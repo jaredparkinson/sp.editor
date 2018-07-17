@@ -4,7 +4,7 @@ export class File {
 
   constructor(fileName: string) {
     this.fileName = fileName;
-    console.log(fileName);
+    // console.log(fileName);
     this.setDepth();
   }
 

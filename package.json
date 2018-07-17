@@ -38,7 +38,9 @@
   },
   "dependencies": {
     "@types/angular": "^1.6.48",
+    "fs-extra": "^7.0.0",
     "nodejs": "0.0.0",
+    "path": "^0.12.7",
     "tslint-config-prettier": "^1.13.0",
     "tslint-microsoft-contrib": "^5.0.3"
   },
@@ -57,6 +59,7 @@
     "@angular/router": "6.0.5",
     "@ngx-translate/core": "10.0.1",
     "@ngx-translate/http-loader": "3.0.1",
+    "@types/fs-extra": "^5.0.4",
     "@types/jasmine": "2.8.7",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "8.9.4",

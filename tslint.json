@@ -34,6 +34,7 @@
     "no-bitwise": true,
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
     "no-construct": true,
+    "no-default-export": false,
     "no-debugger": true,
     "no-duplicate-super": true,
     "no-empty": false,
@@ -52,6 +53,7 @@
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
+    "no-implicit-dependencies": false,
     "one-line": [
       true,
       "check-open-brace",

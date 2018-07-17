@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { File } from '../file';
+import { FileManager } from '../filemanager';
 
 @Component({
   selector: 'app-files',
@@ -8,11 +9,17 @@ import { File } from '../file';
 })
 export class FilesComponent implements OnInit {
   private baseFolder: string;
-  private files: File;
+  private file: File;
+  private fileManager: FileManager;
 
   constructor(baseFolder: string) {
     this.baseFolder = baseFolder;
+    this.file = new File(this.baseFolder);
+    this.fileManager = new FileManager();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('test');
+    this.fileManager.importFiles(this.baseFolder);
+  }
 }

@@ -20,8 +20,8 @@ import { WebviewDirective } from './directives/webview.directive';
 import { timingSafeEqual } from 'crypto';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { FileManager } from './filemanager';
 import { FilesComponent } from './files/files.component';
+import { NavigationService } from './navigation.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService, FileManager],
+  providers: [ElectronService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

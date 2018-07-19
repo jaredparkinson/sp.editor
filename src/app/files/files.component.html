@@ -1,3 +1,10 @@
-<p>
-  files works!
-</p>
+<div class="left-nav-parent">
+  <div class="left-nav-navigation">
+
+    <ul class="navigation">
+      <li *ngFor="let link of links">
+        <a href="{{link.link}}">{{link.link}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

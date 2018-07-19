@@ -20,6 +20,7 @@ import { WebviewDirective } from './directives/webview.directive';
 import { timingSafeEqual } from 'crypto';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { FileManager } from './filemanager';
 import { FilesComponent } from './files/files.component';
 
 // AoT requires an exported function for factories
@@ -42,12 +43,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService],
+  providers: [ElectronService, FileManager],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  private files: FilesComponent;
-  constructor() {
-    this.files = new FilesComponent('scriptures');
-  }
+  constructor() {}
 }

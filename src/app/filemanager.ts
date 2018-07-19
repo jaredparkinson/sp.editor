@@ -1,32 +1,36 @@
-import fse from 'fs-extra';
-import path from 'path';
-
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, switchMap, throttle } from 'rxjs/operators';
+import { Injectable } from '../../node_modules/@angular/core';
+@Injectable()
 export class FileManager {
-  //   private files: string[] = [];
-  //   private path = require('path');
-  //   private fs = require('fs-extra');
-  private fs: fse;
-  // private asdf = require('path');
+  private nav: string;
+  constructor(private httpClient: HttpClient) {
+    this.getChapers();
+    // console.log(this.nav);
+  }
 
-  public importFiles(basePath: string): void {
-    // console.log(
-    //   'test: ' + this.fs.lstatSync(asdf.join('' + basePath)).isDirectory()
-    // );
-    // this.fs.readdir(basePath, (err, items: string[]) => {
-    //   items.forEach(file => {
-    //     const newPath = path.join(basePath, file);
-    //     console.log('fileName: ' + file);
-    //     const isDirectory = this.fs.lstatSync(newPath).isDirectory();
-    //     switch (isDirectory) {
-    //       case true: {
-    //         this.importFiles(newPath);
-    //         break;
-    //       }
-    //       case false:
-    //       default: {
-    //       }
-    //     }
-    //   });
-    // });
+  //scriptures\ot\2-chr
+  getChapers() {
+    this.nav = this.httpClient
+      .get('assets/nav/nav.html', {
+        observe: 'body',
+        responseType: 'text'
+      })
+      .pipe(
+        map(data => {
+          return data;
+        })
+      )
+      .subscribe(t => {
+        console.log(t);
+        return t;
+      });
   }
 }

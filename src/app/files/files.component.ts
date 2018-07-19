@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpRequest
+} from '@angular/common/http';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { File } from '../file';
 import { FileManager } from '../filemanager';
 
@@ -9,17 +15,20 @@ import { FileManager } from '../filemanager';
 })
 export class FilesComponent implements OnInit {
   private baseFolder: string;
+  private nav: string;
   private file: File;
-  private fileManager: FileManager;
-
-  constructor(baseFolder: string) {
-    this.baseFolder = baseFolder;
-    this.file = new File(this.baseFolder);
-    this.fileManager = new FileManager();
+  constructor(
+    private fileManager: FileManager,
+    private httpClient: HttpClient
+  ) {
+    // const gfs = require('graceful-fs');
+    // this.fs = window.require('fs');
+    // this.baseFolder = baseFolder;
+    // this.file = new File(this.baseFolder);
+    // this.fileManager.getChapers();
+    //(this.baseFolder);
+    // console.log(this.fileManager.getChapers());
   }
 
-  ngOnInit() {
-    console.log('test');
-    this.fileManager.importFiles(this.baseFolder);
-  }
+  ngOnInit() {}
 }

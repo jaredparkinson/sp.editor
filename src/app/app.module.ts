@@ -17,20 +17,29 @@ import { ElectronService } from './providers/electron.service';
 
 import { WebviewDirective } from './directives/webview.directive';
 
+import { RouterModule, Routes } from '@angular/router';
 import { timingSafeEqual } from 'crypto';
 import { AppComponent } from './app.component';
+import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
 import { FilesComponent } from './files/files.component';
 import { NavigationService } from './navigation.service';
-import { Routes, RouterModule } from '@angular/router';
-import { BodyblockComponent } from './bodyblock/bodyblock.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-const appRoutes: Routes = [{ path: '*/*/*', component: FilesComponent }];
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'assets/scriptures/:b/:chap',
+    component: BodyblockComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -44,8 +53,8 @@ const appRoutes: Routes = [{ path: '*/*/*', component: FilesComponent }];
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

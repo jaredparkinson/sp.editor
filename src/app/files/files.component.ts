@@ -42,9 +42,14 @@ export class FilesComponent implements OnInit {
   }
 
   onChapterClick(book: string, chapter: string) {
-    console.log(
-      this.fileManager.urlBuilder(book, chapter) + ' ' + book + ' ' + chapter
-    );
+    const url = this.fileManager.urlBuilder(book, chapter);
+    console.log(url);
+    // const response = this.fileManager.getChapter(url);
+    // this.router.navigateByUrl(url);
+    this.router.navigate(['assets/scriptures/' + book + '/' + chapter]);
+
+    // console.log(response.subscribe());
+
     // this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
   }
 

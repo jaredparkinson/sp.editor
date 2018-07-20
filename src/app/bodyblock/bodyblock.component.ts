@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bodyblock',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bodyblock.component.scss']
 })
 export class BodyblockComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    console.log('test');
   }
-
 }

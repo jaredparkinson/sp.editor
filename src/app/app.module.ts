@@ -22,19 +22,30 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FilesComponent } from './files/files.component';
 import { NavigationService } from './navigation.service';
+import { Routes, RouterModule } from '@angular/router';
+import { BodyblockComponent } from './bodyblock/bodyblock.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+const appRoutes: Routes = [{ path: '*/*/*', component: FilesComponent }];
+
 @NgModule({
-  declarations: [AppComponent, HomeComponent, WebviewDirective, FilesComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    WebviewDirective,
+    FilesComponent,
+    BodyblockComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

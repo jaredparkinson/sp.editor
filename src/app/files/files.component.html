@@ -2,8 +2,8 @@
   <div class="left-nav-navigation">
 
     <ul class="navigation">
-      <li *ngFor="let link of links">
-        <a href="{{link.link}}">{{link.link}}</a>
+      <li class="left-nav-link" *ngFor="let link of links">
+        <a (click)="onChapterClick(link.paras[0],link.paras[1])">{{link.link}}</a>
       </li>
     </ul>
   </div>

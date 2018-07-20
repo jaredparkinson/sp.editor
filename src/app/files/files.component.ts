@@ -8,6 +8,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { File } from '../file';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-files',
@@ -21,6 +22,7 @@ export class FilesComponent implements OnInit {
   private file: File;
   constructor(
     private fileManager: NavigationService,
+    private router: Router,
     private httpClient: HttpClient
   ) {}
 
@@ -37,6 +39,13 @@ export class FilesComponent implements OnInit {
       // const jsdom = new JSDOM(t).window;
       // console.log(jsdom.document.childNodes);
     });
+  }
+
+  onChapterClick(book: string, chapter: string) {
+    console.log(
+      this.fileManager.urlBuilder(book, chapter) + ' ' + book + ' ' + chapter
+    );
+    // this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
   }
 
   public getNavigation() {

@@ -24,6 +24,29 @@ export class NavigationService {
       responseType: 'text'
     });
   }
+  public urlBuilder(book: string, chapter: string): string {
+    const url = 'assets/scriptures/';
+    const urlEnd = book + '/' + chapter + '.html';
+    if (chapter === '') {
+      return url + 'tg/' + book + '.html';
+    }
+    switch (book) {
+      case 'gs':
+      case 'triple-index':
+      case 'harmony': {
+        return url + urlEnd;
+        break;
+      }
+      default: {
+        return url + '*/' + urlEnd;
+      }
+    }
+    // if (book.trim() !== '') {
+    //   url += '*/';
+    //   url += book + '/' + chapter + '.html';
+    // }
+    // return url;
+  }
 
   private initNavigation() {
     this.nav = this.httpClient.get('assets/nav/nav.html', {

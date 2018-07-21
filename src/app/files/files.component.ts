@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// import { JSDOM } from 'jsdom';
 import { File } from '../file';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
@@ -17,7 +18,7 @@ import { ChapterService } from '../shared/chapter.service';
   styleUrls: ['./files.component.scss']
 })
 export class FilesComponent implements OnInit {
-  private links: NavLinks[] = [];
+  public links: NavLinks[] = [];
   private baseFolder: string;
   private nav: string;
   private file: File;
@@ -28,19 +29,20 @@ export class FilesComponent implements OnInit {
 
   ngOnInit() {
     this.fileManager.getNavigation().subscribe(s => {
-      const cheerio = require('cheerio');
-      const $ = new cheerio.load(s);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(s, 'text/html');
 
-      const linkTags = $('a');
+      const linkTags = doc.getElementsByTagName('a');
 
-      linkTags.each((i, tag) => {
-        this.links.push(new NavLinks($(tag).attr('href')));
-      });
+      // tslint:disable-next-line:prefer-for-of
+      for (let index = 0; index < linkTags.length; index++) {
+        const element = linkTags[index];
+        this.links.push(new NavLinks(element.getAttribute('href')));
+      }
     });
   }
 
   onChapterClick(book: string, chapter: string) {
-    // this.fileManager.urlBuilder(book, chapter);'
     this.chapterService.getChapter(book, chapter);
   }
   public getNavigation() {

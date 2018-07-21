@@ -13,5 +13,8 @@ export class NotesComponent implements OnInit {
     private navService: NavigationService
   ) {}
 
+  getNotes(): string {
+    return this.chapterService.notes;
+  }
   ngOnInit() {}
 }

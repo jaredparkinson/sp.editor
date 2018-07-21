@@ -6,7 +6,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { JSDOM } from 'jsdom';
+// import { JSDOM } from 'jsdom';
 import { Observable, generate } from 'rxjs';
 import { map, switchMap, throttle } from 'rxjs/operators';
 

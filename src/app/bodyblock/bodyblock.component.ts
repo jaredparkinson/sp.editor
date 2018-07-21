@@ -18,5 +18,8 @@ export class BodyblockComponent implements OnInit {
     private navService: NavigationService
   ) {}
 
+  getBodyBlock(): string {
+    return this.chapterService.bodyBlock;
+  }
   ngOnInit() {}
 }

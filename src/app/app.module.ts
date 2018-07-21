@@ -24,7 +24,8 @@ import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
 import { FilesComponent } from './files/files.component';
 import { NavigationService } from './navigation.service';
-import { ChapterModel } from './shared/chapter.model';
+import { ChapterService } from './shared/chapter.service';
+import { NotesComponent } from './notes/notes.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     HomeComponent,
     WebviewDirective,
     FilesComponent,
-    BodyblockComponent
+    BodyblockComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,7 @@ const appRoutes: Routes = [
       }
     })
   ],
-  providers: [ElectronService, NavigationService, ChapterModel],
+  providers: [ElectronService, NavigationService, ChapterService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

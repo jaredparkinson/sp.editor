@@ -25,10 +25,11 @@ export class NavigationService {
       responseType: 'text'
     });
   }
-  public getChapter(url: string): Observable<string> {
+  public getChapter(book: string, chapter: string): Observable<string> {
+    const url = this.urlBuilder(book, chapter);
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
-  public urlBuilder(book: string, chapter: string): string {
+  private urlBuilder(book: string, chapter: string): string {
     const url = 'assets/scriptures/';
     const urlEnd = book + '/' + chapter + '.html';
     if (chapter === '') {

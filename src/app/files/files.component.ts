@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { File } from '../file';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
+import { ChapterService } from '../shared/chapter.service';
 
 @Component({
   selector: 'app-files',
@@ -22,7 +23,7 @@ export class FilesComponent implements OnInit {
   private file: File;
   constructor(
     private fileManager: NavigationService,
-    private httpClient: HttpClient
+    private chapterService: ChapterService
   ) {}
 
   ngOnInit() {
@@ -39,7 +40,8 @@ export class FilesComponent implements OnInit {
   }
 
   onChapterClick(book: string, chapter: string) {
-    this.fileManager.urlBuilder(book, chapter);
+    // this.fileManager.urlBuilder(book, chapter);'
+    this.chapterService.getChapter(book, chapter);
   }
   public getNavigation() {
     return this.fileManager.getNavigation();

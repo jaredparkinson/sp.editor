@@ -14,6 +14,7 @@ import { map, switchMap, throttle } from 'rxjs/operators';
 export class NavigationService {
   private navLinks: string[] = [];
   private nav: Observable<string>;
+  public bodyBlock: string;
   constructor(private httpClient: HttpClient) {
     this.initNavigation();
   }
@@ -188,6 +189,7 @@ export class NavigationService {
           }
         }
         // console.log(url + testament + urlEnd);
+        this.bodyBlock = url + testament + urlEnd;
         return url + testament + urlEnd;
       }
     }

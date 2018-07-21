@@ -5,10 +5,10 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { File } from '../file';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-files',
@@ -22,7 +22,6 @@ export class FilesComponent implements OnInit {
   private file: File;
   constructor(
     private fileManager: NavigationService,
-    private router: Router,
     private httpClient: HttpClient
   ) {}
 
@@ -36,23 +35,12 @@ export class FilesComponent implements OnInit {
       linkTags.each((i, tag) => {
         this.links.push(new NavLinks($(tag).attr('href')));
       });
-      // const jsdom = new JSDOM(t).window;
-      // console.log(jsdom.document.childNodes);
     });
   }
 
   onChapterClick(book: string, chapter: string) {
-    const url = this.fileManager.urlBuilder(book, chapter);
-    console.log(url);
-    // const response = this.fileManager.getChapter(url);
-    // this.router.navigateByUrl(url);
-    this.router.navigate(['assets/scriptures/' + book + '/' + chapter]);
-
-    // console.log(response.subscribe());
-
-    // this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+    this.fileManager.urlBuilder(book, chapter);
   }
-
   public getNavigation() {
     return this.fileManager.getNavigation();
   }

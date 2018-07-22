@@ -7,8 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 // import { JSDOM } from 'jsdom';
-import { Observable, generate } from 'rxjs';
-import { map, switchMap, throttle } from 'rxjs/operators';
+import { generate, Observable } from 'rxjs';
 
 @Injectable()
 export class NavigationService {

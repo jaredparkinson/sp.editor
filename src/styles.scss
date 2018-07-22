@@ -1,7 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-
   height: 100%;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+}
+
+.main {
+  // display: grid;
+  height: 100vh;
+  grid-template-rows: 5vh 90vh 5vh;
+  grid-template-areas: header body footer;
+
+  .header {
+    // grid-area: header;
+    // height: 5vh;
+    background-color: blue;
+  }
+
+  .body {
+    // grid-area: body
+    grid-template-columns: minmax(0, 1fr) minmax(7fr, 10fr) minmax(0, 2fr);
+    background-color: white;
+  }
 }

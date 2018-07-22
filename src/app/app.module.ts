@@ -26,6 +26,7 @@ import { FilesComponent } from './files/files.component';
 import { NavigationService } from './navigation.service';
 import { ChapterService } from './shared/chapter.service';
 import { NotesComponent } from './notes/notes.component';
+import { HeaderComponent } from './header/header.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     WebviewDirective,
     FilesComponent,
     BodyblockComponent,
-    NotesComponent
+    NotesComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

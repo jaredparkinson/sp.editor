@@ -1,10 +1,10 @@
-<div class="left-nav-parent">
-  <div class="left-nav-navigation">
+<div class="left-pane">
+  <ul class="navigation">
+    <li class="left-nav-link" *ngFor="let link of links">
+      <a (click)="onChapterClick(link.paras[0],link.paras[1])">{{link.link}}</a>
+    </li>
+  </ul>
+  <!-- <div class="left-nav-navigation">
 
-    <ul class="navigation">
-      <li class="left-nav-link" *ngFor="let link of links">
-        <a (click)="onChapterClick(link.paras[0],link.paras[1])">{{link.link}}</a>
-      </li>
-    </ul>
-  </div>
+  </div> -->
 </div>

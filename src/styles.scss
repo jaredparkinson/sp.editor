@@ -1,17 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'css.penguin/view_vars';
+@import 'app/bodyblock/bodyblock.component';
+@import 'app/notes/notes.component';
+
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  // height: 100vh;
+  z-index: 20;
   overflow: hidden;
+  position: fixed;
 }
 
-.left-pane,
-.content-pane,
-.right-pane {
+.body {
+  overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.left-pane nav,
+.right-pane footer {
+  overflow-y: scroll;
+  position: fixed;
+  height: 100vh;
 }
 @media only screen and (max-width: 1079.98px) {
   .body {
@@ -37,6 +48,44 @@ body {
 // }
 @media only screen and (orientation: landscape) and (min-width: 1220px) {
   .body {
-    grid-template-columns: $vw1_5 $vw7_5 $vw3;
+    grid-template-columns: $vw1_5 $vw8 $vw2_5;
   }
+}
+
+li {
+  note & {
+    list-style: none;
+    padding-top: 1px;
+  }
+}
+
+div.paragraph {
+  margin-bottom: 6pt;
+}
+
+.body-block-whitespace {
+  height: 100vh; //This starts at 100vh = 100 percent. Take it down from there. It may need to be 100 to handle cases where there are too many notes to fit on the last screen.
+}
+
+.study-notes-whitespace {
+  height: 25vh; //This starts at 100vh = 100 percent. Take it down from there.
+}
+.highlight-verse {
+  background-color: beige;
+}
+// body {
+//   overflow: hidden;
+//   background-color: white;
+//   color: black;
+//   z-index: 20;
+//   position: fixed;
+// }
+
+h1 {
+  font-family: $font-stack;
+  margin: 0;
+  margin-top: 6pt;
+  margin-bottom: 6pt;
+  text-align: center;
+  padding-right: 20px;
 }

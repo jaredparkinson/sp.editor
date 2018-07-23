@@ -1,6 +1,23 @@
-li.left-nav-link {
-  list-style: none;
+// li.left-nav-link {
+//   list-style: none;
+//   a {
+//     text-decoration: none;
+//   }
+// }
+
+nav {
+  grid-gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 32px);
+
   a {
+    padding: 10px;
+    text-align: center;
     text-decoration: none;
+  }
+
+  a:hover {
+    background-color: #4caf50;
+    color: white;
   }
 }

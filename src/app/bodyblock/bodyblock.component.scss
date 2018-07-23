@@ -1,0 +1,215 @@
+@import '../../css.penguin/view_vars';
+$font-stack: PalatinoldsLat-Roman, serif;
+//This is for when the poetry is not being shown
+
+.content-pane {
+  grid-template-columns: $fr_5 $fr11 $fr_5;
+  .body-block {
+    span.part {
+      margin-left: 6pt;
+    }
+
+    span.answer {
+      text-indent: 1em;
+    }
+  }
+
+  //This is styling for when poetry is being shown
+  .body-block.show-poetry {
+    span.line {
+      display: block;
+    }
+
+    & .break {
+      display: block;
+      margin-bottom: 6pt;
+    }
+  }
+
+  span {
+    &.part,
+    &.question,
+    &.answer {
+      font-family: $font-stack;
+      display: block;
+    }
+
+    &.verse {
+      font-family: $font-stack;
+      text-align: left;
+      margin: 0;
+      margin-bottom: 6pt;
+      display: block;
+
+      div.paragraph & {
+        display: inline;
+
+        span.verse-number {
+          vertical-align: super;
+          font-size: 8pt;
+        }
+      }
+
+      div.hidden-paragraph {
+        span.line {
+          padding-right: 6pt;
+        }
+
+        span.break {
+          margin-bottom: 6pt;
+        }
+      }
+    }
+  }
+
+  span.reference-label-quotation::before {
+    content: 'QUO';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-or::before {
+    content: 'OR';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-ie::before {
+    content: 'IE';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-phrasing::before {
+    content: 'PHR';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-hebrew::before {
+    content: 'HEB';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label {
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-greek::before {
+    content: 'GR';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-archaic::before {
+    content: 'KJV';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-historical::before {
+    content: 'HST';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-cr::before {
+    content: 'CR';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-alt::before {
+    content: 'ALT';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-harmony::before {
+    content: 'HMY';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-tg::before {
+    content: 'TG';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.reference-label-gs::before {
+    content: 'GS';
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+
+  span.deletion {
+    font-style: italic;
+  }
+
+  span.deletion::before {
+    content: '[';
+    font-style: normal;
+  }
+
+  span.deletion::after {
+    content: ']';
+    font-style: normal;
+  }
+
+  span.insertion {
+    font-weight: bold;
+  }
+
+  span.id-label {
+    font-style: italic;
+  }
+  span.small-caps {
+    font-variant: small-caps;
+  }
+
+  span.uppercase {
+    text-transform: uppercase;
+  }
+
+  span.verse-number {
+    color: DimGray;
+    font-weight: bold;
+  }
+
+  span.clarity-word {
+    font-style: italic;
+  }
+
+  span.key-letter {
+    display: none;
+  }
+
+  span.key-word {
+    font-style: italic;
+  }
+
+  sup.marker {
+    font-style: italic;
+    font-size: 8pt;
+  }
+  div.paragraph {
+    margin-bottom: 6pt;
+  }
+}

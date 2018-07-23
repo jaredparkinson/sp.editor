@@ -6,7 +6,7 @@
   // display: grid;
   height: 100vh;
   grid-template-areas: 'header' 'body';
-  grid-template-rows: $vh05 $vh11_5;
+  grid-template-rows: $vh_5 $vh11_5;
 
   .header {
     // grid-area: header;
@@ -43,16 +43,16 @@
     display: none;
   }
   .col-05 {
-    width: $vw05;
+    width: $vw_5;
   }
   .col-05 {
-    width: $vw05;
+    width: $vw_5;
   }
   .col-1 {
     width: $vw1;
   }
   .row-05 {
-    height: $vh05;
+    height: $vh_5;
   }
   .row-1 {
     height: $vh1;
@@ -139,16 +139,16 @@
       display: none;
     }
     .col-s-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .col-s-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .col-s-1 {
       width: $vw1;
     }
     .row-s-05 {
-      height: $vh05;
+      height: $vh_5;
     }
     .row-s-1 {
       height: $vh1;
@@ -234,16 +234,16 @@
       display: none;
     }
     .col-m-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .col-m-1 {
       width: $vw1;
     }
     .col-m-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .row-m-05 {
-      height: $vh05;
+      height: $vh_5;
     }
     .row-m-1 {
       height: $vh1;
@@ -338,16 +338,16 @@
     }
 
     .col-l-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .col-l-1 {
       width: $vw1;
     }
     .col-l-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .row-l-05 {
-      height: $vh05;
+      height: $vh_5;
     }
     .row-l-1 {
       height: $vh1;
@@ -435,16 +435,16 @@
       height: $vh3;
     }
     .col-xl-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .col-xl-1 {
       width: $vw1;
     }
     .col-xl-05 {
-      width: $vw05;
+      width: $vw_5;
     }
     .row-xl-05 {
-      height: $vh05;
+      height: $vh_5;
     }
     .row-xl-1 {
       height: $vh1;

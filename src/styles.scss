@@ -8,9 +8,14 @@ body {
   overflow: hidden;
 }
 
+.left-pane,
+.content-pane,
+.right-pane {
+  overflow-y: scroll;
+}
 @media only screen and (max-width: 1079.98px) {
   .body {
-    grid-template-columns: 0fr $vw12 0fr;
+    grid-template-columns: 0 $vw12 0;
     .left-pane,
     .right-pane {
       display: none;
@@ -32,6 +37,6 @@ body {
 // }
 @media only screen and (orientation: landscape) and (min-width: 1220px) {
   .body {
-    grid-template-columns: $vw2 $vw8 $vw2;
+    grid-template-columns: $vw1_5 $vw7_5 $vw3;
   }
 }

@@ -27,38 +27,40 @@ body {
 @media only screen and (max-width: 1079.98px) {
   .body {
     grid-template-columns: 0 $vw12 0;
-    .left-pane,
+    #leftPaneNav,
     .right-pane {
       display: none;
+      width: 80vw;
     }
   }
 }
-@media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1219.98px) {
+@media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
   .body {
     grid-template-columns: 0fr $vw9 $vw3;
-    .left-pane {
-      display: none;
-    }
+    // .left-pane {
+    //   display: none;
+    // }
+  }
+  #leftPaneNav {
+    display: none;
+    width: 50vw;
   }
 }
-// @media only screen and (orientation: landscape) and (min-width: 1280px) and (max-width: 1919.98px) {
-//   .body {
-//     grid-template-columns: $vw2 $vw8 $vw2;
-//   }
-// }
-@media only screen and (orientation: landscape) and (min-width: 1220px) {
+
+@media only screen and (orientation: landscape) and (min-width: 1280px) {
   .body {
     grid-template-columns: $vw1_5 $vw8 $vw2_5;
-  }
-  .menu-bar {
-    grid-template-columns: repeat(12, $vw_5);
   }
 }
 .menu-bar {
   display: grid;
-  grid-template-columns: repeat(12, $vw1);
   text-align: center;
   height: 100%;
+  grid-template-columns: repeat(12, 64px);
+  button {
+    background-color: lightblue;
+    border-color: lightblue;
+  }
   fa-icon svg {
     height: 100%;
   }

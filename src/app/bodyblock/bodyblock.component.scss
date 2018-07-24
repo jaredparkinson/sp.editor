@@ -1,10 +1,7 @@
 @import '../../css.penguin/view_vars';
 
-@font-face {
-  font-family: 'UbuntuMono';
-  src: url('https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf');
-}
-$font-stack: 'UbuntuMono';
+
+$font-stack: PalatinoldsLat-Roman, serif;
 //This is for when the poetry is not being shown
 
 .content-pane {

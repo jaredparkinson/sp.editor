@@ -1,38 +1,17 @@
 <div class="menu-bar">
-  <button id='navToggle' (click)='toggleNavigation()'>
+  <a id='navToggle' (click)='toggleNavigation()'>
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
-  </button>
-  <button>
+  </a>
+  <div id="bookName"> Temp</div>
+  <input id="addressBar" type="text" />
+  <span id="empty"></span>
+  <a id="paragraphToggle">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
-  </button>
-  <button>
+  </a>
+  <a id="secondaryToggle">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
-  </button>
-  <button (click)='toggleNotes()'>
+  </a>
+  <a id="notesToggle" (click)='toggleNotes()'>
     <fa-icon [icon]="faListUl" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
-  <button>
-    <fa-icon [icon]="faBars" size="lg"></fa-icon>
-  </button>
+  </a>
 </div>

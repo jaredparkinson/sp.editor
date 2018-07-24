@@ -1,8 +1,10 @@
 @import '../../css.penguin/view_vars';
 
-
-$font-stack: PalatinoldsLat-Roman, serif;
+$font-stack: 'Palatino Linotype', 'Palatino Roman', 'Roboto', sans-serif;
 //This is for when the poetry is not being shown
+body {
+  font-family: $font-stack;
+}
 
 .content-pane {
   grid-template-columns: $fr_5 $fr11 $fr_5;

@@ -3,16 +3,20 @@
   display: grid;
 }
 
+.none {
+  display: none;
+}
+
 .main {
   // display: grid;
   height: 100vh;
   grid-template-areas: 'header' 'body';
-  grid-template-rows: 64px auto;
+  grid-template-rows: 40px auto;
 
   .header {
     // grid-area: header;
     // height: 5vh;
-    background-color: blue;
+    background-color: lightblue;
   }
 
   .body {
@@ -136,6 +140,9 @@
     // .body {
     //   grid-template-columns: 0 $vw12 0;
     // }
+    .none-s {
+      display: none;
+    }
     .col-s-0 {
       display: none;
     }
@@ -231,6 +238,9 @@
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px
   @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
+    .none-m {
+      display: none;
+    }
     .col-m-0 {
       display: none;
     }
@@ -328,6 +338,9 @@
   /* Large Screen Sizes Postfix: -l */
   // Screen Size up to 1920px
   @media only screen and (orientation: landscape) and (min-width: 1220px) {
+    .none-l {
+      display: none;
+    }
     .col-l-0 {
       display: none;
       background-color: black;
@@ -434,6 +447,9 @@
   /* Extra Large Screen Sizes Postfix -xl*/
   // Screen Sizes from 1920px and up
   @media only screen and (orientation: landscape) and (min-width: 1921px) {
+    .none-xl {
+      display: none;
+    }
     .col-xl-3 {
       width: $vw3;
     }

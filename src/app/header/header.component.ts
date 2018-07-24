@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     console.log('test');
   }
   toggleNavigation() {
+    console.log('test');
     this.helperService.toggleDisplay('leftPaneNav', 'grid', 'none');
   }
 }

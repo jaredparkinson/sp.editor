@@ -50,6 +50,18 @@ body {
   .body {
     grid-template-columns: $vw1_5 $vw8 $vw2_5;
   }
+  .menu-bar {
+    grid-template-columns: repeat(12, $vw_5);
+  }
+}
+.menu-bar {
+  display: grid;
+  grid-template-columns: repeat(12, $vw1);
+  text-align: center;
+  height: 100%;
+  fa-icon svg {
+    height: 100%;
+  }
 }
 
 li {

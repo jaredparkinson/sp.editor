@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
@@ -10,6 +11,7 @@ import { ElectronService } from './providers/electron.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  faCoffee = faCoffee;
   constructor(
     public electronService: ElectronService,
     private translate: TranslateService

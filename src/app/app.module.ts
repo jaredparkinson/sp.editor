@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import 'reflect-metadata';
 import 'zone.js/dist/zone-mix';
 import '../polyfills';
@@ -58,7 +59,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    // RouterModule.forRoot(appRoutes),
+    FontAwesomeModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

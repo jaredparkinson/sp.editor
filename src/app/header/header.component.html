@@ -3,9 +3,9 @@
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
   </a>
   <div id="bookName"> Temp</div>
-  <input id="addressBar" type="text" />
+  <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
   <span id="empty"></span>
-  <a id="paragraphToggle">
+  <a id="paragraphToggle" (click)="toggleNavButton('paragraphToggle', 'bodyBlock','paragraph', 'hidden-paragraph')">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
   </a>
   <a id="secondaryToggle">

@@ -18,6 +18,15 @@ body {
     }
   }
 
+  #bodyBlock.hidden-paragraph div.hidden-paragraph {
+    span.line {
+      padding-right: 6pt;
+    }
+
+    span.break {
+      margin-bottom: 6pt;
+    }
+  }
   //This is styling for when poetry is being shown
   .body-block.show-poetry {
     span.line {
@@ -30,37 +39,29 @@ body {
     }
   }
 
-  span {
-    &.part,
-    &.question,
-    &.answer {
-      font-family: $font-stack;
-      display: block;
-    }
-
-    &.verse {
-      font-family: $font-stack;
-      text-align: left;
-      margin: 0;
-      margin-bottom: 6pt;
-      display: block;
-
-      div.paragraph & {
-        display: inline;
-
-        span.verse-number {
-          vertical-align: super;
-          font-size: 8pt;
-        }
+  #bodyBlock.hidden-paragraph {
+    span {
+      &.part,
+      &.question,
+      &.answer {
+        font-family: $font-stack;
+        display: block;
       }
 
-      div.hidden-paragraph {
-        span.line {
-          padding-right: 6pt;
-        }
+      &.verse {
+        font-family: $font-stack;
+        text-align: left;
+        margin: 0;
+        margin-bottom: 6pt;
+        display: block;
 
-        span.break {
-          margin-bottom: 6pt;
+        div.hidden-paragraph & {
+          display: inline;
+
+          span.verse-number {
+            vertical-align: super;
+            font-size: 8pt;
+          }
         }
       }
     }

@@ -4,7 +4,7 @@
 }
 
 .none {
-  display: none;
+  visibility: hidden;
 }
 
 .main {
@@ -45,7 +45,7 @@
   //Global rows and columns
 
   .col-0 {
-    display: none;
+    visibility: hidden;
   }
   .col-05 {
     width: $vw_5;
@@ -141,13 +141,13 @@
     //   grid-template-columns: 0 $vw12 0;
     // }
     .grid-s {
-      display: grid;
+      visibility: visible;
     }
     .none-s {
-      display: none;
+      visibility: hidden;
     }
     .col-s-0 {
-      display: none;
+      visibility: hidden;
     }
     .col-s-05 {
       width: $vw_5;
@@ -242,13 +242,13 @@
   // Screen Size up to 1080px
   @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
     .none-m {
-      display: none;
+      visibility: hidden;
     }
     .grid-m {
-      display: grid;
+      visibility: visible;
     }
     .col-m-0 {
-      display: none;
+      visibility: hidden;
     }
     .col-m-05 {
       width: $vw_5;
@@ -345,14 +345,14 @@
   // Screen Size up to 1920px
   @media only screen and (orientation: landscape) and (min-width: 1280px) {
     .grid-l {
-      display: grid;
+      visibility: visible;
     }
 
     .none-l {
-      display: none;
+      visibility: hidden;
     }
     .col-l-0 {
-      display: none;
+      visibility: hidden;
       background-color: black;
     }
     .col-l-9 {
@@ -458,7 +458,7 @@
   // Screen Sizes from 1920px and up
   @media only screen and (orientation: landscape) and (min-width: 1921px) {
     .none-xl {
-      display: none;
+      visibility: hidden;
     }
     .col-xl-3 {
       width: $vw3;

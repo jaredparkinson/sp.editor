@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HelperService {
+  private smallWidth = 1080;
+  private mediumWidth = 1280;
+
   constructor() {
     this.togglePanes();
   }
@@ -35,8 +38,27 @@ export class HelperService {
     };
   }
 
+  public togglePane2(id: string, pinWidth: number): void {
+    const element = document.getElementById(id);
+
+    const viewWidth = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    );
+    const pin = viewWidth >= pinWidth;
+    const gridOn = this.getToggleStrings('grid', viewWidth, pinWidth);
+    const none = this.getToggleStrings('none', viewWidth, pinWidth);
+
+    if (this.contains(element, gridOn)) {
+      this.switchClasses(element, none, gridOn);
+    } else {
+      this.switchClasses(element, gridOn, none);
+    }
+  }
+
   public togglePane(id: string, minViewWidth: number): void {
     const element = document.getElementById(id);
+    console.log('id');
 
     const viewWidth = Math.max(
       document.documentElement.clientWidth,
@@ -107,6 +129,35 @@ export class HelperService {
 
   private setDisplay(element: HTMLElement, toggle: string) {
     element.style.display = toggle;
+  }
+
+  private getToggleStrings(
+    text: string,
+    viewWidth: number,
+    pinWidth: number
+  ): string[] {
+    const classes: string[] = [];
+    if (viewWidth >= 1280 && pinWidth >= 1280) {
+      classes.push(text + '-l');
+    } else if (viewWidth >= 1080 && pinWidth >= 1080) {
+      classes.push(text + '-l');
+      classes.push(text + '-m');
+    } else if (viewWidth < 1080 && pinWidth >= 1280) {
+      classes.push(text + '-m');
+      classes.push(text + '-s');
+    } else {
+      classes.push(text + '-s');
+    }
+    return classes;
+  }
+
+  private contains(element: HTMLElement, classList: string[]): boolean {
+    for (const cls of classList) {
+      if (element.classList.contains(cls)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

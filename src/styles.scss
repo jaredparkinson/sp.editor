@@ -14,6 +14,10 @@ body {
   overflow: hidden;
   position: fixed;
 }
+.left-pane nav,
+.right-pane footer {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 .body {
   overflow-x: hidden;
@@ -32,12 +36,13 @@ body {
   overflow-y: scroll;
   position: fixed;
   height: 100vh;
+  width: 100%;
 }
 @media only screen and (max-width: 1079.98px) {
   .body {
-    grid-template-columns: 0 $vw12 0;
+    grid-template-columns: $vw1_5 $vw7_5 $vw3;
     #leftPaneNav,
-    .right-pane {
+    #studyNotes {
       // display: none;
       width: 80vw;
     }
@@ -70,7 +75,7 @@ body {
 }
 @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
   .body {
-    grid-template-columns: 0fr $vw9 $vw3;
+    grid-template-columns: $vw1_5 $vw8 $vw2_5;
     // .left-pane {
     //   display: none;
     // }

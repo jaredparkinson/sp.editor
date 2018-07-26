@@ -7,8 +7,8 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
-import { HelperService } from '../shared/helper.service';
 import { ChapterService } from '../shared/chapter.service';
+import { HelperService } from '../shared/helper.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   }
   togglePane(id: string, minViewWidth: number) {
     // console.log('test');
-    this.helperService.togglePane(id, 1280);
+    this.helperService.togglePane2(id, minViewWidth);
   }
 
   addressBarKeyPress(event: KeyboardEvent) {

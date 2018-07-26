@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  sp.editor:
+    image: sp.editor
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8000:8000
+      - 9229:9229
+    ## set your startup file here
+    command: node --inspect index.js

@@ -143,12 +143,12 @@ export class HelperService {
     const classes: string[] = [];
     if (viewWidth >= 1280 && pinWidth >= 1280) {
       classes.push(text + '-l');
+    } else if (viewWidth < 1280 && pinWidth >= 1280) {
+      classes.push(text + '-m');
+      classes.push(text + '-s');
     } else if (viewWidth >= 1080 && pinWidth >= 1080) {
       classes.push(text + '-l');
       classes.push(text + '-m');
-    } else if (viewWidth < 1080 && pinWidth >= 1280) {
-      classes.push(text + '-m');
-      classes.push(text + '-s');
     } else {
       classes.push(text + '-s');
     }

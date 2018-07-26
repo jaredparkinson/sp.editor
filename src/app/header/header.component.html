@@ -1,5 +1,5 @@
 <div class="menu-bar">
-  <a id='navToggle' (click)='toggleNavigation()'>
+  <a id='navToggle' (click)="togglePane('leftPaneNav', 1280)">
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
   </a>
   <div id="bookName"> Temp</div>
@@ -11,7 +11,7 @@
   <a id="secondaryToggle">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>
-  <a id="notesToggle" (click)='toggleNotes()'>
+  <a id="notesToggle" (click)="togglePane('rightPane', 1280)">
     <fa-icon [icon]="faListUl" size="lg"></fa-icon>
   </a>
 </div>

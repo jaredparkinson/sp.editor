@@ -35,7 +35,7 @@ export class HelperService {
     };
   }
 
-  public toggleDisplay(id: string, on: string, off: string): void {
+  public togglePane(id: string, minViewWidth: number): void {
     const element = document.getElementById(id);
 
     const viewWidth = Math.max(
@@ -43,14 +43,24 @@ export class HelperService {
       window.innerWidth || 0
     );
 
-    if (viewWidth < 1220) {
-      const gridOn =
-        element.classList.contains('grid-s') ||
-        element.classList.contains('grid-m');
-      if (gridOn) {
-        this.switchClasses(element, ['none-s', 'none-m'], ['grid-s', 'grid-m']);
+    if (viewWidth < minViewWidth) {
+      let gridOn = true;
+      const gridClasses = ['grid-s'];
+      const noneClasses = ['none-s'];
+      if (minViewWidth === 1280) {
+        gridOn =
+          element.classList.contains('grid-s') ||
+          element.classList.contains('grid-m');
+        gridClasses.push('grid-m');
+        noneClasses.push('none-m');
       } else {
-        this.switchClasses(element, ['grid-s', 'grid-m'], ['none-s', 'none-m']);
+        gridOn = element.classList.contains('grid-s');
+      }
+
+      if (gridOn) {
+        this.switchClasses(element, noneClasses, gridClasses);
+      } else {
+        this.switchClasses(element, gridClasses, noneClasses);
       }
     } else {
       const gridOn = element.classList.contains('grid-l');
@@ -59,6 +69,26 @@ export class HelperService {
       } else {
         this.switchClasses(element, ['grid-l'], ['none-l']);
       }
+    }
+  }
+
+  public toggleNavButton(
+    id: string,
+    targetId: string,
+    on: string,
+    off: string
+  ): void {
+    const element = document.getElementById(id);
+    const target = document.getElementById(targetId);
+
+    if (target.classList.contains(off)) {
+      target.classList.add(on);
+      element.classList.add('nav-btn-on');
+      target.classList.remove(off);
+    } else {
+      target.classList.add(off);
+      element.classList.remove('nav-btn-on');
+      target.classList.remove(on);
     }
   }
 

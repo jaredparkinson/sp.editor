@@ -4,6 +4,7 @@
 @import 'app/notes/notes.component';
 
 $btnOn: #8cadb8;
+
 html,
 body {
   margin: 0;
@@ -19,10 +20,12 @@ body {
   overflow-y: scroll;
 }
 .nav-btn-on {
+  // background-color: $btnOn;
   background-color: $btnOn;
+  border: 1px solid black;
 }
 .menu-bar a:hover {
-  background-color: #8cadb8;
+  background-color: $btnOn;
 }
 .left-pane nav,
 .right-pane footer {

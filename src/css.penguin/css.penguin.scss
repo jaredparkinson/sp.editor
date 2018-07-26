@@ -343,7 +343,7 @@
   }
   /* Large Screen Sizes Postfix: -l */
   // Screen Size up to 1920px
-  @media only screen and (orientation: landscape) and (min-width: 1220px) {
+  @media only screen and (orientation: landscape) and (min-width: 1280px) {
     .grid-l {
       display: grid;
     }

@@ -33,9 +33,9 @@ export class HeaderComponent implements OnInit {
   toggleNotes() {
     console.log('test');
   }
-  toggleNavigation() {
-    console.log('test');
-    this.helperService.toggleDisplay('leftPaneNav', 'grid', 'none');
+  togglePane(id: string, minViewWidth: number) {
+    // console.log('test');
+    this.helperService.togglePane(id, 1280);
   }
 
   addressBarKeyPress(event: KeyboardEvent) {
@@ -55,19 +55,20 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
-    const element = document.getElementById(id);
-    const target = document.getElementById(targetId);
+    this.helperService.toggleNavButton(id, targetId, on, off);
+    // const element = document.getElementById(id);
+    // const target = document.getElementById(targetId);
 
-    if (target.classList.contains(off)) {
-      target.classList.add(on);
-      element.classList.add('nav-btn-on');
-      target.classList.remove(off);
-    } else {
-      target.classList.add(off);
-      element.classList.remove('nav-btn-on');
-      target.classList.remove(on);
-    }
-    console.log(element);
-    console.log(target);
+    // if (target.classList.contains(off)) {
+    //   target.classList.add(on);
+    //   element.classList.add('nav-btn-on');
+    //   target.classList.remove(off);
+    // } else {
+    //   target.classList.add(off);
+    //   element.classList.remove('nav-btn-on');
+    //   target.classList.remove(on);
+    // }
+    // console.log(element);
+    // console.log(target);
   }
 }

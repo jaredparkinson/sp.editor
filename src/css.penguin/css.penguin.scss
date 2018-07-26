@@ -32,9 +32,6 @@
     .content-pane {
       grid-area: content-pane;
     }
-    .right-pane {
-      grid-area: right-pane;
-    }
   }
   .left-pane,
   .content-pane,
@@ -241,6 +238,9 @@
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px
   @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
+    .right-pane {
+      grid-area: right-pane;
+    }
     .none-m {
       visibility: hidden;
     }
@@ -344,6 +344,9 @@
   /* Large Screen Sizes Postfix: -l */
   // Screen Size up to 1920px
   @media only screen and (orientation: landscape) and (min-width: 1280px) {
+    .right-pane {
+      grid-area: right-pane;
+    }
     .grid-l {
       visibility: visible;
     }
@@ -457,6 +460,9 @@
   /* Extra Large Screen Sizes Postfix -xl*/
   // Screen Sizes from 1920px and up
   @media only screen and (orientation: landscape) and (min-width: 1921px) {
+    .right-pane {
+      grid-area: right-pane;
+    }
     .none-xl {
       visibility: hidden;
     }

@@ -19,15 +19,19 @@ export class HelperService {
       );
 
       const leftPaneNav = document.getElementById('leftPaneNav');
-      console.log('x: ' + event.x);
+
+      const rightPane = document.getElementById('study-notes-parent');
+      if (
+        !element.classList.contains('right-pane-ignore') &&
+        (event.x < viewWidth - 48 || event.y > 48)
+      ) {
+        this.switchClasses(rightPane, ['none-s'], ['grid-s']);
+        // console.log(viewWidth);
+      }
       if (
         !element.classList.contains('left-pane-ignore') &&
-        // viewWidth < 1220 &&
-        // leftPaneNav.classList.contains('grid') &&
         (event.x > 48 || event.y > 48)
       ) {
-        console.log(event);
-        // this.setDisplay(leftPaneNav, 'none');
         this.switchClasses(
           leftPaneNav,
           ['none-s', 'none-m'],

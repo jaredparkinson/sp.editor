@@ -30,7 +30,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
 
     span {
       display: grid;
-      grid-template-columns: 1fr 9fr;
+      grid-template-columns: auto 9fr;
       grid-template-rows: auto;
 
       .original-note-marker {

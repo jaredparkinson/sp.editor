@@ -32,7 +32,9 @@ export class FilesComponent implements OnInit {
   ngOnInit() {
     // console.log(this.fileManager.folders[0].path);
   }
-
+  setVisibility(folder: Folder) {
+    folder.setVisibility();
+  }
   setLinks(manifest: string) {
     this.fileManager.getNavigation(manifest);
     console.log(manifest);

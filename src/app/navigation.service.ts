@@ -8,19 +8,29 @@ import {
 import { Injectable, OnInit } from '@angular/core';
 // import { JSDOM } from 'jsdom';
 import { generate, Observable } from 'rxjs';
+import { Folder } from './Folder';
 
 @Injectable()
 export class NavigationService {
-  private navLinks: string[] = [];
-  private nav: Observable<string>;
+  // private navLinks: string[] = [];
+  // private nav: Observable<string>;
   public bodyBlock: string;
+  public folders: Folder[];
+  public navLinks: Folder[];
   constructor(private httpClient: HttpClient) {
     this.initNavigation();
   }
 
-  public getNavigation() {
-    return this.httpClient.get('assets/nav/nav.html', {
-      observe: 'body',
+  public getNavigation(manifest: string) {
+    this.folders.forEach(f => {
+      if (f.path === manifest) {
+        this.navLinks = f.Folders;
+        return;
+      }
+    });
+  }
+  public getNavigation2() {
+    return this.httpClient.get('assets/nav/nav.json', {
       responseType: 'text'
     });
   }
@@ -28,6 +38,7 @@ export class NavigationService {
     const url = this.urlBuilder(book, chapter);
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
+
   private urlBuilder(book: string, chapter: string): string {
     const url = 'assets/scriptures/';
     const urlEnd = book + '/' + chapter + '.html';
@@ -201,9 +212,12 @@ export class NavigationService {
   }
 
   private initNavigation() {
-    this.nav = this.httpClient.get('assets/nav/nav.html', {
-      observe: 'body',
-      responseType: 'text'
-    });
+    this.httpClient
+      .get('assets/nav/nav.json', {
+        responseType: 'text'
+      })
+      .subscribe(s => {
+        this.folders = JSON.parse(s);
+      });
   }
 }

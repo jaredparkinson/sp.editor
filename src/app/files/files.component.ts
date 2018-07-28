@@ -8,6 +8,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { JSDOM } from 'jsdom';
 import { File } from '../file';
+import { Folder } from '../Folder';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
 import { ChapterService } from '../shared/chapter.service';
@@ -22,30 +23,40 @@ export class FilesComponent implements OnInit {
   private baseFolder: string;
   private nav: string;
   private file: File;
+  private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
   constructor(
     private fileManager: NavigationService,
     private chapterService: ChapterService
   ) {}
 
   ngOnInit() {
-    this.fileManager.getNavigation().subscribe(s => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(s, 'text/html');
+    // console.log(this.fileManager.folders[0].path);
+  }
 
-      const linkTags = doc.getElementsByTagName('a');
+  setLinks(manifest: string) {
+    this.fileManager.getNavigation(manifest);
+    console.log(manifest);
 
-      // tslint:disable-next-line:prefer-for-of
-      for (let index = 0; index < linkTags.length; index++) {
-        const element = linkTags[index];
-        this.links.push(new NavLinks(element.getAttribute('href')));
-      }
-    });
+    // this.fileManager.getNavigation(manifest).subscribe(s => {
+    //   const parser = new DOMParser();
+    //   const doc = parser.parseFromString(s, 'text/html');
+    //   const linkTags = doc.getElementsByTagName('a');
+    //   // tslint:disable-next-line:prefer-for-of
+    //   for (let index = 0; index < linkTags.length; index++) {
+    //     // console.log(element);
+    //     const element = linkTags[index];
+    //     this.links.push(
+    //       new NavLinks(element.getAttribute('href').replace('?', ''))
+    //     );
+    //   }
+    //   this.map.set(id, this.links);
+    // });
   }
 
   onChapterClick(book: string, chapter: string) {
     this.chapterService.getChapter(book, chapter);
   }
   public getNavigation() {
-    return this.fileManager.getNavigation();
+    // return this.fileManager.getNavigation();
   }
 }

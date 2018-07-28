@@ -1,100 +1,15 @@
 <div class="left-pane-container left-pane-ignore" style="position: fixed">
-  <nav id="leftPaneNav" class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05">
+  <nav id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
-    <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setVisibility(folder.path)">{{folder.path}}</a>
-    <!-- </li> -->
-    <!-- <a class='left-pane-ignore' (click)="setLinks( 'Dictionary', 'bd') ">Bible Dictionary</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Dictionary ">
-      <a class='bible-links'></a>
-    </div>
-    <a class='left-pane-ignore' (click)="setLinks( 'Bible', 'bible') ">Bible</a>
-    <a class='left-pane-ignore' *ngFor="let link of map.get( 'Mormon') " (click)="onChapterClick(link.paras[0],link.paras[1]) ">{{link.link}}</a>
+    <div class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05" [ngClass]="{'nav-hide': !foldersVisible}">
 
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Bible ">
-      <a href=" "></a>
-
-    </div>
-    <a class='left-pane-ignore' (click)="setLinks( 'Chron', 'bible-chrone') ">Bible Chron</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Chron ">
-
-      <a href=" "></a>
-    </div>
-    <a class='left-pane-ignore' (click)="setLinks( 'Maps', 'bible-maps') ">Bible Maps</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Maps ">
-      <a href=" "></a>
+      <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a>
     </div>
 
-    <a class='left-pane-ignore' (click)="setLinks( 'Photos', 'bible-photos') ">Bible Photos</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Photos ">
-      <a href=" "></a>
+    <div class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05">
+      <a (click)="setRoot()">Set Root</a>
+      <a class='left-pane-ignore' *ngFor="let folder of fileManager.navLinks" (click)="setVisibility(folder.path)" [class.nav-children-visible]="folder.visible">{{folder.path}}</a>
     </div>
 
-    <a class='left-pane-ignore' (click)="setLinks( 'Mormon', 'bofm') ">Book of Mormon</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Mormon ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Testament', 'dc-testament') ">DC-Testament</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Testament ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Scriptures', 'gs') ">Guilde to the Scriptures</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Scriptures ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Harmony', 'harmony') ">Harmony</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Harmony ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Maps', 'histroy-maps') ">History Maps</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Maps ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Photos', 'history-photos') ">History Photos</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Photos ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Translation', 'jst') ">Joseph Smith Translation</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Translation ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'new-testament', 'nt') ">New Testament</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="new-testament ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'old-testament', 'ot') ">Old Testament</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="old-testament ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Price', 'pgp') ">Pearl of Great Price</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Price ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'Triple', 'triple') ">Triple</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="Triple ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'triple-index', 'triple-index') ">Triple Index</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="triple-index ">
-      <a href=" "></a>
-    </div>
-
-    <a class='left-pane-ignore' (click)="setLinks( 'topical-guide', 'tg') ">Topical Guide</a>
-    <div class="collapse-lvl-1 nav-lvl-1 " id="topical-guide ">
-      <a href=" "></a>
-    </div> -->
   </nav>
 </div>
-<!-- <div class="left-nav-navigation ">
-
-  </div> -->

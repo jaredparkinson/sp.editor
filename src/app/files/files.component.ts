@@ -8,10 +8,11 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { JSDOM } from 'jsdom';
 import { File } from '../file';
-import { Folder } from '../Folder';
+import { FolderProtoType } from '../FolderProtoType';
 import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
 import { ChapterService } from '../shared/chapter.service';
+import { Folder } from '../Folder';
 
 @Component({
   selector: 'app-files',
@@ -20,6 +21,8 @@ import { ChapterService } from '../shared/chapter.service';
 })
 export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
+  public foldersVisible = true;
+  public booksVisible = false;
   private baseFolder: string;
   private nav: string;
   private file: File;
@@ -27,19 +30,29 @@ export class FilesComponent implements OnInit {
   constructor(
     private fileManager: NavigationService,
     private chapterService: ChapterService
-  ) { }
+  ) {}
 
   ngOnInit() {
     // console.log(this.fileManager.folders[0].path);
   }
   setVisibility(path: string) {
-    console.log(path);
-    this.fileManager.folders.find(f => f.path === path).setVisibility();
+    this.fileManager.getNavigation(path);
   }
-  setLinks(manifest: string) {
-    this.fileManager.getNavigation(manifest);
-    console.log(manifest);
-
+  setRoot() {
+    this.foldersVisible = true;
+    this.booksVisible = false;
+    this.fileManager.navLinks = [];
+  }
+  setTestament(folder: Folder) {
+    folder.visible = !folder.visible;
+    if (folder.visible) {
+      this.fileManager.navLinks = folder.folders;
+      this.foldersVisible = false;
+      this.booksVisible = true;
+      console.log(folder);
+    } else {
+      this.fileManager.navLinks = [];
+    }
     // this.fileManager.getNavigation(manifest).subscribe(s => {
     //   const parser = new DOMParser();
     //   const doc = parser.parseFromString(s, 'text/html');

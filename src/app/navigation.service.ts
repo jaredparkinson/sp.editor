@@ -9,6 +9,7 @@ import { Injectable, OnInit } from '@angular/core';
 // import { JSDOM } from 'jsdom';
 import { generate, Observable } from 'rxjs';
 import { Folder } from './Folder';
+import { FolderProtoType } from './FolderProtoType';
 
 @Injectable()
 export class NavigationService {
@@ -21,10 +22,20 @@ export class NavigationService {
     this.initNavigation();
   }
 
+  setVisibility(path: string) {
+    const folder = this.folders[0];
+    console.log(folder);
+    folder.setVisibility();
+  }
   public getNavigation(manifest: string) {
     this.folders.forEach(f => {
       if (f.path === manifest) {
-        this.navLinks = f.Folders;
+        this.navLinks = [];
+        // this.navLinks = f.Folders;
+        Object.assign(this.navLinks, f.folders);
+        f.visible = !f.visible;
+        console.log(this.navLinks);
+        // f.setVisibility();
         return;
       }
     });
@@ -217,7 +228,15 @@ export class NavigationService {
         responseType: 'text'
       })
       .subscribe(s => {
-        this.folders = JSON.parse(s);
+        const raw = JSON.parse(s) as Folder[];
+        this.folders = [];
+        const asdf: FolderProtoType[] = [];
+
+        Object.assign(asdf, raw);
+
+        Object.assign(this.folders, raw);
+
+        // this.folders = JSON.parse(s) as Folder[];
       });
   }
 }

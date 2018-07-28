@@ -1,13 +1,13 @@
-import { File } from './file';
-import { Injectable } from '../../node_modules/@angular/core';
+import { FolderProtoType } from './FolderProtoType';
 
-@Injectable()
+import { File } from './file';
+
 export class Folder {
   path: string;
   Files: File[];
-  Folders: Folder[];
+  folders: Folder[];
   classList: string = this.path;
-  private visible = false;
+  visible: boolean;
 
   setVisibility() {
     this.visible = !this.visible;

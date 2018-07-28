@@ -37,13 +37,13 @@ body {
   position: fixed;
   height: 100vh;
 }
-.left-pane nav  {
-width: auto;
+.left-pane nav {
+  width: auto;
 }
 @media only screen and (max-width: 1079.98px) {
   .body {
     grid-template-columns: $vw1_5 $vw9 $vw1_5;
-    #leftPaneNav,
+    #leftPaneNav div,
     #studyNotes {
       // display: none;
       width: 90vw;
@@ -90,12 +90,11 @@ width: auto;
     //   display: none;
     // }
   }
-  .right-pane footer
-  {
+  .right-pane footer {
     width: $vw2_5;
   }
 
-  #leftPaneNav {
+  #leftPaneNav div {
     // display: none;
     width: 50vw;
   }
@@ -141,8 +140,7 @@ width: auto;
   .body {
     grid-template-columns: $vw1_5 $vw8 $vw2_5;
   }
-  .right-pane footer
-  {
+  .right-pane footer {
     width: $vw2_5;
   }
   .menu-bar {

@@ -27,13 +27,14 @@ export class FilesComponent implements OnInit {
   constructor(
     private fileManager: NavigationService,
     private chapterService: ChapterService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // console.log(this.fileManager.folders[0].path);
   }
-  setVisibility(folder: Folder) {
-    folder.setVisibility();
+  setVisibility(path: string) {
+    console.log(path);
+    this.fileManager.folders.find(f => f.path === path).setVisibility();
   }
   setLinks(manifest: string) {
     this.fileManager.getNavigation(manifest);

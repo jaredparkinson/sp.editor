@@ -5,13 +5,13 @@
   <div id="bookName"> Temp</div>
   <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
   <span id="empty"></span>
-  <a id="paragraphToggle" [ngClass]="{'nav-btn-on': saveState.paragraphsVisible}" (click)="saveState.paragraphsVisible = !saveState.paragraphsVisible;">
+  <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.paragraphsVisible}" (click)="btnParagraphPress()">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
   </a>
-  <a id="secondaryToggle" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="saveState.secondaryNotesVisible = !saveState.secondaryNotesVisible;">
+  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="saveState.secondaryNotesVisible = !saveState.secondaryNotesVisible;">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>
-  <a id="notesToggle" (click)="togglePane('study-notes-parent', 1080)" class="right-pane-ignore">
+  <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">
     <fa-icon [icon]="faListUl" size="lg" class="right-pane-ignore"></fa-icon>
   </a>
 </div>

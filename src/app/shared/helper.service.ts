@@ -8,6 +8,12 @@ export class HelperService {
   constructor() {
     this.togglePanes();
   }
+  public getWidth(): number {
+    return Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    );
+  }
 
   private togglePanes() {
     document.onclick = event => {

@@ -54,15 +54,15 @@ body {
   }
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr auto 0 0 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty paragraphToggle secondaryToggle notesToggle';
+    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
     #bookName {
       grid-area: 'bookName';
     }
-    #paragraphToggle {
-      grid-area: 'paragraphToggle';
+    #btnParagraph {
+      grid-area: 'btnParagraph';
       visibility: hidden;
     }
     #addressBar {
@@ -74,12 +74,12 @@ body {
     #empty {
       grid-area: 'empty';
     }
-    #secondaryToggle {
-      grid-area: 'secondaryToggle';
+    #btnSecondaryNotes {
+      grid-area: 'btnSecondaryNotes';
       visibility: hidden;
     }
-    #notesToggle {
-      grid-area: 'notesToggle';
+    #btnRightPane {
+      grid-area: 'btnRightPane';
     }
   }
 }
@@ -100,15 +100,15 @@ body {
   }
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr 1fr 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty paragraphToggle secondaryToggle notesToggle';
+    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
     #bookName {
       grid-area: 'bookName';
     }
-    #paragraphToggle {
-      grid-area: 'paragraphToggle';
+    #btnParagraph {
+      grid-area: 'btnParagraph';
     }
     #addressBar {
       grid-area: 'addressBar';
@@ -116,11 +116,11 @@ body {
     #empty {
       grid-area: 'empty';
     }
-    #secondaryToggle {
-      grid-area: 'secondaryToggle';
+    #btnSecondaryNotes {
+      grid-area: 'btnSecondaryNotes';
     }
-    #notesToggle {
-      grid-area: 'notesToggle';
+    #btnRightPane {
+      grid-area: 'btnRightPane';
     }
   }
 }
@@ -145,15 +145,15 @@ body {
   }
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr 1fr 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty paragraphToggle secondaryToggle notesToggle';
+    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
     #bookName {
       grid-area: 'bookName';
     }
-    #paragraphToggle {
-      grid-area: 'paragraphToggle';
+    #btnParagraph {
+      grid-area: 'btnParagraph';
     }
     #addressBar {
       grid-area: 'addressBar';
@@ -161,11 +161,11 @@ body {
     #empty {
       grid-area: 'empty';
     }
-    #secondaryToggle {
-      grid-area: 'secondaryToggle';
+    #btnSecondaryNotes {
+      grid-area: 'btnSecondaryNotes';
     }
-    #notesToggle {
-      grid-area: 'notesToggle';
+    #btnRightPane {
+      grid-area: 'btnRightPane';
     }
   }
 }

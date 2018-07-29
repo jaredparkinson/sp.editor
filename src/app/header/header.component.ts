@@ -30,11 +30,12 @@ export class HeaderComponent implements OnInit {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   toggleNotes() {
     console.log('test');
   }
+
   togglePane(id: string, minViewWidth: number) {
     // console.log('test');
     this.helperService.togglePane2(id, minViewWidth);
@@ -57,6 +58,19 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
+    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+  }
+
+  btnRightPanePress() {
+    if (this.helperService.getWidth() >= 1080) {
+
+      this.saveState.rightPanePin = !this.saveState.rightPanePin;
+    }
+    else {
+      this.saveState.rightPaneToggle = this.saveState.rightPaneToggle;
+    }
+  }
+  btnParagraphPress() {
     this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
   }
 }

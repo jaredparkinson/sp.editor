@@ -1,5 +1,5 @@
 <div id="study-notes-parent" [ngClass]="{'notes-show-tier': saveState.secondaryNotesVisible, 
     'notes-hide-tier': !saveState.secondaryNotesVisible, 'grid-l-hidden': !saveState.rightPanePin, 
-    'grid-m-hidden grid-s-hidden': !saveState.rightPaneToggle }" class="study-notes-parent ">
+    'grid-m-show grid-s-show': !saveState.rightPaneToggle }" class="study-notes-parent ">
     <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
 </div>

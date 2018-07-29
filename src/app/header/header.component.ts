@@ -67,6 +67,7 @@ export class HeaderComponent implements OnInit {
       this.saveState.rightPanePin = !this.saveState.rightPanePin;
     }
     else {
+      console.log(this.helperService.getWidth());
       this.saveState.rightPaneToggle = this.saveState.rightPaneToggle;
     }
   }

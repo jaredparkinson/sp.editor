@@ -3,6 +3,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationService } from '../navigation.service';
 import { ChapterService } from '../shared/chapter.service';
+import { SaveStateService } from '../shared/save-state.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -15,11 +16,12 @@ export class BodyblockComponent implements OnInit {
     private httpClient: HttpClient,
     // private activatedRoute: ActivatedRoute,
     private chapterService: ChapterService,
-    private navService: NavigationService
-  ) {}
+    private navService: NavigationService,
+    private saveState: SaveStateService
+  ) { }
 
   getBodyBlock(): string {
     return this.chapterService.bodyBlock;
   }
-  ngOnInit() {}
+  ngOnInit() { }
 }

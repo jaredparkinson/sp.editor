@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../shared/chapter.service';
 import { HelperService } from '../shared/helper.service';
+import { SaveStateService } from '../shared/save-state.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -23,12 +24,13 @@ export class HeaderComponent implements OnInit {
   leftPaneNav: HTMLElement;
   constructor(
     private helperService: HelperService,
-    private chapterService: ChapterService
+    private chapterService: ChapterService,
+    private saveState: SaveStateService
   ) {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   toggleNotes() {
     console.log('test');
@@ -55,7 +57,8 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
-    this.helperService.toggleNavButton(id, targetId, on, off);
+    this.saveState.paragraphsVisible = !.this.saveState.paragraphsVisible;
+    // this.helperService.toggleNavButton(id, targetId, on, off);
     // const element = document.getElementById(id);
     // const target = document.getElementById(targetId);
 

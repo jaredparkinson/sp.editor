@@ -6,7 +6,7 @@ export class HelperService {
   private mediumWidth = 1280;
 
   constructor() {
-    this.togglePanes();
+    // this.togglePanes();
   }
   public getWidth(): number {
     return Math.max(

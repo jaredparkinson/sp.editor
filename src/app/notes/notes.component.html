@@ -1,3 +1,4 @@
-<div id="study-notes-parent" class="study-notes-parent none-s grid grid-l grid-m">
+<div id="study-notes-parent" [ngClass]="{'notes-show-tier': saveState.secondaryNotesVisible, 'notes-hide-tier': !saveState.secondaryNotesVisible}"
+    class="study-notes-parent none-s grid grid-l grid-m">
     <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
 </div>

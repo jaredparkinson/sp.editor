@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   toggleNotes() {
     console.log('test');
@@ -58,20 +58,5 @@ export class HeaderComponent implements OnInit {
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
     this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
-    // this.helperService.toggleNavButton(id, targetId, on, off);
-    // const element = document.getElementById(id);
-    // const target = document.getElementById(targetId);
-
-    // if (target.classList.contains(off)) {
-    //   target.classList.add(on);
-    //   element.classList.add('nav-btn-on');
-    //   target.classList.remove(off);
-    // } else {
-    //   target.classList.add(off);
-    //   element.classList.remove('nav-btn-on');
-    //   target.classList.remove(on);
-    // }
-    // console.log(element);
-    // console.log(target);
   }
 }

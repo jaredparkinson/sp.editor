@@ -233,6 +233,12 @@
     .row-s-12 {
       height: $vh12;
     }
+    .hide-s {
+      visibility: hidden;
+    }
+    .show-s {
+      visibility: visible;
+    }
   }
 
   /* Medium Screen Sizes Postfix: -m */
@@ -340,12 +346,21 @@
     .row-m-12 {
       height: $vh12;
     }
+    .hide-m {
+      visibility: hidden;
+    }
+    .show-m {
+      visibility: visible;
+    }
   }
   /* Large Screen Sizes Postfix: -l */
   // Screen Size up to 1920px
   @media only screen and (orientation: landscape) and (min-width: 1280px) {
-    .grid-l-hidden {
+    .hide-l {
       visibility: hidden;
+    }
+    .show-l {
+      visibility: visible;
     }
     .right-pane {
       grid-area: right-pane;

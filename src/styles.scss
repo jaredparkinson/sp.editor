@@ -44,7 +44,7 @@ body {
   .body {
     grid-template-columns: $vw1_5 $vw9 $vw1_5;
     #leftPaneNav div,
-    #studyNotes {
+    #studyNotes div {
       // display: none;
       width: 90vw;
     }

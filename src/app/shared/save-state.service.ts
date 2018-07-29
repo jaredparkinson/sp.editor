@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 export class SaveStateService {
   public foldersVisible = true;
   public leftPanePin = true;
-  public rightPanePin = true;
   public paragraphsVisible = false;
   public secondaryNotesVisible = false;
   public engNotesVisible = false;
   public translatorNotesVisible = false;
   public newNotesVisible = false;
-  public rightPaneToggle: false;
-  constructor() { }
+  public rightPaneToggle = false;
+  public rightPanePin = true;
+  public leftPaneToggle = false;
+  constructor() {}
 }

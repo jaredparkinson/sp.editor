@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
-    this.saveState.paragraphsVisible = !.this.saveState.paragraphsVisible;
+    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
     // this.helperService.toggleNavButton(id, targetId, on, off);
     // const element = document.getElementById(id);
     // const target = document.getElementById(targetId);

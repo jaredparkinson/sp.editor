@@ -10,6 +10,7 @@ import {
 import { ChapterService } from '../shared/chapter.service';
 import { HelperService } from '../shared/helper.service';
 import { SaveStateService } from '../shared/save-state.service';
+import { NavigationService } from '../navigation.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,20 +26,16 @@ export class HeaderComponent implements OnInit {
   constructor(
     private helperService: HelperService,
     private chapterService: ChapterService,
-    private saveState: SaveStateService
+    private saveState: SaveStateService,
+    private navServices: NavigationService
   ) {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   toggleNotes() {
-    console.log('test');
-  }
-
-  togglePane(id: string, minViewWidth: number) {
-    // console.log('test');
-    this.helperService.togglePane2(id, minViewWidth);
+    this.navServices.toggleNotes();
   }
 
   addressBarKeyPress(event: KeyboardEvent) {
@@ -58,26 +55,16 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
-    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+    this.navServices.toggleNavButton(id, targetId, on, off);
   }
 
   btnRightPanePress() {
-    if (this.helperService.getWidth() >= 1080) {
-      this.saveState.rightPanePin = !this.saveState.rightPanePin;
-    } else {
-      console.log(this.helperService.getWidth());
-      this.saveState.rightPaneToggle = !this.saveState.rightPaneToggle;
-    }
+    this.navServices.btnRightPanePress();
   }
   btnLeftPanePress() {
-    if (this.helperService.getWidth() >= 1280) {
-      this.saveState.leftPanePin = !this.saveState.leftPanePin;
-    } else {
-      console.log(this.helperService.getWidth());
-      this.saveState.leftPaneToggle = !this.saveState.leftPaneToggle;
-    }
+    this.navServices.btnLeftPanePress();
   }
   btnParagraphPress() {
-    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+    this.navServices.btnParagraphPress();
   }
 }

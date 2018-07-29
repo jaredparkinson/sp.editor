@@ -1,14 +1,13 @@
 <div class="menu-bar">
-  <!-- <a id='navToggle' (click)="togglePane('leftPaneNav', 1280)"> -->
   <a id='navToggle' (click)="btnLeftPanePress()">
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
   </a>
   <div id="bookName"> Temp</div>
   <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
-  <span id="empty"></span>
   <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.paragraphsVisible}" (click)="btnParagraphPress()">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
   </a>
+  <span id="empty"></span>
   <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="saveState.secondaryNotesVisible = !saveState.secondaryNotesVisible;">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>

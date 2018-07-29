@@ -10,6 +10,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { generate, Observable } from 'rxjs';
 import { Folder } from './Folder';
 import { FolderProtoType } from './FolderProtoType';
+import { SaveStateService } from './shared/save-state.service';
+import { HelperService } from './shared/helper.service';
 
 @Injectable()
 export class NavigationService {
@@ -18,8 +20,37 @@ export class NavigationService {
   public bodyBlock: string;
   public folders: Folder[];
   public navLinks: Folder[];
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private saveState: SaveStateService, private helperService: HelperService) {
     this.initNavigation();
+  }
+
+
+
+
+  toggleNotes() {
+    console.log('test');
+  }
+
+  toggleNavButton(id: string, targetId: string, on: string, off: string) {
+    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+  }
+
+  btnRightPanePress() {
+    if (this.helperService.getWidth() >= 1080) {
+      this.saveState.rightPanePin = !this.saveState.rightPanePin;
+    } else {
+      this.saveState.rightPaneToggle = !this.saveState.rightPaneToggle;
+    }
+  }
+  btnLeftPanePress() {
+    if (this.helperService.getWidth() >= 1280) {
+      this.saveState.leftPanePin = !this.saveState.leftPanePin;
+    } else {
+      this.saveState.leftPaneToggle = !this.saveState.leftPaneToggle;
+    }
+  }
+  btnParagraphPress() {
+    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
   }
 
   setVisibility(path: string) {

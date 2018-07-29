@@ -54,7 +54,7 @@ body {
   }
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr auto 0 0 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -99,8 +99,8 @@ body {
     width: 50vw;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 1fr 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -144,8 +144,8 @@ body {
     width: $vw2_5;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 1fr 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar empty btnParagraph btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }

@@ -29,6 +29,7 @@ import { NavigationService } from './navigation.service';
 import { NotesComponent } from './notes/notes.component';
 import { ChapterService } from './shared/chapter.service';
 import { HelperService } from './shared/helper.service';
+import { SaveStateService } from './shared/save-state.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     ElectronService,
     NavigationService,
     ChapterService,
-    HelperService
+    HelperService,
+    SaveStateService
   ],
   bootstrap: [AppComponent]
 })

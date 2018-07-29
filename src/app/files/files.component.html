@@ -1,14 +1,15 @@
 <div class="left-pane-container left-pane-ignore" style="position: fixed">
   <nav id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
-    <div class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05" [ngClass]="{'nav-hide': !foldersVisible}">
+    <a (click)="setRoot()" [class.nav-children-visible]="folder.visible">Set Root</a>
+    <div class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05" [ngClass]="{'nav-hide': !saveState.foldersVisible}">
 
       <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a>
     </div>
 
     <div class="navigation none-m none-s grid grid-l left-pane-ignore col-l-1-05">
-      <a (click)="setRoot()">Set Root</a>
       <a class='left-pane-ignore' *ngFor="let folder of fileManager.navLinks" (click)="setVisibility(folder.path)" [class.nav-children-visible]="folder.visible">{{folder.path}}</a>
+      <a class='left-pane-ignore' *ngFor="let file of folder?.files">{{file.sourceUrl}}</a>
     </div>
 
   </nav>

@@ -13,6 +13,7 @@ import { NavigationService } from '../navigation.service';
 import { NavLinks } from '../navlinks.model';
 import { ChapterService } from '../shared/chapter.service';
 import { Folder } from '../Folder';
+import { SaveStateService } from '../shared/save-state.service';
 
 @Component({
   selector: 'app-files',
@@ -29,7 +30,8 @@ export class FilesComponent implements OnInit {
   private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
   constructor(
     private fileManager: NavigationService,
-    private chapterService: ChapterService
+    private chapterService: ChapterService,
+    private saveState: SaveStateService
   ) {}
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class FilesComponent implements OnInit {
     this.fileManager.getNavigation(path);
   }
   setRoot() {
-    this.foldersVisible = true;
+    this.saveState.foldersVisible = true;
     this.booksVisible = false;
     this.fileManager.navLinks = [];
   }
@@ -47,9 +49,9 @@ export class FilesComponent implements OnInit {
     folder.visible = !folder.visible;
     if (folder.visible) {
       this.fileManager.navLinks = folder.folders;
-      this.foldersVisible = false;
-      this.booksVisible = true;
-      console.log(folder);
+      this.saveState.foldersVisible = false;
+      // this.booksVisible = true;
+      // console.log(folder);
     } else {
       this.fileManager.navLinks = [];
     }

@@ -4,7 +4,7 @@ import { File } from './file';
 
 export class Folder {
   path: string;
-  Files: File[];
+  files: File[];
   folders: Folder[];
   classList: string = this.path;
   visible: boolean;

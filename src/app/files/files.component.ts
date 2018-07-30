@@ -7,13 +7,13 @@ import {
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { JSDOM } from 'jsdom';
-import { File } from '../file';
-import { FolderProtoType } from '../FolderProtoType';
-import { NavigationService } from '../navigation.service';
-import { NavLinks } from '../navlinks.model';
-import { ChapterService } from '../shared/chapter.service';
-import { Folder } from '../Folder';
-import { SaveStateService } from '../shared/save-state.service';
+import { File } from '../models/file';
+import { FolderProtoType } from '../models/FolderProtoType';
+import { NavigationService } from '../services/navigation.service';
+import { NavLinks } from '../models/navlinks.model';
+import { ChapterService } from '../services/chapter.service';
+import { Folder } from '../models/Folder';
+import { SaveStateService } from '../services/save-state.service';
 
 @Component({
   selector: 'app-files',

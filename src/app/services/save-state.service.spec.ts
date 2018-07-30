@@ -1,17 +1,17 @@
 import { inject, TestBed } from '@angular/core/testing';
 
-import { CssClassGenService } from './cssclassconverter.service';
+import { SaveStateService } from './save-state.service';
 
-describe('CssclassconverterService', () => {
+describe('SaveStateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CssClassGenService]
+      providers: [SaveStateService]
     });
   });
 
   it('should be created', inject(
-    [CssClassGenService],
-    (service: CssClassGenService) => {
+    [SaveStateService],
+    (service: SaveStateService) => {
       expect(service).toBeTruthy();
     }
   ));

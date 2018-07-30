@@ -25,11 +25,11 @@ import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
 import { FilesComponent } from './files/files.component';
 import { HeaderComponent } from './header/header.component';
-import { NavigationService } from './navigation.service';
+import { NavigationService } from './services/navigation.service';
 import { NotesComponent } from './notes/notes.component';
-import { ChapterService } from './shared/chapter.service';
-import { HelperService } from './shared/helper.service';
-import { SaveStateService } from './shared/save-state.service';
+import { ChapterService } from './services/chapter.service';
+import { HelperService } from './services/helper.service';
+import { SaveStateService } from './services/save-state.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationService } from '../navigation.service';
-import { ChapterService } from '../shared/chapter.service';
-import { SaveStateService } from '../shared/save-state.service';
+import { NavigationService } from '../services/navigation.service';
+import { ChapterService } from '../services/chapter.service';
+import { SaveStateService } from '../services/save-state.service';
 
 @Component({
   selector: 'app-notes',

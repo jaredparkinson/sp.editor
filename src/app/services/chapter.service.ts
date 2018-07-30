@@ -4,7 +4,7 @@ import {
   SimpleChange,
   SimpleChanges
 } from '@angular/core';
-import { NavigationService } from '../navigation.service';
+import { NavigationService } from './navigation.service';
 @Injectable()
 export class ChapterService {
   public bodyBlock: string;

@@ -8,10 +8,10 @@ import {
 import { Injectable, OnInit } from '@angular/core';
 // import { JSDOM } from 'jsdom';
 import { generate, Observable } from 'rxjs';
-import { Folder } from './Folder';
-import { FolderProtoType } from './FolderProtoType';
-import { SaveStateService } from './shared/save-state.service';
-import { HelperService } from './shared/helper.service';
+import { Folder } from '../models/Folder';
+import { FolderProtoType } from '../models/FolderProtoType';
+import { HelperService } from './helper.service';
+import { SaveStateService } from './save-state.service';
 
 @Injectable()
 export class NavigationService {
@@ -20,12 +20,13 @@ export class NavigationService {
   public bodyBlock: string;
   public folders: Folder[];
   public navLinks: Folder[];
-  constructor(private httpClient: HttpClient, private saveState: SaveStateService, private helperService: HelperService) {
+  constructor(
+    private httpClient: HttpClient,
+    private saveState: SaveStateService,
+    private helperService: HelperService
+  ) {
     this.initNavigation();
   }
-
-
-
 
   toggleNotes() {
     console.log('test');

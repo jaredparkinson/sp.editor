@@ -7,10 +7,10 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
-import { ChapterService } from '../shared/chapter.service';
-import { HelperService } from '../shared/helper.service';
-import { SaveStateService } from '../shared/save-state.service';
-import { NavigationService } from '../navigation.service';
+import { ChapterService } from '../services/chapter.service';
+import { HelperService } from '../services/helper.service';
+import { SaveStateService } from '../services/save-state.service';
+import { NavigationService } from '../services/navigation.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   toggleNotes() {
     this.navServices.toggleNotes();

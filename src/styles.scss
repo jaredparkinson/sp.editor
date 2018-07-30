@@ -41,16 +41,34 @@ body {
   width: auto;
 }
 @media only screen and (max-width: 1079.98px) {
+  $leftPaneWidth: $vw1_5;
+  $bodyBlockWidth: $vw9;
+  $rightPaneWidth: $vw1_5;
+
   .body {
-    grid-template-columns: $vw1_5 $vw9 $vw1_5;
-    #leftPaneNav div,
-    #studyNotes div {
-      // display: none;
-      width: 90vw;
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+    .right-pane footer,
+    .left-pane nav {
+      width: $vw8;
+    }
+
+    .right-pane footer {
+      // grid-area: left-pane;
+      float: right;
+      position: absolute;
+      right: 0px;
     }
   }
-  .right-pane {
-    grid-area: left-pane;
+
+  .body {
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+  }
+  .right-pane footer {
+    width: $rightPaneWidth;
+  }
+
+  .left-pane nav {
+    width: $leftPaneWidth;
   }
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr auto 0 0 48px;
@@ -84,20 +102,21 @@ body {
   }
 }
 @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
+  $leftPaneWidth: $vw1_5;
+  $bodyBlockWidth: $vw8;
+  $rightPaneWidth: $vw2_5;
+
   .body {
-    grid-template-columns: $vw1_5 $vw8 $vw2_5;
-    // .left-pane {
-    //   display: none;
-    // }
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
   .right-pane footer {
-    width: $vw2_5;
+    width: $rightPaneWidth;
   }
 
-  #leftPaneNav div {
-    // display: none;
-    width: 50vw;
+  .left-pane nav {
+    width: $leftPaneWidth;
   }
+
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
     grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
@@ -124,25 +143,23 @@ body {
     }
   }
 }
-#addressBar {
-  height: 24px;
-  margin-top: 6px;
-  margin-right: 10px;
-}
-#bookName {
-  margin-top: 6px;
-  margin-left: 10px;
-  text-align: left;
-  font-size: 16pt;
-}
 
 @media only screen and (orientation: landscape) and (min-width: 1280px) {
+  $leftPaneWidth: $vw1_5;
+  $bodyBlockWidth: $vw8;
+  $rightPaneWidth: $vw2_5;
+
   .body {
-    grid-template-columns: $vw1_5 $vw8 $vw2_5;
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
   .right-pane footer {
-    width: $vw2_5;
+    width: $rightPaneWidth;
   }
+
+  .left-pane nav {
+    width: $leftPaneWidth;
+  }
+
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
     grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';

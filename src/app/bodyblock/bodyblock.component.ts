@@ -12,12 +12,12 @@ import { SaveStateService } from '../services/save-state.service';
 })
 export class BodyblockComponent implements OnInit {
   constructor(
-    private fileManager: NavigationService,
-    private httpClient: HttpClient,
-    // private activatedRoute: ActivatedRoute,
-    private chapterService: ChapterService,
-    private navService: NavigationService,
-    private saveState: SaveStateService
+    public fileManager: NavigationService,
+    public httpClient: HttpClient,
+    // public activatedRoute: ActivatedRoute,
+    public chapterService: ChapterService,
+    public navService: NavigationService,
+    public saveState: SaveStateService
   ) {}
 
   getBodyBlock(): string {

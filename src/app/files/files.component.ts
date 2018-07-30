@@ -29,9 +29,9 @@ export class FilesComponent implements OnInit {
   private file: File;
   private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
   constructor(
-    private fileManager: NavigationService,
-    private chapterService: ChapterService,
-    private saveState: SaveStateService
+    public fileManager: NavigationService,
+    public chapterService: ChapterService,
+    public saveState: SaveStateService
   ) {}
 
   ngOnInit() {

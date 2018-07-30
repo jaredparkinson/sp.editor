@@ -10,9 +10,9 @@ import { SaveStateService } from '../services/save-state.service';
 })
 export class NotesComponent implements OnInit {
   constructor(
-    private chapterService: ChapterService,
-    private navService: NavigationService,
-    private saveState: SaveStateService
+    public chapterService: ChapterService,
+    public navService: NavigationService,
+    public saveState: SaveStateService
   ) {}
 
   getNotes(): string {

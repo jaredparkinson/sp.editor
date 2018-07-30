@@ -26,10 +26,10 @@ export class HeaderComponent implements OnInit {
   faGlobe = faGlobe;
   leftPaneNav: HTMLElement;
   constructor(
-    private helperService: HelperService,
-    private chapterService: ChapterService,
-    private saveState: SaveStateService,
-    private navServices: NavigationService
+    public helperService: HelperService,
+    public chapterService: ChapterService,
+    public saveState: SaveStateService,
+    public navServices: NavigationService
   ) {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -56,9 +56,9 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  toggleNavButton(id: string, targetId: string, on: string, off: string) {
-    this.navServices.toggleNavButton(id, targetId, on, off);
-  }
+  // toggleNavButton(id: string, targetId: string, on: string, off: string) {
+  //   this.navServices.toggleNavButton(id, targetId, on, off);
+  // }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress();
   }

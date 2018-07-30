@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  OnChanges,
-  SimpleChange,
-  SimpleChanges
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NavigationService } from './navigation.service';
 @Injectable()
 export class ChapterService {

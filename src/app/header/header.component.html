@@ -8,7 +8,24 @@
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
   </a>
   <span id="empty"></span>
-  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="saveState.secondaryNotesVisible = !saveState.secondaryNotesVisible;">
+  <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.newNotesVisible}" (click)="btnNewNotesPress();">
+    <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+    N
+  </a>
+  <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.englishNotesVisible}" (click)="btnEnglishNotesPress();">
+    <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+    E
+  </a>
+  <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.translatorNotesVisible}" (click)="btnTranslatorNotesPress();">
+    <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
+    T
+
+  </a>
+  <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.originalNotesVisible}" (click)="btnOriginalNotesPress();">
+    <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+    O
+  </a>
+  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="btnSecondaryNotesPress();">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>
   <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">

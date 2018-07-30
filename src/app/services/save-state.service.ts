@@ -14,5 +14,7 @@ export class SaveStateService {
   public rightPaneToggle = false;
   public rightPanePin = true;
   public leftPaneToggle = false;
+  public originalNotesVisible = false;
+  public englishNotesVisible = false;
   constructor() {}
 }

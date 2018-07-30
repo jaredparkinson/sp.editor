@@ -1,5 +1,15 @@
-<div id="study-notes-parent" [ngClass]="{'notes-show-tier': saveState.secondaryNotesVisible, 
-    'notes-hide-tier': !saveState.secondaryNotesVisible, 'hide-l': !saveState.rightPanePin, 
-    'show-m show-s': saveState.rightPaneToggle, 'hide-m hide-s': !saveState.rightPaneToggle }" class="study-notes-parent ">
+<div id="study-notes-parent" [ngClass]="{'notes-show-tier': saveState.secondaryNotesVisible,
+'notes-hide-tier': !saveState.secondaryNotesVisible, 'hide-l hide-m': !saveState.rightPanePin, 
+'notes-hide-tc': !saveState.translatorNotesVisible,
+'notes-show-tc': saveState.translatorNotesVisible,
+'notes-hide-english': !saveState.englishNotesVisible, 
+'notes-show-english': saveState.englishNotesVisible, 
+'notes-show-eng': saveState.engNotesVisible,
+'notes-hide-eng': !saveState.engNotesVisible,
+'notes-show-new': saveState.newNotesVisible,
+'notes-hide-new': !saveState.newNotesVisible,
+'notes-hide-original': !saveState.originalNotesVisible,
+'notes-show-original': saveState.originalNotesVisible,
+    'show-s': saveState.rightPaneToggle, 'hide-s': !saveState.rightPaneToggle }" class="study-notes-parent ">
     <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
 </div>

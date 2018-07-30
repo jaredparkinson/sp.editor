@@ -1,13 +1,7 @@
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpRequest,
-  HttpResponse
-} from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 // import { JSDOM } from 'jsdom';
-import { generate, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Folder } from '../models/Folder';
 import { FolderProtoType } from '../models/FolderProtoType';
 import { HelperService } from './helper.service';
@@ -31,8 +25,24 @@ export class NavigationService {
   toggleNotes() {
     console.log('test');
   }
-
-  toggleNavButton(id: string, targetId: string, on: string, off: string) {
+  btnSecondaryNotesPress(): any {
+    this.saveState.secondaryNotesVisible = !this.saveState
+      .secondaryNotesVisible;
+  }
+  btnOriginalNotesPress(): any {
+    this.saveState.originalNotesVisible = !this.saveState.originalNotesVisible;
+  }
+  btnTranslatorNotesPress(): any {
+    this.saveState.translatorNotesVisible = !this.saveState
+      .translatorNotesVisible;
+  }
+  btnEnglishNotesPress(): any {
+    this.saveState.englishNotesVisible = !this.saveState.englishNotesVisible;
+  }
+  btnNewNotesPress(): any {
+    this.saveState.newNotesVisible = !this.saveState.newNotesVisible;
+  }
+  toggleNavButton() {
     this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
   }
 
@@ -54,7 +64,7 @@ export class NavigationService {
     this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
   }
 
-  setVisibility(path: string) {
+  setVisibility() {
     const folder = this.folders[0];
     console.log(folder);
     folder.setVisibility();

@@ -40,6 +40,14 @@ body {
 .left-pane nav {
   width: auto;
 }
+#btnTranslatorNotes,
+#btnOriginalNotes,
+#btnEnglishNotes,
+#btnNewNotes {
+  padding-top: 1px;
+  font-size: 26px;
+  font-weight: bolder;
+}
 @media only screen and (max-width: 1079.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
@@ -82,6 +90,22 @@ body {
       grid-area: 'btnParagraph';
       visibility: hidden;
     }
+    #btnOriginalNotes {
+      grid-area: 'btnOriginalNotes';
+      visibility: hidden;
+    }
+    #btnNewNotes {
+      grid-area: 'btnNewNotes';
+      visibility: hidden;
+    }
+    #btnTranslatorNotes {
+      grid-area: 'btnTranslatorNotes';
+      visibility: hidden;
+    }
+    #btnNewNotes {
+      grid-area: 'btnNewNotes';
+      visibility: hidden;
+    }
     #addressBar {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -117,8 +141,8 @@ body {
   }
 
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr repeat(48px, 6);
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -133,6 +157,18 @@ body {
     }
     #empty {
       grid-area: 'empty';
+    }
+    #btnOriginalNotes {
+      grid-area: 'btnOriginalNotes';
+    }
+    #btnEnglishNotes {
+      grid-area: 'btnEnglishNotes';
+    }
+    #btnNewNotes {
+      grid-area: 'btnNewNotes';
+    }
+    #btnTranslatorNotes {
+      grid-area: 'btnTranslatorNotes';
     }
     #btnSecondaryNotes {
       grid-area: 'btnSecondaryNotes';
@@ -160,8 +196,8 @@ body {
   }
 
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px auto 48px 48px 48px 48px 48px 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -176,6 +212,18 @@ body {
     }
     #empty {
       grid-area: 'empty';
+    }
+    #btnOriginalNotes {
+      grid-area: 'btnOriginalNotes';
+    }
+    #btnEnglishNotes {
+      grid-area: 'btnEnglishNotes';
+    }
+    #btnNewNotes {
+      grid-area: 'btnNewNotes';
+    }
+    #btnTranslatorNotes {
+      grid-area: 'btnTranslatorNotes';
     }
     #btnSecondaryNotes {
       grid-area: 'btnSecondaryNotes';

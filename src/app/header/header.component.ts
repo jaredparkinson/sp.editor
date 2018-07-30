@@ -5,12 +5,13 @@ import {
   faBookOpen,
   faListUl,
   faParagraph,
-  faPlus
+  faPlus,
+  faGlobe
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
-import { SaveStateService } from '../services/save-state.service';
 import { NavigationService } from '../services/navigation.service';
+import { SaveStateService } from '../services/save-state.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
   faBookOpen = faBookOpen;
   faPlus = faPlus;
   faListUl = faListUl;
+  faGlobe = faGlobe;
   leftPaneNav: HTMLElement;
   constructor(
     private helperService: HelperService,
@@ -57,9 +59,23 @@ export class HeaderComponent implements OnInit {
   toggleNavButton(id: string, targetId: string, on: string, off: string) {
     this.navServices.toggleNavButton(id, targetId, on, off);
   }
-
+  btnNewNotesPress() {
+    this.navServices.btnNewNotesPress();
+  }
+  btnEnglishNotesPress() {
+    this.navServices.btnEnglishNotesPress();
+  }
+  btnTranslatorNotesPress() {
+    this.navServices.btnTranslatorNotesPress();
+  }
+  btnOriginalNotesPress() {
+    this.navServices.btnOriginalNotesPress();
+  }
   btnRightPanePress() {
     this.navServices.btnRightPanePress();
+  }
+  btnSecondaryNotesPress() {
+    this.navServices.btnSecondaryNotesPress();
   }
   btnLeftPanePress() {
     this.navServices.btnLeftPanePress();

@@ -43,6 +43,7 @@ body {
 #btnTranslatorNotes,
 #btnOriginalNotes,
 #btnEnglishNotes,
+#btnPoetry,
 #btnNewNotes {
   padding-top: 1px;
   font-size: 26px;
@@ -87,6 +88,10 @@ body {
       grid-area: 'bookName';
     }
     #btnParagraph {
+      grid-area: 'btnParagraph';
+      visibility: hidden;
+    }
+    #btnPoetry {
       grid-area: 'btnParagraph';
       visibility: hidden;
     }
@@ -141,8 +146,8 @@ body {
   }
 
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 1fr repeat(48px, 6);
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 48px 1fr 48px 48px 48px 48px 48px 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -151,6 +156,9 @@ body {
     }
     #btnParagraph {
       grid-area: 'btnParagraph';
+    }
+    #btnPoetry {
+      grid-area: 'btnPoetry';
     }
     #addressBar {
       grid-area: 'addressBar';
@@ -196,8 +204,8 @@ body {
   }
 
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px auto 48px 48px 48px 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 48px 1fr 48px 48px 48px 48px 48px 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -206,6 +214,9 @@ body {
     }
     #btnParagraph {
       grid-area: 'btnParagraph';
+    }
+    #btnPoetry {
+      grid-area: 'btnPoetry';
     }
     #addressBar {
       grid-area: 'addressBar';

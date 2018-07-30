@@ -62,6 +62,9 @@ export class HeaderComponent implements OnInit {
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress();
   }
+  btnPoetryPress() {
+    this.navServices.btnPoetryPress();
+  }
   btnEnglishNotesPress() {
     this.navServices.btnEnglishNotesPress();
   }

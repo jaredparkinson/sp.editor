@@ -1,4 +1,5 @@
 <div class="left-content-pane"></div>
-<div id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.paragraphsVisible}" innerHTML="{{getBodyBlock()}}">
+<div id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.paragraphsVisible, 'show-poetry': saveState.poetryVisible}"
+    innerHTML="{{getBodyBlock()}}">
 </div>
 <div class="right-content-pane"></div>

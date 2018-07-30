@@ -25,21 +25,25 @@ export class NavigationService {
   toggleNotes() {
     console.log('test');
   }
-  btnSecondaryNotesPress(): any {
+
+  btnPoetryPress(): void {
+    this.saveState.poetryVisible = !this.saveState.poetryVisible;
+  }
+  btnSecondaryNotesPress(): void {
     this.saveState.secondaryNotesVisible = !this.saveState
       .secondaryNotesVisible;
   }
-  btnOriginalNotesPress(): any {
+  btnOriginalNotesPress(): void {
     this.saveState.originalNotesVisible = !this.saveState.originalNotesVisible;
   }
-  btnTranslatorNotesPress(): any {
+  btnTranslatorNotesPress(): void {
     this.saveState.translatorNotesVisible = !this.saveState
       .translatorNotesVisible;
   }
-  btnEnglishNotesPress(): any {
+  btnEnglishNotesPress(): void {
     this.saveState.englishNotesVisible = !this.saveState.englishNotesVisible;
   }
-  btnNewNotesPress(): any {
+  btnNewNotesPress(): void {
     this.saveState.newNotesVisible = !this.saveState.newNotesVisible;
   }
   toggleNavButton() {

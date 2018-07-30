@@ -49,11 +49,10 @@ body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
     .right-pane footer,
     .left-pane nav {
-      width: $vw8;
+      width: $vw11;
     }
 
     .right-pane footer {
-      // grid-area: left-pane;
       float: right;
       position: absolute;
       right: 0px;

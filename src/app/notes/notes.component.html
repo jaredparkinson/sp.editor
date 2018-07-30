@@ -11,5 +11,28 @@
 'notes-hide-original': !saveState.originalNotesVisible,
 'notes-show-original': saveState.originalNotesVisible,
     'show-s': saveState.rightPaneToggle, 'hide-s': !saveState.rightPaneToggle }" class="study-notes-parent ">
-    <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
+    <div>
+
+        <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
+            <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+            N
+        </a>
+        <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();">
+            <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+            E
+        </a>
+        <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();">
+            <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
+            T
+
+        </a>
+        <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();">
+            <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+            O
+        </a>
+        <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
+            <fa-icon [icon]="faPlus" size="lg"></fa-icon>
+        </a>
+        <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
+    </div>
 </div>

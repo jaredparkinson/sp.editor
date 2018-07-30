@@ -2,7 +2,7 @@
   <a id='navToggle' (click)="btnLeftPanePress()">
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
   </a>
-  <div id="bookName"> Temp</div>
+  <div id="bookName"></div>
   <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
   <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.paragraphsVisible}" (click)="btnParagraphPress()">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
@@ -12,24 +12,24 @@
     P
   </a>
   <span id="empty"></span>
-  <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.newNotesVisible}" (click)="btnNewNotesPress();">
+  <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     N
   </a>
-  <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.englishNotesVisible}" (click)="btnEnglishNotesPress();">
+  <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     E
   </a>
-  <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.translatorNotesVisible}" (click)="btnTranslatorNotesPress();">
+  <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();">
     <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
     T
 
   </a>
-  <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.originalNotesVisible}" (click)="btnOriginalNotesPress();">
+  <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     O
   </a>
-  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="btnSecondaryNotesPress();">
+  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>
   <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">

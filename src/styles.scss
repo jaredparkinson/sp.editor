@@ -49,6 +49,7 @@ body {
   font-size: 26px;
   font-weight: bolder;
 }
+
 @media only screen and (max-width: 1079.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
@@ -67,10 +68,6 @@ body {
       right: 0px;
     }
   }
-
-  .body {
-    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
-  }
   .right-pane footer {
     width: $rightPaneWidth;
   }
@@ -79,13 +76,15 @@ body {
     width: $leftPaneWidth;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr auto 0 0 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph empty btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px 0 auto 0 0 0 0 0 0 0 0 48px;
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+
     #navToggle {
       grid-area: 'navToggle';
     }
     #bookName {
       grid-area: 'bookName';
+      text-overflow: clip;
     }
     #btnParagraph {
       grid-area: 'btnParagraph';
@@ -109,6 +108,10 @@ body {
     }
     #btnNewNotes {
       grid-area: 'btnNewNotes';
+      visibility: hidden;
+    }
+    #btnEnglishNotes {
+      grid-area: 'btnEnglishNotes';
       visibility: hidden;
     }
     #addressBar {

@@ -19,7 +19,9 @@ import { ElectronService } from './providers/electron.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { timingSafeEqual } from 'crypto';
+import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
@@ -69,6 +71,9 @@ const appRoutes: Routes = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: AppConfig.production
     })
   ],
   providers: [

@@ -27,45 +27,59 @@ export class NavigationService {
   }
 
   btnPoetryPress(): void {
-    this.saveState.poetryVisible = !this.saveState.poetryVisible;
+    this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
+    this.saveState.save();
   }
   btnSecondaryNotesPress(): void {
-    this.saveState.secondaryNotesVisible = !this.saveState
+    this.saveState.data.secondaryNotesVisible = !this.saveState.data
       .secondaryNotesVisible;
+    this.saveState.save();
   }
   btnOriginalNotesPress(): void {
-    this.saveState.originalNotesVisible = !this.saveState.originalNotesVisible;
+    this.saveState.data.originalNotesVisible = !this.saveState.data
+      .originalNotesVisible;
+    this.saveState.save();
   }
   btnTranslatorNotesPress(): void {
-    this.saveState.translatorNotesVisible = !this.saveState
+    this.saveState.data.translatorNotesVisible = !this.saveState.data
       .translatorNotesVisible;
+    this.saveState.save();
   }
   btnEnglishNotesPress(): void {
-    this.saveState.englishNotesVisible = !this.saveState.englishNotesVisible;
+    this.saveState.data.englishNotesVisible = !this.saveState.data
+      .englishNotesVisible;
+    this.saveState.save();
   }
   btnNewNotesPress(): void {
-    this.saveState.newNotesVisible = !this.saveState.newNotesVisible;
+    this.saveState.data.newNotesVisible = !this.saveState.data.newNotesVisible;
+    this.saveState.save();
   }
   toggleNavButton() {
-    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+    this.saveState.data.paragraphsVisible = !this.saveState.data
+      .paragraphsVisible;
   }
 
   btnRightPanePress() {
     if (this.helperService.getWidth() >= 1080) {
-      this.saveState.rightPanePin = !this.saveState.rightPanePin;
+      this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
     } else {
-      this.saveState.rightPaneToggle = !this.saveState.rightPaneToggle;
+      this.saveState.data.rightPaneToggle = !this.saveState.data
+        .rightPaneToggle;
     }
+    this.saveState.save();
   }
   btnLeftPanePress() {
     if (this.helperService.getWidth() >= 1280) {
-      this.saveState.leftPanePin = !this.saveState.leftPanePin;
+      this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
     } else {
-      this.saveState.leftPaneToggle = !this.saveState.leftPaneToggle;
+      this.saveState.data.leftPaneToggle = !this.saveState.data.leftPaneToggle;
     }
+    this.saveState.save();
   }
   btnParagraphPress() {
-    this.saveState.paragraphsVisible = !this.saveState.paragraphsVisible;
+    this.saveState.data.paragraphsVisible = !this.saveState.data
+      .paragraphsVisible;
+    this.saveState.save();
   }
 
   setVisibility() {

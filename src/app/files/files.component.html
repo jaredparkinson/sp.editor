@@ -1,9 +1,9 @@
-<div class="left-pane-container left-pane-ignore" style="position: fixed" [ngClass]="{'hide-l': !saveState.leftPanePin, 
-'show-m show-s': saveState.leftPaneToggle, 'hide-m hide-s': !saveState.leftPaneToggle }">
+<div class="left-pane-container left-pane-ignore" style="position: fixed" [ngClass]="{'hide-l': !saveState.data.leftPanePin, 
+'show-m show-s': saveState.data.leftPaneToggle, 'hide-m hide-s': !saveState.data.leftPaneToggle }">
   <nav id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
-    <a (click)="setRoot()" [class.nav-children-visible]="saveState.foldersVisible">Set Root</a>
-    <div class="grid" [ngClass]="{'nav-hide': !saveState.foldersVisible}">
+    <a (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Set Root</a>
+    <div class="grid" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
 
       <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a>
     </div>

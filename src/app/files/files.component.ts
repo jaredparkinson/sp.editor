@@ -41,7 +41,7 @@ export class FilesComponent implements OnInit {
     this.fileManager.getNavigation(path);
   }
   setRoot() {
-    this.saveState.foldersVisible = true;
+    this.saveState.data.foldersVisible = true;
     this.booksVisible = false;
     this.fileManager.navLinks = [];
   }
@@ -49,7 +49,7 @@ export class FilesComponent implements OnInit {
     folder.visible = !folder.visible;
     if (folder.visible) {
       this.fileManager.navLinks = folder.folders;
-      this.saveState.foldersVisible = false;
+      this.saveState.data.foldersVisible = false;
       // this.booksVisible = true;
       // console.log(folder);
     } else {

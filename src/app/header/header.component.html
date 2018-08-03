@@ -4,32 +4,32 @@
   </a>
   <div id="bookName"></div>
   <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
-  <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.paragraphsVisible}" (click)="btnParagraphPress()">
+  <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
   </a>
-  <a id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.poetryVisible}" (click)="btnPoetryPress();">
+  <a id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     P
   </a>
   <span id="empty"></span>
-  <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
+  <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     N
   </a>
-  <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();">
+  <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     E
   </a>
-  <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();">
+  <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();">
     <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
     T
 
   </a>
-  <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();">
+  <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     O
   </a>
-  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
+  <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
   </a>
   <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">

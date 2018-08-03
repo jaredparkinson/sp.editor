@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
+import { SaveStateModel } from './SaveStateModel';
+import { SaveStateTemplate } from './SaveStateTemplate';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaveStateService {
-  public foldersVisible = true;
-  public leftPanePin = true;
-  public paragraphsVisible = false;
-  public poetryVisible = false;
-  public newNotesVisible = false;
-  public rightPaneToggle = false;
-  public rightPanePin = true;
-  public leftPaneToggle = false;
-  public secondaryNotesVisible = false;
-  public engNotesVisible = false;
-  public translatorNotesVisible = false;
-  public originalNotesVisible = false;
-  public englishNotesVisible = false;
-  constructor() {}
+  id: string;
+  data: SaveStateModel;
+
+  constructor() {
+    this.id = 'spEditorSaveState';
+    this.load();
+  }
+  public save(): void {
+    localStorage.setItem(this.id, JSON.stringify(this.data));
+  }
+  public load(): void {
+    const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
+    if (temp !== null) {
+      this.data = temp;
+    } else {
+      this.data = new SaveStateModel();
+    }
+  }
 }

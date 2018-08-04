@@ -1,5 +1,5 @@
 {
-  "name": "angular-electron",
+  "name": "sp-editor",
   "version": "4.1.0",
   "description": "Angular 6 with Electron (Typescript + SASS + Hot Reload)",
   "homepage": "https://github.com/maximegris/angular-electron",
@@ -42,6 +42,8 @@
     "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
+    "@angular/pwa": "^0.6.8",
+    "@angular/service-worker": "^6.1.1",
     "@fortawesome/angular-fontawesome": "^0.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",

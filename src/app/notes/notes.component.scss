@@ -1,4 +1,5 @@
-$font-stack: PalatinoldsLat-Roman, serif;
+$font-stack: PalatinoldsLat-Roman,
+serif;
 .right-pane {
   span.reference-label-quotation::before {
     content: 'QUO';
@@ -6,90 +7,77 @@ $font-stack: PalatinoldsLat-Roman, serif;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-or::before {
     content: 'OR';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-ie::before {
     content: 'IE';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-phrasing::before {
     content: 'PHR';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-hebrew::before {
     content: 'HEB';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label {
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-greek::before {
     content: 'GR';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-archaic::before {
     content: 'KJV';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-historical::before {
     content: 'HST';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-cr::before {
     content: 'CR';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-alt::before {
     content: 'ALT';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-harmony::before {
     content: 'HMY';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-tg::before {
     content: 'TG';
     text-transform: lowercase;
     font-variant: small-caps;
     font-weight: 700;
   }
-
   span.reference-label-gs::before {
     content: 'GS';
     text-transform: lowercase;
@@ -102,57 +90,45 @@ $font-stack: PalatinoldsLat-Roman, serif;
     padding-top: 6pt;
     padding-bottom: 6pt;
   }
-
   sup.marker {
     display: none;
   }
-
   .body-block.notes-show-original {
     span.study-note-ref {
       color: #007fa4;
     }
-
     sup.marker {
       font-style: italic;
       font-size: 8pt;
       display: initial;
-
       /* when original notes showing, display:none */
     }
   }
-
   .original-note {
     background-color: oldlace;
-
     span {
       display: grid;
       grid-template-columns: auto 9fr;
       grid-template-rows: auto;
-
       .original-note-marker {
         grid-column-start: 1;
         margin-right: 5px;
       }
-
       .original-note-note {
         grid-column-start: 2; // display: contents;
       }
-
       margin-bottom: 6pt;
       margin-top: 3pt;
       margin-left: 0.25in;
     }
   }
-
   .tier-2-note {
     background-color: FloralWhite;
   }
-
   .tier-2-lines {
     margin-top: 7px;
     background-color: FloralWhite;
   }
-
   .note-reference-new,
   .note-reference-new-2,
   .note-reference-eng,
@@ -162,28 +138,23 @@ $font-stack: PalatinoldsLat-Roman, serif;
   .note-phrase {
     margin-bottom: 9pt;
   }
-
   footer {
     background-color: Gainsboro;
     padding-top: 6pt;
     padding-bottom: 6pt;
-
     &.study-notes {
       font-size: smaller;
     }
   }
-
   div.note-label {
     padding-right: 4pt;
     display: inline;
     font-size: smaller;
   }
-
   .study-notes-parent {
-    .note-phrase {
+    &.notes-hide-tier .note-phrase {
       display: none;
     }
-
     &.notes-hide-original {
       .original-note {
         display: none;
@@ -192,13 +163,11 @@ $font-stack: PalatinoldsLat-Roman, serif;
     .note-button {
       display: none;
     }
-
     &.notes-show-eng note.button-eng-2 .note-button,
     &.notes-show-tc note.button-tc-2 .note-button,
     &.notes-show-new note.button-new-2 .note-button {
       display: block;
     }
-
     &.notes-hide-tc .note-reference-tc,
     &.notes-hide-eng .note-reference-eng,
     &.notes-hide-new .note-reference-new,
@@ -210,103 +179,49 @@ $font-stack: PalatinoldsLat-Roman, serif;
     &.notes-hide-tier .note-reference-eng-2 {
       display: none;
     }
-
-    &.notes-show-tier
-      note.note-references.tier-2-note-hide
-      .note-reference-tc-2,
-    &.notes-show-tier
-      note.note-references.tier-2-note-hide
-      .note-reference-eng-2,
-    &.notes-show-tier
-      note.note-references.tier-2-note-hide
-      .note-reference-new-2,
-    &.notes-show-tier
-      note.note-references.tier-2-note-hide
-      .note-reference-new-3,
-    &.notes-show-tier
-      note.note-references.tier-2-note-hide
-      .note-phrase.note-reference-tc-2 {
+    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-tc-2,
+    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-eng-2,
+    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-new-2,
+    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-new-3,
+    &.notes-show-tier note.note-references.tier-2-note-hide .note-phrase.note-reference-tc-2 {
       display: none;
     }
-
     &.notes-show-tc .note-phrase-tc,
     &.notes-show-new .note-phrase-new,
     &.notes-show-eng .note-phr-eng,
     &.notes-show-eng .note-phrase-eng,
-    &.notes-show-tier.notes-show-new
-      note.secondary-override-off
-      .note-reference-new-2,
-    &.notes-show-tier.notes-show-tc
-      note.secondary-override-off.note-reference-tc-2,
-    &.notes-show-tier.notes-show-eng
-      note.secondary-override-off
-      .note-reference-eng-2,
-    &.notes-show-tier.notes-show-eng
-      note.secondary-override-off
-      .note-phrase-eng-2,
-    &.notes-show-tier.notes-show-tc
-      note.secondary-override-off
-      .note-phrase-tc-2,
-    &.notes-show-tier.notes-show-new
-      note.secondary-override-off
-      .note-phrase-new-2,
-    &.notes-hide-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-reference-new-2,
-    &.notes-hide-tier.notes-show-eng
-      note.secondary-override-on.tier-2-note-show
-      .note-reference-eng-2,
-    &.notes-hide-tier.notes-show-tc
-      note.secondary-override-on.tier-2-note-show
-      .note-reference-tc-2,
-    &.notes-hide-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-reference-new-3,
-    &.notes-hide-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-new,
-    &.notes-hide-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-new-2,
-    &.notes-hide-tier.notes-show-eng
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-eng,
-    &.notes-hide-tier.notes-show-eng
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-eng-2,
-    &.notes-hide-tier.notes-show-tc
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-tc,
-    &.notes-hide-tier.notes-show-tc
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-tc-2,
-    &.notes-show-tier.notes-show-eng
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-eng-2,
-    &.notes-show-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-new-2,
-    &.notes-show-tier.notes-show-new
-      note.secondary-override-on.tier-2-note-show
-      .note-reference-new-3,
-    &.notes-show-tier.notes-show-tc
-      note.secondary-override-on.tier-2-note-show
-      .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-new note.secondary-override-off .note-reference-new-2,
+    &.notes-show-tier.notes-show-tc note.secondary-override-off.note-reference-tc-2,
+    &.notes-show-tier.notes-show-eng note.secondary-override-off .note-reference-eng-2,
+    &.notes-show-tier.notes-show-eng note.secondary-override-off .note-phrase-eng-2,
+    &.notes-show-tier.notes-show-tc note.secondary-override-off .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-new note.secondary-override-off .note-phrase-new-2,
+    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-2,
+    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-reference-eng-2,
+    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-reference-tc-2,
+    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-3,
+    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new,
+    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new-2,
+    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng,
+    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng-2,
+    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc,
+    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng-2,
+    &.notes-show-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new-2,
+    &.notes-show-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-3,
+    &.notes-show-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc-2,
     &.notes-show-tc .note-reference-tc,
     &.notes-show-eng .note-reference-eng,
     &.notes-show-new .note-reference-new {
       display: block;
     }
-
     note.tier-2-note-show {
       display: grid;
     }
   }
-
   .button-toggled-off {
     color: grey;
   }
-
   .note-button-buttons,
   .tier-2-note-buttons,
   .tier-2-lines-buttons,
@@ -315,14 +230,12 @@ $font-stack: PalatinoldsLat-Roman, serif;
     border-color: rgb(216, 215, 215);
     margin-right: 20px;
     font-size: 9pt;
-
     &.note-button-toggled-off {
       background-color: rgb(161, 161, 161);
       border-color: rgb(161, 161, 161);
       margin-right: 20px;
     }
   }
-
   p {
     &.title,
     &.title-number,
@@ -347,11 +260,9 @@ $font-stack: PalatinoldsLat-Roman, serif;
     &.note-reference-tc-2 {
       padding-right: 20px;
     }
-
     &.intro {
       font-family: $font-stack;
     }
-
     &.title {
       font-family: $font-stack;
       margin: 0;
@@ -360,7 +271,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
       text-align: center;
       font-weight: bold;
     }
-
     &.title-number {
       font-family: $font-stack;
       margin: 0;
@@ -369,75 +279,63 @@ $font-stack: PalatinoldsLat-Roman, serif;
       text-align: center;
       font-weight: bold;
     }
-
     &.subtitle {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
       text-align: center;
     }
-
     &.study-summary {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
       font-style: italic;
     }
-
     &.para {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
     }
-
     &.closing {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
     }
-
     &.salutation {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
     }
-
     &.office {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
     }
-
     &.wide-ellipse {
       font-family: $font-stack;
       margin: 0;
       margin-bottom: 6pt;
       text-align: center;
     }
-
     &.entry {
       font-family: $font-stack;
       margin-top: 6pt;
       margin-right: 0;
       margin-left: 0; // margin-bottom: 0.0001pt;
     }
-
     &.locator {
       margin-top: 0;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.note-title {
       display: none;
     }
-
     &.note-short-title {
       font-family: $font-stack;
       margin-top: 6pt;
       font-weight: bold;
     }
-
     &.note-phrase {
       font-family: $font-stack;
       margin-top: 0;
@@ -445,13 +343,11 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-left: 0; // margin-bottom: 0.0001pt;
       padding-left: 4pt;
     }
-
     &.note-reference-new {
       margin-top: 4pt;
       margin-right: 0;
       margin-left: 0.25in;
     }
-
     &.note-reference-eng {
       color: Blue;
       background-color: LightYellow;
@@ -459,7 +355,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.note-reference-tc {
       color: DodgerBlue;
       background-color: White;
@@ -467,13 +362,11 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.note-reference-new-2 {
       margin-top: 4pt;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.note-reference-eng-2 {
       color: Blue;
       background-color: LightYellow;
@@ -481,7 +374,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.note-reference-tc-2 {
       color: DodgerBlue;
       background-color: White;
@@ -489,7 +381,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-right: 0;
       margin-left: 0.25in; // margin-bottom: 0.0001pt;
     }
-
     &.hanging-indent {
       margin-top: 0;
       margin-right: 0;

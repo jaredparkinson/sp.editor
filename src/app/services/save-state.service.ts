@@ -18,10 +18,7 @@ export class SaveStateService {
   }
   public load(): void {
     const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
-    if (temp !== null) {
-      this.data = temp;
-    } else {
-      this.data = new SaveStateModel();
-    }
+    this.data = temp !== null ? temp : new SaveStateModel();
+    // is
   }
 }

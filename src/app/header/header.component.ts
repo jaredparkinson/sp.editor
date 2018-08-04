@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import {
   faBars,
   faBookOpen,
+  faGlobe,
   faListUl,
   faParagraph,
-  faPlus,
-  faGlobe
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';

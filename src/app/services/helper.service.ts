@@ -68,7 +68,7 @@ export class HelperService {
 
   public togglePane(id: string, minViewWidth: number): void {
     const element = document.getElementById(id);
-    console.log('id');
+    // console.log('id');
 
     const viewWidth = Math.max(
       document.documentElement.clientWidth,

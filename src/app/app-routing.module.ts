@@ -7,17 +7,16 @@ import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
-    pathMatch: 'full'
+    component: AppComponent
   },
   {
     path: '**',
     component: AppComponent
-  },
-  {
-    path: 'assets/scriptures/:b/:chap',
-    component: AppComponent
   }
+  // {
+  //   path: 'assets/scriptures/:b/:chap',
+  //   component: AppComponent
+  // }
 ];
 
 @NgModule({

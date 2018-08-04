@@ -1,8 +1,10 @@
 $font-stack: PalatinoldsLat-Roman,
 serif;
 .right-pane {
-  note {
+  .secondary-notes,
+  .note-short-title {
     margin-left: 1em;
+    margin-right: 20px;
   }
   span.reference-label-quotation::before {
     content: 'QUO';

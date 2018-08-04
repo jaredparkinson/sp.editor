@@ -1,16 +1,27 @@
-import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { BodyblockComponent } from './bodyblock/bodyblock.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-    }
+  {
+    path: '',
+    component: AppComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: AppComponent
+  },
+  {
+    path: 'assets/scriptures/:b/:chap',
+    component: AppComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

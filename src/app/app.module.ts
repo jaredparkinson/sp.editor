@@ -38,17 +38,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: BodyblockComponent
-  },
-  {
-    path: 'assets/scriptures/:b/:chap',
-    component: BodyblockComponent
-  }
-];
-
 @NgModule({
   declarations: [
     AppComponent,

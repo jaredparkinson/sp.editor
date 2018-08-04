@@ -1,14 +1,17 @@
-<div id="study-notes-parent" [ngClass]="{'notes-show-tier': saveState.data.secondaryNotesVisible,
-'notes-hide-tier': !saveState.data.secondaryNotesVisible, 'hide-l hide-m': !saveState.data.rightPanePin, 
-'notes-hide-tc': !saveState.data.translatorNotesVisible,
-'notes-show-tc': saveState.data.translatorNotesVisible,
-'notes-show-eng': saveState.data.englishNotesVisible,
+<div id="study-notes-parent" [ngClass]="{
+    'notes-show-tier': saveState.data.secondaryNotesVisible,
+    'hide-l hide-m': !saveState.data.rightPanePin, 
+    'notes-show-tc': saveState.data.translatorNotesVisible,
+    'notes-show-eng': saveState.data.englishNotesVisible,
+    'notes-hide-tier': !saveState.data.secondaryNotesVisible, 
+    'notes-hide-tc': !saveState.data.translatorNotesVisible,
 'notes-hide-eng': !saveState.data.englishNotesVisible,
 'notes-show-new': saveState.data.newNotesVisible,
 'notes-hide-new': !saveState.data.newNotesVisible,
 'notes-hide-original': !saveState.data.originalNotesVisible,
 'notes-show-original': saveState.data.originalNotesVisible,
-    'show-s': saveState.data.rightPaneToggle, 'hide-s': !saveState.data.rightPaneToggle }" class="study-notes-parent ">
+'show-s': saveState.data.rightPaneToggle,
+'hide-s': !saveState.data.rightPaneToggle }" class="study-notes-parent ">
   <div>
 
     <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();">

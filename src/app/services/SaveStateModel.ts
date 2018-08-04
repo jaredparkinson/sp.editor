@@ -13,6 +13,9 @@ export class SaveStateModel implements ISaveModel {
   public translatorNotesVisible = false;
   public originalNotesVisible = false;
   public englishNotesVisible = false;
+  public backtrack: string[] = [];
+  public forward: string[] = [];
+  public currentPage = '';
   constructor() {}
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
@@ -17,17 +17,20 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-  ngOnInit(): void {
+  ) {
     this.translate.setDefaultLang('en');
-    console.log('AppConfig', AppConfig);
+    // console.log('AppConfig', AppConfig);
 
-    if (this.electronService.isElectron()) {
-      console.log('Mode electron');
-      console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
-      console.log('NodeJS childProcess', this.electronService.childProcess);
-    } else {
-      console.log('Mode web');
-    }
+    // if (this.electronService.isElectron()) {
+    //   console.log('Mode electron');
+    //   console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
+    //   console.log('NodeJS childProcess', this.electronService.childProcess);
+    // } else {
+    //   console.log('Mode web');
+    // }
+    this.router.events.subscribe(val => {
+      console.log(val instanceof NavigationEnd);
+    });
   }
+  ngOnInit(): void {}
 }

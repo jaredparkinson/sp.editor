@@ -12,6 +12,7 @@ import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -29,7 +30,8 @@ export class HeaderComponent implements OnInit {
     public helperService: HelperService,
     public chapterService: ChapterService,
     public saveState: SaveStateService,
-    public navServices: NavigationService
+    public navServices: NavigationService,
+    private router: Router
   ) {
     this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -51,7 +53,8 @@ export class HeaderComponent implements OnInit {
       });
       console.log(address);
       if (address.length >= 2) {
-        this.chapterService.getChapter(address[0], address[1]);
+        this.router.navigateByUrl(address[0] + '/' + address[1]);
+        // this.chapterService.getChapter(address[0], address[1]);
       }
     }
   }

@@ -6,6 +6,14 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
+    path: 'search/:s/:chap',
+    component: AppComponent
+  },
+  {
+    path: ':book/:chapter',
+    component: AppComponent
+  },
+  {
     path: '',
     component: AppComponent,
     pathMatch: 'full'
@@ -14,10 +22,6 @@ const routes: Routes = [
     path: '**',
     component: AppComponent
   }
-  // {
-  //   path: 'assets/scriptures/:b/:chap',
-  //   component: AppComponent
-  // }
 ];
 
 @NgModule({

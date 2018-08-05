@@ -4,6 +4,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
+import { ChapterService } from './services/chapter.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
   faCoffee = faCoffee;
   constructor(
     public electronService: ElectronService,
+    private chapterService: ChapterService,
     private translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router
@@ -28,9 +30,25 @@ export class AppComponent implements OnInit {
     // } else {
     //   console.log('Mode web');
     // }
-    this.router.events.subscribe(val => {
-      console.log(val instanceof NavigationEnd);
+  }
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      // this.id = +params['b']; // (+) converts string 'id' to a number
+      const book = params['book'];
+      const chapter = params['chapter'];
+      if (book !== undefined || chapter !== undefined) {
+        console.log(book);
+        console.log(chapter);
+        this.route.queryParams.subscribe(v => {
+          this.chapterService.getChapter(book, chapter);
+          console.log(v['verse']);
+        });
+      }
+      // const verse = route.queryParams['verse'];
+
+      // console.log(chapter);
+
+      // In a real app: dispatch action to load the details here.
     });
   }
-  ngOnInit(): void {}
 }

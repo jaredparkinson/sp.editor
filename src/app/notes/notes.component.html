@@ -34,6 +34,6 @@
     <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
       <fa-icon [icon]="faPlus" size="lg"></fa-icon>
     </a>
-    <footer id="studyNotes" class="study-notes" innerHTML="{{getNotes()}}"></footer>
+    <footer id="studyNotes" class="study-notes" [innerHTML]="getNotes()"></footer>
   </div>
 </div>

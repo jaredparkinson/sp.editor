@@ -36,13 +36,15 @@ export class AppComponent implements OnInit {
       // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
       const chapter = params['chapter'];
-      if (book !== undefined || chapter !== undefined) {
+      if (book !== undefined && chapter !== undefined) {
         console.log(book);
         console.log(chapter);
+        this.chapterService.getChapter(book, chapter);
         this.route.queryParams.subscribe(v => {
-          this.chapterService.getChapter(book, chapter);
           console.log(v['verse']);
         });
+      } else if (book === undefined && chapter !== undefined) {
+        this.chapterService.getChapter(chapter, '');
       }
       // const verse = route.queryParams['verse'];
 

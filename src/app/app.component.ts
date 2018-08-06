@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
     // } else {
     //   console.log('Mode web');
     // }
+  }
+
+  onScroll(event: any) {
+    console.log(event);
   }
   ngOnInit(): void {
     this.route.params.subscribe(params => {

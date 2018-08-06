@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   faPlus = faPlus;
   faListUl = faListUl;
   faGlobe = faGlobe;
-  leftPaneNav: HTMLElement;
+  // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
     public chapterService: ChapterService,
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     public navServices: NavigationService,
     private router: Router
   ) {
-    this.leftPaneNav = document.getElementById('leftPaneNav');
+    // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
   ngOnInit() {}

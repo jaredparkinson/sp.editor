@@ -36,25 +36,23 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      // this.id = +params['b']; // (+) converts string 'id' to a number
-      const book = params['book'];
-      const chapter = params['chapter'];
-      if (book !== undefined && chapter !== undefined) {
-        console.log(book);
-        console.log(chapter);
-        this.chapterService.getChapter(book, chapter);
-        this.route.queryParams.subscribe(v => {
-          console.log(v['verse']);
-        });
-      } else if (book === undefined && chapter !== undefined) {
-        this.chapterService.getChapter(chapter, '');
-      }
-      // const verse = route.queryParams['verse'];
-
-      // console.log(chapter);
-
-      // In a real app: dispatch action to load the details here.
-    });
+    // this.route.params.subscribe(params => {
+    //   // this.id = +params['b']; // (+) converts string 'id' to a number
+    //   const book = params['book'];
+    //   const chapter = params['chapter'];
+    //   if (book !== undefined && chapter !== undefined) {
+    //     console.log(book);
+    //     console.log(chapter);
+    //     this.chapterService.getChapter(book, chapter);
+    //     this.route.queryParams.subscribe(v => {
+    //       console.log(v['verse']);
+    //     });
+    //   } else if (book === undefined && chapter !== undefined) {
+    //     this.chapterService.getChapter(chapter, '');
+    //   }
+    //   // const verse = route.queryParams['verse'];
+    //   // console.log(chapter);
+    //   // In a real app: dispatch action to load the details here.
+    // });
   }
 }

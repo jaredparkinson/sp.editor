@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: ':book/:chapter',
-    component: AppComponent
+    component: BodyblockComponent
   },
   {
     path: ':chapter',
-    component: AppComponent
+    component: BodyblockComponent
   },
   {
     path: '',

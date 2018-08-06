@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -31,7 +31,9 @@ export class BodyblockComponent implements OnInit {
     public navService: NavigationService,
     public saveState: SaveStateService,
     private sanitizer: DomSanitizer,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   getBodyBlock(): SafeHtml {
@@ -40,7 +42,28 @@ export class BodyblockComponent implements OnInit {
     );
     // return this.chapterService.bodyBlock;
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      // this.id = +params['b']; // (+) converts string 'id' to a number
+      const book = params['book'];
+      const chapter = params['chapter'];
+      if (book !== undefined && chapter !== undefined) {
+        console.log(book);
+        console.log(chapter);
+        this.chapterService.getChapter(book, chapter);
+        this.route.queryParams.subscribe(v => {
+          console.log(v['verse']);
+        });
+      } else if (book === undefined && chapter !== undefined) {
+        this.chapterService.getChapter(chapter, '');
+      }
+      // const verse = route.queryParams['verse'];
+
+      // console.log(chapter);
+
+      // In a real app: dispatch action to load the details here.
+    });
+  }
 
   onScroll(event: any) {
     this.synchronizedScrolling();

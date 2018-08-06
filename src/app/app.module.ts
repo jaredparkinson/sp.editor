@@ -33,6 +33,7 @@ import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SearchComponent } from './search/search.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,7 +49,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BodyblockComponent,
     NotesComponent,
     HeaderComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

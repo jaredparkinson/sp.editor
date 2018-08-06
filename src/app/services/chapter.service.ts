@@ -8,7 +8,7 @@ export class ChapterService {
   constructor(
     private navService: NavigationService,
     private saveStateService: SaveStateService
-  ) {}
+  ) { }
 
   public getChapter(book: string, chapter: string): void {
     const url = this.navService.getChapter(book, chapter);
@@ -20,6 +20,11 @@ export class ChapterService {
 
       this.bodyBlock = this.extractHtml(doc, 'div.body-block');
       this.notes = this.extractHtml(doc, 'footer.study-notes');
+
+      if (this.notes === null || this.notes === undefined) {
+        this.notes = '';
+      }
+
       const urlText = book + '/' + chapter;
       (addressBar as HTMLInputElement).value = urlText;
       this.saveStateService.data.currentPage = urlText;

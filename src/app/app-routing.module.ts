@@ -4,11 +4,12 @@ import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
-    path: 'search/:s/:chap',
-    component: AppComponent
+    path: 'search/:search',
+    component: SearchComponent
   },
   {
     path: ':book/:chapter',
@@ -33,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

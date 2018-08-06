@@ -1,16 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  Component,
-  OnChanges,
-  OnInit,
-  HostListener,
-  NgZone,
-  ContentChildren,
-  ElementRef,
-  Input,
-  ViewChildren,
-  ViewChild
-} from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
@@ -31,9 +20,7 @@ export class BodyblockComponent implements OnInit {
     public navService: NavigationService,
     public saveState: SaveStateService,
     private sanitizer: DomSanitizer,
-    private ngZone: NgZone,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   getBodyBlock(): SafeHtml {
@@ -65,7 +52,7 @@ export class BodyblockComponent implements OnInit {
     });
   }
 
-  onScroll(event: any) {
+  onScroll() {
     this.synchronizedScrolling();
     // this.ngZone.runOutsideAngular();
   }

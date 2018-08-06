@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
   {
@@ -19,12 +20,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AppComponent,
+    component: LandingPageComponent,
     pathMatch: 'full'
   },
   {
     path: '**',
-    component: AppComponent
+    component: BodyblockComponent
   }
 ];
 

@@ -11,6 +11,7 @@ import {
   faPlus,
   faGlobe
 } from '@fortawesome/free-solid-svg-icons';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -26,11 +27,12 @@ export class NotesComponent implements OnInit {
   constructor(
     public chapterService: ChapterService,
     public navServices: NavigationService,
+    private sanitizer: DomSanitizer,
     public saveState: SaveStateService
   ) {}
 
-  getNotes(): string {
-    return this.chapterService.notes;
+  getNotes(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);
   }
   ngOnInit() {}
 }

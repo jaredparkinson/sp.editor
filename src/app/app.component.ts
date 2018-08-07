@@ -44,18 +44,36 @@ export class AppComponent implements OnInit {
 
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
-    console.log(verses);
+    // console.log(verses);
+    let scrollIntoView: Element;
 
-    // for (let x = 0; x <= verses.length; x++) {
-    //   const element = verses[x];
-    //   console.log(
-    //     'Top: ' +
-    //       element.getBoundingClientRect().top +
-    //       ' Bottom: ' +
-    //       element.getBoundingClientRect().bottom
-    //   );
-    // }
-    console.log('test');
+    if (verses === null) {
+      console.log('null');
+    }
+
+    for (let x = 0; x <= verses.length; x++) {
+      // console.log(verses[x]);
+      // const element = verses[x];
+      const top = (verses[x] as Element).getBoundingClientRect().top;
+      if (top > 40 && top < 60) {
+        scrollIntoView = verses[x];
+      } else if (scrollIntoView !== undefined) {
+        const noteID =
+          'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+        document.getElementById(noteID).scrollIntoView();
+
+        break;
+      }
+      // console.log(element);
+      // console.log(
+      //   element.id +
+      //     ' Top: ' +
+      //     element.getBoundingClientRect().top +
+      //     ' Bottom: ' +
+      //     element.getBoundingClientRect().bottom
+      // );
+    }
+    // console.log('test');
   }
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {

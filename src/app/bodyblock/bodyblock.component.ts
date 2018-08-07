@@ -12,6 +12,7 @@ import { SaveStateService } from '../services/save-state.service';
   styleUrls: ['./bodyblock.component.scss']
 })
 export class BodyblockComponent implements OnInit {
+  private timer: NodeJS.Timer;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -53,17 +54,26 @@ export class BodyblockComponent implements OnInit {
   }
 
   onScroll() {
-    this.synchronizedScrolling();
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.synchronizedScrolling();
+    }, 50);
     // this.ngZone.runOutsideAngular();
   }
 
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
+    console.log(verses);
 
-    for (let x = 0; x <= verses.length; x++) {
-      const element = verses[x];
-      console.log(element);
-    }
+    // for (let x = 0; x <= verses.length; x++) {
+    //   const element = verses[x];
+    //   console.log(
+    //     'Top: ' +
+    //       element.getBoundingClientRect().top +
+    //       ' Bottom: ' +
+    //       element.getBoundingClientRect().bottom
+    //   );
+    // }
     console.log('test');
   }
 }

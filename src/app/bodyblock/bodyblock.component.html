@@ -1,5 +1,5 @@
 <div class="left-content-pane"></div>
 <div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 'show-poetry': saveState.data.poetryVisible}"
-  [innerHTML]="getBodyBlock()" (DOMMouseScroll)="onScroll($event)">
+  [innerHTML]="getBodyBlock()" (wheel)="onScroll()">
 </div>
 <div class="right-content-pane"></div>

@@ -12,6 +12,11 @@
     P
   </a>
   <span id="empty"></span>
+  <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">
+    <fa-icon [icon]="faListUl" size="lg" class="right-pane-ignore"></fa-icon>
+  </a>
+</div>
+<div id='notesSettings'>
   <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
     <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
     N
@@ -31,8 +36,5 @@
   </a>
   <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
     <fa-icon [icon]="faPlus" size="lg"></fa-icon>
-  </a>
-  <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">
-    <fa-icon [icon]="faListUl" size="lg" class="right-pane-ignore"></fa-icon>
   </a>
 </div>

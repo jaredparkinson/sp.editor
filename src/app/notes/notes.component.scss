@@ -395,3 +395,13 @@ serif;
     }
   }
 }
+
+#notesSettings {
+  position: absolute;
+  right: 24px;
+  top: 48px;
+  height: 280px;
+  width: 280px;
+  background-color: black;
+  z-index: 1000;
+}

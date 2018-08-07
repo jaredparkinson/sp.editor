@@ -57,15 +57,17 @@ export class AppComponent implements OnInit {
       // var asdf = function(id) {var pasdf = document.getElementById(id).getBoundingClientRect(); console.log((pasdf.top + pasdf.height >= 40 && pasdf.top < 40 +pasdf.height));}
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
-      const start = 45;
+      const start = 35;
       if (top + height > start && top < start + height) {
         scrollIntoView = element;
+      } else if (scrollIntoView !== undefined) {
         const noteID =
           'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
         document.getElementById(noteID).scrollIntoView();
 
         break;
       }
+
       // console.log(element);
       // console.log(
       //   element.id +

@@ -34,6 +34,35 @@
     <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
       <fa-icon [icon]="faPlus" size="lg"></fa-icon>
     </a> -->
+
+    <div id='notesSettings' [hidden]="!navServices.notesSettings" class="notes-settings">
+      <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        N
+      </a>
+      <a id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        E
+      </a>
+      <a id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
+        T
+
+      </a>
+      <a id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        O
+      </a>
+      <a id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();"
+        class="notes-settings">
+        <fa-icon [icon]="faPlus" size="lg"></fa-icon>
+      </a>
+    </div>
+
     <footer id="studyNotes" class="study-notes" [innerHTML]="getNotes()"></footer>
   </div>
 </div>

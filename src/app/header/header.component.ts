@@ -6,7 +6,8 @@ import {
   faGlobe,
   faListUl,
   faParagraph,
-  faPlus
+  faPlus,
+  faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
   faPlus = faPlus;
   faListUl = faListUl;
   faGlobe = faGlobe;
+  faCaretDown = faCaretDown;
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
@@ -79,6 +81,9 @@ export class HeaderComponent implements OnInit {
   }
   btnRightPanePress() {
     this.navServices.btnRightPanePress();
+  }
+  btnNotesSettingsPress() {
+    this.navServices.btnNotesSettingsPress();
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress();

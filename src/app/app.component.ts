@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
     private chapterService: ChapterService,
     private translate: TranslateService,
     private route: ActivatedRoute,
+    private navService: NavigationService,
     private router: Router,
     private ngZone: NgZone
   ) {
@@ -44,17 +46,10 @@ export class AppComponent implements OnInit {
 
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
-    // console.log(verses);
     let scrollIntoView: Element;
 
-    if (verses === null) {
-      console.log('null');
-    }
-
     for (let x = 0; x <= verses.length; x++) {
-      // console.log(verses[x]);
       const element = verses[x];
-      // var asdf = function(id) {var pasdf = document.getElementById(id).getBoundingClientRect(); console.log((pasdf.top + pasdf.height >= 40 && pasdf.top < 40 +pasdf.height));}
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
       const start = 35;
@@ -67,41 +62,32 @@ export class AppComponent implements OnInit {
 
         break;
       }
-
-      // console.log(element);
-      // console.log(
-      //   element.id +
-      //     ' Top: ' +
-      //     element.getBoundingClientRect().top +
-      //     ' Bottom: ' +
-      //     element.getBoundingClientRect().bottom
-      // );
     }
-    // console.log('test');
   }
   ngOnInit(): void {
+    this.initSyncScrolling();
+    this.initNoteSettingsToggle();
+  }
+
+  private initNoteSettingsToggle() {
+    this.ngZone.runOutsideAngular(() => {
+      document.body.addEventListener('click', e => {
+        if (!(e.target as HTMLElement).classList.contains('notes-settings')) {
+          console.log('test1');
+          this.navService.notesSettings = false;
+        }
+      });
+    });
+  }
+
+  private initSyncScrolling() {
     this.ngZone.runOutsideAngular(() => {
       document.getElementById('appBodyBlock').addEventListener('wheel', () => {
         this.onScroll();
       });
+      document.getElementById('appBodyBlock').addEventListener('scroll', () => {
+        this.onScroll();
+      });
     });
-    // this.route.params.subscribe(params => {
-    //   // this.id = +params['b']; // (+) converts string 'id' to a number
-    //   const book = params['book'];
-    //   const chapter = params['chapter'];
-    //   if (book !== undefined && chapter !== undefined) {
-    //     console.log(book);
-    //     console.log(chapter);
-    //     this.chapterService.getChapter(book, chapter);
-    //     this.route.queryParams.subscribe(v => {
-    //       console.log(v['verse']);
-    //     });
-    //   } else if (book === undefined && chapter !== undefined) {
-    //     this.chapterService.getChapter(chapter, '');
-    //   }
-    //   // const verse = route.queryParams['verse'];
-    //   // console.log(chapter);
-    //   // In a real app: dispatch action to load the details here.
-    // });
   }
 }

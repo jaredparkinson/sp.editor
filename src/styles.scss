@@ -1,19 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import 'css.penguin/view_vars';
 @import 'app/bodyblock/bodyblock.component';
 @import 'app/notes/notes.component';
-
 $btnOn: #8cadb8;
-
 html,
 body {
   margin: 0;
-  padding: 0;
-  // height: 100vh;
+  padding: 0; // height: 100vh;
   z-index: 20;
   overflow: hidden;
   position: fixed;
 }
+
 .left-pane nav,
 .right-pane footer {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -23,23 +22,28 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
 .nav-btn-on {
   // background-color: $btnOn;
   background-color: $btnOn;
   border: 1px solid black;
 }
+
 .menu-bar a:hover {
   background-color: $btnOn;
 }
+
 .left-pane nav,
 .right-pane footer {
   overflow-y: scroll;
   position: fixed;
   height: 100vh;
 }
+
 .left-pane nav {
   width: auto;
 }
+
 #btnTranslatorNotes,
 #btnOriginalNotes,
 #btnEnglishNotes,
@@ -54,14 +58,12 @@ body {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
-
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
     .right-pane footer,
     .left-pane nav {
       width: $vw11;
     }
-
     .right-pane footer {
       float: right;
       position: absolute;
@@ -71,14 +73,12 @@ body {
   .right-pane footer {
     width: $rightPaneWidth;
   }
-
   .left-pane nav {
     width: $leftPaneWidth;
   }
   .menu-bar {
     grid-template-columns: 48px 0 auto 0 0 0 0 0 0 0 0 48px;
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
-
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -115,8 +115,7 @@ body {
       visibility: hidden;
     }
     #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }
@@ -132,22 +131,20 @@ body {
     }
   }
 }
+
 @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw8;
   $rightPaneWidth: $vw2_5;
-
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
   .right-pane footer {
     width: $rightPaneWidth;
   }
-
   .left-pane nav {
     width: $leftPaneWidth;
   }
-
   .menu-bar {
     grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 48px 1fr 48px 48px 48px 48px 48px 48px;
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
@@ -194,21 +191,17 @@ body {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw8;
   $rightPaneWidth: $vw2_5;
-
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
   .right-pane footer {
     width: $rightPaneWidth;
   }
-
   .left-pane nav {
     width: $leftPaneWidth;
   }
-
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 48px 1fr 48px 48px 48px 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 3fr 48px 48px 48px 1fr 48px; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -220,6 +213,9 @@ body {
     }
     #btnPoetry {
       grid-area: 'btnPoetry';
+    }
+    #btnNotesFlyout {
+      grid-area: 'btnNotesFlyout';
     }
     #addressBar {
       grid-area: 'addressBar';
@@ -247,6 +243,7 @@ body {
     }
   }
 }
+
 .menu-bar {
   display: grid;
   text-align: center;
@@ -278,9 +275,11 @@ div.paragraph {
 .study-notes-whitespace {
   height: 25vh; //This starts at 100vh = 100 percent. Take it down from there.
 }
+
 .highlight-verse {
   background-color: beige;
 }
+
 // body {
 //   overflow: hidden;
 //   background-color: white;
@@ -288,7 +287,6 @@ div.paragraph {
 //   z-index: 20;
 //   position: fixed;
 // }
-
 h1 {
   font-family: $font-stack;
   margin: 0;

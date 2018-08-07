@@ -14,6 +14,7 @@ export class NavigationService {
   public bodyBlock: string;
   public folders: Folder[];
   public navLinks: Folder[];
+  public notesSettings = false;
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
@@ -58,7 +59,9 @@ export class NavigationService {
     this.saveState.data.paragraphsVisible = !this.saveState.data
       .paragraphsVisible;
   }
-
+  btnNotesSettingsPress() {
+    this.notesSettings = !this.notesSettings;
+  }
   btnRightPanePress() {
     if (this.helperService.getWidth() >= 1080) {
       this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;

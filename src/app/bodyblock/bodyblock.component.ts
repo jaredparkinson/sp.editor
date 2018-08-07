@@ -21,7 +21,8 @@ export class BodyblockComponent implements OnInit {
     public navService: NavigationService,
     public saveState: SaveStateService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ngZone: NgZone
   ) {}
 
   getBodyBlock(): SafeHtml {
@@ -45,12 +46,12 @@ export class BodyblockComponent implements OnInit {
       } else if (book === undefined && chapter !== undefined) {
         this.chapterService.getChapter(chapter, '');
       }
-      // const verse = route.queryParams['verse'];
-
-      // console.log(chapter);
-
-      // In a real app: dispatch action to load the details here.
     });
+    // this.ngZone.runOutsideAngular(() => {
+    //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
+    //     console.log('test');
+    //   });
+    // });
   }
 
   onScroll() {

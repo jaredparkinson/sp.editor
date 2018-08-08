@@ -18,19 +18,13 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.pop-out {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .body {
   overflow-x: hidden;
   overflow-y: scroll;
-}
-
-.nav-btn-on {
-  // background-color: $btnOn;
-  background-color: $btnOn;
-  border: 1px solid black;
-}
-
-.menu-bar a:hover {
-  background-color: $btnOn;
 }
 
 .left-pane nav,
@@ -42,16 +36,6 @@ body {
 
 .left-pane nav {
   width: auto;
-}
-
-#btnTranslatorNotes,
-#btnOriginalNotes,
-#btnEnglishNotes,
-#btnPoetry,
-#btnNewNotes {
-  padding-top: 1px;
-  font-size: 26px;
-  font-weight: bolder;
 }
 
 @media only screen and (max-width: 1079.98px) {
@@ -201,7 +185,7 @@ body {
     width: $leftPaneWidth;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 3fr 48px 48px 48px 1fr 48px; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
+    grid-template-columns: 48px minmax(auto, 1fr) 3fr 48px 1fr 48px; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -244,14 +228,27 @@ body {
   }
 }
 
+button {
+  background-color: lightblue;
+  border-color: lightblue; // border: 1px solid black;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-style: none;
+  &.nav-btn-on,
+  &:hover {
+    // background-color: $btnOn;
+    background-color: $btnOn;
+  }
+  &:hover {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+  }
+}
+
 .menu-bar {
   display: grid;
   text-align: center;
   height: 100%;
-  button {
-    background-color: lightblue;
-    border-color: lightblue;
-  }
   fa-icon svg {
     height: 100%;
   }

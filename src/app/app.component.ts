@@ -70,14 +70,13 @@ export class AppComponent implements OnInit {
   }
 
   private initNoteSettingsToggle() {
-    this.ngZone.runOutsideAngular(() => {
-      document.body.addEventListener('click', e => {
-        if (!(e.target as HTMLElement).classList.contains('notes-settings')) {
-          console.log('test1');
-          this.navService.notesSettings = false;
-        }
-      });
+    document.body.addEventListener('click', e => {
+      if (!(e.target as HTMLElement).classList.contains('notes-settings')) {
+        this.navService.notesSettings = false;
+        console.log(this.navService.notesSettings);
+      }
     });
+    this.ngZone.runOutsideAngular(() => {});
   }
 
   private initSyncScrolling() {

@@ -397,12 +397,19 @@ serif;
 }
 
 #notesSettings {
+  right: 15vw;
   position: absolute;
-  right: 10vw;
   top: 48px;
-  height: 280px;
-  width: 280px;
+  height: 48px * 7;
+  width: 200px;
   background-color: rgba(255, 252, 247, 0.95);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 1000;
+  display: grid;
+  grid-template-rows: repeat(100%, 48px);
+  button {
+    padding-top: 1px;
+    font-size: 18px;
+    font-weight: bolder;
+  }
 }

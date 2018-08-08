@@ -1,21 +1,21 @@
-<div class="menu-bar">
-  <a id='navToggle' (click)="btnLeftPanePress()">
+<div class="menu-bar pop-out">
+  <button id='navToggle' (click)="btnLeftPanePress()">
     <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
-  </a>
+  </button>
   <div id="bookName"></div>
   <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
-  <a id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
+  <!-- <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
     <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
-  </a>
-  <a id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
-    <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+  </button>
+  <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
+    <fa-icon [icon]="faPlus" size="lg"></fa-icon>
     P
-  </a>
-  <a id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore">
-    <fa-icon [icon]="faCaretDown" size="2x" class="right-pane-ignore"></fa-icon>
-  </a>
-  <span id="empty"></span>
-  <a id="btnRightPane" (click)="btnRightPanePress()" class="right-pane-ignore">
-    <fa-icon [icon]="faListUl" size="lg" class="right-pane-ignore"></fa-icon>
-  </a>
+  </button> -->
+  <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings" [ngClass]="{'nav-btn-on': navServices.notesSettings}">
+    <fa-icon [icon]=" faCaretDown " size="2x " class="right-pane-ignore "></fa-icon>
+  </button>
+  <span id="empty "></span>
+  <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
+    <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
+  </button>
 </div>

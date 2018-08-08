@@ -71,7 +71,17 @@ export class AppComponent implements OnInit {
 
   private initNoteSettingsToggle() {
     document.body.addEventListener('click', e => {
-      if (!(e.target as HTMLElement).classList.contains('notes-settings')) {
+      console.log(
+        (e.target as HTMLElement) ===
+          document.querySelector('#btnNotesFlyout path')
+      );
+      if (
+        !(e.target as HTMLElement).classList.contains('notes-settings') &&
+        !(
+          (e.target as HTMLElement) ===
+          document.querySelector('#btnNotesFlyout path')
+        )
+      ) {
         this.navService.notesSettings = false;
         console.log(this.navService.notesSettings);
       }

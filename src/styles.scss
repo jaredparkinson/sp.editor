@@ -38,6 +38,88 @@ body {
   width: auto;
 }
 
+#headerMiddlePane {
+  display: grid;
+}
+
+@media only screen and (max-width: 511.98px) {
+  #headerMiddlePane {
+    grid-template-columns: 48px 0 0 48px 0 minmax(48px, auto) 0 48px 0 0 48px;
+  }
+  #navToggle {
+    grid-area: 'navToggle';
+  }
+  #bookName {
+    grid-area: 'bookName';
+    text-overflow: clip;
+  }
+  #btnParagraph {
+    grid-area: 'btnParagraph';
+    visibility: hidden;
+  }
+  #btnPoetry {
+    grid-area: 'btnParagraph';
+    visibility: hidden;
+  }
+  #btnOriginalNotes {
+    grid-area: 'btnOriginalNotes';
+    visibility: hidden;
+  }
+  #btnNewNotes {
+    grid-area: 'btnNewNotes';
+    visibility: hidden;
+  }
+  #btnTranslatorNotes {
+    grid-area: 'btnTranslatorNotes';
+    visibility: hidden;
+  }
+  #btnNewNotes {
+    grid-area: 'btnNewNotes';
+    visibility: hidden;
+  }
+  #btnEnglishNotes {
+    grid-area: 'btnEnglishNotes';
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width: 512px) {
+  #headerMiddlePane {
+    grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
+  }
+  #navToggle {
+    grid-area: 'navToggle';
+  }
+  #bookName {
+    grid-area: 'bookName';
+    text-overflow: clip;
+  }
+  #btnParagraph {
+    grid-area: 'btnParagraph'; // visibility: hidden;
+  }
+  #btnPoetry {
+    grid-area: 'btnParagraph'; // visibility: hidden;
+  }
+  #btnOriginalNotes {
+    grid-area: 'btnOriginalNotes'; // visibility: hidden;
+  }
+  #btnNewNotes {
+    grid-area: 'btnNewNotes'; // visibility: hidden;
+  }
+  #btnTranslatorNotes {
+    grid-area: 'btnTranslatorNotes'; // visibility: hidden;
+  }
+  #btnNewNotes {
+    grid-area: 'btnNewNotes'; // visibility: hidden;
+  }
+  #btnEnglishNotes {
+    grid-area: 'btnEnglishNotes'; // visibility: hidden;
+  }
+  #notesSettings {
+    right: 0;
+  }
+}
+
 @media only screen and (max-width: 1079.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
@@ -61,43 +143,8 @@ body {
     width: $leftPaneWidth;
   }
   .menu-bar {
-    grid-template-columns: 48px 0 auto 0 0 0 0 0 0 0 0 48px;
+    grid-template-columns: 0 100vw 0;
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
-    #navToggle {
-      grid-area: 'navToggle';
-    }
-    #bookName {
-      grid-area: 'bookName';
-      text-overflow: clip;
-    }
-    #btnParagraph {
-      grid-area: 'btnParagraph';
-      visibility: hidden;
-    }
-    #btnPoetry {
-      grid-area: 'btnParagraph';
-      visibility: hidden;
-    }
-    #btnOriginalNotes {
-      grid-area: 'btnOriginalNotes';
-      visibility: hidden;
-    }
-    #btnNewNotes {
-      grid-area: 'btnNewNotes';
-      visibility: hidden;
-    }
-    #btnTranslatorNotes {
-      grid-area: 'btnTranslatorNotes';
-      visibility: hidden;
-    }
-    #btnNewNotes {
-      grid-area: 'btnNewNotes';
-      visibility: hidden;
-    }
-    #btnEnglishNotes {
-      grid-area: 'btnEnglishNotes';
-      visibility: hidden;
-    }
     #addressBar {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
@@ -105,11 +152,10 @@ body {
     }
     #empty {
       grid-area: 'empty';
-    }
-    #btnSecondaryNotes {
-      grid-area: 'btnSecondaryNotes';
-      visibility: hidden;
-    }
+    } // #btnSecondaryNotes {
+    //   grid-area: 'btnSecondaryNotes';
+    //   visibility: hidden;
+    // }
     #btnRightPane {
       grid-area: 'btnRightPane';
     }
@@ -117,8 +163,8 @@ body {
 }
 
 @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
-  $leftPaneWidth: $vw1_5;
-  $bodyBlockWidth: $vw8;
+  $leftPaneWidth: $vw2_5;
+  $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw2_5;
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
@@ -130,8 +176,8 @@ body {
     width: $leftPaneWidth;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 4fr 48px 48px 1fr 48px 48px 48px 48px 48px 48px;
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
+    // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -169,11 +215,17 @@ body {
       grid-area: 'btnRightPane';
     }
   }
+  #notesSettings {
+    right: $vw2_5;
+  } // #headerMiddlePane {
+  //   display: grid;
+  //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
+  // }
 }
 
 @media only screen and (orientation: landscape) and (min-width: 1280px) {
-  $leftPaneWidth: $vw1_5;
-  $bodyBlockWidth: $vw8;
+  $leftPaneWidth: $vw2_5;
+  $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw2_5;
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
@@ -185,7 +237,7 @@ body {
     width: $leftPaneWidth;
   }
   .menu-bar {
-    grid-template-columns: 48px minmax(auto, 1fr) 3fr 48px 1fr 48px; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
+    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
@@ -226,6 +278,12 @@ body {
       grid-area: 'btnRightPane';
     }
   }
+  #notesSettings {
+    right: $vw2_5;
+  } // #headerMiddlePane {
+  //   display: grid;
+  //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
+  // }
 }
 
 button {
@@ -275,9 +333,7 @@ div.paragraph {
 
 .highlight-verse {
   background-color: beige;
-}
-
-// body {
+} // body {
 //   overflow: hidden;
 //   background-color: white;
 //   color: black;

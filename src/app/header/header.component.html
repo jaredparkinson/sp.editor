@@ -1,21 +1,83 @@
 <div class="menu-bar pop-out">
-  <button id='navToggle' (click)="btnLeftPanePress()">
-    <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
-  </button>
-  <div id="bookName"></div>
-  <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
-  <!-- <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
-    <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
-  </button>
-  <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
-    <fa-icon [icon]="faPlus" size="lg"></fa-icon>
-    P
-  </button> -->
-  <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings" [ngClass]="{'nav-btn-on': navServices.notesSettings}">
-    <fa-icon [icon]=" faCaretDown " size="2x " class="right-pane-ignore notes-settings"></fa-icon>
-  </button>
-  <span id="empty "></span>
-  <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
-    <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
-  </button>
+  <div id="headerLeftPane">
+
+    <div id="bookName"></div>
+  </div>
+  <div id="headerMiddlePane">
+    <button id='navToggle' (click)="btnLeftPanePress()">
+      <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
+    </button>
+    <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
+      <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
+    </button>
+    <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
+      <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+      P
+    </button>
+    <button id="btnBack" (click)="btnBackPress();">
+      <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+
+    </button>
+    <span id="empty "></span>
+
+    <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
+    <span id="empty "></span>
+    <button id="btnForward" (click)="btnForwardPress();">
+      <fa-icon [icon]="faArrowRight" size="lg"></fa-icon>
+
+    </button>
+    <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings" [ngClass]="{'nav-btn-on': navServices.notesSettings}">
+      <fa-icon [icon]=" faCaretDown " size="2x " class="right-pane-ignore notes-settings"></fa-icon>
+    </button>
+    <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();"
+      class="notes-settings">
+      <!-- Secondary Notes -->
+      <fa-icon [icon]="faPlus" size="lg"></fa-icon>
+    </button>
+
+    <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
+      <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
+    </button>
+  </div>
+  <div id="headerRightPane">
+
+    <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
+      <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        New Notes
+      </button>
+      <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        English Notes
+      </button>
+      <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
+        Translator Notes
+      </button>
+      <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
+        class="notes-settings">
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+        Original Notes
+      </button>
+      <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();"
+        class="notes-settings">
+        Secondary Notes
+        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+      </button>
+      <!-- <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="navServices.btnParagraphPress()"
+            class="notes-settings">
+            <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
+            Paragraph
+          </button>
+          <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="navServices.btnPoetryPress();" class="notes-settings">
+            <fa-icon [icon]="faPlus" size="lg"></fa-icon>
+            Poetry
+          </button> -->
+    </div>
+  </div>
+
+
 </div>

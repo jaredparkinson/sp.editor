@@ -7,13 +7,16 @@ import {
   faListUl,
   faParagraph,
   faPlus,
-  faCaretDown
+  faCaretDown,
+  faArrowLeft,
+  faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -27,13 +30,16 @@ export class HeaderComponent implements OnInit {
   faListUl = faListUl;
   faGlobe = faGlobe;
   faCaretDown = faCaretDown;
+  faArrowLeft = faArrowLeft;
+  faArrowRight = faArrowRight;
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
     public chapterService: ChapterService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -61,6 +67,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  btnBackPress() {
+    this.location.back();
+  }
+  btnForwardPress() {
+    this.location.forward();
+  }
   // toggleNavButton(id: string, targetId: string, on: string, off: string) {
   //   this.navServices.toggleNavButton(id, targetId, on, off);
   // }

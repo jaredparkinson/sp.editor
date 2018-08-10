@@ -94,9 +94,11 @@ export class AppComponent implements OnInit {
       document.getElementById('appBodyBlock').addEventListener('wheel', () => {
         this.onScroll();
       });
-      document.getElementById('appBodyBlock').addEventListener('scroll', () => {
-        this.onScroll();
-      });
+      document
+        .getElementById('appBodyBlock')
+        .addEventListener('touchend', () => {
+          this.onScroll();
+        });
     });
   }
 }

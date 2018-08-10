@@ -157,6 +157,9 @@ serif;
     font-size: smaller;
   }
   .study-notes-parent {
+    .note-phrase {
+      display: none;
+    }
     &.notes-hide-tier .note-phrase {
       display: none;
     }

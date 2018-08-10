@@ -24,16 +24,17 @@ import { timingSafeEqual } from 'crypto';
 import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
+import { ButtonHighlightDirective } from './button-highlight.directive';
 import { HomeComponent } from './components/home/home.component';
 import { FilesComponent } from './files/files.component';
 import { HeaderComponent } from './header/header.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NotesComponent } from './notes/notes.component';
+import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { SearchComponent } from './search/search.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -50,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotesComponent,
     HeaderComponent,
     LandingPageComponent,
-    SearchComponent
+    SearchComponent,
+    ButtonHighlightDirective
   ],
   imports: [
     BrowserModule,

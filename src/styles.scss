@@ -81,6 +81,9 @@ body {
     grid-area: 'btnEnglishNotes';
     visibility: hidden;
   }
+  #notesSettings {
+    right: 0;
+  }
 }
 
 @media only screen and (min-width: 512px) {
@@ -114,9 +117,6 @@ body {
   }
   #btnEnglishNotes {
     grid-area: 'btnEnglishNotes'; // visibility: hidden;
-  }
-  #notesSettings {
-    right: 0;
   }
 }
 
@@ -163,9 +163,9 @@ body {
 }
 
 @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
-  $leftPaneWidth: $vw2_5;
+  $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
-  $rightPaneWidth: $vw2_5;
+  $rightPaneWidth: $vw3;
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
@@ -216,7 +216,7 @@ body {
     }
   }
   #notesSettings {
-    right: $vw2_5;
+    right: $rightPaneWidth;
   } // #headerMiddlePane {
   //   display: grid;
   //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
@@ -224,9 +224,9 @@ body {
 }
 
 @media only screen and (orientation: landscape) and (min-width: 1280px) {
-  $leftPaneWidth: $vw2_5;
+  $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
-  $rightPaneWidth: $vw2_5;
+  $rightPaneWidth: $vw3;
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
@@ -279,7 +279,7 @@ body {
     }
   }
   #notesSettings {
-    right: $vw2_5;
+    right: $rightPaneWidth;
   } // #headerMiddlePane {
   //   display: grid;
   //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;

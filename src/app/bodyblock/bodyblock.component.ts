@@ -13,6 +13,7 @@ import { SaveStateService } from '../services/save-state.service';
 })
 export class BodyblockComponent implements OnInit {
   private timer: NodeJS.Timer;
+  private timer2: NodeJS.Timer;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -32,6 +33,7 @@ export class BodyblockComponent implements OnInit {
     // return this.chapterService.bodyBlock;
   }
   ngOnInit() {
+    this.initSyncScrolling();
     this.route.params.subscribe(params => {
       // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
@@ -59,22 +61,53 @@ export class BodyblockComponent implements OnInit {
     this.timer = setTimeout(() => {
       this.synchronizedScrolling();
     }, 50);
+    this.timer2 = setTimeout(() => {
+      this.synchronizedScrolling();
+    }, 1000);
     // this.ngZone.runOutsideAngular();
   }
 
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
-    console.log(verses);
+    let scrollIntoView: Element;
 
-    // for (let x = 0; x <= verses.length; x++) {
-    //   const element = verses[x];
-    //   console.log(
-    //     'Top: ' +
-    //       element.getBoundingClientRect().top +
-    //       ' Bottom: ' +
-    //       element.getBoundingClientRect().bottom
-    //   );
-    // }
-    console.log('test');
+    for (let x = 0; x < verses.length; x++) {
+      const element = verses[x];
+      const top = element.getBoundingClientRect().top;
+      const height = element.getBoundingClientRect().height;
+      const start = 35;
+      if (top + height > start && top < start + height) {
+        scrollIntoView = element;
+      } else if (scrollIntoView !== undefined) {
+        const noteID =
+          'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+        document.getElementById(noteID).scrollIntoView();
+
+        break;
+      }
+    }
+    if (scrollIntoView === undefined) {
+      const element = verses[0];
+
+      const top = element.getBoundingClientRect().top;
+      const height = element.getBoundingClientRect().height;
+      const start = 35;
+      if (top + height < start) {
+        document.getElementById('footerTop').scrollIntoView();
+      }
+    }
+  }
+
+  private initSyncScrolling() {
+    this.ngZone.runOutsideAngular(() => {
+      document.getElementById('appBodyBlock').addEventListener('wheel', () => {
+        this.onScroll();
+      });
+      document
+        .getElementById('appBodyBlock')
+        .addEventListener('touchend', () => {
+          this.onScroll();
+        });
+    });
   }
 }

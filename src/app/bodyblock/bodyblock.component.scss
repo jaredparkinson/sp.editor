@@ -1,8 +1,5 @@
 @import '../../css.penguin/view_vars';
-$font-stack: 'Open Sans',
-Helvetica,
-Arial,
-sans-serif;
+$font-stack: serif;
 //This is for when the poetry is not being shown
 body {
   font-family: $font-stack;
@@ -68,6 +65,23 @@ body {
       }
     }
   }
+
+  .notes-hide-original {
+    sup.marker {
+      display: none;
+    }
+  }
+  .notes-show-original {
+    span.study-note-ref {
+      color: #007fa4;
+    }
+    sup.marker {
+      font-style: italic;
+      font-size: 8pt;
+      display: initial;
+      /* when original notes showing, display:none */
+    }
+  }
   span.deletion {
     font-style: italic;
   }
@@ -110,5 +124,17 @@ body {
   }
   div.paragraph {
     margin-bottom: 6pt;
+  }
+
+  p.subtitle,
+  p.title-number {
+    text-align: center;
+  }
+  p.title-number {
+    font-weight: bold;
+  }
+
+  p.study_summary1 {
+    font-style: italic;
   }
 }

@@ -1,3 +1,5 @@
-<div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 'show-poetry': saveState.data.poetryVisible}"
-  [innerHTML]="getBodyBlock()">
+<div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 
+'show-poetry': saveState.data.poetryVisible,
+'notes-hide-original': !saveState.data.originalNotesVisible,
+'notes-show-original': saveState.data.originalNotesVisible}" [innerHTML]="getBodyBlock()">
 </div>

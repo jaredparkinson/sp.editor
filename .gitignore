@@ -46,5 +46,7 @@ package-lock.json
 Thumbs.db
 
 src/assets/scriptures*
+src/scriptures*
+scriptures*
 scriptures_project_v3
 scriptures.tar.gz

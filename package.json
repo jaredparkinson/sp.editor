@@ -1,11 +1,11 @@
 {
   "name": "sp-editor",
-  "version": "4.1.0",
-  "description": "Angular 6 with Electron (Typescript + SASS + Hot Reload)",
+  "version": "3.0.0",
+  "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Jared Parkinson",
+    "email": "jared@parkinson.im"
   },
   "keywords": [
     "angular",

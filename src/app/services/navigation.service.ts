@@ -15,12 +15,14 @@ export class NavigationService {
   public folders: Folder[];
   public navLinks: Folder[];
   public notesSettings = false;
+  private fs: any;
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
     private helperService: HelperService
   ) {
     this.initNavigation();
+    this.fs = (window as any).fs;
   }
 
   toggleNotes() {
@@ -109,12 +111,23 @@ export class NavigationService {
     });
   }
   public getChapter(book: string, chapter: string): Observable<string> {
-    const url = this.urlBuilder(book, chapter);
+    const url = 'assets/' + this.urlBuilder(book, chapter);
+
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
 
-  private urlBuilder(book: string, chapter: string): string {
-    const url = 'assets/scriptures/';
+  public getChapterElectron(book: string, chapter: string): string {
+    const url = this.urlBuilder(book, chapter);
+
+    const test = this.fs.readFile('src/' + url, 'utf8', (err, data) => {
+      return data;
+    });
+    // console.log(test);
+    return test;
+  }
+
+  public urlBuilder(book: string, chapter: string): string {
+    const url = 'scriptures/';
     const urlEnd = book + '/' + chapter + '.html';
     if (chapter === '') {
       return url + 'tg/' + book + '.html';

@@ -40,20 +40,23 @@ export class AppComponent implements OnInit {
 
   private initNoteSettingsToggle() {
     document.body.addEventListener('click', e => {
-      console.log(
-        (e.target as HTMLElement) ===
-          document.querySelector('#btnNotesFlyout path')
-      );
-      if (
-        !(e.target as HTMLElement).classList.contains('notes-settings') &&
-        !(
-          (e.target as HTMLElement) ===
-          document.querySelector('#btnNotesFlyout path')
-        )
-      ) {
+      if ((e.target as HTMLElement).closest('.notes-settings') === null) {
         this.navService.notesSettings = false;
-        console.log(this.navService.notesSettings);
       }
+      // console.log(
+      //   (e.target as HTMLElement) ===
+      //     document.querySelector('#btnNotesFlyout path')
+      // );
+      // if (
+      //   !(e.target as HTMLElement).classList.contains('notes-settings') &&
+      //   !(
+      //     (e.target as HTMLElement) ===
+      //     document.querySelector('#btnNotesFlyout path')
+      //   )
+      // ) {
+      //   this.navService.notesSettings = false;
+      //   console.log(this.navService.notesSettings);
+      // }
     });
     this.ngZone.runOutsideAngular(() => {});
   }

@@ -20,8 +20,13 @@ export class ChapterService {
         book.toLowerCase(),
         chapter.toLowerCase()
       );
-      console.log('test electron' + this.fs);
+      this.fs.writeFile(
+        'd:/node_test.txt',
+        process.env.PORTABLE_EXECUTABLE_DIR,
+        e => {}
+      );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
+        console.log(process.env);
         const addressBar = document.getElementById('addressBar');
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');

@@ -36,6 +36,7 @@ import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
+import { SettingsComponent } from './settings/settings.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LandingPageComponent,
     SearchComponent,
     ButtonHighlightDirective,
-    SyncScrollingDirective
+    SyncScrollingDirective,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

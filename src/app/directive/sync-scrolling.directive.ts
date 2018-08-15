@@ -8,7 +8,7 @@ export class SyncScrollingDirective {
   defaultColor: string;
   constructor(private element: ElementRef) {}
 
-  @HostListener('touchend', ['$event'])
+  @HostListener('keypress', ['$event'])
   onTouchEnd() {
     console.log('yvtctc');
   }

@@ -20,7 +20,7 @@ export class ChapterService {
         book.toLowerCase(),
         chapter.toLowerCase()
       );
-      console.log('url2' + url2);
+      console.log('test electron' + this.fs);
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
         const addressBar = document.getElementById('addressBar');
         const parser = new DOMParser();

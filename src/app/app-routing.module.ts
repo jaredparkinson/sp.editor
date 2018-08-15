@@ -5,8 +5,13 @@ import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SearchComponent } from './search/search.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
+  {
+    path: 'settings',
+    component: SettingsComponent
+  },
   {
     path: 'search/:search',
     component: SearchComponent
@@ -34,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

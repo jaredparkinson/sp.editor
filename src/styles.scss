@@ -38,13 +38,15 @@ body {
   width: auto;
 }
 
-#headerMiddlePane {
+#headerLeftPane,
+#headerMiddlePane,
+#headerRightPane {
   display: grid;
 }
 
 @media only screen and (max-width: 511.98px) {
   #headerMiddlePane {
-    grid-template-columns: 48px 0 0 48px 0 minmax(48px, auto) 0 48px 0 0 48px;
+    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0;
   }
   #navToggle {
     grid-area: 'navToggle';
@@ -55,6 +57,12 @@ body {
   }
   #btnParagraph {
     grid-area: 'btnParagraph';
+    visibility: hidden;
+  }
+  #btnNotesFlyout,
+  #btnSecondaryNotes,
+  #btnBack,
+  #btnForward {
     visibility: hidden;
   }
   #btnPoetry {
@@ -86,9 +94,17 @@ body {
   }
 }
 
+#headerRightPane {
+  grid-template-columns: minmax(0, auto) 48px;
+}
+
+#headerLeftPane {
+  grid-template-columns: 48px auto;
+}
+
 @media only screen and (min-width: 512px) {
   #headerMiddlePane {
-    grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
+    grid-template-columns: 48px 48px 48px auto 48px 48px 48px;
   }
   #navToggle {
     grid-area: 'navToggle';
@@ -120,34 +136,47 @@ body {
   }
 }
 
+@media only screen and (max-width: 499.98px) {
+  .right-pane footer,
+  .left-pane nav {
+    width: $vw11;
+  }
+  .right-pane footer {
+    float: right;
+    position: absolute;
+    right: 0px;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 1079.98px) {
+  .right-pane footer,
+  .left-pane nav {
+    width: $vw6;
+  }
+}
+
 @media only screen and (max-width: 1079.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
-    .right-pane footer,
-    .left-pane nav {
-      width: $vw11;
-    }
     .right-pane footer {
       float: right;
       position: absolute;
       right: 0px;
     }
-  }
-  .right-pane footer {
-    width: $rightPaneWidth;
-  }
-  .left-pane nav {
-    width: $leftPaneWidth;
-  }
+  } // .right-pane footer {
+  //   width: $rightPaneWidth;
+  // }
+  // .left-pane nav {
+  //   width: $leftPaneWidth;
+  // }
   .menu-bar {
-    grid-template-columns: 0 100vw 0;
+    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }
@@ -239,45 +268,6 @@ body {
   }
   .menu-bar {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
-    #navToggle {
-      grid-area: 'navToggle';
-    }
-    #bookName {
-      grid-area: 'bookName';
-    }
-    #btnParagraph {
-      grid-area: 'btnParagraph';
-    }
-    #btnPoetry {
-      grid-area: 'btnPoetry';
-    }
-    #btnNotesFlyout {
-      grid-area: 'btnNotesFlyout';
-    }
-    #addressBar {
-      grid-area: 'addressBar';
-    }
-    #empty {
-      grid-area: 'empty';
-    }
-    #btnOriginalNotes {
-      grid-area: 'btnOriginalNotes';
-    }
-    #btnEnglishNotes {
-      grid-area: 'btnEnglishNotes';
-    }
-    #btnNewNotes {
-      grid-area: 'btnNewNotes';
-    }
-    #btnTranslatorNotes {
-      grid-area: 'btnTranslatorNotes';
-    }
-    #btnSecondaryNotes {
-      grid-area: 'btnSecondaryNotes';
-    }
-    #btnRightPane {
-      grid-area: 'btnRightPane';
-    }
   }
   #notesSettings {
     right: $rightPaneWidth;

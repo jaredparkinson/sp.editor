@@ -93,7 +93,8 @@ export class BodyblockComponent implements OnInit {
       const height = element.getBoundingClientRect().height;
       const start = 35;
       if (top + height < start) {
-        document.getElementById('footerTop').scrollIntoView();
+        document.getElementById('note_title_number1').scrollIntoView();
+        console.log('test gojbvhgv');
       }
     }
   }

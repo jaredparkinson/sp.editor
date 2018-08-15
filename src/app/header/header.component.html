@@ -1,12 +1,14 @@
 <div class="menu-bar pop-out">
   <div id="headerLeftPane">
-
-    <div id="bookName"></div>
-  </div>
-  <div id="headerMiddlePane">
     <button id='navToggle' (click)="btnLeftPanePress()">
       <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
     </button>
+
+    <span id="empty "></span>
+  </div>
+  <div id="headerMiddlePane">
+
+    <!-- <div id="bookName"></div> -->
     <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
       <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
     </button>
@@ -18,10 +20,10 @@
       <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
 
     </button>
-    <span id="empty "></span>
+    <!-- <span id="empty "></span> -->
 
     <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
-    <span id="empty "></span>
+    <!-- <span id="empty "></span> -->
     <button id="btnForward" (click)="btnForwardPress();">
       <fa-icon [icon]="faArrowRight" size="lg"></fa-icon>
 
@@ -34,12 +36,13 @@
       <fa-icon [icon]="faPlus" size="lg"></fa-icon>
     </button>
 
-    <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
-      <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
-    </button>
   </div>
   <div id="headerRightPane">
 
+    <span id="empty "></span>
+    <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
+      <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
+    </button>
     <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
       <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
         class="notes-settings">

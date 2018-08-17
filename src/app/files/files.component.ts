@@ -31,7 +31,8 @@ export class FilesComponent implements OnInit {
   constructor(
     public fileManager: NavigationService,
     public chapterService: ChapterService,
-    public saveState: SaveStateService
+    public saveState: SaveStateService,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
@@ -45,16 +46,17 @@ export class FilesComponent implements OnInit {
     this.booksVisible = false;
     this.fileManager.navLinks = [];
   }
-  setTestament(folder: Folder) {
-    folder.visible = !folder.visible;
-    if (folder.visible) {
-      this.fileManager.navLinks = folder.folders;
-      this.saveState.data.foldersVisible = false;
-      // this.booksVisible = true;
-      // console.log(folder);
-    } else {
-      this.fileManager.navLinks = [];
-    }
+  setTestament(folder: string) {
+    this.fileManager.getTestament(folder);
+    // folder.visible = !folder.visible;
+    // if (folder.visible) {
+    //   this.fileManager.navLinks = folder.folders;
+    //   this.saveState.data.foldersVisible = false;
+    //   // this.booksVisible = true;
+    //   // console.log(folder);
+    // } else {
+    //   this.fileManager.navLinks = [];
+    // }
     // this.fileManager.getNavigation(manifest).subscribe(s => {
     //   const parser = new DOMParser();
     //   const doc = parser.parseFromString(s, 'text/html');

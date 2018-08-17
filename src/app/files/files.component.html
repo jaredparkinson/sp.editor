@@ -5,7 +5,9 @@
     <a (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Set Root</a>
     <div class="grid" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
 
-      <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a>
+
+      <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
+      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="setTestament(folder.folder)">{{folder.text}}</a>
     </div>
 
     <div class="grid">

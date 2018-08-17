@@ -1,11 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 // import { JSDOM } from 'jsdom';
 import { Observable } from 'rxjs';
 import { Folder } from '../models/Folder';
 import { FolderProtoType } from '../models/FolderProtoType';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
+import { NavLinks } from '../models/navlinks.model';
+import { MapType } from '@angular/compiler';
+import { Chapter } from '../models/Chapter';
+import { Book } from '../models/Book';
 
 @Injectable()
 export class NavigationService {
@@ -14,6 +18,8 @@ export class NavigationService {
   public bodyBlock: string;
   public folders: Folder[];
   public navLinks: Folder[];
+  public nav: NavLinks[];
+  public navMap: Map<string, NavLinks>;
   public notesSettings = false;
   private fs: any;
   constructor(
@@ -124,6 +130,10 @@ export class NavigationService {
     });
     // console.log(test);
     return test;
+  }
+
+  public getTestament(folder: string): void {
+    console.log(folder);
   }
 
   public urlBuilder(book: string, chapter: string): string {
@@ -299,20 +309,88 @@ export class NavigationService {
   }
 
   private initNavigation() {
-    this.httpClient
-      .get('assets/nav/nav.json', {
-        responseType: 'text'
-      })
-      .subscribe(s => {
-        const raw = JSON.parse(s) as Folder[];
-        this.folders = [];
-        const asdf: FolderProtoType[] = [];
+    this.setNav();
 
-        Object.assign(asdf, raw);
+    this.nav.forEach(n => {
+      console.log(n);
+      this.httpClient
+        .get('assets/scriptures/' + n.folder + '/_manifest.html', {
+          observe: 'body',
+          responseType: 'text'
+        })
+        .subscribe(data => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, 'text/html');
+          // doc.evaluate();
+          const nodes = doc.evaluate(
+            '/html/body/nav/ul/li/a/p[@class="title"]',
+            doc,
+            null,
+            XPathResult.ANY_TYPE,
+            null
+          );
+          let node: HTMLElement;
+          n.books = [];
+          if (nodes !== null) {
+            node = nodes.iterateNext() as HTMLElement;
+            while (node !== null) {
+              const chap = new Book(node.innerHTML.replace('&nbsp;', ' '));
 
-        Object.assign(this.folders, raw);
+              n.books.push(chap);
+              console.log(node.innerText);
+              node = nodes.iterateNext() as HTMLElement;
+            }
+          }
+          const nodesTest = doc.evaluate(
+            '/html/body/nav/ul/li',
+            doc,
+            null,
+            XPathResult.ANY_TYPE,
+            null
+          );
+          node = nodesTest.iterateNext() as HTMLElement;
+          while (node !== null) {
+            console.log(node.querySelector('p.title').innerHTML);
+          }
+        });
+    });
+    // this.httpClient
+    //   .get('assets/nav/nav.json', {
+    //     responseType: 'text'
+    //   })
+    //   .subscribe(s => {
+    //     const raw = JSON.parse(s) as Folder[];
+    //     this.folders = [];
+    //     const asdf: FolderProtoType[] = [];
 
-        // this.folders = JSON.parse(s) as Folder[];
-      });
+    //     Object.assign(asdf, raw);
+
+    //     Object.assign(this.folders, raw);
+
+    //     // this.folders = JSON.parse(s) as Folder[];
+    //   });
+  }
+
+  private setNav() {
+    this.nav = [
+      new NavLinks('Old Testament', 'ot'),
+      new NavLinks('New Testament', 'nt'),
+      new NavLinks('Topical Guide', 'tg'),
+      new NavLinks('Book of Mormon', 'bofm'),
+      new NavLinks('DC Testament', 'dc-testament'),
+      new NavLinks('Joseph Smith Translation', 'jst'),
+      new NavLinks('Pearl of Great Price', 'pgp'),
+      new NavLinks('History Photos', 'history-photos'),
+      new NavLinks('History Maps', 'history-maps'),
+      new NavLinks('Harmony', 'harmony'),
+      new NavLinks('Guide to the Scriptures', 'gs'),
+      new NavLinks('Bible Photos', 'bible-photos'),
+      new NavLinks('Bible Maps', 'bible-maps'),
+      new NavLinks('Bible Chron', 'bible-chron'),
+      new NavLinks('Bible', 'bible'),
+      new NavLinks('Bible Dictionary', 'bd'),
+      new NavLinks('Triple Index ', 'triple-index'),
+      new NavLinks('Triple', 'triple')
+    ];
   }
 }

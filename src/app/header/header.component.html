@@ -3,12 +3,10 @@
     <button id='navToggle' (click)="btnLeftPanePress()">
       <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
     </button>
-
     <span id="empty "></span>
   </div>
   <div id="headerMiddlePane">
 
-    <!-- <div id="bookName"></div> -->
     <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
       <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
     </button>
@@ -21,6 +19,8 @@
 
     </button>
     <!-- <span id="empty "></span> -->
+
+    <div id="bookName"></div>
 
     <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
     <!-- <span id="empty "></span> -->

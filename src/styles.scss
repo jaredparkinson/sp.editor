@@ -46,7 +46,7 @@ body {
 
 @media only screen and (max-width: 511.98px) {
   #headerMiddlePane {
-    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0;
+    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0 0;
   }
   #navToggle {
     grid-area: 'navToggle';
@@ -104,7 +104,7 @@ body {
 
 @media only screen and (min-width: 512px) {
   #headerMiddlePane {
-    grid-template-columns: 48px 48px 48px auto 48px 48px 48px;
+    grid-template-columns: 48px 48px 48px auto auto 48px 48px 48px;
   }
   #navToggle {
     grid-area: 'navToggle';
@@ -173,10 +173,14 @@ body {
   //   width: $leftPaneWidth;
   // }
   .menu-bar {
-    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
+    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(
+        auto,
+        $bodyBlockWidth
+      ) minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }

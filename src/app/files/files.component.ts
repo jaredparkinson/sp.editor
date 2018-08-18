@@ -43,8 +43,8 @@ export class FilesComponent implements OnInit {
   }
   setRoot() {
     this.saveState.data.foldersVisible = true;
-    this.booksVisible = false;
-    this.fileManager.navLinks = [];
+    this.fileManager.showBooks = false;
+    this.fileManager.books = [];
   }
   setTestament(folder: string) {
     this.fileManager.getTestament(folder);

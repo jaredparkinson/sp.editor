@@ -3,15 +3,21 @@
   <nav id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
     <a (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Set Root</a>
-    <div class="grid" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
+    <div class="grid" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
 
 
       <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
-      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="setTestament(folder.folder)">{{folder.text}}</a>
+      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="fileManager.books = folder.books;  fileManager.showBooks = true;">{{folder.text}}</a>
     </div>
 
-    <div class="grid">
-      <a class='left-pane-ignore' *ngFor="let nav of fileManager.navLinks" (click)="setVisibility(nav.path)" [class.nav-children-visible]="nav.visible">{{nav.path}}</a>
+    <div class="grid" *ngIf="fileManager.showBooks">
+      <div *ngFor="let nav of fileManager.books">
+        <a class='left-pane-ignore' style="color:red" (click)="setVisibility('asdf')" [class.nav-children-visible]="nav.visible">{{nav.bookName}}</a>
+        <div *ngFor="let chapter of nav.chapters">
+          <a class='left-pane-ignore' href="{{chapter.link}}">{{chapter.name}}</a>
+
+        </div>
+      </div>
       <!-- <a class='left-pane-ignore' *ngFor="let file of folder?.files">{{file.sourceUrl}}</a> -->
     </div>
 

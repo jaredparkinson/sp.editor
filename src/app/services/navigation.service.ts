@@ -322,35 +322,7 @@ export class NavigationService {
       .subscribe(data => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
-        const testaments = doc.querySelectorAll('div.book');
-        testaments.forEach(testament => {
-          const testamentName = testament.querySelector('header h1').innerHTML;
-
-          const tempTestament = new NavLinks(testamentName, '');
-
-          const books = testament.querySelectorAll('div>ul>li');
-
-          const tempBooks: Book[] = [];
-          books.forEach(book => {
-            const tempBook = new Book(book.querySelector('p.title').innerHTML);
-
-            const tempChapters: Chapter[] = [];
-            book.querySelectorAll('ul li a').forEach(chapter => {
-              const tempChapter = new Chapter(
-                chapter.querySelector('.title').innerHTML,
-                chapter.getAttribute('href').replace('.html', '')
-              );
-              tempChapters.push(tempChapter);
-            });
-            tempBook.chapters = tempChapters;
-
-            tempBooks.push(tempBook);
-          });
-          tempTestament.books = tempBooks;
-          this.nav.push(tempTestament);
-
-          // console.log(testamentName);
-        });
+        this.extractTestaments(doc);
       });
 
     // this.nav.forEach(n => {
@@ -411,5 +383,39 @@ export class NavigationService {
 
     //     // this.folders = JSON.parse(s) as Folder[];
     //   });
+  }
+
+  private extractTestaments(doc: Document) {
+    const testaments = doc.querySelectorAll('div.book');
+    Array.prototype.slice.call(testaments).forEach(testament => {
+      const testamentName = testament.querySelector('header h1').innerHTML;
+      const tempTestament = new NavLinks(testamentName, '');
+      const books = testament.querySelectorAll('div>ul>li');
+
+      tempTestament.books = this.extractBooks(books);
+      this.nav.push(tempTestament);
+    });
+  }
+
+  private extractBooks(books: any): Book[] {
+    const tempBooks: Book[] = [];
+    Array.prototype.slice.call(books).forEach(book => {
+      const tempBook = new Book(book.querySelector('p.title').innerHTML);
+      tempBook.chapters = this.extractChapters(book);
+      tempBooks.push(tempBook);
+    });
+    return tempBooks;
+  }
+
+  private extractChapters(book: any): Chapter[] {
+    const tempChapters: Chapter[] = [];
+    book.querySelectorAll('ul li a').forEach(chapter => {
+      const tempChapter = new Chapter(
+        chapter.querySelector('.title').innerHTML,
+        chapter.getAttribute('href').replace('.html', '')
+      );
+      tempChapters.push(tempChapter);
+    });
+    return tempChapters;
   }
 }

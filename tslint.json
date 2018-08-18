@@ -30,6 +30,7 @@
         ]
       }
     ],
+    "no-submodule-imports": [true, "@angular/common/http"],
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],

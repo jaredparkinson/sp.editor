@@ -6,6 +6,7 @@ import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
+import { TSQuery } from '../TSQuery';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
 
@@ -24,6 +25,7 @@ export class NavigationService {
 
   public notesSettings = false;
   private fs: any;
+  private tsQuery: TSQuery = new TSQuery();
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
@@ -323,7 +325,7 @@ export class NavigationService {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
         const testaments = doc.querySelectorAll('div.book');
-        testaments.forEach(testament => {
+        this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
           const testamentName = testament.querySelector('header h1').innerHTML;
 
           const tempTestament = new NavLinks(testamentName, '');
@@ -331,11 +333,11 @@ export class NavigationService {
           const books = testament.querySelectorAll('div>ul>li');
 
           const tempBooks: Book[] = [];
-          books.forEach(book => {
+          this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
             const tempBook = new Book(book.querySelector('p.title').innerHTML);
 
             const tempChapters: Chapter[] = [];
-            book.querySelectorAll('ul li a').forEach(chapter => {
+            this.tsQuery.selectClass(book, 'ul li a').forEach(chapter => {
               const tempChapter = new Chapter(
                 chapter.querySelector('.title').innerHTML,
                 chapter.getAttribute('href').replace('.html', '')

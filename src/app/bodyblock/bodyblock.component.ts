@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { TSQuery } from '../TSQuery';
 
 @Component({
   selector: 'app-bodyblock',
@@ -14,6 +15,7 @@ import { SaveStateService } from '../services/save-state.service';
 export class BodyblockComponent implements OnInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
+  private tsQuery: TSQuery = new TSQuery();
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,

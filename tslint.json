@@ -30,6 +30,7 @@
         ]
       }
     ],
+    "no-submodule-imports": [true, "@angular", "zone.js"],
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],

@@ -4,21 +4,40 @@
 //     text-decoration: none;
 //   }
 // }
-
 nav {
-  grid-gap: 25px;
-  // display: grid;
+  grid-gap: 25px; // display: grid;
   grid-template-columns: repeat(100%, 32px);
-  background-color: lightgrey;
-
-  a {
-    // padding: 10px;
-    text-align: center;
-    height: 32px;
-    text-decoration: none;
+  background-color: whitesmoke;
+  .nav-parent {
+    height: 150vh;
   }
-
-  a:hover {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    // padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 48px;
+    text-decoration: none;
+    border: #d0d3d4 solid;
+    border-width: 0 0 1px 0;
+    text-align: left;
+    list-style: none;
+  }
+  .left-nav-back {
+    height: 32px;
+  }
+  .left-nav-item {
+    padding-left: 1em;
+  }
+  .left-nav-plus {
+    padding-right: 1em;
+  }
+  li:hover {
     background-color: #4caf50;
     color: white;
   }

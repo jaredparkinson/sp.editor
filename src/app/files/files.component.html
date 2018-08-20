@@ -2,12 +2,25 @@
 'show-m show-s': saveState.data.leftPaneToggle, 'hide-m hide-s': !saveState.data.leftPaneToggle }">
   <nav id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
-    <a (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Set Root</a>
-    <div class="grid" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
+    <div class="grid">
+      <ul>
+
+        <li class="left-nav-item left-nav-back" (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Scriptures</li>
+      </ul>
+    </div>
+    <div class="nav-parent" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
 
 
       <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
-      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="fileManager.testamentSelected = folder;  fileManager.showBooks = true;">{{folder.text}}</a>
+      <ul class='left-pane-ignore grid'>
+        <li *ngFor="let folder of fileManager.nav" (click)="fileManager.testamentSelected = folder;  fileManager.showBooks = true;">
+          <div class="left-nav-item"> {{folder.text}}</div>
+          <div class="left-nav-plus" style="text-align: right;">+</div>
+        </li>
+      </ul>
+      <!-- <a>
+        
+      </a> -->
     </div>
 
     <div class="grid" *ngIf="fileManager.showBooks">

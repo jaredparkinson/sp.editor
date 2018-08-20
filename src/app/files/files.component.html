@@ -7,12 +7,12 @@
 
 
       <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
-      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="fileManager.books = folder.books;  fileManager.showBooks = true;">{{folder.text}}</a>
+      <a class='left-pane-ignore' *ngFor="let folder of fileManager.nav" (click)="fileManager.testamentSelected = folder;  fileManager.showBooks = true;">{{folder.text}}</a>
     </div>
 
     <div class="grid" *ngIf="fileManager.showBooks">
-      <div *ngFor="let nav of fileManager.books" class="grid">
-        <a class='left-pane-ignore' style="color:red" (click)="nav.showChildren = !nav.showChildren">{{nav.bookName}}</a>
+      <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
+        <a class='left-pane-ignore' id="{{nav.bookName}}" style="color:red" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">{{nav.bookName}}</a>
         <div *ngIf="nav.showChildren" class="grid">
           <a *ngFor="let chapter of nav.chapters" class='left-pane-ignore' href="{{chapter.link}}">{{chapter.name}}</a>
 

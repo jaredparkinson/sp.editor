@@ -28,4 +28,11 @@ export class NavLinks {
     this.folder = folder;
     this.text = text;
   }
+  public resetVisibility(bookName: string) {
+    this.books.forEach(book => {
+      if (book.bookName !== bookName) {
+        book.showChildren = false;
+      }
+    });
+  }
 }

@@ -6,6 +6,7 @@ import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
+import { TSQuery } from '../TSQuery';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
 
@@ -21,9 +22,11 @@ export class NavigationService {
   public showBooks = false;
 
   public books: Book[] = [];
+  public testamentSelected: NavLinks;
 
   public notesSettings = false;
   private fs: any;
+  private tsQuery: TSQuery = new TSQuery();
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
@@ -322,7 +325,41 @@ export class NavigationService {
       .subscribe(data => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
-        this.extractTestaments(doc);
+        const testaments = doc.querySelectorAll('div.book');
+        this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
+          const testamentName = testament
+            .querySelector('header h1')
+            .innerHTML.replace('&nbsp;', ' ');
+
+          const tempTestament = new NavLinks(testamentName, '');
+
+          const books = testament.querySelectorAll('div>ul>li');
+
+          const tempBooks: Book[] = [];
+          this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
+            const tempBook = new Book(
+              book.querySelector('p.title').innerHTML.replace('&nbsp;', ' ')
+            );
+
+            const tempChapters: Chapter[] = [];
+            this.tsQuery.selectClass(book, 'ul li a').forEach(chapter => {
+              const tempChapter = new Chapter(
+                chapter
+                  .querySelector('.title')
+                  .innerHTML.replace('&nbsp;', ' '),
+                chapter.getAttribute('href').replace('.html', '')
+              );
+              tempChapters.push(tempChapter);
+            });
+            tempBook.chapters = tempChapters;
+
+            tempBooks.push(tempBook);
+          });
+          tempTestament.books = tempBooks;
+          this.nav.push(tempTestament);
+
+          // console.log(testamentName);
+        });
       });
 
     // this.nav.forEach(n => {
@@ -383,39 +420,5 @@ export class NavigationService {
 
     //     // this.folders = JSON.parse(s) as Folder[];
     //   });
-  }
-
-  private extractTestaments(doc: Document) {
-    const testaments = doc.querySelectorAll('div.book');
-    Array.prototype.slice.call(testaments).forEach(testament => {
-      const testamentName = testament.querySelector('header h1').innerHTML;
-      const tempTestament = new NavLinks(testamentName, '');
-      const books = testament.querySelectorAll('div>ul>li');
-
-      tempTestament.books = this.extractBooks(books);
-      this.nav.push(tempTestament);
-    });
-  }
-
-  private extractBooks(books: any): Book[] {
-    const tempBooks: Book[] = [];
-    Array.prototype.slice.call(books).forEach(book => {
-      const tempBook = new Book(book.querySelector('p.title').innerHTML);
-      tempBook.chapters = this.extractChapters(book);
-      tempBooks.push(tempBook);
-    });
-    return tempBooks;
-  }
-
-  private extractChapters(book: any): Chapter[] {
-    const tempChapters: Chapter[] = [];
-    book.querySelectorAll('ul li a').forEach(chapter => {
-      const tempChapter = new Chapter(
-        chapter.querySelector('.title').innerHTML,
-        chapter.getAttribute('href').replace('.html', '')
-      );
-      tempChapters.push(tempChapter);
-    });
-    return tempChapters;
   }
 }

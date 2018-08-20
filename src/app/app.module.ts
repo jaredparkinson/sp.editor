@@ -26,6 +26,7 @@ import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { ButtonHighlightDirective } from './button-highlight.directive';
 import { HomeComponent } from './components/home/home.component';
+import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
 import { FilesComponent } from './files/files.component';
 import { HeaderComponent } from './header/header.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -35,8 +36,8 @@ import { ChapterService } from './services/chapter.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
 import { SettingsComponent } from './settings/settings.component';
+import { TSQuery } from './TSQuery';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

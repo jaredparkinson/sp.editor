@@ -1,3 +1,4 @@
+.\docker_upload.ps1
 Move-Item .\src\assets\scriptures\ ..
 # npm run electron:linux  
 npm run electron:windows

@@ -351,8 +351,8 @@ export class NavigationService {
               );
               tempChapters.push(tempChapter);
             });
+            tempChapters.shift();
             tempBook.chapters = tempChapters;
-
             tempBooks.push(tempBook);
           });
           tempTestament.books = tempBooks;

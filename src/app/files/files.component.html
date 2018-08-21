@@ -25,9 +25,9 @@
 
     <div class="grid" *ngIf="fileManager.showBooks">
       <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
-        <a class='left-pane-ignore' id="{{nav.bookName}}" style="color:red" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">{{nav.bookName}}</a>
+        <a class='left-pane-ignore chapter-header left-nav-item' id="{{nav.bookName}}" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">{{nav.bookName}}</a>
         <div *ngIf="nav.showChildren" class="grid">
-          <a *ngFor="let chapter of nav.chapters" class='left-pane-ignore' href="{{chapter.link}}">{{chapter.name}}</a>
+          <a *ngFor="let chapter of nav.chapters" class='left-pane-ignore left-nav-item' href="{{chapter.link}}">{{chapter.name}}</a>
 
         </div>
       </div>

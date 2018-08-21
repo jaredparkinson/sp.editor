@@ -15,7 +15,8 @@ nav {
     margin: 0;
     padding: 0;
   }
-  li {
+  li,
+  a {
     // padding: 10px;
     display: flex;
     align-items: center;
@@ -26,10 +27,19 @@ nav {
     border: #d0d3d4 solid;
     border-width: 0 0 1px 0;
     text-align: left;
+  }
+  li {
     list-style: none;
   }
   .left-nav-back {
-    height: 32px;
+    height: 40px;
+  }
+  a,
+  a:visited {
+    color: blue;
+  }
+  .chapter-header {
+    color: black;
   }
   .left-nav-item {
     padding-left: 1em;
@@ -37,9 +47,10 @@ nav {
   .left-nav-plus {
     padding-right: 1em;
   }
+  a:hover,
   li:hover {
-    background-color: #4caf50;
-    color: white;
+    background-color: azure;
+    color: black;
   }
   .nav-hide {
     display: none;

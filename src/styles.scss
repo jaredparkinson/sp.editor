@@ -8,8 +8,7 @@ html,
 body {
   margin: 0;
   padding: 0; // height: 100vh;
-  z-index: 20;
-  overflow: hidden;
+  z-index: 20; // overflow: hidden;
   position: fixed;
 }
 
@@ -173,14 +172,10 @@ body {
   //   width: $leftPaneWidth;
   // }
   .menu-bar {
-    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(
-        auto,
-        $bodyBlockWidth
-      ) minmax(48px, $rightPaneWidth);
+    grid-template-columns: minmax(48px, $leftPaneWidth) minmax( auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }
@@ -301,7 +296,7 @@ button {
 .menu-bar {
   display: grid;
   text-align: center;
-  height: 100%;
+  height: 40px;
   fa-icon svg {
     height: 100%;
   }

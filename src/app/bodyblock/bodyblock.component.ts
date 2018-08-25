@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, NgZone, OnInit } from '@angular/core';
+import {
+  Component,
+  NgZone,
+  OnInit,
+  AfterViewInit,
+  AfterContentChecked,
+  AfterViewChecked
+} from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
@@ -12,7 +19,7 @@ import { TSQuery } from '../TSQuery';
   templateUrl: './bodyblock.component.html',
   styleUrls: ['./bodyblock.component.scss']
 })
-export class BodyblockComponent implements OnInit {
+export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
@@ -37,6 +44,8 @@ export class BodyblockComponent implements OnInit {
   ngOnInit() {
     this.initSyncScrolling();
     this.route.params.subscribe(params => {
+      console.log(params);
+
       // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
       const chapter = params['chapter'];
@@ -44,9 +53,6 @@ export class BodyblockComponent implements OnInit {
         console.log(book);
         console.log(chapter);
         this.chapterService.getChapter(book, chapter);
-        this.route.queryParams.subscribe(v => {
-          console.log(v['verse']);
-        });
       } else if (book === undefined && chapter !== undefined) {
         this.chapterService.getChapter(chapter, '');
       }
@@ -58,6 +64,27 @@ export class BodyblockComponent implements OnInit {
     // });
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.route.queryParams.subscribe(v => {
+        document.getElementById('p' + v['verse']).scrollIntoView();
+        document.getElementById('note' + v['verse']).scrollIntoView();
+        // console.log('verse ' + v['verse']);
+        // const asdf = document.getElementById('p' + v);
+        // console.log('asdf ' + asdf);
+        // asdf.scrollIntoView();
+        // console.log(asdf);
+        // asdf.scrollIntoView();
+      });
+    }, 1000);
+    // asdf.scrollIntoView();
+    // this.route.queryParams.subscribe(qp => {
+    //   const verse = qp['verse'];
+    //   const asdf = document.getElementById('p' + verse);
+    //   console.log('asdf ' + asdf);
+    //   asdf.scrollIntoView();
+    // });
+  }
   onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {

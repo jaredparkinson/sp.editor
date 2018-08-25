@@ -27,6 +27,7 @@ export class NavigationService {
   public notesSettings = false;
   private fs: any;
   private tsQuery: TSQuery = new TSQuery();
+  public pageTitle: string;
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,

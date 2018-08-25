@@ -6,9 +6,12 @@
       <ul>
 
         <li class="left-nav-item left-nav-back" (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Scriptures</li>
+        <li>
+          <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
+        </li>
       </ul>
     </div>
-    <div class="nav-parent" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
+    <div class="nav-parent navigation" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
 
 
       <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
@@ -23,7 +26,7 @@
       </a> -->
     </div>
 
-    <div class="grid" *ngIf="fileManager.showBooks">
+    <div class="grid navigation" *ngIf="fileManager.showBooks">
       <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
         <a class='left-pane-ignore chapter-header left-nav-item' id="{{nav.bookName}}" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">{{nav.bookName}}</a>
         <div *ngIf="nav.showChildren" class="grid">

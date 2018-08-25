@@ -20,9 +20,10 @@
     </button>
     <!-- <span id="empty "></span> -->
 
-    <div id="bookName"></div>
+    <div id="bookName">{{navServices.pageTitle}}</div>
+    <div id="bookName">{{navServices.pageTitle}}</div>
 
-    <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
+    <!-- <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" /> -->
     <!-- <span id="empty "></span> -->
     <button id="btnForward" (click)="btnForwardPress();">
       <fa-icon [icon]="faArrowRight" size="lg"></fa-icon>

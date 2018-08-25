@@ -26,9 +26,15 @@ body {
   overflow-y: scroll;
 }
 
+.left-pane .navigation,
+.right-pane footer {
+  overflow-y: scroll; // position: fixed;
+  height: 100vh;
+}
+
 .left-pane nav,
 .right-pane footer {
-  overflow-y: scroll;
+  // overflow-y: scroll;
   position: fixed;
   height: 100vh;
 }

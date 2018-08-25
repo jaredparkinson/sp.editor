@@ -41,7 +41,8 @@ export class ChapterService {
         }
 
         const urlText = book + '/' + chapter;
-        (addressBar as HTMLInputElement).value = title;
+        // (addressBar as HTMLInputElement).value = title;
+        this.navService.pageTitle = title;
         this.saveStateService.data.currentPage = urlText;
       });
       return;
@@ -69,7 +70,9 @@ export class ChapterService {
       }
 
       const urlText = book + '/' + chapter;
-      (addressBar as HTMLInputElement).value = title;
+      // (addressBar as HTMLInputElement).value = title;
+      this.saveStateService.data.currentPage = urlText;
+      this.navService.pageTitle = title;
       this.saveStateService.data.currentPage = urlText;
     });
   }

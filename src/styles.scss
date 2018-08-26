@@ -51,7 +51,7 @@ body {
 
 @media only screen and (max-width: 511.98px) {
   #headerMiddlePane {
-    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0 0;
+    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0;
   }
   #navToggle {
     grid-area: 'navToggle';
@@ -109,7 +109,7 @@ body {
 
 @media only screen and (min-width: 512px) {
   #headerMiddlePane {
-    grid-template-columns: 48px 48px 48px auto auto 48px 48px 48px;
+    grid-template-columns: 48px 48px 48px auto 48px 48px 48px;
   }
   #navToggle {
     grid-area: 'navToggle';

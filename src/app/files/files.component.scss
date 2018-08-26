@@ -16,7 +16,8 @@ nav {
     padding: 0;
   }
   li,
-  a {
+  a,
+  .chapter-header {
     // padding: 10px;
     display: flex;
     align-items: center;
@@ -48,11 +49,18 @@ nav {
     padding-right: 1em;
   }
   a:hover,
-  li:hover {
+  li:hover,
+  .chapter-header:hover {
     background-color: azure;
     color: black;
   }
   .nav-hide {
     display: none;
+  }
+  #addressBar {
+    height: 24px;
+    width: 100%;
+    margin: 5px;
+    text-align: center;
   }
 }

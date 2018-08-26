@@ -12,20 +12,17 @@
   height: 100vh;
   grid-template-areas: 'header' 'body';
   grid-template-rows: 40px auto;
-
   .header {
     // grid-area: header;
     // height: 5vh;
     background-color: lightblue;
   }
-
   .body {
     // grid-area: body
     // width: 100vw;
     // height: 95vh;
     background-color: #fffcf7;
-    grid-template-areas: 'left-pane content-pane right-pane';
-    // grid-template-areas: left-pane content-pane right-pane;
+    grid-template-areas: 'left-pane content-pane right-pane'; // grid-template-areas: left-pane content-pane right-pane;
     .left-pane {
       grid-area: left-pane;
     }
@@ -37,10 +34,7 @@
   .content-pane,
   .right-pane {
     height: 95vh;
-  }
-
-  //Global rows and columns
-
+  } //Global rows and columns
   .col-0 {
     visibility: hidden;
   }
@@ -130,8 +124,7 @@
   }
   .row-12 {
     height: $vh12;
-  }
-  // Small Screen Sizes Postfix: -s
+  } // Small Screen Sizes Postfix: -s
   // Screen Size up to 720px
   @media only screen and (max-width: 1079.98px) {
     // .body {
@@ -240,7 +233,6 @@
       visibility: visible;
     }
   }
-
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px
   @media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
@@ -368,7 +360,6 @@
     .grid-l {
       visibility: visible;
     }
-
     .none-l {
       visibility: hidden;
     }
@@ -383,7 +374,6 @@
     .col-l-3 {
       width: $vw3;
     }
-
     .col-l-05 {
       width: $vw_5;
     }

@@ -4,11 +4,11 @@
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
     <div class="grid">
       <ul>
-
-        <li class="left-nav-item left-nav-back" (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Scriptures</li>
         <li>
           <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" />
         </li>
+        <li class="left-nav-item left-nav-back" (click)="setRoot()" [class.nav-children-visible]="saveState.data.foldersVisible">Scriptures</li>
+
       </ul>
     </div>
     <div class="nav-parent navigation" *ngIf="!fileManager.showBooks" [ngClass]="{'nav-hide': !saveState.data.foldersVisible}">
@@ -28,7 +28,19 @@
 
     <div class="grid navigation" *ngIf="fileManager.showBooks">
       <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
-        <a class='left-pane-ignore chapter-header left-nav-item' id="{{nav.bookName}}" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">{{nav.bookName}}</a>
+        <div class="chapter-header" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">
+
+          <a class='left-pane-ignore chapter-header left-nav-item' id="{{nav.bookName}}">{{nav.bookName}}</a>
+          <div *ngIf="nav.showChildren; then thenBlock; else elseBlock"></div>
+          <ng-template #thenBlock>
+            <div class="left-nav-plus" style="text-align: right;">-</div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="left-nav-plus" style="text-align: right;">+</div>
+          </ng-template>
+
+        </div>
+
         <div *ngIf="nav.showChildren" class="grid">
           <a *ngFor="let chapter of nav.chapters" class='left-pane-ignore left-nav-item' href="{{chapter.link}}">{{chapter.name}}</a>
 

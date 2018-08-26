@@ -32,6 +32,7 @@ export class FilesComponent implements OnInit {
     public fileManager: NavigationService,
     public chapterService: ChapterService,
     public saveState: SaveStateService,
+    private router: Router,
     private httpClient: HttpClient
   ) {}
 
@@ -71,6 +72,22 @@ export class FilesComponent implements OnInit {
     //   }
     //   this.map.set(id, this.links);
     // });
+  }
+  addressBarKeyPress(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      let addressBarValue = (document.getElementById(
+        'addressBar'
+      ) as HTMLInputElement).value;
+      addressBarValue = addressBarValue.replace('/', ' ');
+      const address = addressBarValue.split(' ').filter(f => {
+        return f.trim() !== '';
+      });
+      console.log(address);
+      if (address.length >= 2) {
+        this.router.navigateByUrl(address[0] + '/' + address[1]);
+        // this.chapterService.getChapter(address[0], address[1]);
+      }
+    }
   }
 
   onChapterClick(book: string, chapter: string) {

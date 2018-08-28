@@ -37,27 +37,26 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.initNoteSettingsToggle();
   }
+  gridBodyClick() {
+    // console.log('body clicked');
+    // this.navService.notesSettings = false;
+    // if (
+    //   (e.target as HTMLElement).closest('.notes-settings') === null &&
+    //   this.navService.notesSettings
+    // ) {
+    //   console.log(e);
+    //   this.navService.notesSettings = false;
+    // }
+  }
 
   private initNoteSettingsToggle() {
-    document.body.addEventListener('click', e => {
-      if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-        this.navService.notesSettings = false;
-      }
-      // console.log(
-      //   (e.target as HTMLElement) ===
-      //     document.querySelector('#btnNotesFlyout path')
-      // );
-      // if (
-      //   !(e.target as HTMLElement).classList.contains('notes-settings') &&
-      //   !(
-      //     (e.target as HTMLElement) ===
-      //     document.querySelector('#btnNotesFlyout path')
-      //   )
-      // ) {
-      //   this.navService.notesSettings = false;
-      //   console.log(this.navService.notesSettings);
-      // }
-    });
+    // document.querySelector('div.grid.main').addEventListener('click', e => {
+    //   if ((e.target as HTMLElement).closest('.notes-settings') === null) {
+    //     console.log(e);
+    //     this.navService.notesSettings = false;
+    //   }
+    // });
+    // document.body
     this.ngZone.runOutsideAngular(() => {});
   }
 }

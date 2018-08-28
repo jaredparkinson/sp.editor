@@ -13,6 +13,7 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { TSQuery } from '../TSQuery';
+import { log } from 'util';
 
 @Component({
   selector: 'app-bodyblock',
@@ -67,8 +68,11 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.route.queryParams.subscribe(v => {
-        document.getElementById('p' + v['verse']).scrollIntoView();
-        document.getElementById('note' + v['verse']).scrollIntoView();
+        const verse = document.getElementById('p' + v['verse']);
+        if (verse !== null) {
+          verse.scrollIntoView();
+          document.getElementById('note' + v['verse']).scrollIntoView();
+        }
         // console.log('verse ' + v['verse']);
         // const asdf = document.getElementById('p' + v);
         // console.log('asdf ' + asdf);

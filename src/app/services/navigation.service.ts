@@ -73,8 +73,25 @@ export class NavigationService {
     this.saveState.data.paragraphsVisible = !this.saveState.data
       .paragraphsVisible;
   }
+
+  documentBodyClick(e: Event) {
+    if ((e.target as HTMLElement).closest('.notes-settings') === null) {
+      console.log(this.notesSettings);
+      this.notesSettings = false;
+      document
+        .querySelector('div.main.grid')
+        .removeEventListener('click', this.documentBodyClick);
+    }
+  }
   btnNotesSettingsPress() {
     this.notesSettings = !this.notesSettings;
+
+    // if (this.notesSettings) {
+    //   document
+    //     .querySelector('div.main.grid')
+    //     .addEventListener('click', this.documentBodyClick);
+    // } else {
+    // }
   }
   btnRightPanePress() {
     if (this.helperService.getWidth() >= 1080) {

@@ -45,42 +45,41 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.initSyncScrolling();
     this.route.params.subscribe(params => {
-      console.log(params);
+      // console.log(params);
 
       // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
       const chapter = params['chapter'];
       if (book !== undefined && chapter !== undefined) {
-        console.log(book);
-        console.log(chapter);
+        // console.log(book);
+        // console.log(chapter);
         this.chapterService.getChapter(book, chapter);
       } else if (book === undefined && chapter !== undefined) {
         this.chapterService.getChapter(chapter, '');
       }
+      setTimeout(() => {
+        this.route.queryParams.subscribe(v => {
+          if (v['verse'] !== undefined) {
+            const verseParam = (v['verse'] as string).split(',')[0];
+            const verse = document.getElementById('p' + verseParam);
+            if (verse !== null) {
+              verse.scrollIntoView();
+              document.getElementById('note' + verseParam).scrollIntoView();
+
+              // console.log('verse: ' + v['verse']);
+            }
+          }
+        });
+      }, 600);
     });
+
     // this.ngZone.runOutsideAngular(() => {
     //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
     //     console.log('test');
     //   });
     // });
   }
-
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.route.queryParams.subscribe(v => {
-        const verse = document.getElementById('p' + v['verse']);
-        if (verse !== null) {
-          verse.scrollIntoView();
-          document.getElementById('note' + v['verse']).scrollIntoView();
-        }
-        // console.log('verse ' + v['verse']);
-        // const asdf = document.getElementById('p' + v);
-        // console.log('asdf ' + asdf);
-        // asdf.scrollIntoView();
-        // console.log(asdf);
-        // asdf.scrollIntoView();
-      });
-    }, 1000);
     // asdf.scrollIntoView();
     // this.route.queryParams.subscribe(qp => {
     //   const verse = qp['verse'];

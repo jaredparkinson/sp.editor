@@ -11,7 +11,8 @@
 'notes-hide-original': !saveState.data.originalNotesVisible,
 'notes-show-original': saveState.data.originalNotesVisible,
 'show-s': saveState.data.rightPaneToggle,
-'hide-s': !saveState.data.rightPaneToggle }" class="study-notes-parent ">
+'hide-s': !saveState.data.rightPaneToggle }"
+  class="study-notes-parent ">
   <div>
 
     <!-- <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();">
@@ -36,6 +37,8 @@
     </a> -->
 
     <div id="footerTop"></div>
-    <footer id="studyNotes" class="study-notes" [innerHTML]="getNotes()"></footer>
+    <footer id="studyNotes" class="study-notes" [innerHTML]="getNotes()">
+      <span id="studyNotesTop"></span>
+    </footer>
   </div>
 </div>

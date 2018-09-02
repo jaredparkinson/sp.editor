@@ -119,14 +119,23 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       }
     }
     if (scrollIntoView === undefined) {
+      console.log(scrollIntoView);
+
       const element = verses[0];
 
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
+
+      // console.log('Top: ' + top + ' height: ' + height + ' start: ' + start);
+
       const start = 35;
-      if (top + height < start) {
-        document.getElementById('note_title_number1').scrollIntoView();
-        console.log('test gojbvhgv');
+      if (top + height > start) {
+        document.querySelector('note').scrollIntoView();
+        // console.log('test gojbvhgv');
+      } else {
+        const notes = document.querySelectorAll('note');
+
+        notes[notes.length - 1].scrollIntoView();
       }
     }
   }

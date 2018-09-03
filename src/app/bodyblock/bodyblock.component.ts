@@ -61,6 +61,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         this.route.queryParams.subscribe(v => {
           if (v['verse'] !== undefined) {
             const verseParam = (v['verse'] as string).split(',')[0];
+            console.log('verse params: ' + verseParam);
+
             const verse = document.getElementById('p' + verseParam);
             if (verse !== null) {
               verse.scrollIntoView();
@@ -68,6 +70,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
               // console.log('verse: ' + v['verse']);
             }
+          } else {
+            document.getElementById('title1').scrollIntoView();
           }
         });
       }, 600);

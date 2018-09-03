@@ -78,6 +78,11 @@ export class ChapterService {
   }
 
   private extractHtml(doc: Document, selector: string): string {
-    return doc.querySelector(selector).innerHTML;
+    const html = doc.querySelector(selector);
+    if (html !== undefined && html !== null) {
+      // console.log(html);
+      return html.innerHTML;
+    }
+    return '';
   }
 }

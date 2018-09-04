@@ -60,16 +60,12 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.route.queryParams.subscribe(v => {
           if (v['verse'] !== undefined) {
-            const verseParam = (v['verse'] as string).split(',')[0];
-            console.log('verse params: ' + verseParam);
+            const verseParams = (v['verse'] as string).split(',');
+            // const verseSelect = verseParams[0].split('-')[0];
+            this.selectVerse(verseParams[0].split('-')[0]);
 
-            const verse = document.getElementById('p' + verseParam);
-            if (verse !== null) {
-              verse.scrollIntoView();
-              document.getElementById('note' + verseParam).scrollIntoView();
-
-              // console.log('verse: ' + v['verse']);
-            }
+            // let selectedVerse = false;
+            this.highlightVerses(verseParams);
           } else {
             document.getElementById('title1').scrollIntoView();
           }
@@ -83,6 +79,49 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     //   });
     // });
   }
+  private highlightVerses(verseParams: string[]) {
+    for (const verseParam of verseParams) {
+      console.log('Verse Parm: ' + verseParam);
+      const verseHightLight = verseParam.split('-');
+      const bodyBlock = document.getElementById('bodyBlock');
+      if (verseHightLight.length === 1) {
+        // console.log(verseHightLight);
+        // document
+        //   .getElementById('p' + verseHightLight[0])
+        //   .classList.add('highlight');
+        bodyBlock.classList.add('p' + verseHightLight[0]);
+      }
+      for (
+        let x = parseInt(verseHightLight[0], 10);
+        x < parseInt(verseHightLight[1], 10);
+        x++
+      ) {
+        // const element = document.getElementById('p' + x);
+
+        // element.className = 'verse highlight';
+        // element.classList.add('highlight');
+
+        // console.log('Class Name' + element.className);
+        bodyBlock.classList.add('p' + x);
+      }
+      // for (const highlight of verseHightLight) {
+      //   console.log(highlight);
+      //   document
+      //     .getElementById('p' + highlight)
+      //     .classList.add('verse-hightlight');
+      // }
+    }
+  }
+
+  private selectVerse(verseSelect: string) {
+    const verse = document.getElementById('p' + verseSelect);
+    if (verse !== null) {
+      verse.scrollIntoView();
+      document.getElementById('note' + verseSelect).scrollIntoView();
+      // console.log('verse: ' + v['verse']);
+    }
+  }
+
   ngAfterViewInit() {
     // asdf.scrollIntoView();
     // this.route.queryParams.subscribe(qp => {

@@ -1,5 +1,6 @@
 @import '../../css.penguin/view_vars';
 $font-stack: serif;
+
 //This is for when the poetry is not being shown
 body {
   font-family: $font-stack;
@@ -7,55 +8,68 @@ body {
 
 .content-pane {
   grid-template-columns: $fr_5 $fr11 $fr_5;
+
   .body-block {
     span.part {
       margin-left: 6pt;
     }
+
     span.answer {
       text-indent: 1em;
     }
   }
+
   #bodyBlock.hidden-paragraph div.hidden-paragraph {
     span.line {
       padding-right: 6pt;
     }
+
     span.break {
       margin-bottom: 6pt;
     }
-  } //This is styling for when poetry is being shown
+  }
+
+  //This is styling for when poetry is being shown
   .body-block.show-poetry {
     span.line {
       display: block;
     }
+
     & .break {
       display: block;
       margin-bottom: 6pt;
     }
   }
+
   #bodyBlock {
     span.verse-number {
       vertical-align: super;
       font-size: 8pt;
     }
   }
+
   #bodyBlock.hidden-paragraph {
     span {
+
       &.part,
       &.question,
       &.answer {
         font-family: $font-stack;
         display: block;
       }
+
       &.verse {
         font-family: $font-stack;
         text-align: left;
         margin: 0;
         margin-bottom: 6pt;
         display: block;
+
         span.verse-number {
           vertical-align: unset;
           font-size: inherit;
         }
+
         div.hidden-paragraph & {
           display: inline; // span.verse-number {
           //   vertical-align: super;
@@ -71,10 +85,12 @@ body {
       display: none;
     }
   }
+
   .notes-show-original {
     span.study-note-ref {
       color: #007fa4;
     }
+
     sup.marker {
       font-style: italic;
       font-size: 8pt;
@@ -82,43 +98,55 @@ body {
       /* when original notes showing, display:none */
     }
   }
+
   span.deletion {
     font-style: italic;
   }
+
   span.deletion::before {
     content: '[';
     font-style: normal;
   }
+
   span.deletion::after {
     content: ']';
     font-style: normal;
   }
+
   span.insertion {
     font-weight: bold;
   }
+
   span.small-caps {
     font-variant: small-caps;
   }
+
   span.uppercase {
     text-transform: uppercase;
   }
+
   span.verse-number {
     color: DimGray;
     font-weight: bold;
   }
+
   span.clarity-word {
     font-style: italic;
   }
+
   span.key-letter {
     display: none;
   }
+
   span.key-word {
     font-style: italic;
   }
+
   sup.marker {
     font-style: italic;
     font-size: 8pt;
   }
+
   div.paragraph {
     margin-bottom: 6pt;
   }
@@ -127,6 +155,7 @@ body {
   p.title-number {
     text-align: center;
   }
+
   p.title-number {
     font-weight: bold;
   }
@@ -135,14 +164,31 @@ body {
   p.study-intro {
     font-style: italic;
   }
+
   h2#title1 {
     text-align: center;
     font-size: 12pt;
   }
+
   p.signature {
     font-variant: small-caps;
   }
+
   div.hidden-paragraph {
     margin-bottom: 6pt;
   }
+
+  @for $x from 1 to 300 {
+    .p#{
+ $x
+  }
+
+  #p#{
+ $x
+}
+
+  {
+  border-left: 3px solid #f68d2e;
+}
+}
 }

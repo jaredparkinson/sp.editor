@@ -24,6 +24,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
+  private highlightClasses = '';
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -80,16 +81,18 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     // });
   }
   private highlightVerses(verseParams: string[]) {
+    this.highlightClasses = '';
     for (const verseParam of verseParams) {
       console.log('Verse Parm: ' + verseParam);
       const verseHightLight = verseParam.split('-');
-      const bodyBlock = document.getElementById('bodyBlock');
+      // const bodyBlock = document.getElementById('bodyBlock');
       if (verseHightLight.length === 1) {
         // console.log(verseHightLight);
         // document
         //   .getElementById('p' + verseHightLight[0])
         //   .classList.add('highlight');
-        bodyBlock.classList.add('p' + verseHightLight[0]);
+        // bodyBlock.classList.add('p' + verseHightLight[0]);
+        this.highlightClasses += ' p' + verseHightLight[0];
       }
       for (
         let x = parseInt(verseHightLight[0], 10);
@@ -102,7 +105,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         // element.classList.add('highlight');
 
         // console.log('Class Name' + element.className);
-        bodyBlock.classList.add('p' + x);
+        // bodyBlock.classList.add('p' + x);
+        this.highlightClasses += ' p' + x;
       }
       // for (const highlight of verseHightLight) {
       //   console.log(highlight);

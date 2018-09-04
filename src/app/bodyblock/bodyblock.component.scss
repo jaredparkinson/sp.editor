@@ -178,12 +178,16 @@ body {
     margin-bottom: 6pt;
   }
 
+  #highlight-holder {
+    visibility: hidden;
+  }
+
   @for $x from 1 to 300 {
-    .p#{
+    #highlight-holder.p#{
  $x
   }
 
-  #p#{
+  ~#bodyBlock #p#{
  $x
 }
 

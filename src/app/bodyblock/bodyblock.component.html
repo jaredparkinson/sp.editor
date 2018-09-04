@@ -1,5 +1,7 @@
+<div id="highlight-holder" class="{{this.highlightClasses}}"></div>
 <div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 
 'show-poetry': saveState.data.poetryVisible,
 'notes-hide-original': !saveState.data.originalNotesVisible,
-'notes-show-original': saveState.data.originalNotesVisible}" [innerHTML]="getBodyBlock()">
+'notes-show-original': saveState.data.originalNotesVisible}"
+  [innerHTML]="getBodyBlock()">
 </div>

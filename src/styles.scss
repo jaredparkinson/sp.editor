@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import 'css.penguin/view_vars';
 @import 'app/bodyblock/bodyblock.component';
 @import 'app/notes/notes.component';
 $btnOn: #8cadb8;
+
 html,
 body {
   margin: 0;
@@ -53,47 +53,58 @@ body {
   #headerMiddlePane {
     grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0;
   }
+
   #navToggle {
     grid-area: 'navToggle';
   }
+
   #bookName {
     grid-area: 'bookName';
     text-overflow: clip;
   }
+
   #btnParagraph {
     grid-area: 'btnParagraph';
     visibility: hidden;
   }
+
   #btnNotesFlyout,
   #btnSecondaryNotes,
   #btnBack,
   #btnForward {
     visibility: hidden;
   }
+
   #btnPoetry {
     grid-area: 'btnParagraph';
     visibility: hidden;
   }
+
   #btnOriginalNotes {
     grid-area: 'btnOriginalNotes';
     visibility: hidden;
   }
+
   #btnNewNotes {
     grid-area: 'btnNewNotes';
     visibility: hidden;
   }
+
   #btnTranslatorNotes {
     grid-area: 'btnTranslatorNotes';
     visibility: hidden;
   }
+
   #btnNewNotes {
     grid-area: 'btnNewNotes';
     visibility: hidden;
   }
+
   #btnEnglishNotes {
     grid-area: 'btnEnglishNotes';
     visibility: hidden;
   }
+
   #notesSettings {
     right: 0;
   }
@@ -111,41 +122,52 @@ body {
   #headerMiddlePane {
     grid-template-columns: 48px 48px 48px auto 48px 48px 48px;
   }
+
   #navToggle {
     grid-area: 'navToggle';
   }
+
   #bookName {
     grid-area: 'bookName';
     text-overflow: clip;
   }
+
   #btnParagraph {
     grid-area: 'btnParagraph'; // visibility: hidden;
   }
+
   #btnPoetry {
     grid-area: 'btnParagraph'; // visibility: hidden;
   }
+
   #btnOriginalNotes {
     grid-area: 'btnOriginalNotes'; // visibility: hidden;
   }
+
   #btnNewNotes {
     grid-area: 'btnNewNotes'; // visibility: hidden;
   }
+
   #btnTranslatorNotes {
     grid-area: 'btnTranslatorNotes'; // visibility: hidden;
   }
+
   #btnNewNotes {
     grid-area: 'btnNewNotes'; // visibility: hidden;
   }
+
   #btnEnglishNotes {
     grid-area: 'btnEnglishNotes'; // visibility: hidden;
   }
 }
 
 @media only screen and (max-width: 499.98px) {
+
   .right-pane footer,
   .left-pane nav {
     width: $vw11;
   }
+
   .right-pane footer {
     float: right;
     position: absolute;
@@ -154,6 +176,7 @@ body {
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1079.98px) {
+
   .right-pane footer,
   .left-pane nav {
     width: $vw6;
@@ -164,30 +187,38 @@ body {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
+
   .body {
-    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+    grid-template-columns: 0 100vw 0; //$leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+
     .right-pane footer {
       float: right;
       position: absolute;
       right: 0px;
     }
-  } // .right-pane footer {
+  }
+
+  // .right-pane footer {
   //   width: $rightPaneWidth;
   // }
   // .left-pane nav {
   //   width: $leftPaneWidth;
   // }
   .menu-bar {
-    grid-template-columns: minmax(48px, $leftPaneWidth) minmax( auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
+    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+
     #addressBar {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }
+
     #empty {
       grid-area: 'empty';
-    } // #btnSecondaryNotes {
+    }
+
+    // #btnSecondaryNotes {
     //   grid-area: 'btnSecondaryNotes';
     //   visibility: hidden;
     // }
@@ -201,58 +232,77 @@ body {
   $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw3;
+
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
+
   .right-pane footer {
     width: $rightPaneWidth;
   }
+
   .left-pane nav {
     width: $leftPaneWidth;
   }
+
   .menu-bar {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
+
     // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
     #navToggle {
       grid-area: 'navToggle';
     }
+
     #bookName {
       grid-area: 'bookName';
     }
+
     #btnParagraph {
       grid-area: 'btnParagraph';
     }
+
     #btnPoetry {
       grid-area: 'btnPoetry';
     }
+
     #addressBar {
       grid-area: 'addressBar';
     }
+
     #empty {
       grid-area: 'empty';
     }
+
     #btnOriginalNotes {
       grid-area: 'btnOriginalNotes';
     }
+
     #btnEnglishNotes {
       grid-area: 'btnEnglishNotes';
     }
+
     #btnNewNotes {
       grid-area: 'btnNewNotes';
     }
+
     #btnTranslatorNotes {
       grid-area: 'btnTranslatorNotes';
     }
+
     #btnSecondaryNotes {
       grid-area: 'btnSecondaryNotes';
     }
+
     #btnRightPane {
       grid-area: 'btnRightPane';
     }
   }
+
   #notesSettings {
     right: $rightPaneWidth;
-  } // #headerMiddlePane {
+  }
+
+  // #headerMiddlePane {
   //   display: grid;
   //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
   // }
@@ -262,21 +312,28 @@ body {
   $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw3;
+
   .body {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
+
   .right-pane footer {
     width: $rightPaneWidth;
   }
+
   .left-pane nav {
     width: $leftPaneWidth;
   }
+
   .menu-bar {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth; // grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry btnNotesFlyout empty btnRightPane';
   }
+
   #notesSettings {
     right: $rightPaneWidth;
-  } // #headerMiddlePane {
+  }
+
+  // #headerMiddlePane {
   //   display: grid;
   //   grid-template-columns: 48px 48px 48px 48px auto auto auto 48px 48px 48px 48px;
   // }
@@ -287,11 +344,13 @@ button {
   border-color: lightblue; // border: 1px solid black;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-style: none;
+
   &.nav-btn-on,
   &:hover {
     // background-color: $btnOn;
     background-color: $btnOn;
   }
+
   &:hover {
     border-color: black;
     border-style: solid;
@@ -303,6 +362,7 @@ button {
   display: grid;
   text-align: center;
   height: 40px;
+
   fa-icon svg {
     height: 100%;
   }
@@ -329,7 +389,9 @@ div.paragraph {
 
 .highlight-verse {
   background-color: beige;
-} // body {
+}
+
+// body {
 //   overflow: hidden;
 //   background-color: white;
 //   color: black;
@@ -346,6 +408,7 @@ h1 {
 }
 
 p {
+
   &.title,
   &.title-number,
   &.subtitle,
@@ -369,9 +432,11 @@ p {
   &.note-reference-tc-2 {
     padding-right: 20px;
   }
+
   &.intro {
     font-family: $font-stack;
   }
+
   &.title {
     font-family: $font-stack;
     margin: 0;
@@ -380,6 +445,7 @@ p {
     text-align: center;
     font-weight: bold;
   }
+
   &.title-number {
     font-family: $font-stack;
     margin: 0;
@@ -388,63 +454,75 @@ p {
     text-align: center;
     font-weight: bold;
   }
+
   &.subtitle {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
     text-align: center;
   }
+
   &.study-summary {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
     font-style: italic;
   }
+
   &.para {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
   }
+
   &.closing {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
   }
+
   &.salutation {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
   }
+
   &.office {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
   }
+
   &.wide-ellipse {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;
     text-align: center;
   }
+
   &.entry {
     font-family: $font-stack;
     margin-top: 6pt;
     margin-right: 0;
     margin-left: 0; // margin-bottom: 0.0001pt;
   }
+
   &.locator {
     margin-top: 0;
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.note-title {
     display: none;
   }
+
   &.note-short-title {
     font-family: $font-stack;
     margin-top: 6pt;
     font-weight: bold;
   }
+
   &.note-phrase {
     font-family: $font-stack;
     margin-top: 0;
@@ -452,11 +530,13 @@ p {
     margin-left: 0; // margin-bottom: 0.0001pt;
     padding-left: 4pt;
   }
+
   &.note-reference-new {
     margin-top: 4pt;
     margin-right: 0;
     margin-left: 0.25in;
   }
+
   &.note-reference-eng {
     color: Blue;
     background-color: LightYellow;
@@ -464,6 +544,7 @@ p {
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.note-reference-tc {
     color: DodgerBlue;
     background-color: White;
@@ -471,11 +552,13 @@ p {
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.note-reference-new-2 {
     margin-top: 4pt;
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.note-reference-eng-2 {
     color: Blue;
     background-color: LightYellow;
@@ -483,6 +566,7 @@ p {
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.note-reference-tc-2 {
     color: DodgerBlue;
     background-color: White;
@@ -490,6 +574,7 @@ p {
     margin-right: 0;
     margin-left: 0.25in; // margin-bottom: 0.0001pt;
   }
+
   &.hanging-indent {
     margin-top: 0;
     margin-right: 0;

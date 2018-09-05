@@ -1,6 +1,10 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faChevronRight,
+  faCoffee
+} from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
@@ -14,6 +18,8 @@ import { NavigationService } from './services/navigation.service';
 })
 export class AppComponent implements OnInit {
   faCoffee = faCoffee;
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
   constructor(
     public electronService: ElectronService,
     private chapterService: ChapterService,

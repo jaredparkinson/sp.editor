@@ -7,6 +7,10 @@ import {
   AfterContentChecked,
   AfterViewChecked
 } from '@angular/core';
+import {
+  faChevronLeft,
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
@@ -69,6 +73,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
             this.highlightVerses(verseParams);
           } else {
             document.getElementById('title1').scrollIntoView();
+            this.scrollNotesTop();
           }
         });
       }, 600);
@@ -177,14 +182,21 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
       const start = 35;
       if (top + height > start) {
-        document.querySelector('note').scrollIntoView();
+        this.scrollNotesTop();
         // console.log('test gojbvhgv');
       } else {
-        const notes = document.querySelectorAll('note');
-
-        notes[notes.length - 1].scrollIntoView();
+        this.scrollNotesBottom();
       }
     }
+  }
+
+  private scrollNotesBottom() {
+    const notes = document.querySelectorAll('note');
+    notes[notes.length - 1].scrollIntoView();
+  }
+
+  private scrollNotesTop() {
+    document.querySelector('note').scrollIntoView();
   }
 
   private initSyncScrolling() {

@@ -7,7 +7,13 @@ body {
 }
 
 .content-pane {
-  grid-template-columns: $fr_5 $fr11 $fr_5;
+  @media only screen and (max-width: 1079.98px) {
+    grid-template-columns: 10vw 80vw 10vw;
+  }
+
+  @media only screen and (min-width: 1080px) {
+    grid-template-columns: $fr_5 $fr11 $fr_5;
+  }
 
   .body-block {
     span.part {
@@ -64,6 +70,7 @@ body {
         margin: 0;
         margin-bottom: 6pt;
         display: block;
+        padding-left: 5px;
 
         span.verse-number {
           vertical-align: unset;
@@ -97,6 +104,18 @@ body {
       display: initial;
       /* when original notes showing, display:none */
     }
+  }
+
+  .body-block-nav-flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  .body-block-nav {
+    position: fixed;
+    top: 50%;
+    background: inherit;
+    color: #c4bebe;
   }
 
   span.deletion {

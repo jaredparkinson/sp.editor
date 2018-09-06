@@ -1,23 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import {
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   NgZone,
-  OnInit,
-  AfterViewInit,
-  AfterContentChecked,
-  AfterViewChecked
+  OnInit
 } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { log } from 'util';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { TSQuery } from '../TSQuery';
-import { log } from 'util';
 
 @Component({
   selector: 'app-bodyblock',

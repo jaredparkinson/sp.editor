@@ -103,7 +103,7 @@ export class NavigationService {
     this.saveState.save();
   }
   btnLeftPanePress() {
-    if (this.helperService.getWidth() >= 1280) {
+    if (this.helperService.getWidth() >= 1080) {
       this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
     } else {
       this.saveState.data.leftPaneToggle = !this.saveState.data.leftPaneToggle;

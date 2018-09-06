@@ -29,6 +29,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
   private highlightClasses = '';
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -72,6 +74,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
             // let selectedVerse = false;
             this.highlightVerses(verseParams);
           } else {
+            console.log('1');
             document.getElementById('title1').scrollIntoView();
             this.scrollNotesTop();
           }
@@ -165,11 +168,13 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       } else if (scrollIntoView !== undefined) {
         const noteID =
           'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+
         document.getElementById(noteID).scrollIntoView();
 
         break;
       }
     }
+
     if (scrollIntoView === undefined) {
       console.log(scrollIntoView);
 

@@ -18,8 +18,6 @@ import { NavigationService } from './services/navigation.service';
 })
 export class AppComponent implements OnInit {
   faCoffee = faCoffee;
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
   constructor(
     public electronService: ElectronService,
     private chapterService: ChapterService,

@@ -1,7 +1,30 @@
-<div id="highlight-holder" class="{{this.highlightClasses}}"></div>
-<div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 
-'show-poetry': saveState.data.poetryVisible,
-'notes-hide-original': !saveState.data.originalNotesVisible,
-'notes-show-original': saveState.data.originalNotesVisible}"
-  [innerHTML]="getBodyBlock()">
+<div class="content-pane grid ">
+
+  <div id="highlight-holder" class="{{this.highlightClasses}}"></div>
+
+  <div class="left-content-pane">
+    <div class="body-block-nav-flex">
+
+      <button class="body-block-nav" id="btnPreviousChapter">
+        <!-- Secondary Notes -->
+        <fa-icon [icon]="faChevronLeft" size="2x"></fa-icon>
+      </button></div>
+  </div>
+
+  <div class='bypassSecurityTrustHtml' id="bodyBlock" class="body-block " [ngClass]="{'hidden-paragraph': !saveState.data.paragraphsVisible, 
+    'show-poetry': saveState.data.poetryVisible,
+    'notes-hide-original': !saveState.data.originalNotesVisible,
+    'notes-show-original': saveState.data.originalNotesVisible}"
+    [innerHTML]="getBodyBlock()">
+  </div>
+
+  <div class="right-content-pane">
+    <div class="body-block-nav-flex">
+
+      <button class="body-block-nav" id="btnNextChapter">
+        <!-- Secondary Notes -->
+        <fa-icon [icon]="faChevronRight" size="2x"></fa-icon>
+      </button></div>
+  </div>
+
 </div>

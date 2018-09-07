@@ -175,7 +175,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 500px) and (max-width: 1079.98px) {
+@media only screen and (min-width: 500px) and (max-width: 879.98px) {
 
   .right-pane footer,
   .left-pane nav {
@@ -183,7 +183,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 1079.98px) {
+@media only screen and (max-width: 879.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
@@ -228,7 +228,7 @@ body {
   }
 }
 
-@media only screen and (orientation: landscape) and (min-width: 1080px) and (max-width: 1279.98px) {
+@media only screen and (orientation: landscape) and (min-width: 880px) and (max-width: 1279.98px) {
   $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw3;

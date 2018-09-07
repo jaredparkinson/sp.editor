@@ -67,10 +67,11 @@ body {
       &.verse {
         font-family: $font-stack;
         text-align: left;
-        margin: 0;
-        margin-bottom: 6pt;
+        // margin: 0;
+        // margin-bottom: 6pt;
         display: block;
-        padding-left: 5px;
+        // padding-left: 5px;
+        padding: 0 0 6pt 5px;
 
         span.verse-number {
           vertical-align: unset;

@@ -103,7 +103,10 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           // console.log(start + ' ' + end);
           const df = range.getRangeAt(0).cloneContents();
           const wTags = df.querySelectorAll('w');
-          console.log(wTags);
+          wTags.forEach(wTag => {
+            console.log(wTag);
+          });
+          // console.log(wTags);
         }
       });
     });
@@ -114,35 +117,17 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     for (const verseParam of verseParams) {
       console.log('Verse Parm: ' + verseParam);
       const verseHightLight = verseParam.split('-');
-      // const bodyBlock = document.getElementById('bodyBlock');
+
       if (verseHightLight.length === 1) {
-        // console.log(verseHightLight);
-        // document
-        //   .getElementById('p' + verseHightLight[0])
-        //   .classList.add('highlight');
-        // bodyBlock.classList.add('p' + verseHightLight[0]);
         this.highlightClasses += ' p' + verseHightLight[0];
       }
       for (
         let x = parseInt(verseHightLight[0], 10);
-        x < parseInt(verseHightLight[1], 10);
+        x <= parseInt(verseHightLight[1], 10);
         x++
       ) {
-        // const element = document.getElementById('p' + x);
-
-        // element.className = 'verse highlight';
-        // element.classList.add('highlight');
-
-        // console.log('Class Name' + element.className);
-        // bodyBlock.classList.add('p' + x);
         this.highlightClasses += ' p' + x;
       }
-      // for (const highlight of verseHightLight) {
-      //   console.log(highlight);
-      //   document
-      //     .getElementById('p' + highlight)
-      //     .classList.add('verse-hightlight');
-      // }
     }
   }
 

@@ -81,13 +81,34 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         });
       }, 600);
     });
-
+    this.verseSelection();
     // this.ngZone.runOutsideAngular(() => {
     //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
     //     console.log('test');
     //   });
     // });
   }
+
+  private verseSelection(): void {
+    this.ngZone.runOutsideAngular(() => {
+      setInterval(() => {}, 7500);
+      document.getElementById('bodyBlock').addEventListener('mouseup', () => {
+        const range = window.getSelection();
+        if (range.anchorNode !== null) {
+          // console.log(range.getRangeAt(0).startContainer);
+          // const start = window.getSelection().getRangeAt(0).startContainer
+          //   .parentElement.attributes['n'].value;
+          // const end = window.getSelection().getRangeAt(0).endContainer
+          //   .parentElement.attributes['n'].value;
+          // console.log(start + ' ' + end);
+          const df = range.getRangeAt(0).cloneContents();
+          const wTags = df.querySelectorAll('w');
+          console.log(wTags);
+        }
+      });
+    });
+  }
+
   private highlightVerses(verseParams: string[]) {
     this.highlightClasses = '';
     for (const verseParam of verseParams) {

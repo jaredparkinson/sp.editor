@@ -28,7 +28,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
-  public highlightClasses = '';
+  private highlightClasses = '';
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   constructor(

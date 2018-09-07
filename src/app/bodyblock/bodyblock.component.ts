@@ -28,7 +28,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
-  private highlightClasses = '';
+  public highlightClasses = '';
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   constructor(
@@ -103,7 +103,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           // console.log(start + ' ' + end);
           const df = range.getRangeAt(0).cloneContents();
           const wTags = df.querySelectorAll('w');
-          wTags.forEach(wTag => {
+
+          Array.prototype.slice.call(wTags).forEach(wTag => {
             console.log(wTag);
           });
           // console.log(wTags);

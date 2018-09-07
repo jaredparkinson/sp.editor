@@ -42,10 +42,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": false,
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.dev.ts"
-              }]
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             },
             "production": {
               "optimization": true,
@@ -57,10 +59,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "serviceWorker": true
             }
           }
@@ -154,6 +158,11 @@
     },
     "@schematics/angular:directive": {
       "prefix": "app"
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
     }
   }
 }

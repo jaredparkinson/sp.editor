@@ -38,6 +38,7 @@ body {
   //This is styling for when poetry is being shown
   .body-block.show-poetry {
     span.line {
+      background: inherit;
       display: block;
     }
 
@@ -56,6 +57,7 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
+
       &.part,
       &.question,
       &.answer {

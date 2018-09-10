@@ -88,22 +88,11 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       }, 600);
     });
     this.verseSelection();
-    this.styleTest();
     // this.ngZone.runOutsideAngular(() => {
     //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
     //     console.log('test');
     //   });
     // });
-  }
-
-  private styleTest(): void {
-    // const css = 'body {color: pink;}';
-    // const head = document.querySelector('head');
-    // const style = document.createElement('style');
-    // style.type = 'text/css';
-    // style.id = 'test';
-    // style.appendChild(document.createTextNode(css));
-    // head.appendChild(style);
   }
 
   private verseSelection(): void {
@@ -127,7 +116,10 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     return (
       '.hidden-paragraph .hidden-paragraph ' +
       tag +
-      '{border-left: 3px solid #f68d2e;}'
+      '{border-left: 3px solid #f68d2e;}' +
+      ' .show-paragraph .hidden-paragraph ' +
+      tag +
+      ' { background: beige }'
     );
   }
 

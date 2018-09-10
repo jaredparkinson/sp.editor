@@ -56,7 +56,6 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
-
       &.part,
       &.question,
       &.answer {
@@ -202,17 +201,17 @@ body {
     visibility: hidden;
   }
 
-  @for $x from 1 to 300 {
-    #highlight-holder.p#{
- $x
-  }
+  //   @for $x from 1 to 300 {
+  //     #highlight-holder.p#{
+  //  $x
+  //   }
 
-  ~#bodyBlock #p#{
- $x
-}
+  //   ~#bodyBlock #p#{
+  //  $x
+  // }
 
-  {
-  border-left: 3px solid #f68d2e;
-}
-}
+  //   {
+  //   border-left: 3px solid #f68d2e;
+  // }
+  // }
 }

@@ -28,7 +28,11 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
+  private styleTag = document.querySelector(
+    '#highlightStyle'
+  ) as HTMLStyleElement;
   public highlightClasses = '';
+  public highlightClasses2 = '';
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   constructor(
@@ -57,6 +61,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
       const chapter = params['chapter'];
+
+      this.styleTag.innerText = '';
       if (book !== undefined && chapter !== undefined) {
         // console.log(book);
         // console.log(chapter);
@@ -82,11 +88,22 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       }, 600);
     });
     this.verseSelection();
+    this.styleTest();
     // this.ngZone.runOutsideAngular(() => {
     //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
     //     console.log('test');
     //   });
     // });
+  }
+
+  private styleTest(): void {
+    // const css = 'body {color: pink;}';
+    // const head = document.querySelector('head');
+    // const style = document.createElement('style');
+    // style.type = 'text/css';
+    // style.id = 'test';
+    // style.appendChild(document.createTextNode(css));
+    // head.appendChild(style);
   }
 
   private verseSelection(): void {
@@ -95,40 +112,63 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       document.getElementById('bodyBlock').addEventListener('mouseup', () => {
         const range = window.getSelection();
         if (range.anchorNode !== null) {
-          // console.log(range.getRangeAt(0).startContainer);
-          // const start = window.getSelection().getRangeAt(0).startContainer
-          //   .parentElement.attributes['n'].value;
-          // const end = window.getSelection().getRangeAt(0).endContainer
-          //   .parentElement.attributes['n'].value;
-          // console.log(start + ' ' + end);
           const df = range.getRangeAt(0).cloneContents();
           const wTags = df.querySelectorAll('w');
 
           Array.prototype.slice.call(wTags).forEach(wTag => {
             console.log(wTag);
           });
-          // console.log(wTags);
         }
       });
     });
   }
 
+  private createVerseHighlight(tag: string): string {
+    return (
+      '.hidden-paragraph .hidden-paragraph ' +
+      tag +
+      '{border-left: 3px solid #f68d2e;}'
+    );
+  }
+
   private highlightVerses(verseParams: string[]) {
     this.highlightClasses = '';
+    this.highlightClasses2 = '';
     for (const verseParam of verseParams) {
       console.log('Verse Parm: ' + verseParam);
       const verseHightLight = verseParam.split('-');
 
       if (verseHightLight.length === 1) {
-        this.highlightClasses += ' p' + verseHightLight[0];
+        this.highlightClasses2 +=
+          ' ' + this.createVerseHighlight('#p' + verseHightLight[0]);
+        // this.highlightClasses += ' p' + verseHightLight[0];
       }
       for (
         let x = parseInt(verseHightLight[0], 10);
         x <= parseInt(verseHightLight[1], 10);
         x++
       ) {
-        this.highlightClasses += ' p' + x;
+        this.highlightClasses2 += ' ' + this.createVerseHighlight('#p' + x);
+        // this.highlightClasses += ' p' + x;
       }
+    }
+    this.styleTag.appendChild(document.createTextNode(this.highlightClasses2));
+    // styleTag.innerHTML = this.highlightClasses2;
+  }
+
+  private getStyleTag(selector: string): HTMLStyleElement {
+    let styleTag = document.querySelector(selector) as HTMLStyleElement;
+
+    if (styleTag) {
+      styleTag.innerHTML = '';
+      return styleTag;
+    } else {
+      const head = document.querySelector('head');
+      styleTag = document.createElement('style');
+      styleTag.type = 'text/css';
+      styleTag.id = selector;
+      head.appendChild(styleTag);
+      return styleTag;
     }
   }
 

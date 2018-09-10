@@ -18,6 +18,7 @@ import { NavigationService } from './services/navigation.service';
 })
 export class AppComponent implements OnInit {
   faCoffee = faCoffee;
+  public testStyle = '#gridBody {background-color: black;}';
   constructor(
     public electronService: ElectronService,
     private chapterService: ChapterService,

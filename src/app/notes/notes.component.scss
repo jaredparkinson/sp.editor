@@ -1,5 +1,4 @@
-$font-stack: PalatinoldsLat-Roman,
-serif;
+$font-stack: PalatinoldsLat-Roman, serif;
 .right-pane {
   .secondary-notes,
   .note-short-title {
@@ -89,6 +88,24 @@ serif;
     font-variant: small-caps;
     font-weight: 700;
   }
+
+  span.deletion {
+    font-style: italic;
+  }
+
+  span.deletion::before {
+    content: '[';
+    font-style: normal;
+  }
+
+  span.deletion::after {
+    content: ']';
+    font-style: normal;
+  }
+
+  span.insertion {
+    font-weight: bold;
+  }
   footer {
     position: fixed;
     background-color: Gainsboro;
@@ -176,37 +193,86 @@ serif;
     &.notes-hide-tier .note-reference-eng-2 {
       display: none;
     }
-    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-tc-2,
-    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-eng-2,
-    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-new-2,
-    &.notes-show-tier note.note-references.tier-2-note-hide .note-reference-new-3,
-    &.notes-show-tier note.note-references.tier-2-note-hide .note-phrase.note-reference-tc-2 {
+    &.notes-show-tier
+      note.note-references.tier-2-note-hide
+      .note-reference-tc-2,
+    &.notes-show-tier
+      note.note-references.tier-2-note-hide
+      .note-reference-eng-2,
+    &.notes-show-tier
+      note.note-references.tier-2-note-hide
+      .note-reference-new-2,
+    &.notes-show-tier
+      note.note-references.tier-2-note-hide
+      .note-reference-new-3,
+    &.notes-show-tier
+      note.note-references.tier-2-note-hide
+      .note-phrase.note-reference-tc-2 {
       display: none;
     }
     &.notes-show-tc .note-phrase-tc,
     &.notes-show-new .note-phrase-new,
     &.notes-show-eng .note-phr-eng,
     &.notes-show-eng .note-phrase-eng,
-    &.notes-show-tier.notes-show-new note.secondary-override-off .note-reference-new-2,
-    &.notes-show-tier.notes-show-tc note.secondary-override-off.note-reference-tc-2,
-    &.notes-show-tier.notes-show-eng note.secondary-override-off .note-reference-eng-2,
-    &.notes-show-tier.notes-show-eng note.secondary-override-off .note-phrase-eng-2,
-    &.notes-show-tier.notes-show-tc note.secondary-override-off .note-phrase-tc-2,
-    &.notes-show-tier.notes-show-new note.secondary-override-off .note-phrase-new-2,
-    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-2,
-    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-reference-eng-2,
-    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-reference-tc-2,
-    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-3,
-    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new,
-    &.notes-hide-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new-2,
-    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng,
-    &.notes-hide-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng-2,
-    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc,
-    &.notes-hide-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc-2,
-    &.notes-show-tier.notes-show-eng note.secondary-override-on.tier-2-note-show .note-phrase-eng-2,
-    &.notes-show-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-phrase-new-2,
-    &.notes-show-tier.notes-show-new note.secondary-override-on.tier-2-note-show .note-reference-new-3,
-    &.notes-show-tier.notes-show-tc note.secondary-override-on.tier-2-note-show .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-new
+      note.secondary-override-off
+      .note-reference-new-2,
+    &.notes-show-tier.notes-show-tc
+      note.secondary-override-off.note-reference-tc-2,
+    &.notes-show-tier.notes-show-eng
+      note.secondary-override-off
+      .note-reference-eng-2,
+    &.notes-show-tier.notes-show-eng
+      note.secondary-override-off
+      .note-phrase-eng-2,
+    &.notes-show-tier.notes-show-tc
+      note.secondary-override-off
+      .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-new
+      note.secondary-override-off
+      .note-phrase-new-2,
+    &.notes-hide-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-reference-new-2,
+    &.notes-hide-tier.notes-show-eng
+      note.secondary-override-on.tier-2-note-show
+      .note-reference-eng-2,
+    &.notes-hide-tier.notes-show-tc
+      note.secondary-override-on.tier-2-note-show
+      .note-reference-tc-2,
+    &.notes-hide-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-reference-new-3,
+    &.notes-hide-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-new,
+    &.notes-hide-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-new-2,
+    &.notes-hide-tier.notes-show-eng
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-eng,
+    &.notes-hide-tier.notes-show-eng
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-eng-2,
+    &.notes-hide-tier.notes-show-tc
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-tc,
+    &.notes-hide-tier.notes-show-tc
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-tc-2,
+    &.notes-show-tier.notes-show-eng
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-eng-2,
+    &.notes-show-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-new-2,
+    &.notes-show-tier.notes-show-new
+      note.secondary-override-on.tier-2-note-show
+      .note-reference-new-3,
+    &.notes-show-tier.notes-show-tc
+      note.secondary-override-on.tier-2-note-show
+      .note-phrase-tc-2,
     &.notes-show-tc .note-reference-tc,
     &.notes-show-eng .note-reference-eng,
     &.notes-show-new .note-reference-new {

@@ -25,7 +25,7 @@ body {
     }
   }
 
-  #bodyBlock.hidden-paragraph div.hidden-paragraph {
+  #bodyBlock.show-poetry div.hidden-paragraph {
     span.line {
       padding-right: 6pt;
     }
@@ -57,7 +57,6 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
-
       &.part,
       &.question,
       &.answer {
@@ -120,24 +119,6 @@ body {
     color: #c4bebe;
   }
 
-  span.deletion {
-    font-style: italic;
-  }
-
-  span.deletion::before {
-    content: '[';
-    font-style: normal;
-  }
-
-  span.deletion::after {
-    content: ']';
-    font-style: normal;
-  }
-
-  span.insertion {
-    font-weight: bold;
-  }
-
   span.small-caps {
     font-variant: small-caps;
   }
@@ -195,7 +176,7 @@ body {
     font-variant: small-caps;
   }
 
-  div.hidden-paragraph {
+  .show-paragraph div.hidden-paragraph {
     margin-bottom: 6pt;
   }
 

@@ -3,15 +3,16 @@ import { NavigationService } from '../services/navigation.service';
 import { ChapterService } from '../services/chapter.service';
 import { SaveStateService } from '../services/save-state.service';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   faBars,
   faBookOpen,
+  faGlobe,
   faListUl,
   faParagraph,
-  faPlus,
-  faGlobe
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',

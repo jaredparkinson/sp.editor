@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Note } from '../models/Note';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 
@@ -6,6 +7,8 @@ import { SaveStateService } from './save-state.service';
 export class ChapterService {
   public bodyBlock: string;
   public notes: string;
+  public notesArray: HTMLElement[] = [];
+  public notes2: Note[] = [];
   private fs: any;
   constructor(
     private navService: NavigationService,
@@ -62,6 +65,26 @@ export class ChapterService {
 
       this.bodyBlock = this.extractHtml(doc, 'div.body-block');
       this.notes = this.extractHtml(doc, 'footer.study-notes');
+      // console.log(doc.querySelectorAll('note'));
+      this.notesArray = Array.prototype.slice.call(
+        doc.querySelectorAll('note')
+      );
+
+      Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
+        this.notes2.push(elem);
+      });
+      this.notes2.forEach(n => {
+        console.log(n.button);
+      });
+      // console.log('Notes2 ' + this.notes2);
+
+      // this.notesArray[0].classList.contains
+      // this.notesArray.forEach(element => {
+      //   if (element.innerHTML.includes('button')) {
+      //     console.log(element);
+      //   }
+      //   // console.log(element as HTMLElement);
+      // });
       const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
       console.log(title);
 

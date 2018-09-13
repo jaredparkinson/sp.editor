@@ -37,8 +37,16 @@
     </a> -->
 
     <div id="footerTop"></div>
-    <footer id="studyNotes" class="study-notes" [innerHTML]="getNotes()">
-      <span id="studyNotesTop"></span>
+    <footer id="studyNotes" class="study-notes">
+      <!-- <span id="studyNotesTop"></span> -->
+      <note *ngFor="let note of chapterService.notes2" id="{{note.id}}" class="{{note.classList}}">
+        <div [innerHTML]="note.innerHTML"></div>
+
+        <button *ngIf="note.button" class='note-button note-button-buttons all-buttons' id="{{note.btnId}}">+</button>
+
+      </note>
+
+      <div id='study-notes-whitespace' class='study-notes-whitespace'></div>
     </footer>
   </div>
 </div>

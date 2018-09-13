@@ -17,6 +17,12 @@ export class ChapterService {
     this.fs = (window as any).fs;
   }
 
+  public resetNotes(): void {
+    this.notes2.forEach(note => {
+      note.reset();
+    });
+  }
+
   public getChapter(book: string, chapter: string): void {
     try {
       const url2 = this.navService.urlBuilder(
@@ -35,7 +41,13 @@ export class ChapterService {
         const doc = parser.parseFromString(data, 'text/html');
 
         this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-        this.notes = this.extractHtml(doc, 'footer.study-notes');
+        // this.notes = this.extractHtml(doc, 'footer.study-notes');
+
+        Array.prototype.slice
+          .call(doc.querySelectorAll('note'))
+          .forEach(elem => {
+            this.notes2.push(new Note(elem));
+          });
         const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
         console.log(title);
 
@@ -64,18 +76,19 @@ export class ChapterService {
       const doc = parser.parseFromString(u, 'text/html');
 
       this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-      this.notes = this.extractHtml(doc, 'footer.study-notes');
+      // this.notes = this.extractHtml(doc, 'footer.study-notes');
       // console.log(doc.querySelectorAll('note'));
-      this.notesArray = Array.prototype.slice.call(
-        doc.querySelectorAll('note')
-      );
+      // this.notesArray = Array.prototype.slice.call(
+      //   doc.querySelectorAll('note')
+      // );
 
       Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
-        this.notes2.push(elem);
+        this.notes2.push(new Note(elem));
+        // console.log((elem as HTMLElement).innerHTML.includes('button'));
       });
-      this.notes2.forEach(n => {
-        console.log(n.button);
-      });
+      // this.notes2.forEach(n => {
+      //   console.log(n.button);
+      // });
       // console.log('Notes2 ' + this.notes2);
 
       // this.notesArray[0].classList.contains

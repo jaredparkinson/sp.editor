@@ -99,6 +99,7 @@ export class HeaderComponent implements OnInit {
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress();
+    this.chapterService.resetNotes();
   }
   btnLeftPanePress() {
     this.navServices.btnLeftPanePress();

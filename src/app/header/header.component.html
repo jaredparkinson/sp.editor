@@ -32,7 +32,7 @@
     <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings" [ngClass]="{'nav-btn-on': navServices.notesSettings}">
       <fa-icon [icon]=" faCaretDown " size="2x " class="right-pane-ignore notes-settings"></fa-icon>
     </button>
-    <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();">
+    <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="btnSecondaryNotesPress();">
       <!-- Secondary Notes -->
       <fa-icon [icon]="faPlus" size="lg"></fa-icon>
     </button>

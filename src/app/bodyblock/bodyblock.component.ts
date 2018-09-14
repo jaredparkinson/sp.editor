@@ -81,7 +81,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
             this.highlightVerses(verseParams);
           } else {
             console.log('1');
-            document.getElementById('title1').scrollIntoView();
+            document.querySelector('header').scrollIntoView();
             this.scrollNotesTop();
           }
         });
@@ -127,7 +127,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     this.highlightClasses = '';
     this.highlightClasses2 = '';
     for (const verseParam of verseParams) {
-      console.log('Verse Parm: ' + verseParam);
+      // console.log('Verse Parm: ' + verseParam);
       const verseHightLight = verseParam.split('-');
 
       if (verseHightLight.length === 1) {

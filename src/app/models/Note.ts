@@ -14,13 +14,13 @@ export class Note {
     this.classList = element.classList.toString();
 
     this.innerHtml = element.innerHTML;
-    console.log('inner' + this.innerHtml);
+    // console.log('inner' + this.innerHtml);
 
-    this.button = element.innerHTML.includes('+');
+    this.button = element.classList.contains('a2086');
     this.btnId = 'note-button-note' + element.id.replace('note', '');
   }
   public reset(): void {
-    console.log('reseting');
+    // console.log('reseting');
 
     this.override = false;
     this.secondaryToggled = false;

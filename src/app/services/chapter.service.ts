@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../models/Note';
+import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 
@@ -9,6 +10,9 @@ export class ChapterService {
   public notes: string;
   public notesArray: HTMLElement[] = [];
   public notes2: Note[] = [];
+  public hiddenParagraphs: string[] = [];
+  public paragraphs: Paragraph[] = [];
+  public header: string;
   private fs: any;
   constructor(
     private navService: NavigationService,
@@ -24,6 +28,8 @@ export class ChapterService {
   }
 
   public getChapter(book: string, chapter: string): void {
+    this.paragraphs = [];
+    this.notes2 = [];
     try {
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),
@@ -49,6 +55,21 @@ export class ChapterService {
             this.notes2.push(new Note(elem));
           });
         const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
+
+        this.header = doc.querySelector('header').innerHTML;
+
+        Array.prototype.slice
+          .call(doc.querySelectorAll('.hidden-paragraph'))
+          .forEach(elem => {
+            console.log(elem);
+            this.paragraphs.push(new Paragraph(elem as HTMLElement));
+          });
+        Array.prototype.slice
+          .call(doc.querySelectorAll('.hidden-paragraph'))
+          .forEach(elem => {
+            console.log(elem);
+            this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
+          });
         console.log(title);
 
         if (this.notes === null || this.notes === undefined) {
@@ -81,11 +102,25 @@ export class ChapterService {
       // this.notesArray = Array.prototype.slice.call(
       //   doc.querySelectorAll('note')
       // );
+      this.header = doc.querySelector('header').innerHTML;
 
+      Array.prototype.slice
+        .call(doc.querySelectorAll('.hidden-paragraph'))
+        .forEach(elem => {
+          console.log(elem);
+          this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
+        });
+      Array.prototype.slice
+        .call(doc.querySelectorAll('.hidden-paragraph'))
+        .forEach(elem => {
+          console.log(elem);
+          this.paragraphs.push(new Paragraph(elem as HTMLElement));
+        });
       Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
         this.notes2.push(new Note(elem));
         // console.log((elem as HTMLElement).innerHTML.includes('button'));
       });
+
       // this.notes2.forEach(n => {
       //   console.log(n.button);
       // });

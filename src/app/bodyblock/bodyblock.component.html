@@ -15,8 +15,13 @@
     'show-paragraph': saveState.data.paragraphsVisible, 
     'show-poetry': saveState.data.poetryVisible,
     'notes-hide-original': !saveState.data.originalNotesVisible,
-    'notes-show-original': saveState.data.originalNotesVisible}"
-    [innerHTML]="getBodyBlock()">
+    'notes-show-original': saveState.data.originalNotesVisible}">
+    <div id='bodyBlockTop'></div>
+    <header [innerHTML]="chapterService.header"></header>
+
+    <div class="hidden-paragraph" *ngFor="let hidden of chapterService.hiddenParagraphs" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(hidden)"></div>
+    <div id='body-block-whitespace' class='body-block-whitespace'></div>
+
   </div>
 
   <div class="right-content-pane">

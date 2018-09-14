@@ -355,9 +355,7 @@ export class NavigationService {
 
           const tempBooks: Book[] = [];
           this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
-            const tempBook = new Book(
-              book.querySelector('p.title').innerHTML.replace('&nbsp;', ' ')
-            );
+            const tempBook = new Book(book);
 
             const tempChapters: Chapter[] = [];
             this.tsQuery.selectClass(book, 'ul li a').forEach(chapter => {

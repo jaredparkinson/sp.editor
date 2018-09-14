@@ -93,6 +93,9 @@ export class ChapterService {
   }
 
   private parseHighlightedVerses(v: Params): number[] {
+    if (v === null) {
+      return [];
+    }
     const verseNums: number[] = [];
     if (v['verse'] !== undefined) {
       const verseParams = (v['verse'] as string).split(',');

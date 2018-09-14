@@ -73,6 +73,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.route.queryParams.subscribe(v => {
           if (v['verse'] !== undefined) {
+            console.log('parameters');
+
             const verseParams = (v['verse'] as string).split(',');
             // const verseSelect = verseParams[0].split('-')[0];
             this.selectVerse(verseParams[0].split('-')[0]);
@@ -166,8 +168,12 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
   private selectVerse(verseSelect: string) {
     const verse = document.getElementById('p' + verseSelect);
+    console.log(verseSelect);
+
     if (verse !== null) {
       verse.scrollIntoView();
+      console.log(verse);
+
       document.getElementById('note' + verseSelect).scrollIntoView();
       // console.log('verse: ' + v['verse']);
     }

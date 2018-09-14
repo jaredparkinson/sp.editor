@@ -10,7 +10,7 @@ export class ChapterService {
   public notes: string;
   public notesArray: HTMLElement[] = [];
   public notes2: Note[] = [];
-  public hiddenParagraphs: string[] = [];
+  // public hiddenParagraphs: string[] = [];
   public paragraphs: Paragraph[] = [];
   public header: string;
   private fs: any;
@@ -45,18 +45,15 @@ export class ChapterService {
         const addressBar = document.getElementById('addressBar');
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
-
         this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-        // this.notes = this.extractHtml(doc, 'footer.study-notes');
+        const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
+        this.header = doc.querySelector('header').innerHTML;
 
         Array.prototype.slice
           .call(doc.querySelectorAll('note'))
           .forEach(elem => {
             this.notes2.push(new Note(elem));
           });
-        const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
-
-        this.header = doc.querySelector('header').innerHTML;
 
         Array.prototype.slice
           .call(doc.querySelectorAll('.hidden-paragraph'))
@@ -64,13 +61,6 @@ export class ChapterService {
             console.log(elem);
             this.paragraphs.push(new Paragraph(elem as HTMLElement));
           });
-        Array.prototype.slice
-          .call(doc.querySelectorAll('.hidden-paragraph'))
-          .forEach(elem => {
-            console.log(elem);
-            this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
-          });
-        console.log(title);
 
         if (this.notes === null || this.notes === undefined) {
           this.notes = '';
@@ -104,12 +94,12 @@ export class ChapterService {
       // );
       this.header = doc.querySelector('header').innerHTML;
 
-      Array.prototype.slice
-        .call(doc.querySelectorAll('.hidden-paragraph'))
-        .forEach(elem => {
-          console.log(elem);
-          this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
-        });
+      // Array.prototype.slice
+      //   .call(doc.querySelectorAll('.hidden-paragraph'))
+      //   .forEach(elem => {
+      //     console.log(elem);
+      //     this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
+      //   });
       Array.prototype.slice
         .call(doc.querySelectorAll('.hidden-paragraph'))
         .forEach(elem => {
@@ -120,19 +110,6 @@ export class ChapterService {
         this.notes2.push(new Note(elem));
         // console.log((elem as HTMLElement).innerHTML.includes('button'));
       });
-
-      // this.notes2.forEach(n => {
-      //   console.log(n.button);
-      // });
-      // console.log('Notes2 ' + this.notes2);
-
-      // this.notesArray[0].classList.contains
-      // this.notesArray.forEach(element => {
-      //   if (element.innerHTML.includes('button')) {
-      //     console.log(element);
-      //   }
-      //   // console.log(element as HTMLElement);
-      // });
       const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
       console.log(title);
 

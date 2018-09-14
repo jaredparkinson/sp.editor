@@ -19,7 +19,9 @@
     <div id='bodyBlockTop'></div>
     <header [innerHTML]="chapterService.header"></header>
 
-    <div class="hidden-paragraph" *ngFor="let hidden of chapterService.hiddenParagraphs" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(hidden)"></div>
+    <div class="hidden-paragraph" *ngFor="let paragraph of chapterService.paragraphs">
+      <span class="verse" id="{{verse.id}}" *ngFor="let verse of paragraph.verses" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(verse.innerHtml)"></span>
+    </div>
     <div id='body-block-whitespace' class='body-block-whitespace'></div>
 
   </div>

@@ -387,7 +387,12 @@ div.paragraph {
   height: 25vh; //This starts at 100vh = 100 percent. Take it down from there.
 }
 
-.highlight-verse {
+.hidden-paragraph .hidden-paragraph .highlight-verse {
+  border-left: 3px solid #f68d2e;
+  ;
+}
+
+.show-paragraph .hidden-paragra ph .highlight-verse {
   background-color: beige;
 }
 

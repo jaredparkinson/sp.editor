@@ -3,6 +3,8 @@ import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
+import { Params } from '@angular/router';
+import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable()
 export class ChapterService {
@@ -27,7 +29,8 @@ export class ChapterService {
     });
   }
 
-  public getChapter(book: string, chapter: string): void {
+  public getChapter(book: string, chapter: string, v: Params): void {
+    const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
     this.notes2 = [];
     try {
@@ -41,88 +44,71 @@ export class ChapterService {
         e => {}
       );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-        console.log(process.env);
-        const addressBar = document.getElementById('addressBar');
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
-        this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-        const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
-        this.header = doc.querySelector('header').innerHTML;
-
-        Array.prototype.slice
-          .call(doc.querySelectorAll('note'))
-          .forEach(elem => {
-            this.notes2.push(new Note(elem));
-          });
-
-        Array.prototype.slice
-          .call(doc.querySelectorAll('.hidden-paragraph'))
-          .forEach(elem => {
-            console.log(elem);
-            this.paragraphs.push(new Paragraph(elem as HTMLElement));
-          });
-
-        if (this.notes === null || this.notes === undefined) {
-          this.notes = '';
-        }
-
-        const urlText = book + '/' + chapter;
-        // (addressBar as HTMLInputElement).value = title;
-        this.navService.pageTitle = title;
-        this.saveStateService.data.currentPage = urlText;
+        this.setChapter(data, book, chapter, verseNums);
       });
       return;
     } catch {
       console.log('Not a file system');
-    }
-    const url = this.navService.getChapter(
-      book.toLowerCase(),
-      chapter.toLowerCase()
-    );
-    console.log('test web');
+      const url = this.navService.getChapter(
+        book.toLowerCase(),
+        chapter.toLowerCase()
+      );
+      console.log('test web');
 
-    url.subscribe(u => {
-      const addressBar = document.getElementById('addressBar');
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(u, 'text/html');
-
-      this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-      // this.notes = this.extractHtml(doc, 'footer.study-notes');
-      // console.log(doc.querySelectorAll('note'));
-      // this.notesArray = Array.prototype.slice.call(
-      //   doc.querySelectorAll('note')
-      // );
-      this.header = doc.querySelector('header').innerHTML;
-
-      // Array.prototype.slice
-      //   .call(doc.querySelectorAll('.hidden-paragraph'))
-      //   .forEach(elem => {
-      //     console.log(elem);
-      //     this.hiddenParagraphs.push((elem as HTMLElement).innerHTML);
-      //   });
-      Array.prototype.slice
-        .call(doc.querySelectorAll('.hidden-paragraph'))
-        .forEach(elem => {
-          console.log(elem);
-          this.paragraphs.push(new Paragraph(elem as HTMLElement));
-        });
-      Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
-        this.notes2.push(new Note(elem));
-        // console.log((elem as HTMLElement).innerHTML.includes('button'));
+      url.subscribe(u => {
+        this.setChapter(u, book, chapter, verseNums);
       });
-      const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
-      console.log(title);
+    }
+  }
 
-      if (this.notes === null || this.notes === undefined) {
-        this.notes = '';
-      }
-
-      const urlText = book + '/' + chapter;
-      // (addressBar as HTMLInputElement).value = title;
-      this.saveStateService.data.currentPage = urlText;
-      this.navService.pageTitle = title;
-      this.saveStateService.data.currentPage = urlText;
+  private setChapter(
+    u: string,
+    book: string,
+    chapter: string,
+    verseNums: number[]
+  ) {
+    const addressBar = document.getElementById('addressBar');
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(u, 'text/html');
+    this.bodyBlock = this.extractHtml(doc, 'div.body-block');
+    const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
+    this.header = doc.querySelector('header').innerHTML;
+    Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
+      this.notes2.push(new Note(elem));
     });
+    Array.prototype.slice
+      .call(doc.querySelectorAll('.hidden-paragraph'))
+      .forEach(elem => {
+        this.paragraphs.push(new Paragraph(elem as HTMLElement, verseNums));
+      });
+    console.log(title);
+    if (this.notes === null || this.notes === undefined) {
+      this.notes = '';
+    }
+    const urlText = book + '/' + chapter;
+    // (addressBar as HTMLInputElement).value = title;
+    this.saveStateService.data.currentPage = urlText;
+    this.navService.pageTitle = title;
+    this.saveStateService.data.currentPage = urlText;
+  }
+
+  private parseHighlightedVerses(v: Params): number[] {
+    const verseNums: number[] = [];
+    if (v['verse'] !== undefined) {
+      const verseParams = (v['verse'] as string).split(',');
+      verseParams.forEach(verseParam => {
+        console.log(verseParam);
+
+        const t = verseParam.split('-');
+        const count = t.length > 1 ? 1 : 0;
+        for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
+          verseNums.push(x);
+          // console.log(x);
+        }
+      });
+      console.log(verseNums);
+    }
+    return verseNums;
   }
 
   private extractHtml(doc: Document, selector: string): string {

@@ -28,9 +28,9 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   private tsQuery: TSQuery = new TSQuery();
-  private styleTag = document.querySelector(
-    '#highlightStyle'
-  ) as HTMLStyleElement;
+  // private styleTag = document.querySelector(
+  //   '#highlightStyle'
+  // ) as HTMLStyleElement;
   public highlightClasses = '';
   public highlightClasses2 = '';
   faChevronLeft = faChevronLeft;
@@ -62,39 +62,30 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       const book = params['book'];
       const chapter = params['chapter'];
 
-      this.styleTag.innerText = '';
-      if (book !== undefined && chapter !== undefined) {
-        // console.log(book);
-        // console.log(chapter);
-        this.chapterService.getChapter(book, chapter);
-      } else if (book === undefined && chapter !== undefined) {
-        this.chapterService.getChapter(chapter, '');
-      }
-      setTimeout(() => {
-        this.route.queryParams.subscribe(v => {
-          if (v['verse'] !== undefined) {
-            console.log('parameters');
+      // this.styleTag.innerText = '';
 
+      this.route.queryParams.subscribe(v => {
+        if (book !== undefined && chapter !== undefined) {
+          // console.log(book);
+          // console.log(chapter);
+          this.chapterService.getChapter(book, chapter, v);
+        } else if (book === undefined && chapter !== undefined) {
+          this.chapterService.getChapter(chapter, '', v);
+        }
+        setTimeout(() => {
+          if (v['verse'] !== undefined) {
             const verseParams = (v['verse'] as string).split(',');
-            // const verseSelect = verseParams[0].split('-')[0];
             this.selectVerse(verseParams[0].split('-')[0]);
 
-            // let selectedVerse = false;
-            this.highlightVerses(verseParams);
+            // this.highlightVerses(verseParams);
           } else {
-            console.log('1');
             document.querySelector('header').scrollIntoView();
             this.scrollNotesTop();
           }
-        });
-      }, 600);
+        }, 600);
+      });
     });
     this.verseSelection();
-    // this.ngZone.runOutsideAngular(() => {
-    //   document.getElementById('bodyBlock').addEventListener('wheel', () => {
-    //     console.log('test');
-    //   });
-    // });
   }
 
   private verseSelection(): void {
@@ -146,7 +137,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         // this.highlightClasses += ' p' + x;
       }
     }
-    this.styleTag.appendChild(document.createTextNode(this.highlightClasses2));
+    // this.styleTag.appendChild(document.createTextNode(this.highlightClasses2));
     // styleTag.innerHTML = this.highlightClasses2;
   }
 

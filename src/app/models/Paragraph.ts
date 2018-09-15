@@ -19,4 +19,12 @@ export class Paragraph {
       }
     });
   }
+  /**
+   * resetHighlight()
+   */
+  public resetHighlight() {
+    this.verses.forEach(v => {
+      v.resetHighlight();
+    });
+  }
 }

@@ -61,6 +61,11 @@ export class ChapterService {
       });
     }
   }
+  public resetHighlighting(): void {
+    this.paragraphs.forEach(p => {
+      p.resetHighlight();
+    });
+  }
 
   private setChapter(u: string, book: string, chapter: string) {
     const addressBar = document.getElementById('addressBar');

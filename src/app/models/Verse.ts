@@ -9,4 +9,7 @@ export class Verse {
     // this.highlight = verseNums.includes(parseInt(this.id.replace('p', ''), 10));
     this.num = parseInt(this.id.replace('p', ''), 10);
   }
+  public resetHighlight(): void {
+    this.highlight = false;
+  }
 }

@@ -81,6 +81,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
               // this.highlightVerses(verseParams);
             } else {
+              this.chapterService.resetHighlighting();
               document.querySelector('header').scrollIntoView();
               this.scrollNotesTop();
             }

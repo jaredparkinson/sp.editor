@@ -29,8 +29,8 @@ export class ChapterService {
     });
   }
 
-  public getChapter(book: string, chapter: string, v: Params): void {
-    const verseNums = this.parseHighlightedVerses(v);
+  public getChapter(book: string, chapter: string): void {
+    // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
     this.notes2 = [];
     try {
@@ -44,7 +44,7 @@ export class ChapterService {
         e => {}
       );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-        this.setChapter(data, book, chapter, verseNums);
+        this.setChapter(data, book, chapter);
       });
       return;
     } catch {
@@ -56,17 +56,12 @@ export class ChapterService {
       console.log('test web');
 
       url.subscribe(u => {
-        this.setChapter(u, book, chapter, verseNums);
+        this.setChapter(u, book, chapter);
       });
     }
   }
 
-  private setChapter(
-    u: string,
-    book: string,
-    chapter: string,
-    verseNums: number[]
-  ) {
+  private setChapter(u: string, book: string, chapter: string) {
     const addressBar = document.getElementById('addressBar');
     const parser = new DOMParser();
     const doc = parser.parseFromString(u, 'text/html');
@@ -79,7 +74,7 @@ export class ChapterService {
     Array.prototype.slice
       .call(doc.querySelectorAll('.hidden-paragraph'))
       .forEach(elem => {
-        this.paragraphs.push(new Paragraph(elem as HTMLElement, verseNums));
+        this.paragraphs.push(new Paragraph(elem as HTMLElement));
       });
     console.log(title);
     if (this.notes === null || this.notes === undefined) {
@@ -92,7 +87,7 @@ export class ChapterService {
     this.saveStateService.data.currentPage = urlText;
   }
 
-  private parseHighlightedVerses(v: Params): number[] {
+  public parseHighlightedVerses(v: Params): number[] {
     if (v === null) {
       return [];
     }
@@ -111,7 +106,14 @@ export class ChapterService {
       });
       console.log(verseNums);
     }
+
+    this.setHighlight(verseNums);
     return verseNums;
+  }
+  private setHighlight(verseNums: number[]): void {
+    this.paragraphs.forEach(p => {
+      p.setHighlight(verseNums);
+    });
   }
 
   private extractHtml(doc: Document, selector: string): string {

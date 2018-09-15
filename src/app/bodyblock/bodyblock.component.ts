@@ -64,18 +64,19 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
       // this.styleTag.innerText = '';
 
+      if (book !== undefined && chapter !== undefined) {
+        // console.log(book);
+        // console.log(chapter);
+        this.chapterService.getChapter(book, chapter);
+      } else if (book === undefined && chapter !== undefined) {
+        this.chapterService.getChapter(chapter, '');
+      }
       this.route.queryParams.subscribe(v => {
-        if (book !== undefined && chapter !== undefined) {
-          // console.log(book);
-          // console.log(chapter);
-          this.chapterService.getChapter(book, chapter, v);
-        } else if (book === undefined && chapter !== undefined) {
-          this.chapterService.getChapter(chapter, '', v);
-        }
         setTimeout(() => {
           if (v['verse'] !== undefined) {
             const verseParams = (v['verse'] as string).split(',');
             this.selectVerse(verseParams[0].split('-')[0]);
+            this.chapterService.parseHighlightedVerses(v);
 
             // this.highlightVerses(verseParams);
           } else {

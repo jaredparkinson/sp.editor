@@ -63,28 +63,30 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       const chapter = params['chapter'];
 
       // this.styleTag.innerText = '';
+      console.log(params);
+      setTimeout(() => {
+        if (book !== undefined && chapter !== undefined) {
+          // console.log(book);
+          // console.log(chapter);
+          this.chapterService.getChapter(book, chapter);
+        } else if (book === undefined && chapter !== undefined) {
+          this.chapterService.getChapter(chapter, '');
+        }
+        this.route.queryParams.subscribe(v => {
+          setTimeout(() => {
+            if (v['verse'] !== undefined) {
+              const verseParams = (v['verse'] as string).split(',');
+              this.selectVerse(verseParams[0].split('-')[0]);
+              this.chapterService.parseHighlightedVerses(v);
 
-      if (book !== undefined && chapter !== undefined) {
-        // console.log(book);
-        // console.log(chapter);
-        this.chapterService.getChapter(book, chapter);
-      } else if (book === undefined && chapter !== undefined) {
-        this.chapterService.getChapter(chapter, '');
-      }
-      this.route.queryParams.subscribe(v => {
-        setTimeout(() => {
-          if (v['verse'] !== undefined) {
-            const verseParams = (v['verse'] as string).split(',');
-            this.selectVerse(verseParams[0].split('-')[0]);
-            this.chapterService.parseHighlightedVerses(v);
-
-            // this.highlightVerses(verseParams);
-          } else {
-            document.querySelector('header').scrollIntoView();
-            this.scrollNotesTop();
-          }
-        }, 600);
-      });
+              // this.highlightVerses(verseParams);
+            } else {
+              document.querySelector('header').scrollIntoView();
+              this.scrollNotesTop();
+            }
+          }, 800);
+        });
+      }, 200);
     });
     this.verseSelection();
   }

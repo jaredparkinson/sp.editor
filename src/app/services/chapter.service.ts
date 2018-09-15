@@ -33,6 +33,7 @@ export class ChapterService {
     // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
     this.notes2 = [];
+    // this.notes2.length = 0;
     try {
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),

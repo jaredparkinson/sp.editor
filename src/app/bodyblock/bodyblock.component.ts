@@ -72,21 +72,22 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         } else if (book === undefined && chapter !== undefined) {
           this.chapterService.getChapter(chapter, '');
         }
-        this.route.queryParams.subscribe(v => {
-          setTimeout(() => {
-            if (v['verse'] !== undefined) {
-              const verseParams = (v['verse'] as string).split(',');
-              this.selectVerse(verseParams[0].split('-')[0]);
-              this.chapterService.parseHighlightedVerses(v);
 
-              // this.highlightVerses(verseParams);
-            } else {
-              this.chapterService.resetHighlighting();
-              document.querySelector('header').scrollIntoView();
-              this.scrollNotesTop();
-            }
-          }, 800);
-        });
+        // this.route.queryParams.subscribe(v => {
+        //   setTimeout(() => {
+        //     if (v['verse'] !== undefined) {
+        //       const verseParams = (v['verse'] as string).split(',');
+        //       this.selectVerse(verseParams[0].split('-')[0]);
+        //       this.chapterService.parseHighlightedVerses(v);
+
+        //       // this.highlightVerses(verseParams);
+        //     } else {
+        //       this.chapterService.resetHighlighting();
+        //       document.querySelector('header').scrollIntoView();
+        //       this.scrollNotesTop();
+        //     }
+        //   }, 800);
+        // });
       }, 200);
     });
     this.verseSelection();

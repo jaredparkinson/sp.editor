@@ -15,7 +15,10 @@ export class ChapterService {
   // public hiddenParagraphs: string[] = [];
   public paragraphs: Paragraph[] = [];
   public header: string;
+  public verseNums: number[] = [];
+  public contextNums: number[] = [];
   private fs: any;
+
   constructor(
     private navService: NavigationService,
     private saveStateService: SaveStateService
@@ -32,12 +35,19 @@ export class ChapterService {
   public getChapter(book: string, chapter: string): void {
     // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
-    this.notes2 = [];
+    this.notes2 = []; // chapter.split('.');
+    let vSplit = chapter.split('.');
+    if (chapter === '') {
+      vSplit = book.split('.');
+      // vSplit.push('');
+    }
     // this.notes2.length = 0;
+    console.log('vsplit 2 ' + vSplit[2]);
+
     try {
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),
-        chapter.toLowerCase()
+        vSplit[0].toLowerCase()
       );
       this.fs.writeFile(
         'd:/node_test.txt',
@@ -45,19 +55,19 @@ export class ChapterService {
         e => {}
       );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-        this.setChapter(data, book, chapter);
+        this.setChapter(data, book, vSplit[0], vSplit[1], vSplit[2]);
       });
       return;
     } catch {
       console.log('Not a file system');
       const url = this.navService.getChapter(
         book.toLowerCase(),
-        chapter.toLowerCase()
+        vSplit[0].toLowerCase()
       );
       console.log('test web');
 
       url.subscribe(u => {
-        this.setChapter(u, book, chapter);
+        this.setChapter(u, book, vSplit[0], vSplit[1], vSplit[2]);
       });
     }
   }
@@ -67,7 +77,17 @@ export class ChapterService {
     });
   }
 
-  private setChapter(u: string, book: string, chapter: string) {
+  private setChapter(
+    u: string,
+    book: string,
+    chapter: string,
+    highlight: string,
+    context: string
+  ) {
+    this.verseNums = this.parseHighlightedVerses2(highlight);
+    this.contextNums = this.parseHighlightedVerses2(context);
+    // console.log(' Context Nums ' + contextNums.length + ' ' + context);
+
     const addressBar = document.getElementById('addressBar');
     const parser = new DOMParser();
     const doc = parser.parseFromString(u, 'text/html');
@@ -80,23 +100,63 @@ export class ChapterService {
     Array.prototype.slice
       .call(doc.querySelectorAll('.hidden-paragraph'))
       .forEach(elem => {
-        this.paragraphs.push(new Paragraph(elem as HTMLElement));
+        this.paragraphs.push(
+          new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
+        );
       });
-    console.log(title);
     if (this.notes === null || this.notes === undefined) {
       this.notes = '';
     }
     const urlText = book + '/' + chapter;
-    // (addressBar as HTMLInputElement).value = title;
+
     this.saveStateService.data.currentPage = urlText;
     this.navService.pageTitle = title;
     this.saveStateService.data.currentPage = urlText;
+
+    setTimeout(() => {
+      if (this.verseNums.length === 0) {
+        document.getElementById('bodyBlockTop').scrollIntoView();
+      } else {
+        const focusVerse = this.contextNums
+          .concat(this.verseNums)
+          .sort((a, b) => {
+            return a - b;
+          })[0]
+          .toString();
+        document.getElementById('p' + focusVerse).scrollIntoView();
+      }
+      // console.log();
+    }, 0);
   }
 
-  public parseHighlightedVerses(v: Params): number[] {
-    if (v === null) {
+  public parseHighlightedVerses2(v: string): number[] {
+    if (v === null || v === undefined) {
       return [];
     }
+    const verseNums: number[] = [];
+    if (v !== undefined) {
+      const verseParams = v.split(',');
+      verseParams.forEach(verseParam => {
+        // console.log(verseParam);
+
+        const t = verseParam.split('-');
+        const count = t.length > 1 ? 1 : 0;
+        for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
+          verseNums.push(x);
+          // console.log(x);
+        }
+      });
+    }
+
+    return verseNums;
+    // this.setHighlight(verseNums);
+    // return verseNums;
+  }
+  public parseHighlightedVerses(v: Params): void {
+    if (v === null) {
+      return;
+    }
+
     const verseNums: number[] = [];
     if (v['verse'] !== undefined) {
       const verseParams = (v['verse'] as string).split(',');
@@ -113,11 +173,14 @@ export class ChapterService {
       console.log(verseNums);
     }
 
+    console.log('333');
     this.setHighlight(verseNums);
-    return verseNums;
+    // return verseNums;
   }
   private setHighlight(verseNums: number[]): void {
     this.paragraphs.forEach(p => {
+      console.log(p);
+
       p.setHighlight(verseNums);
     });
   }

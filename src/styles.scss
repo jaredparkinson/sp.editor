@@ -384,7 +384,7 @@ div.paragraph {
 }
 
 .study-notes-whitespace {
-  height: 25vh; //This starts at 100vh = 100 percent. Take it down from there.
+  height: 50vh; //This starts at 100vh = 100 percent. Take it down from there.
 }
 
 .hidden-paragraph .hidden-paragraph .highlight-verse {
@@ -392,7 +392,16 @@ div.paragraph {
   ;
 }
 
-.show-paragraph .hidden-paragra ph .highlight-verse {
+.show-paragraph .hidden-paragraph .highlight-verse {
+  background-color: beige;
+}
+
+.hidden-paragraph .hidden-paragraph .highlight-context {
+  border-left: 3px solid #2ca1a5;
+  ;
+}
+
+.show-paragraph .hidden-paragraph .highlight-context {
   background-color: beige;
 }
 

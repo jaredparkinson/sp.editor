@@ -2,6 +2,7 @@ export class Verse {
   public id: string;
   public innerHtml: string;
   public highlight = false;
+  public context = false;
   public num: number;
   constructor(verse: HTMLElement) {
     this.id = verse.id;
@@ -11,5 +12,6 @@ export class Verse {
   }
   public resetHighlight(): void {
     this.highlight = false;
+    this.context = false;
   }
 }

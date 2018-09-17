@@ -4,6 +4,11 @@
 @import 'app/notes/notes.component';
 $btnOn: #8cadb8;
 
+html {
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 html,
 body {
   margin: 0;

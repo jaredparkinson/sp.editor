@@ -125,11 +125,7 @@ export class ChapterService {
             return a - b;
           })[0]
           .toString();
-        document.getElementById('p' + focusVerse).scrollIntoView({
-          behavior: 'instant',
-          block: 'center',
-          inline: 'nearest'
-        });
+        document.getElementById('p' + focusVerse).scrollIntoView({});
       }
 
       this.syncScrolling.synchronizedScrolling();

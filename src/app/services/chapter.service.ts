@@ -5,6 +5,7 @@ import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { Params } from '@angular/router';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
+import { SyncScrollingService } from './sync-scrolling.service';
 
 @Injectable()
 export class ChapterService {
@@ -21,7 +22,8 @@ export class ChapterService {
 
   constructor(
     private navService: NavigationService,
-    private saveStateService: SaveStateService
+    private saveStateService: SaveStateService,
+    private syncScrolling: SyncScrollingService
   ) {
     this.fs = (window as any).fs;
   }
@@ -123,8 +125,15 @@ export class ChapterService {
             return a - b;
           })[0]
           .toString();
-        document.getElementById('p' + focusVerse).scrollIntoView();
+        document.getElementById('p' + focusVerse).scrollIntoView({
+          behavior: 'instant',
+          block: 'center',
+          inline: 'nearest'
+        });
       }
+
+      this.syncScrolling.synchronizedScrolling();
+
       // console.log();
     }, 0);
   }
@@ -170,7 +179,7 @@ export class ChapterService {
           // console.log(x);
         }
       });
-      console.log(verseNums);
+      // console.log(verseNums);
     }
 
     console.log('333');

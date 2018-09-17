@@ -18,7 +18,6 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { TSQuery } from '../TSQuery';
-
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -27,7 +26,6 @@ import { TSQuery } from '../TSQuery';
 export class BodyblockComponent implements OnInit, AfterViewInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
-  private tsQuery: TSQuery = new TSQuery();
   // private styleTag = document.querySelector(
   //   '#highlightStyle'
   // ) as HTMLStyleElement;
@@ -58,36 +56,27 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(params => {
       // console.log(params);
 
-      // this.id = +params['b']; // (+) converts string 'id' to a number
       const book = params['book'];
       const chapter = params['chapter'];
 
-      // this.styleTag.innerText = '';
-      console.log(params);
       setTimeout(() => {
         if (book !== undefined && chapter !== undefined) {
           // console.log(book);
           // console.log(chapter);
-          this.chapterService.getChapter(book, chapter);
+          this.chapterService.getChapter(
+            book,
+            chapter,
+            this.synchronizedScrolling
+          );
         } else if (book === undefined && chapter !== undefined) {
-          this.chapterService.getChapter(chapter, '');
+          this.chapterService.getChapter(
+            chapter,
+            '',
+            this.synchronizedScrolling
+          );
         }
 
-        // this.route.queryParams.subscribe(v => {
-        //   setTimeout(() => {
-        //     if (v['verse'] !== undefined) {
-        //       const verseParams = (v['verse'] as string).split(',');
-        //       this.selectVerse(verseParams[0].split('-')[0]);
-        //       this.chapterService.parseHighlightedVerses(v);
-
-        //       // this.highlightVerses(verseParams);
-        //     } else {
-        //       this.chapterService.resetHighlighting();
-        //       document.querySelector('header').scrollIntoView();
-        //       this.scrollNotesTop();
-        //     }
-        //   }, 800);
-        // });
+        // this.synchronizedScrolling();
       }, 200);
     });
     this.verseSelection();
@@ -194,11 +183,14 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     }, 1000);
     // this.ngZone.runOutsideAngular();
   }
-
+  private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
+    return Array.prototype.slice.call(list) as Element[];
+  }
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
     let scrollIntoView: Element;
 
+    // tslint:disable-next-line:prefer-for-of
     for (let x = 0; x < verses.length; x++) {
       const element = verses[x];
       const top = element.getBoundingClientRect().top;
@@ -209,6 +201,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       } else if (scrollIntoView !== undefined) {
         const noteID =
           'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+
+        console.log(noteID);
 
         document.getElementById(noteID).scrollIntoView();
 

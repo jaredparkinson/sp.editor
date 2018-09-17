@@ -1,8 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SyncScrollingService {
   constructor(private ngZone: NgZone) {}
 
@@ -56,7 +54,7 @@ export class SyncScrollingService {
     document.querySelector('note').scrollIntoView();
   }
 
-  private initSyncScrolling() {
+  public initSyncScrolling() {
     this.ngZone.runOutsideAngular(() => {
       document.getElementById('appBodyBlock').addEventListener('wheel', () => {
         this.onScroll();

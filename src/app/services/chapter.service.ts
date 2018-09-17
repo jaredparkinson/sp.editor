@@ -22,8 +22,7 @@ export class ChapterService {
 
   constructor(
     private navService: NavigationService,
-    private saveStateService: SaveStateService,
-    private syncScrolling: SyncScrollingService
+    private saveStateService: SaveStateService
   ) {
     this.fs = (window as any).fs;
   }
@@ -34,7 +33,11 @@ export class ChapterService {
     });
   }
 
-  public getChapter(book: string, chapter: string): void {
+  public getChapter(
+    book: string,
+    chapter: string,
+    synchronizedScrolling: () => void
+  ): void {
     // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
     this.notes2 = []; // chapter.split('.');
@@ -57,7 +60,14 @@ export class ChapterService {
         e => {}
       );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-        this.setChapter(data, book, vSplit[0], vSplit[1], vSplit[2]);
+        this.setChapter(
+          data,
+          book,
+          vSplit[0],
+          vSplit[1],
+          vSplit[2],
+          synchronizedScrolling
+        );
       });
       return;
     } catch {
@@ -69,7 +79,14 @@ export class ChapterService {
       console.log('test web');
 
       url.subscribe(u => {
-        this.setChapter(u, book, vSplit[0], vSplit[1], vSplit[2]);
+        this.setChapter(
+          u,
+          book,
+          vSplit[0],
+          vSplit[1],
+          vSplit[2],
+          synchronizedScrolling
+        );
       });
     }
   }
@@ -84,7 +101,8 @@ export class ChapterService {
     book: string,
     chapter: string,
     highlight: string,
-    context: string
+    context: string,
+    synchronizedScrolling: () => void
   ) {
     this.verseNums = this.parseHighlightedVerses2(highlight);
     this.contextNums = this.parseHighlightedVerses2(context);
@@ -127,8 +145,8 @@ export class ChapterService {
           .toString();
         document.getElementById('p' + focusVerse).scrollIntoView({});
       }
-
-      this.syncScrolling.synchronizedScrolling();
+      synchronizedScrolling();
+      // this.syncScrolling.synchronizedScrolling();
 
       // console.log();
     }, 0);

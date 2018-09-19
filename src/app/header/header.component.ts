@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Location } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Router } from '@angular/router';
 import {
+  faArrowLeft,
+  faArrowRight,
   faBars,
   faBookOpen,
+  faCaretDown,
   faGlobe,
   faListUl,
   faParagraph,
-  faPlus,
-  faCaretDown,
-  faArrowLeft,
-  faArrowRight
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -39,7 +41,8 @@ export class HeaderComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -95,7 +98,10 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {
-    this.navServices.btnNotesSettingsPress();
+    const dialogConfig = new MatDialogConfig();
+
+    this.dialog.open(DialogBodyComponent, { width: '250px', height: '250px' });
+    // this.navServices.btnNotesSettingsPress();
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress();

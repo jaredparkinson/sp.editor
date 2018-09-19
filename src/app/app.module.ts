@@ -22,6 +22,8 @@ import { ElectronService } from './providers/electron.service';
 
 import { WebviewDirective } from './directives/webview.directive';
 
+import { MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { timingSafeEqual } from 'crypto';
@@ -30,6 +32,7 @@ import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { ButtonHighlightDirective } from './button-highlight.directive';
 import { HomeComponent } from './components/home/home.component';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
 import { FilesComponent } from './files/files.component';
 import { HeaderComponent } from './header/header.component';
@@ -42,7 +45,6 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SettingsComponent } from './settings/settings.component';
 import { TSQuery } from './TSQuery';
-
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,13 +63,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchComponent,
     ButtonHighlightDirective,
     SyncScrollingDirective,
-    SettingsComponent
+    SettingsComponent,
+    DialogBodyComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     FontAwesomeModule,
+    MatDialogModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
@@ -88,7 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveStateService
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  entryComponents: [DialogBodyComponent]
 })
 export class AppModule {
   constructor() {}

@@ -55,13 +55,14 @@ export class AppComponent implements OnInit {
   }
 
   private initNoteSettingsToggle() {
-    // document.querySelector('div.grid.main').addEventListener('click', e => {
-    //   if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-    //     console.log(e);
-    //     this.navService.notesSettings = false;
-    //   }
-    // });
     // document.body
-    this.ngZone.runOutsideAngular(() => {});
+    // this.ngZone.runOutsideAngular(() => {
+    //   document.querySelector('div.grid.main').addEventListener('click', e => {
+    //     if ((e.target as HTMLElement).closest('.notes-settings') === null) {
+    //       console.log(e);
+    //       this.navService.notesSettings = false;
+    //     }
+    //   });
+    // });
   }
 }

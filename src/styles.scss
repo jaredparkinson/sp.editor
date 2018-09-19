@@ -3,6 +3,7 @@
 @import 'app/bodyblock/bodyblock.component';
 @import 'app/notes/notes.component';
 $btnOn: #8cadb8;
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html {
   -ms-overflow-style: none;

@@ -166,11 +166,11 @@ export class NavigationService {
       return url + 'tg/' + book + '.html';
     }
     switch (book) {
-      case 'gs':
-      case 'triple-index':
-      case 'harmony': {
-        return url + urlEnd;
-      }
+      // case 'gs':
+      // case 'triple-index':
+      // case 'harmony': {
+      //   return url + urlEnd;
+      // }
       default: {
         let testament = '';
         switch (book) {

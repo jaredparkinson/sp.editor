@@ -317,6 +317,11 @@
       background: rgba(0, 0, 0, .288);
     }
 
+    .left-pane-container,
+    .study-notes {
+      z-index: 300;
+    }
+
   }
 
   /* Medium Screen Sizes Postfix: -m */

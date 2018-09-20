@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     private chapterService: ChapterService,
     private translate: TranslateService,
     private route: ActivatedRoute,
-    private navService: NavigationService,
+    public navService: NavigationService,
     public saveState: SaveStateService,
     private router: Router,
     private ngZone: NgZone

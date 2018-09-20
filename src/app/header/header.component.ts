@@ -98,10 +98,10 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {
-    const dialogConfig = new MatDialogConfig();
+    // const dialogConfig = new MatDialogConfig();
 
-    this.dialog.open(DialogBodyComponent, { width: '250px', height: '250px' });
-    // this.navServices.btnNotesSettingsPress();
+    // this.dialog.open(DialogBodyComponent, { width: '0px', height: '0px' });
+    this.navServices.btnNotesSettingsPress();
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress();

@@ -44,33 +44,35 @@
     <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
       <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
     </button>
-    <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
-      <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
-        class="notes-settings">
-        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
-        New Notes
-      </button>
-      <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
-        class="notes-settings">
-        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
-        English Notes
-      </button>
-      <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
-        class="notes-settings">
-        <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
-        Translator Notes
-      </button>
-      <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
-        class="notes-settings">
-        <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
-        Original Notes
-      </button>
-      <!-- <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();"
+    <div id="noteSettingsOverlay" [ngClass]="{'none': !navServices.notesSettings}" (click)="btnNotesSettingsPress()">
+
+      <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
+        <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
+          class="notes-settings">
+          <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+          New Notes
+        </button>
+        <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
+          class="notes-settings">
+          <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+          English Notes
+        </button>
+        <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
+          class="notes-settings">
+          <!-- <fa-icon [icon]="faGlobe" size="lg"></fa-icon> -->
+          Translator Notes
+        </button>
+        <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
+          class="notes-settings">
+          <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
+          Original Notes
+        </button>
+        <!-- <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="navServices.btnSecondaryNotesPress();"
         class="notes-settings">
         Secondary Notes
         <fa-icon [icon]="faPlus" size="lg"></fa-icon>
       </button> -->
-      <!-- <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="navServices.btnParagraphPress()"
+        <!-- <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="navServices.btnParagraphPress()"
             class="notes-settings">
             <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
             Paragraph
@@ -79,6 +81,7 @@
             <fa-icon [icon]="faPlus" size="lg"></fa-icon>
             Poetry
           </button> -->
+      </div>
     </div>
   </div>
 

@@ -117,7 +117,7 @@ body {
 }
 
 #headerRightPane {
-  grid-template-columns: minmax(0, auto) 48px;
+  grid-template-columns: minmax(0, auto) 48px 0;
 }
 
 #headerLeftPane {

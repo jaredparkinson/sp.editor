@@ -603,3 +603,22 @@ p {
     font-size: smaller;
   }
 }
+
+#notesSettings,
+.left-pane-container,
+.study-notes {
+  z-index: 300;
+}
+
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  opacity: 1;
+  background: rgba(0, 0, 0, .288);
+
+}

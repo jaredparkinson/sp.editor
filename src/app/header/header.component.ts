@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Location } from '@angular/common';
-import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
 import {
   faArrowLeft,
@@ -18,7 +17,6 @@ import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -41,8 +39,7 @@ export class HeaderComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     private router: Router,
-    private location: Location,
-    private dialog: MatDialog
+    private location: Location
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }

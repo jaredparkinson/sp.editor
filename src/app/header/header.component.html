@@ -44,7 +44,7 @@
     <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
       <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
     </button>
-    <div id="noteSettingsOverlay" [ngClass]="{'none': !navServices.notesSettings}" (click)="btnNotesSettingsPress()">
+    <div>
 
       <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
         <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
@@ -87,3 +87,4 @@
 
 
 </div>
+<div [ngClass]="{'none': !navServices.notesSettings, 'overlay': navServices.notesSettings}" (click)="btnNotesSettingsPress()"></div>

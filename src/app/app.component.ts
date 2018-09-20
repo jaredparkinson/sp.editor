@@ -10,6 +10,7 @@ import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
+import { SaveStateService } from './services/save-state.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private navService: NavigationService,
+    public saveState: SaveStateService,
     private router: Router,
     private ngZone: NgZone
   ) {

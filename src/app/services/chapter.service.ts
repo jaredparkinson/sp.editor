@@ -143,6 +143,8 @@ export class ChapterService {
             return a - b;
           })[0]
           .toString();
+        // console.log('gghvtucydxydx' + focusVerse);
+
         document.getElementById('p' + focusVerse).scrollIntoView({});
       }
       synchronizedScrolling();

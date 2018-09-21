@@ -157,7 +157,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
     if (verse !== null) {
       verse.scrollIntoView();
-      console.log(verse);
+      // console.log('gfsethv' + verse);
 
       document.getElementById('note' + verseSelect).scrollIntoView();
       // console.log('verse: ' + v['verse']);
@@ -202,7 +202,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         const noteID =
           'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
 
-        console.log(noteID);
+        console.log('nojgtgcd' + noteID);
 
         document.getElementById(noteID).scrollIntoView();
 

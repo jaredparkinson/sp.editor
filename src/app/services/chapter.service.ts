@@ -145,7 +145,7 @@ export class ChapterService {
           .toString();
         // console.log('gghvtucydxydx' + focusVerse);
 
-        document.getElementById('p' + focusVerse).scrollIntoView({});
+        document.getElementById('p' + focusVerse).scrollIntoView();
       }
       synchronizedScrolling();
       // this.syncScrolling.synchronizedScrolling();

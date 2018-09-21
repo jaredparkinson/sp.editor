@@ -14,6 +14,8 @@ import { SaveStateService } from './save-state.service';
 export class NavigationService {
   // private navLinks: string[] = [];
   // private nav: Observable<string>;
+  public leftPaneToggle = false;
+  public rightPaneToggle = false;
   public bodyBlock: string;
   public folders: Folder[];
   public navLinks: Folder[];
@@ -99,6 +101,7 @@ export class NavigationService {
     } else {
       this.saveState.data.rightPaneToggle = !this.saveState.data
         .rightPaneToggle;
+      this.rightPaneToggle = !this.rightPaneToggle;
     }
     this.saveState.save();
   }
@@ -106,6 +109,7 @@ export class NavigationService {
     if (this.helperService.getWidth() >= 1080) {
       this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
     } else {
+      this.leftPaneToggle = !this.leftPaneToggle;
       this.saveState.data.leftPaneToggle = !this.saveState.data.leftPaneToggle;
     }
     this.saveState.save();

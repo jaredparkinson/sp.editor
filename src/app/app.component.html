@@ -13,9 +13,8 @@
     </div>
     <!-- <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock> -->
     <app-notes class="right-pane "></app-notes>
-    <div [ngClass]="{'none': !saveState.data.rightPaneToggle, 'overlay-toggle': saveState.data.rightPaneToggle}"
-      (click)="navService.btnRightPanePress()"></div>
-    <div [ngClass]="{'none': !saveState.data.leftPaneToggle, 'overlay-toggle': saveState.data.leftPaneToggle}" (click)="navService.btnLeftPanePress()"></div>
+    <div [ngClass]="{'none': !navService.rightPaneToggle, 'overlay-toggle': navService.rightPaneToggle}" (click)="navService.btnRightPanePress()"></div>
+    <div [ngClass]="{'none': !navService.leftPaneToggle, 'overlay-toggle': navService.leftPaneToggle}" (click)="navService.btnLeftPanePress()"></div>
 
   </div>
 

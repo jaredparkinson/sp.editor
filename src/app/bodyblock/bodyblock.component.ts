@@ -54,6 +54,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.initSyncScrolling();
     this.route.params.subscribe(params => {
+      this.navService.rightPaneToggle = false;
+      this.navService.leftPaneToggle = false;
       // console.log(params);
 
       const book = params['book'];

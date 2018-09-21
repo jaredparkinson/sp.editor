@@ -19,5 +19,7 @@ export class SaveStateService {
   public load(): void {
     const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
     this.data = temp !== null ? temp : new SaveStateModel();
+    this.data.leftPaneToggle = false;
+    this.data.rightPaneToggle = false;
   }
 }

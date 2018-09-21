@@ -32,6 +32,7 @@ export class FilesComponent implements OnInit {
     public fileManager: NavigationService,
     public chapterService: ChapterService,
     public saveState: SaveStateService,
+    public navService: NavigationService,
     private router: Router,
     private httpClient: HttpClient
   ) {}

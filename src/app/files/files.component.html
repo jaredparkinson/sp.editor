@@ -26,7 +26,7 @@
       </a> -->
     </div>
 
-    <div class="grid navigation" *ngIf="fileManager.showBooks">
+    <div class="navigation" *ngIf="fileManager.showBooks">
       <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
         <div class="chapter-header" (click)="fileManager.testamentSelected.resetVisibility(nav.bookName); nav.showChildren = !nav.showChildren;">
 

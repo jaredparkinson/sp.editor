@@ -49,7 +49,7 @@ export class NavigationService {
   btnPreviousPagePress(pageUrl: string) {
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
-    // console.log(test);
+    console.log(pageUrl);
 
     let previousSibling: Element;
     if (!node.previousElementSibling) {

@@ -403,17 +403,27 @@ export class NavigationService {
             const tempBook = new Book(book);
 
             const tempChapters: Chapter[] = [];
-            this.tsQuery.selectClass(book, 'ul li a').forEach(chapter => {
+            let chapters = this.tsQuery.selectClass(book, 'ul li a');
+            if (!chapters) {
+              chapters = this.tsQuery.selectClass(book, 'li a');
+            }
+
+            chapters.forEach(chapter => {
               const tempChapter = new Chapter(
                 chapter
                   .querySelector('.title')
                   .innerHTML.replace('&nbsp;', ' '),
                 chapter.getAttribute('href').replace('.html', '')
               );
+              console.log(tempChapter);
+
               tempChapters.push(tempChapter);
             });
-            tempChapters.shift();
+            if (tempChapters.length !== 1) {
+              tempChapters.shift();
+            }
             tempBook.chapters = tempChapters;
+            // console.log(tempBook);
             tempBooks.push(tempBook);
           });
           tempTestament.books = tempBooks;

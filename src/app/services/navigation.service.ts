@@ -9,6 +9,7 @@ import { NavLinks } from '../models/navlinks.model';
 import { TSQuery } from '../TSQuery';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class NavigationService {
@@ -30,10 +31,12 @@ export class NavigationService {
   private fs: any;
   private tsQuery: TSQuery = new TSQuery();
   public pageTitle: string;
+  private navData: Document;
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private router: Router
   ) {
     this.initNavigation();
     this.fs = (window as any).fs;
@@ -43,6 +46,36 @@ export class NavigationService {
     console.log('test');
   }
 
+  btnPreviousPagePress(pageUrl: string) {
+    const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
+
+    // console.log(test);
+
+    let previousSibling: Element;
+    if (!node.previousElementSibling) {
+      const allNodes = this.navData.querySelectorAll('a');
+      previousSibling = allNodes[allNodes.length - 1];
+    } else {
+      previousSibling = node.previousElementSibling;
+    }
+
+    this.router.navigateByUrl(
+      previousSibling.getAttribute('href').replace('#/', '')
+    );
+  }
+
+  btnNextPagePress(pageUrl: string) {
+    const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
+
+    // console.log(test);
+    const nextSibling = !node.nextElementSibling
+      ? this.navData.querySelector('a')
+      : node.nextElementSibling;
+
+    this.router.navigateByUrl(
+      nextSibling.getAttribute('href').replace('#/', '')
+    );
+  }
   btnPoetryPress(): void {
     this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
     this.saveState.save();
@@ -338,6 +371,13 @@ export class NavigationService {
   private initNavigation() {
     // this.setNav();
     // const regex = '((^(../){1,1000})scriptures/(.*?/))';
+    this.httpClient
+      .get('assets/nav/nav2.html', { observe: 'body', responseType: 'text' })
+      .subscribe(data => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        this.navData = doc;
+      });
 
     this.httpClient
       .get('assets/nav/nav.html', {
@@ -347,6 +387,7 @@ export class NavigationService {
       .subscribe(data => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
+        // this.navData = doc;
         const testaments = doc.querySelectorAll('div.book');
         this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
           const testamentName = testament

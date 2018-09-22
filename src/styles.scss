@@ -168,7 +168,6 @@ body {
 }
 
 @media only screen and (max-width: 499.98px) {
-
   .right-pane footer,
   .left-pane nav {
     width: $vw11;
@@ -182,7 +181,6 @@ body {
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1079.98px) {
-
   .right-pane footer,
   .left-pane nav {
     width: $vw6;
@@ -211,11 +209,14 @@ body {
   //   width: $leftPaneWidth;
   // }
   .menu-bar {
-    grid-template-columns: minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
+    grid-template-columns:
+      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
+      minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
 
     #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
       margin-left: 10px;
       grid-area: 'addressBar';
     }
@@ -351,8 +352,7 @@ button {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-style: none;
 
-  &.nav-btn-on,
-    {
+  &.nav-btn-on {
     // background-color: $btnOn;
     background-color: $btnOn;
   }
@@ -395,16 +395,14 @@ div.paragraph {
 
 .hidden-paragraph .hidden-paragraph .highlight-verse {
   border-left: 3px solid #f68d2e;
-  ;
 }
 
 .show-paragraph .hidden-paragraph .highlight-verse {
-  background-color: beige;
+  background-color: rgba(184, 184, 106, 0.815);
 }
 
 .hidden-paragraph .hidden-paragraph .highlight-context {
   border-left: 3px solid #2ca1a5;
-  ;
 }
 
 .show-paragraph .hidden-paragraph .highlight-context {
@@ -428,7 +426,6 @@ h1 {
 }
 
 p {
-
   &.title,
   &.title-number,
   &.subtitle,
@@ -608,7 +605,6 @@ p {
   z-index: 300;
 }
 
-
 .overlay {
   height: 100%;
   width: 100%;
@@ -618,7 +614,6 @@ p {
   z-index: 50;
   opacity: 1;
   // background: rgba(0, 0, 0, .288);
-
 }
 
 .hidden {

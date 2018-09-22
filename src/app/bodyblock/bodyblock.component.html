@@ -5,7 +5,7 @@
   <div class="left-content-pane">
     <div class="body-block-nav-flex">
 
-      <button class="body-block-nav" id="btnPreviousChapter">
+      <button class="body-block-nav" id="btnPreviousChapter" (click)="navService.btnPreviousPagePress(chapterService.pageUrl)">
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronLeft" size="2x"></fa-icon>
       </button></div>
@@ -30,7 +30,7 @@
   <div class="right-content-pane">
     <div class="body-block-nav-flex">
 
-      <button class="body-block-nav" id="btnNextChapter">
+      <button class="body-block-nav" id="btnNextChapter" (click)="navService.btnNextPagePress(chapterService.pageUrl)">
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronRight" size="2x"></fa-icon>
       </button></div>

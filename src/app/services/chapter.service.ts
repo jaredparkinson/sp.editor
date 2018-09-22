@@ -18,6 +18,7 @@ export class ChapterService {
   public header: string;
   public verseNums: number[] = [];
   public contextNums: number[] = [];
+  public pageUrl = '';
   private fs: any;
 
   constructor(
@@ -111,6 +112,11 @@ export class ChapterService {
     const addressBar = document.getElementById('addressBar');
     const parser = new DOMParser();
     const doc = parser.parseFromString(u, 'text/html');
+    this.pageUrl = doc
+      .querySelector('meta.page-url')
+      .attributes.getNamedItem('content').value;
+    console.log(this.pageUrl);
+
     this.bodyBlock = this.extractHtml(doc, 'div.body-block');
     const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
     this.header = doc.querySelector('header').innerHTML;

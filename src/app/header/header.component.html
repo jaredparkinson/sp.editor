@@ -87,4 +87,4 @@
 
 
 </div>
-<div [ngClass]="{'none': !navServices.notesSettings, 'overlay': navServices.notesSettings}" (click)="btnNotesSettingsPress()"></div>
+<div [ngClass]="{'hidden': !navServices.notesSettings}" class="overlay" (click)="btnNotesSettingsPress()"></div>

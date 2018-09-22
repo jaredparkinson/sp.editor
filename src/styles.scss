@@ -352,7 +352,7 @@ button {
   border-style: none;
 
   &.nav-btn-on,
-  &:hover {
+    {
     // background-color: $btnOn;
     background-color: $btnOn;
   }
@@ -619,4 +619,8 @@ p {
   opacity: 1;
   // background: rgba(0, 0, 0, .288);
 
+}
+
+.hidden {
+  visibility: hidden;
 }

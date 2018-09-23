@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.33.0",
+  "version": "3.34.0",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -52,6 +52,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
     "@types/graceful-fs": "^4.1.2",
+    "electron-builder-squirrel-windows": "^20.28.3",
     "graceful-fs": "^4.1.11",
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",

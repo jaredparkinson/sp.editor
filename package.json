@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.24.0",
+  "version": "3.25.0",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -29,7 +29,7 @@
     "start": "yarn run postinstall:electron && npm-run-all -p ng:serve electron:serve",
     "build": "yarn run postinstall:electron && yarn run electron:tsc && ng build",
     "build:dev": "yarn run build -- -c dev",
-    "build:prod": "yarn run build -- -c production",
+    "build:prod": "yarn version --minor && yarn run build -- -c production",
     "ng:serve": "ng serve",
     "ng:serve:web": "yarn run postinstall:web && ng serve -o",
     "electron:tsc": "tsc main.ts",

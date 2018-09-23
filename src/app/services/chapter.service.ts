@@ -51,6 +51,7 @@ export class ChapterService {
     console.log('vsplit 2 ' + vSplit[2]);
 
     try {
+      // throw SyntaxError;
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),
         vSplit[0].toLowerCase()

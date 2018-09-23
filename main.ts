@@ -33,6 +33,8 @@ function createWindow() {
         slashes: true
       })
     );
+    // use this to open dev tools manualy to debug
+    //  win.webContents.openDevTools();
   }
 
   // win.webContents.openDevTools();

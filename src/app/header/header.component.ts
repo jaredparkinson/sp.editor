@@ -17,6 +17,9 @@ import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+// import searchInPage from 'electron-in-page-search';
+// import { remote, BrowserWindow } from 'electron';
+import * as Mark from 'mark.js';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -68,7 +71,12 @@ export class HeaderComponent implements OnInit {
   }
 
   btnBackPress() {
-    this.location.back();
+    const instance = new Mark(document.querySelector('body'));
+
+    instance.mark('egypt', { accuracy: 'partially' });
+    // const inPageSearch = searchInPage(remote.getCurrentWebContents());
+    // inPageSearch.openSearchWindow();
+    // this.location.back();
   }
   btnForwardPress() {
     this.location.forward();

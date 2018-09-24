@@ -1,4 +1,4 @@
-yarn version --minor 
+yarn version --patch
 docker build . -t scriptures_project_v3_beta
 
 docker save scriptures_project_v3_beta -o .\scriptures_project_v3_beta

@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 // import remote from 'electron';
-import searchInPage from 'electron-in-page-search';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';

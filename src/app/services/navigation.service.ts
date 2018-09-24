@@ -43,13 +43,13 @@ export class NavigationService {
   }
 
   toggleNotes() {
-    console.log('test');
+    // console.log('test');
   }
 
   btnPreviousPagePress(pageUrl: string) {
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
-    console.log(pageUrl);
+    // console.log(pageUrl);
 
     let previousSibling: Element;
     if (!node.previousElementSibling) {
@@ -111,7 +111,7 @@ export class NavigationService {
 
   documentBodyClick(e: Event) {
     if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-      console.log(this.notesSettings);
+      // console.log(this.notesSettings);
       this.notesSettings = false;
       document
         .querySelector('div.main.grid')
@@ -155,7 +155,7 @@ export class NavigationService {
 
   setVisibility() {
     const folder = this.folders[0];
-    console.log(folder);
+    // console.log(folder);
     folder.setVisibility();
   }
   public getNavigation(manifest: string) {
@@ -165,7 +165,7 @@ export class NavigationService {
         // this.navLinks = f.Folders;
         Object.assign(this.navLinks, f.folders);
         f.visible = !f.visible;
-        console.log(this.navLinks);
+        // console.log(this.navLinks);
         // f.setVisibility();
         return;
       }
@@ -193,7 +193,7 @@ export class NavigationService {
   }
 
   public getTestament(folder: string): void {
-    console.log(folder);
+    // console.log(folder);
   }
 
   public urlBuilder(book: string, chapter: string): string {
@@ -415,7 +415,7 @@ export class NavigationService {
                   .innerHTML.replace('&nbsp;', ' '),
                 chapter.getAttribute('href').replace('.html', '')
               );
-              console.log(tempChapter);
+              // console.log(tempChapter);
 
               tempChapters.push(tempChapter);
             });
@@ -434,7 +434,7 @@ export class NavigationService {
       });
 
     // this.nav.forEach(n => {
-    //   console.log(n);
+    // console.log(n);
     //   this.httpClient
     //     .get('assets/scriptures/' + n.folder + '/_manifest.html', {
     //       observe: 'body',
@@ -459,7 +459,7 @@ export class NavigationService {
     //           const chap = new Book(node.innerHTML.replace('&nbsp;', ' '));
 
     //           n.books.push(chap);
-    //           console.log(node.innerText);
+    // console.log(node.innerText);
     //           node = nodes.iterateNext() as HTMLElement;
     //         }
     //       }
@@ -472,7 +472,7 @@ export class NavigationService {
     //       );
     //       node = nodesTest.iterateNext() as HTMLElement;
     //       while (node !== null) {
-    //         console.log(node.querySelector('p.title').innerHTML);
+    // console.log(node.querySelector('p.title').innerHTML);
     //       }
     //     });
     // });

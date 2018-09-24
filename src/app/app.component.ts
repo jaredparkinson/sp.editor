@@ -6,12 +6,13 @@ import {
   faCoffee
 } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+// import remote from 'electron';
+import searchInPage from 'electron-in-page-search';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit {
     //   console.log('NodeJS childProcess', this.electronService.childProcess);
     // } else {
     //   console.log('Mode web');
-    // }
+    // }import searchInPage from 'electron-in-page-search';
   }
   ngOnInit(): void {
     this.initNoteSettingsToggle();

@@ -11,4 +11,9 @@ ssh -t jared@192.168.1.150 'docker load -i /home/jared/v3/scriptures_project_v3_
 
 ssh -t jared@192.168.1.150 'docker kill scriptures_project_v3_beta'
 
-ssh -t jared@192.168.1.150 'docker run -d -e VIRTUAL_HOST=beta.scripturesproject.review -p 11000 -it --rm --name scriptures_project_v3_beta scriptures_project_v3_beta'
+ssh -t jared@192.168.1.150 'docker run -d -e "VIRTUAL_HOST=beta.scripturesproject.review" -e "LETSENCRYPT_HOST=beta.scripturesproject.review" -e "LETSENCRYPT_EMAIL=jared@parkinson.im" -p 11000 -it --rm --name scriptures_project_v3_beta scriptures_project_v3_beta'
+
+
+
+
+

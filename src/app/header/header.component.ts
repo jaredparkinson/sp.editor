@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   faCaretDown = faCaretDown;
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
+
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
@@ -39,7 +40,8 @@ export class HeaderComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private ngZone: NgZone
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -68,7 +70,15 @@ export class HeaderComponent implements OnInit {
   }
 
   btnBackPress() {
-    this.location.back();
+    this.ngZone.run(() => {
+      let strFound = window.find('moses');
+      if (!strFound) {
+        strFound = window.find('moses', 0, 1, 1);
+        while (window.find('moses', 0, 1, 1)) continue;
+      }
+    });
+
+    // this.location.back();
   }
   btnForwardPress() {
     this.location.forward();

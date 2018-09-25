@@ -43,6 +43,7 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SettingsComponent } from './settings/settings.component';
 import { TSQuery } from './TSQuery';
+import { ViewOverlayComponent } from './view-overlay/view-overlay.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,7 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchComponent,
     ButtonHighlightDirective,
     SyncScrollingDirective,
-    SettingsComponent
+    SettingsComponent,
+    ViewOverlayComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { TSQuery } from '../TSQuery';
+import { BodyScrollService } from '../services/body-block-scroll.service';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -42,7 +43,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     public saveState: SaveStateService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    public bodyScrollService: BodyScrollService
   ) {}
 
   getBodyBlock(): SafeHtml {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Params } from '@angular/router';
+import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
-import { Params } from '@angular/router';
-import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import { SyncScrollingService } from './sync-scrolling.service';
 
 @Injectable()
@@ -52,6 +52,13 @@ export class ChapterService {
 
     try {
       // throw SyntaxError;
+      console.log(this.fs);
+
+      if (this.fs) {
+        console.log('tasdfsdfasdufjin oiasdfoijasdflkasdfljk');
+
+        throw new Error('asdf');
+      }
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),
         vSplit[0].toLowerCase()

@@ -120,6 +120,12 @@ export class ChapterService {
 
     this.bodyBlock = this.extractHtml(doc, 'div.body-block');
     const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
+    const urlText = book + '/' + chapter;
+
+    this.saveStateService.data.currentPage = urlText;
+    this.navService.pageTitle = title;
+    this.saveStateService.data.currentPage = urlText;
+
     this.header = doc.querySelector('header').innerHTML;
     Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
       this.notes2.push(new Note(elem));
@@ -134,12 +140,6 @@ export class ChapterService {
     if (this.notes === null || this.notes === undefined) {
       this.notes = '';
     }
-    const urlText = book + '/' + chapter;
-
-    this.saveStateService.data.currentPage = urlText;
-    this.navService.pageTitle = title;
-    this.saveStateService.data.currentPage = urlText;
-
     setTimeout(() => {
       if (this.verseNums.length === 0) {
         document.getElementById('bodyBlockTop').scrollIntoView();

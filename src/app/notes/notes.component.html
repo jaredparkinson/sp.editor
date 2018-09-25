@@ -12,7 +12,7 @@
 'notes-show-original': saveState.data.originalNotesVisible,
 'show-s': navServices.rightPaneToggle,
 'hide-s': !navServices.rightPaneToggle }"
-  class="study-notes-parent ">
+  class="study-notes-parent " (dblclick)="navService.btnRightPanePress()">
   <div>
 
     <!-- <a id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();">

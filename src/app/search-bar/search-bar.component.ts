@@ -16,8 +16,33 @@ export class SearchBarComponent implements OnInit, OnChanges {
   ngOnInit() {}
   ngOnChanges() {}
 
-  searchTestChange() {
-    console.log(ipcRenderer.sendSync('synchronous-message', this.searchText)); // prints "pong"
+  onKeyUp(e: KeyboardEvent) {
+    // console.log(e);
+    if (e.keyCode === 13) {
+      this.searchTestChange('forward');
+    }
+  }
+
+  searchTestChange(direction: string) {
+    if (this.searchText.trim().length <= 0) {
+      this.clearSearch();
+    } else {
+      switch (direction) {
+        case 'forward': {
+          ipcRenderer.sendSync('search-forward', this.searchText);
+          break;
+        }
+        case 'back': {
+          ipcRenderer.sendSync('search-back', this.searchText);
+          break;
+        }
+        default: {
+          this.clearSearch();
+          break;
+        }
+      }
+      console.log(); // prints "pong"
+    }
     // // console.log(this.searchText);
     // let strFound = window.find(this.searchText);
     // if (!strFound) {
@@ -34,5 +59,10 @@ export class SearchBarComponent implements OnInit, OnChanges {
     //     console.log(note.id);
     //   }
     // });
+  }
+
+  clearSearch(): void {
+    this.searchText = '';
+    ipcRenderer.sendSync('search-clear', 'ping');
   }
 }

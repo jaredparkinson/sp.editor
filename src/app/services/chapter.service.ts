@@ -54,11 +54,11 @@ export class ChapterService {
       // throw SyntaxError;
       console.log(this.fs);
 
-      if (this.fs) {
-        console.log('tasdfsdfasdufjin oiasdfoijasdflkasdfljk');
+      // if (this.fs) {
+      //   console.log('tasdfsdfasdufjin oiasdfoijasdflkasdfljk');
 
-        throw new Error('asdf');
-      }
+      //   throw new Error('asdf');
+      // }?
       const url2 = this.navService.urlBuilder(
         book.toLowerCase(),
         vSplit[0].toLowerCase()

@@ -1,9 +1,10 @@
-import { app, BrowserWindow, screen, ipcMain } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, webContents } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
-let win;
+let win: BrowserWindow;
 let serve;
+let content: webContents;
 
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
@@ -19,7 +20,7 @@ function createWindow() {
     width: size.width,
     height: size.height
   });
-
+  content = win.webContents;
   if (serve) {
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
@@ -34,7 +35,7 @@ function createWindow() {
       })
     );
     // use this to open dev tools manualy to debug
-    //  win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 
   // win.webContents.openDevTools();
@@ -70,8 +71,21 @@ try {
       createWindow();
     }
   });
+
+  ipcMain.on('search-clear', (event, arg) => {
+    content.stopFindInPage('clearSelection');
+    event.returnValue = 'pong';
+  });
+  ipcMain.on('search-forward', (event, arg) => {
+    console.log(content.findInPage(arg)); // prints "ping"
+    event.returnValue = 'pong';
+  });
+  ipcMain.on('search-back', (event, arg) => {
+    console.log(content.findInPage(arg, { forward: false })); // prints "ping"
+    event.returnValue = 'pong';
+  });
   ipcMain.on('synchronous-message', (event, arg) => {
-    console.log((win as BrowserWindow).webContents.findInPage(arg)); // prints "ping"
+    console.log(content.findInPage(arg)); // prints "ping"
     event.returnValue = 'pong';
   });
 } catch (e) {

@@ -8,12 +8,14 @@ export class Note {
   public classList: string;
   public btnId: string;
   public innerHtml: string;
+  public innerText: string;
 
   constructor(element: HTMLElement) {
     this.id = element.id;
     this.classList = element.classList.toString();
 
     this.innerHtml = element.innerHTML;
+    this.innerText = element.innerText;
     // console.log('inner' + this.innerHtml);
 
     this.button = element.classList.contains('a2086');

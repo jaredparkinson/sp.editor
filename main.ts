@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -69,6 +69,10 @@ try {
     if (win === null) {
       createWindow();
     }
+  });
+  ipcMain.on('synchronous-message', (event, arg) => {
+    console.log((win as BrowserWindow).webContents.findInPage(arg)); // prints "ping"
+    event.returnValue = 'pong';
   });
 } catch (e) {
   // Catch Error

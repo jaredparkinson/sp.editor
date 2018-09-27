@@ -1,0 +1,13 @@
+#searchBar {
+  position: absolute;
+  bottom: 0px;
+  height: 30px;
+  display: flex;
+
+  width: 100%;
+
+  input {
+    height: 26px;
+    margin-left: 5px
+  }
+}

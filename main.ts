@@ -77,7 +77,7 @@ try {
     event.returnValue = 'pong';
   });
   ipcMain.on('search-forward', (event, arg) => {
-    console.log(content.findInPage(arg)); // prints "ping"
+    console.log(content.findInPage(arg, { wordStart: true })); // prints "ping"
     event.returnValue = 'pong';
   });
   ipcMain.on('search-back', (event, arg) => {

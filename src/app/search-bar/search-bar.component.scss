@@ -8,6 +8,11 @@
 
   input {
     height: 26px;
-    margin-left: 5px
+    margin-left: 5px;
+
+    &:before {
+
+      content: 'Foobar';
+    }
   }
 }

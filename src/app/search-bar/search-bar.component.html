@@ -1,7 +1,7 @@
 <div id="searchBar">
   <input type="search" name="" id="searchBox" [(ngModel)]="searchText" (keyup)="onKeyUp($event)">
-  <!-- (ngModelChange)="searchTestChange()"> -->
-  <button (click)="searchTestChange('back')"> Back</button>
-  <button (click)="searchTestChange('forward')"> Forward</button>
+  <!-- (ngModelChange)="searchTextChange()"> -->
+  <button (click)="searchTextChange('back')"> Back</button>
+  <button (click)="searchTextChange('forward')"> Forward</button>
   <button (click)="clearSearch()"> Clear</button>
 </div>

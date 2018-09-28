@@ -12,6 +12,7 @@ import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
+import { ipcRenderer } from 'electron';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +20,8 @@ import { SaveStateService } from './services/save-state.service';
 })
 export class AppComponent implements OnInit {
   faCoffee = faCoffee;
+  ipcRenderer: any;
+
   public testStyle = '#gridBody {background-color: black;}';
   constructor(
     public electronService: ElectronService,
@@ -31,6 +34,7 @@ export class AppComponent implements OnInit {
     private ngZone: NgZone
   ) {
     this.translate.setDefaultLang('en');
+
     // console.log('AppConfig', AppConfig);
 
     // if (this.electronService.isElectron()) {

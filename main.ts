@@ -16,11 +16,9 @@ let view: BrowserView;
 
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
-
 function createWindow() {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
   // Create the browser window.
   win = new BrowserWindow({
     x: 0,
@@ -42,17 +40,41 @@ function createWindow() {
     });
     win.setBrowserView(view);
     view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+
     view.webContents.loadURL(
       url.format({
-        pathname: path.join(__dirname, 'find-in-page.html'),
+        pathname: path.join('find-in-page.html'),
         protocol: 'file:',
         slashes: true
       })
     );
+    // view.webContents.loadFile('dist/find-in-page.html');
+    // try {
+    //   console.log(path.join('find-in-page.html'));
+
+    //   console.log('no errors');
+    // } catch (error) {
+
+    // }
   } else {
     win.loadURL(
       url.format({
         pathname: path.join(__dirname, 'dist/index.html'),
+        protocol: 'file:',
+        slashes: true
+      })
+    );
+
+    view = new BrowserView({
+      webPreferences: {
+        nodeIntegration: true
+      }
+    });
+    win.setBrowserView(view);
+    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.webContents.loadURL(
+      url.format({
+        pathname: path.join(__dirname, '/find-in-page.html'),
         protocol: 'file:',
         slashes: true
       })

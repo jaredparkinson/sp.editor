@@ -1,10 +1,18 @@
-import { app, BrowserWindow, screen, ipcMain, webContents } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  screen,
+  ipcMain,
+  webContents,
+  BrowserView
+} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
 let win: BrowserWindow;
 let serve;
 let content: webContents;
+let view: BrowserView;
 
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
@@ -26,6 +34,21 @@ function createWindow() {
       electron: require(`${__dirname}/node_modules/electron`)
     });
     win.loadURL('http://localhost:4200');
+
+    view = new BrowserView({
+      webPreferences: {
+        nodeIntegration: true
+      }
+    });
+    win.setBrowserView(view);
+    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.webContents.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'find-in-page.html'),
+        protocol: 'file:',
+        slashes: true
+      })
+    );
   } else {
     win.loadURL(
       url.format({

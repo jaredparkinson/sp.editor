@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    const {ipcRenderer} = require('electron');
+    // let searchText;
+
+  function clearSearch(){
+      
+   document.getElementById('searchBox').value = '';
+    ipcRenderer.sendSync('search-clear', 'ping');
+  }
+    
+  function searchTextChange(direction) {
+    //   alert(ipcRenderer);
+    if (document.getElementById('searchBox').value.length <= 0) {
+      this.clearSearch();
+    } else {
+      switch (direction) {
+        case 'forward': {
+        //   console.log(this.normalizeSearchText());
+
+          ipcRenderer.sendSync('search-forward', document.getElementById('searchBox').value);
+          break;
+        }
+        case 'back': {
+          ipcRenderer.sendSync('search-back', document.getElementById('searchBox').value);
+          break;
+        }
+        default: {
+          clearSearch();
+          break;
+        }
+      }
+      console.log(); // prints "pong"
+    }}
+      </script>
+  <style>
+    #searchBar {
+  position: absolute;
+  bottom: 0px;
+  height: 30px;
+  display: flex;
+
+  width: 100%;  
+}
+input {
+    height: 26px;
+    margin-left: 5px;
+
+  }
+  </style>
+</head>
+
+<body>
+  <div id="searchBar">
+    <input type="search" name="" id="searchBox" onkeyup="searchTextChange('forward')">
+
+    <button onclick="searchTextChange('back')"> Back</button>
+    <button onclick="searchTextChange('forward')"> Forward</button>
+    <button onclick="clearSearch()"> Clear</button>
+  </div>
+
+</body>
+
+</html>

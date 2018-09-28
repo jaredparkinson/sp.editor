@@ -6,8 +6,13 @@ import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
+// import { SearchBarComponent } from './search-bar/search-bar.component';
 
 const routes: Routes = [
+  // {
+  //   path: 'find-in-page',
+  //   component: SearchBarComponent
+  // },
   {
     path: 'settings',
     component: SettingsComponent

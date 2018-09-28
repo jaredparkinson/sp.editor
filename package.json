@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.40.13",
+  "version": "3.40.14",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -86,7 +86,7 @@
     "@types/node": "10.5.2",
     "codelyzer": "4.4.2",
     "core-js": "2.5.7",
-    "electron": "^2.0.5",
+    "electron": "^3.0.2",
     "electron-builder": "^20.27.1",
     "electron-reload": "1.2.5",
     "jasmine-core": "3.1.0",

@@ -5,11 +5,29 @@
   <script>
     const {ipcRenderer} = require('electron');
     // let searchText;
-
+  ipcRenderer.on('search-close', (event, arg) => {
+    console.log(arg) // prints "ping"
+    // document.querySelector('body').classList.add('close');
+    event.returnValue = 'pong'
+  })
+  ipcRenderer.on('search-open', (event, arg) => {
+    console.log(arg) // prints "ping"
+    
+   document.getElementById('searchBox').value = '';
+    event.returnValue = 'pong'
+  })
   function clearSearch(){
       
    document.getElementById('searchBox').value = '';
     ipcRenderer.sendSync('search-clear', 'ping');
+    
+    // document.querySelector('body').classList.add('close');
+    // ipcRenderer.sendSync('search-close', 'close');
+  }
+
+  function closeSearch() {
+    clearSearch();
+    ipcRenderer.sendSync('search-close', 'close');
   }
     
   function searchTextChange(direction) {
@@ -37,6 +55,13 @@
     }}
       </script>
   <style>
+    .close {
+      visibility: hidden;
+    }
+    body {
+      background: white;
+      overflow: hidden;
+    }
     #searchBar {
   position: absolute;
   bottom: 0px;
@@ -51,15 +76,17 @@ input {
 
   }
   </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
 </head>
 
 <body>
   <div id="searchBar">
-    <input type="search" name="" id="searchBox" onkeyup="searchTextChange('forward')">
+    <input type="search" name="" id="searchBox" oninput="searchTextChange('forward')">
 
-    <button onclick="searchTextChange('back')"> Back</button>
-    <button onclick="searchTextChange('forward')"> Forward</button>
-    <button onclick="clearSearch()"> Clear</button>
+    <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
+    <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>
+    <button onclick="closeSearch()" class="fas fa-window-close"></button>
   </div>
 
 </body>

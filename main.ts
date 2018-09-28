@@ -4,7 +4,8 @@ import {
   screen,
   ipcMain,
   webContents,
-  BrowserView
+  BrowserView,
+  ipcRenderer
 } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -39,7 +40,7 @@ function createWindow() {
       }
     });
     win.setBrowserView(view);
-    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
 
     view.webContents.loadURL(
       url.format({
@@ -71,7 +72,7 @@ function createWindow() {
       }
     });
     win.setBrowserView(view);
-    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     view.webContents.loadURL(
       url.format({
         pathname: path.join(__dirname, '/find-in-page.html'),
@@ -119,6 +120,17 @@ try {
 
   ipcMain.on('search-clear', (event, arg) => {
     content.stopFindInPage('clearSelection');
+    event.returnValue = 'pong';
+  });
+  ipcMain.on('search-close', (event, arg) => {
+    view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
+    view.webContents.send('search-close', 'open');
+    event.returnValue = 'pong';
+  });
+  ipcMain.on('search-open', (event, arg) => {
+    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.webContents.stopFindInPage('clearSelection');
+    view.webContents.send('search-open', 'open');
     event.returnValue = 'pong';
   });
   ipcMain.on('search-forward', (event, arg) => {

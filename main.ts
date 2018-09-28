@@ -39,6 +39,8 @@ function createWindow() {
         nodeIntegration: true
       }
     });
+
+    // view.id = 123;
     win.setBrowserView(view);
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
 
@@ -131,6 +133,7 @@ try {
     view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
     view.webContents.stopFindInPage('clearSelection');
     view.webContents.send('search-open', 'open');
+    view.webContents.focus();
     event.returnValue = 'pong';
   });
   ipcMain.on('search-forward', (event, arg) => {

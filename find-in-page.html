@@ -14,6 +14,8 @@
     console.log(arg) // prints "ping"
     
    document.getElementById('searchBox').value = '';
+   document.getElementById('searchBox').focus(); // = '';
+   
     event.returnValue = 'pong'
   })
   function clearSearch(){

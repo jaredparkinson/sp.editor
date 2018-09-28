@@ -1,0 +1,10 @@
+{
+  "name": "jppenguin.denormalizejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jared Parkinson",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.1.1"
+  }
+}

@@ -70,11 +70,7 @@ export class HeaderComponent implements OnInit {
   }
 
   btnBackPress() {
-    if (this.electronService.isElectron()) {
-      console.log('electron service ' + this.electronService.isElectron());
-      this.electronService.ipcRenderer.sendSync('search-open', 'close');
-    }
-    // this.location.back();
+    this.location.back();
   }
   btnForwardPress() {
     this.location.forward();

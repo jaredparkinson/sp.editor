@@ -29,6 +29,12 @@
     clearSearch();
     ipcRenderer.sendSync('search-close', 'close');
   }
+  function escape(e)
+  {
+    if (e.key == 'Escape') {
+      closeSearch();
+    }
+  }
     
   function searchTextChange(direction) {
     //   alert(ipcRenderer);
@@ -82,7 +88,7 @@ input {
 
 <body>
   <div id="searchBar">
-    <input type="search" name="" id="searchBox" oninput="searchTextChange('forward')">
+    <input type="search" name="" id="searchBox" oninput="searchTextChange('forward')" onkeyup="escape(e)">
 
     <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
     <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>

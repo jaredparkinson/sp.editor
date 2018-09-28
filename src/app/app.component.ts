@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
 import {
   faChevronLeft,
@@ -45,6 +45,22 @@ export class AppComponent implements OnInit {
     //   console.log('Mode web');
     // }import searchInPage from 'electron-in-page-search';
   }
+
+  @HostListener('document:keydown', ['$event'])
+  public handleKeyboardEvent(event: KeyboardEvent): void {
+    if (this.electronService.isElectron()) {
+      // console.log('electron service ' + this.electronService.isElectron());
+      if (event.key === 'f' && event.ctrlKey) {
+        this.electronService.ipcRenderer.sendSync('search-open', 'close');
+      }
+
+      if (event.key === 'Escape') {
+        console.log(event);
+        this.electronService.ipcRenderer.sendSync('search-close', 'close');
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.initNoteSettingsToggle();
   }

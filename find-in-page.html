@@ -3,13 +3,24 @@
 
 <head>
   <script>
-    const {ipcRenderer} = require('electron');
+    const {ipcRenderer, webContents} = require('electron');
     // let searchText;
   ipcRenderer.on('search-close', (event, arg) => {
     console.log(arg) // prints "ping"
     // document.querySelector('body').classList.add('close');
     event.returnValue = 'pong'
   })
+  ipcRenderer.on('search-results', (event, arg) => {
+    //   alert(arg);
+    console.log(arg) // prints "ping"
+    // document.querySelector('body').classList.add('close');
+    document.getElementById('results').textContent = arg;
+    event.returnValue = 'pong'
+  })
+  ipcRenderer.on('found-in-page', e => {
+    //   alert('thcugctuvuy');
+      console.log(e.result + ' results');
+    });
   ipcRenderer.on('search-open', (event, arg) => {
     console.log(arg) // prints "ping"
     
@@ -19,6 +30,7 @@
   function clearSearch(){
       
    document.getElementById('searchBox').value = '';
+    document.getElementById('results').textContent = 'No Results';
     ipcRenderer.sendSync('search-clear', 'ping');
     
     // document.querySelector('body').classList.add('close');
@@ -27,6 +39,7 @@
 
   function closeSearch() {
     clearSearch();
+    
     ipcRenderer.sendSync('search-close', 'close');
   }
   function escape(e)
@@ -37,8 +50,8 @@
   }
     
   function searchTextChange(direction) {
-    //   alert(ipcRenderer);
-    if (document.getElementById('searchBox').value.length <= 0) {
+      if (document.getElementById('searchBox').value.trim().length <= 0) {
+        // alert((document.getElementById('searchBox').value.trim().length));
       this.clearSearch();
     } else {
       switch (direction) {
@@ -61,25 +74,58 @@
     }}
       </script>
   <style>
+    body{
+          margin: 0;
+          padding: 0;          
+      }
+    #results {
+        font-size: 13px;
+          width: 69px;
+          height: auto;
+          padding: 5px 2px 0;
+          
+    background: inherit;
+        }
     .close {
       visibility: hidden;
     }
     body {
-      background: white;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       background-color: rgb(250, 250, 239);
+      /* background: white; */
       overflow: hidden;
     }
+    html{
+    }
     #searchBar {
-  position: absolute;
-  bottom: 0px;
-  height: 30px;
+        /* border-color: ivory;
+        border-left-style: solid;
+        border-left-width: 1px;
+        border-right-style: solid;
+        border-right-width: 1px; */
+        
+           /* background: lightblue; */
+  /* position: absolute; */
+  /* bottom: 0px; */
+  width: 129;
+  height: 35px;
   display: flex;
 
+    background: inherit;
   width: 100%;  
 }
+button {
+    height: 35px;
+    width: 35px;
+    background: inherit;
+        border-style: none;
+}
 input {
-    height: 26px;
-    margin-left: 5px;
-
+    height: auto;
+          /* padding: 2px 2px 0; */
+    /* margin-left: 5px; */
+    border-style: none;
+    background: inherit;
   }
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
@@ -88,8 +134,9 @@ input {
 
 <body>
   <div id="searchBar">
-    <input type="search" name="" id="searchBox" oninput="searchTextChange('forward')" onkeyup="escape(e)">
-
+    <input placeholder="Enter text to search" type="search" name="" id="searchBox" oninput="searchTextChange('forward')"
+      onkeyup="escape(e)">
+    <div id="results">No Results</div>
     <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
     <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>
     <button onclick="closeSearch()" class="fas fa-window-close"></button>

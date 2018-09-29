@@ -5,7 +5,8 @@ import {
   ipcMain,
   webContents,
   BrowserView,
-  ipcRenderer
+  ipcRenderer,
+  FoundInPageEvent
 } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -28,6 +29,17 @@ function createWindow() {
     height: size.height
   });
   content = win.webContents;
+  content.on('found-in-page', (event, result) => {
+    console.log(result);
+    view.webContents.send(
+      'search-results',
+      result.activeMatchOrdinal + '/' + result.matches
+    );
+    if (result.finalUpdate) {
+      // webContents.stopFindInPage('clearSelection');
+    }
+  });
+
   if (serve) {
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
@@ -49,6 +61,7 @@ function createWindow() {
         slashes: true
       })
     );
+
     // view.webContents.loadFile('dist/find-in-page.html');
     // try {
     //   console.log(path.join('find-in-page.html'));
@@ -128,13 +141,16 @@ try {
     event.returnValue = 'pong';
   });
   ipcMain.on('search-open', (event, arg) => {
-    view.setBounds({ x: 200, y: 48, width: 300, height: 48 });
+    view.setBounds({ x: 200, y: 38, width: 350, height: 40 });
+
     view.webContents.stopFindInPage('clearSelection');
     view.webContents.send('search-open', 'open');
     event.returnValue = 'pong';
   });
   ipcMain.on('search-forward', (event, arg) => {
-    console.log(content.findInPage(arg, { wordStart: true })); // prints "ping"
+    console.log();
+    content.findInPage(arg, { wordStart: true });
+    console.log(); // prints "ping"
     event.returnValue = 'pong';
   });
   ipcMain.on('search-back', (event, arg) => {

@@ -1,6 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
+import * as jsZip from 'jszip';
+// import * as pako from 'pako';
+import { Observable } from 'rxjs';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
@@ -20,12 +24,20 @@ export class ChapterService {
   public contextNums: number[] = [];
   public pageUrl = '';
   private fs: any;
+  scripturesArchive: Observable<ArrayBuffer>;
 
   constructor(
     private navService: NavigationService,
-    private saveStateService: SaveStateService
+    private saveStateService: SaveStateService,
+    private httpClient: HttpClient
   ) {
     this.fs = (window as any).fs;
+    if (!this.fs || this.fs === undefined) {
+      this.scripturesArchive = this.httpClient.get('assets/scriptures.zip', {
+        observe: 'body',
+        responseType: 'arraybuffer'
+      });
+    }
   }
 
   public resetNotes(): void {
@@ -87,16 +99,40 @@ export class ChapterService {
       );
       console.log('test web');
 
-      url.subscribe(u => {
-        this.setChapter(
-          u,
-          book,
-          vSplit[0],
-          vSplit[1],
-          vSplit[2],
-          synchronizedScrolling
-        );
+      this.scripturesArchive.subscribe(data => {
+        // const results = pako.inflate(new Uint8Array(data));0
+        jsZip.loadAsync(data).then(async o => {
+          const f = await o
+            .file(
+              this.navService.urlBuilder(
+                book.toLowerCase(),
+                vSplit[0].toLowerCase()
+              )
+            )
+            .async('text');
+
+          this.setChapter(
+            f,
+            book,
+            vSplit[0],
+            vSplit[1],
+            vSplit[2],
+            synchronizedScrolling
+          );
+        });
+
+        // console.log(results);
       });
+      // url.subscribe(u => {
+      //   this.setChapter(
+      //     u,
+      //     book,
+      //     vSplit[0],
+      //     vSplit[1],
+      //     vSplit[2],
+      //     synchronizedScrolling
+      //   );
+      // });
     }
   }
   public resetHighlighting(): void {

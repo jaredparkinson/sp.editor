@@ -1,4 +1,9 @@
-yarn version --patch
+# Move-Item .\src\assets\scriptures\ ..
+
+yarn run electron:windows:beta
+
+# Move-Item ..\scriptures\ .\src\assets\
+
 docker build . -t scriptures_project_v3_beta
 
 docker save scriptures_project_v3_beta -o .\scriptures_project_v3_beta

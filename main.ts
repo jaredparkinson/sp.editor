@@ -15,12 +15,13 @@ let win: BrowserWindow;
 let serve;
 let content: webContents;
 let view: BrowserView;
+let size;
 
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 function createWindow() {
   const electronScreen = screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+  size = electronScreen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   win = new BrowserWindow({
     x: 0,
@@ -135,15 +136,19 @@ try {
 
   ipcMain.on('search-clear', (event, arg) => {
     content.stopFindInPage('clearSelection');
+    // content.send('search-close', 'close');
+
     event.returnValue = 'pong';
   });
   ipcMain.on('search-close', (event, arg) => {
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     view.webContents.send('search-close', 'open');
+    content.send('search-close2', 'open');
+    content.focus();
     event.returnValue = 'pong';
   });
   ipcMain.on('search-open', (event, arg) => {
-    view.setBounds({ x: 200, y: 38, width: 350, height: 40 });
+    view.setBounds({ x: 0, y: 0, width: size.width, height: 35 });
 
     view.webContents.stopFindInPage('clearSelection');
     view.webContents.send('search-open', 'open');

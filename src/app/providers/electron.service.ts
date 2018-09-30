@@ -13,6 +13,7 @@ export class ElectronService {
   remote: typeof remote;
   childProcess: typeof childProcess;
   fs: typeof fs;
+  body: HTMLElement;
 
   constructor() {
     // Conditional imports
@@ -23,6 +24,14 @@ export class ElectronService {
 
       this.childProcess = window.require('child_process');
       this.fs = window.require('graceful-fs');
+
+      this.body = document.querySelector('body');
+      ipcRenderer.on('search-close2', (event, args) => {
+        console.log('kjxjfxufc');
+
+        this.body.classList.remove('find');
+        this.body.focus();
+      });
     }
   }
 

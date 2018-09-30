@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
   ) {
     this.translate.setDefaultLang('en');
 
+    if (this.electronService.isElectron()) {
+    }
     // console.log('AppConfig', AppConfig);
 
     // if (this.electronService.isElectron()) {
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit {
     if (this.electronService.isElectron()) {
       // console.log('electron service ' + this.electronService.isElectron());
       if (event.key === 'f' && event.ctrlKey) {
+        document.querySelector('body').classList.add('find');
         this.electronService.ipcRenderer.sendSync('search-open', 'close');
       }
 

@@ -2,83 +2,13 @@
 <html>
 
 <head>
-  <script>
-    const {ipcRenderer, webContents} = require('electron');
-    // let searchText;
-  ipcRenderer.on('search-close', (event, arg) => {
-    console.log(arg) // prints "ping"
-    // document.querySelector('body').classList.add('close');
-    event.returnValue = 'pong'
-  })
-  ipcRenderer.on('search-results', (event, arg) => {
-    //   alert(arg);
-    console.log(arg) // prints "ping"
-    // document.querySelector('body').classList.add('close');
-    document.getElementById('results').textContent = arg;
-    event.returnValue = 'pong'
-  })
-  ipcRenderer.on('found-in-page', e => {
-    //   alert('thcugctuvuy');
-      console.log(e.result + ' results');
-    });
-  ipcRenderer.on('search-open', (event, arg) => {
-    console.log(arg) // prints "ping"
-    
-   document.getElementById('searchBox').value = '';
-   document.getElementById('searchBox').focus(); // = '';
-   
-    event.returnValue = 'pong'
-  })
-  function clearSearch(){
-      
-   document.getElementById('searchBox').value = '';
-    document.getElementById('results').textContent = 'No Results';
-    ipcRenderer.sendSync('search-clear', 'ping');
-    
-    // document.querySelector('body').classList.add('close');
-    // ipcRenderer.sendSync('search-close', 'close');
-  }
-
-  function closeSearch() {
-    clearSearch();
-    
-    ipcRenderer.sendSync('search-close', 'close');
-  }
-  function escape(e)
-  {
-    if (e.key == 'Escape') {
-      closeSearch();
-    }
-  }
-    
-  function searchTextChange(direction) {
-      if (document.getElementById('searchBox').value.trim().length <= 0) {
-        // alert((document.getElementById('searchBox').value.trim().length));
-      this.clearSearch();
-    } else {
-      switch (direction) {
-        case 'forward': {
-        //   console.log(this.normalizeSearchText());
-
-          ipcRenderer.sendSync('search-forward', document.getElementById('searchBox').value);
-          break;
-        }
-        case 'back': {
-          ipcRenderer.sendSync('search-back', document.getElementById('searchBox').value);
-          break;
-        }
-        default: {
-          clearSearch();
-          break;
-        }
-      }
-      console.log(); // prints "pong"
-    }}
-      </script>
+  <script type="text/javascript" src="find-in-page.js"> </script>
   <style>
     body{
           margin: 0;
-          padding: 0;          
+          padding: 0;
+          background: black;   
+          width: 100%;
       }
     #results {
         font-size: 15px;
@@ -95,7 +25,8 @@
     }
     body {
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-       background-color: rgb(250, 250, 239);
+       background-color: rgb(74, 162, 212);
+       color: white;
       /* background: white; */
       overflow: hidden;
     }
@@ -111,8 +42,8 @@
            /* background: lightblue; */
   /* position: absolute; */
   /* bottom: 0px; */
-  width: 129;
-  height: 35px;
+  width: 100%;
+  height: 100%;
   display: flex;
 
     background: inherit;
@@ -132,6 +63,9 @@ input {
     background: inherit;
     text-align: center;
   }
+  input::placeholder{
+      color: #fff;
+  }
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
@@ -140,7 +74,7 @@ input {
 <body>
   <div id="searchBar">
     <input placeholder="Enter text to search" type="search" name="" id="searchBox" oninput="searchTextChange('forward')"
-      onkeyup="escape(e)">
+      onkeyup="escape(event)">
     <div id="results">No Results</div>
     <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
     <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>

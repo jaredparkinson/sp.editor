@@ -1,12 +1,12 @@
 import {
   app,
-  BrowserWindow,
-  screen,
-  ipcMain,
-  webContents,
   BrowserView,
+  BrowserWindow,
+  FoundInPageEvent,
+  ipcMain,
   ipcRenderer,
-  FoundInPageEvent
+  screen,
+  webContents
 } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -138,14 +138,14 @@ try {
     content.stopFindInPage('clearSelection');
     // content.send('search-close', 'close');
 
-    event.returnValue = 'pong';
+    // event.returnValue = 'pong';
   });
   ipcMain.on('search-close', (event, arg) => {
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     view.webContents.send('search-close', 'open');
     content.send('search-close2', 'open');
     content.focus();
-    event.returnValue = 'pong';
+    // event.returnValue = 'pong';
   });
   ipcMain.on('search-open', (event, arg) => {
     view.setBounds({ x: 0, y: 0, width: size.width, height: 35 });
@@ -153,21 +153,23 @@ try {
     view.webContents.stopFindInPage('clearSelection');
     view.webContents.send('search-open', 'open');
     view.webContents.focus();
-    event.returnValue = 'pong';
+    // event.returnValue = 'pong';
   });
   ipcMain.on('search-forward', (event, arg) => {
-    console.log();
+    // console.log();
     content.findInPage(arg, { wordStart: true });
-    console.log(); // prints "ping"
-    event.returnValue = 'pong';
+    // console.log();
+    // event.returnValue = 'pong';
   });
   ipcMain.on('search-back', (event, arg) => {
-    console.log(content.findInPage(arg, { forward: false })); // prints "ping"
-    event.returnValue = 'pong';
+    // console.log();
+    content.findInPage(arg, { forward: false });
+    // event.returnValue = 'pong';
   });
   ipcMain.on('synchronous-message', (event, arg) => {
-    console.log(content.findInPage(arg)); // prints "ping"
-    event.returnValue = 'pong';
+    // console.log();
+    content.findInPage(arg);
+    // event.returnValue = 'pong';
   });
 } catch (e) {
   // Catch Error

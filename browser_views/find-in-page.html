@@ -9,7 +9,7 @@
   function clearSearch(){
       
    document.getElementById('searchBox').value = '';
-    ipcRenderer.sendSync('search-clear', 'ping');
+    ipcRenderer.send('search-clear', 'ping');
   }
     
   function searchTextChange(direction) {
@@ -21,11 +21,11 @@
         case 'forward': {
         //   console.log(this.normalizeSearchText());
 
-          ipcRenderer.sendSync('search-forward', document.getElementById('searchBox').value);
+          ipcRenderer.send('search-forward', document.getElementById('searchBox').value);
           break;
         }
         case 'back': {
-          ipcRenderer.sendSync('search-back', document.getElementById('searchBox').value);
+          ipcRenderer.send('search-back', document.getElementById('searchBox').value);
           break;
         }
         default: {

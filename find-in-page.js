@@ -2,7 +2,7 @@ const {
   ipcRenderer,
   webContents
 } = require('electron');
-// let searchText;
+
 ipcRenderer.on('search-close', (event, arg) => {
   console.log(arg) // prints "ping"
   // document.querySelector('body').classList.add('close');
@@ -32,22 +32,27 @@ function clearSearch() {
 
   document.getElementById('searchBox').value = '';
   document.getElementById('results').textContent = 'No Results';
-  ipcRenderer.sendSync('search-clear', 'ping');
+  ipcRenderer.send('search-clear', 'ping');
 
   // document.querySelector('body').classList.add('close');
-  // ipcRenderer.sendSync('search-close', 'close');
+  // ipcRenderer.send('search-close', 'close');
 }
 
 function closeSearch() {
   clearSearch();
 
-  ipcRenderer.sendSync('search-close', 'close');
+  ipcRenderer.send('search-close', 'close');
 }
 
 function escape(event) {
   //   alert(event.key);
   if (event.key == 'Escape') {
     closeSearch();
+  }
+  if (event.shiftKey && event.key === 'Enter') {
+    searchTextChange('back');
+  } else if (event.key == 'Enter') {
+    searchTextChange('forward');
   }
 }
 
@@ -61,12 +66,12 @@ function searchTextChange(direction) {
         {
           //   console.log(this.normalizeSearchText());
 
-          ipcRenderer.sendSync('search-forward', document.getElementById('searchBox').value);
+          ipcRenderer.send('search-forward', document.getElementById('searchBox').value);
           break;
         }
       case 'back':
         {
-          ipcRenderer.sendSync('search-back', document.getElementById('searchBox').value);
+          ipcRenderer.send('search-back', document.getElementById('searchBox').value);
           break;
         }
       default:
@@ -75,6 +80,6 @@ function searchTextChange(direction) {
           break;
         }
     }
-    console.log(); // prints "pong"
+    document.getElementById('searchBox').focus();
   }
 }

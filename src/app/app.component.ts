@@ -54,12 +54,12 @@ export class AppComponent implements OnInit {
       // console.log('electron service ' + this.electronService.isElectron());
       if (event.key === 'f' && event.ctrlKey) {
         document.querySelector('body').classList.add('find');
-        this.electronService.ipcRenderer.sendSync('search-open', 'close');
+        this.electronService.ipcRenderer.send('search-open', 'close');
       }
 
       if (event.key === 'Escape') {
         console.log(event);
-        this.electronService.ipcRenderer.sendSync('search-close', 'close');
+        this.electronService.ipcRenderer.send('search-close', 'close');
       }
     }
   }

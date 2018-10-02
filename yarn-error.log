@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Users\jared\AppData\Local\nvs\node\10.11.0\x64\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add pakos
+  C:\Users\jared\AppData\Local\nvs\node\10.11.0\x64\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js version
 
 PATH: 
   C:\Users\jared\AppData\Local\nvs\node\10.11.0\x64;C:\Program Files\PowerShell\6-preview;C:\Program Files\Docker\Docker\Resources\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files (x86)\Gpg4win\..\GnuPG\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\jared\source\repos\scripts\powershell_scripts;C:\Program Files\Java\jdk1.8.0_181\bin;C:\Android\android-sdk\tools;C:\Android\android-sdk\platform-tools;C:\Android\android-sdk\tools\bin;D:\OneDrive\Path\Junction;D:\OneDrive\Path\ffmpeg_4\bin;D:\OneDrive\Path\Checksum;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Users\jared\AppData\Local\Microsoft\WindowsApps;C:\tools\cmder;C:\Users\jared\AppData\Local\nvs\;C:\Users\jared\.dotnet\tools;C:\Users\jared\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jared\AppData\Roaming\npm;C:\Users\jared\AppData\Local\Yarn\bin;C:\Users\jared\AppData\Local\Keybase\
@@ -14,22 +14,22 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/pakos: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:64202:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:137468:22)
-      at Request.emit (events.js:182:13)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138440:10)
-      at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138362:12)
-      at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
-      at endReadableNT (_stream_readable.js:1092:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: canceled
+      at Interface.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:126002:13)
+      at Interface.emit (events.js:182:13)
+      at Interface._ttyWrite (readline.js:783:16)
+      at ReadStream.onkeypress (readline.js:168:10)
+      at ReadStream.emit (events.js:182:13)
+      at emitKeys (internal/readline.js:424:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1022:36)
+      at ReadStream.emit (events.js:182:13)
+      at addChunk (_stream_readable.js:283:12)
 
 npm manifest: 
   {
     "name": "sp-editor",
-    "version": "3.40.30",
+    "version": "3.40.38",
     "description": "sp-project version 3",
     "homepage": "https://github.com/maximegris/angular-electron",
     "author": {
@@ -46,7 +46,8 @@ npm manifest:
     "browser": {
       "fs": false,
       "path": false,
-      "os": false
+      "os": false,
+      "stream": false
     },
     "main": "main.js",
     "private": true,
@@ -85,13 +86,17 @@ npm manifest:
       "graceful-fs": "^4.1.11",
       "hammerjs": "^2.0.8",
       "jquery": "^3.3.1",
+      "jszip": "^3.1.5",
       "mark.js": "^8.11.1",
       "node-sass": "^4.9.3",
       "nodejs": "0.0.0",
+      "pako": "^1.0.6",
       "path": "^0.12.7",
       "rxjs": "^6.2.2",
+      "stream": "^0.0.2",
       "tslint-config-prettier": "^1.14.0",
-      "tslint-microsoft-contrib": "^5.1.0"
+      "tslint-microsoft-contrib": "^5.1.0",
+      "underscore": "^1.9.1"
     },
     "devDependencies": {
       "@angular-devkit/build-angular": "0.8.3",
@@ -111,11 +116,14 @@ npm manifest:
       "@types/angular": "^1.6.51",
       "@types/jasmine": "2.8.8",
       "@types/jasminewd2": "2.0.3",
+      "@types/jszip": "^3.1.4",
       "@types/mark.js": "^8.11.1",
       "@types/node": "10.5.2",
+      "@types/pako": "^1.0.0",
+      "@types/underscore": "^1.8.9",
       "codelyzer": "4.4.2",
       "core-js": "2.5.7",
-      "electron": "^3.0.2",
+      "electron": "^3",
       "electron-builder": "^20.27.1",
       "electron-reload": "1.2.5",
       "jasmine-core": "3.1.0",
@@ -442,6 +450,12 @@ Lockfile:
     version "3.3.9"
     resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.9.tgz#91f2aaf5c1e91fd79598fc00ecb4504d78b51fd7"
   
+  "@types/jszip@^3.1.4":
+    version "3.1.4"
+    resolved "https://registry.yarnpkg.com/@types/jszip/-/jszip-3.1.4.tgz#9b81e3901a6988e9459ac27abf483e6b892251af"
+    dependencies:
+      "@types/node" "*"
+  
   "@types/mark.js@^8.11.1":
     version "8.11.1"
     resolved "https://registry.yarnpkg.com/@types/mark.js/-/mark.js-8.11.1.tgz#a93de600b10bf0d77b74cd0ba77045f528465f8a"
@@ -460,6 +474,10 @@ Lockfile:
     version "8.10.21"
     resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.21.tgz#12b3f2359b27aa05a45d886c8ba1eb8d1a77e285"
   
+  "@types/pako@^1.0.0":
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/@types/pako/-/pako-1.0.0.tgz#eaae8364d1b7f752e263bc3fd68dfec98e6136c5"
+  
   "@types/q@^0.0.32":
     version "0.0.32"
     resolved "https://registry.yarnpkg.com/@types/q/-/q-0.0.32.tgz#bd284e57c84f1325da702babfc82a5328190c0c5"
@@ -467,6 +485,10 @@ Lockfile:
   "@types/selenium-webdriver@^2.53.35", "@types/selenium-webdriver@~2.53.39":
     version "2.53.43"
     resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-2.53.43.tgz#2de3d718819bc20165754c4a59afb7e9833f6707"
+  
+  "@types/underscore@^1.8.9":
+    version "1.8.9"
+    resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.9.tgz#fef41f800cd23db1b4f262ddefe49cd952d82323"
   
   "@webassemblyjs/ast@1.7.6":
     version "1.7.6"
@@ -2577,7 +2599,7 @@ Lockfile:
     version "1.3.52"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.52.tgz#d2d9f1270ba4a3b967b831c40ef71fb4d9ab5ce0"
   
-  electron@^3.0.2:
+  electron@^3:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.2.tgz#0aed43a331b43dfe671ddb54d75fc4102d362959"
     dependencies:
@@ -2596,6 +2618,10 @@ Lockfile:
       inherits "^2.0.1"
       minimalistic-assert "^1.0.0"
       minimalistic-crypto-utils "^1.0.0"
+  
+  emitter-component@^1.1.1:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/emitter-component/-/emitter-component-1.1.1.tgz#065e2dbed6959bf470679edabeaf7981d1003ab6"
   
   emojis-list@^2.0.0:
     version "2.1.0"
@@ -4555,7 +4581,7 @@ Lockfile:
       json-schema "0.2.3"
       verror "1.10.0"
   
-  jszip@^3.1.3:
+  jszip@^3.1.3, jszip@^3.1.5:
     version "3.1.5"
     resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.1.5.tgz#e3c2a6c6d706ac6e603314036d43cd40beefdf37"
     dependencies:
@@ -6054,7 +6080,7 @@ Lockfile:
       unique-filename "^1.1.0"
       which "^1.2.12"
   
-  pako@~1.0.2, pako@~1.0.5:
+  pako@^1.0.6, pako@~1.0.2, pako@~1.0.5:
     version "1.0.6"
     resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
   
@@ -7732,6 +7758,12 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   
+  stream@^0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/stream/-/stream-0.0.2.tgz#7f5363f057f6592c5595f00bc80a27f5cec1f0ef"
+    dependencies:
+      emitter-component "^1.1.1"
+  
   streamroller@0.7.0:
     version "0.7.0"
     resolved "https://registry.yarnpkg.com/streamroller/-/streamroller-0.7.0.tgz#a1d1b7cf83d39afb0d63049a5acbf93493bdf64b"
@@ -8246,6 +8278,10 @@ Lockfile:
   umask@~1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/umask/-/umask-1.1.0.tgz#f29cebf01df517912bb58ff9c4e50fde8e33320d"
+  
+  underscore@^1.9.1:
+    version "1.9.1"
+    resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
   
   underscore@~1.7.0:
     version "1.7.0"

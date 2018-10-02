@@ -1,38 +1,34 @@
-const {
-  ipcRenderer,
-  webContents
-} = require('electron');
+const { ipcRenderer, webContents } = require('electron');
 
 let searchText = '';
 let timer;
 
 ipcRenderer.on('search-close', (event, arg) => {
-  console.log(arg) // prints "ping"
+  console.log(arg); // prints "ping"
   // document.querySelector('body').classList.add('close');
-  event.returnValue = 'pong'
-})
+  event.returnValue = 'pong';
+});
 ipcRenderer.on('search-results', (event, arg) => {
   //   alert(arg);
-  console.log(arg) // prints "ping"
+  console.log(arg); // prints "ping"
   // document.querySelector('body').classList.add('close');
   document.getElementById('results').textContent = arg;
-  event.returnValue = 'pong'
-})
+  event.returnValue = 'pong';
+});
 ipcRenderer.on('found-in-page', e => {
   //   alert('thcugctuvuy');
   console.log(e.result + ' results');
 });
 ipcRenderer.on('search-open', (event, arg) => {
-  console.log(arg) // prints "ping"
+  console.log(arg); // prints "ping"
 
   document.getElementById('searchBox').value = '';
   document.getElementById('searchBox').focus(); // = '';
 
-  event.returnValue = 'pong'
-})
+  event.returnValue = 'pong';
+});
 
 function clearSearch() {
-
   // document.getElementById('searchBox').value = '';
   // document.getElementById('results').textContent = 'No Results';
   ipcRenderer.send('search-clear', 'ping');
@@ -52,26 +48,19 @@ function escape(event) {
   if (event.key == 'Escape') {
     closeSearch();
   }
-  // if (event.shiftKey && event.key === 'Enter') {
-  //   searchTextChange('back');
-  // } else
-
-
-  if (event.key == 'Enter') {
-    timer = setTimeout(function () {
-      searchTextChange(event, 'forward');
-    }, 300);
-
+  if (event.shiftKey && event.key === 'Enter') {
+    searchTextChange('back');
+  } else if (event.key == 'Enter') {
+    searchTextChange('forward');
   }
 }
 
-function searchTextChange(event, direction) {
-
-  alert(event.type.toString() + ' ' + direction);
-  if (direction === 'find' && event.type.toString() == 'keyup') {
-    alert(direction);
-    return;
-  }
+function searchTextChange(direction) {
+  // (event.type.toString() + ' ' + direction);
+  // if (direction === 'find' && event.type.toString() == 'keyup') {
+  //   alert(direction);
+  //   return;
+  // }
 
   // if (document.getElementById('searchBox').value === this.searchText && direction === 'find') {
   //   alert('duplicate');
@@ -83,29 +72,32 @@ function searchTextChange(event, direction) {
     this.clearSearch();
   } else {
     switch (direction) {
-      case 'find':
-        {
-
-          ipcRenderer.send('search-find', document.getElementById('searchBox').value);
-          break;
-        }
-      case 'forward':
-        {
-          //   console.log(this.normalizeSearchText());
-          ipcRenderer.send('search-forward', document.getElementById('searchBox').value);
-          break;
-
-        }
-      case 'back':
-        {
-          ipcRenderer.send('search-back', document.getElementById('searchBox').value);
-          break;
-        }
-      default:
-        {
-          clearSearch();
-          break;
-        }
+      case 'find': {
+        ipcRenderer.send(
+          'search-find',
+          document.getElementById('searchBox').value
+        );
+        break;
+      }
+      case 'forward': {
+        //   console.log(this.normalizeSearchText());
+        ipcRenderer.send(
+          'search-forward',
+          document.getElementById('searchBox').value
+        );
+        break;
+      }
+      case 'back': {
+        ipcRenderer.send(
+          'search-back',
+          document.getElementById('searchBox').value
+        );
+        break;
+      }
+      default: {
+        clearSearch();
+        break;
+      }
     }
     document.getElementById('searchBox').focus();
     this.searchText = document.getElementById('searchBox').value;

@@ -42,7 +42,7 @@ export class ChapterService {
   }
 
   public resetNotes(): void {
-    this.notes2.forEach(note => {
+    _.each(this.notes2, note => {
       note.reset();
     });
   }
@@ -171,8 +171,8 @@ export class ChapterService {
     this.saveStateService.data.currentPage = urlText;
 
     this.header = doc.querySelector('header').innerHTML;
-    Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
-      this.notes2.push(new Note(elem));
+    _.each(doc.querySelectorAll('note'), elem => {
+      this.notes2.push(new Note(elem as HTMLElement));
     });
 
     _.each(doc.querySelectorAll('.hidden-paragraph'), elem => {
@@ -233,38 +233,6 @@ export class ChapterService {
     return verseNums;
     // this.setHighlight(verseNums);
     // return verseNums;
-  }
-  public parseHighlightedVerses(v: Params): void {
-    if (v === null) {
-      return;
-    }
-
-    const verseNums: number[] = [];
-    if (v['verse'] !== undefined) {
-      const verseParams = (v['verse'] as string).split(',');
-      verseParams.forEach(verseParam => {
-        console.log(verseParam);
-
-        const t = verseParam.split('-');
-        const count = t.length > 1 ? 1 : 0;
-        for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
-          verseNums.push(x);
-          // console.log(x);
-        }
-      });
-      // console.log(verseNums);
-    }
-
-    console.log('333');
-    this.setHighlight(verseNums);
-    // return verseNums;
-  }
-  private setHighlight(verseNums: number[]): void {
-    this.paragraphs.forEach(p => {
-      console.log(p);
-
-      p.setHighlight(verseNums);
-    });
   }
 
   private extractHtml(doc: Document, selector: string): string {

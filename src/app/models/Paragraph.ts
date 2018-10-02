@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { Verse } from './Verse';
 
 export class Paragraph {
@@ -7,11 +8,14 @@ export class Paragraph {
     verseNums: number[],
     contextNums: number[]
   ) {
-    Array.prototype.slice
-      .call(paragraph.querySelectorAll('span.verse'))
-      .forEach(v => {
-        this.verses.push(new Verse(v));
-      });
+    _.each(paragraph.querySelectorAll('span.verse'), v => {
+      this.verses.push(new Verse(v as HTMLElement));
+    });
+    // Array.prototype.slice
+    //   .call(paragraph.querySelectorAll('span.verse'))
+    //   .forEach(v => {
+    //     this.verses.push(new Verse(v));
+    //   });
 
     this.setHighlight2(verseNums, contextNums);
   }

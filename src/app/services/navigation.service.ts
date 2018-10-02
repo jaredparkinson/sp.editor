@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 // import { JSDOM } from 'jsdom';
 import { Observable } from 'rxjs';
+import * as _ from 'underscore';
 import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
-import { TSQuery } from '../TSQuery';
+// import { TSQuery } from '../TSQuery';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class NavigationService {
@@ -29,7 +30,7 @@ export class NavigationService {
 
   public notesSettings = false;
   private fs: any;
-  private tsQuery: TSQuery = new TSQuery();
+  // private tsQuery: TSQuery = new TSQuery();
   public pageTitle: string;
   private navData: Document;
   constructor(
@@ -389,7 +390,8 @@ export class NavigationService {
         const doc = parser.parseFromString(data, 'text/html');
         // this.navData = doc;
         const testaments = doc.querySelectorAll('div.book');
-        this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
+
+        _.each(doc.querySelectorAll('div.book'), testament => {
           const testamentName = testament
             .querySelector('header h1')
             .innerHTML.replace('&nbsp;', ' ');
@@ -399,23 +401,29 @@ export class NavigationService {
           const books = testament.querySelectorAll('div>ul>li');
 
           const tempBooks: Book[] = [];
-          this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
-            const tempBook = new Book(book);
+          _.each(testament.querySelectorAll('div>ul>li'), book => {
+            const tempBook = new Book(book as HTMLElement);
 
             const tempChapters: Chapter[] = [];
-            let chapters = this.tsQuery.selectClass(book, 'ul li a');
+            let chapters = _.toArray<HTMLElement>(
+              book.querySelectorAll('ul li a')
+            );
+            // let chapters = this.tsQuery.selectClass(
+            //   book as HTMLElement,
+            //   'ul li a'
+            // );
             if (!chapters) {
-              chapters = this.tsQuery.selectClass(book, 'li a');
+              chapters = _.toArray(book.querySelectorAll('li a'));
+              // this.tsQuery.selectClass(book as HTMLElement, 'li a');
             }
 
-            chapters.forEach(chapter => {
+            _.each(chapters, chapter => {
               const tempChapter = new Chapter(
                 chapter
                   .querySelector('.title')
                   .innerHTML.replace('&nbsp;', ' '),
                 chapter.getAttribute('href').replace('.html', '')
               );
-              // console.log(tempChapter);
 
               tempChapters.push(tempChapter);
             });
@@ -426,11 +434,101 @@ export class NavigationService {
             // console.log(tempBook);
             tempBooks.push(tempBook);
           });
+
+          // chapters.forEach(chapter => {
+          //   const tempChapter = new Chapter(
+          //     chapter
+          //       .querySelector('.title')
+          //       .innerHTML.replace('&nbsp;', ' '),
+          //     chapter.getAttribute('href').replace('.html', '')
+          //   );
+          // console.log(tempChapter);
+
+          //     tempChapters.push(tempChapter);
+          //   });
+          //   if (tempChapters.length !== 1) {
+          //     tempChapters.shift();
+          //   }
+          //   tempBook.chapters = tempChapters;
+          //   // console.log(tempBook);
+          //   tempBooks.push(tempBook);
+          // });
+          // this.tsQuery
+          //   .selectClass(testament as HTMLElement, 'div>ul>li')
+          //   .forEach(book => {
+          //     const tempBook = new Book(book);
+
+          //     const tempChapters: Chapter[] = [];
+          //     let chapters = this.tsQuery.selectClass(book, 'ul li a');
+          //     if (!chapters) {
+          //       chapters = this.tsQuery.selectClass(book, 'li a');
+          //     }
+
+          //     chapters.forEach(chapter => {
+          //       const tempChapter = new Chapter(
+          //         chapter
+          //           .querySelector('.title')
+          //           .innerHTML.replace('&nbsp;', ' '),
+          //         chapter.getAttribute('href').replace('.html', '')
+          //       );
+          //       // console.log(tempChapter);
+
+          //       tempChapters.push(tempChapter);
+          //     });
+          //     if (tempChapters.length !== 1) {
+          //       tempChapters.shift();
+          //     }
+          //     tempBook.chapters = tempChapters;
+          //     // console.log(tempBook);
+          //     tempBooks.push(tempBook);
+          //   });
           tempTestament.books = tempBooks;
           this.nav.push(tempTestament);
 
           // console.log(testamentName);
         });
+        // this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
+        //   const testamentName = testament
+        //     .querySelector('header h1')
+        //     .innerHTML.replace('&nbsp;', ' ');
+
+        //   const tempTestament = new NavLinks(testamentName, '');
+
+        //   const books = testament.querySelectorAll('div>ul>li');
+
+        //   const tempBooks: Book[] = [];
+        //   this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
+        //     const tempBook = new Book(book);
+
+        //     const tempChapters: Chapter[] = [];
+        //     let chapters = this.tsQuery.selectClass(book, 'ul li a');
+        //     if (!chapters) {
+        //       chapters = this.tsQuery.selectClass(book, 'li a');
+        //     }
+
+        //     chapters.forEach(chapter => {
+        //       const tempChapter = new Chapter(
+        //         chapter
+        //           .querySelector('.title')
+        //           .innerHTML.replace('&nbsp;', ' '),
+        //         chapter.getAttribute('href').replace('.html', '')
+        //       );
+        //       // console.log(tempChapter);
+
+        //       tempChapters.push(tempChapter);
+        //     });
+        //     if (tempChapters.length !== 1) {
+        //       tempChapters.shift();
+        //     }
+        //     tempBook.chapters = tempChapters;
+        //     // console.log(tempBook);
+        //     tempBooks.push(tempBook);
+        //   });
+        //   tempTestament.books = tempBooks;
+        //   this.nav.push(tempTestament);
+
+        //   // console.log(testamentName);
+        // });
       });
 
     // this.nav.forEach(n => {

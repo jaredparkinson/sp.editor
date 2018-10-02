@@ -13,11 +13,12 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import * as _ from 'underscore';
 import { log } from 'util';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { TSQuery } from '../TSQuery';
+// import { TSQuery } from '../TSQuery';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -93,7 +94,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           const df = range.getRangeAt(0).cloneContents();
           const wTags = df.querySelectorAll('w');
 
-          Array.prototype.slice.call(wTags).forEach(wTag => {
+          _.each(wTags, wTag => {
             console.log(wTag);
           });
         }
@@ -185,9 +186,9 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     }, 1000);
     // this.ngZone.runOutsideAngular();
   }
-  private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
-    return Array.prototype.slice.call(list) as Element[];
-  }
+  // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
+  //   return Array.prototype.slice.call(list) as Element[];
+  // }
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
     let scrollIntoView: Element;

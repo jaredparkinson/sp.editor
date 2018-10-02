@@ -5,6 +5,7 @@ import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import * as jsZip from 'jszip';
 // import * as pako from 'pako';
 import { Observable } from 'rxjs';
+import * as _ from 'underscore';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
@@ -173,13 +174,19 @@ export class ChapterService {
     Array.prototype.slice.call(doc.querySelectorAll('note')).forEach(elem => {
       this.notes2.push(new Note(elem));
     });
-    Array.prototype.slice
-      .call(doc.querySelectorAll('.hidden-paragraph'))
-      .forEach(elem => {
-        this.paragraphs.push(
-          new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
-        );
-      });
+
+    _.each(doc.querySelectorAll('.hidden-paragraph'), elem => {
+      this.paragraphs.push(
+        new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
+      );
+    });
+    // Array.prototype.slice
+    //   .call(doc.querySelectorAll('.hidden-paragraph'))
+    //   .forEach(elem => {
+    //     this.paragraphs.push(
+    //       new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
+    //     );
+    //   });
     if (this.notes === null || this.notes === undefined) {
       this.notes = '';
     }

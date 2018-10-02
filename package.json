@@ -66,7 +66,8 @@
     "rxjs": "^6.2.2",
     "stream": "^0.0.2",
     "tslint-config-prettier": "^1.14.0",
-    "tslint-microsoft-contrib": "^5.1.0"
+    "tslint-microsoft-contrib": "^5.1.0",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.8.3",
@@ -90,6 +91,7 @@
     "@types/mark.js": "^8.11.1",
     "@types/node": "10.5.2",
     "@types/pako": "^1.0.0",
+    "@types/underscore": "^1.8.9",
     "codelyzer": "4.4.2",
     "core-js": "2.5.7",
     "electron": "^2.0.10",

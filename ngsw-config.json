@@ -5,7 +5,7 @@
     "installMode": "prefetch",
     "resources": {
       "files": [
-        "/assets/scriptures.zip",
+        "/assets/scriptures/**",
         "/favicon.ico",
         "/index.html",
         "/*.css",

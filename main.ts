@@ -31,6 +31,7 @@ function createWindow() {
   });
   content = win.webContents;
   content.on('found-in-page', (event, result) => {
+    // result.activeMatchOrdinal = result.activeMatchOrdinal - 1;
     console.log(result);
     view.webContents.send(
       'search-results',
@@ -142,9 +143,17 @@ try {
   });
   ipcMain.on('search-close', (event, arg) => {
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
-    view.webContents.send('search-close', 'open');
+    // view.webContents.send('search-close', 'open');
+    // content.send('search-close2', 'open');
+    content.focus();
+    // event.returnValue = 'pong';
+  });
+  ipcMain.on('search-close-fip', (event, arg) => {
+    content.stopFindInPage('clearSelection');
+    view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     content.send('search-close2', 'open');
     content.focus();
+    // view.webContents.send('search-close', 'open');
     // event.returnValue = 'pong';
   });
   ipcMain.on('search-open', (event, arg) => {
@@ -155,15 +164,21 @@ try {
     view.webContents.focus();
     // event.returnValue = 'pong';
   });
-  ipcMain.on('search-forward', (event, arg) => {
+  ipcMain.on('search-find', (event, arg) => {
     // console.log();
-    content.findInPage(arg, { wordStart: true });
+    content.findInPage(arg);
+    // console.log();
+    // event.returnValue = 'pong';
+  });
+  ipcMain.on('search-forward', (event, arg) => {
+    console.log('arg ' + arg);
+    content.findInPage(arg, { findNext: true });
     // console.log();
     // event.returnValue = 'pong';
   });
   ipcMain.on('search-back', (event, arg) => {
     // console.log();
-    content.findInPage(arg, { forward: false });
+    content.findInPage(arg, { forward: false, findNext: true });
     // event.returnValue = 'pong';
   });
   ipcMain.on('synchronous-message', (event, arg) => {

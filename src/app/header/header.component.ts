@@ -17,7 +17,6 @@ import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { ElectronService } from '../providers/electron.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -40,8 +39,7 @@ export class HeaderComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     private router: Router,
-    private location: Location,
-    private electronService: ElectronService
+    private location: Location
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }

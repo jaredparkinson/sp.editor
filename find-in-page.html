@@ -12,11 +12,11 @@
 
 <body onkeyup="escape(event)">
   <div id="searchBar">
-    <input placeholder="Enter text to search" type="search" name="" id="searchBox" oninput="searchTextChange('forward')"
+    <input placeholder="Enter text to search" type="search" name="" id="searchBox" oninput="searchTextChange(event, 'find')"
       onkeyup="escape(event)">
     <div id="results">No Results</div>
-    <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
-    <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>
+    <button onclick="searchTextChange(event, 'back')" class="fas fa-chevron-left"></button>
+    <button onclick="searchTextChange(event, 'forward')" class="fas fa-chevron-right"></button>
 
     <button id="closeButton" onclick="closeSearch()" class="fas fa-times-circle"></button>
   </div>

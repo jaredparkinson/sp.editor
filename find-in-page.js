@@ -3,6 +3,9 @@ const {
   webContents
 } = require('electron');
 
+let searchText = '';
+let timer;
+
 ipcRenderer.on('search-close', (event, arg) => {
   console.log(arg) // prints "ping"
   // document.querySelector('body').classList.add('close');
@@ -30,8 +33,8 @@ ipcRenderer.on('search-open', (event, arg) => {
 
 function clearSearch() {
 
-  document.getElementById('searchBox').value = '';
-  document.getElementById('results').textContent = 'No Results';
+  // document.getElementById('searchBox').value = '';
+  // document.getElementById('results').textContent = 'No Results';
   ipcRenderer.send('search-clear', 'ping');
 
   // document.querySelector('body').classList.add('close');
@@ -39,9 +42,9 @@ function clearSearch() {
 }
 
 function closeSearch() {
-  clearSearch();
+  // clearSearch();
 
-  ipcRenderer.send('search-close', 'close');
+  ipcRenderer.send('search-close-fip', 'close');
 }
 
 function escape(event) {
@@ -49,25 +52,49 @@ function escape(event) {
   if (event.key == 'Escape') {
     closeSearch();
   }
-  if (event.shiftKey && event.key === 'Enter') {
-    searchTextChange('back');
-  } else if (event.key == 'Enter') {
-    searchTextChange('forward');
+  // if (event.shiftKey && event.key === 'Enter') {
+  //   searchTextChange('back');
+  // } else
+
+
+  if (event.key == 'Enter') {
+    timer = setTimeout(function () {
+      searchTextChange(event, 'forward');
+    }, 300);
+
   }
 }
 
-function searchTextChange(direction) {
+function searchTextChange(event, direction) {
+
+  alert(event.type.toString() + ' ' + direction);
+  if (direction === 'find' && event.type.toString() == 'keyup') {
+    alert(direction);
+    return;
+  }
+
+  // if (document.getElementById('searchBox').value === this.searchText && direction === 'find') {
+  //   alert('duplicate');
+  //   return;
+  // }
+
   if (document.getElementById('searchBox').value.trim().length <= 0) {
     // alert((document.getElementById('searchBox').value.trim().length));
     this.clearSearch();
   } else {
     switch (direction) {
+      case 'find':
+        {
+
+          ipcRenderer.send('search-find', document.getElementById('searchBox').value);
+          break;
+        }
       case 'forward':
         {
           //   console.log(this.normalizeSearchText());
-
           ipcRenderer.send('search-forward', document.getElementById('searchBox').value);
           break;
+
         }
       case 'back':
         {
@@ -81,5 +108,6 @@ function searchTextChange(direction) {
         }
     }
     document.getElementById('searchBox').focus();
+    this.searchText = document.getElementById('searchBox').value;
   }
 }

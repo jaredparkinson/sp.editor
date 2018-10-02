@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
 import {
   faChevronLeft,
@@ -6,13 +6,13 @@ import {
   faCoffee
 } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+// import { ipcRenderer } from 'electron';
 // import remote from 'electron';
 import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-import { ipcRenderer } from 'electron';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -59,6 +59,9 @@ export class AppComponent implements OnInit {
 
       if (event.key === 'Escape') {
         console.log(event);
+        this.electronService.resetWindow();
+        console.log('Window reset');
+
         this.electronService.ipcRenderer.send('search-close', 'close');
       }
     }

@@ -99,40 +99,40 @@ export class ChapterService {
       );
       console.log('test web');
 
-      this.scripturesArchive.subscribe(data => {
-        // const results = pako.inflate(new Uint8Array(data));0
-        jsZip.loadAsync(data).then(async o => {
-          const f = await o
-            .file(
-              this.navService.urlBuilder(
-                book.toLowerCase(),
-                vSplit[0].toLowerCase()
-              )
-            )
-            .async('text');
+      // this.scripturesArchive.subscribe(data => {
+      //   // const results = pako.inflate(new Uint8Array(data));0
+      //   jsZip.loadAsync(data).then(async o => {
+      //     const f = await o
+      //       .file(
+      //         this.navService.urlBuilder(
+      //           book.toLowerCase(),
+      //           vSplit[0].toLowerCase()
+      //         )
+      //       )
+      //       .async('text');
 
-          this.setChapter(
-            f,
-            book,
-            vSplit[0],
-            vSplit[1],
-            vSplit[2],
-            synchronizedScrolling
-          );
-        });
+      //     this.setChapter(
+      //       f,
+      //       book,
+      //       vSplit[0],
+      //       vSplit[1],
+      //       vSplit[2],
+      //       synchronizedScrolling
+      //     );
+      //   });
 
-        // console.log(results);
-      });
-      // url.subscribe(u => {
-      //   this.setChapter(
-      //     u,
-      //     book,
-      //     vSplit[0],
-      //     vSplit[1],
-      //     vSplit[2],
-      //     synchronizedScrolling
-      //   );
+      //   // console.log(results);
       // });
+      url.subscribe(u => {
+        this.setChapter(
+          u,
+          book,
+          vSplit[0],
+          vSplit[1],
+          vSplit[2],
+          synchronizedScrolling
+        );
+      });
     }
   }
   public resetHighlighting(): void {

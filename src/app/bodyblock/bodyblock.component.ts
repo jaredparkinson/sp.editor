@@ -18,7 +18,6 @@ import { log } from 'util';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-// import { TSQuery } from '../TSQuery';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -183,7 +182,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     }, 50);
     this.timer2 = setTimeout(() => {
       this.synchronizedScrolling();
-    }, 1000);
+    }, 200);
     // this.ngZone.runOutsideAngular();
   }
   // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
@@ -193,9 +192,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     const verses = document.querySelectorAll('span.verse');
     let scrollIntoView: Element;
 
-    // tslint:disable-next-line:prefer-for-of
-    for (let x = 0; x < verses.length; x++) {
-      const element = verses[x];
+    _.toArray<Element>(verses).some(element => {
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
       const start = 35;
@@ -209,9 +206,29 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
         document.getElementById(noteID).scrollIntoView();
 
-        break;
+        return true;
       }
-    }
+    });
+
+    // tslint:disable-next-line:prefer-for-of
+    // for (let x = 0; x < verses.length; x++) {
+    //   const element = verses[x];
+    //   const top = element.getBoundingClientRect().top;
+    //   const height = element.getBoundingClientRect().height;
+    //   const start = 35;
+    //   if (top + height > start && top < start + height) {
+    //     scrollIntoView = element;
+    //   } else if (scrollIntoView !== undefined) {
+    //     const noteID =
+    //       'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+
+    //     console.log('nojgtgcd' + noteID);
+
+    //     document.getElementById(noteID).scrollIntoView();
+
+    //     break;
+    //   }
+    // }
 
     if (scrollIntoView === undefined) {
       console.log(scrollIntoView);

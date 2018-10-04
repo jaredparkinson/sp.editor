@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as _ from 'underscore';
 // import { JSDOM } from 'jsdom';
 import { File } from '../models/file';
 import { Folder } from '../models/Folder';
@@ -14,6 +15,7 @@ import { NavLinks } from '../models/navlinks.model';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { UrlBuilder } from './UrlBuilder';
 
 @Component({
   selector: 'app-files',
@@ -28,6 +30,7 @@ export class FilesComponent implements OnInit {
   private nav: string;
   private file: File;
   private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
+  private addressBar: HTMLInputElement;
   constructor(
     public fileManager: NavigationService,
     public chapterService: ChapterService,
@@ -39,6 +42,7 @@ export class FilesComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.fileManager.folders[0].path);
+    this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
   setVisibility(path: string) {
     this.fileManager.getNavigation(path);
@@ -80,15 +84,46 @@ export class FilesComponent implements OnInit {
         'addressBar'
       ) as HTMLInputElement).value;
       addressBarValue = addressBarValue.replace('/', ' ');
-      const address = addressBarValue.split(' ').filter(f => {
-        return f.trim() !== '';
-      });
-      console.log(address);
-      if (address.length >= 2) {
-        this.router.navigateByUrl(address[0] + '/' + address[1]);
-        // this.chapterService.getChapter(address[0], address[1]);
-      }
+      this.buildUrl();
+
+      // const address = this.addressBar.value
+      //   .replace('/', ' ')
+      //   .split(' ')
+      //   .filter(f => {
+      //     return f.trim() !== '';
+      //   });
+      // // const address = addressBarValue.split(' ').filter(f => {
+      // //   return f.trim() !== '';
+      // // });
+      // console.log(address);
+      // if (address.length >= 2) {
+      //   this.router.navigateByUrl(address[0] + '/' + address[1]);
+      //   // this.chapterService.getChapter(address[0], address[1]);
+      // }
     }
+  }
+
+  private buildUrl(): string {
+    // const text = this.addressBar.value.trim().split(' ');
+
+    const aasdf = new UrlBuilder();
+    // console.log(
+    //   'contains ' +
+    //     _.contains(
+    //       ['0', '1', '2', '3', '4', '5', '6', '8', '9'],
+    //       text[0].split('-')[0]
+    //     )
+    // );
+    const urlAsdf = aasdf.urlParser(this.addressBar.value).split(' ');
+    console.log(urlAsdf[0] + '/' + urlAsdf[1].replace(':', '.'));
+    this.router.navigateByUrl(urlAsdf[0] + '/' + urlAsdf[1].replace(':', '.'));
+    // console.log('text ' + text[0]);
+    // if (text.length === 0) {
+    //   return '';
+    // } else if (text[0] === '1') {
+    //   console.log('number');
+    // }
+    return '';
   }
 
   onChapterClick(book: string, chapter: string) {

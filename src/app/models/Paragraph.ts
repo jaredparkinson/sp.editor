@@ -6,9 +6,14 @@ export class Paragraph {
   constructor(
     paragraph: HTMLElement,
     verseNums: number[],
-    contextNums: number[]
+    contextNums: number[],
+    tgGs: boolean
   ) {
-    _.each(paragraph.querySelectorAll('span.verse'), v => {
+    let sel = 'span.verse';
+    if (tgGs) {
+      sel = 'li';
+    }
+    _.each(paragraph.querySelectorAll(sel), v => {
       this.verses.push(new Verse(v as HTMLElement));
     });
     this.setHighlight2(verseNums, contextNums);

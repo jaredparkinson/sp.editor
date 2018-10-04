@@ -55,6 +55,8 @@ export class ChapterService {
     // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
     this.notes2 = []; // chapter.split('.');
+    this.navService.pageTitle = '';
+    this.header = '';
     let vSplit = chapter.split('.');
     if (chapter === '') {
       vSplit = book.split('.');
@@ -65,7 +67,7 @@ export class ChapterService {
 
     try {
       // throw SyntaxError;
-      console.log(this.fs);
+      // console.log(this.fs);
 
       // if (this.fs) {
       //   console.log('tasdfsdfasdufjin oiasdfoijasdflkasdfljk');
@@ -174,10 +176,23 @@ export class ChapterService {
     _.each(doc.querySelectorAll('note'), elem => {
       this.notes2.push(new Note(elem as HTMLElement));
     });
+    let hiddenParagraph = '.hidden-paragraph';
+    let tgGs = false;
+    if (book === 'tg' || book === 'gs') {
+      // console.log('tggs');
+      hiddenParagraph = '.index ul';
+      tgGs = true;
+    }
+    console.log(doc.querySelectorAll(hiddenParagraph));
 
-    _.each(doc.querySelectorAll('.hidden-paragraph'), elem => {
+    _.each(doc.querySelectorAll(hiddenParagraph), elem => {
       this.paragraphs.push(
-        new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
+        new Paragraph(
+          elem as HTMLElement,
+          this.verseNums,
+          this.contextNums,
+          tgGs
+        )
       );
     });
     // Array.prototype.slice

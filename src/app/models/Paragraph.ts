@@ -1,6 +1,6 @@
-import * as _ from 'underscore';
 import { Verse } from './Verse';
 
+import * as lodash from 'lodash';
 export class Paragraph {
   public verses: Verse[] = [];
   constructor(
@@ -13,7 +13,7 @@ export class Paragraph {
     if (tgGs) {
       sel = 'li';
     }
-    _.each(paragraph.querySelectorAll(sel), v => {
+    lodash.each(paragraph.querySelectorAll(sel), v => {
       this.verses.push(new Verse(v as HTMLElement));
     });
     this.setHighlight2(verseNums, contextNums);
@@ -22,11 +22,11 @@ export class Paragraph {
    * setHighlight
    */
   public setHighlight2(verseNums: number[], contextNums: number[]) {
-    _.each(this.verses, verse => {
-      if (_.includes(verseNums, verse.num)) {
+    lodash.each(this.verses, verse => {
+      if (lodash.includes(verseNums, verse.num)) {
         verse.highlight = true;
       }
-      if (_.includes(contextNums, verse.num)) {
+      if (lodash.includes(contextNums, verse.num)) {
         verse.context = true;
       }
     });

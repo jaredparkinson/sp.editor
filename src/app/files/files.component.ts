@@ -6,7 +6,8 @@ import {
 } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as _ from 'underscore';
+
+import * as lodash from 'lodash';
 // import { JSDOM } from 'jsdom';
 import { File } from '../models/file';
 import { Folder } from '../models/Folder';
@@ -115,11 +116,12 @@ export class FilesComponent implements OnInit {
     //       text[0].split('-')[0]
     //     )
     // );
-    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value); //.split(' ');
+    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value); // .split(' ');
     console.log(urlAsdf);
 
     // console.log(urlAsdf[0] + '/' + urlAsdf[1].replace(':', '.'));
-    this.router.navigateByUrl(urlAsdf); //[0] + '/' + urlAsdf[1].replace(':', '.'));
+    this.router.navigateByUrl(urlAsdf);
+    // [0] + '/' + urlAsdf[1].replace(':', '.'));
     // console.log('text ' + text[0]);
     // if (text.length === 0) {
     //   return '';

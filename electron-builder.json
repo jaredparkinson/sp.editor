@@ -21,7 +21,8 @@
   ],
   "win": {
     "icon": "dist",
-    "target": ["portable"]
+    "target": ["nsis"],
+    "compression": "store"
   },
   "mac": {
     "icon": "dist",

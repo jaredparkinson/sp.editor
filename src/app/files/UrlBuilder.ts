@@ -1,6 +1,7 @@
-import * as _ from 'underscore';
-import { BookConvert } from './BookCovert';
 import { Injectable } from '@angular/core';
+import * as lodash from 'lodash';
+
+import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
@@ -139,7 +140,7 @@ export class UrlBuilder {
   public bookConvert: BookConvert[] = [];
 
   constructor() {
-    _.each(this.booksAsdfj, book => {
+    lodash.each(this.booksAsdfj, book => {
       this.bookConvert.push(new BookConvert(book));
     });
 
@@ -153,7 +154,7 @@ export class UrlBuilder {
     let bookName = '';
 
     const cRegex = new RegExp('\\(.+\\)');
-    let highlight = '';
+    const highlight = '';
     let context = '';
 
     // console.log(url);
@@ -203,9 +204,10 @@ export class UrlBuilder {
 
   private getBookName(outUrl: string) {
     let bookName = '';
-    _.each(this.bookConvert, book => {
+
+    lodash.each(this.bookConvert, book => {
       // console.log(book.names);
-      _.each(book.names, b => {
+      lodash.each(book.names, b => {
         if (outUrl.includes(b.trim().toLowerCase())) {
           outUrl = outUrl.replace(b.toLowerCase(), '');
           // console.log(outUrl + 'matched' + b.toLowerCase() + book.convertTo);

@@ -13,7 +13,8 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import * as _ from 'underscore';
+import * as lodash from 'lodash';
+
 import { log } from 'util';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
@@ -93,7 +94,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           const df = range.getRangeAt(0).cloneContents();
           const wTags = df.querySelectorAll('w');
 
-          _.each(wTags, wTag => {
+          lodash.each(wTags, wTag => {
             console.log(wTag);
           });
         }
@@ -192,7 +193,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     const verses = document.querySelectorAll('span.verse');
     let scrollIntoView: Element;
 
-    _.toArray<Element>(verses).some(element => {
+    lodash.toArray<Element>(verses).some(element => {
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
       const start = 35;

@@ -5,7 +5,8 @@ import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import * as jsZip from 'jszip';
 // import * as pako from 'pako';
 import { Observable } from 'rxjs';
-import * as _ from 'underscore';
+
+import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
@@ -42,7 +43,7 @@ export class ChapterService {
   }
 
   public resetNotes(): void {
-    _.each(this.notes2, note => {
+    lodash.each(this.notes2, note => {
       note.reset();
     });
   }
@@ -173,7 +174,7 @@ export class ChapterService {
     this.saveStateService.data.currentPage = urlText;
 
     this.header = doc.querySelector('header').innerHTML;
-    _.each(doc.querySelectorAll('note'), elem => {
+    lodash.each(doc.querySelectorAll('note'), elem => {
       this.notes2.push(new Note(elem as HTMLElement));
     });
     let hiddenParagraph = '.hidden-paragraph';
@@ -185,7 +186,7 @@ export class ChapterService {
     }
     console.log(doc.querySelectorAll(hiddenParagraph));
 
-    _.each(doc.querySelectorAll(hiddenParagraph), elem => {
+    lodash.each(doc.querySelectorAll(hiddenParagraph), elem => {
       this.paragraphs.push(
         new Paragraph(
           elem as HTMLElement,

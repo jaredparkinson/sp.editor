@@ -169,16 +169,16 @@ export class UrlBuilder {
         //
         .replace(':', '.')
 
-        .replace('\uFEFF', '')
-        .replace('\u2013', '-')
         .trim() +
       '.' +
       context
         .replace('(', '')
         .replace(')', '')
-        .replace('\u2013', '-')
         .trim()
-    ).replace(/\s/g, '');
+    )
+      .replace(/\s/g, '')
+      .replace(/\u2013/g, '-')
+      .replace(/\uFEFF/g, '');
   }
 
   private getBookName(outUrl: string) {

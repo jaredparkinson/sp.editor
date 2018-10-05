@@ -27,7 +27,7 @@ export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
-  private baseFolder: string;
+  // private baseFolder: string;
   private nav: string;
   private file: File;
   private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
@@ -56,29 +56,6 @@ export class FilesComponent implements OnInit {
   }
   setTestament(folder: string) {
     this.fileManager.getTestament(folder);
-    // folder.visible = !folder.visible;
-    // if (folder.visible) {
-    //   this.fileManager.navLinks = folder.folders;
-    //   this.saveState.data.foldersVisible = false;
-    //   // this.booksVisible = true;
-    //   // console.log(folder);
-    // } else {
-    //   this.fileManager.navLinks = [];
-    // }
-    // this.fileManager.getNavigation(manifest).subscribe(s => {
-    //   const parser = new DOMParser();
-    //   const doc = parser.parseFromString(s, 'text/html');
-    //   const linkTags = doc.getElementsByTagName('a');
-    //   // tslint:disable-next-line:prefer-for-of
-    //   for (let index = 0; index < linkTags.length; index++) {
-    //     // console.log(element);
-    //     const element = linkTags[index];
-    //     this.links.push(
-    //       new NavLinks(element.getAttribute('href').replace('?', ''))
-    //     );
-    //   }
-    //   this.map.set(id, this.links);
-    // });
   }
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
@@ -87,54 +64,18 @@ export class FilesComponent implements OnInit {
       ) as HTMLInputElement).value;
       addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();
-
-      // const address = this.addressBar.value
-      //   .replace('/', ' ')
-      //   .split(' ')
-      //   .filter(f => {
-      //     return f.trim() !== '';
-      //   });
-      // // const address = addressBarValue.split(' ').filter(f => {
-      // //   return f.trim() !== '';
-      // // });
-      // console.log(address);
-      // if (address.length >= 2) {
-      //   this.router.navigateByUrl(address[0] + '/' + address[1]);
-      //   // this.chapterService.getChapter(address[0], address[1]);
-      // }
     }
   }
 
   private buildUrl() {
-    // const text = this.addressBar.value.trim().split(' ');
-
-    // const aasdf = new UrlBuilder();
-    // console.log(
-    //   'contains ' +
-    //     _.contains(
-    //       ['0', '1', '2', '3', '4', '5', '6', '8', '9'],
-    //       text[0].split('-')[0]
-    //     )
-    // );
-    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value); // .split(' ');
+    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value);
     console.log(urlAsdf);
 
-    // console.log(urlAsdf[0] + '/' + urlAsdf[1].replace(':', '.'));
     this.router.navigateByUrl(urlAsdf);
-    // [0] + '/' + urlAsdf[1].replace(':', '.'));
-    // console.log('text ' + text[0]);
-    // if (text.length === 0) {
-    //   return '';
-    // } else if (text[0] === '1') {
-    //   console.log('number');
-    // }
-    // return '';
   }
 
   onChapterClick(book: string, chapter: string) {
     this.chapterService.getChapter(book, chapter, null);
   }
-  public getNavigation() {
-    // return this.fileManager.getNavigation();
-  }
+  public getNavigation() {}
 }

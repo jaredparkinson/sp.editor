@@ -25,13 +25,9 @@ export class AppComponent implements OnInit {
   public testStyle = '#gridBody {background-color: black;}';
   constructor(
     public electronService: ElectronService,
-    private chapterService: ChapterService,
     private translate: TranslateService,
-    private route: ActivatedRoute,
     public navService: NavigationService,
-    public saveState: SaveStateService,
-    private router: Router,
-    private ngZone: NgZone
+    public saveState: SaveStateService
   ) {
     this.translate.setDefaultLang('en');
 

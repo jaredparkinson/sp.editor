@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
+import { HelperService } from '../services/helper.service';
+import { NavigationService } from '../services/navigation.service';
 import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
@@ -8,9 +12,10 @@ describe('SettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
-    })
-    .compileComponents();
+      declarations: [SettingsComponent],
+      providers: [NavigationService, HelperService],
+      imports: [HttpClientModule, Router]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

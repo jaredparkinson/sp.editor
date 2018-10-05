@@ -5,7 +5,12 @@ import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
-  private booksAsdfj = [
+  constructor() {
+    lodash.each(this.bookNames, book => {
+      this.bookConvert.push(new BookConvert(book));
+    });
+  }
+  private bookNames = [
     ['Genesis', 'Gen.', 'Gen', 'Gen', 'gen'],
     ['Exodus', 'Ex.', 'Ex', 'ex'],
     ['Leviticus', 'Lev.', 'Lev', 'lev '],
@@ -139,81 +144,51 @@ export class UrlBuilder {
   ];
   public bookConvert: BookConvert[] = [];
 
-  constructor() {
-    lodash.each(this.booksAsdfj, book => {
-      this.bookConvert.push(new BookConvert(book));
-    });
-
-    // console.log(this.bookConvert.length);
-  }
+  private cRegex = new RegExp('\\(.+\\)');
 
   public urlParser(url: string): string {
-    // console.log('asdfklajsdf');
     let outUrl = url.toLowerCase();
-
     let bookName = '';
-
-    const cRegex = new RegExp('\\(.+\\)');
-    const highlight = '';
     let context = '';
 
-    // console.log(url);
-
     ({ outUrl, bookName } = this.getBookName(outUrl));
-    console.log(outUrl);
+
     try {
-      context = cRegex.exec(outUrl).toString();
+      context = this.cRegex.exec(outUrl).toString();
     } catch {
       context = '';
     }
 
     outUrl = outUrl.replace(context, '');
-    // console.log('outurl ' + outUrl);
-    console.log(bookName + ' ' + outUrl + ' ' + context);
-
-    console.log(outUrl);
 
     return (
-      (
-        bookName +
-        '/' +
-        outUrl
-          // .replace(' ', '')
-          //
-          .replace(':', '.')
-          // .replace('\u00A0', '')
-          .replace('\uFEFF', '')
-          .replace('\u2013', '-')
-          .trim() +
-        '.' +
-        context
-          .replace('(', '')
-          .replace(')', '')
-          .replace('\u2013', '-')
-          .trim()
-      )
-        // .replace(' ', '')
-        // .replace('\u00A0', '')
-        // .replace('\u0020', '')
-        // .replace('\uFF0D', '-')
-        // .replace('\u2014', '-')
-        // .replace('\u00A0', '')
-        .replace(/\s/g, '')
-    );
+      bookName +
+      '/' +
+      outUrl
+
+        //
+        .replace(':', '.')
+
+        .replace('\uFEFF', '')
+        .replace('\u2013', '-')
+        .trim() +
+      '.' +
+      context
+        .replace('(', '')
+        .replace(')', '')
+        .replace('\u2013', '-')
+        .trim()
+    ).replace(/\s/g, '');
   }
 
   private getBookName(outUrl: string) {
     let bookName = '';
 
     lodash.each(this.bookConvert, book => {
-      // console.log(book.names);
       lodash.each(book.names, b => {
         if (outUrl.includes(b.trim().toLowerCase())) {
           outUrl = outUrl.replace(b.toLowerCase(), '');
-          // console.log(outUrl + 'matched' + b.toLowerCase() + book.convertTo);
           bookName = book.convertTo;
-          console.log(book.names + ' outurl ' + bookName);
-          // return { outUrl, bookName };
         }
       });
     });

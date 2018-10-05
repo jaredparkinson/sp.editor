@@ -4,6 +4,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import {
   faBars,
   faBookOpen,
@@ -29,7 +30,8 @@ export class NotesComponent implements OnInit {
     public chapterService: ChapterService,
     public navServices: NavigationService,
     private sanitizer: DomSanitizer,
-    public saveState: SaveStateService
+    public saveState: SaveStateService,
+    private router: Router
   ) {}
 
   getNotes(): SafeHtml {

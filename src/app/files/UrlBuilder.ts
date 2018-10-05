@@ -2,81 +2,81 @@ import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
 export class UrlBuilder {
   private books = [
-    ['Genesis', 'Gen.', 'gen'],
-    ['Exodus', 'Ex.', 'ex'],
-    ['Leviticus', 'Lev.', 'lev '],
-    ['Numbers', 'Num.', 'num'],
-    ['Deuteronomy', 'Deut.', 'deut'],
-    ['Joshua', 'Josh.', 'josh'],
-    ['Judges', 'Judg.', 'judg'],
+    ['Genesis', 'Gen.', 'Gen', 'Gen', 'gen'],
+    ['Exodus', 'Ex.', 'Ex', 'ex'],
+    ['Leviticus', 'Lev.', 'Lev', 'lev '],
+    ['Numbers', 'Num.', 'Num', 'num'],
+    ['Deuteronomy', 'Deut.', 'Deut', 'deut'],
+    ['Joshua', 'Josh.', 'Josh', 'josh'],
+    ['Judges', 'Judg.', 'Judg', 'judg'],
     ['Ruth', 'Ruth', 'ruth'],
-    ['1 Samuel', '1 Sam.', '1-sam'],
-    ['2 Samuel', '2 Sam.', '2-sam'],
-    ['1 Kings', '1 Kgs.', '1-kgs'],
-    ['2 Kings', '2 Kgs.', '2-kgs'],
-    ['1 Chronicles', '1 Chr.', '1-chr'],
-    ['1 Chronicles', '1 Chron.', '2-chr'],
-    ['2 Chronicles', '2 Chr.', '1-chr'],
-    ['2 Chronicles', '2 Chron.', '2-chr'],
+    ['1 Samuel', '1 Sam.', '1 Sam', '1-sam'],
+    ['2 Samuel', '2 Sam.', '2 Sam', '2-sam'],
+    ['1 Kings', '1 Kgs.', '1 Kgs', '1-kgs'],
+    ['2 Kings', '2 Kgs.', '2 Kgs', '2-kgs'],
+    ['1 Chronicles', '1 Chr.', '1 Chr', '1-chr'],
+    ['1 Chronicles', '1 Chron.', '1 Chron', '2-chr'],
+    ['2 Chronicles', '2 Chr.', '2 Chr', '1-chr'],
+    ['2 Chronicles', '2 Chron.', '2 Chron', '2-chr'],
     ['Ezra', 'Ezra', 'ezra'],
-    ['Nehemiah', 'Neh.', 'neh'],
-    ['Esther', 'Esth.', 'esth'],
+    ['Nehemiah', 'Neh.', 'Neh', 'neh'],
+    ['Esther', 'Esth.', 'Esth', 'esth'],
     ['Job', 'Job', 'job'],
-    ['Psalms', 'Ps.', 'ps'],
-    ['Psalm', 'Ps.', 'ps'],
-    ['Proverbs', 'Prov.', 'prov'],
-    ['Ecclesiastes', 'Eccl.', 'eccl'],
+    ['Psalms', 'Ps.', 'Ps', 'ps'],
+    ['Psalm', 'Ps.', 'Ps', 'ps'],
+    ['Proverbs', 'Prov.', 'Prov', 'prov'],
+    ['Ecclesiastes', 'Eccl.', 'Eccl', 'eccl'],
     ['Song of Solomon', 'Song', 'song'],
-    ['Isaiah', 'Isa.', 'isa'],
-    ['Jeremiah', 'Jer.', 'jer'],
-    ['Lamentations', 'Lam.', 'lam'],
-    ['Ezekiel', 'Ezek.', 'ezek'],
-    ['Daniel', 'Dan.', 'dan'],
+    ['Isaiah', 'Isa.', 'Isa', 'isa'],
+    ['Jeremiah', 'Jer.', 'Jer', 'jer'],
+    ['Lamentations', 'Lam.', 'Lam', 'lam'],
+    ['Ezekiel', 'Ezek.', 'Ezek', 'ezek'],
+    ['Daniel', 'Dan.', 'Dan', 'dan'],
     ['Hosea', 'Hosea', 'hosea'],
     ['Joel', 'Joel', 'joel'],
     ['Amos', 'Amos', 'amos'],
-    ['Obadiah', 'Obad.', 'obad'],
+    ['Obadiah', 'Obad.', 'Obad', 'obad'],
     ['Jonah', 'Jonah', 'jonah'],
     ['Micah', 'Micah', 'micah'],
     ['Nahum', 'Nahum', 'nahum'],
-    ['Habakkuk', 'Hab.', 'hab'],
-    ['Habbakuk', 'Hab.', 'hab'],
-    ['Zephaniah', 'Zeph.', 'zeph'],
-    ['Haggai', 'Hag.', 'hag'],
-    ['Hagai', 'Hag.', 'hag'],
-    ['Zechariah', 'Zech.', 'zech'],
-    ['Malachi', 'Mal.', 'mal'],
-    ['Matthew', 'matthew', 'Matt.', 'matt'],
+    ['Habakkuk', 'Hab.', 'Hab', 'hab'],
+    ['Habbakuk', 'Hab.', 'Hab', 'hab'],
+    ['Zephaniah', 'Zeph.', 'Zeph', 'zeph'],
+    ['Haggai', 'Hag.', 'Hag', 'hag'],
+    ['Hagai', 'Hag.', 'Hag', 'hag'],
+    ['Zechariah', 'Zech.', 'Zech', 'zech'],
+    ['Malachi', 'Mal.', 'Mal', 'mal'],
+    ['Matthew', 'matthew', 'Matt.', 'matthew', 'Matt', 'matt'],
     ['Mark', 'Mark', 'mark'],
     ['Luke', 'Luke', 'luke'],
     ['John', 'John', 'john'],
     ['Acts', 'Acts', 'acts'],
-    ['Romans', 'Rom.', 'rom'],
-    ['1 Corinthians', '1 Cor.', '1-cor'],
-    ['2 Corinthians', '2 Cor.', '2-cor'],
-    ['Galatians', 'Gal.', 'gal'],
-    ['Ephesians', 'Eph.', 'eph'],
-    ['Philippians', 'Philip.', 'philip'],
-    ['Colossians', 'Col.', 'col'],
-    ['1 Thessalonians', '1 Thes.', '1-thes'],
-    ['2 Thessalonians', '2 Thes.', '2-thes'],
-    ['1 Timothy', '1 Tim.', '1-tim'],
-    ['2 Timothy', '2 Tim.', '2-tim'],
+    ['Romans', 'Rom.', 'Rom', 'rom'],
+    ['1 Corinthians', '1 Cor.', '1 Cor', '1-cor'],
+    ['2 Corinthians', '2 Cor.', '2 Cor', '2-cor'],
+    ['Galatians', 'Gal.', 'Gal', 'gal'],
+    ['Ephesians', 'Eph.', 'Eph', 'eph'],
+    ['Philippians', 'Philip.', 'Philip', 'philip'],
+    ['Colossians', 'Col.', 'Col', 'col'],
+    ['1 Thessalonians', '1 Thes.', '1 Thes', '1-thes'],
+    ['2 Thessalonians', '2 Thes.', '2 Thes', '2-thes'],
+    ['1 Timothy', '1 Tim.', '1 Tim', '1-tim'],
+    ['2 Timothy', '2 Tim.', '2 Tim', '2-tim'],
     ['Titus', 'Titus', 'titus'],
-    ['Philemon', 'Philem.', 'philem'],
-    ['Hebrews', 'Heb.', 'heb'],
+    ['Philemon', 'Philem.', 'Philem', 'philem'],
+    ['Hebrews', 'Heb.', 'Heb', 'heb'],
     ['James', 'James', 'james'],
-    ['1 Peter', '1 Pet.', '1-pet'],
-    ['1 Peter', '1 Pt.', '1-pet'],
-    ['2 Peter', '2 Pet.', '2-pet'],
-    ['2 Peter', '2 Pt.', '2-pet'],
-    ['1 John', '1 Jn.', '1-jn'],
-    ['2 John', '2 Jn.', '2-jn'],
-    ['3 John', '3 Jn.', '3-jn'],
+    ['1 Peter', '1 Pet.', '1 Pet', '1-pet'],
+    ['1 Peter', '1 Pt.', '1 Pt', '1-pet'],
+    ['2 Peter', '2 Pet.', '2 Pet', '2-pet'],
+    ['2 Peter', '2 Pt.', '2 Pt', '2-pet'],
+    ['1 John', '1 Jn.', '1 Jn', '1-jn'],
+    ['2 John', '2 Jn.', '2 Jn', '2-jn'],
+    ['3 John', '3 Jn.', '3 Jn', '3-jn'],
     ['Jude', 'Jude', 'jude'],
-    ['Revelations', 'Rev.', 'rev'],
-    ['1 Nephi', '1 Ne.', '1 Ne', '1-ne'],
-    ['2 Nephi', '2 Ne.', '2 Ne', '2-ne'],
+    ['Revelations', 'Rev.', 'Rev', 'rev'],
+    ['1 Nephi', '1 Ne.', '1 Ne', '1 Ne', '1-ne'],
+    ['2 Nephi', '2 Ne.', '2 Ne', '2 Ne', '2-ne'],
     ['Jacob', 'Jacob', 'jacob'],
     ['Enos', 'Enos', 'enos'],
     ['Jarom', 'Jarom', 'jarom'],
@@ -84,17 +84,17 @@ export class UrlBuilder {
     ['Words of Mormon', 'W of M', 'w-of-m', 'Words of Mormon', 'WofM'],
     ['Mosiah', 'mosiah', 'Mosiah'],
     ['Alma', 'Alma', 'alma'],
-    ['Helaman', 'Hel.', 'hel'],
-    ['3 Nephi', '3 Ne.', '3 Ne', '3-ne'],
-    ['4 Nephi', '4 Ne.', '4 Ne', '4-ne'],
-    ['Mormon', 'Morm.', 'morm'],
+    ['Helaman', 'Hel.', 'Hel', 'hel'],
+    ['3 Nephi', '3 Ne.', '3 Ne', '3 Ne', '3-ne'],
+    ['4 Nephi', '4 Ne.', '4 Ne', '4 Ne', '4-ne'],
+    ['Mormon', 'Morm.', 'Morm', 'morm'],
     ['Ether', 'Ether', 'ether'],
-    ['Moroni', 'Moro.', 'moro'],
+    ['Moroni', 'Moro.', 'Moro', 'moro'],
     ['bofm'],
     ['Doctrine and Covenants', 'DC', 'Doctrine and Covenants', 'D&C', 'dc'],
     ['Official Declaration', 'OD', 'od'],
     ['Moses', 'pgp', 'Moses', 'moses'],
-    ['Abraham', 'Abr.', 'abr'],
+    ['Abraham', 'Abr.', 'Abr', 'Abr', 'abr'],
     [
       'Joseph Smith— Matthew',
       'JS—M',
@@ -144,19 +144,66 @@ export class UrlBuilder {
 
   public urlParser(url: string): string {
     // console.log('asdfklajsdf');
-    let outUrl = '';
-    console.log(url);
+    let outUrl = url.toLowerCase();
 
+    let bookName = '';
+
+    const cRegex = new RegExp('\\(.+\\)');
+    let highlight = '';
+    let context = '';
+
+    // console.log(url);
+
+    ({ outUrl, bookName } = this.getBookName(outUrl));
+    console.log(outUrl);
+    try {
+      context = cRegex.exec(outUrl).toString();
+    } catch {
+      context = '';
+    }
+
+    outUrl = outUrl.replace(context, '');
+    // console.log('outurl ' + outUrl);
+    console.log(bookName + ' ' + outUrl + ' ' + context);
+
+    return (
+      bookName +
+      '/' +
+      outUrl
+        // .replace(' ', '')
+        //
+        .replace(':', '.')
+        .replace('\u00A0', '')
+        .replace('\u2013', '-')
+        .trim() +
+      '.' +
+      context
+        .replace('(', '')
+        .replace(')', '')
+        .replace('\u2013', '-')
+        .trim()
+      // .replace(' ', '')
+      // .replace('\u00A0', '')
+      // .replace('\u0020', '')
+      // .replace('\uFF0D', '-')
+      // .replace('\u2014', '-')
+      // .replace(' ', '')
+    );
+  }
+
+  private getBookName(outUrl: string) {
+    let bookName = '';
     _.each(this.bookConvert, book => {
       // console.log(book.names);
-
       _.each(book.names, b => {
-        if (url.includes(b)) {
-          outUrl = url.replace(b, book.convertTo);
-          console.log(outUrl);
+        if (outUrl.includes(b.trim().toLowerCase())) {
+          console.log(outUrl + ' outurl');
+          outUrl = outUrl.replace(b.toLowerCase(), '');
+          // console.log(outUrl + 'matched' + b.toLowerCase() + book.convertTo);
+          bookName = book.convertTo;
         }
       });
     });
-    return outUrl;
+    return { outUrl, bookName };
   }
 }

@@ -1,7 +1,10 @@
 import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class UrlBuilder {
-  private books = [
+  private booksAsdfj = [
     ['Genesis', 'Gen.', 'Gen', 'Gen', 'gen'],
     ['Exodus', 'Ex.', 'Ex', 'ex'],
     ['Leviticus', 'Lev.', 'Lev', 'lev '],
@@ -55,7 +58,7 @@ export class UrlBuilder {
     ['1 Corinthians', '1 Cor.', '1 Cor', '1-cor'],
     ['2 Corinthians', '2 Cor.', '2 Cor', '2-cor'],
     ['Galatians', 'Gal.', 'Gal', 'gal'],
-    ['Ephesians', 'Eph.', 'Eph', 'eph'],
+    // ['Ephesians', 'Eph.', 'Eph', 'eph'],
     ['Philippians', 'Philip.', 'Philip', 'philip'],
     ['Colossians', 'Col.', 'Col', 'col'],
     ['1 Thessalonians', '1 Thes.', '1 Thes', '1-thes'],
@@ -75,7 +78,7 @@ export class UrlBuilder {
     ['3 John', '3 Jn.', '3 Jn', '3-jn'],
     ['Jude', 'Jude', 'jude'],
     ['Revelations', 'Rev.', 'Rev', 'rev'],
-    ['1 Nephi', '1 Ne.', '1 Ne', '1 Ne', '1-ne'],
+    ['1 Nephi', '1 Ne.', '1 Nephi', '1 Ne', '1 Ne', '1-ne'],
     ['2 Nephi', '2 Ne.', '2 Ne', '2 Ne', '2-ne'],
     ['Jacob', 'Jacob', 'jacob'],
     ['Enos', 'Enos', 'enos'],
@@ -95,6 +98,7 @@ export class UrlBuilder {
     ['Official Declaration', 'OD', 'od'],
     ['Moses', 'pgp', 'Moses', 'moses'],
     ['Abraham', 'Abr.', 'Abr', 'Abr', 'abr'],
+    ['Ephesians', 'Eph.', 'Eph', 'eph'],
     [
       'Joseph Smith— Matthew',
       'JS—M',
@@ -135,7 +139,7 @@ export class UrlBuilder {
   public bookConvert: BookConvert[] = [];
 
   constructor() {
-    _.each(this.books, book => {
+    _.each(this.booksAsdfj, book => {
       this.bookConvert.push(new BookConvert(book));
     });
 
@@ -166,28 +170,34 @@ export class UrlBuilder {
     // console.log('outurl ' + outUrl);
     console.log(bookName + ' ' + outUrl + ' ' + context);
 
+    console.log(outUrl);
+
     return (
-      bookName +
-      '/' +
-      outUrl
+      (
+        bookName +
+        '/' +
+        outUrl
+          // .replace(' ', '')
+          //
+          .replace(':', '.')
+          // .replace('\u00A0', '')
+          .replace('\uFEFF', '')
+          .replace('\u2013', '-')
+          .trim() +
+        '.' +
+        context
+          .replace('(', '')
+          .replace(')', '')
+          .replace('\u2013', '-')
+          .trim()
+      )
         // .replace(' ', '')
-        //
-        .replace(':', '.')
-        .replace('\u00A0', '')
-        .replace('\u2013', '-')
-        .trim() +
-      '.' +
-      context
-        .replace('(', '')
-        .replace(')', '')
-        .replace('\u2013', '-')
-        .trim()
-      // .replace(' ', '')
-      // .replace('\u00A0', '')
-      // .replace('\u0020', '')
-      // .replace('\uFF0D', '-')
-      // .replace('\u2014', '-')
-      // .replace(' ', '')
+        // .replace('\u00A0', '')
+        // .replace('\u0020', '')
+        // .replace('\uFF0D', '-')
+        // .replace('\u2014', '-')
+        // .replace('\u00A0', '')
+        .replace(/\s/g, '')
     );
   }
 
@@ -197,10 +207,11 @@ export class UrlBuilder {
       // console.log(book.names);
       _.each(book.names, b => {
         if (outUrl.includes(b.trim().toLowerCase())) {
-          console.log(outUrl + ' outurl');
           outUrl = outUrl.replace(b.toLowerCase(), '');
           // console.log(outUrl + 'matched' + b.toLowerCase() + book.convertTo);
           bookName = book.convertTo;
+          console.log(book.names + ' outurl ' + bookName);
+          // return { outUrl, bookName };
         }
       });
     });

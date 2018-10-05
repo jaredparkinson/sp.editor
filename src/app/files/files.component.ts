@@ -37,7 +37,8 @@ export class FilesComponent implements OnInit {
     public saveState: SaveStateService,
     public navService: NavigationService,
     private router: Router,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private urlBuilder: UrlBuilder
   ) {}
 
   ngOnInit() {
@@ -106,7 +107,7 @@ export class FilesComponent implements OnInit {
   private buildUrl() {
     // const text = this.addressBar.value.trim().split(' ');
 
-    const aasdf = new UrlBuilder();
+    // const aasdf = new UrlBuilder();
     // console.log(
     //   'contains ' +
     //     _.contains(
@@ -114,7 +115,7 @@ export class FilesComponent implements OnInit {
     //       text[0].split('-')[0]
     //     )
     // );
-    const urlAsdf = aasdf.urlParser(this.addressBar.value); //.split(' ');
+    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value); //.split(' ');
     console.log(urlAsdf);
 
     // console.log(urlAsdf[0] + '/' + urlAsdf[1].replace(':', '.'));

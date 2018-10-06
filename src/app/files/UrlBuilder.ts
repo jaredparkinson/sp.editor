@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import * as lodash from 'lodash';
-
+// import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
 
 @Injectable()
@@ -84,7 +84,7 @@ export class UrlBuilder {
     ['3 John', '3 Jn.', '3 Jn', '3-jn'],
     ['Jude', 'Jude', 'jude'],
     ['Revelations', 'Rev.', 'Rev', 'rev'],
-    ['1 Nephi', '1 Ne.', '1 Nephi', '1 Ne', '1 Ne', '1-ne'],
+    ['1 Nephi', '1 ne.', '1 Ne.', '1 Nephi', '1 Ne', '1-ne'],
     ['2 Nephi', '2 Ne.', '2 Ne', '2 Ne', '2-ne'],
     ['Jacob', 'Jacob', 'jacob'],
     ['Enos', 'Enos', 'enos'],
@@ -100,7 +100,14 @@ export class UrlBuilder {
     ['Ether', 'Ether', 'ether'],
     ['Moroni', 'Moro.', 'Moro', 'moro'],
     ['bofm'],
-    ['Doctrine and Covenants', 'DC', 'Doctrine and Covenants', 'D&C', 'dc'],
+    [
+      'Doctrine and Covenants',
+      'sections',
+      'DC',
+      'Doctrine and Covenants',
+      'D&C',
+      'dc'
+    ],
     ['Official Declaration', 'OD', 'od'],
     ['Moses', 'pgp', 'Moses', 'moses'],
     ['Abraham', 'Abr.', 'Abr', 'Abr', 'abr'],
@@ -147,7 +154,14 @@ export class UrlBuilder {
   private cRegex = new RegExp('\\(.+\\)');
 
   public urlParser(url: string): string {
-    let outUrl = url.toLowerCase();
+    let outUrl = url
+      .toLowerCase()
+      .replace(/\s/g, ' ')
+      .replace('&amp;', '&');
+    // .toLowerCase();
+    // .replace(/00A0/s, '\u0020');
+    // console.log(outUrl);
+
     let bookName = '';
     let context = '';
 
@@ -160,6 +174,10 @@ export class UrlBuilder {
     }
 
     outUrl = outUrl.replace(context, '');
+
+    // console.log('bookName ' + bookName);
+    // console.log('outUrl ' + outUrl);
+    // console.log('context ' + context);
 
     return (
       bookName +
@@ -186,12 +204,16 @@ export class UrlBuilder {
 
     lodash.each(this.bookConvert, book => {
       lodash.each(book.names, b => {
-        if (outUrl.includes(b.trim().toLowerCase())) {
+        // console.log(outUrl.includes(b));
+        if (outUrl.includes(b.toLowerCase())) {
           outUrl = outUrl.replace(b.toLowerCase(), '');
           bookName = book.convertTo;
+          //   console.log('bookname ' + bookName);
         }
       });
     });
+    // console.log(outUrl);
+
     return { outUrl, bookName };
   }
 }

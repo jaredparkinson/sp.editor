@@ -25,7 +25,7 @@ describe('sp-editor App', () => {
 
     const urlData = new UrlData();
     lodash.each(urlData.urls, url => {
-      expect(urlBuilder.urlParser(url[0])).toMatch(url[1]);
+      expect(urlBuilder.urlParser(url[0]).toLowerCase()).toMatch(url[1]);
     });
 
     //   expect(urlBuilder.urlParser('1 Nephi 1:1 (1)')).toMatch('1-ne/1.1.1');

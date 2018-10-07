@@ -13,6 +13,7 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
+import { Note } from '../models/Note';
 
 @Component({
   selector: 'app-notes',
@@ -38,4 +39,7 @@ export class NotesComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);
   }
   ngOnInit() {}
+
+  trackById(index: number, note: Note){
+    return note.id;  }
 }

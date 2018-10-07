@@ -24,8 +24,8 @@ export class UrlBuilder {
     ['1 Kings', '1 Kgs.', '1 Kgs', '1-kgs'],
     ['2 Kings', '2 Kgs.', '2 Kgs', '2-kgs'],
     ['1 Chronicles', '1 Chr.', '1 Chr', '1-chr'],
-    ['1 Chronicles', '1 Chron.', '1 Chron', '2-chr'],
-    ['2 Chronicles', '2 Chr.', '2 Chr', '1-chr'],
+    ['1 Chronicles', '1 Chron.', '1 Chron', '1-chr'],
+    ['2 Chronicles', '2 Chr.', '2 Chr', '2-chr'],
     ['2 Chronicles', '2 Chron.', '2 Chron', '2-chr'],
     ['Ezra', 'Ezra', 'ezra'],
     ['Nehemiah', 'Neh.', 'Neh', 'neh'],
@@ -90,7 +90,14 @@ export class UrlBuilder {
     ['Enos', 'Enos', 'enos'],
     ['Jarom', 'Jarom', 'jarom'],
     ['Omni', 'Omni', 'omni'],
-    ['Words of Mormon', 'W of M', 'w-of-m', 'Words of Mormon', 'WofM'],
+    [
+      'Words of Mormon',
+      'W of M',
+      'w-of-m',
+      'Words of Mormon',
+      'WofM',
+      'w-of-m'
+    ],
     ['Mosiah', 'mosiah', 'Mosiah'],
     ['Alma', 'Alma', 'alma'],
     ['Helaman', 'Hel.', 'Hel', 'hel'],
@@ -99,7 +106,8 @@ export class UrlBuilder {
     ['Mormon', 'Morm.', 'Morm', 'morm'],
     ['Ether', 'Ether', 'ether'],
     ['Moroni', 'Moro.', 'Moro', 'moro'],
-    ['bofm'],
+    ['The Testimony of Three Witnesses', 'bofm/three'],
+    ['The Testimony of Eight Witnesses', 'bofm/eight'],
     [
       'Doctrine and Covenants',
       'sections',
@@ -179,7 +187,7 @@ export class UrlBuilder {
     // console.log('outUrl ' + outUrl);
     // console.log('context ' + context);
 
-    return (
+    const fullUrl = (
       bookName +
       '/' +
       outUrl
@@ -197,6 +205,13 @@ export class UrlBuilder {
       .replace(/\s/g, '')
       .replace(/\u2013/g, '-')
       .replace(/\uFEFF/g, '');
+
+    if (bookName.startsWith('bofm/')) {
+      return bookName;
+    }
+    return fullUrl[fullUrl.length - 1] === '.'
+      ? fullUrl.substring(0, fullUrl.length - 1)
+      : fullUrl;
   }
 
   private getBookName(outUrl: string) {
@@ -205,7 +220,10 @@ export class UrlBuilder {
     lodash.each(this.bookConvert, book => {
       lodash.each(book.names, b => {
         // console.log(outUrl.includes(b));
-        if (outUrl.includes(b.toLowerCase())) {
+        if (
+          outUrl.includes(b.toLowerCase()) &&
+          outUrl.startsWith(b.toLowerCase())
+        ) {
           outUrl = outUrl.replace(b.toLowerCase(), '');
           bookName = book.convertTo;
           //   console.log('bookname ' + bookName);

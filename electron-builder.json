@@ -20,7 +20,7 @@
     "!tslint.json"
   ],
   "win": {
-    "icon": "dist",
+    "icon": "src/favicon.ico",
     "target": ["nsis"],
     "compression": "store"
   },

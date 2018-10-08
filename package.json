@@ -46,7 +46,7 @@
     "e2e": "yarn run postinstall:web && ng e2e"
   },
   "dependencies": {
-    "@angular/animations": "^6",
+    "@angular/animations": "next",
     "@angular/cdk": "next",
     "@angular/material": "next",
     "@angular/pwa": "^0.8",

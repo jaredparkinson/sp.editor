@@ -10,7 +10,13 @@
         "/index.html",
         "/*.css",
         "/*.js",
-        "/assets/scriptures/**"
+        "/assets/scriptures/**",
+        "/assets/scriptures/bofm/**",
+        "/assets/scriptures/dc-testament/**",
+        "/assets/scriptures/jst/**",
+        "/assets/scriptures/nt/**",
+        "/assets/scriptures/ot/**",
+        "/assets/scriptures/pgp/**"
       ]
     }
   }, {
@@ -19,6 +25,19 @@
     "updateMode": "prefetch",
     "resources": {
       "files": [
+        "/assets/scriptures/bd/**",
+        "/assets/scriptures/bible/**",
+        "/assets/scriptures/bible-chron/**",
+        "/assets/scriptures/bible-maps/**",
+        "/assets/scriptures/bible-photos/**",
+        "/assets/scriptures/gs/**",
+        "/assets/scriptures/harmony/**",
+        "/assets/scriptures/history-maps/**",
+        "/assets/scriptures/history-photos/**",
+        "/assets/scriptures/quad/**",
+        "/assets/scriptures/tg/**",
+        "/assets/scriptures/triple/**",
+        "/assets/scriptures/triple-index/**",
         "/assets/**"
       ]
     }

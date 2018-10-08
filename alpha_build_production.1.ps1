@@ -1,8 +1,13 @@
-Move-Item .\src\assets\scriptures ..
+yarn version --patch
 
-ng build
+(cat .\package.json)[2] | Out-File .\src\assets\version.txt
 
-Copy-Item ..\scriptures dist\assets -Recurse
+# Move-Item .\src\assets\scriptures ..
+
+# ng build --prod
+
+# Copy-Item ..\scriptures dist\assets -Recurse
+
 
 docker build . -t scriptures_project_v3_alpha
 

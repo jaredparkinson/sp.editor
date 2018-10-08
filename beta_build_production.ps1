@@ -1,10 +1,8 @@
-Move-Item .\src\assets\scriptures ..
 
-ng build
+Move-Item ..\scriptures .\src\assets\scriptures 
 
-Copy-Item ..\scriptures dist\assets -Recurse
+yarn version --patch
 
-Move-Item ..\scriptures .\src\assets
 
 docker build . -t scriptures_project_v3_beta
 
@@ -20,11 +18,12 @@ ssh -t jared@192.168.1.150 'docker kill scriptures_project_v3_beta'
 
 ssh -t jared@192.168.1.150 'docker run -d -e "VIRTUAL_HOST=beta.scripturesproject.review" -e "LETSENCRYPT_HOST=beta.scripturesproject.review" -e "LETSENCRYPT_EMAIL=jared@parkinson.im" -p 11000 -it --rm --name scriptures_project_v3_beta scriptures_project_v3_beta'
 
-# Move-Item .\src\assets\scriptures\ ..
+Move-Item .\src\assets\scriptures\ ..
 
 # yarn run electron:windows:beta
 
-# Move-Item ..\scriptures\ .\src\assets\
 electron-builder build --windows
+
+Move-Item ..\scriptures\ .\src\assets\
 
 

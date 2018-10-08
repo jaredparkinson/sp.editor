@@ -1,12 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+import * as _ from 'lodash';
 // import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
   constructor() {
-    lodash.each(this.bookNames, book => {
+    _.each(this.bookNames, book => {
       this.bookConvert.push(new BookConvert(book));
     });
   }
@@ -109,6 +109,8 @@ export class UrlBuilder {
     ['Moroni', 'Moro.', 'Moro', 'moro'],
     ['The Testimony of Three Witnesses', 'bofm/three'],
     ['The Testimony of Eight Witnesses', 'bofm/eight'],
+    ['The Testimony of the Prophet Joseph Smith', 'bofm/js'],
+    ['title page of the Book of Mormon', 'bofm/bofm-title'],
     [
       'Doctrine and Covenants',
       'sections',
@@ -218,8 +220,8 @@ export class UrlBuilder {
   private getBookName(outUrl: string) {
     let bookName = '';
 
-    lodash.each(this.bookConvert, book => {
-      lodash.each(book.names, b => {
+    _.each(this.bookConvert, book => {
+      _.each(book.names, b => {
         // console.log(outUrl.includes(b));
         if (
           outUrl.includes(b.toLowerCase()) &&

@@ -7,7 +7,7 @@ import {
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as lodash from 'lodash';
+import * as _ from 'lodash';
 // import { JSDOM } from 'jsdom';
 import { File } from '../models/file';
 import { Folder } from '../models/Folder';

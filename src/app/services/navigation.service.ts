@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 // import { JSDOM } from 'jsdom';
 import { Observable } from 'rxjs';
 
-import * as lodash from 'lodash';
+import * as _ from 'lodash';
 import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
@@ -392,7 +392,7 @@ export class NavigationService {
         // this.navData = doc;
         const testaments = doc.querySelectorAll('div.book');
 
-        lodash.each(doc.querySelectorAll('div.book'), testament => {
+        _.each(doc.querySelectorAll('div.book'), testament => {
           const testamentName = testament
             .querySelector('header h1')
             .innerHTML.replace('&nbsp;', ' ');
@@ -402,11 +402,11 @@ export class NavigationService {
           const books = testament.querySelectorAll('div>ul>li');
 
           const tempBooks: Book[] = [];
-          lodash.each(testament.querySelectorAll('div>ul>li'), book => {
+          _.each(testament.querySelectorAll('div>ul>li'), book => {
             const tempBook = new Book(book as HTMLElement);
 
             const tempChapters: Chapter[] = [];
-            let chapters = lodash.toArray<HTMLElement>(
+            let chapters = _.toArray<HTMLElement>(
               book.querySelectorAll('ul li a')
             );
             // let chapters = this.tsQuery.selectClass(
@@ -414,11 +414,11 @@ export class NavigationService {
             //   'ul li a'
             // );
             if (!chapters) {
-              chapters = lodash.toArray(book.querySelectorAll('li a'));
+              chapters = _.toArray(book.querySelectorAll('li a'));
               // this.tsQuery.selectClass(book as HTMLElement, 'li a');
             }
 
-            lodash.each(chapters, chapter => {
+            _.each(chapters, chapter => {
               const tempChapter = new Chapter(
                 chapter
                   .querySelector('.title')

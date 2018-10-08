@@ -6,7 +6,7 @@ import * as jsZip from 'jszip';
 // import * as pako from 'pako';
 import { Observable } from 'rxjs';
 
-import * as lodash from 'lodash';
+import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { NavigationService } from './navigation.service';
@@ -43,7 +43,7 @@ export class ChapterService {
   }
 
   public resetNotes(): void {
-    lodash.each(this.notes2, note => {
+    _.each(this.notes2, note => {
       note.reset(this.saveStateService.data.secondaryNotesVisible);
     });
   }
@@ -174,7 +174,7 @@ export class ChapterService {
     this.saveStateService.data.currentPage = urlText;
 
     this.header = doc.querySelector('header').innerHTML;
-    lodash.each(doc.querySelectorAll('note'), elem => {
+    _.each(doc.querySelectorAll('note'), elem => {
       this.notes2.push(new Note(elem as HTMLElement));
     });
     let hiddenParagraph = '.hidden-paragraph';
@@ -186,7 +186,7 @@ export class ChapterService {
     }
     console.log(doc.querySelectorAll(hiddenParagraph));
 
-    lodash.each(doc.querySelectorAll(hiddenParagraph), elem => {
+    _.each(doc.querySelectorAll(hiddenParagraph), elem => {
       this.paragraphs.push(
         new Paragraph(
           elem as HTMLElement,

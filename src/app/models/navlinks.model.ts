@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { Book } from './Book';
 
 export class NavLinks {
@@ -29,7 +30,7 @@ export class NavLinks {
     this.text = text;
   }
   public resetVisibility(bookName: string) {
-    this.books.forEach(book => {
+    _.forEach(this.books, book => {
       if (book.bookName !== bookName) {
         book.showChildren = false;
       }

@@ -34,12 +34,12 @@ export class ChapterService {
     private httpClient: HttpClient
   ) {
     this.fs = (window as any).fs;
-    if (!this.fs || this.fs === undefined) {
-      this.scripturesArchive = this.httpClient.get('assets/scriptures.zip', {
-        observe: 'body',
-        responseType: 'arraybuffer'
-      });
-    }
+    // if (!this.fs || this.fs === undefined) {
+    //   this.scripturesArchive = this.httpClient.get('assets/scriptures.zip', {
+    //     observe: 'body',
+    //     responseType: 'arraybuffer'
+    //   });
+    // }
   }
 
   public resetNotes(): void {
@@ -140,7 +140,7 @@ export class ChapterService {
     }
   }
   public resetHighlighting(): void {
-    this.paragraphs.forEach(p => {
+    _.forEach(this.paragraphs, p => {
       p.resetHighlight();
     });
   }
@@ -228,13 +228,16 @@ export class ChapterService {
   }
 
   public parseHighlightedVerses2(v: string): number[] {
+    console.log('parseHighlightedVerses2');
+
     if (v === null || v === undefined) {
       return [];
     }
     const verseNums: number[] = [];
     if (v !== undefined) {
       const verseParams = v.split(',');
-      verseParams.forEach(verseParam => {
+
+      _.forEach(verseParams, verseParam => {
         // console.log(verseParam);
 
         const t = verseParam.split('-');

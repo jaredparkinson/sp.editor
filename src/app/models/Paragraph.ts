@@ -35,7 +35,7 @@ export class Paragraph {
    * resetHighlight()
    */
   public resetHighlight() {
-    this.verses.forEach(v => {
+    _.forEach(this.verses, v => {
       v.resetHighlight();
     });
   }

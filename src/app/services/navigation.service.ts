@@ -161,7 +161,7 @@ export class NavigationService {
     folder.setVisibility();
   }
   public getNavigation(manifest: string) {
-    this.folders.forEach(f => {
+    _.forEach(this.folders, f => {
       if (f.path === manifest) {
         this.navLinks = [];
         // this.navLinks = f.Folders;

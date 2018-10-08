@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {
   faArrowLeft,
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
   faCaretDown = faCaretDown;
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
+  versionNumber = '';
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
@@ -39,12 +41,21 @@ export class HeaderComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     private router: Router,
+    public httpClient: HttpClient,
     private location: Location
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.httpClient
+      .get('assets/version.txt', { observe: 'body', responseType: 'text' })
+      .subscribe(data => {
+        const regex = new RegExp(/\d(\.\d{1,3}){1,2}/);
+        this.versionNumber = regex.exec(data)[0];
+        console.log('data ' + this.versionNumber);
+      });
+  }
 
   toggleNotes() {
     this.navServices.toggleNotes();

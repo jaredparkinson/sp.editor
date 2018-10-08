@@ -3,6 +3,7 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 
+import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import {
@@ -40,6 +41,7 @@ export class NotesComponent implements OnInit {
   }
   ngOnInit() {}
 
-  trackById(index: number, note: Note){
-    return note.id;  }
+  trackById(index: number, note: Note) {
+    return note.id;
+  }
 }

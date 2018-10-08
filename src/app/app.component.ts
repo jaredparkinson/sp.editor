@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
 import {
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     public navService: NavigationService,
     public saveState: SaveStateService
+    public httpClient: HttpClient
   ) {
     this.translate.setDefaultLang('en');
 
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initNoteSettingsToggle();
+    
   }
   gridBodyClick() {
     // console.log('body clicked');

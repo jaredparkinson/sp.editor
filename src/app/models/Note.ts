@@ -21,11 +21,11 @@ export class Note {
     this.button = element.classList.contains('a2086');
     this.btnId = 'note-button-note' + element.id.replace('note', '');
   }
-  public reset(): void {
+  public reset(secondaryStatus: boolean): void {
     // console.log('reseting');
 
     this.override = false;
-    this.secondaryToggled = false;
+    this.secondaryToggled = secondaryStatus;
   }
 
   public secondaryButtonClick(): void {

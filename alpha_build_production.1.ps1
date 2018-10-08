@@ -1,3 +1,9 @@
+Move-Item .\src\assets\scriptures ..
+
+ng build
+
+Copy-Item ..\scriptures dist\assets -Recurse
+
 docker build . -t scriptures_project_v3_alpha
 
 docker save scriptures_project_v3_alpha -o .\scriptures_project_v3_alpha
@@ -12,11 +18,6 @@ ssh -t jared@192.168.1.150 'docker kill scriptures_project_v3_alpha'
 
 ssh -t jared@192.168.1.150 'docker run -d -e "VIRTUAL_HOST=alpha.scripturesproject.review" -e "LETSENCRYPT_HOST=alpha.scripturesproject.review" -e "LETSENCRYPT_EMAIL=jared@parkinson.im" -p 11000 -it --rm --name scriptures_project_v3_alpha scriptures_project_v3_alpha'
 
-Move-Item .\src\assets\scriptures\ ..
-
-yarn run electron:windows:alpha
-
-Move-Item ..\scriptures\ .\src\assets\
 
 
 

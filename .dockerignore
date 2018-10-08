@@ -8,7 +8,7 @@ docker-compose*
 README.md
 LICENSE
 .vscode
-dist
+
 app-builds
 e2e
 scriptures_project_v3

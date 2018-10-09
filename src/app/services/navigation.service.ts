@@ -184,15 +184,15 @@ export class NavigationService {
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
 
-  public getChapterElectron(book: string, chapter: string): string {
-    const url = this.urlBuilder(book, chapter);
+  // public getChapterElectron(book: string, chapter: string): string {
+  //   const url = this.urlBuilder(book, chapter);
 
-    const test = this.fs.readFile('src/' + url, 'utf8', (err, data) => {
-      return data;
-    });
-    // console.log(test);
-    return test;
-  }
+  //   const test = this.fs.readFile('src/' + url, 'utf8', (err, data) => {
+  //     return data;
+  //   });
+  //   // console.log(test);
+  //   return test;
+  // }
 
   public getTestament(folder: string): void {
     // console.log(folder);

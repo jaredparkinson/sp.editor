@@ -79,11 +79,11 @@ export class ChapterService {
         book.toLowerCase(),
         vSplit[0].toLowerCase()
       );
-      this.fs.writeFile(
-        'd:/node_test.txt',
-        process.env.PORTABLE_EXECUTABLE_DIR,
-        e => {}
-      );
+      // this.fs.writeFile(
+      //   'd:/node_test.txt',
+      //   process.env.PORTABLE_EXECUTABLE_DIR,
+      //   e => {}
+      // );
       this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
         this.setChapter(
           data,
@@ -94,14 +94,13 @@ export class ChapterService {
           synchronizedScrolling
         );
       });
-      return;
     } catch {
-      console.log('Not a file system');
+      // console.log('Not a file system');
       const url = this.navService.getChapter(
         book.toLowerCase(),
         vSplit[0].toLowerCase()
       );
-      console.log('test web');
+      // console.log('test web');
 
       // this.scripturesArchive.subscribe(data => {
       //   // const results = pako.inflate(new Uint8Array(data));0

@@ -98,10 +98,10 @@ function createWindow() {
       })
     );
     // use this to open dev tools manualy to debug
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   }
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -181,7 +181,7 @@ try {
     content.findInPage(arg, { forward: false, findNext: true });
     // event.returnValue = 'pong';
   });
-  ipcMain.on('synchronous-message', (event, arg) => {
+  ipcMain.on('syn`chro`nous-message', (event, arg) => {
     // console.log();
     content.findInPage(arg);
     // event.returnValue = 'pong';

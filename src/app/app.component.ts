@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     public electronService: ElectronService,
     private translate: TranslateService,
     public navService: NavigationService,
-    public saveState: SaveStateService
+    public saveState: SaveStateService,
     public httpClient: HttpClient
   ) {
     this.translate.setDefaultLang('en');
@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initNoteSettingsToggle();
-    
   }
   gridBodyClick() {
     // console.log('body clicked');

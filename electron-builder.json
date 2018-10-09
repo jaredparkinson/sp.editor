@@ -1,5 +1,5 @@
 {
-  "productName": "sp-editor",
+  "productName": "SP Editor",
   "directories": {
     "output": "app-builds"
   },
@@ -20,7 +20,7 @@
     "!tslint.json"
   ],
   "win": {
-    "icon": "dist",
+    "icon": "src/favicon.ico",
     "target": ["nsis"],
     "compression": "store"
   },

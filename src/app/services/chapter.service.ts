@@ -155,7 +155,7 @@ export class ChapterService {
     this.pageUrl = doc
       .querySelector('meta.page-url')
       .attributes.getNamedItem('content').value;
-    console.log(this.pageUrl);
+    // console.log(this.pageUrl);
 
     this.bodyBlock = this.extractHtml(doc, 'div.body-block');
     const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
@@ -175,11 +175,11 @@ export class ChapterService {
       hiddenParagraph = '.index ul';
       tgGs = true;
     }
-    console.log(doc.querySelectorAll(hiddenParagraph));
+    // console.log(doc.querySelectorAll(hiddenParagraph));
     let count = 0;
 
     _.each(doc.querySelectorAll(hiddenParagraph), elem => {
-      console.log(u);
+      // console.log(u);
 
       this.paragraphs.push(
         new Paragraph(
@@ -214,7 +214,7 @@ export class ChapterService {
   }
 
   public parseHighlightedVerses2(v: string): number[] {
-    console.log('parseHighlightedVerses2');
+    // console.log('parseHighlightedVerses2');
 
     if (v === null || v === undefined) {
       return [];

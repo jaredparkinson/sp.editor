@@ -129,7 +129,11 @@ export class VerseSelectService {
 
                 wTag.classList.add(underline);
                 wTag.classList.remove('verse-select-0');
-                // console.log(wTag.nextElementSibling);
+                // if (wTag.nextElementSibling) {
+                //   console.log(
+                //     'next ' + (wTag.nextElementSibling as HTMLElement).innerText
+                //   );
+                // }
               });
 
               this.ngZone.run(() => {

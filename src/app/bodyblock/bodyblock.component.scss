@@ -6,15 +6,22 @@ body {
   font-family: $font-stack;
 }
 
-.verse-select-0 {
+w.verse-select-0,
+w.verse-select-0+w {
   border-bottom: 1px solid grey;
 }
 
-.verse-select-1 {
+// w.verse-select-0+w {
+//   border-bottom: 1px solid grey;
+// }
+
+w.verse-select-1,
+w.verse-select-1+w {
   border-bottom: 3px solid #f68d2e;
 }
 
-.verse-select-2 {
+w.verse-select-2,
+w.verse-select-2+w {
   border-bottom: 3px solid #2ca1a5;
 }
 

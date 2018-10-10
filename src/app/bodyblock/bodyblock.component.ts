@@ -97,9 +97,6 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
         _.each(document.querySelectorAll('span.verse'), verse => {
           (verse as HTMLElement).addEventListener('mouseup', event => {
-            console.log('asdfoijqwioerjjndfvjkasdhfuiahjsdoifjasdiofjasoidfj');
-            console.log(event);
-
             this.verseSelectService.wTagClick(event);
           });
         });

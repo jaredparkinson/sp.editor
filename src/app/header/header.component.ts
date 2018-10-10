@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  NgZone,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +20,7 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
+import * as _ from 'lodash';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
@@ -34,6 +41,8 @@ export class HeaderComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
   versionNumber = '';
+  @ViewChildren('wtag')
+  wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
@@ -42,7 +51,8 @@ export class HeaderComponent implements OnInit {
     public navServices: NavigationService,
     private router: Router,
     public httpClient: HttpClient,
-    private location: Location
+    private location: Location,
+    private ngZong: NgZone
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -59,6 +69,65 @@ export class HeaderComponent implements OnInit {
 
   toggleNotes() {
     this.navServices.toggleNotes();
+  }
+
+  toggleVerseSelect() {
+    this.chapterService.verseSelect = !this.chapterService.verseSelect;
+
+    // console.log(this.wTags2);
+    this.ngZong.run(() => {
+      switch (this.chapterService.verseSelect) {
+        case true: {
+          const parser = new DOMParser();
+          _.each(this.chapterService.paragraphs, paragraph => {
+            _.each(paragraph.verses, verse => {
+              const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+
+              _.each(doc.querySelectorAll('w'), w => {
+                const ids = w.getAttribute('n').split('-');
+                if (
+                  _.find(this.chapterService.wTagRefs, wTagRef => {
+                    return (
+                      (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+                      (wTagRef as HTMLElement).parentElement.id === ids[0]
+                    );
+                  })
+                ) {
+                  w.classList.add('verse-select-0');
+                }
+
+                // console.log(w);
+                // console.log(w);
+              });
+              // console.log(doc.querySelector('body').innerHTML);
+
+              verse.innerHtml = doc.querySelector('body').innerHTML;
+            });
+          });
+
+          break;
+        }
+        case false:
+        default: {
+          const parser = new DOMParser();
+          _.each(this.chapterService.paragraphs, paragraph => {
+            _.each(paragraph.verses, verse => {
+              const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+
+              _.each(doc.querySelectorAll('w'), w => {
+                w.className = '';
+                // console.log(w);
+              });
+              // console.log(doc.querySelector('body').innerHTML);
+              verse.innerHtml = doc.querySelector('body').innerHTML;
+            });
+          });
+          break;
+        }
+      }
+    });
+
+    // this.chapterService.toggleVerseSelect(this.verseSelect);
   }
 
   addressBarKeyPress(event: KeyboardEvent) {

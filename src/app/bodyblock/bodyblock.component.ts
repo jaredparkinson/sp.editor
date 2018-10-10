@@ -5,7 +5,9 @@ import {
   AfterViewInit,
   Component,
   NgZone,
-  OnInit
+  OnInit,
+  QueryList,
+  ViewChildren
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +18,8 @@ import {
 import * as _ from 'lodash';
 
 import { log } from 'util';
+import { Paragraph } from '../models/Paragraph';
+import { Verse } from '../models/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -82,9 +86,94 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         // this.synchronizedScrolling();
       }, 200);
     });
-    this.verseSelection();
+    // this.verseSelection();
+    this.wordSelection();
   }
 
+  private wordSelection() {
+    _.each(document.querySelectorAll('w'), wTag => {});
+  }
+
+  public wTagClick(event: Event) {
+    if (this.chapterService.verseSelect) {
+      const ids = (event.target as HTMLUnknownElement)
+        .getAttribute('n')
+        .split('-');
+      const targer = _.find(this.chapterService.wTagRefs, wTagRef => {
+        return (
+          (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+          (wTagRef as HTMLElement).parentElement.id === ids[0]
+        );
+      });
+      const refs = (targer as HTMLUnknownElement)
+        .getAttribute('ref')
+        .split(',');
+      const matches: Array<[string, string, number]> = []; // = [];
+
+      _.each(this.chapterService.wTagRefs, wTagRef => {
+        const refs2 = wTagRef.getAttribute('ref').split(',');
+        if (_.intersection(refs, refs2).length > 0) {
+          // console.log(
+          //   _.intersection(refs, refs2).length + ' ' + wTagRef.parentElement.id
+          // );
+          matches.push([
+            wTagRef.parentElement.id,
+            wTagRef.getAttribute('n'),
+            _.intersection(refs, refs2).length
+          ]);
+        }
+      });
+
+      const parser = new DOMParser();
+
+      _.each(this.chapterService.paragraphs, paragraph => {
+        _.each(paragraph.verses, verse => {
+          const matchedMatches = _.filter(matches, match => {
+            return match[0] === verse.id;
+          });
+          const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+
+          _.each(doc.querySelectorAll('w'), wTag => {
+            if (wTag.className.includes('verse-select')) {
+              wTag.className = 'verse-select-0';
+            }
+          });
+
+          if (matchedMatches.length > 0) {
+            console.log('pasdf ' + matchedMatches.length);
+
+            _.each(matchedMatches, m => {
+              // console.log('#' + m[0] + ' w[n="' + m[0] + '-' + m[1] + '"]');
+
+              const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
+              const wTag = doc.querySelector(
+                ' w[n="' + m[0] + '-' + m[1] + '"]'
+              );
+              console.log(wTag.innerHTML + ' added class here');
+
+              wTag.classList.add(underline);
+              wTag.classList.remove('verse-select-0');
+            });
+
+            verse.innerHtml = doc.querySelector('body').innerHTML;
+          }
+        });
+      });
+    }
+
+    // console.log(
+    //   'wtag selected ' +
+    //     (targer as HTMLUnknownElement).innerHTML +
+    //     ' ' +
+    //     (targer as HTMLUnknownElement).getAttribute('ref') +
+    //     ' ' +
+    //     (event.currentTarget as HTMLElement).parentElement.id
+    // );
+  }
+
+  trackById(index: number, paragraph: any) {
+    return paragraph.id;
+  }
   private verseSelection(): void {
     this.ngZone.runOutsideAngular(() => {
       // setInterval(() => {}, 7500);
@@ -92,12 +181,6 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         console.log('mouseup');
 
         const range = window.getSelection();
-        // console.log(
-        //   range
-        //     .getRangeAt(0)
-        //     .cloneContents()
-        //     .querySelectorAll('w')
-        // );
 
         const df = range.getRangeAt(0).cloneContents();
         const wTags = _.toArray(df.querySelectorAll('w'));
@@ -108,23 +191,14 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           // console.log(wTag);
 
           const id = wTag.getAttribute('n').split('-');
-          // console.log('ref ' + wTag.hasAttribute('ref'));
-
-          // console.log('#' + id[0] + ' w[n="' + id[1] + '"]');
 
           const data = this.chapterService.wTags.querySelector(
             '#' + id[0] + ' w[n="' + id[1] + '"]'
           );
-          // console.log(
-          //   this.chapterService.wTags
-          //     .querySelector('#' + id[0] + ' w[n="' + id[1] + '"]')
-          //     .hasAttribute('ref')
-          // );
-          // (wTag as HTMLElement).style.borderBottomStyle = 'solid';
           if (data.hasAttribute('ref')) {
-            document
-              .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
-              .classList.add('wtag');
+            // document
+            //   .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
+            //   .classList.add('wtag');
           }
         });
 

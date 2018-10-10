@@ -73,6 +73,9 @@
           <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
           Original Notes
         </button>
+        <button id="verseSelect" (click)="toggleVerseSelect()" [ngClass]="{'nav-btn-on': this.verseSelect}">
+          Toggle Verse Select
+        </button>
         <button id="versionNumber">
           Version {{this.versionNumber}}
         </button>

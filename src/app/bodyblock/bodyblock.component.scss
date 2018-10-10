@@ -6,6 +6,18 @@ body {
   font-family: $font-stack;
 }
 
+.verse-select-0 {
+  border-bottom: 3px solid grey;
+}
+
+.verse-select-1 {
+  border-bottom: 3px solid #f68d2e;
+}
+
+.verse-select-2 {
+  border-bottom: 3px solid #2ca1a5;
+}
+
 .content-pane {
   @media only screen and (max-width: 1079.98px) {
     grid-template-columns: 0 10vw 80vw 10vw;
@@ -57,6 +69,7 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
+
       &.part,
       &.question,
       &.answer {

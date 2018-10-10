@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Sanitizer, SecurityContext } from '@angular/core';
 import { Params } from '@angular/router';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import * as jsZip from 'jszip';
 
 import { Observable } from 'rxjs';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
@@ -28,11 +29,14 @@ export class ChapterService {
   private fs: any;
   scripturesArchive: Observable<ArrayBuffer>;
   wTags: Document;
+  wTagRefs: NodeListOf<Element>;
+  verseSelect = false;
 
   constructor(
     private navService: NavigationService,
     private saveStateService: SaveStateService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private domSanitizer: DomSanitizer
   ) {
     this.fs = (window as any).fs;
   }
@@ -72,6 +76,9 @@ export class ChapterService {
         .subscribe(data => {
           const parser = new DOMParser();
           this.wTags = parser.parseFromString(data, 'text/html');
+          this.wTagRefs = this.wTags.querySelectorAll('w[ref]');
+
+          // console.log('wTagRefs ' + this.wTagRefs.length);
         });
     }
   }
@@ -137,6 +144,11 @@ export class ChapterService {
 
     const addressBar = document.getElementById('addressBar');
     const parser = new DOMParser();
+
+    // const safeDocument = this.domSanitizer.bypassSecurityTrustHtml(u);
+
+    // console.log(parser.parseFromString(safeDocument, 'text/html'));
+
     const doc = parser.parseFromString(u, 'text/html');
     this.pageUrl = doc
       .querySelector('meta.page-url')
@@ -162,16 +174,21 @@ export class ChapterService {
       tgGs = true;
     }
     console.log(doc.querySelectorAll(hiddenParagraph));
+    let count = 0;
 
     _.each(doc.querySelectorAll(hiddenParagraph), elem => {
+      console.log(u);
+
       this.paragraphs.push(
         new Paragraph(
           elem as HTMLElement,
           this.verseNums,
           this.contextNums,
-          tgGs
+          tgGs,
+          count
         )
       );
+      count++;
     });
 
     if (this.notes === null || this.notes === undefined) {
@@ -222,5 +239,57 @@ export class ChapterService {
       return html.innerHTML;
     }
     return '';
+  }
+
+  public toggleVerseSelect(verseSelect: boolean) {
+    switch (verseSelect) {
+      case true: {
+        console.log(this.wTagRefs);
+        _.each(this.wTagRefs, wTagRef => {
+          // console.log(
+          //   '#' +
+          //     wTagRef.parentElement.id +
+          //     ' w[n="' +
+          //     wTagRef.getAttribute('n') +
+          //     '"]'
+          // );
+          // // console.log(
+          //   document.querySelector(
+          //     '#' +
+          //       wTagRef.parentElement.id +
+          //       ' w[n="' +
+          //       wTagRef.parentElement.id +
+          //       '-' +
+          //       wTagRef.getAttribute('n') +
+          //       '"]'
+          //   )
+          // );
+          console.log(
+            document.querySelector(
+              ' w[n="' +
+                wTagRef.parentElement.id +
+                '-' +
+                wTagRef.getAttribute('n') +
+                '"]'
+            )
+          );
+
+          document
+            .querySelector(
+              ' w[n="' +
+                wTagRef.parentElement.id +
+                '-' +
+                wTagRef.getAttribute('n') +
+                '"]'
+            )
+            .classList.add('verse-select-0');
+        });
+        break;
+      }
+      case false:
+      default: {
+        break;
+      }
+    }
   }
 }

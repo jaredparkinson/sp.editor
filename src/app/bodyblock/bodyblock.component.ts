@@ -107,13 +107,25 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         _.each(wTags, wTag => {
           // console.log(wTag);
 
-          console.log(
-            document.querySelector('w[n="' + wTag.getAttribute('n') + '"]')
+          const id = wTag.getAttribute('n').split('-');
+          // console.log('ref ' + wTag.hasAttribute('ref'));
+
+          // console.log('#' + id[0] + ' w[n="' + id[1] + '"]');
+
+          const data = this.chapterService.wTags.querySelector(
+            '#' + id[0] + ' w[n="' + id[1] + '"]'
           );
+          // console.log(
+          //   this.chapterService.wTags
+          //     .querySelector('#' + id[0] + ' w[n="' + id[1] + '"]')
+          //     .hasAttribute('ref')
+          // );
           // (wTag as HTMLElement).style.borderBottomStyle = 'solid';
-          document
-            .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
-            .classList.add('wtag');
+          if (data.hasAttribute('ref')) {
+            document
+              .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
+              .classList.add('wtag');
+          }
         });
 
         if (range.anchorNode !== null) {

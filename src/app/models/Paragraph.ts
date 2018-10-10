@@ -20,6 +20,9 @@ export class Paragraph {
     _.each(paragraph.querySelectorAll('.verse'), verse => {
       _.each(verse.querySelectorAll('w'), wTag => {
         wTag.setAttribute('n', verse.id + '-' + wTag.getAttribute('n'));
+        if (wTag.nextSibling && wTag.nextSibling.nodeName === '#text') {
+          console.log((wTag.nextSibling.textContent = ''));
+        }
         // console.log(wTag.getAttribute('n'));
       });
     });

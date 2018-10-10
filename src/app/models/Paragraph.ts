@@ -13,9 +13,16 @@ export class Paragraph {
     if (tgGs) {
       sel = 'li';
     }
+    _.each(paragraph.querySelectorAll('.verse'), verse => {
+      _.each(verse.querySelectorAll('w'), wTag => {
+        wTag.setAttribute('n', verse.id + '-' + wTag.getAttribute('n'));
+        console.log(wTag.getAttribute('n'));
+      });
+    });
     _.each(paragraph.querySelectorAll(sel), v => {
       this.verses.push(new Verse(v as HTMLElement));
     });
+
     this.setHighlight2(verseNums, contextNums);
   }
   /**

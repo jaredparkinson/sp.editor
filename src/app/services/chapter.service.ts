@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import * as jsZip from 'jszip';
-// import * as pako from 'pako';
+
 import { Observable } from 'rxjs';
 
 import * as _ from 'lodash';
@@ -19,7 +19,7 @@ export class ChapterService {
   public notes: string;
   public notesArray: HTMLElement[] = [];
   public notes2: Note[] = [];
-  // public hiddenParagraphs: string[] = [];
+
   public paragraphs: Paragraph[] = [];
   public header: string;
   public verseNums: number[] = [];
@@ -27,6 +27,7 @@ export class ChapterService {
   public pageUrl = '';
   private fs: any;
   scripturesArchive: Observable<ArrayBuffer>;
+  wTags: Document;
 
   constructor(
     private navService: NavigationService,
@@ -34,12 +35,6 @@ export class ChapterService {
     private httpClient: HttpClient
   ) {
     this.fs = (window as any).fs;
-    // if (!this.fs || this.fs === undefined) {
-    //   this.scripturesArchive = this.httpClient.get('assets/scriptures.zip', {
-    //     observe: 'body',
-    //     responseType: 'arraybuffer'
-    //   });
-    // }
   }
 
   public resetNotes(): void {
@@ -53,91 +48,76 @@ export class ChapterService {
     chapter: string,
     synchronizedScrolling: () => void
   ): void {
-    // const verseNums = this.parseHighlightedVerses(v);
     this.paragraphs = [];
-    this.notes2 = []; // chapter.split('.');
+    this.notes2 = [];
     this.navService.pageTitle = '';
     this.header = '';
     let vSplit = chapter.split('.');
+    this.wTags = new Document();
     if (chapter === '') {
       vSplit = book.split('.');
-      // vSplit.push('');
     }
-    // this.notes2.length = 0;
-    console.log('vsplit 2 ' + vSplit[2]);
+
+    const url = book + '/' + vSplit[0];
 
     try {
-      // throw SyntaxError;
-      // console.log(this.fs);
-
-      // if (this.fs) {
-      //   console.log('tasdfsdfasdufjin oiasdfoijasdflkasdfljk');
-
-      //   throw new Error('asdf');
-      // }?
-      const url2 = this.navService.urlBuilder(
-        book.toLowerCase(),
-        vSplit[0].toLowerCase()
-      );
-      // this.fs.writeFile(
-      //   'd:/node_test.txt',
-      //   process.env.PORTABLE_EXECUTABLE_DIR,
-      //   e => {}
-      // );
-      this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-        this.setChapter(
-          data,
-          book,
-          vSplit[0],
-          vSplit[1],
-          vSplit[2],
-          synchronizedScrolling
-        );
-      });
+      this.getChapterFS(book, vSplit, synchronizedScrolling);
     } catch {
-      // console.log('Not a file system');
-      const url = this.navService.getChapter(
-        book.toLowerCase(),
-        vSplit[0].toLowerCase()
-      );
-      // console.log('test web');
+      this.getChapterWeb(book, vSplit, synchronizedScrolling);
+    }
 
-      // this.scripturesArchive.subscribe(data => {
-      //   // const results = pako.inflate(new Uint8Array(data));0
-      //   jsZip.loadAsync(data).then(async o => {
-      //     const f = await o
-      //       .file(
-      //         this.navService.urlBuilder(
-      //           book.toLowerCase(),
-      //           vSplit[0].toLowerCase()
-      //         )
-      //       )
-      //       .async('text');
-
-      //     this.setChapter(
-      //       f,
-      //       book,
-      //       vSplit[0],
-      //       vSplit[1],
-      //       vSplit[2],
-      //       synchronizedScrolling
-      //     );
-      //   });
-
-      //   // console.log(results);
-      // });
-      url.subscribe(u => {
-        this.setChapter(
-          u,
-          book,
-          vSplit[0],
-          vSplit[1],
-          vSplit[2],
-          synchronizedScrolling
-        );
-      });
+    if (url === 'heb/1') {
+      this.httpClient
+        .get('assets/heb-1.xml', { observe: 'body', responseType: 'text' })
+        .subscribe(data => {
+          const parser = new DOMParser();
+          this.wTags = parser.parseFromString(data, 'text/html');
+        });
     }
   }
+
+  private getChapterFS(
+    book: string,
+    vSplit: string[],
+    synchronizedScrolling: () => void
+  ) {
+    const url2 = this.navService.urlBuilder(
+      book.toLowerCase(),
+      vSplit[0].toLowerCase()
+    );
+    this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
+      this.setChapter(
+        data,
+        book,
+        vSplit[0],
+        vSplit[1],
+        vSplit[2],
+        synchronizedScrolling
+      );
+    });
+  }
+
+  private getChapterWeb(
+    book: string,
+    vSplit: string[],
+    synchronizedScrolling: () => void
+  ) {
+    const url = this.navService.getChapter(
+      book.toLowerCase(),
+      vSplit[0].toLowerCase()
+    );
+    url.subscribe(u => {
+      this.setChapter(
+        u,
+        book,
+        vSplit[0],
+        vSplit[1],
+        vSplit[2],
+        synchronizedScrolling
+      );
+    });
+  }
+
   public resetHighlighting(): void {
     _.forEach(this.paragraphs, p => {
       p.resetHighlight();
@@ -154,7 +134,6 @@ export class ChapterService {
   ) {
     this.verseNums = this.parseHighlightedVerses2(highlight);
     this.contextNums = this.parseHighlightedVerses2(context);
-    // console.log(' Context Nums ' + contextNums.length + ' ' + context);
 
     const addressBar = document.getElementById('addressBar');
     const parser = new DOMParser();
@@ -179,7 +158,6 @@ export class ChapterService {
     let hiddenParagraph = '.hidden-paragraph';
     let tgGs = false;
     if (book === 'tg' || book === 'gs') {
-      // console.log('tggs');
       hiddenParagraph = '.index ul';
       tgGs = true;
     }
@@ -195,13 +173,7 @@ export class ChapterService {
         )
       );
     });
-    // Array.prototype.slice
-    //   .call(doc.querySelectorAll('.hidden-paragraph'))
-    //   .forEach(elem => {
-    //     this.paragraphs.push(
-    //       new Paragraph(elem as HTMLElement, this.verseNums, this.contextNums)
-    //     );
-    //   });
+
     if (this.notes === null || this.notes === undefined) {
       this.notes = '';
     }
@@ -215,14 +187,10 @@ export class ChapterService {
             return a - b;
           })[0]
           .toString();
-        // console.log('gghvtucydxydx' + focusVerse);
 
         document.getElementById('p' + focusVerse).scrollIntoView();
       }
       synchronizedScrolling();
-      // this.syncScrolling.synchronizedScrolling();
-
-      // console.log();
     }, 0);
   }
 
@@ -237,26 +205,20 @@ export class ChapterService {
       const verseParams = v.split(',');
 
       _.forEach(verseParams, verseParam => {
-        // console.log(verseParam);
-
         const t = verseParam.split('-');
         const count = t.length > 1 ? 1 : 0;
         for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
           verseNums.push(x);
-          // console.log(x);
         }
       });
     }
 
     return verseNums;
-    // this.setHighlight(verseNums);
-    // return verseNums;
   }
 
   private extractHtml(doc: Document, selector: string): string {
     const html = doc.querySelector(selector);
     if (html !== undefined && html !== null) {
-      // console.log(html);
       return html.innerHTML;
     }
     return '';

@@ -87,16 +87,31 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
 
   private verseSelection(): void {
     this.ngZone.runOutsideAngular(() => {
-      setInterval(() => {}, 7500);
+      // setInterval(() => {}, 7500);
       document.getElementById('bodyBlock').addEventListener('mouseup', () => {
-        const range = window.getSelection();
-        if (range.anchorNode !== null) {
-          const df = range.getRangeAt(0).cloneContents();
-          const wTags = df.querySelectorAll('w');
+        console.log('mouseup');
 
-          _.each(wTags, wTag => {
-            console.log(wTag);
-          });
+        const range = window.getSelection();
+        // console.log(
+        //   range
+        //     .getRangeAt(0)
+        //     .cloneContents()
+        //     .querySelectorAll('w')
+        // );
+
+        const df = range.getRangeAt(0).cloneContents();
+        const wTags = df.querySelectorAll('w');
+        console.log(wTags.length);
+
+        _.each(wTags, wTag => {
+          // console.log(wTag);
+
+          console.log(wTag.getAttribute('n'));
+          // (wTag as HTMLElement).style.borderBottomStyle = 'solid';
+           wTag.classList.add('border-test');
+        });
+
+        if (range.anchorNode !== null) {
         }
       });
     });

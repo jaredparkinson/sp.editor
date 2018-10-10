@@ -15,7 +15,7 @@ export class Note {
     this.classList = element.classList.toString();
 
     this.innerHtml = element.innerHTML;
-    this.innerText = element.innerText;
+    // this.innerText = element.innerText;
     // console.log('inner' + this.innerHtml);
 
     this.button = element.classList.contains('a2086');

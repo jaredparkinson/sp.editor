@@ -49,7 +49,9 @@ export class VerseSelectService {
           }
         });
 
-        verse.innerHtml = doc.querySelector('body').innerHTML;
+        this.ngZone.run(() => {
+          verse.innerHtml = doc.querySelector('body').innerHTML;
+        });
       });
     });
   }
@@ -63,7 +65,9 @@ export class VerseSelectService {
           w.className = '';
         });
 
-        verse.innerHtml = doc.querySelector('body').innerHTML;
+        this.ngZone.run(() => {
+          verse.innerHtml = doc.querySelector('body').innerHTML;
+        });
       });
     });
   }
@@ -128,7 +132,10 @@ export class VerseSelectService {
                 // console.log(wTag.nextElementSibling);
               });
 
-              verse.innerHtml = doc.querySelector('body').innerHTML;
+              this.ngZone.run(() => {
+                verse.innerHtml = doc.querySelector('body').innerHTML;
+              });
+              // console.log(event.target);
             }
           });
         });

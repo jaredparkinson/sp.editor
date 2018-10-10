@@ -20,7 +20,7 @@
     <header [innerHTML]="chapterService.header"></header>
 
     <div class="hidden-paragraph" *ngFor="let paragraph of chapterService.paragraphs;  trackBy: trackById" id="{{paragraph.id}}">
-      <span class="verse" (mouseup)="wTagClick($event)" [ngClass]="{'highlight-verse': verse.highlight, 'highlight-context': !verse.highlight && verse.context}"
+      <span class="verse" [ngClass]="{'highlight-verse': verse.highlight, 'highlight-context': !verse.highlight && verse.context}"
         id="{{verse.id}}" *ngFor="let verse of paragraph.verses; let i = index; trackBy: trackById" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(verse.innerHtml)"></span>
     </div>
     <div id='body-block-whitespace' class='body-block-whitespace'></div>

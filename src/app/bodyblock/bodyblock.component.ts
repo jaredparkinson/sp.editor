@@ -90,17 +90,28 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     });
     // this.verseSelection();
     this.wordSelection();
+
+    setTimeout(() => {
+      this.ngZone.runOutsideAngular(() => {
+        // console.log('span.verse ' + document.querySelector('span.verse'));
+
+        _.each(document.querySelectorAll('span.verse'), verse => {
+          (verse as HTMLElement).addEventListener('mouseup', event => {
+            console.log('asdfoijqwioerjjndfvjkasdhfuiahjsdoifjasdiofjasoidfj');
+            console.log(event);
+
+            this.verseSelectService.wTagClick(event);
+          });
+        });
+      });
+    }, 2000);
   }
 
   private wordSelection() {
     _.each(document.querySelectorAll('w'), wTag => {});
   }
 
-  public wTagClick(event: Event) {
-    this.ngZone.runOutsideAngular(() => {
-      this.verseSelectService.wTagClick(event);
-    });
-  }
+  public wTagClick(event: Event) {}
 
   trackById(index: number, paragraph: any) {
     return paragraph.id;

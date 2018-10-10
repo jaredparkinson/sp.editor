@@ -100,15 +100,20 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         // );
 
         const df = range.getRangeAt(0).cloneContents();
-        const wTags = df.querySelectorAll('w');
+        const wTags = _.toArray(df.querySelectorAll('w'));
         console.log(wTags.length);
 
+        wTags.pop();
         _.each(wTags, wTag => {
           // console.log(wTag);
 
-          console.log(wTag.getAttribute('n'));
+          console.log(
+            document.querySelector('w[n="' + wTag.getAttribute('n') + '"]')
+          );
           // (wTag as HTMLElement).style.borderBottomStyle = 'solid';
-           wTag.classList.add('border-test');
+          document
+            .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
+            .classList.add('wtag');
         });
 
         if (range.anchorNode !== null) {

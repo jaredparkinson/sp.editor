@@ -99,7 +99,7 @@ export class VerseSelectService {
             matches.push([
               wTagRef.parentElement.id,
               wTagRef.getAttribute('n'),
-              _.intersection(refs, refs2).length
+              refs2.length
             ]);
           }
         });

@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public httpClient: HttpClient,
     private location: Location,
-    private verseSelectService: VerseSelectService
+    public verseSelectService: VerseSelectService
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }

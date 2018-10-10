@@ -49,7 +49,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private ngZone: NgZone,
-    private verseSelectService: VerseSelectService
+    public verseSelectService: VerseSelectService
   ) {}
 
   getBodyBlock(): SafeHtml {

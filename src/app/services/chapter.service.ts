@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Sanitizer, SecurityContext } from '@angular/core';
+import { Injectable, NgZone, Sanitizer, SecurityContext } from '@angular/core';
 import { Params } from '@angular/router';
 import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
 import * as jsZip from 'jszip';
 
 import { Observable } from 'rxjs';
 
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Note } from '../models/Note';
@@ -27,6 +28,7 @@ export class ChapterService {
   public contextNums: number[] = [];
   public pageUrl = '';
   private fs: any;
+  private parser = new DOMParser();
   scripturesArchive: Observable<ArrayBuffer>;
   wTags: Document;
   wTagRefs: NodeListOf<Element>;
@@ -36,7 +38,7 @@ export class ChapterService {
     private navService: NavigationService,
     private saveStateService: SaveStateService,
     private httpClient: HttpClient,
-    private domSanitizer: DomSanitizer
+    private ngZong: NgZone
   ) {
     this.fs = (window as any).fs;
   }
@@ -241,55 +243,62 @@ export class ChapterService {
     return '';
   }
 
-  public toggleVerseSelect(verseSelect: boolean) {
-    switch (verseSelect) {
-      case true: {
-        console.log(this.wTagRefs);
-        _.each(this.wTagRefs, wTagRef => {
-          // console.log(
-          //   '#' +
-          //     wTagRef.parentElement.id +
-          //     ' w[n="' +
-          //     wTagRef.getAttribute('n') +
-          //     '"]'
-          // );
-          // // console.log(
-          //   document.querySelector(
-          //     '#' +
-          //       wTagRef.parentElement.id +
-          //       ' w[n="' +
-          //       wTagRef.parentElement.id +
-          //       '-' +
-          //       wTagRef.getAttribute('n') +
-          //       '"]'
-          //   )
-          // );
-          console.log(
-            document.querySelector(
-              ' w[n="' +
-                wTagRef.parentElement.id +
-                '-' +
-                wTagRef.getAttribute('n') +
-                '"]'
-            )
-          );
+  public toggleVerseSelect() {
+    this.verseSelect = !this.verseSelect;
+    this.ngZong.run(() => {
+      switch (this.verseSelect) {
+        case true: {
+          this.resetVerseSelect();
 
-          document
-            .querySelector(
-              ' w[n="' +
-                wTagRef.parentElement.id +
-                '-' +
-                wTagRef.getAttribute('n') +
-                '"]'
-            )
-            .classList.add('verse-select-0');
+          break;
+        }
+        case false:
+        default: {
+          this.removeVerseSelect();
+          break;
+        }
+      }
+    });
+  }
+
+  public resetVerseSelect() {
+    _.each(this.paragraphs, paragraph => {
+      _.each(paragraph.verses, verse => {
+        const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
+        _.each(doc.querySelectorAll('w'), w => {
+          const ids = w.getAttribute('n').split('-');
+          w.className = '';
+          if (
+            _.find(this.wTagRefs, wTagRef => {
+              return (
+                (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+                (wTagRef as HTMLElement).parentElement.id === ids[0]
+              );
+            })
+          ) {
+            w.classList.add('verse-select-0');
+          }
+          // console.log(w);
+          // console.log(w);
         });
-        break;
-      }
-      case false:
-      default: {
-        break;
-      }
-    }
+        // console.log(doc.querySelector('body').innerHTML);
+        verse.innerHtml = doc.querySelector('body').innerHTML;
+      });
+    });
+  }
+
+  public removeVerseSelect() {
+    const parser = new DOMParser();
+    _.each(this.paragraphs, paragraph => {
+      _.each(paragraph.verses, verse => {
+        const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+        _.each(doc.querySelectorAll('w'), w => {
+          w.className = '';
+          // console.log(w);
+        });
+        // console.log(doc.querySelector('body').innerHTML);
+        verse.innerHtml = doc.querySelector('body').innerHTML;
+      });
+    });
   }
 }

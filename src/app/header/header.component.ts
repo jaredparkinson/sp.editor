@@ -25,6 +25,7 @@ import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -52,7 +53,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public httpClient: HttpClient,
     private location: Location,
-    private ngZong: NgZone
+    private verseSelectService: VerseSelectService
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -72,60 +73,8 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleVerseSelect() {
-    this.chapterService.verseSelect = !this.chapterService.verseSelect;
-
+    this.verseSelectService.toggleVerseSelect();
     // console.log(this.wTags2);
-    this.ngZong.run(() => {
-      switch (this.chapterService.verseSelect) {
-        case true: {
-          const parser = new DOMParser();
-          _.each(this.chapterService.paragraphs, paragraph => {
-            _.each(paragraph.verses, verse => {
-              const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-
-              _.each(doc.querySelectorAll('w'), w => {
-                const ids = w.getAttribute('n').split('-');
-                if (
-                  _.find(this.chapterService.wTagRefs, wTagRef => {
-                    return (
-                      (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-                      (wTagRef as HTMLElement).parentElement.id === ids[0]
-                    );
-                  })
-                ) {
-                  w.classList.add('verse-select-0');
-                }
-
-                // console.log(w);
-                // console.log(w);
-              });
-              // console.log(doc.querySelector('body').innerHTML);
-
-              verse.innerHtml = doc.querySelector('body').innerHTML;
-            });
-          });
-
-          break;
-        }
-        case false:
-        default: {
-          const parser = new DOMParser();
-          _.each(this.chapterService.paragraphs, paragraph => {
-            _.each(paragraph.verses, verse => {
-              const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-
-              _.each(doc.querySelectorAll('w'), w => {
-                w.className = '';
-                // console.log(w);
-              });
-              // console.log(doc.querySelector('body').innerHTML);
-              verse.innerHtml = doc.querySelector('body').innerHTML;
-            });
-          });
-          break;
-        }
-      }
-    });
 
     // this.chapterService.toggleVerseSelect(this.verseSelect);
   }

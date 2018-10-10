@@ -23,6 +23,7 @@ import { Verse } from '../models/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -47,7 +48,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     public saveState: SaveStateService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private verseSelectService: VerseSelectService
   ) {}
 
   getBodyBlock(): SafeHtml {
@@ -95,80 +97,9 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   }
 
   public wTagClick(event: Event) {
-    if (this.chapterService.verseSelect) {
-      const ids = (event.target as HTMLUnknownElement)
-        .getAttribute('n')
-        .split('-');
-      const targer = _.find(this.chapterService.wTagRefs, wTagRef => {
-        return (
-          (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-          (wTagRef as HTMLElement).parentElement.id === ids[0]
-        );
-      });
-      const refs = (targer as HTMLUnknownElement)
-        .getAttribute('ref')
-        .split(',');
-      const matches: Array<[string, string, number]> = []; // = [];
-
-      _.each(this.chapterService.wTagRefs, wTagRef => {
-        const refs2 = wTagRef.getAttribute('ref').split(',');
-        if (_.intersection(refs, refs2).length > 0) {
-          // console.log(
-          //   _.intersection(refs, refs2).length + ' ' + wTagRef.parentElement.id
-          // );
-          matches.push([
-            wTagRef.parentElement.id,
-            wTagRef.getAttribute('n'),
-            _.intersection(refs, refs2).length
-          ]);
-        }
-      });
-
-      const parser = new DOMParser();
-
-      _.each(this.chapterService.paragraphs, paragraph => {
-        _.each(paragraph.verses, verse => {
-          const matchedMatches = _.filter(matches, match => {
-            return match[0] === verse.id;
-          });
-          const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-
-          _.each(doc.querySelectorAll('w'), wTag => {
-            if (wTag.className.includes('verse-select')) {
-              wTag.className = 'verse-select-0';
-            }
-          });
-
-          if (matchedMatches.length > 0) {
-            console.log('pasdf ' + matchedMatches.length);
-
-            _.each(matchedMatches, m => {
-              // console.log('#' + m[0] + ' w[n="' + m[0] + '-' + m[1] + '"]');
-
-              const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
-              const wTag = doc.querySelector(
-                ' w[n="' + m[0] + '-' + m[1] + '"]'
-              );
-              console.log(wTag.innerHTML + ' added class here');
-
-              wTag.classList.add(underline);
-              wTag.classList.remove('verse-select-0');
-            });
-
-            verse.innerHtml = doc.querySelector('body').innerHTML;
-          }
-        });
-      });
-    }
-
-    // console.log(
-    //   'wtag selected ' +
-    //     (targer as HTMLUnknownElement).innerHTML +
-    //     ' ' +
-    //     (targer as HTMLUnknownElement).getAttribute('ref') +
-    //     ' ' +
-    //     (event.currentTarget as HTMLElement).parentElement.id
-    // );
+    this.ngZone.runOutsideAngular(() => {
+      this.verseSelectService.wTagClick(event);
+    });
   }
 
   trackById(index: number, paragraph: any) {

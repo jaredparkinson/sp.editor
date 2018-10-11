@@ -6,25 +6,6 @@ body {
   font-family: $font-stack;
 }
 
-w.verse-select-0,
-w.verse-select-0+w {
-  border-bottom: 1px solid grey;
-}
-
-// w.verse-select-0+w {
-//   border-bottom: 1px solid grey;
-// }
-
-w.verse-select-1,
-w.verse-select-1+w {
-  border-bottom: 3px solid #f68d2e;
-}
-
-w.verse-select-2,
-w.verse-select-2+w {
-  border-bottom: 3px solid #2ca1a5;
-}
-
 .content-pane {
   @media only screen and (max-width: 1079.98px) {
     grid-template-columns: 0 10vw 80vw 10vw;
@@ -76,7 +57,6 @@ w.verse-select-2+w {
 
   #bodyBlock.hidden-paragraph {
     span {
-
       &.part,
       &.question,
       &.answer {

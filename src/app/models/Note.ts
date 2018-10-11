@@ -1,5 +1,5 @@
 import { DomSanitizer } from '@angular/platform-browser';
-
+import * as _ from 'lodash';
 export class Note {
   public id: string;
   public button = false;
@@ -31,5 +31,27 @@ export class Note {
   public secondaryButtonClick(): void {
     this.override = true;
     this.secondaryToggled = !this.secondaryToggled;
+  }
+
+  public resetVerseSelect() {
+    console.log('resetting innherml');
+
+    this.innerHtml = this.innerHtml
+      .replace('verse-select-1', '')
+      .replace('verse-select-2', '');
+  }
+
+  public verseSelect(refs: string[]) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(this.innerHtml, 'text/html');
+    console.log(refs);
+
+    _.each(refs, (ref, i) => {
+      doc
+        .getElementById(ref)
+        .classList.add('verse-select-' + (i > 0 ? '1' : '2'));
+      console.log();
+    });
+    this.innerHtml = doc.querySelector('body').innerHTML;
   }
 }

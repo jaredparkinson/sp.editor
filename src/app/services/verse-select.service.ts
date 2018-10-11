@@ -23,6 +23,8 @@ export class VerseSelectService {
         case false:
         default: {
           this.removeVerseSelect();
+
+          this.resetNotes();
           break;
         }
       }
@@ -31,6 +33,7 @@ export class VerseSelectService {
 
   public resetVerseSelect() {
     this.verseSelected = false;
+    this.resetNotes();
     _.each(this.chapterService.paragraphs, paragraph => {
       _.each(paragraph.verses, verse => {
         const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
@@ -53,6 +56,12 @@ export class VerseSelectService {
           verse.innerHtml = doc.querySelector('body').innerHTML;
         });
       });
+    });
+  }
+
+  private resetNotes() {
+    _.each(this.chapterService.notes2, note => {
+      note.resetVerseSelect();
     });
   }
 
@@ -91,6 +100,10 @@ export class VerseSelectService {
         const refs = (targetWTags as HTMLUnknownElement)
           .getAttribute('ref')
           .split(',');
+
+        this.chapterService.notes2[
+          parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
+        ].verseSelect(refs);
         const matches: Array<[string, string, number]> = [];
 
         _.each(this.chapterService.wTagRefs, wTagRef => {

@@ -19,9 +19,15 @@ body {
 }
 
 w.verse-select-0,
-div.verse-select-0 > .note-phrase,
-w.verse-select-0 + w {
+w.verse-select-0+w {
   border-bottom: 1px solid grey;
+}
+
+div.verse-select-0,
+div.verse-select-1,
+div.verse-select-2 {
+
+  border-left: 3px solid #f68d2e;
 }
 
 // w.verse-select-0+w {
@@ -29,16 +35,15 @@ w.verse-select-0 + w {
 // }
 
 w.verse-select-1,
-div.verse-select-1 > .note-phrase,
-w.verse-select-1 + w {
+w.verse-select-1+w {
   border-bottom: 3px solid #f68d2e;
 }
 
 w.verse-select-2,
-div.verse-select-2 > .note-phrase,
-w.verse-select-2 + w {
+w.verse-select-2+w {
   border-bottom: 3px solid #2ca1a5;
 }
+
 .wtag {
   border-bottom: 1px solid black;
 }
@@ -197,6 +202,7 @@ body.find {
 }
 
 @media only screen and (max-width: 499.98px) {
+
   .right-pane footer,
   .left-pane nav {
     width: $vw11;
@@ -210,6 +216,7 @@ body.find {
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1079.98px) {
+
   .right-pane footer,
   .left-pane nav {
     width: $vw6;
@@ -239,8 +246,7 @@ body.find {
   // }
   .menu-bar {
     grid-template-columns:
-      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
-      minmax(48px, $rightPaneWidth);
+      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth) minmax(48px, $rightPaneWidth);
     grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
 
     #addressBar {
@@ -455,6 +461,7 @@ h1 {
 }
 
 p {
+
   &.title,
   &.title-number,
   &.subtitle,

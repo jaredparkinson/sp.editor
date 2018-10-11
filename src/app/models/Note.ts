@@ -47,6 +47,11 @@ export class Note {
     console.log(refs);
 
     _.each(refs, (ref, i) => {
+      if (refs.length > 1 && i === 0) {
+        // console.log(refs);
+
+        return;
+      }
       doc
         .getElementById(ref)
         .classList.add('verse-select-' + (i > 0 ? '1' : '2'));

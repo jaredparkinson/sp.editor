@@ -38,7 +38,8 @@ export class ChapterService {
     private navService: NavigationService,
     private saveStateService: SaveStateService,
     private httpClient: HttpClient,
-    private ngZong: NgZone
+    private ngZong: NgZone,
+    private sanitizer: DomSanitizer
   ) {
     this.fs = (window as any).fs;
   }
@@ -167,7 +168,7 @@ export class ChapterService {
 
     this.header = doc.querySelector('header').innerHTML;
     _.each(doc.querySelectorAll('note'), elem => {
-      this.notes2.push(new Note(elem as HTMLElement));
+      this.notes2.push(new Note(elem as HTMLElement, this.sanitizer));
     });
     let hiddenParagraph = '.hidden-paragraph';
     let tgGs = false;

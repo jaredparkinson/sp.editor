@@ -1,4 +1,4 @@
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as _ from 'lodash';
 export class Note {
   public id: string;
@@ -10,13 +10,16 @@ export class Note {
   public innerHtml: string;
   public innerText: string;
 
-  constructor(element: HTMLElement) {
+  public h: SafeHtml;
+
+  constructor(element: HTMLElement, sanitizer: DomSanitizer) {
     this.id = element.id;
     this.classList = element.classList.toString();
 
     this.innerHtml = element.innerHTML;
     // this.innerText = element.innerText;
     // console.log('inner' + this.innerHtml);
+    this.h = sanitizer.bypassSecurityTrustHtml(this.innerHtml);
 
     this.button = element.classList.contains('a2086');
     this.btnId = 'note-button-note' + element.id.replace('note', '');

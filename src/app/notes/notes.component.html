@@ -40,8 +40,9 @@
     <footer id="studyNotes" class="study-notes">
       <!-- <span id="studyNotesTop"></span> -->
       <note [ngClass]="{'secondary-override-on': note.override, 'secondary-override-off': !note.override, 'tier-2-note-show': note.secondaryToggled, 'tier-2-note-hide': !note.secondaryToggled && note.override}"
-        *ngFor="let note of chapterService.notes2; trackBy: trackById" id="{{note.id}}" class="{{note.classList}}">
-        <div [innerHTML]="note.innerHtml"></div>
+        *ngFor="let note of chapterService.notes2; trackBy: trackById" id="{{note.id}}" class="{{note.classList}}"
+        #notes>
+        <div [innerHTML]="note.h"></div>
 
         <button *ngIf="note.button" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': note.secondaryToggled}"
           id="{{note.btnId}}" (click)="note.secondaryButtonClick()">+</button>

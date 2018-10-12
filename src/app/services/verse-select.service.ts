@@ -1,4 +1,11 @@
-import { Injectable, NgZone } from '@angular/core';
+import {
+  ContentChildren,
+  ElementRef,
+  Injectable,
+  NgZone,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import * as _ from 'lodash';
 import { ChapterService } from './chapter.service';
 
@@ -6,10 +13,22 @@ import { ChapterService } from './chapter.service';
   providedIn: 'root'
 })
 export class VerseSelectService {
+  constructor(private chapterService: ChapterService, private ngZone: NgZone) {}
   verseSelect = false;
   parser = new DOMParser();
   verseSelected = false;
-  constructor(private chapterService: ChapterService, private ngZone: NgZone) {}
+  @ContentChildren('notes')
+  noteh!: QueryList<ElementRef>;
+  test(): void {
+    console.log(
+      (_.find<ElementRef>(
+        this.noteh.toArray(),
+        n => n.nativeElement.id === 'note1'
+      ).nativeElement as HTMLElement)
+        .querySelector('.note-phrase')
+        .classList.add('verse-select-1')
+    );
+  }
 
   public toggleVerseSelect() {
     this.verseSelect = !this.verseSelect;
@@ -60,9 +79,17 @@ export class VerseSelectService {
   }
 
   private resetNotes() {
-    _.each(this.chapterService.notes2, note => {
-      note.resetVerseSelect();
+    _.each<ElementRef>(this.noteh.toArray(), n => {
+      const verseSelect = (n.nativeElement as HTMLElement).querySelectorAll(
+        '.verse-select-1'
+      );
+      _.each(verseSelect, vs => {
+        vs.classList.remove('verse-select-1');
+      });
     });
+    // _.each(this.chapterService.notes2, note => {
+    //   note.resetVerseSelect();
+    // });
   }
 
   public removeVerseSelect() {
@@ -101,9 +128,20 @@ export class VerseSelectService {
           .getAttribute('ref')
           .split(',');
 
-        this.chapterService.notes2[
-          parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
-        ].verseSelect(refs);
+        // this.chapterService.notes2[
+        //   parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
+        // ].verseSelect(refs);
+
+        console.log(refs);
+
+        console.log(
+          (this.noteh.toArray()[
+            parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
+          ].nativeElement as HTMLElement)
+            .querySelector('div[id="' + refs[refs.length - 1] + '"]')
+            .classList.add('verse-select-1')
+        );
+
         const matches: Array<[string, string, number]> = [];
 
         _.each(this.chapterService.wTagRefs, wTagRef => {

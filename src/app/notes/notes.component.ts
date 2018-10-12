@@ -52,11 +52,14 @@ export class NotesComponent implements OnInit, AfterViewInit {
   wtags!: QueryList<ElementRef>;
 
   ngAfterViewInit(): void {
+    // console.log(this.noteh.toArray().length);
+
+    // while (this.noteh.toArray().length === 0) {}
     setTimeout(() => {
-      console.log(this.wtags.toArray());
       this.verseSelectService.noteh = this.noteh;
-      this.verseSelectService.test();
-    }, 5000);
+      // console.log(this.wtags.toArray());
+      // this.verseSelectService.test();
+    }, 1000);
   }
   getNotes(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);

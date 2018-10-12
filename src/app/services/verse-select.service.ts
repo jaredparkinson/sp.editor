@@ -132,12 +132,11 @@ export class VerseSelectService {
         //   parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
         // ].verseSelect(refs);
 
-        console.log(refs);
+        console.log();
+        const noteIndex = parseInt(ids[0].substring(1, ids[0].length), 10) - 1;
 
         console.log(
-          (this.noteh.toArray()[
-            parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
-          ].nativeElement as HTMLElement)
+          (this.noteh.toArray()[noteIndex].nativeElement as HTMLElement)
             .querySelector('div[id="' + refs[refs.length - 1] + '"]')
             .classList.add('verse-select-1')
         );

@@ -101,7 +101,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
           });
         });
       });
-    }, 2000);
+    }, 5000);
   }
 
   private wordSelection() {

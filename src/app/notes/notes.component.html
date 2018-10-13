@@ -42,8 +42,10 @@
       <note [ngClass]="{'secondary-override-on': note.override, 'secondary-override-off': !note.override, 'tier-2-note-show': note.secondaryToggled, 'tier-2-note-hide': !note.secondaryToggled && note.override}"
         *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById" id="{{note.id}}" class="{{note.className}}"
         #notes>
+        <p class="note-title">{{note.noteTitle}}</p>
+        <p class="note-short-title">{{note.noteShortTitle}}</p>
         <div *ngFor="let secondaryNote of note.secondaryNotes" [innerHTML]="secondaryNote.innerHtml" id="{{secondaryNote.id}}"
-          class="{{secondaryNote.className}}"></div>
+          class="{{secondaryNote.className}} secondary-notes" id="{{secondaryNote.id}}"></div>
 
         <button *ngIf="note.className.includes('a2086')" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': note.secondaryToggled}"
           id="note-button-{{note.id}}">

@@ -69,8 +69,11 @@ export class ChapterService {
 
     const url = book + '/' + vSplit[0];
 
+    const url2 =
+      'assets/' + this.navService.urlBuilder(book, chapter) + '.json';
+
     this.httpClient
-      .get('assets/scriptures/nt/1-jn/1.html.json', {
+      .get(url2, {
         observe: 'body',
         responseType: 'text'
       })

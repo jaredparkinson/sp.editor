@@ -11,6 +11,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
+import { Chapter2 } from '../modelsJson/Chapter';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { SyncScrollingService } from './sync-scrolling.service';
@@ -33,6 +34,7 @@ export class ChapterService {
   wTags: Document;
   wTagRefs: NodeListOf<Element>;
   verseSelect = false;
+  chapter2: Chapter2 = new Chapter2();
 
   constructor(
     private navService: NavigationService,
@@ -67,11 +69,24 @@ export class ChapterService {
 
     const url = book + '/' + vSplit[0];
 
-    try {
-      this.getChapterFS(book, vSplit, synchronizedScrolling);
-    } catch {
-      this.getChapterWeb(book, vSplit, synchronizedScrolling);
-    }
+    this.httpClient
+      .get('assets/scriptures/nt/1-jn/1.html.json', {
+        observe: 'body',
+        responseType: 'text'
+      })
+      .subscribe(data => {
+        this.chapter2 = JSON.parse(data) as Chapter2;
+        console.log(
+          (JSON.parse(data) as Chapter2).paragraphs[0].verses[0].wTags[0]
+        );
+      });
+    // try {
+    //   this.getChapterFS(book, vSplit, synchronizedScrolling);
+    // } catch {
+    //   this.getChapterWeb(book, vSplit, synchronizedScrolling);
+    // }
+    // if (url === '1-jn-1') {
+    // }
 
     if (url === 'heb/1') {
       this.httpClient

@@ -89,17 +89,17 @@ body {
   }
 
   .notes-hide-original {
-    sup.marker {
+    w.marker {
       display: none;
     }
   }
 
   .notes-show-original {
-    span.study-note-ref {
+    w.study-note-ref {
       color: #007fa4;
     }
 
-    sup.marker {
+    w.marker {
       font-style: italic;
       font-size: 8pt;
       display: initial;
@@ -144,7 +144,7 @@ body {
     font-style: italic;
   }
 
-  sup.marker {
+  w.marker {
     font-style: italic;
     font-size: 8pt;
   }

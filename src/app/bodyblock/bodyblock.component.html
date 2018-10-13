@@ -17,11 +17,13 @@
     'notes-hide-original': !saveState.data.originalNotesVisible,
     'notes-show-original': saveState.data.originalNotesVisible}">
     <div id='bodyBlockTop'></div>
-    <header [innerHTML]="chapterService.header"></header>
+    <header [innerHTML]="chapterService.chapter2.header"></header>
 
-    <div class="hidden-paragraph" *ngFor="let paragraph of chapterService.paragraphs;  trackBy: trackById" id="{{paragraph.id}}">
+    <div class="hidden-paragraph" *ngFor="let paragraph of chapterService.chapter2.paragraphs;  trackBy: trackById" id="{{paragraph.id}}">
       <span class="verse" [ngClass]="{'highlight-verse': verse.highlight, 'highlight-context': !verse.highlight && verse.context}"
-        id="{{verse.id}}" *ngFor="let verse of paragraph.verses; let i = index; trackBy: trackById" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(verse.innerHtml)"></span>
+        id="{{verse.id}}" *ngFor="let verse of paragraph.verses; let i = index; trackBy: trackById">
+        <w *ngFor="let w of verse.wTags" n="{{w.n}}" class="{{w.className}}">{{w.innerHtml}}</w>
+      </span>
     </div>
     <div id='body-block-whitespace' class='body-block-whitespace'></div>
 

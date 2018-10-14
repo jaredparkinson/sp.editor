@@ -9,5 +9,8 @@ export class Note2 {
   public noteTitle = '';
   public noteShortTitle = '';
   public className = '';
+  public override = false;
+  public visible = false;
+  public btn = false;
   public secondaryNotes: SecondaryNote[] = [];
 }

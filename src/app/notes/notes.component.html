@@ -1,12 +1,12 @@
 <div id="study-notes-parent" [ngClass]="{
     'notes-show-tier': saveState.data.secondaryNotesVisible,
+    'notes-show-new': saveState.data.newNotesVisible,
     'hide-l hide-m': !saveState.data.rightPanePin, 
     'notes-show-tc': saveState.data.translatorNotesVisible,
     'notes-show-eng': saveState.data.englishNotesVisible,
     'notes-hide-tier': !saveState.data.secondaryNotesVisible, 
     'notes-hide-tc': !saveState.data.translatorNotesVisible,
 'notes-hide-eng': !saveState.data.englishNotesVisible,
-'notes-show-new': saveState.data.newNotesVisible,
 'notes-hide-new': !saveState.data.newNotesVisible,
 'notes-hide-original': !saveState.data.originalNotesVisible,
 'notes-show-original': saveState.data.originalNotesVisible,
@@ -39,16 +39,18 @@
     <div id="footerTop"></div>
     <footer id="studyNotes" class="study-notes">
       <!-- <span id="studyNotesTop"></span> -->
-      <note [ngClass]="{'secondary-override-on': note.override, 'secondary-override-off': !note.override, 'tier-2-note-show': note.secondaryToggled, 'tier-2-note-hide': !note.secondaryToggled && note.override}"
-        *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById" id="{{note.id}}" class="{{note.className}}"
-        #notes>
+      <note [ngClass]="{
+      'secondary-override-off': !note.override}" *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById"
+        id="{{note.id}}" class="{{note.className}}" #notes>
         <p class="note-title">{{note.noteTitle}}</p>
         <p class="note-short-title">{{note.noteShortTitle}}</p>
-        <div *ngFor="let secondaryNote of note.secondaryNotes" [innerHTML]="secondaryNote.innerHtml" id="{{secondaryNote.id}}"
-          class="{{secondaryNote.className}} secondary-notes" id="{{secondaryNote.id}}"></div>
+        <div *ngFor="let secondaryNote of note.secondaryNotes" [ngClass]="{'tier-2-note-hide': !note.visible && note.override, 
+        'tier-2-note-show': note.visible && note.override}"
+          [innerHTML]="secondaryNote.innerHtml" id="{{secondaryNote.id}}" class="{{secondaryNote.className}} secondary-notes"
+          id="{{secondaryNote.id}}"></div>
 
-        <button *ngIf="note.className.includes('a2086')" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': note.secondaryToggled}"
-          id="note-button-{{note.id}}">
+        <button *ngIf="note.btn" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': (!note.override && saveState.data.secondaryNotesVisible) || (note.override && note.visible)} "
+          id="note-button-{{note.id}}" (click)="noteButtonClick(note)">
           <!-- (click)="note.secondaryButtonClick()"> -->
           +</button>
 

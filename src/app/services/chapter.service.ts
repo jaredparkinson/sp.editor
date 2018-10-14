@@ -47,8 +47,8 @@ export class ChapterService {
   }
 
   public resetNotes(): void {
-    _.each(this.notes2, note => {
-      note.reset(this.saveStateService.data.secondaryNotesVisible);
+    _.each(this.chapter2.notes, note => {
+      note.override = false;
     });
   }
 

@@ -21,6 +21,7 @@ import {
 import * as _ from 'lodash';
 import { timeout } from 'q';
 import { Note } from '../models/Note';
+import { Note2 } from '../modelsJson/Note';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -65,6 +66,22 @@ export class NotesComponent implements OnInit, AfterViewInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);
   }
   ngOnInit() {}
+
+  noteButtonClick(note: Note2) {
+    switch (note.override) {
+      case true: {
+        note.visible = !note.visible;
+        break;
+      }
+
+      default: {
+        note.override = true;
+
+        note.visible = !this.saveState.data.secondaryNotesVisible;
+        break;
+      }
+    }
+  }
 
   trackById(index: number, note: Note) {
     return note.id;

@@ -1,9 +1,14 @@
-$font-stack: PalatinoldsLat-Roman, serif;
+$font-stack: PalatinoldsLat-Roman,
+serif;
 
 .right-pane {
   z-index: 100;
 
   note {
+    >div>div.original-note-marker {
+      display: none;
+    }
+
     // margin-left: 1em;
     display: grid;
     grid-template-columns: 9fr 1fr;
@@ -20,7 +25,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
       grid-area: auto / 1;
     }
 
-    div.secondary-notes {
+    >div {
       grid-area: auto / 1;
     }
 
@@ -34,7 +39,10 @@ $font-stack: PalatinoldsLat-Roman, serif;
   }
 
   .secondary-notes,
-  .note-short-title {
+  .original-note,
+  .note-short-title,
+  div.note,
+  div.note-tier-2 {
     margin-left: 1em;
     margin-right: 20px;
   }
@@ -168,14 +176,27 @@ $font-stack: PalatinoldsLat-Roman, serif;
   .original-note {
     background-color: oldlace;
 
-    span {
-      display: grid;
+    .original-note-marker {
+      grid-column-start: 1;
+      margin-right: 5px;
+    }
+
+    ul {
+
+      padding-left: 0px;
+      margin-left: 0.25in;
+    }
+
+    ul>li {
+      // display: grid;
+
+
       grid-template-columns: auto 9fr;
       grid-template-rows: auto;
 
-      .original-note-marker {
-        grid-column-start: 1;
-        margin-right: 5px;
+      div,
+      p {
+        display: inline;
       }
 
       .original-note-note {
@@ -183,8 +204,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
       }
 
       margin-bottom: 6pt;
-      margin-top: 3pt;
-      margin-left: 0.25in;
+      // margin-top: 3pt;
     }
   }
 
@@ -224,146 +244,30 @@ $font-stack: PalatinoldsLat-Roman, serif;
   }
 
   .study-notes-parent {
-    [class='note-phrase note-phrase-tc-2'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-eng-2'],
-    [class='note-reference-eng-2'],
-    [class='note-phrase note-phrase-new note-phrase-new-2'],
-    [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc'],
-    [class='note-reference-new'],
-    [class='note-reference-eng-2'],
-    [class='note-reference-tc'],
-    [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc note-phrase-tc-2'],
-    [class='note-reference-eng'],
-    [class='note-reference-eng-2'],
-    [class='note-reference-tc'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc note-phrase-tc-2'],
-    [class='note-reference-eng'],
-    [class='note-reference-eng-2'],
-    [class='note-reference-tc'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    [class='note-reference-eng-2'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-new'],
-    [class='note-reference-new'],
-    [class='note-phrase note-phrase-new'],
-    [class='note-reference-new'],
-    [class='note-phrase note-phrase-eng note-phrase-tc'],
-    [class='note-phrase note-phrase-new'],
-    [class='note-reference-new'],
-    [class='note-phrase note-phrase-new note-phrase-tc-2'],
-    [class='note-reference-new'],
-    [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    [class='note-reference-new-2'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    [class='note-phrase note-phrase-eng-2 note-phrase-tc'],
-    [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc'],
-    [class='note-phrase note-phrase-new note-phrase-eng note-phrase-eng-2'],
-    [class='note-phrase note-phrase-engs'],
-    [class='note-reference-tc-2'],
-    [class='note-phrase note-phrase-eng note-phrase-tc note-phrase-tc-2'],
-    [class='note-phrase note-phrase-new note-phrase-eng-2'],
-    [class='note-phrase note-phrase-new note-phrase-eng note-phrase-tc'],
-    [class='note-phrase note-phrase-eng-2'] {
-      visibility: hidden;
+
+    .note-phrase,
+    .original-note,
+    .note-reference-eng,
+    .note-reference-eng-2,
+    .note-reference-new,
+    .note-reference-new-2,
+    .note-reference-tc-2,
+    .note-reference-tc {
       display: none;
     }
 
-    &.notes-show-eng [class='note-reference-eng'],
-    &.notes-show-eng.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-eng-2'],
-    &.notes-show-eng.notes-show-tier.secondary-override-off
-      [class='note-reference-eng-2'],
-    &.notes-show-eng
-      [class='note-phrase note-phrase-new note-phrase-eng note-phrase-tc'],
-    &.notes-show-new
-      [class='note-phrase note-phrase-new note-phrase-eng note-phrase-tc'],
-    &.notes-show-tc
-      [class='note-phrase note-phrase-new note-phrase-eng note-phrase-tc'],
-    &.notes-show-eng
-      .tier-2-note-show[class='note-phrase note-phrase-new note-phrase-eng-2'],
-    &.notes-show-new [class='note-phrase note-phrase-new note-phrase-eng-2'],
-    &.notes-show-eng.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-new note-phrase-eng-2'],
-    &.notes-show-tc.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-eng note-phrase-tc note-phrase-tc-2'],
-    &.notes-show-tc
-      [class='note-phrase note-phrase-eng note-phrase-tc note-phrase-tc-2'],
-    &.notes-show-eng
-      [class='note-phrase note-phrase-eng note-phrase-tc note-phrase-tc-2'],
-    &.notes-show-eng.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-eng
-      .tier-2-note-show[class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-tc.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-tc
-      .tier-2-note-show[class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-tc.notes-show-tier
-      .secondary-override-off
-      [class='note-phrase note-phrase-tc-2'],
-    &.notes-show-tc .tier-2-note.show[class='note-phrase note-phrase-tc-2'],
-    &.notes-show-new [class='note-phrase note-phrase-new note-phrase-new-2'],
-    &.notes-show-new.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-new note-phrase-new-2'],
-    &.notes-show-new
-      .tier-2-note-show[class='note-phrase note-phrase-new note-phrase-new-2'],
-    &.notes-show-tc.notes-show-tier.secondary-override-off
-      [class='note-reference-tc-2'],
-    &.notes-show-tc .tier-2-note-show[class='note-reference-tc-2'],
-    &.notes-show-new
-      [class='note-phrase note-phrase-new note-phrase-eng note-phrase-eng-2'],
-    &.notes-show-eng
-      [class='note-phrase note-phrase-new note-phrase-eng note-phrase-eng-2'],
-    &.notes-show-new
-      [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-eng.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-tc.notes-show-tier.secondary-override-off
-      [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-eng
-      .tier-2-note-show[class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    &.notes-show-tc
-      .tier-2-note-show[class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc-2'],
-    .hiu [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc'],
-    &.hgfg
-      &.hgfg
-      [class='note-phrase note-phrase-new note-phrase-eng-2 note-phrase-tc'],
-    &.hgfg [class='note-reference-new'],
-    &.hgfg [class='note-reference-tc'],
-    &.hgfg
-      &.hgfg
-      [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc note-phrase-tc-2'],
-    &.hgfg [class='note-reference-tc'],
-    &.hgfg [class='note-reference-tc-2'],
-    &.hgfg
-      &.hgfg
-      [class='note-phrase note-phrase-eng note-phrase-eng-2 note-phrase-tc note-phrase-tc-2'],
-    &.hgfg &.hgfg [class='note-reference-tc'],
-    &.hgfg &.hgfg [class='note-reference-tc-2'],
-    &.hgfg
-      &.hgfg
-      &.hgfg
-      &.hgfg
-      [class='note-phrase note-phrase-eng-2 note-phrase-tc-2'],
-    &.hgfg [class='note-reference-tc-2'],
-    &.hgfg [class='note-phrase note-phrase-new'],
-    &.hgfg [class='note-phrase note-phrase-eng note-phrase-tc'],
-    &.hgfg [class='note-phrase note-phrase-new'],
-    &.hgfg [class='note-phrase note-phrase-eng'],
-    &.hgfg [class='note-reference-new-2'],
-    &.hgfg [class='note-phrase note-phrase-new'],
-    &.hgfg [class='note-reference-new'],
-    &.hgfg &.hgfg [class='note-phrase note-phrase-new note-phrase-tc-2'],
-    &.hgfg [class='note-reference-new'],
-    &.hgfg [class='note-reference-tc-2'],
-    .hjhf [class='note-phrase note-phrase-eng-2 note-phrase-tc'],
-    &.hgfg [class='note-reference-tc-2'],
-    &.hgfg [class='note-phrase note-phrase-eng-2'] {
-      visibility: inherit;
+    //     notes-show-tier
+    // notes-show-new
+    // notes-show-tc
+    // notes-show-eng
+
+    &.notes-show-eng .note-reference-eng,
+    &.notes-show-original .original-note,
+    &.notes-show-eng.notes-show-tier .note-reference-eng-2,
+    &.notes-show-new .note-reference-new,
+    &.notes-show-new.notes-show-tier .note-reference-new-2,
+    &.notes-show-tc.notes-show-tier .note-reference-tc-2,
+    &.notes-show-tc .note-reference-tc {
       display: block;
     }
 

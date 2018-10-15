@@ -52,11 +52,11 @@ export class ChapterService {
     });
   }
 
-  public getChapter(
+  public async getChapter(
     book: string,
     chapter: string,
-    synchronizedScrolling: () => void
-  ): void {
+    synchronizedScrolling: () => Promise<void>
+  ): Promise<void> {
     this.paragraphs = [];
     this.notes2 = [];
     this.navService.pageTitle = '';
@@ -69,31 +69,17 @@ export class ChapterService {
 
     const url = book + '/' + vSplit[0];
 
-    const url2 =
-      'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
-
     this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
     this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-    console.log(this.verseNums + ' ' + this.contextNums);
+    // console.log(this.verseNums + ' ' + this.contextNums);
 
-    this.httpClient
-      .get(url2, {
-        observe: 'body',
-        responseType: 'text'
-      })
-      .subscribe(data => {
-        this.chapter2 = JSON.parse(data) as Chapter2;
+    console.log(this.fs);
 
-        this.setHighlighting();
-        console.log(
-          (JSON.parse(data) as Chapter2).paragraphs[0].verses[0].wTags[0]
-        );
-      });
-    // try {
-    //   this.getChapterFS(book, vSplit, synchronizedScrolling);
-    // } catch {
-    //   this.getChapterWeb(book, vSplit, synchronizedScrolling);
-    // }
+    if (this.fs) {
+      this.getChapterFS(book, vSplit, synchronizedScrolling);
+    } else {
+      this.getChapterWeb(book, vSplit, synchronizedScrolling);
+    }
     // if (url === '1-jn-1') {
     // }
 
@@ -110,7 +96,23 @@ export class ChapterService {
     }
   }
 
-  private setHighlighting() {
+  private async verseFocus(): Promise<void> {
+    setTimeout(() => {
+      if (this.verseNums.length === 0) {
+        document.getElementById('bodyBlockTop').scrollIntoView();
+      } else {
+        const focusVerse = this.contextNums
+          .concat(this.verseNums)
+          .sort((a, b) => {
+            return a - b;
+          })[0]
+          .toString();
+        document.getElementById('p' + focusVerse).scrollIntoView();
+      }
+    });
+  }
+
+  private async setHighlighting(): Promise<void> {
     _.forEach(this.chapter2.paragraphs, paragraph => {
       _.forEach(paragraph.verses, verse => {
         if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
@@ -126,43 +128,31 @@ export class ChapterService {
   private getChapterFS(
     book: string,
     vSplit: string[],
-    synchronizedScrolling: () => void
+    synchronizedScrolling: () => Promise<void>
   ) {
-    const url2 = this.navService.urlBuilder(
-      book.toLowerCase(),
-      vSplit[0].toLowerCase()
-    );
+    const url2 =
+      this.navService.urlBuilder(book.toLowerCase(), vSplit[0].toLowerCase()) +
+      '.json';
     this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-      this.setChapter(
-        data,
-        book,
-        vSplit[0],
-        vSplit[1],
-        vSplit[2],
-        synchronizedScrolling
-      );
+      this.setChapter(data, synchronizedScrolling);
     });
   }
 
   private getChapterWeb(
     book: string,
     vSplit: string[],
-    synchronizedScrolling: () => void
+    synchronizedScrolling: () => Promise<void>
   ) {
-    const url = this.navService.getChapter(
-      book.toLowerCase(),
-      vSplit[0].toLowerCase()
-    );
-    url.subscribe(u => {
-      this.setChapter(
-        u,
-        book,
-        vSplit[0],
-        vSplit[1],
-        vSplit[2],
-        synchronizedScrolling
-      );
-    });
+    const url2 =
+      'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+    this.httpClient
+      .get(url2, {
+        observe: 'body',
+        responseType: 'text'
+      })
+      .subscribe(data => {
+        this.setChapter(data, synchronizedScrolling);
+      });
   }
 
   public resetHighlighting(): void {
@@ -171,84 +161,20 @@ export class ChapterService {
     });
   }
 
-  private setChapter(
-    u: string,
-    book: string,
-    chapter: string,
-    highlight: string,
-    context: string,
-    synchronizedScrolling: () => void
+  private async setChapter(
+    data: string,
+    synchronizedScrolling: () => Promise<void>
   ) {
-    this.verseNums = this.parseHighlightedVerses2(highlight);
-    this.contextNums = this.parseHighlightedVerses2(context);
+    this.chapter2 = (await JSON.parse(data)) as Chapter2;
 
-    const addressBar = document.getElementById('addressBar');
-    const parser = new DOMParser();
+    await this.setHighlighting();
 
-    // const safeDocument = this.domSanitizer.bypassSecurityTrustHtml(u);
+    console.log('verse focus');
 
-    // console.log(parser.parseFromString(safeDocument, 'text/html'));
-
-    const doc = parser.parseFromString(u, 'text/html');
-    this.pageUrl = doc
-      .querySelector('meta.page-url')
-      .attributes.getNamedItem('content').value;
-    // console.log(this.pageUrl);
-
-    this.bodyBlock = this.extractHtml(doc, 'div.body-block');
-    const title = this.extractHtml(doc, 'h1').replace('&nbsp;', ' ');
-    const urlText = book + '/' + chapter;
-
-    this.saveStateService.data.currentPage = urlText;
-    this.navService.pageTitle = title;
-    this.saveStateService.data.currentPage = urlText;
-
-    this.header = doc.querySelector('header').innerHTML;
-    _.each(doc.querySelectorAll('note'), elem => {
-      this.notes2.push(new Note(elem as HTMLElement, this.sanitizer));
-    });
-    let hiddenParagraph = '.hidden-paragraph';
-    let tgGs = false;
-    if (book === 'tg' || book === 'gs') {
-      hiddenParagraph = '.index ul';
-      tgGs = true;
-    }
-    // console.log(doc.querySelectorAll(hiddenParagraph));
-    let count = 0;
-
-    _.each(doc.querySelectorAll(hiddenParagraph), elem => {
-      // console.log(u);
-
-      this.paragraphs.push(
-        new Paragraph(
-          elem as HTMLElement,
-          this.verseNums,
-          this.contextNums,
-          tgGs,
-          count
-        )
-      );
-      count++;
-    });
-
-    if (this.notes === null || this.notes === undefined) {
-      this.notes = '';
-    }
-    setTimeout(() => {
-      if (this.verseNums.length === 0) {
-        document.getElementById('bodyBlockTop').scrollIntoView();
-      } else {
-        const focusVerse = this.contextNums
-          .concat(this.verseNums)
-          .sort((a, b) => {
-            return a - b;
-          })[0]
-          .toString();
-
-        document.getElementById('p' + focusVerse).scrollIntoView();
-      }
-      synchronizedScrolling();
-    }, 0);
+    await this.verseFocus();
+    // setTimeout(async () => {
+    //   await synchronizedScrolling();
+    // }, 200);
   }
 
   public parseHighlightedVerses2(v: string): number[] {

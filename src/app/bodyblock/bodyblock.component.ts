@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import {
   AfterContentChecked,
+  AfterContentInit,
   AfterViewChecked,
   AfterViewInit,
   Component,
+  ElementRef,
   NgZone,
   OnInit,
   QueryList,
@@ -29,7 +31,8 @@ import { VerseSelectService } from '../services/verse-select.service';
   templateUrl: './bodyblock.component.html',
   styleUrls: ['./bodyblock.component.scss']
 })
-export class BodyblockComponent implements OnInit, AfterViewInit {
+export class BodyblockComponent
+  implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
   // private styleTag = document.querySelector(
@@ -39,6 +42,8 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
   public highlightClasses2 = '';
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
+  @ViewChildren('verses')
+  verses!: QueryList<ElementRef>;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -58,6 +63,7 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     );
     // return this.chapterService.bodyBlock;
   }
+  ngAfterContentInit(): void {}
   ngOnInit() {
     this.initSyncScrolling();
     this.route.params.subscribe(params => {
@@ -68,22 +74,27 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
       const book = params['book'];
       const chapter = params['chapter'];
 
-      setTimeout(() => {
+      setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
           // console.log(book);
           // console.log(chapter);
-          this.chapterService.getChapter(
+          await this.chapterService.getChapter(
             book,
             chapter,
             this.synchronizedScrolling
           );
         } else if (book === undefined && chapter !== undefined) {
-          this.chapterService.getChapter(
+          await this.chapterService.getChapter(
             chapter,
             '',
             this.synchronizedScrolling
           );
         }
+        // setTimeout(async () => {
+        //   await this.synchronizedScrolling().catch(err => {
+        //     console.log('failed');
+        //   });
+        // }, 1000);
 
         // this.synchronizedScrolling();
       }, 200);
@@ -147,30 +158,42 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {}
+  async ngAfterViewInit() {
+    this.verses.changes.subscribe(() => {
+      setTimeout(async () => {
+        await this.synchronizedScrolling().catch(err => {
+          console.log('failed');
+        });
+      }, 100);
+    });
+  }
   onScroll() {
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => {
-      this.synchronizedScrolling();
+    this.timer = setTimeout(async () => {
+      await this.synchronizedScrolling();
     }, 50);
-    this.timer2 = setTimeout(() => {
-      this.synchronizedScrolling();
+    this.timer2 = setTimeout(async () => {
+      await this.synchronizedScrolling();
     }, 200);
     // this.ngZone.runOutsideAngular();
   }
   // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
   //   return Array.prototype.slice.call(list) as Element[];
   // }
-  synchronizedScrolling(): void {
+  async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
+    console.log('sync scrolling ' + this.verses.length);
+
     let scrollIntoView: Element;
 
-    _.toArray<Element>(verses).some(element => {
-      const top = element.getBoundingClientRect().top;
-      const height = element.getBoundingClientRect().height;
+    _.forEach(this.verses.toArray(), verse => {
+      const top = (verse.nativeElement as HTMLElement).getBoundingClientRect()
+        .top;
+      const height = (verse.nativeElement as HTMLElement).getBoundingClientRect()
+        .height;
       const start = 35;
       if (top + height > start && top < start + height) {
-        scrollIntoView = element;
+        scrollIntoView = verse.nativeElement as HTMLElement;
       } else if (scrollIntoView !== undefined) {
         const noteID =
           'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
@@ -182,6 +205,23 @@ export class BodyblockComponent implements OnInit, AfterViewInit {
         return true;
       }
     });
+    // _.toArray<Element>(verses).some(element => {
+    //   const top = element.getBoundingClientRect().top;
+    //   const height = element.getBoundingClientRect().height;
+    //   const start = 35;
+    //   if (top + height > start && top < start + height) {
+    //     scrollIntoView = element;
+    //   } else if (scrollIntoView !== undefined) {
+    //     const noteID =
+    //       'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
+
+    //     console.log('nojgtgcd' + noteID);
+
+    //     document.getElementById(noteID).scrollIntoView();
+
+    //     return true;
+    //   }
+    // });
 
     // tslint:disable-next-line:prefer-for-of
     // for (let x = 0; x < verses.length; x++) {

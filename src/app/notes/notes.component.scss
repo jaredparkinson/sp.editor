@@ -252,7 +252,14 @@ serif;
     .note-reference-new,
     .note-reference-new-2,
     .note-reference-tc-2,
-    .note-reference-tc {
+    .note-reference-tc,
+    &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-phrase-eng-2,
+    &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-reference-eng-2,
+    &.notes-show-new.notes-show-tier .tier-2-note-hide .note-phrase-new-2,
+    &.notes-show-new.notes-show-tier .tier-2-note-hide .note-reference-new-2,
+    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-phrase-tc-2,
+    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2,
+      {
       display: none;
     }
 
@@ -263,10 +270,34 @@ serif;
 
     &.notes-show-eng .note-reference-eng,
     &.notes-show-original .original-note,
-    &.notes-show-eng.notes-show-tier .note-reference-eng-2,
+    &.notes-show-tc .note-phrase-tc,
+    &.notes-show-eng .note-phrase-eng,
+    &.notes-show-new .note-phrase-new,
     &.notes-show-new .note-reference-new,
+    &.notes-show-eng .tier-2-note-show .note-phrase-eng-2,
+    &.notes-show-eng .tier-2-note-show .note-reference-eng-2,
+    &.notes-show-new .tier-2-note-show .note-phrase-new-2,
+    &.notes-show-new .tier-2-note-show .note-reference-new-2,
+    &.notes-show-tc .tier-2-note-show .note-phrase-tc-2,
+    &.notes-show-tc .tier-2-note-show .note-reference-tc-2,
+    &.notes-show-eng .tier-2-note-hide.secondary-note .note-phrase-eng,
+    &.notes-show-eng .tier-2-note-hide.secondary-note .note-reference-eng,
+    &.notes-show-new .tier-2-note-hide.secondary-note .note-phrase-new,
+    &.notes-show-new .tier-2-note-hide.secondary-note .note-reference-new,
+    &.notes-show-tc .tier-2-note-hide.secondary-note .note-phrase-tc,
+    &.notes-show-tc .tier-2-note-hide.secondary-note .note-reference-tc,
+    &.notes-show-eng.notes-show-tier .note-phrase-eng-2,
+    &.notes-show-eng.notes-show-tier .note-reference-eng-2,
+    &.notes-show-new.notes-show-tier .note-phrase-new-2,
     &.notes-show-new.notes-show-tier .note-reference-new-2,
+    &.notes-show-tc.notes-show-tier .note-phrase-tc-2,
     &.notes-show-tc.notes-show-tier .note-reference-tc-2,
+    &.notes-show-eng.notes-hide-tier .note-phrase-eng,
+    &.notes-show-eng.notes-hide-tier .note-reference-eng,
+    &.notes-show-new.notes-hide-tier .note-phrase-new,
+    &.notes-show-new.notes-hide-tier .note-reference-new,
+    &.notes-show-tc.notes-hide-tier .note-phrase-tc,
+    &.notes-show-tc.notes-hide-tier .note-reference-tc,
     &.notes-show-tc .note-reference-tc {
       display: block;
     }

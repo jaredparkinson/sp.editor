@@ -57,6 +57,7 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
+
       &.part,
       &.question,
       &.answer {
@@ -103,6 +104,7 @@ body {
       font-style: italic;
       font-size: 8pt;
       display: initial;
+      vertical-align: super;
       /* when original notes showing, display:none */
     }
   }

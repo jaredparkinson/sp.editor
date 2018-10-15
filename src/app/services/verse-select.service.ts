@@ -7,6 +7,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import * as _ from 'lodash';
+import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
 
 @Injectable({
@@ -18,9 +19,8 @@ export class VerseSelectService {
   verseSelect = false;
   parser = new DOMParser();
   verseSelected = false;
-  @ContentChildren('notes')
-  notes: ElementRef[];
-  public verses: ElementRef[];
+  public notes: ElementRef[] = [];
+  public verses: ElementRef[] = [];
   test(): void {
     console.log(
       (_.find<ElementRef>(this.notes, n => n.nativeElement.id === 'note1')
@@ -64,7 +64,11 @@ export class VerseSelectService {
           );
         })
       ) {
-        wTag.className += ' verse-select-0';
+        if (!wTag.className.includes('verse-select-0')) {
+          wTag.className += ' verse-select-0';
+        }
+        wTag.className = wTag.className.replace(' verse-select-1', '');
+        wTag.className = wTag.className.replace(' verse-select-2', '');
       }
     });
     // console.log(this.wTags);
@@ -110,12 +114,7 @@ export class VerseSelectService {
 
   private resetNotes() {
     _.each<ElementRef>(this.notes, n => {
-      const verseSelect = (n.nativeElement as HTMLElement).querySelectorAll(
-        '.verse-select-1'
-      );
-      _.each(verseSelect, vs => {
-        vs.classList.remove('verse-select-1');
-      });
+      (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
     });
     // _.each(this.chapterService.notes2, note => {
     //   note.resetVerseSelect();
@@ -128,16 +127,14 @@ export class VerseSelectService {
     });
   }
 
-  public wTagClick(event: Event) {
+  public wTagClick(w: WTag) {
     if (this.verseSelect) {
       if (this.verseSelected === true) {
         this.resetVerseSelect();
         this.verseSelected = false;
       } else {
         this.verseSelected = true;
-        const ids = (event.target as HTMLUnknownElement)
-          .getAttribute('n')
-          .split('-');
+        const ids = w.n.split('-');
         const targetWTags = _.find(this.chapterService.wTagRefs, wTagRef => {
           return (
             (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
@@ -152,14 +149,7 @@ export class VerseSelectService {
         //   parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
         // ].verseSelect(refs);
 
-        console.log();
         const noteIndex = parseInt(ids[0].substring(1, ids[0].length), 10) - 1;
-
-        console.log(
-          (this.notes[noteIndex].nativeElement as HTMLElement)
-            .querySelector('div[id="' + refs[refs.length - 1] + '"]')
-            .classList.add('verse-select-1')
-        );
 
         const matches: Array<[string, string, number]> = [];
 
@@ -174,44 +164,52 @@ export class VerseSelectService {
           }
         });
 
-        const parser = new DOMParser();
+        const n = _.find(this.notes, note => {
+          return (
+            ((note as ElementRef).nativeElement as HTMLElement).id ===
+            refs[refs.length - 1]
+          );
+        });
 
-        _.each(this.chapterService.paragraphs, paragraph => {
-          _.each(paragraph.verses, verse => {
-            const matchedMatches = _.filter(matches, match => {
-              return match[0] === verse.id;
-            });
-            const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+        if (n) {
+          (n.nativeElement as HTMLElement).classList.add('verse-select-1');
+          (n.nativeElement as HTMLElement).scrollIntoView({ block: 'center' });
+        }
 
-            _.each(doc.querySelectorAll('w'), wTag => {
-              if (wTag.className.includes('verse-select')) {
-                wTag.className = 'verse-select-0';
-              }
-            });
+        console.log(n + 'n');
 
-            if (matchedMatches.length > 0) {
-              _.each(matchedMatches, m => {
-                const underline =
-                  m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
-                const wTag = doc.querySelector(
-                  ' w[n="' + m[0] + '-' + m[1] + '"]'
-                );
-
-                wTag.classList.add(underline);
-                wTag.classList.remove('verse-select-0');
-                // if (wTag.nextElementSibling) {
-                //   console.log(
-                //     'next ' + (wTag.nextElementSibling as HTMLElement).innerText
-                //   );
-                // }
-              });
-
-              this.ngZone.run(() => {
-                verse.innerHtml = doc.querySelector('body').innerHTML;
-              });
-              // console.log(event.target);
-            }
+        _.each(this.chapterService.wTags, verse => {
+          const matchedMatches = _.filter(matches, match => {
+            return match[0] + '-' + match[1] === verse.n;
           });
+
+          // console.log(matchedMatches + ' matches matches');
+          // this.resetVerseSelect();
+
+          // const doc = parser.parseFromString(verse.innerHtml, 'text/html');
+
+          // _.each(doc.querySelectorAll('w'), wTag => {
+          //   if (wTag.className.includes('verse-select')) {
+          //     wTag.className = 'verse-select-0';
+          //   }
+          // });
+
+          if (matchedMatches.length > 0) {
+            _.each(matchedMatches, m => {
+              const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
+              const wTag = _.find(this.chapterService.wTags, t => {
+                return t.n === m[0] + '-' + m[1];
+              });
+
+              wTag.className += underline;
+              wTag.className = wTag.className.replace('verse-select-0', '');
+              // if (wTag.nextElementSibling) {
+              //   console.log(
+              //     'next ' + (wTag.nextElementSibling as HTMLElement).innerText
+              //   );
+              // }
+            });
+          }
         });
       }
     }

@@ -49,23 +49,20 @@ export class NotesComponent implements OnInit, AfterViewInit {
   faGlobe = faGlobe;
   @ViewChildren('notes')
   notes!: QueryList<ElementRef>;
-  @ViewChildren('w')
-  wtags!: QueryList<ElementRef>;
 
   async ngAfterViewInit() {
     // console.log(this.noteh.toArray().length);
 
     // while (this.noteh.toArray().length === 0) {}
     await setTimeout(() => {
-      console.log(this.notes.toArray());
+      this.notes.changes.subscribe(() => {
+        this.verseSelectService.notes = this.notes.toArray();
 
-      this.notes.changes.subscribe(async () => {
-        this.verseSelectService.notes = await this.notes.toArray();
-        console.log(this.verseSelectService.notes.length);
+        // console.log('notes ' + this.notes);
       });
       // console.log(this.wtags.toArray());
       // this.verseSelectService.test();
-    }, 1000);
+    }, 100);
   }
   getNotes(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);

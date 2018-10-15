@@ -21,6 +21,7 @@ import * as _ from 'lodash';
 
 import { Paragraph } from '../models/Paragraph';
 import { Verse } from '../models/Verse';
+import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -103,24 +104,22 @@ export class BodyblockComponent
     // this.verseSelection();
     this.wordSelection();
 
-    setTimeout(() => {
-      this.ngZone.runOutsideAngular(() => {
-        // console.log('span.verse ' + document.querySelector('span.verse'));
+    // setTimeout(() => {
+    //   this.ngZone.runOutsideAngular(() => {
+    //     // console.log('span.verse ' + document.querySelector('span.verse'));
 
-        _.each(document.querySelectorAll('span.verse'), verse => {
-          (verse as HTMLElement).addEventListener('mouseup', event => {
-            this.verseSelectService.wTagClick(event);
-          });
-        });
-      });
-    }, 5000);
+    //     _.each(document.querySelectorAll('span.verse'), verse => {
+    //       (verse as HTMLElement).addEventListener('mouseup', event => {
+    //         // this.verseSelectService.wTagClick(event);
+    //       });
+    //     });
+    //   });
+    // }, 5000);
   }
 
   private wordSelection() {
     _.each(document.querySelectorAll('w'), wTag => {});
   }
-
-  public wTagClick(event: Event) {}
 
   trackById(index: number, paragraph: any) {
     return paragraph.id;
@@ -157,6 +156,11 @@ export class BodyblockComponent
         }
       });
     });
+  }
+
+  wTagClick(wTag: WTag) {
+    console.log(wTag);
+    this.verseSelectService.wTagClick(wTag);
   }
 
   async ngAfterViewInit() {
@@ -213,43 +217,6 @@ export class BodyblockComponent
         return true;
       }
     });
-    // _.toArray<Element>(verses).some(element => {
-    //   const top = element.getBoundingClientRect().top;
-    //   const height = element.getBoundingClientRect().height;
-    //   const start = 35;
-    //   if (top + height > start && top < start + height) {
-    //     scrollIntoView = element;
-    //   } else if (scrollIntoView !== undefined) {
-    //     const noteID =
-    //       'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
-
-    //     console.log('nojgtgcd' + noteID);
-
-    //     document.getElementById(noteID).scrollIntoView();
-
-    //     return true;
-    //   }
-    // });
-
-    // tslint:disable-next-line:prefer-for-of
-    // for (let x = 0; x < verses.length; x++) {
-    //   const element = verses[x];
-    //   const top = element.getBoundingClientRect().top;
-    //   const height = element.getBoundingClientRect().height;
-    //   const start = 35;
-    //   if (top + height > start && top < start + height) {
-    //     scrollIntoView = element;
-    //   } else if (scrollIntoView !== undefined) {
-    //     const noteID =
-    //       'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
-
-    //     console.log('nojgtgcd' + noteID);
-
-    //     document.getElementById(noteID).scrollIntoView();
-
-    //     break;
-    //   }
-    // }
 
     if (scrollIntoView === undefined) {
       console.log(scrollIntoView);

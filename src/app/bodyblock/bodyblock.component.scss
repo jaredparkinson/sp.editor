@@ -49,7 +49,7 @@ body {
   }
 
   #bodyBlock {
-    span.verse-number {
+    w.verse-number {
       vertical-align: super;
       font-size: 8pt;
     }
@@ -74,13 +74,13 @@ body {
         // padding-left: 5px;
         padding: 0 0 6pt 5px;
 
-        span.verse-number {
+        w.verse-number {
           vertical-align: unset;
           font-size: inherit;
         }
 
         div.hidden-paragraph & {
-          display: inline; // span.verse-number {
+          display: inline; // w.verse-number {
           //   vertical-align: super;
           //   font-size: 8pt;
           // }
@@ -129,7 +129,7 @@ body {
     text-transform: uppercase;
   }
 
-  span.verse-number {
+  w.verse-number {
     color: DimGray;
     font-weight: bold;
   }

@@ -33,13 +33,15 @@ div.verse-select-2 {
 //   border-bottom: 1px solid grey;
 // }
 
-w.verse-select-1,
-w.verse-select-1+w {
+w.verse-select-1 // w.verse-select-1+w 
+
+  {
   border-bottom: 3px solid #f68d2e;
 }
 
-w.verse-select-2,
-w.verse-select-2+w {
+w.verse-select-2 // w.verse-select-2+w 
+
+  {
   border-bottom: 3px solid #2ca1a5;
 }
 

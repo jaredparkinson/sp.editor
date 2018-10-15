@@ -1,11 +1,10 @@
-$font-stack: PalatinoldsLat-Roman,
-serif;
+$font-stack: PalatinoldsLat-Roman, serif;
 
 .right-pane {
   z-index: 100;
 
   note {
-    >div>div.original-note-marker {
+    > div > div.original-note-marker {
       display: none;
     }
 
@@ -25,7 +24,7 @@ serif;
       grid-area: auto / 1;
     }
 
-    >div {
+    > div {
       grid-area: auto / 1;
     }
 
@@ -182,14 +181,12 @@ serif;
     }
 
     ul {
-
       padding-left: 0px;
       margin-left: 0.25in;
     }
 
-    ul>li {
+    ul > li {
       // display: grid;
-
 
       grid-template-columns: auto 9fr;
       grid-template-rows: auto;
@@ -244,7 +241,9 @@ serif;
   }
 
   .study-notes-parent {
-
+    .note-short-title:empty {
+      display: none;
+    }
     .note-phrase,
     .original-note,
     .note-reference-eng,
@@ -258,8 +257,7 @@ serif;
     &.notes-show-new.notes-show-tier .tier-2-note-hide .note-phrase-new-2,
     &.notes-show-new.notes-show-tier .tier-2-note-hide .note-reference-new-2,
     &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-phrase-tc-2,
-    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2,
-      {
+    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2 {
       display: none;
     }
 

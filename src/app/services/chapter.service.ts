@@ -70,7 +70,11 @@ export class ChapterService {
     const url = book + '/' + vSplit[0];
 
     const url2 =
-      'assets/' + this.navService.urlBuilder(book, chapter) + '.json';
+      'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+
+    this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
+    this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
+    console.log(this.verseNums + ' ' + this.contextNums);
 
     this.httpClient
       .get(url2, {
@@ -79,6 +83,8 @@ export class ChapterService {
       })
       .subscribe(data => {
         this.chapter2 = JSON.parse(data) as Chapter2;
+
+        this.setHighlighting();
         console.log(
           (JSON.parse(data) as Chapter2).paragraphs[0].verses[0].wTags[0]
         );
@@ -102,6 +108,19 @@ export class ChapterService {
           // console.log('wTagRefs ' + this.wTagRefs.length);
         });
     }
+  }
+
+  private setHighlighting() {
+    _.forEach(this.chapter2.paragraphs, paragraph => {
+      _.forEach(paragraph.verses, verse => {
+        if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
+          verse.highlight = true;
+        }
+        if (this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))) {
+          verse.context = true;
+        }
+      });
+    });
   }
 
   private getChapterFS(

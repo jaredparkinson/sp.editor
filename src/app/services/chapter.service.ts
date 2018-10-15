@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { Chapter2 } from '../modelsJson/Chapter';
+import { WTag } from '../modelsJson/WTag';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { SyncScrollingService } from './sync-scrolling.service';
@@ -31,10 +32,11 @@ export class ChapterService {
   private fs: any;
   private parser = new DOMParser();
   scripturesArchive: Observable<ArrayBuffer>;
-  wTags: Document;
+  hebWTags: Document;
   wTagRefs: NodeListOf<Element>;
   verseSelect = false;
   chapter2: Chapter2 = new Chapter2();
+  wTags: WTag[] = [];
 
   constructor(
     private navService: NavigationService,
@@ -62,7 +64,7 @@ export class ChapterService {
     this.navService.pageTitle = '';
     this.header = '';
     let vSplit = chapter.split('.');
-    this.wTags = new Document();
+    this.hebWTags = new Document();
     if (chapter === '') {
       vSplit = book.split('.');
     }
@@ -88,8 +90,8 @@ export class ChapterService {
         .get('assets/heb-1.xml', { observe: 'body', responseType: 'text' })
         .subscribe(data => {
           const parser = new DOMParser();
-          this.wTags = parser.parseFromString(data, 'text/html');
-          this.wTagRefs = this.wTags.querySelectorAll('w[ref]');
+          this.hebWTags = parser.parseFromString(data, 'text/html');
+          this.wTagRefs = this.hebWTags.querySelectorAll('w[ref]');
 
           // console.log('wTagRefs ' + this.wTagRefs.length);
         });
@@ -133,6 +135,8 @@ export class ChapterService {
     const url2 =
       this.navService.urlBuilder(book.toLowerCase(), vSplit[0].toLowerCase()) +
       '.json';
+    console.log(url2 + ' url2');
+
     this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
       this.setChapter(data, synchronizedScrolling);
     });
@@ -172,9 +176,19 @@ export class ChapterService {
     console.log('verse focus');
 
     await this.verseFocus();
+    await this.setWTags();
     // setTimeout(async () => {
     //   await synchronizedScrolling();
     // }, 200);
+  }
+  async setWTags() {
+    _.each(this.chapter2.paragraphs, paragraph => {
+      _.each(paragraph.verses, verse => {
+        _.each(verse.wTags, wTag => {
+          this.wTags.push(wTag);
+        });
+      });
+    });
   }
 
   public parseHighlightedVerses2(v: string): number[] {

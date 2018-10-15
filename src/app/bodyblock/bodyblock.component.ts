@@ -19,7 +19,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as _ from 'lodash';
 
-import { log } from 'util';
 import { Paragraph } from '../models/Paragraph';
 import { Verse } from '../models/Verse';
 import { ChapterService } from '../services/chapter.service';
@@ -44,6 +43,8 @@ export class BodyblockComponent
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<ElementRef>;
+  @ViewChildren('wTags')
+  'wTags'!: QueryList<ElementRef>;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -142,7 +143,7 @@ export class BodyblockComponent
 
           const id = wTag.getAttribute('n').split('-');
 
-          const data = this.chapterService.wTags.querySelector(
+          const data = this.chapterService.hebWTags.querySelector(
             '#' + id[0] + ' w[n="' + id[1] + '"]'
           );
           if (data.hasAttribute('ref')) {
@@ -161,9 +162,16 @@ export class BodyblockComponent
   async ngAfterViewInit() {
     this.verses.changes.subscribe(() => {
       setTimeout(async () => {
+        this.verseSelectService.verses = this.verses.toArray();
+
         await this.synchronizedScrolling().catch(err => {
           console.log('failed');
         });
+      }, 100);
+    });
+    this.verses.changes.subscribe(() => {
+      setTimeout(() => {
+        this.verseSelectService.wTags = this.wTags.toArray();
       }, 100);
     });
   }

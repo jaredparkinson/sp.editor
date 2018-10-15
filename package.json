@@ -38,7 +38,7 @@
     "electron:serve": "wait-on http-get://localhost:4200/ && yarn run electron:tsc && electron . --serve",
     "electron:local": "yarn run build:prod && electron .",
     "electron:linux": "yarn run build:prod && npx electron-builder build --linux",
-    "electron:windows": "yarn run build:prod && npx electron-builder build --windows",
+    "electron:windows": "yarn run build:prod && electron-builder build --windows",
     "electron:windows:alpha": "yarn run build:prod && electron-builder build --windows",
     "electron:windows:beta": "yarn version --patch && yarn run build:prod && electron-builder build --windows",
     "electron:mac": "yarn run build:prod && npx electron-builder build --mac",

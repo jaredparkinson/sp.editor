@@ -13,18 +13,18 @@ import { ChapterService } from './chapter.service';
   providedIn: 'root'
 })
 export class VerseSelectService {
+  wTags: ElementRef[];
   constructor(private chapterService: ChapterService, private ngZone: NgZone) {}
   verseSelect = false;
   parser = new DOMParser();
   verseSelected = false;
   @ContentChildren('notes')
-  noteh!: QueryList<ElementRef>;
+  notes: ElementRef[];
+  public verses: ElementRef[];
   test(): void {
     console.log(
-      (_.find<ElementRef>(
-        this.noteh.toArray(),
-        n => n.nativeElement.id === 'note1'
-      ).nativeElement as HTMLElement)
+      (_.find<ElementRef>(this.notes, n => n.nativeElement.id === 'note1')
+        .nativeElement as HTMLElement)
         .querySelector('.note-phrase')
         .classList.add('verse-select-1')
     );
@@ -53,33 +53,63 @@ export class VerseSelectService {
   public resetVerseSelect() {
     this.verseSelected = false;
     this.resetNotes();
-    _.each(this.chapterService.paragraphs, paragraph => {
-      _.each(paragraph.verses, verse => {
-        const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
-        _.each(doc.querySelectorAll('w'), w => {
-          const ids = w.getAttribute('n').split('-');
-          w.className = '';
-          if (
-            _.find(this.chapterService.wTagRefs, wTagRef => {
-              return (
-                (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-                (wTagRef as HTMLElement).parentElement.id === ids[0]
-              );
-            })
-          ) {
-            w.classList.add('verse-select-0');
-          }
-        });
-
-        this.ngZone.run(() => {
-          verse.innerHtml = doc.querySelector('body').innerHTML;
-        });
-      });
+    _.each(this.chapterService.wTags, wTag => {
+      const ids = wTag.n.split('-');
+      // console.log(ids);
+      if (
+        _.find(this.chapterService.wTagRefs, wTagRef => {
+          return (
+            (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+            (wTagRef as HTMLElement).parentElement.id === ids[0]
+          );
+        })
+      ) {
+        wTag.className += ' verse-select-0';
+      }
     });
+    // console.log(this.wTags);
+    // _.each(this.wTags, wTag => {
+    //   const element = wTag.nativeElement as HTMLElement;
+    //   const ids = element.getAttribute('n').split('-');
+    //   element.className = '';
+    //   if (
+    //     _.find(this.chapterService.wTagRefs, wTagRef => {
+    //       return (
+    //         (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+    //         (wTagRef as HTMLElement).parentElement.id === ids[0]
+    //       );
+    //     })
+    //   ) {
+    //     element.classList.add('verse-select-0');
+    //   }
+    // });
+    // _.each(this.chapterService.paragraphs, paragraph => {
+    //   _.each(paragraph.verses, verse => {
+    //     const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
+    //     _.each(doc.querySelectorAll('w'), w => {
+    //       const ids = w.getAttribute('n').split('-');
+    //       w.className = '';
+    //       if (
+    //         _.find(this.chapterService.wTagRefs, wTagRef => {
+    //           return (
+    //             (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
+    //             (wTagRef as HTMLElement).parentElement.id === ids[0]
+    //           );
+    //         })
+    //       ) {
+    //         w.classList.add('verse-select-0');
+    //       }
+    //     });
+
+    //     this.ngZone.run(() => {
+    //       verse.innerHtml = doc.querySelector('body').innerHTML;
+    //     });
+    //   });
+    // });
   }
 
   private resetNotes() {
-    _.each<ElementRef>(this.noteh.toArray(), n => {
+    _.each<ElementRef>(this.notes, n => {
       const verseSelect = (n.nativeElement as HTMLElement).querySelectorAll(
         '.verse-select-1'
       );
@@ -93,18 +123,8 @@ export class VerseSelectService {
   }
 
   public removeVerseSelect() {
-    const parser = new DOMParser();
-    _.each(this.chapterService.paragraphs, paragraph => {
-      _.each(paragraph.verses, verse => {
-        const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-        _.each(doc.querySelectorAll('w'), w => {
-          w.className = '';
-        });
-
-        this.ngZone.run(() => {
-          verse.innerHtml = doc.querySelector('body').innerHTML;
-        });
-      });
+    _.each(this.chapterService.wTags, wTag => {
+      wTag.className = wTag.className.replace(' verse-select-0', '');
     });
   }
 
@@ -136,7 +156,7 @@ export class VerseSelectService {
         const noteIndex = parseInt(ids[0].substring(1, ids[0].length), 10) - 1;
 
         console.log(
-          (this.noteh.toArray()[noteIndex].nativeElement as HTMLElement)
+          (this.notes[noteIndex].nativeElement as HTMLElement)
             .querySelector('div[id="' + refs[refs.length - 1] + '"]')
             .classList.add('verse-select-1')
         );

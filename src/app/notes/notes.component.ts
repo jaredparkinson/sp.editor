@@ -48,16 +48,21 @@ export class NotesComponent implements OnInit, AfterViewInit {
   faListUl = faListUl;
   faGlobe = faGlobe;
   @ViewChildren('notes')
-  noteh!: QueryList<ElementRef>;
+  notes!: QueryList<ElementRef>;
   @ViewChildren('w')
   wtags!: QueryList<ElementRef>;
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit() {
     // console.log(this.noteh.toArray().length);
 
     // while (this.noteh.toArray().length === 0) {}
-    setTimeout(() => {
-      this.verseSelectService.noteh = this.noteh;
+    await setTimeout(() => {
+      console.log(this.notes.toArray());
+
+      this.notes.changes.subscribe(async () => {
+        this.verseSelectService.notes = await this.notes.toArray();
+        console.log(this.verseSelectService.notes.length);
+      });
       // console.log(this.wtags.toArray());
       // this.verseSelectService.test();
     }, 1000);

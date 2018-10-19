@@ -6,8 +6,8 @@ import * as jsZip from 'jszip';
 
 import { Observable } from 'rxjs';
 
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import * as localForage from 'localforage';
 import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
@@ -15,6 +15,7 @@ import { Chapter2 } from '../modelsJson/Chapter';
 import { WTag } from '../modelsJson/WTag';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
+
 import { SyncScrollingService } from './sync-scrolling.service';
 
 @Injectable()
@@ -142,21 +143,30 @@ export class ChapterService {
     });
   }
 
-  private getChapterWeb(
+  private async getChapterWeb(
     book: string,
     vSplit: string[],
     synchronizedScrolling: () => Promise<void>
   ) {
-    const url2 =
-      'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
-    this.httpClient
-      .get(url2, {
-        observe: 'body',
-        responseType: 'text'
-      })
-      .subscribe(data => {
-        this.setChapter(data, synchronizedScrolling);
-      });
+    const saved = await localForage.getItem(book + '\\' + vSplit[0]);
+
+    if (saved) {
+      console.log('asved');
+
+      this.setChapter(saved as string, synchronizedScrolling);
+    } else {
+      const url2 =
+        'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+
+      this.httpClient
+        .get(url2, {
+          observe: 'body',
+          responseType: 'text'
+        })
+        .subscribe(data => {
+          this.setChapter(data, synchronizedScrolling);
+        });
+    }
   }
 
   public resetHighlighting(): void {

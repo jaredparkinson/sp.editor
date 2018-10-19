@@ -9,4 +9,6 @@ export class Chapter2 {
   public notes: Note2[] = [];
   public paragraphs: Paragraph[] = [];
   private hiddenParagraph = '.hidden-paragraph';
+  // public bodyBlock = '';
+  public bb = false;
 }

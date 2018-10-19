@@ -49,6 +49,8 @@ export class NavigationService {
   }
 
   btnPreviousPagePress(pageUrl: string) {
+    console.log(pageUrl);
+
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
     // console.log(pageUrl);

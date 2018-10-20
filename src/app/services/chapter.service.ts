@@ -192,6 +192,7 @@ export class ChapterService {
     // }, 200);
   }
   async setWTags() {
+    this.wTags = [];
     _.each(this.chapter2.paragraphs, paragraph => {
       _.each(paragraph.verses, verse => {
         _.each(verse.wTags, wTag => {

@@ -14,7 +14,7 @@ import { ChapterService } from './chapter.service';
   providedIn: 'root'
 })
 export class VerseSelectService {
-  wTags: ElementRef[];
+  // wTags: ElementRef[];
   constructor(private chapterService: ChapterService, private ngZone: NgZone) {}
   verseSelect = false;
   parser = new DOMParser();

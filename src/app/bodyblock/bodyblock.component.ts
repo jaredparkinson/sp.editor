@@ -173,11 +173,11 @@ export class BodyblockComponent
         });
       }, 100);
     });
-    this.verses.changes.subscribe(() => {
-      setTimeout(() => {
-        this.verseSelectService.wTags = this.wTags.toArray();
-      }, 100);
-    });
+    // this.verses.changes.subscribe(() => {
+    //   setTimeout(() => {
+    //     this.verseSelectService.wTags = this.wTags.toArray();
+    //   }, 100);
+    // });
   }
   onScroll() {
     clearTimeout(this.timer);

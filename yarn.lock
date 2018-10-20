@@ -101,6 +101,15 @@
     rxjs "~6.2.0"
     source-map "^0.5.6"
 
+"@angular-devkit/core@0.8.6":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-0.8.6.tgz#499cac38e8ed18b04903a404e300046858769ecd"
+  dependencies:
+    ajv "~6.4.0"
+    chokidar "^2.0.3"
+    rxjs "~6.2.0"
+    source-map "^0.5.6"
+
 "@angular-devkit/core@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.0.2.tgz#69f1ffc1f8731f916d3cc36ee42cf5a2de3aee45"
@@ -111,11 +120,11 @@
     rxjs "6.3.3"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@0.8.4":
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-0.8.4.tgz#e19f6fc8b1e88277d921a286914dc9d01f139738"
+"@angular-devkit/schematics@0.8.6":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-0.8.6.tgz#fe5407304ac6bad1a0c138821843af0115425afb"
   dependencies:
-    "@angular-devkit/core" "0.8.4"
+    "@angular-devkit/core" "0.8.6"
     rxjs "~6.2.0"
 
 "@angular-devkit/schematics@7.0.2":
@@ -221,13 +230,13 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/pwa@^0.8":
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.8.4.tgz#3aec49b40bad986d2fdfc5d1fc5d13675ad3224c"
+"@angular/pwa@^0.8.6":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.8.6.tgz#ee52fa418133de780e79ce3c20ca8546eaec957a"
   dependencies:
-    "@angular-devkit/core" "0.8.4"
-    "@angular-devkit/schematics" "0.8.4"
-    "@schematics/angular" "0.8.4"
+    "@angular-devkit/core" "0.8.6"
+    "@angular-devkit/schematics" "0.8.6"
+    "@schematics/angular" "0.8.6"
     typescript "~2.6.2"
 
 "@angular/router@7.0.0":
@@ -285,12 +294,12 @@
   dependencies:
     tslib "^1.9.0"
 
-"@schematics/angular@0.8.4":
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.8.4.tgz#ee3c8535476d7b49b1a5676f4a5eee3fc158506f"
+"@schematics/angular@0.8.6":
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.8.6.tgz#d62c25566b40293b4bea0da7d23258b6f03004e8"
   dependencies:
-    "@angular-devkit/core" "0.8.4"
-    "@angular-devkit/schematics" "0.8.4"
+    "@angular-devkit/core" "0.8.6"
+    "@angular-devkit/schematics" "0.8.6"
     typescript ">=2.6.2 <2.10"
 
 "@schematics/angular@7.0.2":

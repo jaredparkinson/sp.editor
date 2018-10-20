@@ -93,7 +93,7 @@ body.find {
 
 @media only screen and (max-width: 511.98px) {
   #headerMiddlePane {
-    grid-template-columns: 0 0 0 minmax(48px, auto) 0 0 0;
+    grid-template-columns: 0 0 0 minmax(48px, auto) 0 48px 48px;
   }
 
   #navToggle {
@@ -110,8 +110,6 @@ body.find {
     visibility: hidden;
   }
 
-  #btnNotesFlyout,
-  #btnSecondaryNotes,
   #btnBack,
   #btnForward {
     visibility: hidden;
@@ -119,31 +117,6 @@ body.find {
 
   #btnPoetry {
     grid-area: 'btnParagraph';
-    visibility: hidden;
-  }
-
-  #btnOriginalNotes {
-    grid-area: 'btnOriginalNotes';
-    visibility: hidden;
-  }
-
-  #btnNewNotes {
-    grid-area: 'btnNewNotes';
-    visibility: hidden;
-  }
-
-  #btnTranslatorNotes {
-    grid-area: 'btnTranslatorNotes';
-    visibility: hidden;
-  }
-
-  #btnNewNotes {
-    grid-area: 'btnNewNotes';
-    visibility: hidden;
-  }
-
-  #btnEnglishNotes {
-    grid-area: 'btnEnglishNotes';
     visibility: hidden;
   }
 

@@ -6,6 +6,7 @@
     "resources": {
       "files": [
         "/assets/nav/**",
+        "src/manifest.json",
         "/favicon.ico",
         "/index.html",
         "/*.css",

@@ -4,6 +4,7 @@ import * as jszip from 'jszip';
 import * as localForage from 'localforage';
 import * as _ from 'lodash';
 import * as pako from 'pako';
+import { DownloadService } from '../services/download.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 @Component({
@@ -18,39 +19,13 @@ export class SettingsComponent implements OnInit {
   constructor(
     public saveState: SaveStateService,
     public navServices: NavigationService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private downloadService: DownloadService
   ) {}
 
   ngOnInit() {}
 
   download(file: string) {
-    this.httpClient
-      .get('assets/scriptures/' + file + '.zip', {
-        observe: 'body',
-        responseType: 'arraybuffer'
-      })
-      .subscribe(async data => {
-        // const i = pako.gzip(, {});
-        const zip = await jszip.loadAsync(data);
-        await zip.forEach(async file2 => {
-          const contents = await zip.file(file2).async('text');
-          // localStorage.setItem(file2, contents);
-          const saveName = this.forageRegex.exec(file2).toString();
-
-          const test = await localForage.getItem(saveName);
-          // console.log(test !== null);
-
-          if (!test) {
-            await localForage.setItem(saveName, contents).then(() => {
-              console.log('finished ' + saveName);
-            });
-          }
-        });
-        // console.log(zip);
-
-        console.log('Finished');
-
-        // pako.inflate(data);
-      });
+    this.downloadService.download(file);
   }
 }

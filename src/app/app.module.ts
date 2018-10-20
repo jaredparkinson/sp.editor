@@ -39,6 +39,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NotesComponent } from './notes/notes.component';
 import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
+import { DownloadService } from './services/download.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
@@ -90,7 +91,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChapterService,
     HelperService,
     UrlBuilder,
-    SaveStateService
+    SaveStateService,
+    DownloadService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

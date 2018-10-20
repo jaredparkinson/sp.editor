@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.8",
-    "@angular/cli": "7.0.1",
+    "@angular/cli": "7.0.2",
     "@angular/common": "7.0.0",
     "@angular/compiler": "7.0.0",
     "@angular/compiler-cli": "7.0.0",
@@ -91,7 +91,6 @@
     "@types/jasmine": "2.8.8",
     "@types/jasminewd2": "2.0.3",
     "@types/jszip": "^3.1.4",
-    "@types/localforage": "^0.0.34",
     "@types/lodash": "^4.14.116",
     "@types/mark.js": "^8.11.1",
     "@types/node": "10.5.2",

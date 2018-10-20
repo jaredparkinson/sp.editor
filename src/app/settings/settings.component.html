@@ -1,19 +1,5 @@
-<div><button (click)="download('bd')">Download bd</button></div> bd
-<div><button (click)="download('bible')">Download bible</button></div> bible
-<div><button (click)="download('bible-chron')">Download bible-chron</button></div> bible-chron
-<div><button (click)="download('bible-maps')">Download bible-maps</button></div> bible-maps
-<div><button (click)="download('bible-photos')">Download bible-photos</button></div> bible-photos
-<div><button (click)="download('bofm')">Download bofm</button></div> bofm
-<div><button (click)="download('dc-testament')">Download dc-testament</button></div> dc-testament
-<div><button (click)="download('gs')">Download gs</button></div> gs
-<div><button (click)="download('harmony')">Download harmony</button></div> harmony
-<div><button (click)="download('history-maps')">Download history-maps</button></div> history-maps
-<div><button (click)="download('history-photos')">Download history-photos</button></div> history-photos
-<div><button (click)="download('jst')">Download jst</button></div> jst
-<div><button (click)="download('nt')">Download nt</button></div> nt
-<div><button (click)="download('ot')">Download ot</button></div> ot
-<div><button (click)="download('pgp')">Download pgp</button></div> pgp
-<div><button (click)="download('quad')">Download quad</button></div> quad
-<div><button (click)="download('tg')">Download tg</button></div> tg
-<div><button (click)="download('triple')">Download triple</button></div> triple
-<div><button (click)="download('triple-index')">Download triple-index</button></div> triple-index
+<div>
+  <div *ngFor="let download of downloadService.downloads">
+    <button (click)="downloadService.download(download)">{{download.title}}{{download.downloading}}</button>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 <div class="settings">
-  <div *ngFor="let download of downloadService.downloads">
-    <button (click)="downloadService.download(download)" class="btn btn-light" [disabled]="download.downloading">
+  <div class="download" *ngFor="let download of downloadService.downloads">
+    <span></span>
+
+    <button (click)="downloadService.download(download)" class="btn" [disabled]="download.downloading">
       <svg *ngIf="!download.downloaded" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
         <g>
@@ -22,6 +24,7 @@
           <polygon class="fil0" points="233,22 211,0 117,94 22,0 0,22 94,117 0,211 22,233 117,139 211,233 233,211 139,117 "></polygon>
         </g>
       </svg>
-    </button>
+    </button> <span></span>
+    <span>{{download.title}}</span>
   </div>
 </div>

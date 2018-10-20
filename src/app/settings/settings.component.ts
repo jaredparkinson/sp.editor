@@ -17,10 +17,10 @@ export class SettingsComponent implements OnInit {
     /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html)/
   );
   constructor(
+    public downloadService: DownloadService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
-    private httpClient: HttpClient,
-    private downloadService: DownloadService
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit() {}

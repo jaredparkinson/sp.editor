@@ -53,6 +53,8 @@ export class VerseSelectService {
   public resetVerseSelect() {
     this.verseSelected = false;
     this.resetNotes();
+    console.log(this.chapterService.wTags);
+
     _.each(this.chapterService.wTags, wTag => {
       const ids = wTag.n.split('-');
       // console.log(ids);
@@ -176,7 +178,7 @@ export class VerseSelectService {
           (n.nativeElement as HTMLElement).scrollIntoView({ block: 'center' });
         }
 
-        console.log(n + 'n');
+        console.log(n.nativeElement + 'n');
 
         _.each(this.chapterService.wTags, verse => {
           const matchedMatches = _.filter(matches, match => {
@@ -195,11 +197,14 @@ export class VerseSelectService {
           // });
 
           if (matchedMatches.length > 0) {
+            console.log('matches' + matchedMatches);
+
             _.each(matchedMatches, m => {
               const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
               const wTag = _.find(this.chapterService.wTags, t => {
                 return t.n === m[0] + '-' + m[1];
               });
+              console.log(wTag);
 
               wTag.className += underline;
               wTag.className = wTag.className.replace('verse-select-0', '');

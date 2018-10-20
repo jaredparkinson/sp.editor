@@ -79,6 +79,9 @@ export class HeaderComponent implements OnInit {
     // this.chapterService.toggleVerseSelect(this.verseSelect);
   }
 
+  settings() {
+    this.router.navigateByUrl('settings');
+  }
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(

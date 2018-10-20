@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.42.15",
+  "version": "3.42.16",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -49,7 +49,7 @@
     "@angular/animations": "latest",
     "@angular/cdk": "latest",
     "@angular/material": "latest",
-    "@angular/pwa": "^0.8",
+    "@angular/pwa": "^0.8.6",
     "@angular/service-worker": "latest",
     "@fortawesome/angular-fontawesome": "^0.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",

@@ -1,0 +1,13 @@
+.settings {
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  grid-template-rows: repeat(auto-fill, 48px);
+
+  button {
+    height: 48px;
+    width: 48px;
+  }
+
+}

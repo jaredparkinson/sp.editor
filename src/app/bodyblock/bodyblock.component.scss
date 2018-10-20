@@ -66,6 +66,7 @@ body {
       }
 
       &.verse {
+        position: relative;
         font-family: $font-stack;
         text-align: left;
         // margin: 0;

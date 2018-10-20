@@ -182,6 +182,8 @@ export class BodyblockComponent
   onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(async () => {
+      console.log(this.verses);
+
       await this.synchronizedScrolling();
     }, 50);
     this.timer2 = setTimeout(async () => {

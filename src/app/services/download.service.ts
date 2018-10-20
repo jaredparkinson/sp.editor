@@ -61,7 +61,10 @@ export class DownloadService {
       })
       .subscribe(async data => {
         // const i = pako.gzip(, {});
+        let c = 0;
         const zip = await jszip.loadAsync(data);
+        console.log(zip);
+
         await zip.forEach(async file2 => {
           const contents = await zip.file(file2).async('text');
           // localStorage.setItem(file2, contents);
@@ -69,14 +72,19 @@ export class DownloadService {
 
           const test = await localForage.getItem(saveName);
           // console.log(test !== null);
-
           if (!test) {
+            c++;
             await localForage.setItem(saveName, contents).then(() => {
-              console.log('finished ' + saveName);
+              console.log('finished ' + saveName + zip.files.length);
             });
             file.downloading = false;
+            file.downloaded = true;
+            localForage.setItem(file.title, JSON.stringify(file));
+            localForage.setItem(file.title, JSON.stringify(file));
           } else {
             file.downloading = false;
+            file.downloaded = true;
+            localForage.setItem(file.title, JSON.stringify(file));
           }
         });
         // console.log(zip);

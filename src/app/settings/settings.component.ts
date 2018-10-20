@@ -26,6 +26,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {}
 
   download(file: string) {
-    this.downloadService.download(file);
+    // this.downloadService.download(file);
   }
 }

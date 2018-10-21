@@ -1,4 +1,4 @@
-FROM node:8.9-alpine as node-angular-cli
+FROM mhart/alpine-node as node-angular-cli
 WORKDIR /app
 COPY package.json /app
 RUN npm install
@@ -6,7 +6,7 @@ COPY . /app
 RUN npm run build:prod
 
 
-FROM node:8.9-alpine
+FROM mhart/alpine-node
 WORKDIR /app
 COPY --from=node-angular-cli /app/dist .
 EXPOSE 80

@@ -99,6 +99,10 @@ export class BodyblockComponent
         // }, 1000);
 
         // this.synchronizedScrolling();
+        console.log('btsxyd');
+        if (this.verseSelectService.verseSelect) {
+          this.verseSelectService.resetVerseSelect();
+        }
       }, 200);
     });
     // this.verseSelection();
@@ -250,15 +254,15 @@ export class BodyblockComponent
   }
 
   private initSyncScrolling() {
-    this.ngZone.runOutsideAngular(() => {
-      document.getElementById('appBodyBlock').addEventListener('wheel', () => {
-        this.onScroll();
-      });
-      document
-        .getElementById('appBodyBlock')
-        .addEventListener('touchend', () => {
-          this.onScroll();
-        });
-    });
+    // this.ngZone.runOutsideAngular(() => {
+    //   document.getElementById('appBodyBlock').addEventListener('wheel', () => {
+    //     this.onScroll();
+    //   });
+    //   document
+    //     .getElementById('appBodyBlock')
+    //     .addEventListener('touchend', () => {
+    //       this.onScroll();
+    //     });
+    // });
   }
 }

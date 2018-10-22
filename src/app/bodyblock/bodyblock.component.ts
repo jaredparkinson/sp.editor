@@ -57,7 +57,11 @@ export class BodyblockComponent
     private route: ActivatedRoute,
     private ngZone: NgZone,
     public verseSelectService: VerseSelectService
-  ) {}
+  ) {
+    setInterval(() => {
+      this.synchronizedScrolling();
+    }, 100);
+  }
 
   getBodyBlock(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(

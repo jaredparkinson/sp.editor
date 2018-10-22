@@ -73,45 +73,6 @@ export class VerseSelectService {
         wTag.className = wTag.className.replace(' verse-select-2', '');
       }
     });
-    // console.log(this.wTags);
-    // _.each(this.wTags, wTag => {
-    //   const element = wTag.nativeElement as HTMLElement;
-    //   const ids = element.getAttribute('n').split('-');
-    //   element.className = '';
-    //   if (
-    //     _.find(this.chapterService.wTagRefs, wTagRef => {
-    //       return (
-    //         (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-    //         (wTagRef as HTMLElement).parentElement.id === ids[0]
-    //       );
-    //     })
-    //   ) {
-    //     element.classList.add('verse-select-0');
-    //   }
-    // });
-    // _.each(this.chapterService.paragraphs, paragraph => {
-    //   _.each(paragraph.verses, verse => {
-    //     const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
-    //     _.each(doc.querySelectorAll('w'), w => {
-    //       const ids = w.getAttribute('n').split('-');
-    //       w.className = '';
-    //       if (
-    //         _.find(this.chapterService.wTagRefs, wTagRef => {
-    //           return (
-    //             (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-    //             (wTagRef as HTMLElement).parentElement.id === ids[0]
-    //           );
-    //         })
-    //       ) {
-    //         w.classList.add('verse-select-0');
-    //       }
-    //     });
-
-    //     this.ngZone.run(() => {
-    //       verse.innerHtml = doc.querySelector('body').innerHTML;
-    //     });
-    //   });
-    // });
   }
 
   private resetNotes() {

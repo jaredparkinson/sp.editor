@@ -21,6 +21,12 @@ nav {
 
   .left-pane .navigation {
     height: auto;
+    overflow-y: scroll;
+  }
+
+  .navigation {
+    height: auto;
+    overflow-y: scroll;
   }
 
   li,
@@ -93,4 +99,10 @@ nav {
     margin: 5px;
     text-align: center;
   }
+
+}
+
+#settings {
+  border-top-style: solid;
+  border-top-width: .5px;
 }

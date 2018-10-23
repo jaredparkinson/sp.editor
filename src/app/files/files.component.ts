@@ -78,4 +78,8 @@ export class FilesComponent implements OnInit {
     this.chapterService.getChapter(book, chapter, null);
   }
   public getNavigation() {}
+
+  settings() {
+    this.router.navigateByUrl('settings');
+  }
 }

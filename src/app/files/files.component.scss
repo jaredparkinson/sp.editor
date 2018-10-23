@@ -5,16 +5,24 @@
 //   }
 // }
 nav {
-  grid-gap: 25px; // display: grid;
-  grid-template-columns: repeat(100%, 32px);
   background-color: whitesmoke;
+  grid-template-rows: 96px 1fr 87px;
+  display: grid;
+
   .nav-parent {
-    height: 150vh;
+    height: auto;
+    overflow-y: scroll;
   }
+
   ul {
     margin: 0;
     padding: 0;
   }
+
+  .left-pane .navigation {
+    height: auto;
+  }
+
   li,
   a,
   .chapter-header {
@@ -29,34 +37,56 @@ nav {
     border-width: 0 0 1px 0;
     text-align: left;
   }
+
   li {
     list-style: none;
   }
-  .left-nav-back {
-    height: 40px;
+
+  // .left-nav-back {
+  //   height: 40px;
+  // }
+
+  button {
+    height: 48px;
+    width: 100%;
+    background-color: inherit;
+    text-align: left;
+
+    svg {
+      height: 24px;
+      width: 24px;
+      color: inherit;
+    }
   }
+
   a,
   a:visited {
     color: blue;
   }
+
   .chapter-header {
     color: black;
   }
+
   .left-nav-item {
     padding-left: 1em;
   }
+
   .left-nav-plus {
     padding-right: 1em;
   }
+
   a:hover,
   li:hover,
   .chapter-header:hover {
     background-color: azure;
     color: black;
   }
+
   .nav-hide {
     display: none;
   }
+
   #addressBar {
     height: 24px;
     width: 100%;

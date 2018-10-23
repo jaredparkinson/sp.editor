@@ -248,7 +248,7 @@ body.find {
   }
 }
 
-@media only screen and (orientation: landscape) and (min-width: 1024px) and (max-width: 1279.98px) {
+@media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
   $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7_5;
   $rightPaneWidth: $vw2_5;
@@ -328,7 +328,7 @@ body.find {
   // }
 }
 
-@media only screen and (orientation: landscape) and (min-width: 1280px) {
+@media only screen and (min-width: 1280px) {
   $leftPaneWidth: $vw2;
   $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw3;

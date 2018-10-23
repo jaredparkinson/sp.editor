@@ -1,7 +1,14 @@
 <div class="menu-bar pop-out">
   <div id="headerLeftPane">
-    <button id='navToggle' (click)="btnLeftPanePress()">
-      <fa-icon [icon]="faBookOpen" size="lg"></fa-icon>
+    <button id='navToggle' (click)="btnLeftPanePress()"><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+        <g transform="translate(0,-952.36218)">
+          <path style="color:#000000;enable-background:accumulate;" d="m 18,966.3622 0,58 c 12.793163,-0.069 22.32638,6.9097 30,13.3125 l 0,-59.31252 C 39.508362,971.24463 29.963324,966.3513 18,966.3622 z m 64,0 c -11.963324,-0.0109 -21.508362,4.88243 -30,11.99998 l 0,59.31252 c 7.67362,-6.4027 17.206837,-13.3814 30,-13.3125 z m -74,8 0,58 35,6 c -6.651752,-5.0153 -15.042675,-10.054 -25,-10 l -2,0 c -1.047169,-10e-5 -1.999895,-0.9529 -2,-2 l 0,-2 0,-49.15625 z m 84,0 -6,0.84375 0,49.15625 0,2 c -1.05e-4,1.0472 -0.952831,1.9999 -2,2 l -2,0 c -9.957325,-0.054 -18.348248,4.9847 -25,10 l 35,-6 z"
+            fill="#000000" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"></path>
+        </g>
+      </svg>
     </button>
     <span id="empty "></span>
   </div>
@@ -11,7 +18,6 @@
       <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
     </button>
     <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
-      <!-- <fa-icon [icon]="faPlus" size="lg"></fa-icon> -->
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
         viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
         <g>
@@ -19,37 +25,49 @@
         </g>
       </svg>
     </button>
-    <button id="btnBack" (click)="btnBackPress();">
-      <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
+    <button id="btnBack" (click)="btnBackPress();"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+        <g>
+          <polygon points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "></polygon>
+        </g>
+      </svg>
 
     </button>
-    <!-- <span id="empty "></span> -->
 
-    <!-- <div class="none"></div> -->
     <div id="bookName" [innerHtml]="chapterService.chapter2.title"></div>
 
-    <!-- <input id="addressBar" type="text" (keypress)="addressBarKeyPress($event)" /> -->
-    <!-- <span id="empty "></span> -->
     <button id="btnForward" (click)="btnForwardPress();">
-      <fa-icon [icon]="faArrowRight" size="lg"></fa-icon>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+        viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+        <g transform="translate(50 50)  rotate(180) translate(-50 -50)" style="fill:#000000;">
+          <polygon points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "></polygon>
+        </g>
+      </svg>
 
     </button>
     <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings fas fa-ellipsis-v"
       [ngClass]="{'nav-btn-on': navServices.notesSettings}">
-      <!-- <fa-icon [icon]=" faCaretDown " size="2x " class="right-pane-ignore notes-settings"></fa-icon> -->
     </button>
     <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="btnSecondaryNotesPress();">
-      <!-- Secondary Notes -->
-      <fa-icon [icon]="faPlus" size="lg"></fa-icon>
-    </button>
+      <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 48 48" x="0px" y="0px">
+        <title>video music player</title>
+        <path d="M34,22.19H26v-8a2,2,0,1,0-4,0v8H14a2,2,0,1,0,0,4h8v8a2,2,0,0,0,4,0v-8h8a2,2,0,0,0,0-4Z"></path>
+      </svg> </button>
 
   </div>
   <div id="headerRightPane">
 
     <span id="empty "></span>
     <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
-      <fa-icon [icon]="faListUl " size="lg " class="right-pane-ignore "></fa-icon>
-    </button>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
+        viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+        <circle cx="8.8" cy="24.3" r="6.4"></circle>
+        <rect x="22.8" y="20.3" width="74.5" height="7.9"></rect>
+        <circle cx="8.8" cy="50.3" r="6.4"></circle>
+        <rect x="22.8" y="46.3" width="74.5" height="7.9"></rect>
+        <circle cx="8.8" cy="76.3" r="6.4"></circle>
+        <rect x="22.8" y="72.3" width="74.5" height="7.9"></rect>
+      </svg></button>
   </div>
 
 

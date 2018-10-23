@@ -324,9 +324,10 @@
 
   }
 
+
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px
-  @media only screen and (orientation: landscape) and (min-width: 1024px) and (max-width: 1279.98px) {
+  @media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
     .right-pane {
       grid-area: right-pane;
     }
@@ -474,7 +475,7 @@
 
   /* Large Screen Sizes Postfix: -l */
   // Screen Size up to 1920px
-  @media only screen and (orientation: landscape) and (min-width: 1024px) {
+  @media only screen and (min-width: 1024px) {
     .hide-l {
       visibility: hidden;
     }
@@ -632,7 +633,7 @@
 
   /* Extra Large Screen Sizes Postfix -xl*/
   // Screen Sizes from 1920px and up
-  @media only screen and (orientation: landscape) and (min-width: 1921px) {
+  @media only screen and (min-width: 1921px) {
     .right-pane {
       grid-area: right-pane;
     }

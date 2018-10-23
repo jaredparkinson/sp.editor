@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
   faCaretDown = faCaretDown;
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
-  versionNumber = '';
   @ViewChildren('wtag')
   wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;
@@ -58,15 +57,7 @@ export class HeaderComponent implements OnInit {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
 
-  ngOnInit() {
-    this.httpClient
-      .get('assets/version.txt', { observe: 'body', responseType: 'text' })
-      .subscribe(data => {
-        const regex = new RegExp(/\d(\.\d{1,3}){1,2}/);
-        this.versionNumber = regex.exec(data)[0];
-        console.log('data ' + this.versionNumber);
-      });
-  }
+  ngOnInit() {}
 
   toggleNotes() {
     this.navServices.toggleNotes();

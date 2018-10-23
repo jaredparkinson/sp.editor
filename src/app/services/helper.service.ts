@@ -49,6 +49,7 @@ export class HelperService {
   }
 
   public togglePane2(id: string, pinWidth: number): void {
+    console.log('called');
     const element = document.getElementById(id);
 
     const viewWidth = Math.max(
@@ -67,6 +68,7 @@ export class HelperService {
   }
 
   public togglePane(id: string, minViewWidth: number): void {
+    console.log('called2');
     const element = document.getElementById(id);
     // console.log('id');
 
@@ -110,6 +112,7 @@ export class HelperService {
     on: string,
     off: string
   ): void {
+    console.log('called3');
     const element = document.getElementById(id);
     const target = document.getElementById(targetId);
 
@@ -129,6 +132,7 @@ export class HelperService {
     addClasses: string[],
     removeClasses: string[]
   ): void {
+    console.log('called4');
     for (const addClass of addClasses) {
       element.classList.add(addClass);
     }
@@ -146,6 +150,7 @@ export class HelperService {
     viewWidth: number,
     pinWidth: number
   ): string[] {
+    console.log('called5');
     const classes: string[] = [];
     if (viewWidth >= 1280 && pinWidth >= 1280) {
       classes.push(text + '-l');

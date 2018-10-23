@@ -133,7 +133,7 @@ export class NavigationService {
     // }
   }
   btnRightPanePress() {
-    if (this.helperService.getWidth() >= 1080) {
+    if (this.helperService.getWidth() >= 1024) {
       this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
     } else {
       this.saveState.data.rightPaneToggle = !this.saveState.data
@@ -143,7 +143,7 @@ export class NavigationService {
     this.saveState.save();
   }
   btnLeftPanePress() {
-    if (this.helperService.getWidth() >= 1080) {
+    if (this.helperService.getWidth() >= 1024) {
       this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
     } else {
       this.leftPaneToggle = !this.leftPaneToggle;

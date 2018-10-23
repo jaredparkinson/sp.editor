@@ -7,12 +7,12 @@ body {
 }
 
 .content-pane {
-  @media only screen and (max-width: 1079.98px) {
-    grid-template-columns: 0 10vw 80vw 10vw;
+  @media only screen and (max-width: 1023.98px) {
+    grid-template-columns: 10vw 80vw 10vw;
   }
 
-  @media only screen and (min-width: 1080px) {
-    grid-template-columns: 0 $fr_5 $fr11 $fr_5;
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: $fr_5 $fr11 $fr_5;
   }
 
   .body-block {
@@ -181,10 +181,6 @@ body {
 
   .show-paragraph div.hidden-paragraph {
     margin-bottom: 6pt;
-  }
-
-  #highlight-holder {
-    visibility: hidden;
   }
 
   //   @for $x from 1 to 300 {

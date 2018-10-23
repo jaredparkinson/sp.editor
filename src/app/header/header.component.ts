@@ -50,10 +50,10 @@ export class HeaderComponent implements OnInit {
     public chapterService: ChapterService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
+    public verseSelectService: VerseSelectService,
     private router: Router,
     public httpClient: HttpClient,
-    private location: Location,
-    public verseSelectService: VerseSelectService
+    private location: Location
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }

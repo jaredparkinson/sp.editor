@@ -1,0 +1,30 @@
+<div>
+
+  <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
+    <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
+      class="notes-settings">
+      New Notes
+    </button>
+    <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
+      class="notes-settings">
+      English Notes
+    </button>
+    <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
+      class="notes-settings">
+      Translator Notes
+    </button>
+    <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
+      class="notes-settings">
+      Original Notes
+    </button>
+    <button id="verseSelect" (click)="toggleVerseSelect()" [ngClass]="{'nav-btn-on': this.verseSelectService.verseSelect}">
+      Note Underlining
+    </button>
+    <button id="versionNumber">
+      Version {{this.versionNumber}}
+    </button>
+    <button id="settings" (click)="settings()">
+      Settings
+    </button>
+  </div>
+</div>

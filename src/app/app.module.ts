@@ -44,6 +44,7 @@ import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SettingsComponent } from './settings/settings.component';
+import { NoteSettingsComponent } from './note-settings/note-settings.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -64,7 +65,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchComponent,
     // ButtonHighlightDirective,
     // SyncScrollingDirective,
-    SettingsComponent
+    SettingsComponent,
+    NoteSettingsComponent
     // SearchBarComponent
   ],
   imports: [

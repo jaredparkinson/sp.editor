@@ -38,6 +38,7 @@ export class ChapterService {
   verseSelect = false;
   chapter2: Chapter2 = new Chapter2();
   wTags: WTag[] = [];
+  scrollIntoView: Element;
 
   constructor(
     private navService: NavigationService,

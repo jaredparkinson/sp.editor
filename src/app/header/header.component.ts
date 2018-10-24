@@ -132,5 +132,7 @@ export class HeaderComponent implements OnInit {
   }
   btnParagraphPress() {
     this.navServices.btnParagraphPress();
+    this.chapterService.scrollIntoView.scrollIntoView();
+    console.log(this.chapterService.scrollIntoView);
   }
 }

@@ -35,11 +35,7 @@ export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
   private timer2: NodeJS.Timer;
-  // private styleTag = document.querySelector(
-  //   '#highlightStyle'
-  // ) as HTMLStyleElement;
-  public highlightClasses = '';
-  public highlightClasses2 = '';
+
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
@@ -71,15 +67,12 @@ export class BodyblockComponent
     this.route.params.subscribe(params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
-      // console.log(params);
 
       const book = params['book'];
       const chapter = params['chapter'];
 
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
-          // console.log(book);
-          // console.log(chapter);
           await this.chapterService.getChapter(
             book,
             chapter,
@@ -92,33 +85,13 @@ export class BodyblockComponent
             this.synchronizedScrolling
           );
         }
-        // setTimeout(async () => {
-        //   await this.synchronizedScrolling().catch(err => {
-        //     console.log('failed');
-        //   });
-        // }, 1000);
-
-        // this.synchronizedScrolling();
         console.log('btsxyd');
         if (this.verseSelectService.verseSelect) {
           this.verseSelectService.resetVerseSelect();
         }
       }, 200);
     });
-    // this.verseSelection();
     this.wordSelection();
-
-    // setTimeout(() => {
-    //   this.ngZone.runOutsideAngular(() => {
-    //     // console.log('span.verse ' + document.querySelector('span.verse'));
-
-    //     _.each(document.querySelectorAll('span.verse'), verse => {
-    //       (verse as HTMLElement).addEventListener('mouseup', event => {
-    //         // this.verseSelectService.wTagClick(event);
-    //       });
-    //     });
-    //   });
-    // }, 5000);
   }
 
   private wordSelection() {
@@ -130,7 +103,6 @@ export class BodyblockComponent
   }
   private verseSelection(): void {
     this.ngZone.runOutsideAngular(() => {
-      // setInterval(() => {}, 7500);
       document.getElementById('bodyBlock').addEventListener('mouseup', () => {
         console.log('mouseup');
 
@@ -142,17 +114,12 @@ export class BodyblockComponent
 
         wTags.pop();
         _.each(wTags, wTag => {
-          // console.log(wTag);
-
           const id = wTag.getAttribute('n').split('-');
 
           const data = this.chapterService.hebWTags.querySelector(
             '#' + id[0] + ' w[n="' + id[1] + '"]'
           );
           if (data.hasAttribute('ref')) {
-            // document
-            //   .querySelector('w[n="' + wTag.getAttribute('n') + '"]')
-            //   .classList.add('wtag');
           }
         });
 
@@ -224,6 +191,7 @@ export class BodyblockComponent
       }
     });
 
+    this.chapterService.scrollIntoView = scrollIntoView;
     if (scrollIntoView === undefined) {
       console.log(scrollIntoView);
 
@@ -246,11 +214,14 @@ export class BodyblockComponent
 
   private scrollNotesBottom() {
     const notes = document.querySelectorAll('note');
-    notes[notes.length - 1].scrollIntoView();
+    this.chapterService.scrollIntoView = notes[notes.length - 1];
+    this.chapterService.scrollIntoView.scrollIntoView();
   }
 
   private scrollNotesTop() {
-    document.querySelector('note').scrollIntoView();
+    this.chapterService.scrollIntoView = document.querySelector('note');
+    this.chapterService.scrollIntoView.scrollIntoView();
+    // scrollIntoView;
   }
 
   private initSyncScrolling() {

@@ -1,6 +1,15 @@
 $font-stack: PalatinoldsLat-Roman,
 serif;
 
+@mixin span-reference($selector: '', $content: '') {
+  span.reference-label-#{$selector}::before {
+    content: $content;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+}
+
 .right-pane {
   z-index: 100;
 
@@ -47,102 +56,29 @@ serif;
     margin-right: 20px;
   }
 
-  span.reference-label-quotation::before {
-    content: 'QUO';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
+  @include span-reference('quotation', 'QUO');
 
-  span.reference-label-or::before {
-    content: 'OR';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
+  @include span-reference('phrasing', 'PHR');
+  @include span-reference('or', 'OR');
+  @include span-reference('ie', 'IE');
+  @include span-reference();
+  @include span-reference('hebrew', 'HEB');
+  @include span-reference('greek', 'GR');
+  @include span-reference('archaic', 'KJV');
+  @include span-reference('historical', 'HST');
+  @include span-reference('cr', 'CR');
+  @include span-reference('alt', 'ALT');
+  @include span-reference('harmony', 'HWY');
+  @include span-reference('TG', 'TG');
+  @include span-reference('gs', 'GS');
 
-  span.reference-label-ie::before {
-    content: 'IE';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
 
-  span.reference-label-phrasing::before {
-    content: 'PHR';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
 
-  span.reference-label-hebrew::before {
-    content: 'HEB';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label {
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-greek::before {
-    content: 'GR';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-archaic::before {
-    content: 'KJV';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-historical::before {
-    content: 'HST';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-cr::before {
-    content: 'CR';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-alt::before {
-    content: 'ALT';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-harmony::before {
-    content: 'HMY';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-tg::before {
-    content: 'TG';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
-
-  span.reference-label-gs::before {
-    content: 'GS';
-    text-transform: lowercase;
-    font-variant: small-caps;
-    font-weight: 700;
-  }
+  // span.reference-label {
+  //   text-transform: lowercase;
+  //   font-variant: small-caps;
+  //   font-weight: 700;
+  // }
 
   span.deletion {
     font-style: italic;

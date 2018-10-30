@@ -1,4 +1,5 @@
-$font-stack: PalatinoldsLat-Roman, serif;
+$font-stack: PalatinoldsLat-Roman,
+serif;
 
 @mixin span-reference($selector: '', $content: '') {
   span.reference-label-#{$selector}::before {
@@ -13,7 +14,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
   z-index: 100;
 
   note {
-    > div > div.original-note-marker {
+    >div>div.original-note-marker {
       display: none;
     }
 
@@ -33,7 +34,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
       grid-area: auto / 1;
     }
 
-    > div {
+    >div {
       grid-area: auto / 1;
     }
 
@@ -68,7 +69,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
   @include span-reference('cr', 'CR');
   @include span-reference('alt', 'ALT');
   @include span-reference('harmony', 'HWY');
-  @include span-reference('TG', 'TG');
+  @include span-reference('tg', 'TG');
   @include span-reference('gs', 'GS');
 
   // span.reference-label {
@@ -119,7 +120,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
       margin-left: 0.25in;
     }
 
-    ul > li {
+    ul>li {
       // display: grid;
 
       grid-template-columns: auto 9fr;
@@ -180,6 +181,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
     }
 
     .note-phrase,
+    .note-phrase-eng,
     .original-note,
     .note-reference-eng,
     .note-reference-eng-2,

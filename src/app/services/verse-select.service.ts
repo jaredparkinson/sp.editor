@@ -56,7 +56,7 @@ export class VerseSelectService {
     console.log(this.chapterService.wTags);
 
     _.each(this.chapterService.wTags, wTag => {
-      const ids = wTag.n.split('-');
+      const ids = wTag[2].split('-');
       // console.log(ids);
       if (
         _.find(this.chapterService.wTagRefs, wTagRef => {
@@ -66,11 +66,11 @@ export class VerseSelectService {
           );
         })
       ) {
-        if (!wTag.className.includes('verse-select-0')) {
-          wTag.className += ' verse-select-0';
+        if (!wTag[0].includes('verse-select-0')) {
+          wTag[0] += ' verse-select-0';
         }
-        wTag.className = wTag.className.replace(' verse-select-1', '');
-        wTag.className = wTag.className.replace(' verse-select-2', '');
+        wTag[0] = wTag[0].replace(' verse-select-1', '');
+        wTag[0] = wTag[0].replace(' verse-select-2', '');
       }
     });
   }
@@ -86,7 +86,7 @@ export class VerseSelectService {
 
   public removeVerseSelect() {
     _.each(this.chapterService.wTags, wTag => {
-      wTag.className = wTag.className.replace(' verse-select-0', '');
+      wTag[0] = wTag[0].replace(' verse-select-0', '');
     });
   }
 
@@ -143,7 +143,7 @@ export class VerseSelectService {
 
         _.each(this.chapterService.wTags, verse => {
           const matchedMatches = _.filter(matches, match => {
-            return match[0] + '-' + match[1] === verse.n;
+            return match[0] + '-' + match[1] === verse[2];
           });
 
           // console.log(matchedMatches + ' matches matches');
@@ -163,12 +163,12 @@ export class VerseSelectService {
             _.each(matchedMatches, m => {
               const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
               const wTag = _.find(this.chapterService.wTags, t => {
-                return t.n === m[0] + '-' + m[1];
+                return t[2] === m[0] + '-' + m[1];
               });
               console.log(wTag);
 
-              wTag.className += underline;
-              wTag.className = wTag.className.replace('verse-select-0', '');
+              wTag[0] += underline;
+              wTag[0] = wTag[0].replace('verse-select-0', '');
               // if (wTag.nextElementSibling) {
               //   console.log(
               //     'next ' + (wTag.nextElementSibling as HTMLElement).innerText

@@ -15,6 +15,23 @@ body {
     grid-template-columns: $fr_5 $fr11 $fr_5;
   }
 
+  .show-paragraph {
+    div.hidden-paragraph {
+      margin-bottom: 6pt;
+    }
+  }
+
+  w {
+    &.marker {
+      font-style: italic;
+      font-size: 8pt;
+    }
+
+    &.verse-number {
+      color: DimGray;
+      font-weight: bold;
+    }
+  }
   .body-block {
     span.part {
       margin-left: 6pt;
@@ -57,7 +74,6 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
-
       &.part,
       &.question,
       &.answer {
@@ -129,12 +145,6 @@ body {
   span.uppercase {
     text-transform: uppercase;
   }
-
-  w.verse-number {
-    color: DimGray;
-    font-weight: bold;
-  }
-
   span.clarity-word {
     font-style: italic;
   }
@@ -145,11 +155,6 @@ body {
 
   span.key-word {
     font-style: italic;
-  }
-
-  w.marker {
-    font-style: italic;
-    font-size: 8pt;
   }
 
   div.paragraph {
@@ -177,10 +182,6 @@ body {
 
   p.signature {
     font-variant: small-caps;
-  }
-
-  .show-paragraph div.hidden-paragraph {
-    margin-bottom: 6pt;
   }
 
   //   @for $x from 1 to 300 {

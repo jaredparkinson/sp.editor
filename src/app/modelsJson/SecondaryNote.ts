@@ -1,7 +1,8 @@
 export class SecondaryNote {
-  public className = '';
-  public id = '';
-  public innerHtml = '';
+  public cn: string = '';
+  public id: string = '';
+  public iH: string = '';
+  public t2: string = '';
 
   constructor(element: Element) {
     this.className = element.className;

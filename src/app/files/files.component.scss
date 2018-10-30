@@ -41,7 +41,6 @@ nav {
     text-decoration: none;
     border: #d0d3d4 solid;
     border-width: 0 0 1px 0;
-    text-align: left;
   }
 
   li {
@@ -99,10 +98,9 @@ nav {
     margin: 5px;
     text-align: center;
   }
-
 }
 
 #settings {
   border-top-style: solid;
-  border-top-width: .5px;
+  border-top-width: 0.5px;
 }

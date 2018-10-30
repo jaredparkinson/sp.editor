@@ -6,11 +6,11 @@ import { SecondaryNote } from './SecondaryNote';
 
 export class Note2 {
   public id = '';
-  public noteTitle = '';
-  public noteShortTitle = '';
-  public className = '';
-  public override = false;
-  public visible = false;
+  public nT = ''; // noteTitle
+  public nST = ''; // NoteShortTitle
+  public cn = ''; // ClassName
+  public o = false; // Override
+  public v = false; // Visible
   public btn = false;
-  public secondaryNotes: SecondaryNote[] = [];
+  public sn: SecondaryNote[] = [];
 }

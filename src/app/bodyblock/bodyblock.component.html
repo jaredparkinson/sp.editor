@@ -22,8 +22,8 @@
     <div class="hidden-paragraph" *ngFor="let paragraph of chapterService.chapter2.paragraphs;  trackBy: trackById" id="{{paragraph.id}}">
       <span class="verse" [ngClass]="{'highlight-verse': verse.highlight, 'highlight-context': !verse.highlight && verse.context}"
         id="{{verse.id}}" *ngFor="let verse of paragraph.verses; let i = index; trackBy: trackById" #verses>
-        <w *ngFor="let w of verse.wTags" nT="{{w.n}}" class="{{w.className}}" (click)="wTagClick(w)" #wTags>
-          <n>{{w.innerHtml}}</n>
+        <w *ngFor="let w of verse.wTags2" nT="{{w[2]}}" class="{{w[0]}}" (click)="wTagClick(w)" #wTags>
+          <n>{{w[1]}}</n>
         </w>
       </span>
     </div>

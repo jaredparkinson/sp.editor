@@ -70,16 +70,16 @@ export class NotesComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   noteButtonClick(note: Note2) {
-    switch (note.override) {
+    switch (note.o) {
       case true: {
-        note.visible = !note.visible;
+        note.v = !note.v;
         break;
       }
 
       default: {
-        note.override = true;
+        note.o = true;
 
-        note.visible = !this.saveState.data.secondaryNotesVisible;
+        note.v = !this.saveState.data.secondaryNotesVisible;
         break;
       }
     }

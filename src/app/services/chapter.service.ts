@@ -37,7 +37,7 @@ export class ChapterService {
   wTagRefs: NodeListOf<Element>;
   verseSelect = false;
   chapter2: Chapter2 = new Chapter2();
-  wTags: WTag[] = [];
+  wTags: Array<[string, string, string]> = [];
   scrollIntoView: Element;
 
   constructor(
@@ -52,7 +52,7 @@ export class ChapterService {
 
   public resetNotes(): void {
     _.each(this.chapter2.notes, note => {
-      note.override = false;
+      note.o = false;
     });
   }
 
@@ -196,7 +196,7 @@ export class ChapterService {
     this.wTags = [];
     _.each(this.chapter2.paragraphs, paragraph => {
       _.each(paragraph.verses, verse => {
-        _.each(verse.wTags, wTag => {
+        _.each(verse.wTags2, wTag => {
           this.wTags.push(wTag);
         });
       });

@@ -1,5 +1,4 @@
-$font-stack: PalatinoldsLat-Roman,
-serif;
+$font-stack: PalatinoldsLat-Roman, serif;
 
 @mixin span-reference($selector: '', $content: '') {
   span.reference-label-#{$selector}::before {
@@ -14,7 +13,7 @@ serif;
   z-index: 100;
 
   note {
-    >div>div.original-note-marker {
+    > div > div.original-note-marker {
       display: none;
     }
 
@@ -34,7 +33,7 @@ serif;
       grid-area: auto / 1;
     }
 
-    >div {
+    > div {
       grid-area: auto / 1;
     }
 
@@ -71,8 +70,6 @@ serif;
   @include span-reference('harmony', 'HWY');
   @include span-reference('TG', 'TG');
   @include span-reference('gs', 'GS');
-
-
 
   // span.reference-label {
   //   text-transform: lowercase;
@@ -122,7 +119,7 @@ serif;
       margin-left: 0.25in;
     }
 
-    ul>li {
+    ul > li {
       // display: grid;
 
       grid-template-columns: auto 9fr;
@@ -208,9 +205,9 @@ serif;
     &.notes-show-original .original-note,
     &.notes-show-tc .note-phrase-tc,
     &.notes-show-eng .note-phrase-eng,
-    &.notes-show-new .note-phrase-new,
-    &.notes-show-new .note-reference-new,
     &.notes-show-eng .tier-2-note-show .note-phrase-eng-2,
+    &.notes-show-new .note-reference-new,
+    &.notes-show-new .note-phrase-new,
     &.notes-show-eng .tier-2-note-show .note-reference-eng-2,
     &.notes-show-new .tier-2-note-show .note-phrase-new-2,
     &.notes-show-new .tier-2-note-show .note-reference-new-2,
@@ -237,132 +234,6 @@ serif;
     &.notes-show-tc .note-reference-tc {
       display: block;
     }
-
-    // .note-phrase {
-    //   display: none;
-    // }
-
-    // &.notes-hide-tier .note-phrase {
-    //   display: none;
-    // }
-
-    // &.notes-hide-original {
-    //   .original-note {
-    //     display: none;
-    //   }
-    // }
-
-    // .note-button {
-    //   display: none;
-    // }
-
-    // &.notes-show-eng note.button-eng-2 .note-button,
-    // &.notes-show-tc note.button-tc-2 .note-button,
-    // &.notes-show-new note.button-new-2 .note-button {
-    //   display: block;
-    // }
-
-    // &.notes-hide-tc .note-reference-tc,
-    // &.notes-hide-eng .note-reference-eng,
-    // &.notes-hide-new .note-reference-new,
-    // &.notes-hide-new .note-reference-new-2,
-    // &.notes-hide-tc .note-reference-tc-2,
-    // &.notes-hide-eng .note-reference-eng-2,
-    // &.notes-hide-tier .note-reference-new-2,
-    // &.notes-hide-tier .note-reference-tc-2,
-    // &.notes-hide-tier .note-reference-eng-2 {
-    //   display: none;
-    // }
-
-    // &.notes-show-tier.secondary-override-off
-    //   note.note-references.tier-2-note-hide
-    //   .note-reference-tc-2,
-    // &.notes-show-tier.secondary-override-off
-    //   note.note-references.tier-2-note-hide
-    //   .note-reference-eng-2,
-    // &.notes-show-tier.secondary-override-off
-    //   note.note-references.tier-2-note-hide
-    //   .note-reference-new-2,
-    // &.notes-show-tier.secondary-override-off
-    //   note.note-references.tier-2-note-hide
-    //   .note-reference-new-3,
-    // &.notes-show-tier.secondary-override-off
-    //   note.note-references.tier-2-note-hide
-    //   .note-phrase.note-reference-tc-2 {
-    //   display: none;
-    // }
-    // .note-phrase,
-    // &.notes-show-new .note-phrase-new,
-    // &.notes-show-tier.secondary-override-off.notes-show-new
-    //   note.secondary-override-off
-    //   .note-phrase-new-2,
-    // &.notes-hide-tier.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-new-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-new-2 {
-    //   display: inline-block;
-    // }
-
-    // &.notes-show-tc .note-phrase-tc,
-    // &.notes-show-eng .note-phr-eng,
-    // &.notes-show-eng .note-phrase-eng,
-    // &.notes-show-tier.secondary-override-off.notes-show-new
-    //   note.secondary-override-off
-    //   .note-reference-new-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-tc
-    //   note.secondary-override-off.note-reference-tc-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-eng
-    //   note.secondary-override-off
-    //   .note-reference-eng-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-eng
-    //   note.secondary-override-off
-    //   .note-phrase-eng-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-tc
-    //   note.secondary-override-off
-    //   .note-phrase-tc-2,
-    // &.notes-hide-tier.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-reference-new-2,
-    // &.notes-hide-tier.notes-show-eng
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-reference-eng-2,
-    // &.notes-hide-tier.notes-show-tc
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-reference-tc-2,
-    // &.notes-hide-tier.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-reference-new-3,
-    // &.notes-hide-tier.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-new,
-    // &.notes-hide-tier.notes-show-eng
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-eng,
-    // &.notes-hide-tier.notes-show-eng
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-eng-2,
-    // &.notes-hide-tier.notes-show-tc
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-tc,
-    // &.notes-hide-tier.notes-show-tc
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-tc-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-eng
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-eng-2,
-    // &.notes-show-tier.secondary-override-off.notes-show-new
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-reference-new-3,
-    // &.notes-show-tier.secondary-override-off.notes-show-tc
-    //   note.secondary-override-on.tier-2-note-show
-    //   .note-phrase-tc-2,
-    // &.notes-show-tc .note-reference-tc,
-    // &.notes-show-eng .note-reference-eng,
-    // &.notes-show-new .note-reference-new {
-    //   display: block;
-    // }
 
     note.tier-2-note-show {
       display: grid;

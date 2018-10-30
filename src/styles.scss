@@ -460,6 +460,7 @@ p {
   &.note-title,
   &.note-short-title,
   &.note-phrase,
+  [class*="note-phrase"],
   &.note-reference-new,
   &.note-reference-eng,
   &.note-reference-tc,
@@ -559,7 +560,8 @@ p {
     font-weight: bold;
   }
 
-  &.note-phrase {
+  &.note-phrase,
+  &.note-phrase-eng {
     font-family: $font-stack;
     margin-top: 0;
     margin-right: 0;

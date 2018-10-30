@@ -50,6 +50,9 @@ serif;
   .secondary-notes,
   .original-note,
   .note-short-title,
+  .tc-note,
+  .eng-note,
+  .new-note,
   div.note,
   div.note-tier-2 {
     margin-left: 1em;
@@ -155,7 +158,8 @@ serif;
   .note-reference-eng-2,
   .note-reference-tc,
   .note-reference-tc-2,
-  .note-phrase {
+  .note-phrase,
+  [class*="note-phrase"] {
     margin-bottom: 9pt;
   }
 

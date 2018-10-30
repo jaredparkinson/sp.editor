@@ -32,6 +32,7 @@ body {
       font-weight: bold;
     }
   }
+
   .body-block {
     span.part {
       margin-left: 6pt;
@@ -54,10 +55,11 @@ body {
 
   //This is styling for when poetry is being shown
   .body-block.show-poetry {
-    span.line {
-      background: inherit;
-      display: block;
-    }
+    // w.line-start::before {
+    //   content: "\A";
+    //   // background: inherit;
+    //   // display: block;
+    // }
 
     & .break {
       display: block;
@@ -74,6 +76,7 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
+
       &.part,
       &.question,
       &.answer {
@@ -145,6 +148,7 @@ body {
   span.uppercase {
     text-transform: uppercase;
   }
+
   span.clarity-word {
     font-style: italic;
   }

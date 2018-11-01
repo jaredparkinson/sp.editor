@@ -1,7 +1,6 @@
 <div class="settings">
   <div class="download" *ngFor="let download of downloadService.downloads">
     <span></span>
-
     <button (click)="downloadService.download(download)" class="btn" [disabled]="download.downloading">
       <svg *ngIf="!download.downloaded" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
@@ -17,7 +16,6 @@
             .fil0 {
               fill: black
             }
-
           </style>
         </defs>
         <g>
@@ -27,4 +25,5 @@
     </button> <span></span>
     <span>{{download.title}}</span>
   </div>
+  <button (click)="reset();">Reset</button>
 </div>

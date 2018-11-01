@@ -20,7 +20,8 @@ import {
 import * as _ from 'lodash';
 
 import { Paragraph } from '../models/Paragraph';
-import { Verse } from '../models/Verse';
+import { Verse } from '../modelsJson/Verse';
+// import { Verse } from '../models/Verse';
 import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
@@ -137,20 +138,11 @@ export class BodyblockComponent
   }
 
   wTagClick(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string
-    ]
+    wTag: [string, string, string, string, string, string],
+    verse: Verse
   ) {
     console.log(wTag);
-    this.verseSelectService.wTagClick(wTag);
+    this.verseSelectService.wTagClick(wTag, verse);
   }
 
   async ngAfterViewInit() {

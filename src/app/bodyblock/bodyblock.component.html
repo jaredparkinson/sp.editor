@@ -26,7 +26,7 @@
 
 
 
-          <w nT="{{w[2]}}" class="{{w[0]}}" (click)="wTagClick(w)" #wTags>
+          <w nT="{{w[2]}}" class="{{w[0]}}" (click)="wTagClick(w,verse)" #wTags>
             <n>{{w[1]}}</n>
           </w>
           <br *ngIf="w[0].includes('line-end') && saveState.data.poetryVisible">

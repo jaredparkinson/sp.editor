@@ -28,4 +28,7 @@ export class SettingsComponent implements OnInit {
   download(file: string) {
     // this.downloadService.download(file);
   }
+  reset() {
+    localForage.clear();
+  }
 }

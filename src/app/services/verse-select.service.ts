@@ -92,7 +92,9 @@ export class VerseSelectService {
 
   public removeVerseSelect() {
     this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      wa[0] = '';
+      for (let x = 0; x < 10; x++) {
+        wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-' + x);
+      }
     });
 
     // _.each(this.chapterService.wTags, wTag => {
@@ -110,7 +112,7 @@ export class VerseSelectService {
     if (this.verseSelect) {
       if (
         this.stringService.hasAttribute(w[0], 'verse-select-1') ||
-        this.stringService.hasAttribute(w[0], 'verse-select-4')
+        this.stringService.hasAttribute(w[0], 'verse-select-3')
       ) {
         this.resetVerseSelect();
         this.verseSelected = false;
@@ -119,14 +121,15 @@ export class VerseSelectService {
         const refs = w[4].split(',');
         w[0] = w[0].replace('verse-select-2', 'verse-select-3');
         this.selectNote(refs);
-      } else if (this.stringService.hasAttribute(w[0], 'verse-select-3')) {
-        this.resetNotes();
-        const refs = w[5].split(',');
-        w[0] = w[0].replace('verse-select-3', 'verse-select-4');
-        this.selectNote(refs);
       } else {
         this.firstClick(w, verse);
       }
+      // else if (this.stringService.hasAttribute(w[0], 'verse-select-3')) {
+      //   this.resetNotes();
+      //   const refs = w[5].split(',');
+      //   w[0] = w[0].replace('verse-select-3', 'verse-select-4');
+      //   this.selectNote(refs);
+      // }
     }
   }
 
@@ -142,7 +145,11 @@ export class VerseSelectService {
     verse.wTags2.forEach(wr => {
       // console.log(wr);
       refs.forEach(ref => {
-        if (wr[3].includes(ref) && !wr[0].includes(' verse-select-1')) {
+        if (
+          wr[3].includes(ref) &&
+          !wr[0].includes(' verse-select-1') &&
+          !wr[0].includes(' verse-select-2')
+        ) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
           wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-1');
         } else if (wr[3].includes(ref) && wr[0].includes(' verse-select-1')) {

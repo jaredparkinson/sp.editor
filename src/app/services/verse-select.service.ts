@@ -10,13 +10,18 @@ import * as _ from 'lodash';
 import { Verse } from '../modelsJson/Verse';
 import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
+import { StringService } from './string.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerseSelectService {
   // wTags: ElementRef[];
-  constructor(private chapterService: ChapterService, private ngZone: NgZone) {}
+  constructor(
+    private chapterService: ChapterService,
+    private ngZone: NgZone,
+    private stringService: StringService
+  ) {}
   verseSelect = false;
   parser = new DOMParser();
   verseSelected = false;
@@ -50,11 +55,17 @@ export class VerseSelectService {
     this.resetNotes();
     console.log(this.chapterService.wTags);
     this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      if (wa[3].trim() !== '' && !wa[1].includes(' verse-select-0')) {
-        wa[0] += ' verse-select-0';
+      if (wa[3].trim() !== '') {
+        // wa[0] += ' verse-select-0';
+        wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
       }
-      wa[0] = wa[0].replace(' verse-select-1', '');
-      wa[0] = wa[0].replace(' verse-select-2', '');
+
+      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
+      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-3');
+      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-4');
+      // wa[0] = wa[0].replace(' verse-select-1', '');
+      // wa[0] = wa[0].replace(' verse-select-2', '');
     });
   }
 
@@ -81,9 +92,7 @@ export class VerseSelectService {
 
   public removeVerseSelect() {
     this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      wa[0] = wa[0].replace('verse-select-0', '');
-      wa[0] = wa[0].replace('verse-select-1', '');
-      wa[0] = wa[0].replace('verse-select-2', '');
+      wa[0] = '';
     });
 
     // _.each(this.chapterService.wTags, wTag => {
@@ -95,114 +104,66 @@ export class VerseSelectService {
     w: [string, string, string, string, string, string],
     verse: Verse
   ) {
+    if (w[3].trim() === '') {
+      return;
+    }
     if (this.verseSelect) {
-      if (this.verseSelected === true) {
+      if (
+        this.stringService.hasAttribute(w[0], 'verse-select-1') ||
+        this.stringService.hasAttribute(w[0], 'verse-select-4')
+      ) {
         this.resetVerseSelect();
         this.verseSelected = false;
+      } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+        this.resetNotes();
+        const refs = w[4].split(',');
+        w[0] = w[0].replace('verse-select-2', 'verse-select-3');
+        this.selectNote(refs);
+      } else if (this.stringService.hasAttribute(w[0], 'verse-select-3')) {
+        this.resetNotes();
+        const refs = w[5].split(',');
+        w[0] = w[0].replace('verse-select-3', 'verse-select-4');
+        this.selectNote(refs);
       } else {
-        this.verseSelected = true;
-        const ids = w[2].split('-');
-
-        const refs = w[3].split(' ');
-        console.log(refs);
-
-        verse.wTags2.forEach(wr => {
-          // console.log(wr);
-          refs.forEach(ref => {
-            if (wr[3].includes(ref) && !wr[0].includes(' verse-select-1')) {
-              wr[0] = ' verse-select-1';
-              wr[0] = wr[0].replace(' verse-select-0', '');
-            } else if (
-              wr[3].includes(ref) &&
-              wr[0].includes(' verse-select-1')
-            ) {
-              wr[0] = ' verse-select-2';
-              wr[0] = wr[0].replace(' verse-select-0', '');
-              wr[0] = wr[0].replace(' verse-select-1', '');
-            }
-          });
-        });
-
-        const note = _.find(this.notes, (n: ElementRef) => {
-          return (n.nativeElement as HTMLElement).id === refs[refs.length - 1];
-        });
-        if (note) {
-          (note.nativeElement as HTMLElement).classList.add('verse-select-1');
-          (note.nativeElement as HTMLElement).scrollIntoView({
-            block: 'center'
-          });
-        }
-
-        // this.chapterService.notes2[
-        //   parseInt(ids[0].substring(ids[0].length - 1), 10) - 1
-        // ].verseSelect(refs);
-
-        // const noteIndex = parseInt(ids[0].substring(1, ids[0].length), 10) - 1;
-
-        // const matches: Array<[string, string, number]> = [];
-
-        // _.each(this.chapterService.wTagRefs, wTagRef => {
-        //   const refs2 = wTagRef.getAttribute('ref').split(',');
-        //   if (_.intersection(refs, refs2).length > 0) {
-        //     matches.push([
-        //       wTagRef.parentElement.id,
-        //       wTagRef.getAttribute('n'),
-        //       refs2.length
-        //     ]);
-        //   }
-        // });
-
-        // const n = _.find(this.notes, note => {
-        //   return (
-        //     ((note as ElementRef).nativeElement as HTMLElement).id ===
-        //     refs[refs.length - 1]
-        //   );
-        // });
-
-        // if (n) {
-        //   (n.nativeElement as HTMLElement).classList.add('verse-select-1');
-        //   (n.nativeElement as HTMLElement).scrollIntoView({ block: 'center' });
-        // }
-
-        // console.log(n.nativeElement + 'n');
-
-        // _.each(this.chapterService.wTags, o => {
-        //   const matchedMatches = _.filter(matches, match => {
-        //     return match[0] + '-' + match[1] === verse[2];
-        //   });
-
-        //   // console.log(matchedMatches + ' matches matches');
-        //   // this.resetVerseSelect();
-
-        //   // const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-
-        //   // _.each(doc.querySelectorAll('w'), wTag => {
-        //   //   if (wTag.className.includes('verse-select')) {
-        //   //     wTag.className = 'verse-select-0';
-        //   //   }
-        //   // });
-
-        //   if (matchedMatches.length > 0) {
-        //     console.log('matches' + matchedMatches);
-
-        //     _.each(matchedMatches, m => {
-        //       const underline = m[2] > 1 ? 'verse-select-1' : 'verse-select-2';
-        //       const wTag = _.find(this.chapterService.wTags, t => {
-        //         return t[2] === m[0] + '-' + m[1];
-        //       });
-        //       console.log(wTag);
-
-        //       wTag[0] += underline;
-        //       wTag[0] = wTag[0].replace('verse-select-0', '');
-        //       // if (wTag.nextElementSibling) {
-        //       //   console.log(
-        //       //     'next ' + (wTag.nextElementSibling as HTMLElement).innerText
-        //       //   );
-        //       // }
-        //     });
-        //   }
-        // });
+        this.firstClick(w, verse);
       }
+    }
+  }
+
+  private firstClick(
+    w: [string, string, string, string, string, string],
+    verse: Verse
+  ) {
+    this.resetVerseSelect();
+    this.verseSelected = true;
+    const ids = w[2].split('-');
+    const refs = w[3].split(' ');
+    console.log(refs);
+    verse.wTags2.forEach(wr => {
+      // console.log(wr);
+      refs.forEach(ref => {
+        if (wr[3].includes(ref) && !wr[0].includes(' verse-select-1')) {
+          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
+          wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-1');
+        } else if (wr[3].includes(ref) && wr[0].includes(' verse-select-1')) {
+          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
+          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-1');
+          wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-2');
+        }
+      });
+    });
+    this.selectNote(refs);
+  }
+
+  private selectNote(refs: string[]) {
+    const note = _.find(this.notes, (n: ElementRef) => {
+      return (n.nativeElement as HTMLElement).id === refs[refs.length - 1];
+    });
+    if (note) {
+      (note.nativeElement as HTMLElement).classList.add('verse-select-1');
+      (note.nativeElement as HTMLElement).scrollIntoView({
+        block: 'center'
+      });
     }
   }
 }

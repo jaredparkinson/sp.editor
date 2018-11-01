@@ -21,57 +21,77 @@ export class VerseSelectService {
   verseSelected = false;
   public notes: ElementRef[] = [];
   public verses: ElementRef[] = [];
-  test(): void {
-    console.log(
-      (_.find<ElementRef>(this.notes, n => n.nativeElement.id === 'note1')
-        .nativeElement as HTMLElement)
-        .querySelector('.note-phrase')
-        .classList.add('verse-select-1')
-    );
-  }
 
   public toggleVerseSelect() {
     this.verseSelect = !this.verseSelect;
-    this.ngZone.run(() => {
-      switch (this.verseSelect) {
-        case true: {
-          this.resetVerseSelect();
+    switch (this.verseSelect) {
+      case true: {
+        this.resetVerseSelect();
 
-          break;
-        }
-        case false:
-        default: {
-          this.removeVerseSelect();
-
-          this.resetNotes();
-          break;
-        }
+        break;
       }
-    });
-  }
+      case false:
+      default: {
+        this.removeVerseSelect();
 
+        this.resetNotes();
+        break;
+      }
+    }
+  }
+  public test(
+    w: [string, string, string, string, string, string, string, string, string]
+  ) {}
   public resetVerseSelect() {
+    console.log('verse select');
+
     this.verseSelected = false;
     this.resetNotes();
     console.log(this.chapterService.wTags);
-
-    _.each(this.chapterService.wTags, wTag => {
-      const ids = wTag[2].split('-');
-      // console.log(ids);
-      if (
-        _.find(this.chapterService.wTagRefs, wTagRef => {
-          return (
-            (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-            (wTagRef as HTMLElement).parentElement.id === ids[0]
-          );
-        })
-      ) {
-        if (!wTag[0].includes('verse-select-0')) {
-          wTag[0] += ' verse-select-0';
+    this.modifyWTags(
+      (
+        wa: [
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string
+        ]
+      ) => {
+        if (wa[3].trim() !== '' && !wa[1].includes('verse-select-0')) {
+          wa[0] += ' verse-select-0';
         }
-        wTag[0] = wTag[0].replace(' verse-select-1', '');
-        wTag[0] = wTag[0].replace(' verse-select-2', '');
+        wa[0] = wa[0].replace(' verse-select-1', '');
+        wa[0] = wa[0].replace(' verse-select-2', '');
       }
+    );
+  }
+
+  private modifyWTags(
+    callBack: (
+      w: [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ]
+    ) => void
+  ) {
+    _.each(this.chapterService.chapter2.paragraphs, paragrah => {
+      _.each(paragrah.verses, verse => {
+        _.each(verse.wTags2, wa => {
+          callBack(wa);
+        });
+      });
     });
   }
 
@@ -85,19 +105,43 @@ export class VerseSelectService {
   }
 
   public removeVerseSelect() {
-    _.each(this.chapterService.wTags, wTag => {
-      wTag[0] = wTag[0].replace(' verse-select-0', '');
-    });
+    this.modifyWTags(
+      (
+        wa: [
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          string
+        ]
+      ) => {
+        wa[0] = wa[0].replace(' verse-select-0', '');
+        wa[0] = wa[0].replace(' verse-select-1', '');
+        wa[0] = wa[0].replace(' verse-select-2', '');
+      }
+    );
+
+    // _.each(this.chapterService.wTags, wTag => {
+    //   wTag[0] = wTag[0].replace(' verse-select-0', '');
+    // });
   }
 
-  public wTagClick(w: WTag) {
+  public wTagClick(
+    w: [string, string, string, string, string, string, string, string, string]
+  ) {
     if (this.verseSelect) {
       if (this.verseSelected === true) {
         this.resetVerseSelect();
         this.verseSelected = false;
       } else {
         this.verseSelected = true;
-        const ids = w.n.split('-');
+        const ids = w[2].split('-');
+        console.log(ids);
+
         const targetWTags = _.find(this.chapterService.wTagRefs, wTagRef => {
           return (
             (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&

@@ -11,8 +11,8 @@ export class Chapter2 {
 
   public bodyBlock = '';
   public bb = false;
-  public newWTagRefs: Array<Array<[string, string]>> = [];
-  public ogWTagRefs: Array<Array<[string, string]>> = [];
-  public tcWTagRefs: Array<Array<[string, string]>> = [];
+  // public newWTagRefs: [string, string, string, string][][] = [];
+  // public ogWTagRefs: [string, string, string, string][][] = [];
+  // public tcWTagRefs: [string, string, string, string][][] = [];
   private hiddenParagraph = '.hidden-paragraph';
 }

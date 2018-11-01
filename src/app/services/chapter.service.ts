@@ -84,20 +84,6 @@ export class ChapterService {
     } else {
       this.getChapterWeb(book, vSplit, synchronizedScrolling);
     }
-    // if (url === '1-jn-1') {
-    // }
-
-    if (url === 'heb/1') {
-      this.httpClient
-        .get('assets/heb-1.xml', { observe: 'body', responseType: 'text' })
-        .subscribe(data => {
-          const parser = new DOMParser();
-          this.hebWTags = parser.parseFromString(data, 'text/html');
-          this.wTagRefs = this.hebWTags.querySelectorAll('w[ref]');
-
-          // console.log('wTagRefs ' + this.wTagRefs.length);
-        });
-    }
   }
 
   private async verseFocus(): Promise<void> {
@@ -187,21 +173,21 @@ export class ChapterService {
     console.log('verse focus');
 
     await this.verseFocus();
-    await this.setWTags();
+    // await this.setWTags();
     // setTimeout(async () => {
     //   await synchronizedScrolling();
     // }, 200);
   }
-  async setWTags() {
-    this.wTags = [];
-    _.each(this.chapter2.paragraphs, paragraph => {
-      _.each(paragraph.verses, verse => {
-        _.each(verse.wTags2, wTag => {
-          this.wTags.push(wTag);
-        });
-      });
-    });
-  }
+  // async setWTags() {
+  //   this.wTags = [];
+  //   _.each(this.chapter2.paragraphs, paragraph => {
+  //     _.each(paragraph.verses, verse => {
+  //       _.each(verse.wTags2, wTag => {
+  //         this.wTags.push(wTag);
+  //       });
+  //     });
+  //   });
+  // }
 
   public parseHighlightedVerses2(v: string): number[] {
     // console.log('parseHighlightedVerses2');

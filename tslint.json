@@ -54,6 +54,7 @@
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "no-implicit-dependencies": false,
+    "no-unused-variable": true,
     "one-line": [
       true,
       "check-open-brace",

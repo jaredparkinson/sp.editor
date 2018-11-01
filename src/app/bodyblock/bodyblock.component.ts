@@ -78,17 +78,24 @@ export class BodyblockComponent
             chapter,
             this.synchronizedScrolling
           );
+          setTimeout(() => {
+            if (this.verseSelectService.verseSelect) {
+              this.verseSelectService.resetVerseSelect();
+            }
+          }, 100);
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService.getChapter(
             chapter,
             '',
             this.synchronizedScrolling
           );
+          setTimeout(() => {
+            if (this.verseSelectService.verseSelect) {
+              this.verseSelectService.resetVerseSelect();
+            }
+          }, 100);
         }
         console.log('btsxyd');
-        if (this.verseSelectService.verseSelect) {
-          this.verseSelectService.resetVerseSelect();
-        }
       }, 200);
     });
     this.wordSelection();
@@ -129,7 +136,19 @@ export class BodyblockComponent
     });
   }
 
-  wTagClick(wTag: WTag) {
+  wTagClick(
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string
+    ]
+  ) {
     console.log(wTag);
     this.verseSelectService.wTagClick(wTag);
   }

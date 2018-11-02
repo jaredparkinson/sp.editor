@@ -73,26 +73,6 @@ export class VerseSelectService {
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
         }
-        // if (wa[3].trim() !== '') {
-        //   // wa[0] += ' verse-select-0';
-        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-        // }
-        // if (wa[4].trim() !== '') {
-        //   // wa[0] += ' verse-select-0';
-        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
-        // }
-        // if (wa[5].trim() !== '') {
-        //   // wa[0] += ' verse-select-0';
-        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
-        // }
-        // console.log(wa[4] + ' ' + wa[5]);
-
-        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
-        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-3');
-        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-4');
-        // wa[0] = wa[0].replace(' verse-select-1', '');
-        // wa[0] = wa[0].replace(' verse-select-2', '');
       }
     );
   }
@@ -169,14 +149,15 @@ export class VerseSelectService {
       return;
     }
     if (this.saveState.data.verseSelect) {
-      console.log('asodifj');
+      // console.log('asodifj');
 
       if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
         this.firstClick(w, verse);
       } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
         this.resetVerseSelect();
       } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-        // console.log('asdfasdfasdfasdfasdf');
+        console.log('asdfasdfasdfasdfasdf');
+        this.resetVerseSelect1(w);
         this.selectNote(w);
       }
       // if (
@@ -202,31 +183,55 @@ export class VerseSelectService {
       // }
     }
   }
-  resetVerseSelect1(): void {
+  resetVerseSelect1(
+    wTag: [string, string, string, string, string, string, number, string[]]
+  ): void {
     this.modifyWTags(
       (
         wa: [string, string, string, string, string, string, number, string[]]
       ) => {
-        if (wa[3].trim() !== '') {
-          wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-        }
-        if (wa[4].trim() !== '') {
-          wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
-          wa[0] = this.stringService.removeAttribute(
-            wa[0],
-            'verse-og-select-1'
-          );
-        }
-        if (wa[5].trim() !== '') {
-          wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
-          wa[0] = this.stringService.removeAttribute(
-            wa[0],
-            'verse-tc-select-1'
-          );
+        if (wa !== wTag) {
+          wa[7] = [];
+
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
+
+          this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
+          this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
+          this.createRefList(wa, this.saveState.data.translatorNotesVisible, 5);
+          // console.log(wa[7]);
+
+          if (wa[7].length !== 0) {
+            wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+            wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+            wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
+          }
         }
       }
     );
+    // this.modifyWTags(
+    //   (
+    //     wa: [string, string, string, string, string, string, number, string[]]
+    //   ) => {
+    //     if (wa[3].trim() !== '') {
+    //       wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+    //       wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+    //     }
+    //     if (wa[4].trim() !== '') {
+    //       wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
+    //       wa[0] = this.stringService.removeAttribute(
+    //         wa[0],
+    //         'verse-og-select-1'
+    //       );
+    //     }
+    //     if (wa[5].trim() !== '') {
+    //       wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
+    //       wa[0] = this.stringService.removeAttribute(
+    //         wa[0],
+    //         'verse-tc-select-1'
+    //       );
+    //     }
+    //   }
+    // );
   }
 
   private firstClick(
@@ -258,9 +263,9 @@ export class VerseSelectService {
   private selectNote(
     wTag: [string, string, string, string, string, string, number, string[]]
   ) {
-    console.log(wTag[7].length);
+    // console.log(wTag[7].length);
     if (wTag[7].length === 0) {
-      console.log(wTag[7]);
+      // console.log(wTag[7]);
 
       this.resetVerseSelect();
       return;
@@ -269,7 +274,7 @@ export class VerseSelectService {
       return (n.nativeElement as HTMLElement).id === wTag[7][0];
     });
     wTag[7].shift();
-    console.log(note);
+    // console.log('note ' + wTag[7]);
 
     if (note) {
       (note.nativeElement as HTMLElement).classList.add('verse-select-1');

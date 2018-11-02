@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { Verse } from '../modelsJson/Verse';
 import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
+import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 
 @Injectable({
@@ -20,17 +21,19 @@ export class VerseSelectService {
   constructor(
     private chapterService: ChapterService,
     private ngZone: NgZone,
-    private stringService: StringService
+    private stringService: StringService,
+    private saveState: SaveStateService
   ) {}
-  verseSelect = false;
+  // verseSelect = false;
   parser = new DOMParser();
   verseSelected = false;
   public notes: ElementRef[] = [];
   public verses: ElementRef[] = [];
 
   public toggleVerseSelect() {
-    this.verseSelect = !this.verseSelect;
-    switch (this.verseSelect) {
+    this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
+    this.saveState.save();
+    switch (this.saveState.data.verseSelect) {
       case true: {
         this.resetVerseSelect();
 
@@ -49,17 +52,17 @@ export class VerseSelectService {
     w: [string, string, string, string, string, string, string, string, string]
   ) {}
   public resetVerseSelect() {
-    console.log('verse select');
-
     this.verseSelected = false;
     this.resetNotes();
     console.log(this.chapterService.wTags);
+
     this.modifyWTags((wa: [string, string, string, string, string, string]) => {
       if (wa[3].trim() !== '') {
         // wa[0] += ' verse-select-0';
         wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
       }
 
+      console.log('verse select');
       wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
       wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
       wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-3');
@@ -109,7 +112,7 @@ export class VerseSelectService {
     if (w[3].trim() === '') {
       return;
     }
-    if (this.verseSelect) {
+    if (this.saveState.data.verseSelect) {
       if (
         this.stringService.hasAttribute(w[0], 'verse-select-1') ||
         this.stringService.hasAttribute(w[0], 'verse-select-3')
@@ -117,6 +120,7 @@ export class VerseSelectService {
         this.resetVerseSelect();
         this.verseSelected = false;
       } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+        this.resetVerseSelect1();
         this.resetNotes();
         const refs = w[4].split(',');
         w[0] = w[0].replace('verse-select-2', 'verse-select-3');
@@ -132,6 +136,14 @@ export class VerseSelectService {
       // }
     }
   }
+  resetVerseSelect1(): void {
+    this.modifyWTags((wa: [string, string, string, string, string, string]) => {
+      if (this.stringService.hasAttribute(wa[0], '')) {
+        wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+        wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+      }
+    });
+  }
 
   private firstClick(
     w: [string, string, string, string, string, string],
@@ -145,14 +157,10 @@ export class VerseSelectService {
     verse.wTags2.forEach(wr => {
       // console.log(wr);
       refs.forEach(ref => {
-        if (
-          wr[3].includes(ref) &&
-          !wr[0].includes(' verse-select-1') &&
-          !wr[0].includes(' verse-select-2')
-        ) {
+        if (wr[3].includes(ref) && this.refCount(wr[3]) === 1) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
           wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-1');
-        } else if (wr[3].includes(ref) && wr[0].includes(' verse-select-1')) {
+        } else if (wr[3].includes(ref) && this.refCount(wr[3]) === 2) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-1');
           wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-2');
@@ -162,6 +170,9 @@ export class VerseSelectService {
     this.selectNote(refs);
   }
 
+  private refCount(refs: string): number {
+    return refs.split(' ').length;
+  }
   private selectNote(refs: string[]) {
     const note = _.find(this.notes, (n: ElementRef) => {
       return (n.nativeElement as HTMLElement).id === refs[refs.length - 1];

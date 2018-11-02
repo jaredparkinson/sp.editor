@@ -74,16 +74,15 @@ export class BodyblockComponent
 
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
-          await this.chapterService.getChapter(
-            book,
-            chapter,
-            this.synchronizedScrolling
-          );
-          setTimeout(() => {
-            if (this.verseSelectService.verseSelect) {
-              this.verseSelectService.resetVerseSelect();
-            }
-          }, 100);
+          await this.chapterService
+            .getChapter(book, chapter, this.synchronizedScrolling)
+            .then(() => {
+              setTimeout(() => {
+                if (this.saveState.data.verseSelect) {
+                  this.verseSelectService.resetVerseSelect();
+                }
+              }, 700);
+            });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService.getChapter(
             chapter,
@@ -91,10 +90,10 @@ export class BodyblockComponent
             this.synchronizedScrolling
           );
           setTimeout(() => {
-            if (this.verseSelectService.verseSelect) {
+            if (this.saveState.data.verseSelect) {
               this.verseSelectService.resetVerseSelect();
             }
-          }, 100);
+          }, 1000);
         }
         console.log('btsxyd');
       }, 200);

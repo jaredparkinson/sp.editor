@@ -36,6 +36,7 @@ import { FilesComponent } from './files/files.component';
 import { UrlBuilder } from './files/UrlBuilder';
 import { HeaderComponent } from './header/header.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NoteSettingsComponent } from './note-settings/note-settings.component';
 import { NotesComponent } from './notes/notes.component';
 import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
@@ -44,7 +45,6 @@ import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SettingsComponent } from './settings/settings.component';
-import { NoteSettingsComponent } from './note-settings/note-settings.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -89,11 +89,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     ElectronService,
+    SaveStateService,
     NavigationService,
     ChapterService,
     HelperService,
     UrlBuilder,
-    SaveStateService,
     DownloadService
   ],
   bootstrap: [AppComponent],

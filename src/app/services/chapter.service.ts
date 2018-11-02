@@ -61,29 +61,32 @@ export class ChapterService {
     chapter: string,
     synchronizedScrolling: () => Promise<void>
   ): Promise<void> {
-    this.paragraphs = [];
-    this.notes2 = [];
-    this.navService.pageTitle = '';
-    this.header = '';
-    let vSplit = chapter.split('.');
-    this.hebWTags = new Document();
-    if (chapter === '') {
-      vSplit = book.split('.');
-    }
+    return new Promise<void>((resolve, reject) => {
+      this.paragraphs = [];
+      this.notes2 = [];
+      this.navService.pageTitle = '';
+      this.header = '';
+      let vSplit = chapter.split('.');
+      this.hebWTags = new Document();
+      if (chapter === '') {
+        vSplit = book.split('.');
+      }
 
-    const url = book + '/' + vSplit[0];
+      const url = book + '/' + vSplit[0];
 
-    this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
-    this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-    // console.log(this.verseNums + ' ' + this.contextNums);
+      this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
+      this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
+      // console.log(this.verseNums + ' ' + this.contextNums);
 
-    console.log(this.fs);
+      console.log(this.fs);
 
-    if (this.fs) {
-      this.getChapterFS(book, vSplit, synchronizedScrolling);
-    } else {
-      this.getChapterWeb(book, vSplit, synchronizedScrolling);
-    }
+      if (this.fs) {
+        this.getChapterFS(book, vSplit, synchronizedScrolling);
+      } else {
+        this.getChapterWeb(book, vSplit, synchronizedScrolling);
+      }
+      resolve();
+    });
   }
 
   private async verseFocus(): Promise<void> {

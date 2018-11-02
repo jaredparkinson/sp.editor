@@ -159,25 +159,41 @@ export class VerseSelectService {
     w: [string, string, string, string, string, string, number, string[]],
     verse: Verse
   ) {
-    if (w[3].trim() === '') {
+    console.log(this.saveState.data.verseSelect);
+
+    if (
+      w[7].length === 0 &&
+      !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
+      !this.stringService.hasAttribute(w[0], 'verse-select-1')
+    ) {
       return;
     }
     if (this.saveState.data.verseSelect) {
-      if (
-        this.stringService.hasAttribute(w[0], 'verse-select-1') ||
-        this.stringService.hasAttribute(w[0], 'verse-select-3')
-      ) {
-        this.resetVerseSelect();
-        this.verseSelected = false;
-      } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-        this.resetVerseSelect1();
-        this.resetNotes();
-        const refs = w[4].split(',');
-        w[0] = w[0].replace('verse-select-2', 'verse-select-3');
-        this.selectNote(refs);
-      } else {
+      console.log('asodifj');
+
+      if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
         this.firstClick(w, verse);
+      } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
+        this.resetVerseSelect();
+      } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+        // console.log('asdfasdfasdfasdfasdf');
+        this.selectNote(w);
       }
+      // if (
+      //   this.stringService.hasAttribute(w[0], 'verse-select-1') ||
+      //   this.stringService.hasAttribute(w[0], 'verse-select-3')
+      // ) {
+      //   this.resetVerseSelect();
+      //   this.verseSelected = false;
+      // } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+      //   this.resetVerseSelect1();
+      //   this.resetNotes();
+      //   const refs = w[4].split(',');
+      //   w[0] = w[0].replace('verse-select-2', 'verse-select-3');
+      //   this.selectNote(refs);
+      // } else {
+      //   this.firstClick(w, verse);
+      // }
       // else if (this.stringService.hasAttribute(w[0], 'verse-select-3')) {
       //   this.resetNotes();
       //   const refs = w[5].split(',');
@@ -219,37 +235,49 @@ export class VerseSelectService {
   ) {
     this.resetVerseSelect();
     this.verseSelected = true;
-    const ids = w[2].split('-');
-    const refs = w[3].split(' ');
-    console.log(refs);
+    console.log(w[7]);
     verse.wTags2.forEach(wr => {
       // console.log(wr);
-      refs.forEach(ref => {
-        if (wr[3].includes(ref) && this.refCount(wr[3]) === 1) {
+
+      w[7].forEach(ref => {
+        if (wr[3].includes(ref) && wr[7].length >= 1) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
-          wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-1');
-        } else if (wr[3].includes(ref) && this.refCount(wr[3]) >= 2) {
-          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
-          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-1');
-          wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-2');
+          wr[0] =
+            wr[7].length > 1
+              ? this.stringService.addAttribute(wr[0], 'verse-select-2')
+              : this.stringService.addAttribute(wr[0], 'verse-select-1');
         }
       });
     });
-    this.selectNote(refs);
+    this.selectNote(w);
   }
 
   private refCount(refs: string): number {
     return refs.split(' ').length;
   }
-  private selectNote(refs: string[]) {
+  private selectNote(
+    wTag: [string, string, string, string, string, string, number, string[]]
+  ) {
+    console.log(wTag[7].length);
+    if (wTag[7].length === 0) {
+      console.log(wTag[7]);
+
+      this.resetVerseSelect();
+      return;
+    }
     const note = _.find(this.notes, (n: ElementRef) => {
-      return (n.nativeElement as HTMLElement).id === refs[refs.length - 1];
+      return (n.nativeElement as HTMLElement).id === wTag[7][0];
     });
+    wTag[7].shift();
+    console.log(note);
+
     if (note) {
       (note.nativeElement as HTMLElement).classList.add('verse-select-1');
       (note.nativeElement as HTMLElement).scrollIntoView({
         block: 'center'
       });
+    } else {
+      this.resetVerseSelect();
     }
   }
 }

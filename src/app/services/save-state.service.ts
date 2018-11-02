@@ -11,15 +11,18 @@ export class SaveStateService {
 
   constructor() {
     this.id = 'spEditorSaveState';
-    this.load();
+    // this.load();
   }
   public save(): void {
     localStorage.setItem(this.id, JSON.stringify(this.data));
   }
-  public load(): void {
-    const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
-    this.data = temp !== null ? temp : new SaveStateModel();
-    this.data.leftPaneToggle = false;
-    this.data.rightPaneToggle = false;
+  public load(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
+      this.data = temp !== null ? temp : new SaveStateModel();
+      this.data.leftPaneToggle = false;
+      this.data.rightPaneToggle = false;
+      resolve();
+    });
   }
 }

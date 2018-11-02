@@ -81,7 +81,7 @@ export class BodyblockComponent
                 if (this.saveState.data.verseSelect) {
                   this.verseSelectService.resetVerseSelect();
                 }
-              }, 700);
+              }, 500);
             });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService.getChapter(

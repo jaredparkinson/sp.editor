@@ -1,4 +1,5 @@
 import {
+  APP_INITIALIZER,
   CUSTOM_ELEMENTS_SCHEMA,
   NgModule,
   NO_ERRORS_SCHEMA
@@ -52,6 +53,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+export function load(saveState: SaveStateService) {
+  return () => saveState.load();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,12 +93,18 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     ElectronService,
-    SaveStateService,
     NavigationService,
     ChapterService,
     HelperService,
     UrlBuilder,
-    DownloadService
+    DownloadService,
+    SaveStateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: load,
+      deps: [SaveStateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

@@ -81,7 +81,7 @@ export class BodyblockComponent
                 if (this.saveState.data.verseSelect) {
                   this.verseSelectService.resetVerseSelect();
                 }
-              }, 500);
+              }, 1000);
             });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService.getChapter(
@@ -137,7 +137,7 @@ export class BodyblockComponent
   }
 
   wTagClick(
-    wTag: [string, string, string, string, string, string],
+    wTag: [string, string, string, string, string, string, number, string[]],
     verse: Verse
   ) {
     console.log(wTag);

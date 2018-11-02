@@ -3,7 +3,9 @@ export class Verse {
   // public innerHtml: string;
   public highlight = false;
   // public wTags: WTag[] = [];
-  public wTags2: Array<[string, string, string, string, string, string]> = [];
+  public wTags2: Array<
+    [string, string, string, string, string, string, number, string[]]
+  > = [];
 
   public context = false;
   public num: number;

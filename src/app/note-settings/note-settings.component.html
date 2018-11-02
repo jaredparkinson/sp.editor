@@ -1,19 +1,19 @@
 <div>
 
   <div id='notesSettings' [ngClass]="{'none': !navServices.notesSettings}" class="notes-settings">
-    <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="navServices.btnNewNotesPress();"
+    <button id="btnNewNotes" [ngClass]="{'nav-btn-on': saveState.data.newNotesVisible}" (click)="btnNewNotesPress();"
       class="notes-settings">
       New Notes
     </button>
-    <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="navServices.btnEnglishNotesPress();"
+    <button id="btnEnglishNotes" [ngClass]="{'nav-btn-on': saveState.data.englishNotesVisible}" (click)="btnEnglishNotesPress();"
       class="notes-settings">
       English Notes
     </button>
-    <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="navServices.btnTranslatorNotesPress();"
+    <button id="btnTranslatorNotes" [ngClass]="{'nav-btn-on': saveState.data.translatorNotesVisible}" (click)="btnTranslatorNotesPress();"
       class="notes-settings">
       Translator Notes
     </button>
-    <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="navServices.btnOriginalNotesPress();"
+    <button id="btnOriginalNotes" [ngClass]="{'nav-btn-on': saveState.data.originalNotesVisible}" (click)="btnOriginalNotesPress();"
       class="notes-settings">
       Original Notes
     </button>

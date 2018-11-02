@@ -12,6 +12,7 @@ import { NavLinks } from '../models/navlinks.model';
 // import { TSQuery } from '../TSQuery';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
+import { VerseSelectService } from './verse-select.service';
 
 @Injectable()
 export class NavigationService {

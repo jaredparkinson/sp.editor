@@ -54,26 +54,69 @@ export class VerseSelectService {
   public resetVerseSelect() {
     this.verseSelected = false;
     this.resetNotes();
-    console.log(this.chapterService.wTags);
 
-    this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      if (wa[3].trim() !== '') {
-        // wa[0] += ' verse-select-0';
-        wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+    this.modifyWTags(
+      (
+        wa: [string, string, string, string, string, string, number, string[]]
+      ) => {
+        wa[7] = [];
+
+        wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
+
+        this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
+        this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
+        this.createRefList(wa, this.saveState.data.translatorNotesVisible, 5);
+        // console.log(wa[7]);
+
+        if (wa[7].length !== 0) {
+          wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
+        }
+        // if (wa[3].trim() !== '') {
+        //   // wa[0] += ' verse-select-0';
+        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+        // }
+        // if (wa[4].trim() !== '') {
+        //   // wa[0] += ' verse-select-0';
+        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
+        // }
+        // if (wa[5].trim() !== '') {
+        //   // wa[0] += ' verse-select-0';
+        //   wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
+        // }
+        // console.log(wa[4] + ' ' + wa[5]);
+
+        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
+        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-3');
+        // wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-4');
+        // wa[0] = wa[0].replace(' verse-select-1', '');
+        // wa[0] = wa[0].replace(' verse-select-2', '');
       }
+    );
+  }
 
-      console.log('verse select');
-      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
-      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-3');
-      wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-4');
-      // wa[0] = wa[0].replace(' verse-select-1', '');
-      // wa[0] = wa[0].replace(' verse-select-2', '');
-    });
+  private createRefList(
+    wa: [string, string, string, string, string, string, number, string[]],
+    vis: boolean,
+    noteNumber: number
+  ) {
+    // console.log(vis);
+
+    if (vis) {
+      (wa[noteNumber] as string).split(' ').forEach(w => {
+        if (w.trim() !== '') {
+          wa[7].push(w);
+        }
+      });
+    }
   }
 
   private modifyWTags(
-    callBack: (w: [string, string, string, string, string, string]) => void
+    callBack: (
+      w: [string, string, string, string, string, string, number, string[]]
+    ) => void
   ) {
     _.each(this.chapterService.chapter2.paragraphs, paragrah => {
       _.each(paragrah.verses, verse => {
@@ -94,11 +137,18 @@ export class VerseSelectService {
   }
 
   public removeVerseSelect() {
-    this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      for (let x = 0; x < 10; x++) {
-        wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-' + x);
+    this.modifyWTags(
+      (
+        wa: [string, string, string, string, string, string, number, string[]]
+      ) => {
+        for (let x = 0; x < 10; x++) {
+          wa[0] = this.stringService.removeAttribute(
+            wa[0],
+            'verse-select-' + x
+          );
+        }
       }
-    });
+    );
 
     // _.each(this.chapterService.wTags, wTag => {
     //   wTag[0] = wTag[0].replace(' verse-select-0', '');
@@ -106,7 +156,7 @@ export class VerseSelectService {
   }
 
   public wTagClick(
-    w: [string, string, string, string, string, string],
+    w: [string, string, string, string, string, string, number, string[]],
     verse: Verse
   ) {
     if (w[3].trim() === '') {
@@ -137,16 +187,34 @@ export class VerseSelectService {
     }
   }
   resetVerseSelect1(): void {
-    this.modifyWTags((wa: [string, string, string, string, string, string]) => {
-      if (this.stringService.hasAttribute(wa[0], '')) {
-        wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-        wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+    this.modifyWTags(
+      (
+        wa: [string, string, string, string, string, string, number, string[]]
+      ) => {
+        if (wa[3].trim() !== '') {
+          wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+        }
+        if (wa[4].trim() !== '') {
+          wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
+          wa[0] = this.stringService.removeAttribute(
+            wa[0],
+            'verse-og-select-1'
+          );
+        }
+        if (wa[5].trim() !== '') {
+          wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
+          wa[0] = this.stringService.removeAttribute(
+            wa[0],
+            'verse-tc-select-1'
+          );
+        }
       }
-    });
+    );
   }
 
   private firstClick(
-    w: [string, string, string, string, string, string],
+    w: [string, string, string, string, string, string, number, string[]],
     verse: Verse
   ) {
     this.resetVerseSelect();
@@ -160,7 +228,7 @@ export class VerseSelectService {
         if (wr[3].includes(ref) && this.refCount(wr[3]) === 1) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
           wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-1');
-        } else if (wr[3].includes(ref) && this.refCount(wr[3]) === 2) {
+        } else if (wr[3].includes(ref) && this.refCount(wr[3]) >= 2) {
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
           wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-1');
           wr[0] = this.stringService.addAttribute(wr[0], 'verse-select-2');

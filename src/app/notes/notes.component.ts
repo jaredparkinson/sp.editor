@@ -64,9 +64,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
       // this.verseSelectService.test();
     }, 100);
   }
-  getNotes(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);
-  }
   ngOnInit() {}
 
   noteButtonClick(note: Note2) {

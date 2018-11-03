@@ -56,12 +56,6 @@ export class BodyblockComponent
     public verseSelectService: VerseSelectService
   ) {}
 
-  getBodyBlock(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(
-      this.chapterService.bodyBlock
-    );
-    // return this.chapterService.bodyBlock;
-  }
   ngAfterContentInit(): void {}
   ngOnInit() {
     this.initSyncScrolling();
@@ -107,33 +101,6 @@ export class BodyblockComponent
 
   trackById(index: number, paragraph: any) {
     return paragraph.id;
-  }
-  private verseSelection(): void {
-    this.ngZone.runOutsideAngular(() => {
-      document.getElementById('bodyBlock').addEventListener('mouseup', () => {
-        console.log('mouseup');
-
-        const range = window.getSelection();
-
-        const df = range.getRangeAt(0).cloneContents();
-        const wTags = _.toArray(df.querySelectorAll('w'));
-        console.log(wTags.length);
-
-        wTags.pop();
-        _.each(wTags, wTag => {
-          const id = wTag.getAttribute('n').split('-');
-
-          const data = this.chapterService.hebWTags.querySelector(
-            '#' + id[0] + ' w[n="' + id[1] + '"]'
-          );
-          if (data.hasAttribute('ref')) {
-          }
-        });
-
-        if (range.anchorNode !== null) {
-        }
-      });
-    });
   }
 
   wTagClick(

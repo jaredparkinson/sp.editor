@@ -1,51 +1,41 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, NgZone, Sanitizer, SecurityContext } from '@angular/core';
-import { Params } from '@angular/router';
-import { faVectorSquare } from '@fortawesome/free-solid-svg-icons';
-import * as jsZip from 'jszip';
+import { Injectable, NgZone } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as localForage from 'localforage';
 import * as _ from 'lodash';
 import { Note } from '../models/Note';
 import { Paragraph } from '../models/Paragraph';
 import { Chapter2 } from '../modelsJson/Chapter';
-import { WTag } from '../modelsJson/WTag';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 
-import { SyncScrollingService } from './sync-scrolling.service';
-
 @Injectable()
 export class ChapterService {
-  public bodyBlock: string;
-  public notes: string;
-  public notesArray: HTMLElement[] = [];
+  // public bodyBlock: string;
+  // public notes: string;
+  // public notesArray: HTMLElement[] = [];
   public notes2: Note[] = [];
 
-  public paragraphs: Paragraph[] = [];
-  public header: string;
+  // public paragraphs: Paragraph[] = [];
+  // public header: string;
   public verseNums: number[] = [];
   public contextNums: number[] = [];
-  public pageUrl = '';
+  // public pageUrl = '';
   private fs: any;
-  private parser = new DOMParser();
-  scripturesArchive: Observable<ArrayBuffer>;
-  hebWTags: Document;
-  wTagRefs: NodeListOf<Element>;
-  verseSelect = false;
+  // scripturesArchive: Observable<ArrayBuffer>;
+  // hebWTags: Document;
+  // wTagRefs: NodeListOf<Element>;
+  // verseSelect = false;
   chapter2: Chapter2 = new Chapter2();
-  wTags: Array<[string, string, string]> = [];
+  // wTags: Array<[string, string, string]> = [];
   scrollIntoView: Element;
 
   constructor(
     private navService: NavigationService,
-    private saveStateService: SaveStateService,
-    private httpClient: HttpClient,
-    private ngZong: NgZone,
-    private sanitizer: DomSanitizer
+    private httpClient: HttpClient
   ) {
     this.fs = (window as any).fs;
   }
@@ -61,18 +51,16 @@ export class ChapterService {
     chapter: string,
     synchronizedScrolling: () => Promise<void>
   ): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.paragraphs = [];
+    return new Promise<void>(resolve => {
+      // this.paragraphs = [];
       this.notes2 = [];
       this.navService.pageTitle = '';
-      this.header = '';
+      // this.header = '';
       let vSplit = chapter.split('.');
-      this.hebWTags = new Document();
+      // this.hebWTags = new Document();
       if (chapter === '') {
         vSplit = book.split('.');
       }
-
-      const url = book + '/' + vSplit[0];
 
       this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
       this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
@@ -129,7 +117,7 @@ export class ChapterService {
     console.log(url2 + ' url2');
 
     this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-      this.setChapter(data, synchronizedScrolling);
+      this.setChapter(data);
     });
   }
 
@@ -143,7 +131,7 @@ export class ChapterService {
     if (saved) {
       console.log('asved');
 
-      this.setChapter(saved as string, synchronizedScrolling);
+      this.setChapter(saved as string);
     } else {
       const url2 =
         'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
@@ -154,21 +142,12 @@ export class ChapterService {
           responseType: 'text'
         })
         .subscribe(data => {
-          this.setChapter(data, synchronizedScrolling);
+          this.setChapter(data);
         });
     }
   }
 
-  public resetHighlighting(): void {
-    _.forEach(this.paragraphs, p => {
-      p.resetHighlight();
-    });
-  }
-
-  private async setChapter(
-    data: string,
-    synchronizedScrolling: () => Promise<void>
-  ) {
+  private async setChapter(data: string) {
     this.chapter2 = (await JSON.parse(data)) as Chapter2;
 
     await this.setHighlighting();
@@ -176,21 +155,7 @@ export class ChapterService {
     console.log('verse focus');
 
     await this.verseFocus();
-    // await this.setWTags();
-    // setTimeout(async () => {
-    //   await synchronizedScrolling();
-    // }, 200);
   }
-  // async setWTags() {
-  //   this.wTags = [];
-  //   _.each(this.chapter2.paragraphs, paragraph => {
-  //     _.each(paragraph.verses, verse => {
-  //       _.each(verse.wTags2, wTag => {
-  //         this.wTags.push(wTag);
-  //       });
-  //     });
-  //   });
-  // }
 
   public parseHighlightedVerses2(v: string): number[] {
     // console.log('parseHighlightedVerses2');
@@ -212,72 +177,5 @@ export class ChapterService {
     }
 
     return verseNums;
-  }
-
-  private extractHtml(doc: Document, selector: string): string {
-    const html = doc.querySelector(selector);
-    if (html !== undefined && html !== null) {
-      return html.innerHTML;
-    }
-    return '';
-  }
-
-  public toggleVerseSelect() {
-    this.verseSelect = !this.verseSelect;
-    this.ngZong.run(() => {
-      switch (this.verseSelect) {
-        case true: {
-          this.resetVerseSelect();
-
-          break;
-        }
-        case false:
-        default: {
-          this.removeVerseSelect();
-          break;
-        }
-      }
-    });
-  }
-
-  public resetVerseSelect() {
-    _.each(this.paragraphs, paragraph => {
-      _.each(paragraph.verses, verse => {
-        const doc = this.parser.parseFromString(verse.innerHtml, 'text/html');
-        _.each(doc.querySelectorAll('w'), w => {
-          const ids = w.getAttribute('n').split('-');
-          w.className = '';
-          if (
-            _.find(this.wTagRefs, wTagRef => {
-              return (
-                (wTagRef as HTMLElement).getAttribute('n') === ids[1] &&
-                (wTagRef as HTMLElement).parentElement.id === ids[0]
-              );
-            })
-          ) {
-            w.classList.add('verse-select-0');
-          }
-          // console.log(w);
-          // console.log(w);
-        });
-        // console.log(doc.querySelector('body').innerHTML);
-        verse.innerHtml = doc.querySelector('body').innerHTML;
-      });
-    });
-  }
-
-  public removeVerseSelect() {
-    const parser = new DOMParser();
-    _.each(this.paragraphs, paragraph => {
-      _.each(paragraph.verses, verse => {
-        const doc = parser.parseFromString(verse.innerHtml, 'text/html');
-        _.each(doc.querySelectorAll('w'), w => {
-          w.className = '';
-          // console.log(w);
-        });
-        // console.log(doc.querySelector('body').innerHTML);
-        verse.innerHtml = doc.querySelector('body').innerHTML;
-      });
-    });
   }
 }

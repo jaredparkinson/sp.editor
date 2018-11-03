@@ -38,8 +38,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public navServices: NavigationService,
     private sanitizer: DomSanitizer,
     public saveState: SaveStateService,
-    private router: Router,
-    private verseSelectService: VerseSelectService
+    private router: Router
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -56,16 +55,13 @@ export class NotesComponent implements OnInit, AfterViewInit {
     // while (this.noteh.toArray().length === 0) {}
     await setTimeout(() => {
       this.notes.changes.subscribe(() => {
-        this.verseSelectService.notes = this.notes.toArray();
+        this.chapterService.notes = this.notes.toArray();
 
         // console.log('notes ' + this.notes);
       });
       // console.log(this.wtags.toArray());
       // this.verseSelectService.test();
     }, 100);
-  }
-  getNotes(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.chapterService.notes);
   }
   ngOnInit() {}
 

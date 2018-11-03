@@ -64,9 +64,8 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleVerseSelect() {
-    this.verseSelectService.toggleVerseSelect();
+    // this.verseSelectService.toggleVerseSelect();
     // console.log(this.wTags2);
-
     // this.chapterService.toggleVerseSelect(this.verseSelect);
   }
 

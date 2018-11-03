@@ -37,24 +37,24 @@ export class NoteSettingsComponent implements OnInit {
   }
   btnOriginalNotesPress(): void {
     this.navServices.btnOriginalNotesPress();
-    this.verseSelectService.resetVerseSelect();
+    this.chapterService.resetVerseSelect();
   }
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress();
     console.log('oaisdjfoiasjdroiawsjer');
 
-    this.verseSelectService.resetVerseSelect();
+    this.chapterService.resetVerseSelect();
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress();
-    this.verseSelectService.resetVerseSelect();
+    this.chapterService.resetVerseSelect();
   }
   btnNewNotesPress(): void {
     this.navServices.btnNewNotesPress();
-    this.verseSelectService.resetVerseSelect();
+    this.chapterService.resetVerseSelect();
   }
   toggleVerseSelect() {
-    this.verseSelectService.toggleVerseSelect();
+    this.chapterService.toggleVerseSelect();
   }
   settings() {
     this.router.navigateByUrl('settings');

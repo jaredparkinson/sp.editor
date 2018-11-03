@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {
-  AfterContentChecked,
   AfterContentInit,
-  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -11,22 +9,18 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import * as _ from 'lodash';
 
-import { Paragraph } from '../models/Paragraph';
 import { Verse } from '../modelsJson/Verse';
-// import { Verse } from '../models/Verse';
-import { WTag } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -35,7 +29,6 @@ import { VerseSelectService } from '../services/verse-select.service';
 export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
-  private timer2: NodeJS.Timer;
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
@@ -50,10 +43,7 @@ export class BodyblockComponent
     public chapterService: ChapterService,
     public navService: NavigationService,
     public saveState: SaveStateService,
-    private sanitizer: DomSanitizer,
-    private route: ActivatedRoute,
-    private ngZone: NgZone,
-    public verseSelectService: VerseSelectService
+    private route: ActivatedRoute
   ) {}
 
   ngAfterContentInit(): void {}
@@ -68,15 +58,11 @@ export class BodyblockComponent
 
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
-          await this.chapterService
-            .getChapter(book, chapter, this.synchronizedScrolling)
-            .then(() => {
-              setTimeout(() => {
-                if (this.saveState.data.verseSelect) {
-                  this.verseSelectService.resetVerseSelect();
-                }
-              }, 1000);
-            });
+          await this.chapterService.getChapter(
+            book,
+            chapter,
+            this.synchronizedScrolling
+          );
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService.getChapter(
             chapter,
@@ -85,7 +71,7 @@ export class BodyblockComponent
           );
           setTimeout(() => {
             if (this.saveState.data.verseSelect) {
-              this.verseSelectService.resetVerseSelect();
+              this.chapterService.resetVerseSelect();
             }
           }, 1000);
         }
@@ -96,10 +82,10 @@ export class BodyblockComponent
   }
 
   private wordSelection() {
-    _.each(document.querySelectorAll('w'), wTag => {});
+    _.each(document.querySelectorAll('w'), () => {});
   }
 
-  trackById(index: number, paragraph: any) {
+  trackById(paragraph: any) {
     return paragraph.id;
   }
 
@@ -108,22 +94,21 @@ export class BodyblockComponent
     verse: Verse
   ) {
     console.log(wTag);
-    this.verseSelectService.wTagClick(wTag, verse);
+    this.chapterService.wTagClick(wTag, verse);
   }
 
   async ngAfterViewInit() {
-    this.verses.changes.subscribe(() => {
-      setTimeout(async () => {
-        this.verseSelectService.verses = this.verses.toArray();
-
-        await this.synchronizedScrolling().catch(err => {
-          console.log('failed');
-        });
-      }, 100);
-    });
+    // this.verses.changes.subscribe(() => {
+    //   setTimeout(async () => {
+    //     this.chapterService.verses = this.verses.toArray();
+    //     await this.synchronizedScrolling().catch(err => {
+    //       console.log('failed');
+    //     });
+    //   }, 100);
+    // });
     // this.verses.changes.subscribe(() => {
     //   setTimeout(() => {
-    //     this.verseSelectService.wTags = this.wTags.toArray();
+    //     this.chapterService.wTags = this.wTags.toArray();
     //   }, 100);
     // });
   }
@@ -134,9 +119,6 @@ export class BodyblockComponent
 
       await this.synchronizedScrolling();
     }, 50);
-    this.timer2 = setTimeout(async () => {
-      await this.synchronizedScrolling();
-    }, 200);
     // this.ngZone.runOutsideAngular();
   }
   // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {

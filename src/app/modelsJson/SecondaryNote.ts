@@ -4,6 +4,8 @@ export class SecondaryNote {
   public iH = '';
   public t2 = '';
 
+  public notePhraseText = '';
+  public notePhraseClasses = '';
   // constructor(element: Element) {
   //   this.className = element.className;
   //   this.id = element.id;

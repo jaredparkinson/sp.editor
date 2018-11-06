@@ -23,10 +23,17 @@
         id="{{note.id}}" class="{{note.cn}}">
         <p class="note-title">{{note.nT}}</p>
         <p class="note-short-title">{{note.nST}}</p>
+
         <div *ngFor="let secondaryNote of note.sn" [ngClass]="{'tier-2-note-hide': !note.v && note.o, 
         'tier-2-note-show': note.v && note.o}"
-          [innerHTML]="secondaryNote.iH" id="{{secondaryNote.id}}" class="{{secondaryNote.cn}} secondary-note"
-          id="{{secondaryNote.id}}" #notes></div>
+          id="{{secondaryNote.id}}" class="{{secondaryNote.cn}} secondary-note" id="{{secondaryNote.id}}" #notes>
+          <p *ngIf="secondaryNote.notePhraseText.trim() !== ''" [class]="secondaryNote.notePhraseClasses">{{secondaryNote.notePhraseText}}</p>
+          <p [innerHTML]="secondaryNote.iH"></p>
+        </div>
+        <ng-container>
+
+        </ng-container>
+
 
         <button *ngIf="note.btn" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': (!note.o && saveState.data.secondaryNotesVisible) || (note.o && note.v)} "
           id="note-button-{{note.id}}" (click)="noteButtonClick(note)">

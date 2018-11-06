@@ -55,8 +55,8 @@ export class ChapterService {
     book: string,
     chapter: string,
     synchronizedScrolling: () => Promise<void>
-  ): Promise<void> {
-    return new Promise<void>(resolve => {
+  ): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
       // this.paragraphs = [];
       this.notes2 = [];
       this.navService.pageTitle = '';
@@ -74,41 +74,69 @@ export class ChapterService {
       console.log(this.fs);
 
       if (this.fs) {
-        this.getChapterFS(book, vSplit, synchronizedScrolling);
+        this.getChapterFS(book, vSplit, synchronizedScrolling).then(
+          (value: boolean) => {
+            resolve(true);
+          }
+        );
       } else {
-        this.getChapterWeb(book, vSplit, synchronizedScrolling);
+        this.getChapterWeb(book, vSplit, synchronizedScrolling).then(
+          (value: boolean) => {
+            resolve(true);
+          }
+        );
       }
-      resolve();
+      console.log('asodifjaoisdfjaoisdjfoiasdjfoiasdjfoij');
+
+      // resolve(true);
     });
   }
 
-  private async verseFocus(): Promise<void> {
-    setTimeout(() => {
-      if (this.verseNums.length === 0) {
-        document.getElementById('bodyBlockTop').scrollIntoView();
-      } else {
-        const focusVerse = this.contextNums
-          .concat(this.verseNums)
-          .sort((a, b) => {
-            return a - b;
-          })[0]
-          .toString();
-        document.getElementById('p' + focusVerse).scrollIntoView();
+  private async verseFocus(): Promise<boolean> {
+    return new Promise<boolean>(
+      (
+        resolve: (resolveValue: boolean) => void,
+        reject: (rejectValue: boolean) => void
+      ) => {
+        setTimeout(() => {
+          if (this.verseNums.length === 0) {
+            document.getElementById('bodyBlockTop').scrollIntoView();
+          } else {
+            const focusVerse = this.contextNums
+              .concat(this.verseNums)
+              .sort((a, b) => {
+                return a - b;
+              })[0]
+              .toString();
+            document.getElementById('p' + focusVerse).scrollIntoView();
+          }
+        });
+        resolve(true);
       }
-    });
+    );
   }
 
-  private async setHighlighting(): Promise<void> {
-    _.forEach(this.chapter2.paragraphs, paragraph => {
-      _.forEach(paragraph.verses, verse => {
-        if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
-          verse.highlight = true;
-        }
-        if (this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))) {
-          verse.context = true;
-        }
-      });
-    });
+  private async setHighlighting(): Promise<boolean> {
+    return new Promise<boolean>(
+      (
+        resolve: (resolveValue: boolean) => void,
+        reject: (rejectValue: boolean) => void
+      ) => {
+        _.forEach(this.chapter2.paragraphs, paragraph => {
+          _.forEach(paragraph.verses, verse => {
+            if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
+              verse.highlight = true;
+            }
+            if (
+              this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))
+            ) {
+              verse.context = true;
+            }
+          });
+        });
+        resolve(true);
+      }
+    );
   }
 
   private getChapterFS(
@@ -116,14 +144,28 @@ export class ChapterService {
     vSplit: string[],
     synchronizedScrolling: () => Promise<void>
   ) {
-    const url2 =
-      this.navService.urlBuilder(book.toLowerCase(), vSplit[0].toLowerCase()) +
-      '.json';
-    console.log(url2 + ' url2');
+    return new Promise<boolean>(
+      (
+        resolve: (resolveValue: boolean) => void,
+        reject: (rejectValue: boolean) => void
+      ) => {
+        const url2 =
+          this.navService.urlBuilder(
+            book.toLowerCase(),
+            vSplit[0].toLowerCase()
+          ) + '.json';
+        console.log(url2 + ' url2');
 
-    this.fs.readFile('c:/ScripturesProject/' + url2, 'utf8', (err, data) => {
-      this.setChapter(data);
-    });
+        this.fs.readFile(
+          'c:/ScripturesProject/' + url2,
+          'utf8',
+          (err, data) => {
+            this.setChapter(data);
+          }
+        );
+        resolve(true);
+      }
+    );
   }
 
   private async getChapterWeb(
@@ -131,35 +173,54 @@ export class ChapterService {
     vSplit: string[],
     synchronizedScrolling: () => Promise<void>
   ) {
-    const saved = await localForage.getItem(book + '\\' + vSplit[0]);
+    return new Promise<boolean>(
+      async (
+        resolve: (resolveValue: boolean) => void,
+        reject: (rejectValue: boolean) => void
+      ) => {
+        const saved = await localForage.getItem(book + '\\' + vSplit[0]);
 
-    if (saved) {
-      console.log('asved');
+        if (saved) {
+          console.log('asved');
 
-      this.setChapter(saved as string);
-    } else {
-      const url2 =
-        'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+          this.setChapter(saved as string);
+        } else {
+          const url2 =
+            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
 
-      this.httpClient
-        .get(url2, {
-          observe: 'body',
-          responseType: 'text'
-        })
-        .subscribe(data => {
-          this.setChapter(data);
-        });
-    }
+          this.httpClient
+            .get(url2, {
+              observe: 'body',
+              responseType: 'text'
+            })
+            .subscribe(data => {
+              this.setChapter(data);
+              resolve(true);
+            });
+        }
+      }
+    );
   }
 
   private async setChapter(data: string) {
-    this.chapter2 = (await JSON.parse(data)) as Chapter2;
-    this.resetVerseSelect();
-    await this.setHighlighting();
+    return new Promise<boolean>(
+      async (
+        resolve: (resolveValue: boolean) => void,
+        reject: (rejectValue: boolean) => void
+      ) => {
+        this.chapter2 = JSON.parse(data) as Chapter2;
+        // this.resetVerseSelect();
+        this.setHighlighting().then((value: boolean) => {
+          this.verseFocus().then((value2: boolean) => {
+            resolve(true);
+          });
+        });
 
-    console.log('verse focus');
+        console.log('verse focus');
 
-    await this.verseFocus();
+        // resolve(true);
+      }
+    );
   }
 
   public parseHighlightedVerses2(v: string): number[] {
@@ -208,6 +269,8 @@ export class ChapterService {
   ) {}
   public resetVerseSelect() {
     // this.verseSelected = false;
+    console.log('resetVerseSelect');
+
     this.resetNotes2();
 
     this.modifyWTags(
@@ -266,6 +329,8 @@ export class ChapterService {
   }
 
   private resetNotes2() {
+    console.log('asdoifjaosid fjaosidfjaoisdjfA');
+
     _.each<ElementRef>(this.notes, n => {
       (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
     });
@@ -376,6 +441,7 @@ export class ChapterService {
     wTag: [string, string, string, string, string, string, number, string[]]
   ) {
     // console.log(wTag[7].length);
+    this.resetNotes2();
     if (wTag[7].length === 0) {
       // console.log(wTag[7]);
 

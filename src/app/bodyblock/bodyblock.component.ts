@@ -58,22 +58,28 @@ export class BodyblockComponent
 
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
-          await this.chapterService.getChapter(
-            book,
-            chapter,
-            this.synchronizedScrolling
-          );
+          await this.chapterService
+            .getChapter(book, chapter, this.synchronizedScrolling)
+            .then((value: boolean) => {
+              if (this.saveState.data.verseSelect) {
+                console.log(value);
+                this.chapterService.resetVerseSelect();
+              }
+            });
         } else if (book === undefined && chapter !== undefined) {
-          await this.chapterService.getChapter(
-            chapter,
-            '',
-            this.synchronizedScrolling
-          );
-          setTimeout(() => {
-            if (this.saveState.data.verseSelect) {
-              this.chapterService.resetVerseSelect();
-            }
-          }, 1000);
+          await this.chapterService
+            .getChapter(chapter, '', this.synchronizedScrolling)
+            .then((value: boolean) => {
+              if (this.saveState.data.verseSelect) {
+                console.log(value);
+                this.chapterService.resetVerseSelect();
+              }
+            });
+          // setTimeout(() => {
+          //   if (this.saveState.data.verseSelect) {
+          //     this.chapterService.resetVerseSelect();
+          //   }
+          // }, 1000);
         }
         console.log('btsxyd');
       }, 200);

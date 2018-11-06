@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-// import { JSDOM } from 'jsdom';
+
 import { Observable } from 'rxjs';
 
 import * as _ from 'lodash';
@@ -9,15 +9,13 @@ import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
-// import { TSQuery } from '../TSQuery';
+
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
 import { VerseSelectService } from './verse-select.service';
 
 @Injectable()
 export class NavigationService {
-  // private navLinks: string[] = [];
-  // private nav: Observable<string>;
   public leftPaneToggle = false;
   public rightPaneToggle = false;
   public bodyBlock: string;
@@ -32,7 +30,7 @@ export class NavigationService {
 
   public notesSettings = false;
   private fs: any;
-  // private tsQuery: TSQuery = new TSQuery();
+
   public pageTitle: string;
   private navData: Document;
   constructor(
@@ -45,16 +43,12 @@ export class NavigationService {
     this.fs = (window as any).fs;
   }
 
-  toggleNotes() {
-    // console.log('test');
-  }
+  toggleNotes() {}
 
   btnPreviousPagePress(pageUrl: string) {
     console.log(pageUrl);
 
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
-
-    // console.log(pageUrl);
 
     let previousSibling: Element;
     if (!node.previousElementSibling) {
@@ -72,7 +66,6 @@ export class NavigationService {
   btnNextPagePress(pageUrl: string) {
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
-    // console.log(test);
     const nextSibling = !node.nextElementSibling
       ? this.navData.querySelector('a')
       : node.nextElementSibling;
@@ -81,33 +74,50 @@ export class NavigationService {
       nextSibling.getAttribute('href').replace('#/', '')
     );
   }
-  btnPoetryPress(): void {
-    this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
-    this.saveState.save();
+  btnPoetryPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
+      this.saveState.save();
+    });
   }
-  btnSecondaryNotesPress(): void {
-    this.saveState.data.secondaryNotesVisible = !this.saveState.data
-      .secondaryNotesVisible;
-    this.saveState.save();
+  btnSecondaryNotesPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.secondaryNotesVisible = !this.saveState.data
+        .secondaryNotesVisible;
+      this.saveState.save();
+    });
   }
-  btnOriginalNotesPress(): void {
-    this.saveState.data.originalNotesVisible = !this.saveState.data
-      .originalNotesVisible;
-    this.saveState.save();
+  btnOriginalNotesPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.originalNotesVisible = !this.saveState.data
+        .originalNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
   }
-  btnTranslatorNotesPress(): void {
-    this.saveState.data.translatorNotesVisible = !this.saveState.data
-      .translatorNotesVisible;
-    this.saveState.save();
+  btnTranslatorNotesPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.translatorNotesVisible = !this.saveState.data
+        .translatorNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
   }
-  btnEnglishNotesPress(): void {
-    this.saveState.data.englishNotesVisible = !this.saveState.data
-      .englishNotesVisible;
-    this.saveState.save();
+  btnEnglishNotesPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.englishNotesVisible = !this.saveState.data
+        .englishNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
   }
-  btnNewNotesPress(): void {
-    this.saveState.data.newNotesVisible = !this.saveState.data.newNotesVisible;
-    this.saveState.save();
+  async btnNewNotesPress(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.saveState.data.newNotesVisible = !this.saveState.data
+        .newNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
   }
   toggleNavButton() {
     this.saveState.data.paragraphsVisible = !this.saveState.data
@@ -116,7 +126,6 @@ export class NavigationService {
 
   documentBodyClick(e: Event) {
     if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-      // console.log(this.notesSettings);
       this.notesSettings = false;
       document
         .querySelector('div.main.grid')
@@ -125,13 +134,6 @@ export class NavigationService {
   }
   btnNotesSettingsPress() {
     this.notesSettings = !this.notesSettings;
-
-    // if (this.notesSettings) {
-    //   document
-    //     .querySelector('div.main.grid')
-    //     .addEventListener('click', this.documentBodyClick);
-    // } else {
-    // }
   }
   btnRightPanePress() {
     if (this.helperService.getWidth() >= 1024) {
@@ -160,18 +162,17 @@ export class NavigationService {
 
   setVisibility() {
     const folder = this.folders[0];
-    // console.log(folder);
+
     folder.setVisibility();
   }
   public getNavigation(manifest: string) {
     _.forEach(this.folders, f => {
       if (f.path === manifest) {
         this.navLinks = [];
-        // this.navLinks = f.Folders;
+
         Object.assign(this.navLinks, f.folders);
         f.visible = !f.visible;
-        // console.log(this.navLinks);
-        // f.setVisibility();
+
         return;
       }
     });
@@ -187,19 +188,7 @@ export class NavigationService {
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
 
-  // public getChapterElectron(book: string, chapter: string): string {
-  //   const url = this.urlBuilder(book, chapter);
-
-  //   const test = this.fs.readFile('src/' + url, 'utf8', (err, data) => {
-  //     return data;
-  //   });
-  //   // console.log(test);
-  //   return test;
-  // }
-
-  public getTestament(folder: string): void {
-    // console.log(folder);
-  }
+  public getTestament(folder: string): void {}
 
   public urlBuilder(book: string, chapter: string): string {
     const url = 'scriptures/';
@@ -208,11 +197,6 @@ export class NavigationService {
       return url + 'tg/' + book + '.html';
     }
     switch (book) {
-      // case 'gs':
-      // case 'triple-index':
-      // case 'harmony': {
-      //   return url + urlEnd;
-      // }
       default: {
         let testament = '';
         switch (book) {
@@ -361,21 +345,14 @@ export class NavigationService {
             testament = '';
           }
         }
-        // console.log(url + testament + urlEnd);
+
         this.bodyBlock = url + testament + urlEnd;
         return url + testament + urlEnd;
       }
     }
-    // if (book.trim() !== '') {
-    //   url += '*/';
-    //   url += book + '/' + chapter + '.html';
-    // }
-    // return url;
   }
 
   private initNavigation() {
-    // this.setNav();
-    // const regex = '((^(../){1,1000})scriptures/(.*?/))';
     this.httpClient
       .get('assets/nav/nav2.html', { observe: 'body', responseType: 'text' })
       .subscribe(data => {
@@ -392,7 +369,7 @@ export class NavigationService {
       .subscribe(data => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
-        // this.navData = doc;
+
         const testaments = doc.querySelectorAll('div.book');
 
         _.each(doc.querySelectorAll('div.book'), testament => {
@@ -412,13 +389,9 @@ export class NavigationService {
             let chapters = _.toArray<HTMLElement>(
               book.querySelectorAll('ul li a')
             );
-            // let chapters = this.tsQuery.selectClass(
-            //   book as HTMLElement,
-            //   'ul li a'
-            // );
+
             if (!chapters) {
               chapters = _.toArray(book.querySelectorAll('li a'));
-              // this.tsQuery.selectClass(book as HTMLElement, 'li a');
             }
 
             _.each(chapters, chapter => {
@@ -435,163 +408,13 @@ export class NavigationService {
               tempChapters.shift();
             }
             tempBook.chapters = tempChapters;
-            // console.log(tempBook);
+
             tempBooks.push(tempBook);
           });
 
-          // chapters.forEach(chapter => {
-          //   const tempChapter = new Chapter(
-          //     chapter
-          //       .querySelector('.title')
-          //       .innerHTML.replace('&nbsp;', ' '),
-          //     chapter.getAttribute('href').replace('.html', '')
-          //   );
-          // console.log(tempChapter);
-
-          //     tempChapters.push(tempChapter);
-          //   });
-          //   if (tempChapters.length !== 1) {
-          //     tempChapters.shift();
-          //   }
-          //   tempBook.chapters = tempChapters;
-          //   // console.log(tempBook);
-          //   tempBooks.push(tempBook);
-          // });
-          // this.tsQuery
-          //   .selectClass(testament as HTMLElement, 'div>ul>li')
-          //   .forEach(book => {
-          //     const tempBook = new Book(book);
-
-          //     const tempChapters: Chapter[] = [];
-          //     let chapters = this.tsQuery.selectClass(book, 'ul li a');
-          //     if (!chapters) {
-          //       chapters = this.tsQuery.selectClass(book, 'li a');
-          //     }
-
-          //     chapters.forEach(chapter => {
-          //       const tempChapter = new Chapter(
-          //         chapter
-          //           .querySelector('.title')
-          //           .innerHTML.replace('&nbsp;', ' '),
-          //         chapter.getAttribute('href').replace('.html', '')
-          //       );
-          //       // console.log(tempChapter);
-
-          //       tempChapters.push(tempChapter);
-          //     });
-          //     if (tempChapters.length !== 1) {
-          //       tempChapters.shift();
-          //     }
-          //     tempBook.chapters = tempChapters;
-          //     // console.log(tempBook);
-          //     tempBooks.push(tempBook);
-          //   });
           tempTestament.books = tempBooks;
           this.nav.push(tempTestament);
-
-          // console.log(testamentName);
         });
-        // this.tsQuery.selectClass2(doc, 'div.book').forEach(testament => {
-        //   const testamentName = testament
-        //     .querySelector('header h1')
-        //     .innerHTML.replace('&nbsp;', ' ');
-
-        //   const tempTestament = new NavLinks(testamentName, '');
-
-        //   const books = testament.querySelectorAll('div>ul>li');
-
-        //   const tempBooks: Book[] = [];
-        //   this.tsQuery.selectClass(testament, 'div>ul>li').forEach(book => {
-        //     const tempBook = new Book(book);
-
-        //     const tempChapters: Chapter[] = [];
-        //     let chapters = this.tsQuery.selectClass(book, 'ul li a');
-        //     if (!chapters) {
-        //       chapters = this.tsQuery.selectClass(book, 'li a');
-        //     }
-
-        //     chapters.forEach(chapter => {
-        //       const tempChapter = new Chapter(
-        //         chapter
-        //           .querySelector('.title')
-        //           .innerHTML.replace('&nbsp;', ' '),
-        //         chapter.getAttribute('href').replace('.html', '')
-        //       );
-        //       // console.log(tempChapter);
-
-        //       tempChapters.push(tempChapter);
-        //     });
-        //     if (tempChapters.length !== 1) {
-        //       tempChapters.shift();
-        //     }
-        //     tempBook.chapters = tempChapters;
-        //     // console.log(tempBook);
-        //     tempBooks.push(tempBook);
-        //   });
-        //   tempTestament.books = tempBooks;
-        //   this.nav.push(tempTestament);
-
-        //   // console.log(testamentName);
-        // });
       });
-
-    // this.nav.forEach(n => {
-    // console.log(n);
-    //   this.httpClient
-    //     .get('assets/scriptures/' + n.folder + '/_manifest.html', {
-    //       observe: 'body',
-    //       responseType: 'text'
-    //     })
-    //     .subscribe(data => {
-    //       const parser = new DOMParser();
-    //       const doc = parser.parseFromString(data, 'text/html');
-    //       // doc.evaluate();
-    //       const nodes = doc.evaluate(
-    //         '/html/body/nav/ul/li/a/p[@class="title"]',
-    //         doc,
-    //         null,
-    //         XPathResult.ANY_TYPE,
-    //         null
-    //       );
-    //       let node: HTMLElement;
-    //       n.books = [];
-    //       if (nodes !== null) {
-    //         node = nodes.iterateNext() as HTMLElement;
-    //         while (node !== null) {
-    //           const chap = new Book(node.innerHTML.replace('&nbsp;', ' '));
-
-    //           n.books.push(chap);
-    // console.log(node.innerText);
-    //           node = nodes.iterateNext() as HTMLElement;
-    //         }
-    //       }
-    //       const nodesTest = doc.evaluate(
-    //         '/html/body/nav/ul/li',
-    //         doc,
-    //         null,
-    //         XPathResult.ANY_TYPE,
-    //         null
-    //       );
-    //       node = nodesTest.iterateNext() as HTMLElement;
-    //       while (node !== null) {
-    // console.log(node.querySelector('p.title').innerHTML);
-    //       }
-    //     });
-    // });
-    // this.httpClient
-    //   .get('assets/nav/nav.json', {
-    //     responseType: 'text'
-    //   })
-    //   .subscribe(s => {
-    //     const raw = JSON.parse(s) as Folder[];
-    //     this.folders = [];
-    //     const asdf: FolderProtoType[] = [];
-
-    //     Object.assign(asdf, raw);
-
-    //     Object.assign(this.folders, raw);
-
-    //     // this.folders = JSON.parse(s) as Folder[];
-    //   });
   }
 }

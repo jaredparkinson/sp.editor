@@ -36,22 +36,26 @@ export class NoteSettingsComponent implements OnInit {
     this.chapterService.resetNotes();
   }
   btnOriginalNotesPress(): void {
-    this.navServices.btnOriginalNotesPress();
-    this.chapterService.resetVerseSelect();
+    this.navServices.btnOriginalNotesPress().then((value: boolean) => {
+      this.chapterService.resetVerseSelect();
+    });
   }
   btnTranslatorNotesPress(): void {
-    this.navServices.btnTranslatorNotesPress();
-    console.log('oaisdjfoiasjdroiawsjer');
-
-    this.chapterService.resetVerseSelect();
+    this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
+      this.chapterService.resetVerseSelect();
+    });
   }
   btnEnglishNotesPress(): void {
-    this.navServices.btnEnglishNotesPress();
-    this.chapterService.resetVerseSelect();
+    this.navServices.btnEnglishNotesPress().then((value: boolean) => {
+      this.chapterService.resetVerseSelect();
+    });
   }
-  btnNewNotesPress(): void {
-    this.navServices.btnNewNotesPress();
-    this.chapterService.resetVerseSelect();
+  btnNewNotesPress() {
+    this.navServices.btnNewNotesPress().then((value: boolean) => {
+      console.log(value);
+
+      this.chapterService.resetVerseSelect();
+    });
   }
   toggleVerseSelect() {
     this.chapterService.toggleVerseSelect();

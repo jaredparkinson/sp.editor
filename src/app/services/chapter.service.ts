@@ -280,6 +280,7 @@ export class ChapterService {
         wa[7] = [];
 
         wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
+        wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
 
         this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
         this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
@@ -289,6 +290,7 @@ export class ChapterService {
         if (wa[7].length !== 0) {
           wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
           // console.log(wa[5]);
         }
@@ -304,7 +306,7 @@ export class ChapterService {
     // console.log(vis);
 
     if (vis) {
-      (wa[noteNumber] as string).split(' ').forEach(w => {
+      (wa[noteNumber] as string).split(',').forEach(w => {
         if (w.trim() !== '') {
           // console.log(w);
 
@@ -314,7 +316,7 @@ export class ChapterService {
     }
   }
 
-  private modifyWTags(
+  public modifyWTags(
     callBack: (
       w: [string, string, string, string, string, string, number, string[]]
     ) => void
@@ -328,7 +330,7 @@ export class ChapterService {
     });
   }
 
-  private resetNotes2() {
+  public resetNotes2() {
     console.log('asdoifjaosid fjaosidfjaoisdjfA');
 
     _.each<ElementRef>(this.notes, n => {
@@ -435,7 +437,7 @@ export class ChapterService {
   }
 
   private refCount(refs: string): number {
-    return refs.split(' ').length;
+    return refs.split(',').length;
   }
   private selectNote(
     wTag: [string, string, string, string, string, string, number, string[]]

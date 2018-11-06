@@ -1,5 +1,3 @@
-import { HttpClient } from '@angular/common/http';
-import { Element } from '@angular/compiler';
 import {
   AfterViewInit,
   Component,
@@ -8,8 +6,6 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import {
   faBars,
   faBookOpen,
@@ -18,14 +14,14 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
-import * as _ from 'lodash';
-import { timeout } from 'q';
+import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Note2 } from '../modelsJson/Note';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { VerseSelectService } from '../services/verse-select.service';
+import { StringService } from '../services/string.service';
 
 @Component({
   selector: 'app-notes',
@@ -36,9 +32,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
   constructor(
     public chapterService: ChapterService,
     public navServices: NavigationService,
-    private sanitizer: DomSanitizer,
     public saveState: SaveStateService,
-    private router: Router
+    private stringService: StringService
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -64,6 +59,33 @@ export class NotesComponent implements OnInit, AfterViewInit {
     }, 100);
   }
   ngOnInit() {}
+  notePhraseClick(secondaryNote: SecondaryNote) {
+    if (this.saveState.data.verseSelect) {
+      let count = 0;
+      this.chapterService.resetVerseSelect();
+      this.chapterService.modifyWTags(
+        (
+          w: [string, string, string, string, string, string, number, string[]]
+        ) => {
+          w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
+          if (lodash.includes(w, secondaryNote.id)) {
+            w[0] = this.stringService.addAttribute(w[0], 'note-select-1');
+            count++;
+          }
+        }
+      );
+
+      if (count > 0) {
+        const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
+          return (n.nativeElement as Element).id === secondaryNote.id;
+        });
+        if (note) {
+          (note.nativeElement as Element).classList.add('verse-select-1');
+        }
+      }
+      console.log(secondaryNote);
+    }
+  }
 
   noteButtonClick(note: Note2) {
     switch (note.o) {
@@ -81,7 +103,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  trackById(index: number, note: Note) {
+  trackById(note: Note) {
     return note.id;
   }
 }

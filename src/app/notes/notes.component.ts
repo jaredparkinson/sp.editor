@@ -6,6 +6,7 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   faBars,
   faBookOpen,
@@ -33,7 +34,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public chapterService: ChapterService,
     public navServices: NavigationService,
     public saveState: SaveStateService,
-    private stringService: StringService
+    private stringService: StringService,
+    public sanitizer: DomSanitizer
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;

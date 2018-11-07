@@ -62,13 +62,29 @@ export class NotesComponent implements OnInit, AfterViewInit {
   notePhraseClick(secondaryNote: SecondaryNote) {
     if (this.saveState.data.verseSelect) {
       let count = 0;
+
+      const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
+        return (n.nativeElement as Element).id === secondaryNote.id;
+      });
+
+      if (
+        note &&
+        (note.nativeElement as Element).classList.contains('verse-select-1')
+      ) {
+        this.chapterService.resetVerseSelect();
+
+        return;
+      }
       this.chapterService.resetVerseSelect();
+
       this.chapterService.modifyWTags(
         (
           w: [string, string, string, string, string, string, number, string[]]
         ) => {
           w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
-          if (lodash.includes(w, secondaryNote.id)) {
+          if (lodash.includes(w[7], secondaryNote.id)) {
+            console.log(w);
+
             w[0] = this.stringService.addAttribute(w[0], 'note-select-1');
             count++;
           }
@@ -76,14 +92,11 @@ export class NotesComponent implements OnInit, AfterViewInit {
       );
 
       if (count > 0) {
-        const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
-          return (n.nativeElement as Element).id === secondaryNote.id;
-        });
         if (note) {
           (note.nativeElement as Element).classList.add('verse-select-1');
         }
       }
-      console.log(secondaryNote);
+      console.log(secondaryNote.cn);
     }
   }
 

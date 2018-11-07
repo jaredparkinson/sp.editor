@@ -27,7 +27,9 @@
         <div *ngFor="let secondaryNote of note.sn" [ngClass]="{'tier-2-note-hide': !note.v && note.o, 
         'tier-2-note-show': note.v && note.o}"
           id="{{secondaryNote.id}}" class="{{secondaryNote.cn}} secondary-note" id="{{secondaryNote.id}}" #notes>
-          <p *ngIf="secondaryNote.notePhraseText.trim() !== ''" class="{{secondaryNote.notePhraseClasses}}" (click)="this.notePhraseClick(secondaryNote)">{{secondaryNote.notePhraseText}}</p>
+          <p *ngIf="secondaryNote.notePhraseText.trim() !== ''" class="{{secondaryNote.notePhraseClasses}}" (click)="this.notePhraseClick(secondaryNote)">
+            <ng-container [innerHTML]="secondaryNote.notePhraseText"></ng-container>
+          </p>
           <p [id]="secondaryNote.id2" [class]="secondaryNote.noteRefClass" [innerHTML]="secondaryNote.iH"></p>
         </div>
 

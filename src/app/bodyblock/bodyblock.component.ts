@@ -61,6 +61,8 @@ export class BodyblockComponent
           await this.chapterService
             .getChapter(book, chapter, this.synchronizedScrolling)
             .then((value: boolean) => {
+              this.chapterService.wTags = this.wTags;
+
               if (this.saveState.data.verseSelect) {
                 console.log(value);
                 this.chapterService.resetVerseSelect();

@@ -61,7 +61,9 @@ export class BodyblockComponent
           await this.chapterService
             .getChapter(book, chapter, this.synchronizedScrolling)
             .then((value: boolean) => {
-              this.chapterService.wTags = this.wTags;
+              // console.log(this.synchronizedScrolling());
+
+              // this.synchronizedScrolling();
 
               if (this.saveState.data.verseSelect) {
                 console.log(value);
@@ -85,6 +87,9 @@ export class BodyblockComponent
         }
         console.log('btsxyd');
       }, 200);
+      setTimeout(() => {
+        this.synchronizedScrolling();
+      }, 1000);
     });
     this.wordSelection();
   }
@@ -134,6 +139,10 @@ export class BodyblockComponent
   // }
   async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
+    console.log(
+      'sync scrolling 2 ' + document.querySelectorAll('.verse').length
+    );
+
     console.log('sync scrolling ' + this.verses.length);
 
     let scrollIntoView: Element;

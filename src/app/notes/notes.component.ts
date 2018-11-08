@@ -47,17 +47,10 @@ export class NotesComponent implements OnInit, AfterViewInit {
   notes!: QueryList<ElementRef>;
 
   async ngAfterViewInit() {
-    // console.log(this.noteh.toArray().length);
-
-    // while (this.noteh.toArray().length === 0) {}
     await setTimeout(() => {
       this.notes.changes.subscribe(() => {
         this.chapterService.notes = this.notes.toArray();
-
-        // console.log('notes ' + this.notes);
       });
-      // console.log(this.wtags.toArray());
-      // this.verseSelectService.test();
     }, 100);
   }
   ngOnInit() {}

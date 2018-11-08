@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ElementRef, Injectable, NgZone } from '@angular/core';
+import { ElementRef, Injectable, NgZone, QueryList } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -16,6 +16,7 @@ import { StringService } from './string.service';
 
 @Injectable()
 export class ChapterService {
+  wTags: QueryList<ElementRef>;
   constructor(
     private navService: NavigationService,
     private httpClient: HttpClient,
@@ -267,6 +268,25 @@ export class ChapterService {
   public test(
     w: [string, string, string, string, string, string, string, string, string]
   ) {}
+
+  public modifyWTag(callback: (elem: Element) => void) {
+    this.wTags.forEach(e => {
+      console.log(e.nativeElement as [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ]);
+
+      callback(e.nativeElement as Element);
+    });
+  }
+
   public resetVerseSelect() {
     // this.verseSelected = false;
     console.log('resetVerseSelect');
@@ -281,18 +301,19 @@ export class ChapterService {
 
         wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
         wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
+        if (this.saveState.data.verseSelect) {
+          this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
+          this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
+          this.createRefList(wa, this.saveState.data.translatorNotesVisible, 5);
+          // console.log(wa[7]);
 
-        this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
-        this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
-        this.createRefList(wa, this.saveState.data.translatorNotesVisible, 5);
-        // console.log(wa[7]);
+          if (wa[7].length !== 0) {
+            wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+            wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
 
-        if (wa[7].length !== 0) {
-          wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
-          // console.log(wa[5]);
+            wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
+            // console.log(wa[5]);
+          }
         }
       }
     );

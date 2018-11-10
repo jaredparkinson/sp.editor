@@ -228,22 +228,22 @@ export class ChapterService {
   }
 
   public toggleVerseSelect() {
-    this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
+    // this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
     this.saveState.save();
-    switch (this.saveState.data.verseSelect) {
-      case true: {
-        this.resetVerseSelect();
+    this.resetVerseSelect();
+    // switch (this.saveState.data.verseSelect || !this.saveState.data) {
+    //   case true: {
 
-        break;
-      }
-      case false:
-      default: {
-        this.removeVerseSelect();
+    //     break;
+    //   }
+    //   case false:
+    //   default: {
+    //     this.removeVerseSelect();
 
-        this.resetNotes2();
-        break;
-      }
-    }
+    //     this.resetNotes2();
+    //     break;
+    //   }
+    // }
   }
   public test(
     w: [string, string, string, string, string, string, string, string, string]
@@ -292,7 +292,7 @@ export class ChapterService {
 
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
           wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
-          if (this.saveState.data.verseSelect) {
+          if (true) {
             this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
             this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
             this.createRefList(
@@ -379,15 +379,15 @@ export class ChapterService {
     ) {
       return;
     }
-    if (this.saveState.data.verseSelect) {
-      if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
-        this.firstClick(w, verse);
-      } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
-        this.resetVerseNotes();
-      } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-        this.selectNote(w);
-      }
+    if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
+      this.firstClick(w, verse);
+    } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
+      this.resetVerseNotes();
+    } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+      this.selectNote(w);
     }
+    // if (this.saveState.data.verseSelect) {
+    // }
   }
   private firstClick(
     w: [string, string, string, string, string, string, number, string[]],

@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class HelperService {
-  private smallWidth = 1080;
-  private mediumWidth = 1280;
-
   constructor() {
     // this.togglePanes();
   }
@@ -15,39 +12,6 @@ export class HelperService {
     );
   }
 
-  private togglePanes() {
-    document.onclick = event => {
-      const element = event.target as HTMLElement;
-      // const id = element.id;
-      const viewWidth = Math.max(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0
-      );
-
-      const leftPaneNav = document.getElementById('leftPaneNav');
-
-      const rightPane = document.getElementById('study-notes-parent');
-      if (
-        !element.classList.contains('right-pane-ignore') &&
-        (event.x < viewWidth - 48 || event.y > 48)
-      ) {
-        this.switchClasses(rightPane, ['none-s'], ['grid-s']);
-        // console.log(viewWidth);
-      }
-      if (
-        !element.classList.contains('left-pane-ignore') &&
-        (event.x > 48 || event.y > 48)
-      ) {
-        this.switchClasses(
-          leftPaneNav,
-          ['none-s', 'none-m'],
-          ['grid-s', 'grid-m']
-        );
-        // console.log(viewWidth);
-      }
-    };
-  }
-
   public togglePane2(id: string, pinWidth: number): void {
     console.log('called');
     const element = document.getElementById(id);
@@ -56,7 +20,6 @@ export class HelperService {
       document.documentElement.clientWidth,
       window.innerWidth || 0
     );
-    const pin = viewWidth >= pinWidth;
     const gridOn = this.getToggleStrings('grid', viewWidth, pinWidth);
     const none = this.getToggleStrings('none', viewWidth, pinWidth);
 
@@ -139,10 +102,6 @@ export class HelperService {
     for (const removeClass of removeClasses) {
       element.classList.remove(removeClass);
     }
-  }
-
-  private setDisplay(element: HTMLElement, toggle: string) {
-    element.style.display = toggle;
   }
 
   private getToggleStrings(

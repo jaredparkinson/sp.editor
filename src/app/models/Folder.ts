@@ -1,5 +1,3 @@
-import { FolderProtoType } from './FolderProtoType';
-
 import { File } from './file';
 
 export class Folder {

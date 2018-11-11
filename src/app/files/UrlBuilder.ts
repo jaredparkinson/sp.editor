@@ -1,12 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 // import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
   constructor() {
-    _.each(this.bookNames, book => {
+    lodash.each(this.bookNames, book => {
       this.bookConvert.push(new BookConvert(book));
     });
   }
@@ -219,8 +219,8 @@ export class UrlBuilder {
   private getBookName(outUrl: string) {
     let bookName = '';
 
-    _.each(this.bookConvert, book => {
-      _.each(book.names, b => {
+    lodash.each(this.bookConvert, book => {
+      lodash.each(book.names, b => {
         // console.log(outUrl.includes(b));
         if (
           outUrl.includes(b.toLowerCase()) &&

@@ -1,10 +1,4 @@
-import {
-  Component,
-  NgZone,
-  OnInit,
-  QueryList,
-  ViewChildren
-} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +14,7 @@ import {
   faParagraph,
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 import { ChapterService } from '../services/chapter.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';

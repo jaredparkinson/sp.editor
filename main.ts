@@ -2,9 +2,7 @@ import {
   app,
   BrowserView,
   BrowserWindow,
-  FoundInPageEvent,
   ipcMain,
-  ipcRenderer,
   screen,
   webContents
 } from 'electron';
@@ -135,20 +133,20 @@ try {
     }
   });
 
-  ipcMain.on('search-clear', (event, arg) => {
+  ipcMain.on('search-clear', () => {
     content.stopFindInPage('clearSelection');
     // content.send('search-close', 'close');
 
     // event.returnValue = 'pong';
   });
-  ipcMain.on('search-close', (event, arg) => {
+  ipcMain.on('search-close', () => {
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     // view.webContents.send('search-close', 'open');
     // content.send('search-close2', 'open');
     content.focus();
     // event.returnValue = 'pong';
   });
-  ipcMain.on('search-close-fip', (event, arg) => {
+  ipcMain.on('search-close-fip', () => {
     content.stopFindInPage('clearSelection');
     view.setBounds({ x: 0, y: 0, width: 0, height: 0 });
     content.send('search-close2', 'open');
@@ -156,7 +154,7 @@ try {
     // view.webContents.send('search-close', 'open');
     // event.returnValue = 'pong';
   });
-  ipcMain.on('search-open', (event, arg) => {
+  ipcMain.on('search-open', () => {
     view.setBounds({ x: 0, y: 0, width: size.width, height: 35 });
 
     view.webContents.stopFindInPage('clearSelection');

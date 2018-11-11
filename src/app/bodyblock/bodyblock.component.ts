@@ -4,18 +4,16 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  NgZone,
   OnInit,
   QueryList,
   ViewChildren
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
@@ -60,24 +58,16 @@ export class BodyblockComponent
         if (book !== undefined && chapter !== undefined) {
           await this.chapterService
             .getChapter(book, chapter, this.synchronizedScrolling)
-            .then((value: boolean) => {
+            .then(() => {
               // console.log(this.synchronizedScrolling());
-
               // this.synchronizedScrolling();
-
               this.chapterService.resetVerseSelect();
-              // if (this.saveState.data.verseSelect) {
-              //   console.log(value);
-              // }
             });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService
             .getChapter(chapter, '', this.synchronizedScrolling)
-            .then((value: boolean) => {
+            .then(() => {
               this.chapterService.resetVerseSelect();
-              // if (this.saveState.data.verseSelect) {
-              //   console.log(value);
-              // }
             });
           // setTimeout(() => {
           //   if (this.saveState.data.verseSelect) {
@@ -95,7 +85,7 @@ export class BodyblockComponent
   }
 
   private wordSelection() {
-    _.each(document.querySelectorAll('w'), () => {});
+    lodash.each(document.querySelectorAll('w'), () => {});
   }
 
   trackById(paragraph: any) {
@@ -147,7 +137,7 @@ export class BodyblockComponent
 
     let scrollIntoView: Element;
 
-    _.forEach(this.verses.toArray(), verse => {
+    lodash.forEach(this.verses.toArray(), verse => {
       const top = (verse.nativeElement as HTMLElement).getBoundingClientRect()
         .top;
       const height = (verse.nativeElement as HTMLElement).getBoundingClientRect()

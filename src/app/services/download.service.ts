@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as jszip from 'jszip';
 import * as localForage from 'localforage';
-import * as _ from 'lodash';
-import * as pako from 'pako';
+import * as lodash from 'lodash';
 import { Download } from '../models/download';
 
 @Injectable({
@@ -61,7 +60,7 @@ export class DownloadService {
       })
       .subscribe(async data => {
         // const i = pako.gzip(, {});
-        let c = 0;
+
         const zip = await jszip.loadAsync(data);
         console.log(zip);
 
@@ -73,7 +72,6 @@ export class DownloadService {
           const test = await localForage.getItem(saveName);
           // console.log(test !== null);
           if (!test) {
-            c++;
             await localForage.setItem(saveName, contents).then(() => {
               console.log('finished ' + saveName + zip.files.length);
             });

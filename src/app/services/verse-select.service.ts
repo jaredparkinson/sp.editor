@@ -1,29 +1,12 @@
-import {
-  ContentChildren,
-  ElementRef,
-  Injectable,
-  NgZone,
-  QueryList,
-  ViewChildren
-} from '@angular/core';
-import * as _ from 'lodash';
-import { Verse } from '../modelsJson/Verse';
-import { WTag } from '../modelsJson/WTag';
-import { ChapterService } from './chapter.service';
-import { SaveStateService } from './save-state.service';
-import { StringService } from './string.service';
+import { Injectable } from '@angular/core';
+import * as lodash from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerseSelectService {
   // wTags: ElementRef[];
-  constructor(
-    private chapterService: ChapterService,
-    private ngZone: NgZone,
-    private stringService: StringService,
-    private saveState: SaveStateService
-  ) {}
+  constructor() {}
   // verseSelect = false;
   // parser = new DOMParser();
   // verseSelected = false;

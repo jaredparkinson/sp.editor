@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 import { Book } from '../models/Book';
 import { Chapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
@@ -12,7 +12,6 @@ import { NavLinks } from '../models/navlinks.model';
 
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
-import { VerseSelectService } from './verse-select.service';
 
 @Injectable()
 export class NavigationService {
@@ -29,7 +28,7 @@ export class NavigationService {
   public testamentSelected: NavLinks;
 
   public notesSettings = false;
-  private fs: any;
+  // private fs: any;
 
   public pageTitle: string;
   private navData: Document;
@@ -40,7 +39,7 @@ export class NavigationService {
     private router: Router
   ) {
     this.initNavigation();
-    this.fs = (window as any).fs;
+    // this.fs = (window as any).fs;
   }
 
   toggleNotes() {}
@@ -166,7 +165,7 @@ export class NavigationService {
     folder.setVisibility();
   }
   public getNavigation(manifest: string) {
-    _.forEach(this.folders, f => {
+    lodash.forEach(this.folders, f => {
       if (f.path === manifest) {
         this.navLinks = [];
 
@@ -370,31 +369,27 @@ export class NavigationService {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
 
-        const testaments = doc.querySelectorAll('div.book');
-
-        _.each(doc.querySelectorAll('div.book'), testament => {
+        lodash.each(doc.querySelectorAll('div.book'), testament => {
           const testamentName = testament
             .querySelector('header h1')
             .innerHTML.replace('&nbsp;', ' ');
 
           const tempTestament = new NavLinks(testamentName, '');
 
-          const books = testament.querySelectorAll('div>ul>li');
-
           const tempBooks: Book[] = [];
-          _.each(testament.querySelectorAll('div>ul>li'), book => {
+          lodash.each(testament.querySelectorAll('div>ul>li'), book => {
             const tempBook = new Book(book as HTMLElement);
 
             const tempChapters: Chapter[] = [];
-            let chapters = _.toArray<HTMLElement>(
+            let chapters = lodash.toArray<HTMLElement>(
               book.querySelectorAll('ul li a')
             );
 
             if (!chapters) {
-              chapters = _.toArray(book.querySelectorAll('li a'));
+              chapters = lodash.toArray(book.querySelectorAll('li a'));
             }
 
-            _.each(chapters, chapter => {
+            lodash.each(chapters, chapter => {
               const tempChapter = new Chapter(
                 chapter
                   .querySelector('.title')

@@ -1,17 +1,7 @@
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpRequest
-} from '@angular/common/http';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as _ from 'lodash';
-// import { JSDOM } from 'jsdom';
-import { File } from '../models/file';
-import { Folder } from '../models/Folder';
-import { FolderProtoType } from '../models/FolderProtoType';
+import * as lodash from 'lodash';
 import { NavLinks } from '../models/navlinks.model';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
@@ -27,10 +17,6 @@ export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
-  // private baseFolder: string;
-  private nav: string;
-  private file: File;
-  private map: Map<string, NavLinks[]> = new Map<string, NavLinks[]>();
   private addressBar: HTMLInputElement;
   constructor(
     public fileManager: NavigationService,
@@ -38,7 +24,6 @@ export class FilesComponent implements OnInit {
     public saveState: SaveStateService,
     public navService: NavigationService,
     private router: Router,
-    private httpClient: HttpClient,
     private urlBuilder: UrlBuilder
   ) {}
 

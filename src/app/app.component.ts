@@ -1,17 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, NgZone, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, Routes } from '@angular/router';
-import {
-  faChevronLeft,
-  faChevronRight,
-  faCoffee
-} from '@fortawesome/free-solid-svg-icons';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-// import { ipcRenderer } from 'electron';
-// import remote from 'electron';
-import { AppConfig } from '../environments/environment';
 import { ElectronService } from './providers/electron.service';
-import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 @Component({

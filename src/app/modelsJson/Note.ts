@@ -1,7 +1,5 @@
 // import * as lodash from 'lodash';
 
-import * as lodash from 'lodash';
-import * as util from 'util';
 import { SecondaryNote } from './SecondaryNote';
 
 export class Note2 {

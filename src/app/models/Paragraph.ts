@@ -1,7 +1,5 @@
+import * as lodash from 'lodash';
 import { Verse } from './Verse';
-
-import { DomSanitizer } from '@angular/platform-browser';
-import * as _ from 'lodash';
 export class Paragraph {
   public verses: Verse[] = [];
   public id: number;
@@ -17,8 +15,8 @@ export class Paragraph {
     if (tgGs) {
       sel = 'li';
     }
-    _.each(paragraph.querySelectorAll('.verse'), verse => {
-      _.each(verse.querySelectorAll('w'), wTag => {
+    lodash.each(paragraph.querySelectorAll('.verse'), verse => {
+      lodash.each(verse.querySelectorAll('w'), wTag => {
         wTag.setAttribute('n', verse.id + '-' + wTag.getAttribute('n'));
         if (wTag.nextSibling && wTag.nextSibling.nodeName === '#text') {
           console.log((wTag.nextSibling.textContent = ''));
@@ -26,7 +24,7 @@ export class Paragraph {
         // console.log(wTag.getAttribute('n'));
       });
     });
-    _.each(paragraph.querySelectorAll(sel), v => {
+    lodash.each(paragraph.querySelectorAll(sel), v => {
       this.verses.push(new Verse(v as HTMLElement));
     });
 
@@ -36,11 +34,11 @@ export class Paragraph {
    * setHighlight
    */
   public setHighlight2(verseNums: number[], contextNums: number[]) {
-    _.each(this.verses, verse => {
-      if (_.includes(verseNums, verse.num)) {
+    lodash.each(this.verses, verse => {
+      if (lodash.includes(verseNums, verse.num)) {
         verse.highlight = true;
       }
-      if (_.includes(contextNums, verse.num)) {
+      if (lodash.includes(contextNums, verse.num)) {
         verse.context = true;
       }
     });
@@ -49,7 +47,7 @@ export class Paragraph {
    * resetHighlight()
    */
   public resetHighlight() {
-    _.forEach(this.verses, v => {
+    lodash.forEach(this.verses, v => {
       v.resetHighlight();
     });
   }

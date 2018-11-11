@@ -1,5 +1,5 @@
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 export class Note {
   public id: string;
   public button = false;
@@ -49,7 +49,7 @@ export class Note {
     const doc = parser.parseFromString(this.innerHtml, 'text/html');
     console.log(refs);
 
-    _.each(refs, (ref, i) => {
+    lodash.each(refs, (ref, i) => {
       if (refs.length > 1 && i === 0) {
         // console.log(refs);
 

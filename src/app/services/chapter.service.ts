@@ -1,13 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { ElementRef, Injectable, NgZone, QueryList } from '@angular/core';
+import { ElementRef, Injectable, QueryList } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
-import { DomSanitizer } from '@angular/platform-browser';
 import * as localForage from 'localforage';
-import * as _ from 'lodash';
+import * as lodash from 'lodash';
 import { Note } from '../models/Note';
-import { Paragraph } from '../models/Paragraph';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { Verse } from '../modelsJson/Verse';
 import { NavigationService } from './navigation.service';
@@ -40,7 +36,7 @@ export class ChapterService {
   public notes: ElementRef[] = [];
 
   public resetNotes(): void {
-    _.each(this.chapter2.notes, note => {
+    lodash.each(this.chapter2.notes, note => {
       note.o = false;
     });
   }
@@ -109,8 +105,8 @@ export class ChapterService {
         resolve: (resolveValue: boolean) => void,
         reject: (rejectValue: boolean) => void
       ) => {
-        _.forEach(this.chapter2.paragraphs, paragraph => {
-          _.forEach(paragraph.verses, verse => {
+        lodash.forEach(this.chapter2.paragraphs, paragraph => {
+          lodash.forEach(paragraph.verses, verse => {
             if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
               verse.highlight = true;
             }
@@ -215,7 +211,7 @@ export class ChapterService {
     if (v !== undefined) {
       const verseParams = v.split(',');
 
-      _.forEach(verseParams, verseParam => {
+      lodash.forEach(verseParams, verseParam => {
         const t = verseParam.split('-');
         const count = t.length > 1 ? 1 : 0;
         for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
@@ -338,9 +334,9 @@ export class ChapterService {
       w: [string, string, string, string, string, string, number, string[]]
     ) => void
   ) {
-    _.each(this.chapter2.paragraphs, paragrah => {
-      _.each(paragrah.verses, verse => {
-        _.each(verse.wTags2, wa => {
+    lodash.each(this.chapter2.paragraphs, paragrah => {
+      lodash.each(paragrah.verses, verse => {
+        lodash.each(verse.wTags2, wa => {
           callBack(wa);
         });
       });
@@ -348,7 +344,7 @@ export class ChapterService {
   }
 
   public resetNotes2() {
-    _.each<ElementRef>(this.notes, n => {
+    lodash.each<ElementRef>(this.notes, n => {
       (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
     });
   }
@@ -409,9 +405,6 @@ export class ChapterService {
     this.selectNote(w, false);
   }
 
-  private refCount(refs: string): number {
-    return refs.split(',').length;
-  }
   private selectNote(
     wTag: [string, string, string, string, string, string, number, string[]],
     resetVerse: boolean = true
@@ -421,7 +414,7 @@ export class ChapterService {
       this.resetVerseNotes();
       return;
     }
-    const note = _.find(this.notes, (n: ElementRef) => {
+    const note = lodash.find(this.notes, (n: ElementRef) => {
       return (n.nativeElement as HTMLElement).id === wTag[7][0];
     });
     wTag[7].shift();

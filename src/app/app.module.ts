@@ -24,9 +24,7 @@ import { ElectronService } from './providers/electron.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { timingSafeEqual } from 'crypto';
 import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';

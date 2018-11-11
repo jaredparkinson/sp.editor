@@ -65,19 +65,19 @@ export class BodyblockComponent
 
               // this.synchronizedScrolling();
 
-              if (this.saveState.data.verseSelect) {
-                console.log(value);
-                this.chapterService.resetVerseSelect();
-              }
+              this.chapterService.resetVerseSelect();
+              // if (this.saveState.data.verseSelect) {
+              //   console.log(value);
+              // }
             });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService
             .getChapter(chapter, '', this.synchronizedScrolling)
             .then((value: boolean) => {
-              if (this.saveState.data.verseSelect) {
-                console.log(value);
-                this.chapterService.resetVerseSelect();
-              }
+              this.chapterService.resetVerseSelect();
+              // if (this.saveState.data.verseSelect) {
+              //   console.log(value);
+              // }
             });
           // setTimeout(() => {
           //   if (this.saveState.data.verseSelect) {

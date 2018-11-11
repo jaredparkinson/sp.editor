@@ -55,7 +55,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {}
   notePhraseClick(secondaryNote: SecondaryNote) {
-    if (this.saveState.data.verseSelect) {
+    if (true) {
       let count = 0;
 
       const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {

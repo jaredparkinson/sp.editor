@@ -40,7 +40,7 @@ export class VerseSelectService {
 
   //   this.modifyWTags(
   //     (
-  //       wa: [string, string, string, string, string, string, number, string[]]
+  //       wa: [string, string, string, string, string, string, number, string[], number]
   //     ) => {
   //       wa[7] = [];
 
@@ -61,7 +61,7 @@ export class VerseSelectService {
   // }
 
   // private createRefList(
-  //   wa: [string, string, string, string, string, string, number, string[]],
+  //   wa: [string, string, string, string, string, string, number, string[], number],
   //   vis: boolean,
   //   noteNumber: number
   // ) {
@@ -78,7 +78,7 @@ export class VerseSelectService {
 
   // private modifyWTags(
   //   callBack: (
-  //     w: [string, string, string, string, string, string, number, string[]]
+  //     w: [string, string, string, string, string, string, number, string[], number]
   //   ) => void
   // ) {
   //   _.each(this.chapterService.chapter2.paragraphs, paragrah => {
@@ -102,7 +102,7 @@ export class VerseSelectService {
   // public removeVerseSelect() {
   //   this.modifyWTags(
   //     (
-  //       wa: [string, string, string, string, string, string, number, string[]]
+  //       wa: [string, string, string, string, string, string, number, string[], number]
   //     ) => {
   //       for (let x = 0; x < 10; x++) {
   //         wa[0] = this.stringService.removeAttribute(
@@ -119,7 +119,7 @@ export class VerseSelectService {
   // }
 
   // public wTagClick(
-  //   w: [string, string, string, string, string, string, number, string[]],
+  //   w: [string, string, string, string, string, string, number, string[], number],
   //   verse: Verse
   // ) {
   //   console.log(this.saveState.data.verseSelect);
@@ -147,7 +147,7 @@ export class VerseSelectService {
   // resetVerseSelect1(): void {
   //   this.modifyWTags(
   //     (
-  //       wa: [string, string, string, string, string, string, number, string[]]
+  //       wa: [string, string, string, string, string, string, number, string[], number]
   //     ) => {
   //       if (wa[3].trim() !== '') {
   //         wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
@@ -172,7 +172,7 @@ export class VerseSelectService {
   // }
 
   // private firstClick(
-  //   w: [string, string, string, string, string, string, number, string[]],
+  //   w: [string, string, string, string, string, string, number, string[], number],
   //   verse: Verse
   // ) {
   //   this.resetVerseSelect();
@@ -198,7 +198,7 @@ export class VerseSelectService {
   //   return refs.split(' ').length;
   // }
   // private selectNote(
-  //   wTag: [string, string, string, string, string, string, number, string[]]
+  //   wTag: [string, string, string, string, string, string, number, string[], number]
   // ) {
   //   console.log(wTag[7].length);
   //   if (wTag[7].length === 0) {

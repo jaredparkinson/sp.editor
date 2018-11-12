@@ -224,26 +224,10 @@ export class ChapterService {
   }
 
   public toggleVerseSelect() {
-    // this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
+    this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
     this.saveState.save();
     this.resetVerseSelect();
-    // switch (this.saveState.data.verseSelect || !this.saveState.data) {
-    //   case true: {
-
-    //     break;
-    //   }
-    //   case false:
-    //   default: {
-    //     this.removeVerseSelect();
-
-    //     this.resetNotes2();
-    //     break;
-    //   }
-    // }
   }
-  public test(
-    w: [string, string, string, string, string, string, string, string, string]
-  ) {}
 
   public modifyWTag(callback: (elem: Element) => void) {
     this.wTags.forEach(e => {
@@ -260,7 +244,8 @@ export class ChapterService {
       string,
       string,
       number,
-      string[]
+      string[],
+      boolean
     ] = null
   ) {
     this.resetNotes2();
@@ -276,12 +261,23 @@ export class ChapterService {
       string,
       string,
       number,
-      string[]
+      string[],
+      boolean
     ] = null
   ) {
     this.modifyWTags(
       (
-        wa: [string, string, string, string, string, string, number, string[]]
+        wa: [
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          number,
+          string[],
+          boolean
+        ]
       ) => {
         if (wa !== wTag) {
           wa[7] = [];
@@ -316,7 +312,17 @@ export class ChapterService {
   }
 
   private createRefList(
-    wa: [string, string, string, string, string, string, number, string[]],
+    wa: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ],
     vis: boolean,
     noteNumber: number
   ) {
@@ -326,12 +332,23 @@ export class ChapterService {
           wa[7].push(w);
         }
       });
+      wa[8] = wa[7].length > 1;
     }
   }
 
   public modifyWTags(
     callBack: (
-      w: [string, string, string, string, string, string, number, string[]]
+      w: [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        number,
+        string[],
+        boolean
+      ]
     ) => void
   ) {
     lodash.each(this.chapter2.paragraphs, paragrah => {
@@ -349,25 +366,22 @@ export class ChapterService {
     });
   }
 
-  public removeVerseSelect() {
-    this.modifyWTags(
-      (
-        wa: [string, string, string, string, string, string, number, string[]]
-      ) => {
-        for (let x = 0; x < 10; x++) {
-          wa[0] = this.stringService.removeAttribute(
-            wa[0],
-            'verse-select-' + x
-          );
-        }
-      }
-    );
-  }
-
   public wTagClick(
-    w: [string, string, string, string, string, string, number, string[]],
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ],
     verse: Verse
   ) {
+    console.log(w[8]);
+
     if (
       w[7].length === 0 &&
       !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
@@ -386,7 +400,17 @@ export class ChapterService {
     // }
   }
   private firstClick(
-    w: [string, string, string, string, string, string, number, string[]],
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ],
     verse: Verse
   ) {
     this.resetVerseSelect();
@@ -406,7 +430,17 @@ export class ChapterService {
   }
 
   private selectNote(
-    wTag: [string, string, string, string, string, string, number, string[]],
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ],
     resetVerse: boolean = true
   ) {
     this.resetNotes2();

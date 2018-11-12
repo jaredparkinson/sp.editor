@@ -61,20 +61,32 @@ export class NotesComponent implements OnInit, AfterViewInit {
       const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
         return (n.nativeElement as Element).id === secondaryNote.id;
       });
+      console.log(note);
 
       if (
         note &&
         (note.nativeElement as Element).classList.contains('verse-select-1')
       ) {
-        this.chapterService.resetVerseSelect();
+        // this.chapterService.resetVerseSelect();
+        this.chapterService.resetVerseNotes();
 
         return;
       }
-      this.chapterService.resetVerseSelect();
+      this.chapterService.resetVerseNotes();
 
       this.chapterService.modifyWTags(
         (
-          w: [string, string, string, string, string, string, number, string[]]
+          w: [
+            string,
+            string,
+            string,
+            string,
+            string,
+            string,
+            number,
+            string[],
+            boolean
+          ]
         ) => {
           w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
           if (lodash.includes(w[7], secondaryNote.id)) {

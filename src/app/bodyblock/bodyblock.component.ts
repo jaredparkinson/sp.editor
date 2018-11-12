@@ -93,7 +93,17 @@ export class BodyblockComponent
   }
 
   wTagClick(
-    wTag: [string, string, string, string, string, string, number, string[]],
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ],
     verse: Verse
   ) {
     console.log(wTag);

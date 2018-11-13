@@ -380,7 +380,7 @@ export class ChapterService {
     ],
     verse: Verse
   ) {
-    console.log(w[8]);
+    // console.log(w[3].split(','));
 
     if (
       w[7].length === 0 &&
@@ -394,7 +394,7 @@ export class ChapterService {
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
       this.resetVerseNotes();
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-      this.selectNote(w);
+      this.selectNote(verse, w);
     }
     // if (this.saveState.data.verseSelect) {
     // }
@@ -414,7 +414,26 @@ export class ChapterService {
     verse: Verse
   ) {
     this.resetVerseSelect();
+    // console.log(w[7]);
 
+    this.highlightRelatedWords(verse, w);
+    this.selectNote(verse, w, false);
+  }
+
+  private highlightRelatedWords(
+    verse: Verse,
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ]
+  ) {
     verse.wTags2.forEach(wr => {
       w[7].forEach(ref => {
         if (wr[7].includes(ref) && wr[7].length >= 1) {
@@ -426,10 +445,10 @@ export class ChapterService {
         }
       });
     });
-    this.selectNote(w, false);
   }
 
   private selectNote(
+    verse: Verse,
     wTag: [
       string,
       string,
@@ -451,16 +470,19 @@ export class ChapterService {
     const note = lodash.find(this.notes, (n: ElementRef) => {
       return (n.nativeElement as HTMLElement).id === wTag[7][0];
     });
-    wTag[7].shift();
 
     if (note) {
       (note.nativeElement as HTMLElement).classList.add('verse-select-1');
       (note.nativeElement as HTMLElement).scrollIntoView({
         block: 'center'
       });
+
       if (resetVerse) {
         this.resetVerseSelect(wTag);
+        this.highlightRelatedWords(verse, wTag);
       }
+
+      wTag[7].shift();
     } else {
       this.resetVerseNotes();
     }

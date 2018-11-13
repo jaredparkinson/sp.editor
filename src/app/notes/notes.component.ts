@@ -58,10 +58,12 @@ export class NotesComponent implements OnInit, AfterViewInit {
     if (true) {
       let count = 0;
 
+      console.log(secondaryNote.id);
+
       const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
         return (n.nativeElement as Element).id === secondaryNote.id;
       });
-      console.log(note);
+      // console.log(note);
 
       if (
         note &&
@@ -90,7 +92,9 @@ export class NotesComponent implements OnInit, AfterViewInit {
         ) => {
           w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
           if (lodash.includes(w[7], secondaryNote.id)) {
-            console.log(w);
+            // console.log(w);
+
+            console.log(w[7]);
 
             w[0] = this.stringService.addAttribute(w[0], 'note-select-1');
             count++;

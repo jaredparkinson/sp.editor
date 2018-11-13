@@ -24,7 +24,7 @@ body {
     border-bottom: 1px dotted grey;
   }
   w.verse-select-0.wRef {
-    border-bottom: 1px solid grey !important;
+    border-bottom: 1px solid grey; // !important;
   }
 }
 
@@ -44,10 +44,10 @@ w.verse-select-1 // w.verse-select-1+w
   border-bottom: 3px solid #f68d2e;
 }
 
-w.note-select-1 // w.verse-select-1+w 
+w.verse-select-0.note-select-1 // w.verse-select-1+w 
 
  {
-  border-bottom: 3px solid #f68d2e !important;
+  border-bottom: 3px solid #f68d2e; // !important;
 }
 
 w.verse-select-2,
@@ -56,9 +56,8 @@ w.verse-select-3,
 // w.verse-select-2+w 
 w.verse-select-4,
 // w.verse-select-2+w 
-w.verse-select-5 // w.verse-select-2+w 
-
- {
+w.verse-select-5,
+w.verse-select-0.note-select-1.wRef {
   border-bottom: 3px solid #dc143c;
 }
 

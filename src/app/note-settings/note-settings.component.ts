@@ -32,8 +32,12 @@ export class NoteSettingsComponent implements OnInit {
       });
   }
   btnSecondaryNotesPress() {
-    this.navServices.btnSecondaryNotesPress();
-    this.chapterService.resetNotes();
+    this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
+      console.log('asdfiojkasofjafjaosdfjoiasdfjioj');
+
+      this.chapterService.resetNotes();
+      this.chapterService.resetVerseSelect();
+    });
   }
   btnOriginalNotesPress(): void {
     this.navServices.btnOriginalNotesPress().then((value: boolean) => {

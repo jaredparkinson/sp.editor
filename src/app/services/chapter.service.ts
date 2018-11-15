@@ -284,6 +284,7 @@ export class ChapterService {
 
           wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
           wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
           if (true) {
             this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
             this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
@@ -329,7 +330,12 @@ export class ChapterService {
     if (vis) {
       (wa[noteNumber] as string).split(',').forEach(w => {
         if (w.trim() !== '') {
-          wa[7].push(w);
+          if (
+            (w.includes('-t2') && this.saveState.data.secondaryNotesVisible) ||
+            !w.includes('-t2')
+          ) {
+            wa[7].push(w);
+          }
         }
       });
       wa[8] = wa[7].length > 1;

@@ -84,6 +84,7 @@ export class NavigationService {
       this.saveState.data.secondaryNotesVisible = !this.saveState.data
         .secondaryNotesVisible;
       this.saveState.save();
+      resolve(true);
     });
   }
   btnOriginalNotesPress(): Promise<boolean> {

@@ -1,48 +1,82 @@
-<div id="study-notes-parent" [ngClass]="{
+<div
+  id="study-notes-parent"
+  [ngClass]="{
     'notes-show-tier': saveState.data.secondaryNotesVisible,
     'notes-show-new': saveState.data.newNotesVisible,
-    'hide-l hide-m': !saveState.data.rightPanePin, 
+    'hide-l hide-m': !saveState.data.rightPanePin,
     'notes-show-tc': saveState.data.translatorNotesVisible,
     'notes-show-eng': saveState.data.englishNotesVisible,
-    'notes-hide-tier': !saveState.data.secondaryNotesVisible, 
+    'notes-hide-tier': !saveState.data.secondaryNotesVisible,
     'notes-hide-tc': !saveState.data.translatorNotesVisible,
-'notes-hide-eng': !saveState.data.englishNotesVisible,
-'notes-hide-new': !saveState.data.newNotesVisible,
-'notes-hide-original': !saveState.data.originalNotesVisible,
-'notes-show-original': saveState.data.originalNotesVisible,
-'show-s': navServices.rightPaneToggle,
-'hide-s': !navServices.rightPaneToggle }"
-  class="study-notes-parent ">
+    'notes-hide-eng': !saveState.data.englishNotesVisible,
+    'notes-hide-new': !saveState.data.newNotesVisible,
+    'notes-hide-original': !saveState.data.originalNotesVisible,
+    'notes-show-original': saveState.data.originalNotesVisible,
+    'show-s': navServices.rightPaneToggle,
+    'hide-s': !navServices.rightPaneToggle
+  }"
+  class="study-notes-parent "
+>
   <div>
-
     <div id="footerTop"></div>
     <footer id="studyNotes" class="study-notes">
       <!-- <span id="studyNotesTop"></span> -->
-      <note [ngClass]="{
-      'secondary-override-off': !note.o}" *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById"
-        id="{{note.id}}" class="{{note.cn}}">
-        <p class="note-title">{{note.nT}}</p>
-        <p class="note-short-title">{{note.nST}}</p>
+      <note
+        [ngClass]="{
+          'secondary-override-off': !note.o
+        }"
+        *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById"
+        id="{{note.id}}"
+        class="{{note.cn}}"
+      >
+        <p class="note-title">{{ note.nT }}</p>
+        <p class="note-short-title">{{ note.nST }}</p>
 
-        <div *ngFor="let secondaryNote of note.sn" [ngClass]="{'tier-2-note-hide': !note.v && note.o, 
-        'tier-2-note-show': note.v && note.o}"
-          id="{{secondaryNote.id}}" class="{{secondaryNote.cn}} secondary-note" id="{{secondaryNote.id}}" #notes>
-          <p *ngIf="secondaryNote.notePhraseText.trim() !== ''" class="{{secondaryNote.notePhraseClasses}}" (click)="this.notePhraseClick(secondaryNote)"
-            [innerHTML]="sanitizer.bypassSecurityTrustHtml(secondaryNote.notePhraseText)">
-
-          </p>
-          <p [id]="secondaryNote.id2" [class]="secondaryNote.noteRefClass" [innerHTML]="secondaryNote.iH"></p>
+        <div
+          *ngFor="let secondaryNote of note.sn"
+          [ngClass]="{
+            'tier-2-note-hide': !note.v && note.o,
+            'tier-2-note-show': note.v && note.o
+          }"
+          id="{{secondaryNote.id}}"
+          class="{{secondaryNote.cn}} secondary-note"
+          id="{{secondaryNote.id}}"
+          #notes
+        >
+          <ng-container *ngFor="let sn of secondaryNote.seNote">
+            <p
+              *ngIf="sn[1].trim().includes('note-phrase')"
+              class="{{sn[1]}}"
+              [id]="sn[0]"
+              (click)="this.notePhraseClick(secondaryNote)"
+              [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+            ></p>
+            <p
+              *ngIf="!sn[1].trim().includes('note-phrase')"
+              class="{{sn[1]}}"
+              [id]="sn[0]"
+              (click)="this.notePhraseClick(secondaryNote)"
+              [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+            ></p>
+          </ng-container>
         </div>
-
-
-        <button *ngIf="note.btn" class='note-button note-button-buttons all-buttons' [ngClass]="{' note-button-toggled-on': (!note.o && saveState.data.secondaryNotesVisible) || (note.o && note.v)} "
-          id="note-button-{{note.id}}" (click)="noteButtonClick(note)">
+        <button
+          *ngIf="note.btn"
+          class="note-button note-button-buttons all-buttons"
+          [ngClass]="{
+            ' note-button-toggled-on':
+              (!note.o && saveState.data.secondaryNotesVisible) ||
+              (note.o && note.v)
+          }"
+          id="note-button-{{note.id}}"
+          (click)="noteButtonClick(note)"
+        >
           <!-- (click)="note.secondaryButtonClick()"> -->
-          +</button>
-
+          +
+        </button>
       </note>
 
-      <div id='study-notes-whitespace' class='study-notes-whitespace'></div>
+      <div id="study-notes-whitespace" class="study-notes-whitespace"></div>
     </footer>
   </div>
 </div>

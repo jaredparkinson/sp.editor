@@ -58,7 +58,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     if (true) {
       let count = 0;
 
-      console.log(secondaryNote.id);
+      // console.log(secondaryNote.id);
 
       const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
         return (n.nativeElement as Element).id === secondaryNote.id;
@@ -107,7 +107,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
           (note.nativeElement as Element).classList.add('verse-select-1');
         }
       }
-      console.log(secondaryNote.cn);
+      // console.log(secondaryNote.cn);
     }
   }
 

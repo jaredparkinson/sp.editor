@@ -1,12 +1,10 @@
 export class SecondaryNote {
   public cn = '';
   public id = '';
-  public id2 = '';
-  public iH = '';
+  // public id2: string = '';
+  // public iH: string = '';
   public t2 = '';
-  public notePhraseText = '';
-  public notePhraseClasses = '';
-  public noteRefClass = '';
+  public seNote: Array<[string, string, string]> = [];
 
   // constructor(element: Element) {
   //   this.className = element.className;

@@ -21,10 +21,13 @@ body {
 
 .note-underline {
   w.verse-select-0 {
-    border-bottom: 1px dotted grey;
+    border-bottom: 1px solid grey;
   }
   w.verse-select-0.wRef {
     border-bottom: 1px solid grey; // !important;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-decoration-color: grey;
   }
 }
 

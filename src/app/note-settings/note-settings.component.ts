@@ -62,7 +62,12 @@ export class NoteSettingsComponent implements OnInit {
     });
   }
   toggleVerseSelect() {
+    this.chapterService.toggleVerseSuperScripts(false);
     this.chapterService.toggleVerseSelect();
+  }
+  toggleVerseSuperScripts() {
+    this.chapterService.toggleVerseSelect(false);
+    this.chapterService.toggleVerseSuperScripts();
   }
   settings() {
     this.router.navigateByUrl('settings');

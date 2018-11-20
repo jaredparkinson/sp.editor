@@ -223,8 +223,16 @@ export class ChapterService {
     return verseNums;
   }
 
-  public toggleVerseSelect() {
-    this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
+  public toggleVerseSelect(toggle: boolean = this.saveState.data.verseSelect) {
+    this.saveState.data.verseSelect = toggle;
+    this.saveState.save();
+    this.resetVerseSelect();
+  }
+  public toggleVerseSuperScripts(
+    toggle: boolean = this.saveState.data.verseSuperScripts
+  ) {
+    this.saveState.data.verseSuperScripts = !this.saveState.data
+      .verseSuperScripts;
     this.saveState.save();
     this.resetVerseSelect();
   }

@@ -49,6 +49,13 @@
     >
       Note Underlining
     </button>
+    <button
+      id="verseSelect"
+      (click)="toggleVerseSuperScripts()"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.verseSuperScripts }"
+    >
+      Toggle Superscripts
+    </button>
     <button id="versionNumber">Version {{ this.versionNumber }}</button>
     <button id="settings" (click)="settings()">Settings</button>
   </div>

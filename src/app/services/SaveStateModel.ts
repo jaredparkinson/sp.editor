@@ -17,6 +17,7 @@ export class SaveStateModel implements ISaveModel {
   public forward: string[] = [];
   public currentPage = '';
   public verseSelect = false;
+  public verseSuperScripts = false;
   constructor() {}
 }
 

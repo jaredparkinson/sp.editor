@@ -4,7 +4,7 @@ export class SecondaryNote {
   // public id2: string = '';
   // public iH: string = '';
   public t2 = '';
-  public seNote: Array<[string, string, string]> = [];
+  public seNote: Array<[string, string, string, string]> = [];
 
   // constructor(element: Element) {
   //   this.className = element.className;

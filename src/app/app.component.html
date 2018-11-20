@@ -1,6 +1,9 @@
 <div
   class="grid main row-05"
-  [ngClass]="{ 'note-underline': this.saveState.data.verseSelect }"
+  [ngClass]="{
+    'note-underline': this.saveState.data.verseSelect,
+    'note-superscript': this.saveState.data.verseSuperScripts
+  }"
 >
   <div class="header"><app-header></app-header></div>
   <div id="gridBody" class="grid body">

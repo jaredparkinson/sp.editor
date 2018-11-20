@@ -56,8 +56,12 @@
               class="{{sn[1]}}"
               [id]="sn[0]"
               (click)="this.notePhraseClick(secondaryNote)"
-              [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-            ></p>
+            >
+              <span *ngIf="saveState.data.verseSuperScripts">{{ sn[3] }} </span>
+              <span
+                [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+              ></span>
+            </p>
           </ng-container>
         </div>
         <button

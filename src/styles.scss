@@ -32,12 +32,18 @@ body {
 }
 
 .note-superscript {
-  .note-title {
-    display: none;
+  .note-title,
+  .note-phrase,
+  .note-short-title {
+    display: none !important;
   }
   note {
-    .note-reference-eng:nth-of-type(1) {
-      background-color: black;
+    div {
+      p {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-column-gap: 5px;
+      }
     }
   }
 }

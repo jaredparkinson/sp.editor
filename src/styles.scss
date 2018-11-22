@@ -33,16 +33,20 @@ body {
 
 .note-superscript {
   .note-title,
-  .note-phrase,
   .note-short-title {
     display: none !important;
   }
   note {
     div {
-      p {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-column-gap: 5px;
+      p.note-phrase {
+        display: grid !important;
+        grid-template-columns: 25px 1fr;
+        grid-column-gap: 6px;
+        margin-left: -12px;
+        .note-superscript {
+          justify-self: right;
+          color: rgba(0, 0, 0, 0.4);
+        }
       }
     }
   }

@@ -49,15 +49,22 @@
               class="{{sn[1]}}"
               [id]="sn[0]"
               (click)="this.notePhraseClick(secondaryNote)"
-              [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-            ></p>
+            >
+              <span
+                class="note-superscript"
+                *ngIf="saveState.data.verseSuperScripts"
+                >{{ sn[3] }}
+              </span>
+              <span
+                [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+              ></span>
+            </p>
             <p
               *ngIf="!sn[1].trim().includes('note-phrase')"
               class="{{sn[1]}}"
               [id]="sn[0]"
               (click)="this.notePhraseClick(secondaryNote)"
             >
-              <span *ngIf="saveState.data.verseSuperScripts">{{ sn[3] }} </span>
               <span
                 [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
               ></span>

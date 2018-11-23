@@ -39,7 +39,7 @@ body {
   note {
     div {
       p.note-phrase {
-        display: grid !important;
+        display: grid;
         grid-template-columns: 25px 1fr;
         grid-column-gap: 6px;
         margin-left: -12px;

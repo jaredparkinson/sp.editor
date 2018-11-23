@@ -31,46 +31,51 @@
       >
         <p class="note-title">{{ note.nT }}</p>
         <p class="note-short-title">{{ note.nST }}</p>
-
-        <div
-          *ngFor="let secondaryNote of note.sn"
-          [ngClass]="{
-            'tier-2-note-hide': !note.v && note.o,
-            'tier-2-note-show': note.v && note.o
-          }"
-          id="{{secondaryNote.id}}"
-          class="{{secondaryNote.cn}} secondary-note"
-          id="{{secondaryNote.id}}"
-          #notes
-        >
-          <ng-container *ngFor="let sn of secondaryNote.seNote">
-            <p
-              *ngIf="sn[1].trim().includes('note-phrase')"
-              class="{{sn[1]}}"
-              [id]="sn[0]"
-              (click)="this.notePhraseClick(secondaryNote)"
-            >
-              <span
-                class="note-superscript"
-                *ngIf="saveState.data.verseSuperScripts"
-                >{{ sn[3] }}
-              </span>
-              <span
-                [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-              ></span>
-            </p>
-            <p
-              *ngIf="!sn[1].trim().includes('note-phrase')"
-              class="{{sn[1]}}"
-              [id]="sn[0]"
-              (click)="this.notePhraseClick(secondaryNote)"
-            >
-              <span
-                [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-              ></span>
-            </p>
-          </ng-container>
-        </div>
+        <ng-container *ngFor="let secondaryNote of note.sn">
+          <div
+            [ngClass]="{
+              'tier-2-note-hide': !note.v && note.o,
+              'tier-2-note-show': note.v && note.o
+            }"
+            id="{{secondaryNote.id}}"
+            class="{{secondaryNote.cn}} secondary-note"
+            id="{{secondaryNote.id}}"
+            *ngIf="showNote(secondaryNote)"
+            #notes
+          >
+            <ng-container *ngFor="let sn of secondaryNote.seNote">
+              <p
+                *ngIf="
+                  showSecondaryNote(sn) && sn[1].trim().includes('note-phrase')
+                "
+                class="{{sn[1]}}"
+                [id]="sn[0]"
+                (click)="this.notePhraseClick(secondaryNote)"
+              >
+                <span
+                  class="note-superscript"
+                  *ngIf="saveState.data.verseSuperScripts"
+                  >{{ sn[3] }}
+                </span>
+                <span
+                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+                ></span>
+              </p>
+              <p
+                *ngIf="
+                  showSecondaryNote(sn) && !sn[1].trim().includes('note-phrase')
+                "
+                class="{{sn[1]}}"
+                [id]="sn[0]"
+                (click)="this.notePhraseClick(secondaryNote)"
+              >
+                <span
+                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+                ></span>
+              </p>
+            </ng-container>
+          </div>
+        </ng-container>
         <button
           *ngIf="note.btn"
           class="note-button note-button-buttons all-buttons"

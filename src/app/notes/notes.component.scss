@@ -1,5 +1,4 @@
-$font-stack: PalatinoldsLat-Roman,
-serif;
+$font-stack: PalatinoldsLat-Roman, serif;
 
 @mixin span-reference($selector: '', $content: '') {
   span.reference-label-#{$selector}::before {
@@ -14,7 +13,7 @@ serif;
   z-index: 100;
 
   note {
-    >div>div.original-note-marker {
+    > div > div.original-note-marker {
       display: none;
     }
 
@@ -34,7 +33,7 @@ serif;
       grid-area: auto / 1;
     }
 
-    >div {
+    > div {
       grid-area: auto / 1;
     }
 
@@ -123,7 +122,7 @@ serif;
       margin-left: 0.25in;
     }
 
-    ul>li {
+    ul > li {
       // display: grid;
 
       grid-template-columns: auto 9fr;
@@ -159,7 +158,7 @@ serif;
   .note-reference-tc,
   .note-reference-tc-2,
   .note-phrase,
-  [class*="note-phrase"] {
+  [class*='note-phrase'] {
     margin-bottom: 9pt;
   }
 
@@ -184,23 +183,23 @@ serif;
       display: none;
     }
 
-    .note-phrase,
-    .note-phrase-eng,
-    .original-note,
-    .note-reference-eng,
-    .note-reference-eng-2,
-    .note-reference-new,
-    .note-reference-new-2,
-    .note-reference-tc-2,
-    .note-reference-tc,
-    &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-phrase-eng-2,
-    &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-reference-eng-2,
-    &.notes-show-new.notes-show-tier .tier-2-note-hide .note-phrase-new-2,
-    &.notes-show-new.notes-show-tier .tier-2-note-hide .note-reference-new-2,
-    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-phrase-tc-2,
-    &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2 {
-      display: none;
-    }
+    // .note-phrase,
+    // .note-phrase-eng,
+    // .original-note,
+    // .note-reference-eng,
+    // .note-reference-eng-2,
+    // .note-reference-new,
+    // .note-reference-new-2,
+    // .note-reference-tc-2,
+    // .note-reference-tc,
+    // &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-phrase-eng-2,
+    // &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-reference-eng-2,
+    // &.notes-show-new.notes-show-tier .tier-2-note-hide .note-phrase-new-2,
+    // &.notes-show-new.notes-show-tier .tier-2-note-hide .note-reference-new-2,
+    // &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-phrase-tc-2,
+    // &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2 {
+    //   display: none;
+    // }
 
     //     notes-show-tier
     // notes-show-new

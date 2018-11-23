@@ -130,4 +130,82 @@ export class NotesComponent implements OnInit, AfterViewInit {
   trackById(note: Note) {
     return note.id;
   }
+  showNote(secondaryNote: SecondaryNote): boolean {
+    let vis = true;
+    secondaryNote.cn.split(' ').forEach(c => {
+      switch (c) {
+        case 'tc-note': {
+          if (!this.saveState.data.translatorNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note': {
+          if (!this.saveState.data.newNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'eng-note': {
+          if (!this.saveState.data.englishNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        default: {
+          vis = vis;
+        }
+      }
+    });
+    // vis = false;
+    return vis;
+  }
+  showSecondaryNote(seNote: [string, string, string, string]): boolean {
+    let vis = true;
+    seNote[1].split(' ').forEach(c => {
+      switch (c) {
+        case 'note-phrase-eng-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-eng-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-phrase-tc-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-tc-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-phrase-new-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-new-2': {
+          if (!this.saveState.data.secondaryNotesVisible) {
+            vis = false;
+          }
+          break;
+        }
+        default: {
+          vis = vis;
+        }
+      }
+    });
+    // vis = false;
+    return vis;
+  }
 }

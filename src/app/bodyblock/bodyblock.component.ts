@@ -19,6 +19,7 @@ import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { StringService } from '../services/string.service';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -41,6 +42,7 @@ export class BodyblockComponent
     public chapterService: ChapterService,
     public navService: NavigationService,
     public saveState: SaveStateService,
+    public stringService: StringService,
     private route: ActivatedRoute
   ) {}
 
@@ -82,6 +84,42 @@ export class BodyblockComponent
       }, 1000);
     });
     this.wordSelection();
+  }
+
+  getWColor(
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ]
+  ) {
+    let wClass = w[0];
+
+    if (w[0].includes('verse-select')) {
+      if (this.saveState.data.verseSuperScripts) {
+        if (w[4].trim().length > 0 && this.saveState.data.englishNotesVisible) {
+          wClass = this.stringService.addAttribute(wClass, 'eng');
+        } else if (
+          w[5].trim().length > 0 &&
+          this.saveState.data.translatorNotesVisible
+        ) {
+          wClass = this.stringService.addAttribute(wClass, 'tc');
+        } else if (
+          w[3].trim().length > 0 &&
+          this.saveState.data.newNotesVisible
+        ) {
+          wClass = this.stringService.addAttribute(wClass, 'new');
+        }
+      }
+    }
+
+    return wClass;
   }
 
   private wordSelection() {

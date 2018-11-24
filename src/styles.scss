@@ -38,21 +38,29 @@ body {
   }
   note {
     div {
-      p.note-phrase {
-        display: grid;
-        grid-template-columns: 25px 1fr;
-        grid-column-gap: 6px;
-        margin-left: -12px;
-        .note-superscript {
-          justify-self: right;
-          color: rgba(0, 0, 0, 0.4);
+      margin-left: 0 !important;
+      p {
+        &.note-phrase {
+          display: grid;
+          grid-template-columns: 25px 1fr;
+          grid-column-gap: 6px;
+          // margin-left: -12px;
+          .note-superscript {
+            justify-self: right;
+            color: rgba(0, 0, 0, 0.4);
+          }
+        }
+        &.note-reference-tc,
+        &.note-reference-eng,
+        &.note-reference-new {
+          margin-left: 2em;
         }
       }
     }
   }
   w {
     &.eng {
-      color: blue;
+      color: #007fa4;
     }
     &.new {
       color: maroon;

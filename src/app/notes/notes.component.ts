@@ -140,7 +140,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
           }
           break;
         }
-        case 'note': {
+        case 'new-note': {
           if (!this.saveState.data.newNotesVisible) {
             vis = false;
           }

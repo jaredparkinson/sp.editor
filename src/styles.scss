@@ -50,6 +50,17 @@ body {
       }
     }
   }
+  w {
+    &.eng {
+      color: blue;
+    }
+    &.new {
+      color: maroon;
+    }
+    &.tc {
+      color: #098109;
+    }
+  }
 }
 
 div.verse-select-0,

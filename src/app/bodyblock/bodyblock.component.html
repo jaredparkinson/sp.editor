@@ -61,7 +61,7 @@
         <ng-container *ngFor="let w of verse.wTags2">
           <w
             nT="{{w[2]}}"
-            class="{{w[0]}}"
+            class="{{ getWColor(w)}}"
             (click)="wTagClick(w, verse)"
             [ngClass]="{ wRef: w[8] }"
             #wTags

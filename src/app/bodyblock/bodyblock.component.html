@@ -63,10 +63,14 @@
             nT="{{w[2]}}"
             class="{{ getWColor(w)}}"
             (click)="wTagClick(w, verse)"
-            [ngClass]="{ wRef: w[8] }"
+            [ngClass]="{ wRef: w[9] }"
             #wTags
           >
-            <n>{{ w[1] }}</n>
+            <ng-container *ngIf="saveState.data.verseSuperScripts">
+              <ng-container *ngFor="let item of w[8]">
+                <s class="{{item}}"></s>
+              </ng-container> </ng-container
+            ><n>{{ w[1] }}</n>
           </w>
           <br
             *ngIf="w[0].includes('line-end') && saveState.data.poetryVisible"

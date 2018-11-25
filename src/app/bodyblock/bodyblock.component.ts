@@ -104,17 +104,17 @@ export class BodyblockComponent
     if (w[0].includes('verse-select')) {
       if (this.saveState.data.verseSuperScripts) {
         if (w[4].trim().length > 0 && this.saveState.data.englishNotesVisible) {
-          wClass = this.stringService.addAttribute(wClass, 'eng');
+          wClass = this.stringService.addAttribute(wClass, 'eng-color');
         } else if (
           w[5].trim().length > 0 &&
           this.saveState.data.translatorNotesVisible
         ) {
-          wClass = this.stringService.addAttribute(wClass, 'tc');
+          wClass = this.stringService.addAttribute(wClass, 'tc-color');
         } else if (
           w[3].trim().length > 0 &&
           this.saveState.data.newNotesVisible
         ) {
-          wClass = this.stringService.addAttribute(wClass, 'new');
+          wClass = this.stringService.addAttribute(wClass, 'new-color');
         }
       }
     }
@@ -139,6 +139,7 @@ export class BodyblockComponent
       string,
       string,
       number,
+      string[],
       string[],
       boolean
     ],

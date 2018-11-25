@@ -255,6 +255,8 @@ export class ChapterService {
       string,
       number,
       string[],
+      string[],
+
       boolean
     ] = null
   ) {
@@ -272,6 +274,8 @@ export class ChapterService {
       string,
       number,
       string[],
+
+      string[],
       boolean
     ] = null
   ) {
@@ -285,6 +289,7 @@ export class ChapterService {
           string,
           string,
           number,
+          string[],
           string[],
           boolean
         ]
@@ -332,6 +337,7 @@ export class ChapterService {
       string,
       number,
       string[],
+      string[],
       boolean
     ],
     vis: boolean,
@@ -348,7 +354,7 @@ export class ChapterService {
           }
         }
       });
-      wa[8] = wa[7].length > 1;
+      wa[9] = wa[7].length > 1;
     }
   }
 
@@ -362,6 +368,7 @@ export class ChapterService {
         string,
         string,
         number,
+        string[],
         string[],
         boolean
       ]
@@ -391,7 +398,8 @@ export class ChapterService {
       string,
       string,
       number,
-      string[],
+      string[],        string[],
+
       boolean
     ],
     verse: Verse
@@ -425,6 +433,8 @@ export class ChapterService {
       string,
       number,
       string[],
+      string[],
+
       boolean
     ],
     verse: Verse
@@ -446,6 +456,8 @@ export class ChapterService {
       string,
       string,
       number,
+      string[],
+
       string[],
       boolean
     ]
@@ -473,6 +485,8 @@ export class ChapterService {
       string,
       string,
       number,
+      string[],
+
       string[],
       boolean
     ],

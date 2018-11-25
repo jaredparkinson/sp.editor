@@ -5,6 +5,20 @@
 $btnOn: #8cadb8;
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@mixin w-super($selector, $color) {
+  $letters: 'a', 'b', 'c';
+  @each $letter in $letters {
+    s.#{$selector}-#{$letter}::before {
+      content: $letter;
+      color: $color;
+      vertical-align: super;
+      border-style: none !important;
+      text-decoration: none;
+      font-size: 0.75em;
+    }
+  }
+}
+
 html {
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
@@ -41,9 +55,11 @@ body {
       margin-left: 0 !important;
       p {
         &.note-phrase {
-          display: grid;
+          display: grid !important;
           grid-template-columns: 25px 1fr;
           grid-column-gap: 6px;
+          padding-left: 0;
+          margin-left: 0;
           // margin-left: -12px;
           .note-superscript {
             justify-self: right;
@@ -58,15 +74,22 @@ body {
       }
     }
   }
-  w {
-    &.eng {
-      color: #007fa4;
-    }
-    &.new {
-      color: maroon;
-    }
-    &.tc {
-      color: #098109;
+  span {
+    &.verse {
+      @include w-super('eng', #007fa4);
+      @include w-super('new', maroon);
+      @include w-super('tc', #098109);
+      w {
+        &.eng-color {
+          color: #007fa4;
+        }
+        &.new-color {
+          color: maroon;
+        }
+        &.tc-color {
+          color: #098109;
+        }
+      }
     }
   }
 }

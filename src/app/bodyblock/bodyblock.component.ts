@@ -86,6 +86,17 @@ export class BodyblockComponent
     this.wordSelection();
   }
 
+  getSuperScriptVisibility(item: string): boolean {
+    if (
+      (item.includes('new-') && this.saveState.data.newNotesVisible) ||
+      (item.includes('tc-') && this.saveState.data.translatorNotesVisible) ||
+      (item.includes('eng-') && this.saveState.data.englishNotesVisible)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   getWColor(
     w: [
       string,

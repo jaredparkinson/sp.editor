@@ -6,14 +6,15 @@ $btnOn: #8cadb8;
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @mixin w-super($selector, $color) {
-  $letters: 'a', 'b', 'c';
+  $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z';
   @each $letter in $letters {
-    s.#{$selector}-#{$letter}::before {
+    g.#{$selector}-#{$letter}::before {
       content: $letter;
       color: $color;
       vertical-align: super;
       border-style: none !important;
-      text-decoration: none;
+      text-decoration: none !important;
       font-size: 0.75em;
     }
   }

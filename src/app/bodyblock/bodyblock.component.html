@@ -68,7 +68,7 @@
           >
             <ng-container *ngIf="saveState.data.verseSuperScripts">
               <ng-container *ngFor="let item of w[8]">
-                <s class="{{item}}"></s>
+                <g *ngIf="getSuperScriptVisibility(item)" class="{{item}}"></g>
               </ng-container> </ng-container
             ><n>{{ w[1] }}</n>
           </w>

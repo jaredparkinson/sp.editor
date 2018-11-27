@@ -118,9 +118,9 @@ export class HeaderComponent implements OnInit {
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
-      console.log('tasdofjaosdfj');
+      // console.log('tasdofjaosdfj');
 
-      this.chapterService.resetNotes();
+      // this.chapterService.resetNotes();
       this.chapterService.resetVerseSelect();
     });
   }

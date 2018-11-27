@@ -11,7 +11,7 @@ import { Download } from '../models/download';
 export class DownloadService {
   public downloads: Download[] = [];
   private forageRegex: RegExp = new RegExp(
-    /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html)/
+    /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/
   );
   constructor(private httpClient: HttpClient) {
     const testaments = [
@@ -62,7 +62,7 @@ export class DownloadService {
         // const i = pako.gzip(, {});
 
         const zip = await jszip.loadAsync(data);
-        console.log(zip);
+        // console.log(zip);
 
         await zip.forEach(async file2 => {
           const contents = await zip.file(file2).async('text');
@@ -73,7 +73,7 @@ export class DownloadService {
           // console.log(test !== null);
           if (!test) {
             await localForage.setItem(saveName, contents).then(() => {
-              console.log('finished ' + saveName + zip.files.length);
+              // console.log('finished ' + saveName + zip.files.length);
             });
             file.downloading = false;
             file.downloaded = true;
@@ -87,7 +87,7 @@ export class DownloadService {
         });
         // console.log(zip);
 
-        console.log('Finished');
+        // console.log('Finished');
 
         // pako.inflate(data);
       });

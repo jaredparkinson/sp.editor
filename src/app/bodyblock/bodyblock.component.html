@@ -59,18 +59,14 @@
         #verses
       >
         <ng-container *ngFor="let w of verse.wTags2">
-          <w
-            nT="{{w[2]}}"
-            class="{{ getWColor(w)}}"
-            (click)="wTagClick(w, verse)"
-            [ngClass]="{ wRef: w[9] }"
-            #wTags
-          >
+          <w class="{{ getWColor(w)}}" [ngClass]="{ wRef: w[9] }" #wTags>
             <ng-container *ngIf="saveState.data.verseSuperScripts">
               <ng-container *ngFor="let item of w[8]">
                 <g *ngIf="getSuperScriptVisibility(item)" class="{{item}}"></g>
-              </ng-container> </ng-container
-            ><n>{{ w[1] }}</n>
+              </ng-container>
+            </ng-container>
+
+            <n>{{ w[1] }}</n>
           </w>
           <br
             *ngIf="w[0].includes('line-end') && saveState.data.poetryVisible"

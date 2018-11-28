@@ -33,8 +33,6 @@ export class BodyblockComponent
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<ElementRef>;
-  @ViewChildren('wTags')
-  'wTags'!: QueryList<ElementRef>;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -78,7 +76,7 @@ export class BodyblockComponent
           // }, 1000);
         }
         console.log('btsxyd');
-      }, 200);
+      }, 0);
       setTimeout(() => {
         this.synchronizedScrolling();
       }, 1000);

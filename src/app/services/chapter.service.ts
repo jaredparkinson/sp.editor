@@ -160,7 +160,7 @@ export class ChapterService {
         resolve: (resolveValue: boolean) => void,
         reject: (rejectValue: boolean) => void
       ) => {
-        const saved = await localForage.getItem(book + '\\' + vSplit[0]);
+        const saved = false; // await localForage.getItem(book + '\\' + vSplit[0]);
 
         if (saved) {
           this.setChapter(saved as string, synchronizedScrolling);
@@ -398,7 +398,8 @@ export class ChapterService {
       string,
       string,
       number,
-      string[],        string[],
+      string[],
+      string[],
 
       boolean
     ],

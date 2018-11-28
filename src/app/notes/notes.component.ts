@@ -51,7 +51,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
       this.notes.changes.subscribe(() => {
         this.chapterService.notes = this.notes.toArray();
       });
-    }, 100);
+    }, 0);
   }
   ngOnInit() {}
   notePhraseClick(secondaryNote: SecondaryNote) {

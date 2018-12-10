@@ -59,7 +59,12 @@
         #verses
       >
         <ng-container *ngFor="let w of verse.wTags2">
-          <w class="{{ getWColor(w)}}" [ngClass]="{ wRef: w[9] }" #wTags>
+          <w
+            class="{{ getWColor(w)}}"
+            [ngClass]="{ wRef: w[9] }"
+            (click)="wTagClick(w, verse)"
+            #wTags
+          >
             <ng-container *ngIf="saveState.data.verseSuperScripts">
               <ng-container *ngFor="let item of w[8]">
                 <g *ngIf="getSuperScriptVisibility(item)" class="{{item}}"></g>

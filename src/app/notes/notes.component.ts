@@ -104,6 +104,13 @@ export class NotesComponent implements OnInit, AfterViewInit {
       );
 
       if (count > 0) {
+        console.log();
+
+        const verseId = (note.nativeElement as Element).parentElement.id.replace(
+          'note',
+          'p'
+        );
+        document.getElementById(verseId).scrollIntoView();
         if (note) {
           (note.nativeElement as Element).classList.add('verse-select-1');
         }

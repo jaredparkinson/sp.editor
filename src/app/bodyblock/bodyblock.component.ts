@@ -57,7 +57,7 @@ export class BodyblockComponent
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
           await this.chapterService
-            .getChapter(book, chapter, this.synchronizedScrolling)
+            .getChapter(book, chapter)
             .then(() => {
               // console.log(this.synchronizedScrolling());
               // this.synchronizedScrolling();
@@ -65,7 +65,7 @@ export class BodyblockComponent
             });
         } else if (book === undefined && chapter !== undefined) {
           await this.chapterService
-            .getChapter(chapter, '', this.synchronizedScrolling)
+            .getChapter(chapter, '')
             .then(() => {
               this.chapterService.resetVerseSelect();
             });

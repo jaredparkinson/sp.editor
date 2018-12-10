@@ -26,7 +26,7 @@ export class ChapterService {
 
   public verseNums: number[] = [];
   public contextNums: number[] = [];
-
+  public halfNotes = false;
   private fs: any;
 
   chapter2: Chapter2 = new Chapter2();
@@ -43,8 +43,8 @@ export class ChapterService {
 
   public async getChapter(
     book: string,
-    chapter: string,
-    synchronizedScrolling: () => Promise<void>
+    chapter: string
+    // synchronizedScrolling: () => Promise<void>
   ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.notes2 = [];
@@ -60,17 +60,13 @@ export class ChapterService {
       this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
 
       if (this.fs) {
-        this.getChapterFS(book, vSplit, synchronizedScrolling).then(
-          (value: boolean) => {
-            resolve(true);
-          }
-        );
+        this.getChapterFS(book, vSplit).then((value: boolean) => {
+          resolve(true);
+        });
       } else {
-        this.getChapterWeb(book, vSplit, synchronizedScrolling).then(
-          (value: boolean) => {
-            resolve(true);
-          }
-        );
+        this.getChapterWeb(book, vSplit).then((value: boolean) => {
+          resolve(true);
+        });
       }
     });
   }
@@ -124,8 +120,8 @@ export class ChapterService {
 
   private getChapterFS(
     book: string,
-    vSplit: string[],
-    synchronizedScrolling: () => Promise<void>
+    vSplit: string[]
+    // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<boolean>(
       (
@@ -142,7 +138,7 @@ export class ChapterService {
           'c:/ScripturesProject/' + url2,
           'utf8',
           (err, data) => {
-            this.setChapter(data, synchronizedScrolling);
+            this.setChapter(data);
           }
         );
         resolve(true);
@@ -152,8 +148,8 @@ export class ChapterService {
 
   private async getChapterWeb(
     book: string,
-    vSplit: string[],
-    synchronizedScrolling: () => Promise<void>
+    vSplit: string[]
+    // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<boolean>(
       async (
@@ -163,7 +159,7 @@ export class ChapterService {
         const saved = false; // await localForage.getItem(book + '\\' + vSplit[0]);
 
         if (saved) {
-          this.setChapter(saved as string, synchronizedScrolling);
+          this.setChapter(saved as string);
         } else {
           const url2 =
             'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
@@ -174,7 +170,7 @@ export class ChapterService {
               responseType: 'text'
             })
             .subscribe(data => {
-              this.setChapter(data, synchronizedScrolling);
+              this.setChapter(data);
               resolve(true);
             });
         }
@@ -183,8 +179,8 @@ export class ChapterService {
   }
 
   private async setChapter(
-    data: string,
-    synchronizedScrolling: () => Promise<void>
+    data: string
+    // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<boolean>(
       async (
@@ -406,7 +402,7 @@ export class ChapterService {
     verse: Verse
   ) {
     // console.log(w[3].split(','));
-
+    this.halfNotes = false;
     if (
       w[7].length === 0 &&
       !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
@@ -514,6 +510,8 @@ export class ChapterService {
       }
 
       wTag[7].shift();
+      this.halfNotes = true;
+      this.navService.rightPaneToggle = true;
     } else {
       this.resetVerseNotes();
     }

@@ -269,6 +269,10 @@ body.find {
     float: right;
     position: absolute;
     right: 0px;
+
+    &.half-notes {
+      top: 50%;
+    }
   }
 }
 

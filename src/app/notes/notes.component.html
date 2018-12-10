@@ -1,17 +1,6 @@
 <div
   id="study-notes-parent"
   [ngClass]="{
-    'notes-show-tier': saveState.data.secondaryNotesVisible,
-    'notes-show-new': saveState.data.newNotesVisible,
-    'hide-l hide-m': !saveState.data.rightPanePin,
-    'notes-show-tc': saveState.data.translatorNotesVisible,
-    'notes-show-eng': saveState.data.englishNotesVisible,
-    'notes-hide-tier': !saveState.data.secondaryNotesVisible,
-    'notes-hide-tc': !saveState.data.translatorNotesVisible,
-    'notes-hide-eng': !saveState.data.englishNotesVisible,
-    'notes-hide-new': !saveState.data.newNotesVisible,
-    'notes-hide-original': !saveState.data.originalNotesVisible,
-    'notes-show-original': saveState.data.originalNotesVisible,
     'show-s': navServices.rightPaneToggle,
     'hide-s': !navServices.rightPaneToggle
   }"
@@ -19,8 +8,13 @@
 >
   <div>
     <div id="footerTop"></div>
-    <footer id="studyNotes" class="study-notes">
-      <!-- <span id="studyNotesTop"></span> -->
+    <footer
+      id="studyNotes"
+      class="study-notes"
+      [ngClass]="{
+        'half-notes': chapterService.halfNotes
+      }"
+    >
       <note
         [ngClass]="{
           'secondary-override-off': !note.o
@@ -86,7 +80,6 @@
           id="note-button-{{note.id}}"
           (click)="noteButtonClick(note)"
         >
-          <!-- (click)="note.secondaryButtonClick()"> -->
           +
         </button>
       </note>

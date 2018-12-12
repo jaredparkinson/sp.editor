@@ -1,6 +1,7 @@
 <div
   id="study-notes-parent"
   [ngClass]="{
+    'hide-l hide-m': !saveState.data.rightPanePin,
     'show-s': navServices.rightPaneToggle,
     'hide-s': !navServices.rightPaneToggle
   }"

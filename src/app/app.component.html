@@ -16,7 +16,8 @@
     <div
       [ngClass]="{
         none: !navService.rightPaneToggle,
-        'overlay-toggle': navService.rightPaneToggle
+        'overlay-toggle':
+          navService.rightPaneToggle && !chapterServices.halfNotes
       }"
       (click)="navService.btnRightPanePress()"
     ></div>

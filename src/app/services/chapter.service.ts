@@ -6,6 +6,7 @@ import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { Verse } from '../modelsJson/Verse';
+import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
@@ -17,7 +18,8 @@ export class ChapterService {
     private navService: NavigationService,
     private httpClient: HttpClient,
     private stringService: StringService,
-    private saveState: SaveStateService
+    private saveState: SaveStateService,
+    private helperService: HelperService
   ) {
     this.fs = (window as any).fs;
   }
@@ -414,6 +416,7 @@ export class ChapterService {
       this.firstClick(w, verse);
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
       this.resetVerseNotes();
+      this.openHalfNotes();
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
       this.selectNote(verse, w);
     }
@@ -492,6 +495,7 @@ export class ChapterService {
     this.resetNotes2();
     if (wTag[7].length === 0) {
       this.resetVerseNotes();
+      this.openHalfNotes();
       return;
     }
     const note = lodash.find(this.notes, (n: ElementRef) => {
@@ -501,7 +505,7 @@ export class ChapterService {
     if (note) {
       (note.nativeElement as HTMLElement).classList.add('verse-select-1');
       (note.nativeElement as HTMLElement).scrollIntoView({
-        block: 'center'
+        block: 'start'
       });
 
       if (resetVerse) {
@@ -510,10 +514,17 @@ export class ChapterService {
       }
 
       wTag[7].shift();
-      this.halfNotes = true;
+      this.openHalfNotes();
       this.navService.rightPaneToggle = true;
     } else {
       this.resetVerseNotes();
+      this.openHalfNotes();
+    }
+  }
+
+  private openHalfNotes() {
+    if (this.helperService.getWidth() < 511.98) {
+      this.halfNotes = true;
     }
   }
 }

@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ElectronService } from './providers/electron.service';
+import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 @Component({
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     public electronService: ElectronService,
     private translate: TranslateService,
+    public chapterServices: ChapterService,
     public navService: NavigationService,
     public saveState: SaveStateService,
     public httpClient: HttpClient

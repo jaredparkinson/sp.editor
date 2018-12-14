@@ -108,6 +108,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnOriginalNotesPress();
   }
   btnRightPanePress() {
+    this.chapterService.halfNotes = false;
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {

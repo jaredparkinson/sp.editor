@@ -271,6 +271,8 @@ body.find {
     right: 0px;
 
     &.half-notes {
+      position: fixed !important;
+      width: 100%;
       top: 50%;
     }
   }

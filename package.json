@@ -32,7 +32,7 @@
     "build:dev": "yarn run build -- -c dev",
     "build:prod": "yarn run build  -c production",
     "ng:serve": "ng serve",
-    "web": "yarn run postinstall:web && ng serve --aot -o",
+    "web": "yarn run postinstall:web && ng serve --aot",
     "ng:serve:web": "yarn run postinstall:web && ng serve -o",
     "electron:tsc": "tsc main.ts",
     "electron:serve": "wait-on http-get://localhost:4200/ && yarn run electron:tsc && electron . --serve",

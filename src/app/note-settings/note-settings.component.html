@@ -58,5 +58,84 @@
     </button>
     <button id="versionNumber">Version {{ this.versionNumber }}</button>
     <button id="settings" (click)="settings()">Settings</button>
+
+    <button
+      (click)="subNotesClick('QUO')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refQUO }"
+    >
+      QUO
+    </button>
+    <button
+      (click)="subNotesClick('PHR')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refPHR }"
+    >
+      PHR
+    </button>
+    <button
+      (click)="subNotesClick('OR')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refOR }"
+    >
+      OR
+    </button>
+    <button
+      (click)="subNotesClick('IE')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refIE }"
+    >
+      IE
+    </button>
+    <button
+      (click)="subNotesClick('HEB')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refHEB }"
+    >
+      HEB
+    </button>
+    <button
+      (click)="subNotesClick('GR')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refGR }"
+    >
+      GR
+    </button>
+    <button
+      (click)="subNotesClick('KJV')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refKJV }"
+    >
+      KJV
+    </button>
+    <button
+      (click)="subNotesClick('HST')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refHST }"
+    >
+      HST
+    </button>
+    <button
+      (click)="subNotesClick('CR')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refCR }"
+    >
+      CR
+    </button>
+    <button
+      (click)="subNotesClick('ALT')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refALT }"
+    >
+      ALT
+    </button>
+    <button
+      (click)="subNotesClick('HMY')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refHMY }"
+    >
+      HMY
+    </button>
+    <button
+      (click)="subNotesClick('TG')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refTG }"
+    >
+      TG
+    </button>
+    <button
+      (click)="subNotesClick('GS')"
+      [ngClass]="{ 'nav-btn-on': this.saveState.data.refGS }"
+    >
+      GS
+    </button>
   </div>
 </div>

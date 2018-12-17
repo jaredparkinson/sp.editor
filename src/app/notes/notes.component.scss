@@ -59,11 +59,9 @@ $font-stack: PalatinoldsLat-Roman, serif;
   }
 
   @include span-reference('quotation', 'QUO');
-
   @include span-reference('phrasing', 'PHR');
   @include span-reference('or', 'OR');
   @include span-reference('ie', 'IE');
-  @include span-reference();
   @include span-reference('hebrew', 'HEB');
   @include span-reference('greek', 'GR');
   @include span-reference('archaic', 'KJV');

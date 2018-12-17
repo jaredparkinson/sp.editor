@@ -72,4 +72,62 @@ export class NoteSettingsComponent implements OnInit {
   settings() {
     this.router.navigateByUrl('settings');
   }
+
+  subNotesClick(ref: string) {
+    switch (ref) {
+      case 'QUO': {
+        this.saveState.data.refQUO = !this.saveState.data.refQUO;
+        break;
+      }
+      case 'PHR': {
+        this.saveState.data.refPHR = !this.saveState.data.refPHR;
+        break;
+      }
+      case 'OR': {
+        this.saveState.data.refOR = !this.saveState.data.refOR;
+        break;
+      }
+      case 'IE': {
+        this.saveState.data.refIE = !this.saveState.data.refIE;
+        break;
+      }
+      case 'HEB': {
+        this.saveState.data.refHEB = !this.saveState.data.refHEB;
+        break;
+      }
+      case 'GR': {
+        this.saveState.data.refGR = !this.saveState.data.refGR;
+        break;
+      }
+      case 'KJV': {
+        this.saveState.data.refKJV = !this.saveState.data.refKJV;
+        break;
+      }
+      case 'HST': {
+        this.saveState.data.refHST = !this.saveState.data.refHST;
+        break;
+      }
+      case 'CR': {
+        this.saveState.data.refCR = !this.saveState.data.refCR;
+        break;
+      }
+      case 'ALT': {
+        this.saveState.data.refALT = !this.saveState.data.refALT;
+        break;
+      }
+      case 'HMY': {
+        this.saveState.data.refHMY = !this.saveState.data.refHMY;
+        break;
+      }
+      case 'TG': {
+        this.saveState.data.refTG = !this.saveState.data.refTG;
+        break;
+      }
+      case 'GS': {
+        this.saveState.data.refGS = !this.saveState.data.refGS;
+        break;
+      }
+    }
+    this.saveState.save();
+  }
 }

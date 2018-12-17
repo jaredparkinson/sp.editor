@@ -170,6 +170,26 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   showSecondaryNote(seNote: [string, string, string, string]): boolean {
     let vis = true;
+    if (seNote[2].includes('reference-label')) {
+      if (
+        (seNote[2].includes('quotation') && !this.saveState.data.refQUO) ||
+        (seNote[2].includes('phrasing') && !this.saveState.data.refPHR) ||
+        (seNote[2].includes('or') && !this.saveState.data.refOR) ||
+        (seNote[2].includes('ie') && !this.saveState.data.refIE) ||
+        (seNote[2].includes('hebrew') && !this.saveState.data.refHEB) ||
+        (seNote[2].includes('greek') && !this.saveState.data.refGR) ||
+        (seNote[2].includes('archaic') && !this.saveState.data.refKJV) ||
+        (seNote[2].includes('historical') && !this.saveState.data.refHST) ||
+        (seNote[2].includes('cr') && !this.saveState.data.refCR) ||
+        (seNote[2].includes('alt') && !this.saveState.data.refALT) ||
+        (seNote[2].includes('harmony') && !this.saveState.data.refHMY) ||
+        (seNote[2].includes('tg') && !this.saveState.data.refTG) ||
+        (seNote[2].includes('gs') && !this.saveState.data.refGS)
+      ) {
+        console.log('gtcrd');
+        return false;
+      }
+    }
     seNote[1].split(' ').forEach(c => {
       switch (c) {
         case 'note-phrase-eng-2': {

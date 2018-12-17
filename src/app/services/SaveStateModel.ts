@@ -18,6 +18,20 @@ export class SaveStateModel implements ISaveModel {
   public currentPage = '';
   public verseSelect = false;
   public verseSuperScripts = false;
+  public refQUO = false;
+  public refPHR = false;
+  public refOR = false;
+  public refIE = false;
+  public refHEB = false;
+  public refGR = false;
+  public refKJV = false;
+  public refHST = false;
+  public refCR = false;
+  public refALT = false;
+  public refHMY = false;
+  public refTG = false;
+  public refGS = false;
+
   constructor() {}
 }
 

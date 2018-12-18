@@ -277,13 +277,14 @@ body.find {
       position: fixed !important;
       width: 100%;
       top: 50%;
-      .half-notes-margin {
-        display: block !important;
-        position: fixed;
-        width: 100%;
-        height: 20px;
-        background: grey;
-      }
+      border-top: 5px solid darkgrey;
+      // .half-notes-margin {
+      //   display: block !important;
+      //   position: fixed;
+      //   width: 100%;
+      //   height: 20px;
+      //   background: grey;
+      // }
     }
   }
 }

@@ -416,7 +416,7 @@ export class ChapterService {
       this.firstClick(w, verse);
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
       this.resetVerseNotes();
-      this.openHalfNotes();
+      this.openHalfNotes(w, verse);
     } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
       this.selectNote(verse, w);
     }
@@ -495,7 +495,7 @@ export class ChapterService {
     this.resetNotes2();
     if (wTag[7].length === 0) {
       this.resetVerseNotes();
-      this.openHalfNotes();
+      this.openHalfNotes(wTag, verse);
       return;
     }
     const note = lodash.find(this.notes, (n: ElementRef) => {
@@ -514,16 +514,39 @@ export class ChapterService {
       }
 
       wTag[7].shift();
-      this.openHalfNotes();
+      this.openHalfNotes(wTag, verse);
       this.navService.rightPaneToggle = true;
     } else {
       this.resetVerseNotes();
-      this.openHalfNotes();
+      this.openHalfNotes(wTag, verse);
     }
   }
 
-  private openHalfNotes() {
+  private openHalfNotes(
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
+
+      boolean
+    ],
+    verse: Verse
+  ) {
     if (this.helperService.getWidth() < 511.98) {
+      // console.log(w);
+
+      // console.log(
+      //   document
+      //     .querySelector('#' + verse.id + ' >:nth-child(' + w[2] + ')')
+      //     .scrollIntoView()
+      // );
+      document.getElementById(verse.id).scrollIntoView();
       this.halfNotes = true;
     }
   }

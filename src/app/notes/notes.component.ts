@@ -186,7 +186,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
         (seNote[2].includes('tg') && !this.saveState.data.refTG) ||
         (seNote[2].includes('gs') && !this.saveState.data.refGS)
       ) {
-        console.log('gtcrd');
+        // console.log('gtcrd');
         return false;
       }
     }

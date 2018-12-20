@@ -7,8 +7,15 @@ $font-stack: PalatinoldsLat-Roman, serif;
     font-variant: small-caps;
     font-weight: 700;
   }
+  .#{$content}-on {
+    .note-phrase.reference-label-#{$selector}{
+      display: block !important;
+    }
+  }
 }
-
+.note-phrase[class*="reference-label"]{
+  display: none;
+}
 .right-pane {
   z-index: 100;
 

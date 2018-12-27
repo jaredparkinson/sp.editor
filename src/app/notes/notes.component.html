@@ -4,19 +4,21 @@
     'hide-l hide-m': !saveState.data.rightPanePin,
     'show-s': navServices.rightPaneToggle,
     'hide-s': !navServices.rightPaneToggle,
-    'QUO-on':this.saveState.data.refQUO,
-'PHR-on':this.saveState.data.refPHR,
-'OR-on':this.saveState.data.refOR,
-'IE-on':this.saveState.data.refIE,
-'HEB-on':this.saveState.data.refHEB,
-'GR-on':this.saveState.data.refGR,
-'KJV-on':this.saveState.data.refKJV,
-'HST-on':this.saveState.data.refHST,
-'CR-on':this.saveState.data.refCR,
-'ALT-on':this.saveState.data.refALT,
-'HMY-on':this.saveState.data.refHMY,
-'TG-on':this.saveState.data.refTG,
-'GS-on':this.saveState.data.refGS
+    'notesPopover-on':
+      !saveState.data.rightPanePin && this.saveState.data.notesPopover,
+    'QUO-on': this.saveState.data.refQUO,
+    'PHR-on': this.saveState.data.refPHR,
+    'OR-on': this.saveState.data.refOR,
+    'IE-on': this.saveState.data.refIE,
+    'HEB-on': this.saveState.data.refHEB,
+    'GR-on': this.saveState.data.refGR,
+    'KJV-on': this.saveState.data.refKJV,
+    'HST-on': this.saveState.data.refHST,
+    'CR-on': this.saveState.data.refCR,
+    'ALT-on': this.saveState.data.refALT,
+    'HMY-on': this.saveState.data.refHMY,
+    'TG-on': this.saveState.data.refTG,
+    'GS-on': this.saveState.data.refGS
   }"
   class="study-notes-parent "
 >
@@ -35,8 +37,8 @@
           'secondary-override-off': !note.o
         }"
         *ngFor="let note of chapterService.chapter2.notes; trackBy: trackById"
-        id="{{note.id}}"
-        class="{{note.cn}}"
+        id="{{ note.id }}"
+        class="{{ note.cn }}"
       >
         <p class="note-title">{{ note.nT }}</p>
         <p class="note-short-title">{{ note.nST }}</p>
@@ -46,41 +48,37 @@
               'tier-2-note-hide': !note.v && note.o,
               'tier-2-note-show': note.v && note.o
             }"
-            id="{{secondaryNote.id}}"
-            class="{{secondaryNote.cn}} secondary-note"
-            id="{{secondaryNote.id}}"
+            id="{{ secondaryNote.id }}"
+            class="{{ secondaryNote.cn }} secondary-note"
+            id="{{ secondaryNote.id }}"
             *ngIf="showNote(secondaryNote)"
             #notes
           >
             <ng-container *ngFor="let sn of secondaryNote.seNote">
-              <p
-                *ngIf="
-                  showSecondaryNote(sn) && sn[1].trim().includes('note-phrase')
-                "
-                class="{{sn[1]}}"
-                [id]="sn[0]"
-                (click)="this.notePhraseClick(secondaryNote)"
-              >
-                <span
-                  class="note-superscript"
-                  *ngIf="saveState.data.verseSuperScripts"
-                  >{{ sn[3] }}
-                </span>
-                <span
-                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-                ></span>
-              </p>
-              <p
-                *ngIf="
-                  showSecondaryNote(sn) && !sn[1].trim().includes('note-phrase')
-                "
-                class="{{sn[1]}}"
-                [id]="sn[0]"
-              >
-                <span
-                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-                ></span>
-              </p>
+              <ng-container *ngIf="showSecondaryNote(sn)">
+                <p
+                  *ngIf="sn[1].trim().includes('note-phrase'); else noteref"
+                  (click)="this.notePhraseClick(secondaryNote)"
+                  class="{{ sn[1] }}"
+                  [id]="sn[0]"
+                >
+                  <span
+                    class="note-superscript"
+                    *ngIf="saveState.data.verseSuperScripts"
+                    >{{ sn[3] }}
+                  </span>
+                  <span
+                    [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+                  ></span>
+                </p>
+                <ng-template #noteref>
+                  <p class="{{ sn[1] }}" [id]="sn[0]">
+                    <span
+                      [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+                    ></span>
+                  </p>
+                </ng-template>
+              </ng-container>
             </ng-container>
           </div>
         </ng-container>
@@ -92,7 +90,7 @@
               (!note.o && saveState.data.secondaryNotesVisible) ||
               (note.o && note.v)
           }"
-          id="note-button-{{note.id}}"
+          id="note-button-{{ note.id }}"
           (click)="noteButtonClick(note)"
         >
           +

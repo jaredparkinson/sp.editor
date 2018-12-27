@@ -31,6 +31,7 @@ export class SaveStateModel implements ISaveModel {
   public refHMY = false;
   public refTG = false;
   public refGS = false;
+  public notesPopover = false;
 
   constructor() {}
 }

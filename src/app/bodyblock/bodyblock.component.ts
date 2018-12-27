@@ -56,19 +56,15 @@ export class BodyblockComponent
 
       setTimeout(async () => {
         if (book !== undefined && chapter !== undefined) {
-          await this.chapterService
-            .getChapter(book, chapter)
-            .then(() => {
-              // console.log(this.synchronizedScrolling());
-              // this.synchronizedScrolling();
-              this.chapterService.resetVerseSelect();
-            });
+          await this.chapterService.getChapter(book, chapter).then(() => {
+            // console.log(this.synchronizedScrolling());
+            // this.synchronizedScrolling();
+            this.chapterService.resetVerseSelect();
+          });
         } else if (book === undefined && chapter !== undefined) {
-          await this.chapterService
-            .getChapter(chapter, '')
-            .then(() => {
-              this.chapterService.resetVerseSelect();
-            });
+          await this.chapterService.getChapter(chapter, '').then(() => {
+            this.chapterService.resetVerseSelect();
+          });
           // setTimeout(() => {
           //   if (this.saveState.data.verseSelect) {
           //     this.chapterService.resetVerseSelect();
@@ -152,9 +148,15 @@ export class BodyblockComponent
       string[],
       boolean
     ],
-    verse: Verse
+    verse: Verse,
+    event: Event
   ) {
+    if (!this.saveState.data.rightPanePin) {
+    }
+    this.saveState.data.notesPopover = true;
     console.log(wTag);
+    console.log((event.currentTarget as Element).getBoundingClientRect());
+
     this.chapterService.wTagClick(wTag, verse);
   }
 

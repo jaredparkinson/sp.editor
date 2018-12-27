@@ -42,7 +42,7 @@
         let paragraph of chapterService.chapter2.paragraphs;
         trackBy: trackById
       "
-      id="{{paragraph.id}}"
+      id="{{ paragraph.id }}"
     >
       <span
         class="verse"
@@ -50,7 +50,7 @@
           'highlight-verse': verse.highlight,
           'highlight-context': !verse.highlight && verse.context
         }"
-        id="{{verse.id}}"
+        id="{{ verse.id }}"
         *ngFor="
           let verse of paragraph.verses;
           let i = index;
@@ -60,14 +60,17 @@
       >
         <ng-container *ngFor="let w of verse.wTags2">
           <w
-            class="{{ getWColor(w)}}"
+            class="{{ getWColor(w) }}"
             [ngClass]="{ wRef: w[9] }"
-            (click)="wTagClick(w, verse)"
+            (click)="wTagClick(w, verse, $event)"
             #wTags
           >
             <ng-container *ngIf="saveState.data.verseSuperScripts">
               <ng-container *ngFor="let item of w[8]">
-                <g *ngIf="getSuperScriptVisibility(item)" class="{{item}}"></g>
+                <g
+                  *ngIf="getSuperScriptVisibility(item)"
+                  class="{{ item }}"
+                ></g>
               </ng-container>
             </ng-container>
 

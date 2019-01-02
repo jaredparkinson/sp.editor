@@ -1,8 +1,8 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SyncScrollingService {
-  constructor(private ngZone: NgZone) {}
+  constructor() {}
 
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
@@ -55,16 +55,16 @@ export class SyncScrollingService {
   }
 
   public initSyncScrolling() {
-    this.ngZone.runOutsideAngular(() => {
-      document.getElementById('appBodyBlock').addEventListener('wheel', () => {
-        this.onScroll();
-      });
-      document
-        .getElementById('appBodyBlock')
-        .addEventListener('touchend', () => {
-          this.onScroll();
-        });
-    });
+    // this.ngZone.runOutsideAngular(() => {
+    //   document.getElementById('appBodyBlock').addEventListener('wheel', () => {
+    //     this.onScroll();
+    //   });
+    //   document
+    //     .getElementById('appBodyBlock')
+    //     .addEventListener('touchend', () => {
+    //       this.onScroll();
+    //     });
+    // });
   }
   onScroll(): any {
     throw new Error('Method not implemented.');

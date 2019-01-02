@@ -34,7 +34,11 @@
     }"
   >
     <div id="bodyBlockTop"></div>
-    <header [innerHTML]="chapterService.chapter2.header"></header>
+    <header
+      [innerHTML]="
+        sanitizer.bypassSecurityTrustHtml(chapterService.chapter2.header)
+      "
+    ></header>
 
     <div
       class="hidden-paragraph"

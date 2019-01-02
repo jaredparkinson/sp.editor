@@ -20,6 +20,7 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
@@ -37,6 +38,7 @@ export class BodyblockComponent
     public fileManager: NavigationService,
     public httpClient: HttpClient,
     // public activatedRoute: ActivatedRoute,
+    public sanitizer: DomSanitizer,
     public chapterService: ChapterService,
     public navService: NavigationService,
     public saveState: SaveStateService,

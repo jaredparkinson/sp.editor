@@ -172,18 +172,30 @@ export class NotesComponent implements OnInit, AfterViewInit {
     let vis = true;
     if (seNote[2].includes('reference-label')) {
       if (
-        (seNote[2].includes('reference-label-quotation') && !this.saveState.data.refQUO) ||
-        (seNote[2].includes('reference-label-phrasing') && !this.saveState.data.refPHR) ||
-        (seNote[2].includes('reference-label-or') && !this.saveState.data.refOR) ||
-        (seNote[2].includes('reference-label-ie') && !this.saveState.data.refIE) ||
-        (seNote[2].includes('reference-label-hebrew') && !this.saveState.data.refHEB) ||
-        (seNote[2].includes('reference-label-greek') && !this.saveState.data.refGR) ||
-        (seNote[2].includes('reference-label-archaic') && !this.saveState.data.refKJV) ||
-        (seNote[2].includes('reference-label-historical') && !this.saveState.data.refHST) ||
-        (seNote[2].includes('reference-label-cr') && !this.saveState.data.refCR) ||
-        (seNote[2].includes('reference-label-alt') && !this.saveState.data.refALT) ||
-        (seNote[2].includes('reference-label-harmony') && !this.saveState.data.refHMY) ||
-        (seNote[2].includes('reference-label-tg') && !this.saveState.data.refTG) ||
+        (seNote[2].includes('reference-label-quotation') &&
+          !this.saveState.data.refQUO) ||
+        (seNote[2].includes('reference-label-phrasing') &&
+          !this.saveState.data.refPHR) ||
+        (seNote[2].includes('reference-label-or') &&
+          !this.saveState.data.refOR) ||
+        (seNote[2].includes('reference-label-ie') &&
+          !this.saveState.data.refIE) ||
+        (seNote[2].includes('reference-label-hebrew') &&
+          !this.saveState.data.refHEB) ||
+        (seNote[2].includes('reference-label-greek') &&
+          !this.saveState.data.refGR) ||
+        (seNote[2].includes('reference-label-archaic') &&
+          !this.saveState.data.refKJV) ||
+        (seNote[2].includes('reference-label-historical') &&
+          !this.saveState.data.refHST) ||
+        (seNote[2].includes('reference-label-cr') &&
+          !this.saveState.data.refCR) ||
+        (seNote[2].includes('reference-label-alt') &&
+          !this.saveState.data.refALT) ||
+        (seNote[2].includes('reference-label-harmony') &&
+          !this.saveState.data.refHMY) ||
+        (seNote[2].includes('reference-label-tg') &&
+          !this.saveState.data.refTG) ||
         (seNote[2].includes('reference-label-gs') && !this.saveState.data.refGS)
       ) {
         // console.log('gtcrd');

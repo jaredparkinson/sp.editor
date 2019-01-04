@@ -10,6 +10,7 @@ import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
+import { Paragraph } from '../modelsJson/Paragraph';
 
 @Injectable()
 export class ChapterService {
@@ -189,7 +190,19 @@ export class ChapterService {
         resolve: (resolveValue: boolean) => void,
         reject: (rejectValue: boolean) => void
       ) => {
-        this.chapter2 = JSON.parse(data) as Chapter2;
+        const temp = JSON.parse(data) as string[];
+
+        this.chapter2 = JSON.parse(temp.pop()) as Chapter2;
+        // console.log(JSON.parse(temp.shift()));
+
+        this.chapter2.paragraphs.push(JSON.parse(temp.shift())); // as Paragraph[];
+
+        temp.forEach(d => {
+          // console.log(typeof);
+
+          this.chapter2.notes.push(JSON.parse(d));
+        });
+        // this.chapter2 = JSON.parse(data) as Chapter2;
 
         this.setHighlighting().then((value: boolean) => {
           this.verseFocus().then((value2: boolean) => {

@@ -49,35 +49,33 @@ export class BodyblockComponent
   ngAfterContentInit(): void {}
   ngOnInit() {
     this.initSyncScrolling();
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
 
       const book = params['book'];
       const chapter = params['chapter'];
 
-      setTimeout(async () => {
-        if (book !== undefined && chapter !== undefined) {
-          await this.chapterService.getChapter(book, chapter).then(() => {
-            // console.log(this.synchronizedScrolling());
-            // this.synchronizedScrolling();
-            this.chapterService.resetVerseSelect();
-          });
-        } else if (book === undefined && chapter !== undefined) {
-          await this.chapterService.getChapter(chapter, '').then(() => {
-            this.chapterService.resetVerseSelect();
-          });
-          // setTimeout(() => {
-          //   if (this.saveState.data.verseSelect) {
-          //     this.chapterService.resetVerseSelect();
-          //   }
-          // }, 1000);
-        }
-        console.log('btsxyd');
-      }, 0);
-      setTimeout(() => {
-        this.synchronizedScrolling();
-      }, 1000);
+      if (book !== undefined && chapter !== undefined) {
+        await this.chapterService.getChapter(book, chapter).then(() => {
+          // console.log(this.synchronizedScrolling());
+          // this.synchronizedScrolling();
+          this.chapterService.resetVerseSelect();
+        });
+      } else if (book === undefined && chapter !== undefined) {
+        await this.chapterService.getChapter(chapter, '').then(() => {
+          this.chapterService.resetVerseSelect();
+        });
+        // setTimeout(() => {
+        //   if (this.saveState.data.verseSelect) {
+        //     this.chapterService.resetVerseSelect();
+        //   }
+        // }, 1000);
+      }
+      console.log('btsxyd');
+      this.synchronizedScrolling();
+      setTimeout(async () => {}, 0);
+      setTimeout(() => {}, 1000);
     });
     this.wordSelection();
   }

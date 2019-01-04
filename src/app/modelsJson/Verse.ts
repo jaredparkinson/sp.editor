@@ -1,6 +1,6 @@
 export class Verse {
   public id: string;
-  public innerHtml: string;
+  // public innerHtml: string;
   public highlight = false;
   // public wTags: WTag[] = [];
   public wTags2: Array<

@@ -137,6 +137,23 @@ export class BodyblockComponent
     return paragraph.id;
   }
 
+  wTagTrackBy(
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
+      boolean
+    ]
+  ) {
+    return wTag[2];
+  }
+
   wTagClick(
     wTag: [
       string,

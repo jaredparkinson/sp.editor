@@ -46,7 +46,7 @@ export class NavigationService {
 
   btnPreviousPagePress(pageUrl: string) {
     console.log(pageUrl);
-
+    (document.getElementById('addressBar') as HTMLInputElement).value = '';
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
     let previousSibling: Element;
@@ -63,6 +63,8 @@ export class NavigationService {
   }
 
   btnNextPagePress(pageUrl: string) {
+    (document.getElementById('addressBar') as HTMLInputElement).value = '';
+
     const node = this.navData.querySelector('a[href="' + pageUrl + '"]');
 
     const nextSibling = !node.nextElementSibling

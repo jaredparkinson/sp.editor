@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as lodash from 'lodash';
@@ -17,7 +17,8 @@ export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
-  private addressBar: HTMLInputElement;
+  // private addressBar: HTMLInputElement;
+  @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
     public fileManager: NavigationService,
     public chapterService: ChapterService,
@@ -29,7 +30,7 @@ export class FilesComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.fileManager.folders[0].path);
-    this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
+    // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
   setVisibility(path: string) {
     this.fileManager.getNavigation(path);
@@ -53,7 +54,9 @@ export class FilesComponent implements OnInit {
   }
 
   private buildUrl() {
-    const urlAsdf = this.urlBuilder.urlParser(this.addressBar.value);
+    const urlAsdf = this.urlBuilder.urlParser(
+      (this.addressBar.nativeElement as HTMLInputElement).value
+    );
     console.log(urlAsdf);
 
     this.router.navigateByUrl(urlAsdf);
@@ -66,5 +69,9 @@ export class FilesComponent implements OnInit {
 
   settings() {
     this.router.navigateByUrl('settings');
+  }
+
+  addressBarClick() {
+    (this.addressBar.nativeElement as HTMLInputElement).select();
   }
 }

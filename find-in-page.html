@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script type="text/javascript" src="find-in-page.js"></script>
+    <link rel="stylesheet" href="find-in-page.css" />
+    <style></style>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <script type="text/javascript" src="find-in-page.js"> </script>
-  <link rel="stylesheet" href="find-in-page.css">
-  <style>
-  </style>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
-</head>
-
-<body>
-  <div id="searchBar">
-    <input placeholder="Enter text to search" type="search" name="" id="searchBox" oninput="searchTextChange('find')"
-      onkeyup="escape(event)">
-    <div id="results">No Results</div>
-    <button onclick="searchTextChange('back')" class="fas fa-chevron-left"></button>
-    <button onclick="searchTextChange('forward')" class="fas fa-chevron-right"></button>
-
-    <button id="closeButton" onclick="closeSearch()" class="fas fa-times-circle"></button>
-  </div>
-
-</body>
-
+  <body>
+    <div id="searchBar">
+      <input
+        placeholder="Enter text to search"
+        type="search"
+        name=""
+        id="searchBox"
+        oninput="searchTextChange('find')"
+        onkeyup="escape(event)"
+        onclick="searchBoxClick()"
+      />
+      <div id="results">No Results</div>
+      <button
+        onclick="searchTextChange('back')"
+        class="fas fa-chevron-left"
+      ></button>
+      <button
+        onclick="searchTextChange('forward')"
+        class="fas fa-chevron-right"
+      ></button>
+      <button
+        id="closeButton"
+        onclick="closeSearch()"
+        class="fas fa-times-circle"
+      ></button>
+    </div>
+  </body>
 </html>

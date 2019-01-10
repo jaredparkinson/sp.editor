@@ -43,6 +43,11 @@ function closeSearch() {
   ipcRenderer.send('search-close-fip', 'close');
 }
 
+function searchBoxClick() {
+  const searchBox = document.getElementById('searchBox');
+  searchBox.select();
+}
+
 function escape(event) {
   //   alert(event.key);
   if (event.key == 'Escape') {

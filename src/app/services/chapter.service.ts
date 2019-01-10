@@ -189,6 +189,7 @@ export class ChapterService {
         resolve: (resolveValue: boolean) => void,
         reject: (rejectValue: boolean) => void
       ) => {
+        this.chapter2 = new Chapter2();
         this.chapter2 = JSON.parse(data) as Chapter2;
 
         this.setHighlighting().then((value: boolean) => {

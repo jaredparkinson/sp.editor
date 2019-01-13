@@ -2,6 +2,7 @@
 
 * Added note margins ([188c6ba](https://github.com/jaredparkinson/sp.editor/commit/188c6ba))
 * sync scrolling improvements ([cb09415](https://github.com/jaredparkinson/sp.editor/commit/cb09415))
+* v3.42.82 ([df75d35](https://github.com/jaredparkinson/sp.editor/commit/df75d35))
 
 
 

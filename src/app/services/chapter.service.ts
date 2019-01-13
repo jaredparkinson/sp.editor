@@ -509,6 +509,8 @@ export class ChapterService {
         block: 'start'
       });
 
+      document.querySelector('footer').scrollBy(0, -10);
+
       if (resetVerse) {
         this.resetVerseSelect(wTag);
         this.highlightRelatedWords(verse, wTag);

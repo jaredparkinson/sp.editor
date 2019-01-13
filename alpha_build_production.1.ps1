@@ -27,7 +27,7 @@ Move-Item .\src\assets\scriptures\ ..
 
 # yarn run electron:windows:beta
 
-yarn electron-builder build --windows
+yarn electron:windows:alpha
 
 Move-Item ..\scriptures\ .\src\assets\
 

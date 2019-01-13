@@ -48,8 +48,8 @@ body {
 }
 
 .note-superscript {
-  .note-title,
-  .note-short-title {
+  .note-title {
+    // .note-short-title {
     display: none !important;
   }
   note {

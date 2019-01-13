@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
 
+import * as benchmark from 'benchmark';
 import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Note } from '../models/Note';
@@ -47,8 +48,8 @@ export class ChapterService {
     book: string,
     chapter: string
     // synchronizedScrolling: () => Promise<void>
-  ): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
+  ): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       this.notes2 = [];
       this.navService.pageTitle = '';
 
@@ -58,26 +59,32 @@ export class ChapterService {
         vSplit = book.split('.');
       }
 
+      // const suite = new benchmark.Suite();
+      // const a = suite
+      //   .add('hhj', () => {
+      //   })
+      //   .run();
+      //   console.log(a);
       this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
       this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
 
       if (this.fs) {
-        this.getChapterFS(book, vSplit).then((value: boolean) => {
-          resolve(true);
+        this.getChapterFS(book, vSplit).then(() => {
+          resolve(null);
         });
       } else {
-        this.getChapterWeb(book, vSplit).then((value: boolean) => {
-          resolve(true);
+        this.getChapterWeb(book, vSplit).then(() => {
+          resolve(null);
         });
       }
     });
   }
 
-  private async verseFocus(): Promise<boolean> {
-    return new Promise<boolean>(
+  private async verseFocus(): Promise<void> {
+    return new Promise<void>(
       (
-        resolve: (resolveValue: boolean) => void,
-        reject: (rejectValue: boolean) => void
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
       ) => {
         setTimeout(() => {
           if (this.verseNums.length === 0) {
@@ -92,16 +99,16 @@ export class ChapterService {
             document.getElementById('p' + focusVerse).scrollIntoView();
           }
         });
-        resolve(true);
+        resolve(null);
       }
     );
   }
 
-  private async setHighlighting(): Promise<boolean> {
-    return new Promise<boolean>(
+  private async setHighlighting(): Promise<void> {
+    return new Promise<void>(
       (
-        resolve: (resolveValue: boolean) => void,
-        reject: (rejectValue: boolean) => void
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
       ) => {
         lodash.forEach(this.chapter2.paragraphs, paragraph => {
           lodash.forEach(paragraph.verses, verse => {
@@ -115,7 +122,7 @@ export class ChapterService {
             }
           });
         });
-        resolve(true);
+        resolve(null);
       }
     );
   }
@@ -125,10 +132,10 @@ export class ChapterService {
     vSplit: string[]
     // synchronizedScrolling: () => Promise<void>
   ) {
-    return new Promise<boolean>(
+    return new Promise<void>(
       (
-        resolve: (resolveValue: boolean) => void,
-        reject: (rejectValue: boolean) => void
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
       ) => {
         const url2 =
           this.navService.urlBuilder(
@@ -143,7 +150,7 @@ export class ChapterService {
             this.setChapter(data);
           }
         );
-        resolve(true);
+        resolve(null);
       }
     );
   }
@@ -153,10 +160,10 @@ export class ChapterService {
     vSplit: string[]
     // synchronizedScrolling: () => Promise<void>
   ) {
-    return new Promise<boolean>(
+    return new Promise<void>(
       async (
-        resolve: (resolveValue: boolean) => void,
-        reject: (rejectValue: boolean) => void
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
       ) => {
         const saved = false; // await localForage.getItem(book + '\\' + vSplit[0]);
 
@@ -173,7 +180,7 @@ export class ChapterService {
             })
             .subscribe(data => {
               this.setChapter(data);
-              resolve(true);
+              resolve(null);
             });
         }
       }
@@ -184,18 +191,18 @@ export class ChapterService {
     data: string
     // synchronizedScrolling: () => Promise<void>
   ) {
-    return new Promise<boolean>(
+    return new Promise<void>(
       async (
-        resolve: (resolveValue: boolean) => void,
-        reject: (rejectValue: boolean) => void
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
       ) => {
         this.chapter2 = new Chapter2();
         this.chapter2 = JSON.parse(data) as Chapter2;
 
-        this.setHighlighting().then((value: boolean) => {
-          this.verseFocus().then((value2: boolean) => {
+        this.setHighlighting().then(() => {
+          this.verseFocus().then(() => {
             // synchronizedScrolling();
-            resolve(true);
+            resolve(null);
           });
         });
       }
@@ -210,13 +217,21 @@ export class ChapterService {
     if (v !== undefined) {
       const verseParams = v.split(',');
 
-      lodash.forEach(verseParams, verseParam => {
+      verseParams.forEach(verseParam => {
         const t = verseParam.split('-');
         const count = t.length > 1 ? 1 : 0;
         for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
           verseNums.push(x);
         }
       });
+
+      // lodash.forEach(verseParams, verseParam => {
+      //   const t = verseParam.split('-');
+      //   const count = t.length > 1 ? 1 : 0;
+      //   for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
+      //     verseNums.push(x);
+      //   }
+      // });
     }
 
     return verseNums;
@@ -373,9 +388,9 @@ export class ChapterService {
       ]
     ) => void
   ) {
-    lodash.each(this.chapter2.paragraphs, paragrah => {
-      lodash.each(paragrah.verses, verse => {
-        lodash.each(verse.wTags2, wa => {
+    this.chapter2.paragraphs.forEach(paragrah => {
+      paragrah.verses.forEach(verse => {
+        verse.wTags2.forEach(wa => {
           callBack(wa);
         });
       });
@@ -383,7 +398,7 @@ export class ChapterService {
   }
 
   public resetNotes2() {
-    lodash.each<ElementRef>(this.notes, n => {
+    this.notes.forEach(n => {
       (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
     });
   }

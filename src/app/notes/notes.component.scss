@@ -8,12 +8,12 @@ $font-stack: PalatinoldsLat-Roman, serif;
     font-weight: 700;
   }
   .#{$content}-on {
-    .note-phrase.reference-label-#{$selector}{
+    .note-phrase.reference-label-#{$selector} {
       display: block !important;
     }
   }
 }
-.note-phrase[class*="reference-label"]{
+.note-phrase[class*='reference-label'] {
   display: none;
 }
 .right-pane {
@@ -22,6 +22,9 @@ $font-stack: PalatinoldsLat-Roman, serif;
   note {
     > div > div.original-note-marker {
       display: none;
+    }
+    > div > *.note-phrase {
+      margin-left: 1em !important;
     }
 
     // margin-left: 1em;
@@ -61,7 +64,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
   .new-note,
   div.note,
   div.note-tier-2 {
-    margin-left: 1em;
+    // margin-left: 1em;
     margin-right: 20px;
   }
 

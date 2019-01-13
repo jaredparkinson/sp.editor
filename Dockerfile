@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-RUN npm run build:prod
+RUN npm run build:web
 
 
 FROM mhart/alpine-node

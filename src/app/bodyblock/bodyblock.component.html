@@ -78,12 +78,11 @@
                 ></g>
               </ng-container>
             </ng-container>
-
-            <n>{{ w[1] }}</n>
-          </w>
-          <br
-            *ngIf="w[0].includes('line-end') && saveState.data.poetryVisible"
-          />
+            <n>{{ w[1] }}</n></w
+          >
+          <ng-container *ngIf="saveState.data.poetryVisible">
+            <br *ngIf="w[0].includes('line-end')" />
+          </ng-container>
         </ng-container>
       </span>
     </div>

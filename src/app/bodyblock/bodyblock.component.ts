@@ -16,6 +16,7 @@ import {
 import * as lodash from 'lodash';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
@@ -196,7 +197,9 @@ export class BodyblockComponent
     this.timer = setTimeout(async () => {
       console.log(this.verses);
 
-      await this.synchronizedScrolling();
+      await this.synchronizedScrolling().then(async () => {
+        await this.synchronizedScrolling();
+      });
     }, 50);
     // this.ngZone.runOutsideAngular();
   }
@@ -213,7 +216,7 @@ export class BodyblockComponent
 
     let scrollIntoView: Element;
 
-    lodash.forEach(this.verses.toArray(), verse => {
+    this.verses.toArray().forEach(verse => {
       const top = (verse.nativeElement as HTMLElement).getBoundingClientRect()
         .top;
       const height = (verse.nativeElement as HTMLElement).getBoundingClientRect()
@@ -251,6 +254,8 @@ export class BodyblockComponent
       } else {
         this.scrollNotesBottom();
       }
+
+      resolve(null);
     }
   }
 

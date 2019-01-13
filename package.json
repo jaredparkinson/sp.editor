@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.42.81",
+  "version": "3.42.82",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -45,7 +45,8 @@
     "electron:windows:beta": "yarn version --patch && yarn run build:prod && electron-builder build --windows",
     "electron:mac": "yarn run build:prod && npx electron-builder build --mac",
     "test": "yarn run postinstall:web && ng test",
-    "e2e": "yarn run postinstall:web && ng e2e"
+    "e2e": "yarn run postinstall:web && ng e2e",
+    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "dependencies": {
     "@angular/animations": "latest",
@@ -101,6 +102,7 @@
     "@types/pako": "^1.0.0",
     "@types/underscore": "^1.8.9",
     "codelyzer": "4.4.2",
+    "conventional-changelog-cli": "^2.0.11",
     "core-js": "2.5.7",
     "electron": "latest",
     "electron-builder": "latest",

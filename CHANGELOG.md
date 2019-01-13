@@ -1,311 +1,684 @@
-### Changelog
-All notable changes to this project will be documented in this file.
+## <small>3.42.82 (2019-01-13)</small>
 
-#### [4.0.0](https://github.com/maximegris/angular-electron/compare/3.4.1...4.0.0)
-- Update to NodeJS 8, Angular 6, electron 2.0.2, RxJS 6.1  [`#182`](https://github.com/maximegris/angular-electron/pull/182)
-- ref/ upgrade angular to 6.0.3 [`e7fac6e`](https://github.com/maximegris/angular-electron/commit/e7fac6ed1f415ef9c20439c9f0eac2bed0dc7766)
-- misc/ remove unused packages [`a7e33b6`](https://github.com/maximegris/angular-electron/commit/a7e33b646f3c01e0c3f342c39775f884e8391ac7)
+* Added note margins ([188c6ba](https://github.com/jaredparkinson/sp.editor/commit/188c6ba))
+* sync scrolling improvements ([cb09415](https://github.com/jaredparkinson/sp.editor/commit/cb09415))
 
-#### [3.4.1](https://github.com/maximegris/angular-electron/compare/3.4.0...3.4.1)
-- Modify electron builder configuration to remove source code and tests [`#190`](https://github.com/maximegris/angular-electron/pull/190)
-- version 3.4.1 [`308ea9c`](https://github.com/maximegris/angular-electron/commit/308ea9c014781aa65c712ea69a844e77c8e651ef)
 
-#### [3.4.0](https://github.com/maximegris/angular-electron/compare/3.3.0...3.4.0)
-- Resolved Translation issue [`#186`](https://github.com/maximegris/angular-electron/pull/186)
-- Removed unused file [`#185`](https://github.com/maximegris/angular-electron/pull/185)
-- ref/ remove contributors [`6dc97a1`](https://github.com/maximegris/angular-electron/commit/6dc97a1ea857b48a7a111768f58498c91a3572b5)
-- Translation issue [`35354b1`](https://github.com/maximegris/angular-electron/commit/35354b1025d98fd14d0566d3aa3112bb9c36fc91)
-- version 3.4.0 [`06d6b0f`](https://github.com/maximegris/angular-electron/commit/06d6b0f8c5de703a9c7f5dcfc880a9673aa6eec8)
 
-#### [3.3.0](https://github.com/maximegris/angular-electron/compare/3.2.0...3.3.0)
-- add Changelog file [`71083f1`](https://github.com/maximegris/angular-electron/commit/71083f12bf1e20225769af20a8a054ab8af4a6f9)
-- version 3.3.0 [`a88bda6`](https://github.com/maximegris/angular-electron/commit/a88bda66d83690b1064bcb11a0cb1bb893894caf)
+## <small>3.42.81 (2019-01-13)</small>
 
-#### [3.2.0](https://github.com/maximegris/angular-electron/compare/3.1.0...3.2.0)
-> 15 April 2018
-- Terminate the npm process after test execution [`#165`](https://github.com/maximegris/angular-electron/pull/165)
-- Update dependencies [`#164`](https://github.com/maximegris/angular-electron/pull/164)
-- fix/ app e2e spec [`#161`](https://github.com/maximegris/angular-electron/pull/161)
-- provide webFrame access [`#162`](https://github.com/maximegris/angular-electron/pull/162)
-- Including electron to eliminate Electron not found err sg [`#153`](https://github.com/maximegris/angular-electron/pull/153)
-- update dependencies [`89963ab`](https://github.com/maximegris/angular-electron/commit/89963ab996a9d96d2f611959fd0a3eb8f35a64ba)
-- ref/ add node/electron module import as exemple : fs and remote [`e3ad12d`](https://github.com/maximegris/angular-electron/commit/e3ad12dd59f967c2e550131517afa7e5ea0d3389)
-- fix e2e tests based on PR #161 and terminate the npm process after test execution [`fccf348`](https://github.com/maximegris/angular-electron/commit/fccf348abb323d15043be0dc9fdad136e80fc1a4)
-- version 3.2.0 [`8dc69fa`](https://github.com/maximegris/angular-electron/commit/8dc69fa648dd26b74915701f80ba2bd2e3fc0bc3)
-- remove copyfiles [`9af5138`](https://github.com/maximegris/angular-electron/commit/9af5138778c40e08a929322801be217c6d3a3f98)
+* v3.42.81 ([1fa07da](https://github.com/jaredparkinson/sp.editor/commit/1fa07da))
 
-#### [3.1.0](https://github.com/maximegris/angular-electron/compare/3.0.1...3.1.0)
-> 15 March 2018
-- Fix to change environment [`#145`](https://github.com/maximegris/angular-electron/pull/145)
-- Added option -o to script npm run ng:serve so that it really open the browser [`#141`](https://github.com/maximegris/angular-electron/pull/141)
-- version 3.1.0 [`f7c71e7`](https://github.com/maximegris/angular-electron/commit/f7c71e78a0e72ec9bc7fcc20765b3626b13d4af5)
 
-#### [3.0.1](https://github.com/maximegris/angular-electron/compare/3.0.0...3.0.1)
-> 7 March 2018
-- fix/ icon app [`22699ef`](https://github.com/maximegris/angular-electron/commit/22699efd6a5acc6c30ae1b2713228192af4d523a)
-- version 3.0.1 [`5258ff1`](https://github.com/maximegris/angular-electron/commit/5258ff173b784d50fe6f1faefe10a36ce9525dd8)
 
-### [3.0.0](https://github.com/maximegris/angular-electron/compare/2.7.1...3.0.0)
-> 25 February 2018
-- Updated dependencies and fixed unit tests [`#129`](https://github.com/maximegris/angular-electron/pull/129)
-- fix/ TranslateModule test [`7863aa9`](https://github.com/maximegris/angular-electron/commit/7863aa97d2fa37e7d1e0ef66a29ed95876e49260)
-- merge conflict [`ce5724c`](https://github.com/maximegris/angular-electron/commit/ce5724c11f8fa3d79aeb927c305d031ae09c8845)
-- Ng not ejected anymore [`67ab31c`](https://github.com/maximegris/angular-electron/commit/67ab31c458c572de0311f27ee8a7d7bc43765999)
-- update dependencies and fix unit tests [`4d3ca6e`](https://github.com/maximegris/angular-electron/commit/4d3ca6e1b1fc46dea6b7d5e6a7dc09ea5d8d4d44)
-- pin all dependency versions [`0558d6a`](https://github.com/maximegris/angular-electron/commit/0558d6a5faefcd0e3066b484e2e5bff55d6a368d)
+## <small>3.42.80 (2019-01-13)</small>
 
-** BREAKING CHANGES**
+* v3.42.80 ([bc328d9](https://github.com/jaredparkinson/sp.editor/commit/bc328d9))
 
-The build process was migrated to using angular cli rather than webpack. It also makes it easier to migrate to newer Angular releases as they roll out (which was really painful during the last migration). Check the most recent commits for more details.
 
-#### [2.7.1](https://github.com/maximegris/angular-electron/compare/2.7.0...2.7.1)
-> 15 February 2018
-- ref/ dernière version cli [`3df8158`](https://github.com/maximegris/angular-electron/commit/3df81589404dd199efa3f75a1229f54bcc0f1890)
-- version 2.7.1 [`1ae6f7a`](https://github.com/maximegris/angular-electron/commit/1ae6f7aedca7f099688bfce84a050f6ae014b995)
 
-#### [2.7.0](https://github.com/maximegris/angular-electron/compare/2.6.0...2.7.0)
-> 15 February 2018
-- fix: fixes maximegris/angular-electron#118 [`#121`](https://github.com/maximegris/angular-electron/pull/121)
-- ref/ update angular &amp; dep [`e3b1fab`](https://github.com/maximegris/angular-electron/commit/e3b1fabba35b1efa5c10156b423dcbb1515860b6)
+## <small>3.42.79 (2019-01-13)</small>
 
-#### [2.6.0](https://github.com/maximegris/angular-electron/compare/2.5.0...2.6.0)
-> 24 January 2018
-- version bump + logo resize [`#114`](https://github.com/maximegris/angular-electron/pull/114)
-- feat/ add webview directive [`f3bc99a`](https://github.com/maximegris/angular-electron/commit/f3bc99adb16129e3fef41f5f089cabb59dd0fe54)
-- feat/ add webview directive [`e1b5600`](https://github.com/maximegris/angular-electron/commit/e1b56002d8ad26df83a8c07f7d7744793f5a11a5)
-- ref/ upgrade electron (security issue) [`f6a0c4e`](https://github.com/maximegris/angular-electron/commit/f6a0c4ecb97a5ec7c137528e037015d041dd5acc)
-- ref/ Remove sponsor [`2a28239`](https://github.com/maximegris/angular-electron/commit/2a28239152a3dc4352cef8224e76f6f3c06d6ad5)
+* v3.42.79 ([47e7075](https://github.com/jaredparkinson/sp.editor/commit/47e7075))
 
-#### [2.5.0](https://github.com/maximegris/angular-electron/compare/2.4.1...2.5.0)
-> 12 January 2018
-- fix: fixes maximegris/angular-electron#98 [`#105`](https://github.com/maximegris/angular-electron/pull/105)
-- Correction of a word. [`#102`](https://github.com/maximegris/angular-electron/pull/102)
-- migrate Angular to 5.2.0 [`b8cf343`](https://github.com/maximegris/angular-electron/commit/b8cf343f0f33d440feb9a7d7639a65be2790e410)
 
-#### [2.4.1](https://github.com/maximegris/angular-electron/compare/2.4.0...2.4.1)
-> 14 December 2017
-- fix/ Manage icons for linux binary generation [`#92`](https://github.com/maximegris/angular-electron/pull/92)
-- version 2.4.1 [`5fcfca0`](https://github.com/maximegris/angular-electron/commit/5fcfca019da3426326cc3cbedeafaa662cd70deb)
 
-#### [2.4.0](https://github.com/maximegris/angular-electron/compare/2.3.0...2.4.0)
-> 8 December 2017
-- version 2.4.0 [`0437b33`](https://github.com/maximegris/angular-electron/commit/0437b33c36e6806d60a03463644bb7abe3de83a5)
-- merge migration httpclient [`1e6113f`](https://github.com/maximegris/angular-electron/commit/1e6113f71aca9f76822ce39facbd31884f4603fb)
+## <small>3.42.78 (2019-01-13)</small>
 
-#### [2.3.0](https://github.com/maximegris/angular-electron/compare/2.2.0...2.3.0)
-> 4 December 2017
-- Use HttpClientModule [`#88`](https://github.com/maximegris/angular-electron/pull/88)
-- add ngx translate [`facda37`](https://github.com/maximegris/angular-electron/commit/facda3726d9aab6320905ce78414c4f4f0ab901d)
+* v3.42.78 ([43bab23](https://github.com/jaredparkinson/sp.editor/commit/43bab23))
 
-#### [2.2.0](https://github.com/maximegris/angular-electron/compare/2.1.1...2.2.0)
-> 28 November 2017
-- Update to electron-builder [`#86`](https://github.com/maximegris/angular-electron/pull/86)
-- Update LICENSE badge [`#85`](https://github.com/maximegris/angular-electron/pull/85)
-- Brought back scripts defined in webpack.config.js [`#82`](https://github.com/maximegris/angular-electron/pull/82)
-- migrate to Angular 5.0.3 [`f4bc5b2`](https://github.com/maximegris/angular-electron/commit/f4bc5b21bc63b4c3d2eb81ae1e0a87f0ab571001)
 
-#### [2.1.1](https://github.com/maximegris/angular-electron/compare/2.1.0...2.1.1)
-> 19 November 2017
-- Move codesponsor [`064be4c`](https://github.com/maximegris/angular-electron/commit/064be4cb3c1e733716793d9280dcaf2e661f0cbd)
 
-#### [2.1.0](https://github.com/maximegris/angular-electron/compare/2.0.0...2.1.0)
-> 19 November 2017
-- Add support for building a single executable for Windows [`#78`](https://github.com/maximegris/angular-electron/pull/78)
-- fix/ refact webpack config (inspired by ng eject Angular 5) [`d1c30ac`](https://github.com/maximegris/angular-electron/commit/d1c30ac68ef871e65713a9310d8428a276cbdbc3)
-- Mgrate to Angular 5.0.2 [`bd7bed6`](https://github.com/maximegris/angular-electron/commit/bd7bed6c17f2a9ba268a638e0130638eae27781c)
-- fix/ Replace AotPlugin to AngularCompilerPlugin [`bef106e`](https://github.com/maximegris/angular-electron/commit/bef106e2f67a43f4548acde01dbfdf8094e8a734)
-- Add support for building a Windows self-contained executable [`7cfa790`](https://github.com/maximegris/angular-electron/commit/7cfa79030e854d8d806c6b42cad02dab683b13b5)
-- Add codesponsor [`87e695d`](https://github.com/maximegris/angular-electron/commit/87e695d736f0c0897457949c72c4aea17868ff55)
-- fix/ replace aotPlugin in no prod mode [`a0caf1e`](https://github.com/maximegris/angular-electron/commit/a0caf1e29266c582ea1a9961942d3604eb3080ad)
-- Version 2.1.0 [`fccef2f`](https://github.com/maximegris/angular-electron/commit/fccef2f338129e4ba770cccfdf94281886449e9a)
-- fix/ webpack template path [`518b66b`](https://github.com/maximegris/angular-electron/commit/518b66b16ca0744c625abe26379064bafcd7ba98)
-- Update package.json [`b16cf73`](https://github.com/maximegris/angular-electron/commit/b16cf7394d5b65e5ec2d014dfb382aa2b6914184)
-- fix/ Update README Angular 5 [`93c6949`](https://github.com/maximegris/angular-electron/commit/93c694977ff3a3f669e69eb2b6c75565d5819392)
-- Add script for winportable [`2be2dae`](https://github.com/maximegris/angular-electron/commit/2be2dae6c38ca6f38f5f21d3305251858127f4fb)
-- fix/ electron-packager need favicon &gt;&#x3D; 256x256 on Windows [`d2c253f`](https://github.com/maximegris/angular-electron/commit/d2c253f2058f459f0ff2d163e87d9fe4dc33482a)
+## <small>3.42.77 (2019-01-13)</small>
 
-### [2.0.0](https://github.com/maximegris/angular-electron/compare/1.9.0...2.0.0)
-> 13 November 2017
-- Edit a typo on README [`#71`](https://github.com/maximegris/angular-electron/pull/71)
-- Add buffer to externals [`#66`](https://github.com/maximegris/angular-electron/pull/66)
-- Fix #55 removed bootstraps.css which for example purpose before. [`#55`](https://github.com/maximegris/angular-electron/issues/55)
-- License MIT [`73494b7`](https://github.com/maximegris/angular-electron/commit/73494b7fe9077ee6f167de7ca3614d2e2462da55)
-- Migrate to Angular 5 [`3a3ffe1`](https://github.com/maximegris/angular-electron/commit/3a3ffe189398324b10c769e0a50d99e305227126)
+* v3.42.77 ([d3fa87e](https://github.com/jaredparkinson/sp.editor/commit/d3fa87e))
 
-** BREAKING CHANGES**
-Due to Angular 5 migration, all package.json dependencies and webpack.config.js was changed.
 
-I also decided to change the license of this project. It is now under MIT license.
 
-#### [1.9.0](https://github.com/maximegris/angular-electron/compare/1.8.1...1.9.0)
-> 22 September 2017
-- feat/  launch electron &amp; webpack in // (npm run start) [`8c37cc4`](https://github.com/maximegris/angular-electron/commit/8c37cc4c7fad3cdd25a76dd514df55e5dc6c39d8)
-- ref/ Exclude node_modules (tslint) [`412a0a5`](https://github.com/maximegris/angular-electron/commit/412a0a5b626de73055a09137231ef6ba98faf868)
+## <small>3.42.76 (2019-01-13)</small>
 
-#### [1.8.1](https://github.com/maximegris/angular-electron/compare/1.8.0...1.8.1)
-> 22 September 2017
-- Fix #55 , and also added functionality for scripts global building [`#55`](https://github.com/maximegris/angular-electron/issues/55)
-- remove package-lock [`8e98627`](https://github.com/maximegris/angular-electron/commit/8e986275ba9384575eb27126781bcfb879f86583)
-- upgrade angular version 4.4.3 [`10d0f87`](https://github.com/maximegris/angular-electron/commit/10d0f870cebee68ded6e75b0775a3e3f25bd666f)
-- version 1.8.1 [`70879d1`](https://github.com/maximegris/angular-electron/commit/70879d18c45fd65564f160c344552ea3c2195798)
-- ref/ add package-lock in gitignore [`4edd98d`](https://github.com/maximegris/angular-electron/commit/4edd98d54676b76d3941e4abb93a0ed16a14e48c)
+* Added extra footer scrolling ([6100fd6](https://github.com/jaredparkinson/sp.editor/commit/6100fd6))
+* v3.42.76 ([4707c44](https://github.com/jaredparkinson/sp.editor/commit/4707c44))
 
-#### [1.8.0](https://github.com/maximegris/angular-electron/compare/1.7.0...1.8.0)
-> 9 September 2017
-- upgrade lib version [`2ac2aa0`](https://github.com/maximegris/angular-electron/commit/2ac2aa0abc798a17b9aa66314c881cef0268c036)
 
-#### [1.7.0](https://github.com/maximegris/angular-electron/compare/1.6.1...1.7.0)
-> 18 August 2017
-- ref/ Update Angular (4.3.5) / Electron (1.7.2) / Electron Packager (8.7.2) / Typescript (2.5.0) [`f97cd81`](https://github.com/maximegris/angular-electron/commit/f97cd8169239c5f15713903207f7e48040b15317)
 
-#### [1.6.1](https://github.com/maximegris/angular-electron/compare/1.6.0...1.6.1)
-> 27 July 2017
-- fix/  angular-cli error in prod compilation with aot [`c26a5ae`](https://github.com/maximegris/angular-electron/commit/c26a5aec6aacd6def96721646ae2121b942d1a30)
-- version 1.6.1 [`899babd`](https://github.com/maximegris/angular-electron/commit/899babd5bc22edffa439213c5c1e80112f8b26bb)
+## <small>3.42.75 (2019-01-10)</small>
 
-#### [1.6.0](https://github.com/maximegris/angular-electron/compare/1.5.0...1.6.0)
-> 16 July 2017
-- Fix npm run build:prod [`#38`](https://github.com/maximegris/angular-electron/pull/38)
-- upgrade angular version to 4.3.0 [`ab16959`](https://github.com/maximegris/angular-electron/commit/ab16959ae23c830d412a690ebff04107b1361fae)
-- increment version deps [`bde452c`](https://github.com/maximegris/angular-electron/commit/bde452c32cc7435acdf779026e8be17679daf785)
-- fix/ e2e test with jasmine2 [`9c51f32`](https://github.com/maximegris/angular-electron/commit/9c51f3247be9e899d14716b8d38afa415191417d)
-- fix/ typescript issues [`bb0a6ab`](https://github.com/maximegris/angular-electron/commit/bb0a6abd283e32be606caa0281d68a4fad07eb3c)
-- fix/ Bindings not updating automatically #44 [`2a90191`](https://github.com/maximegris/angular-electron/commit/2a90191458de6371e59d53c3e32257782884cfaf)
-- ajout package-lock npm v5 [`09c0840`](https://github.com/maximegris/angular-electron/commit/09c08408111c5d89548803ab9dfc878e85e29b08)
-- Revert last pull request - break production compilation [`ccc9064`](https://github.com/maximegris/angular-electron/commit/ccc90648fead44107ea2f380289915aa94c1f19a)
-- Change background img [`7e58717`](https://github.com/maximegris/angular-electron/commit/7e5871714f18e69b9e9769ae857c3b51d8bf74e6)
+* v3.42.75 ([55ad1ba](https://github.com/jaredparkinson/sp.editor/commit/55ad1ba))
 
-#### [1.5.0](https://github.com/maximegris/angular-electron/compare/1.4.4...1.5.0)
-> 10 June 2017
-- fix/ remove yarn because of error with module dep in prod builds [`8a49a45`](https://github.com/maximegris/angular-electron/commit/8a49a454caba7dc05325ba0d99b06cb04a80b779)
-- update yarn lock [`18c0e62`](https://github.com/maximegris/angular-electron/commit/18c0e62dbafe2f6468dfa02071e37ec7f7d0e51d)
-- fix/ karma Unit test [`ea13d6d`](https://github.com/maximegris/angular-electron/commit/ea13d6d2e13a2b68f924694fd67d64d617eeada8)
 
-#### [1.4.4](https://github.com/maximegris/angular-electron/compare/1.4.3...1.4.4)
-> 8 June 2017
-- fix/ Fix npm run lint [`db7972a`](https://github.com/maximegris/angular-electron/commit/db7972aca4cabd9b4b55420e0e1dd029e7834de9)
-- ref/ electron ./dist more generic [`7e71add`](https://github.com/maximegris/angular-electron/commit/7e71add264adb946ec2b5ad50fdb4c5376dd492e)
-- Replace const icon to let icon [`dadf65f`](https://github.com/maximegris/angular-electron/commit/dadf65f89b76751e6fe22e00242e39f512a8da09)
 
-#### [1.4.3](https://github.com/maximegris/angular-electron/compare/1.4.2...1.4.3)
-> 6 June 2017
-- fix/ favicon path during packaging [`aa2b012`](https://github.com/maximegris/angular-electron/commit/aa2b0122878bb3b769e66d2a56a9f31584de1874)
-- remove build node 8 till node-sass failed [`34f201d`](https://github.com/maximegris/angular-electron/commit/34f201d1d542ec149b76d450d255660f1ecf5d8e)
+## <small>3.42.74 (2019-01-10)</small>
 
-#### [1.4.2](https://github.com/maximegris/angular-electron/compare/1.4.0...1.4.2)
-> 31 May 2017
-- chore(package): bump dependencies [`#26`](https://github.com/maximegris/angular-electron/pull/26)
-- upgrade ng/electron dependencies [`78b0f27`](https://github.com/maximegris/angular-electron/commit/78b0f27da33b14d1c26908109c4f984c3a2a4dd7)
-- update Electron v1.6.10 [`f2f2080`](https://github.com/maximegris/angular-electron/commit/f2f20806c63d3fa8b425bf4df99f975c1c33d23b)
-- Change dep versions [`62d08d3`](https://github.com/maximegris/angular-electron/commit/62d08d39a78c4b061f5e48e764a3b4d6e703fa30)
-- Minor update [`5f282b7`](https://github.com/maximegris/angular-electron/commit/5f282b784c1e100c67ce1686a2cc163fea23217a)
-- install npm dep when building [`56948d0`](https://github.com/maximegris/angular-electron/commit/56948d0fdbc05495c2e27013e0abd5f17c952d10)
-- No hot reload in browser [`7892f0d`](https://github.com/maximegris/angular-electron/commit/7892f0d3a6859ca4d1c576959351535439279ada)
+* Added node version and update build scripts ([9f59b6b](https://github.com/jaredparkinson/sp.editor/commit/9f59b6b))
+* Fixed bug where undefined was displayed when a chapter isn't loaded ([907cf04](https://github.com/jaredparkinson/sp.editor/commit/907cf04))
+* Fixed issue where notes were not going away and update app defaults ([71bc4d8](https://github.com/jaredparkinson/sp.editor/commit/71bc4d8))
+* Text boxes are cleared or selected now ([27f5e0a](https://github.com/jaredparkinson/sp.editor/commit/27f5e0a))
+* v3.42.74 ([d9a07ea](https://github.com/jaredparkinson/sp.editor/commit/d9a07ea))
 
-#### [1.4.0](https://github.com/maximegris/angular-electron/compare/1.3.6...1.4.0)
-> 23 May 2017
-- ref/ electron main from js to ts [`835d32b`](https://github.com/maximegris/angular-electron/commit/835d32bdcdb7d2e7febb30c6b396d2e1ae02046c)
-- Change style home page [`93dcc52`](https://github.com/maximegris/angular-electron/commit/93dcc52ac960406c22bec9bf4cb7d358ff26923c)
 
-#### [1.3.6](https://github.com/maximegris/angular-electron/compare/1.3.5...1.3.6)
-> 21 May 2017
-- Fixed compiler warnings #21 [`#22`](https://github.com/maximegris/angular-electron/pull/22)
-- Remove caret &amp; tilde [`dd98155`](https://github.com/maximegris/angular-electron/commit/dd98155951b8bf9e6c4df10d37fc143544ab6afa)
-- Fixed compiler warnings [`fca6b15`](https://github.com/maximegris/angular-electron/commit/fca6b15d30258d139f112bd547f4a33d385139ef)
 
-#### [1.3.5](https://github.com/maximegris/angular-electron/compare/1.3.4...1.3.5)
-> 18 May 2017
-- Add new tags [`cd07a86`](https://github.com/maximegris/angular-electron/commit/cd07a86ee85cccedd34d70fe033fce8a6c7f12e5)
-- v 1.3.5 [`d528a71`](https://github.com/maximegris/angular-electron/commit/d528a71c4ed3b713881f0945d74f3ab0d54d3936)
+## <small>3.42.73 (2019-01-06)</small>
 
-#### [1.3.4](https://github.com/maximegris/angular-electron/compare/1.3.3...1.3.4)
-> 12 May 2017
-- Ref/ Electron packager in external file [`17b04e8`](https://github.com/maximegris/angular-electron/commit/17b04e8998a5aa9a514a6b2e3b09dc3c745238ae)
-- feat/ add nodejs native lib in webpack config [`27d9bc6`](https://github.com/maximegris/angular-electron/commit/27d9bc65f84d90ac89d4fcfa3f8a84e6296348f5)
-- version 1.3.4 [`374af16`](https://github.com/maximegris/angular-electron/commit/374af16f8c92483a09d4be35d501a0d574dc4d86)
-- Fix issue #15 [`d77cbf1`](https://github.com/maximegris/angular-electron/commit/d77cbf18d6254ec95ad15f0d92dfe7d2a9881cf5)
+* v3.42.73 ([1625d19](https://github.com/jaredparkinson/sp.editor/commit/1625d19))
 
-#### [1.3.3](https://github.com/maximegris/angular-electron/compare/1.3.2...1.3.3)
-> 10 May 2017
-- Version 1.3.3 [`f4db75b`](https://github.com/maximegris/angular-electron/commit/f4db75bbd6474930c782949eca31f24564c8f6de)
-- Fix issue #15 [`e7cd6e6`](https://github.com/maximegris/angular-electron/commit/e7cd6e6df307c9c781ef7b76206b108ca541e864)
-- Move browser mode chapter [`89e34eb`](https://github.com/maximegris/angular-electron/commit/89e34ebe49123e9319662345d86a598dbf5d8a07)
-- Chapters order [`a772b9c`](https://github.com/maximegris/angular-electron/commit/a772b9c74fd8c2d4aa1358caaa2f839bfa2a2d79)
-- Chapters order [`06547e5`](https://github.com/maximegris/angular-electron/commit/06547e5c855bef81c1c9d1ded0b3e7cfc12fae8e)
-- Delete spec file of electron.service [`083498e`](https://github.com/maximegris/angular-electron/commit/083498eab8cb7c72e84125e8d6b7f54b2838951d)
-- Move Browser mode chapter [`8818750`](https://github.com/maximegris/angular-electron/commit/881875036a46f13ef6980e84a6064a665670f454)
 
-#### [1.3.2](https://github.com/maximegris/angular-electron/compare/1.3.1...1.3.2)
-> 6 May 2017
-- Suround electron browser by try/catch [`88be472`](https://github.com/maximegris/angular-electron/commit/88be4723793cddb7b21bbdfffaa245849b45d8fa)
-- update version [`0849a0a`](https://github.com/maximegris/angular-electron/commit/0849a0a6c0e91b507b1f435401cee031f64bb37e)
-- Fix indentation [`6a9836a`](https://github.com/maximegris/angular-electron/commit/6a9836a1e48e34060e826e747464ab63e654ab16)
-- Conditional import of Electron/NodeJS libs - The app can be launch in browser mode [`c434f8a`](https://github.com/maximegris/angular-electron/commit/c434f8a8b0c0d1d8e5843af57465a24e900d967c)
-- Update readme with e2e info [`01bbf13`](https://github.com/maximegris/angular-electron/commit/01bbf1343707527b5c26c322abfa6199d2937aa6)
-- Set e2e tests [`d223974`](https://github.com/maximegris/angular-electron/commit/d2239745a2dc14ad6d6b07520f31ea1e51d03594)
-- Fix prepree2e script [`b2af4fd`](https://github.com/maximegris/angular-electron/commit/b2af4fd24a3722f1fa4cc0d345f505214002f4f0)
-- Add comments of how conditional import works [`e6c1b3b`](https://github.com/maximegris/angular-electron/commit/e6c1b3ba5d7633c9f47191113dab463163a7aa89)
-- Update @types/node [`9d43304`](https://github.com/maximegris/angular-electron/commit/9d43304b678d64fa30ca9ded72cfa8e2e8bee089)
 
-#### [1.3.1](https://github.com/maximegris/angular-electron/compare/1.3.0...1.3.1)
-> 5 May 2017
-- Fixed hardcoded path in glob copy, blocking assets after eject [`#11`](https://github.com/maximegris/angular-electron/pull/11)
-- Add routing module [`7334ce8`](https://github.com/maximegris/angular-electron/commit/7334ce89b5daabba9fa5d1c0c940ebc38aecbc9a)
-- update comments in dev/prod env files [`7cf6a51`](https://github.com/maximegris/angular-electron/commit/7cf6a51532f589305fc488c769391c4d1a1d06b9)
-- Version 1.3.1 [`f18ac77`](https://github.com/maximegris/angular-electron/commit/f18ac77e074a253dc9ece45dd16d1a3c23c18470)
+## <small>3.42.72 (2019-01-05)</small>
 
-#### [1.3.0](https://github.com/maximegris/angular-electron/compare/1.2.1...1.3.0)
-> 1 May 2017
-- Fix webpack prod/dev env [`8549da1`](https://github.com/maximegris/angular-electron/commit/8549da1a17d946b4cc272d8baf9d4ad64fe4e458)
+* track wtags ([a262291](https://github.com/jaredparkinson/sp.editor/commit/a262291))
+* v3.42.72 ([dea7964](https://github.com/jaredparkinson/sp.editor/commit/dea7964))
 
-#### [1.2.1](https://github.com/maximegris/angular-electron/compare/1.2.0...1.2.1)
-> 30 April 2017
-- html loader [`c55558a`](https://github.com/maximegris/angular-electron/commit/c55558a63291a7de55cbf4ae0d5f39dc8cd05b5d)
-- Fix electron build (extract-zip workaround) [`a7ee90e`](https://github.com/maximegris/angular-electron/commit/a7ee90eb504737465526d306e74c723b730fa8ad)
-- Fix webpack config url in css [`cea4be5`](https://github.com/maximegris/angular-electron/commit/cea4be57ba02d343f169eb024c8ac25074857062)
-- Example url background in scss [`3705a35`](https://github.com/maximegris/angular-electron/commit/3705a35c7369b57d2798655af865dbdee385edba)
-- update version 1.2.1 [`78e8da7`](https://github.com/maximegris/angular-electron/commit/78e8da71d2ace705fb8448284fc88d590a8eabb8)
-- allowJs [`4efd188`](https://github.com/maximegris/angular-electron/commit/4efd1880a2e10af7cf2d8a01ecc0577abbe13756)
 
-#### [1.2.0](https://github.com/maximegris/angular-electron/compare/1.1.2...1.2.0)
-> 19 April 2017
-- Update npm dependencies [`0a93ebe`](https://github.com/maximegris/angular-electron/commit/0a93ebe96a7e60502fb99160ab0227ba1b879103)
-- Set one example of css class in app component [`a15775f`](https://github.com/maximegris/angular-electron/commit/a15775fb7a98399852bb12dd39bdc3d9393be48d)
 
-#### [1.1.2](https://github.com/maximegris/angular-electron/compare/1.1.1...1.1.2)
-> 19 April 2017
-- update README [`23fc0a9`](https://github.com/maximegris/angular-electron/commit/23fc0a9b2117bd8056acbf4e69aeb4aeb0cf74dd)
-- update README [`a8dcf6a`](https://github.com/maximegris/angular-electron/commit/a8dcf6ac58e232cadbb1c73c1f65c97a8e85d09f)
-- update README [`97fa63d`](https://github.com/maximegris/angular-electron/commit/97fa63d7ee76fd269f65383441070d9d3565c824)
-- Fix typo &amp; fix script electron:mac [`bd06859`](https://github.com/maximegris/angular-electron/commit/bd068590765f3bb497c1f3656bb11556abbd5f3f)
-- Set theme jekyll-theme-architect [`644d857`](https://github.com/maximegris/angular-electron/commit/644d8575e2d223c9490fbf03eda491d1daad8342)
+## <small>3.42.71 (2019-01-02)</small>
 
-#### [1.1.1](https://github.com/maximegris/angular-electron/compare/1.1.0...1.1.1)
-> 12 April 2017
-- Remove unused dependency (webpack-dev-server) [`e9150f4`](https://github.com/maximegris/angular-electron/commit/e9150f4a41e2a1b1a7af33e79e4af7ae1f96370a)
-- live reload on disk [`7bb2f8b`](https://github.com/maximegris/angular-electron/commit/7bb2f8b20a027cfc4aea0988fd98fe5c74e69f03)
-- Fix webpack.config file path (travisci) [`a172df9`](https://github.com/maximegris/angular-electron/commit/a172df94d918de4af0d0f223f9be4bcc471bd731)
+* fixed missing header ([7eb8774](https://github.com/jaredparkinson/sp.editor/commit/7eb8774))
+* v3.42.71 ([421bd05](https://github.com/jaredparkinson/sp.editor/commit/421bd05))
 
-#### [1.1.0](https://github.com/maximegris/angular-electron/compare/1.0.3...1.1.0)
-> 12 April 2017
-- Override webpack configuration [`60d6116`](https://github.com/maximegris/angular-electron/commit/60d6116b6df17e7451a487359471dbba7ba20882)
-- add depdencies CI &amp; Licence [`6ceb0f2`](https://github.com/maximegris/angular-electron/commit/6ceb0f2a10a68276c30e86a681d24cdd46c23280)
 
-#### [1.0.3](https://github.com/maximegris/angular-electron/compare/1.0.2...1.0.3)
-> 7 April 2017
-- Add TravisCI [`e5640fd`](https://github.com/maximegris/angular-electron/commit/e5640fd6052be0bd23a8052f2c717f0e5fc563dd)
 
-#### [1.0.2](https://github.com/maximegris/angular-electron/compare/1.0.1...1.0.2)
-> 7 April 2017
-- Update README [`3bb45b3`](https://github.com/maximegris/angular-electron/commit/3bb45b39b4a550caaf223a786b25f12ec37174c4)
-- Add TravisCI [`ef4b80e`](https://github.com/maximegris/angular-electron/commit/ef4b80ed706a3a7e7918b291d9cc4a5f17cd9791)
-- Update README with angular-cli doc [`5a57578`](https://github.com/maximegris/angular-electron/commit/5a57578b47c74f68277b78adb1dd53c9b1ba4f0f)
-- Fix typo [`e42bb5e`](https://github.com/maximegris/angular-electron/commit/e42bb5ed01a8fe6acbe969e60f08647d5b4100e5)
-- Fix typo [`f964c3f`](https://github.com/maximegris/angular-electron/commit/f964c3ffd9397977347a17740ff30b350eaa9006)
+## <small>3.42.70 (2018-12-28)</small>
 
-#### 1.0.1
-> 3 April 2017
-- ref/ update README [`7fddc20`](https://github.com/maximegris/angular-electron/commit/7fddc20484cbb23ff2128c209a7548408c311111)
-- feat/ Add electron-packager scripts [`57891dc`](https://github.com/maximegris/angular-electron/commit/57891dc9f409f95d2a7f2ae88ebe7a0a40f06218)
-- update README [`9a983c1`](https://github.com/maximegris/angular-electron/commit/9a983c1a1a1e23638d1660f513070aab35a90e10)
-- chore: initial commit from @angular/cli [`616a69e`](https://github.com/maximegris/angular-electron/commit/616a69ea0b4d3601bfcda207aca238660458ac55)
+* v3.42.70 ([084f719](https://github.com/jaredparkinson/sp.editor/commit/084f719))
+
+
+
+## <small>3.42.69 (2018-12-27)</small>
+
+* performance ([54420cb](https://github.com/jaredparkinson/sp.editor/commit/54420cb))
+* v3.42.69 ([74814d2](https://github.com/jaredparkinson/sp.editor/commit/74814d2))
+
+
+
+## <small>3.42.68 (2018-12-26)</small>
+
+* v3.42.68 ([7a7ffcd](https://github.com/jaredparkinson/sp.editor/commit/7a7ffcd))
+
+
+
+## <small>3.42.67 (2018-12-21)</small>
+
+* note prefix update ([d491f57](https://github.com/jaredparkinson/sp.editor/commit/d491f57))
+* v3.42.67 ([55ffe39](https://github.com/jaredparkinson/sp.editor/commit/55ffe39))
+
+
+
+## <small>3.42.66 (2018-12-18)</small>
+
+* Move verse to top when clicked ([cb05d32](https://github.com/jaredparkinson/sp.editor/commit/cb05d32))
+* v3.42.66 ([746df88](https://github.com/jaredparkinson/sp.editor/commit/746df88))
+
+
+
+## <small>3.42.65 (2018-12-18)</small>
+
+* v3.42.65 ([effc3ac](https://github.com/jaredparkinson/sp.editor/commit/effc3ac))
+
+
+
+## <small>3.42.64 (2018-12-18)</small>
+
+* v3.42.64 ([88cf63a](https://github.com/jaredparkinson/sp.editor/commit/88cf63a))
+* Working on half notes margin ([0f58f05](https://github.com/jaredparkinson/sp.editor/commit/0f58f05))
+* Working on note settings ([9565bfc](https://github.com/jaredparkinson/sp.editor/commit/9565bfc))
+
+
+
+## <small>3.42.63 (2018-12-14)</small>
+
+* half note improvements ([a817b74](https://github.com/jaredparkinson/sp.editor/commit/a817b74))
+* v3.42.63 ([d7c6b21](https://github.com/jaredparkinson/sp.editor/commit/d7c6b21))
+* working on the new half notes ([e087c26](https://github.com/jaredparkinson/sp.editor/commit/e087c26))
+
+
+
+## <small>3.42.62 (2018-12-10)</small>
+
+* Code cleanup ([e65ce17](https://github.com/jaredparkinson/sp.editor/commit/e65ce17))
+* v3.42.62 ([914f5f6](https://github.com/jaredparkinson/sp.editor/commit/914f5f6))
+* Working on wTag fixes ([f327f9d](https://github.com/jaredparkinson/sp.editor/commit/f327f9d))
+
+
+
+## <small>3.42.61 (2018-11-27)</small>
+
+* Download service temp back ([8aa7772](https://github.com/jaredparkinson/sp.editor/commit/8aa7772))
+* v3.42.61 ([1a349d3](https://github.com/jaredparkinson/sp.editor/commit/1a349d3))
+
+
+
+## <small>3.42.60 (2018-11-27)</small>
+
+* Fixes to note displaying ([3bf04a7](https://github.com/jaredparkinson/sp.editor/commit/3bf04a7))
+* v3.42.60 ([86040d3](https://github.com/jaredparkinson/sp.editor/commit/86040d3))
+
+
+
+## <small>3.42.59 (2018-11-27)</small>
+
+* v3.42.59 ([b3e9e39](https://github.com/jaredparkinson/sp.editor/commit/b3e9e39))
+
+
+
+## <small>3.42.58 (2018-11-27)</small>
+
+* v3.42.58 ([e9b4a77](https://github.com/jaredparkinson/sp.editor/commit/e9b4a77))
+
+
+
+## <small>3.42.57 (2018-11-26)</small>
+
+* v3.42.57 ([d79ae2f](https://github.com/jaredparkinson/sp.editor/commit/d79ae2f))
+
+
+
+## <small>3.42.56 (2018-11-26)</small>
+
+* v3.42.56 ([4527c90](https://github.com/jaredparkinson/sp.editor/commit/4527c90))
+
+
+
+## <small>3.42.55 (2018-11-26)</small>
+
+* Added superscript logic ([c4778ea](https://github.com/jaredparkinson/sp.editor/commit/c4778ea))
+* note fixes ([4d73249](https://github.com/jaredparkinson/sp.editor/commit/4d73249))
+* v3.42.55 ([aba88fa](https://github.com/jaredparkinson/sp.editor/commit/aba88fa))
+
+
+
+## <small>3.42.54 (2018-11-25)</small>
+
+* v3.42.54 ([f0364d4](https://github.com/jaredparkinson/sp.editor/commit/f0364d4))
+
+
+
+## <small>3.42.53 (2018-11-25)</small>
+
+* added sups ([b586911](https://github.com/jaredparkinson/sp.editor/commit/b586911))
+* v3.42.53 ([26c5b44](https://github.com/jaredparkinson/sp.editor/commit/26c5b44))
+
+
+
+## <small>3.42.52 (2018-11-24)</small>
+
+* border and color changes ([a0419a8](https://github.com/jaredparkinson/sp.editor/commit/a0419a8))
+* v3.42.52 ([99530b8](https://github.com/jaredparkinson/sp.editor/commit/99530b8))
+
+
+
+## <small>3.42.51 (2018-11-24)</small>
+
+* superscript color update ([06673b9](https://github.com/jaredparkinson/sp.editor/commit/06673b9))
+* v3.42.51 ([fe53134](https://github.com/jaredparkinson/sp.editor/commit/fe53134))
+
+
+
+## <small>3.42.50 (2018-11-23)</small>
+
+* new note logic ([f07c482](https://github.com/jaredparkinson/sp.editor/commit/f07c482))
+* v3.42.50 ([8c2c49a](https://github.com/jaredparkinson/sp.editor/commit/8c2c49a))
+
+
+
+## <small>3.42.49 (2018-11-22)</small>
+
+* styling updates ([7ded8ee](https://github.com/jaredparkinson/sp.editor/commit/7ded8ee))
+* superscript update ([77ad872](https://github.com/jaredparkinson/sp.editor/commit/77ad872))
+* v3.42.49 ([54ff089](https://github.com/jaredparkinson/sp.editor/commit/54ff089))
+
+
+
+## <small>3.42.48 (2018-11-20)</small>
+
+* v3.42.48 ([7f101cf](https://github.com/jaredparkinson/sp.editor/commit/7f101cf))
+
+
+
+## <small>3.42.47 (2018-11-20)</small>
+
+* superscript update ([0813b94](https://github.com/jaredparkinson/sp.editor/commit/0813b94))
+* underlinging update ([17b67f6](https://github.com/jaredparkinson/sp.editor/commit/17b67f6))
+* v3.42.47 ([7ec7450](https://github.com/jaredparkinson/sp.editor/commit/7ec7450))
+* Working on verse select ([26ec102](https://github.com/jaredparkinson/sp.editor/commit/26ec102))
+
+
+
+## <small>3.42.46 (2018-11-17)</small>
+
+* v3.42.46 ([60806b0](https://github.com/jaredparkinson/sp.editor/commit/60806b0))
+
+
+
+## <small>3.42.45 (2018-11-17)</small>
+
+*  Routing work ([4364a34](https://github.com/jaredparkinson/sp.editor/commit/4364a34))
+*  Update tests ([514f4f2](https://github.com/jaredparkinson/sp.editor/commit/514f4f2))
+* Across verses ([8e175d5](https://github.com/jaredparkinson/sp.editor/commit/8e175d5))
+* add app init ([fc447bd](https://github.com/jaredparkinson/sp.editor/commit/fc447bd))
+* Added cyrillic alphabet to denormalize ([ad67fb1](https://github.com/jaredparkinson/sp.editor/commit/ad67fb1))
+* Added electron project ([7075f4c](https://github.com/jaredparkinson/sp.editor/commit/7075f4c))
+* Added keyboard shortcuts ([175c94a](https://github.com/jaredparkinson/sp.editor/commit/175c94a))
+* added landing page ([786deab](https://github.com/jaredparkinson/sp.editor/commit/786deab))
+* Added lyre ([20db413](https://github.com/jaredparkinson/sp.editor/commit/20db413))
+* Added new tests and fixed UrlBuilder ([fa9f6b0](https://github.com/jaredparkinson/sp.editor/commit/fa9f6b0))
+* Added paragraph highlighting ([08e4f1d](https://github.com/jaredparkinson/sp.editor/commit/08e4f1d))
+* Added previous and next buttons ([6ebc0de](https://github.com/jaredparkinson/sp.editor/commit/6ebc0de))
+* Added scroll event ([ccdf303](https://github.com/jaredparkinson/sp.editor/commit/ccdf303))
+* added scrolling to verse on page load ([601aa83](https://github.com/jaredparkinson/sp.editor/commit/601aa83))
+* added scrolling to verse on page load ([040cdbe](https://github.com/jaredparkinson/sp.editor/commit/040cdbe))
+* Added search component ([7a05073](https://github.com/jaredparkinson/sp.editor/commit/7a05073))
+* Added sup ([b97c3d1](https://github.com/jaredparkinson/sp.editor/commit/b97c3d1))
+* Added support for plus buttons ([f2cbb60](https://github.com/jaredparkinson/sp.editor/commit/f2cbb60))
+* Added symbols ([4a09b0b](https://github.com/jaredparkinson/sp.editor/commit/4a09b0b))
+* Added version number changer ([c755912](https://github.com/jaredparkinson/sp.editor/commit/c755912))
+* Added wTag border ([89dbd01](https://github.com/jaredparkinson/sp.editor/commit/89dbd01))
+* address bar moved to file ([fa4cb95](https://github.com/jaredparkinson/sp.editor/commit/fa4cb95))
+* All the buttons are added ([35c234f](https://github.com/jaredparkinson/sp.editor/commit/35c234f))
+* Almost got refs completed ([6c47a88](https://github.com/jaredparkinson/sp.editor/commit/6c47a88))
+* almost there ([7efdf52](https://github.com/jaredparkinson/sp.editor/commit/7efdf52))
+* array work ([0a379b5](https://github.com/jaredparkinson/sp.editor/commit/0a379b5))
+* Attempting to fix installer ([1752b29](https://github.com/jaredparkinson/sp.editor/commit/1752b29))
+* attempting to fix search issues ([9ccc2a2](https://github.com/jaredparkinson/sp.editor/commit/9ccc2a2))
+* BrowserView Search adde ([ef9cd55](https://github.com/jaredparkinson/sp.editor/commit/ef9cd55))
+* bug fixes ([8f62499](https://github.com/jaredparkinson/sp.editor/commit/8f62499))
+* bug fixes ([a4f07d1](https://github.com/jaredparkinson/sp.editor/commit/a4f07d1))
+* Bug fixes ([54ebfdf](https://github.com/jaredparkinson/sp.editor/commit/54ebfdf))
+* Buttons look evem better now ([afd0217](https://github.com/jaredparkinson/sp.editor/commit/afd0217))
+* Buttons look nice now ([ecda8f1](https://github.com/jaredparkinson/sp.editor/commit/ecda8f1))
+* Cache update ([ace16fb](https://github.com/jaredparkinson/sp.editor/commit/ace16fb))
+* Changed build_production to remove scripture files before build ([de1f704](https://github.com/jaredparkinson/sp.editor/commit/de1f704))
+* Changed with of panes ([d5d0a7e](https://github.com/jaredparkinson/sp.editor/commit/d5d0a7e))
+* Cleaned up pane buttons ([3002dad](https://github.com/jaredparkinson/sp.editor/commit/3002dad))
+* Click highlighting ([6610f67](https://github.com/jaredparkinson/sp.editor/commit/6610f67))
+* code cleanup ([c7984e0](https://github.com/jaredparkinson/sp.editor/commit/c7984e0))
+* Code cleanup ([3824d48](https://github.com/jaredparkinson/sp.editor/commit/3824d48))
+* Color changes and added init docker ([e0bb021](https://github.com/jaredparkinson/sp.editor/commit/e0bb021))
+* Commented out broken links ([0e1c0de](https://github.com/jaredparkinson/sp.editor/commit/0e1c0de))
+* Converted to json ([85764ce](https://github.com/jaredparkinson/sp.editor/commit/85764ce))
+* css changes ([6aa7bee](https://github.com/jaredparkinson/sp.editor/commit/6aa7bee))
+* css changes ([45c0702](https://github.com/jaredparkinson/sp.editor/commit/45c0702))
+* CSS Fixes ([0228bfd](https://github.com/jaredparkinson/sp.editor/commit/0228bfd))
+* Ctrl f now focuses on textbox ([165773f](https://github.com/jaredparkinson/sp.editor/commit/165773f))
+* Deprecated sync scrolling service ([ea116c0](https://github.com/jaredparkinson/sp.editor/commit/ea116c0))
+* Docker updates ([2f106e5](https://github.com/jaredparkinson/sp.editor/commit/2f106e5))
+* Docker worked! ([379f2be](https://github.com/jaredparkinson/sp.editor/commit/379f2be))
+* dot highlighting ([26c4e14](https://github.com/jaredparkinson/sp.editor/commit/26c4e14))
+* dot system ([c3639e8](https://github.com/jaredparkinson/sp.editor/commit/c3639e8))
+* Dot system patches ([d850025](https://github.com/jaredparkinson/sp.editor/commit/d850025))
+* Download buttons ([2cd5d29](https://github.com/jaredparkinson/sp.editor/commit/2cd5d29))
+* duplicate error fixed ([d7985cf](https://github.com/jaredparkinson/sp.editor/commit/d7985cf))
+* Electron now builds correctly ([9c773db](https://github.com/jaredparkinson/sp.editor/commit/9c773db))
+* Ephesians fix ([6786895](https://github.com/jaredparkinson/sp.editor/commit/6786895))
+* Error fixed ([e21d9ec](https://github.com/jaredparkinson/sp.editor/commit/e21d9ec))
+* Error fixes ([156613a](https://github.com/jaredparkinson/sp.editor/commit/156613a))
+* escape works ([05a1554](https://github.com/jaredparkinson/sp.editor/commit/05a1554))
+* Everything displaying correctly again ([efdd131](https://github.com/jaredparkinson/sp.editor/commit/efdd131))
+* Everything now loaded on page ([19a543f](https://github.com/jaredparkinson/sp.editor/commit/19a543f))
+* Finally able to make release build ([14a53b3](https://github.com/jaredparkinson/sp.editor/commit/14a53b3))
+* Find in page patches ([9dc0904](https://github.com/jaredparkinson/sp.editor/commit/9dc0904))
+* fixed book name ([8d130b9](https://github.com/jaredparkinson/sp.editor/commit/8d130b9))
+* Fixed button styling ([2479732](https://github.com/jaredparkinson/sp.editor/commit/2479732))
+* Fixed buttons ([59f16e8](https://github.com/jaredparkinson/sp.editor/commit/59f16e8))
+* Fixed docker script ([10f0452](https://github.com/jaredparkinson/sp.editor/commit/10f0452))
+* Fixed error where verse highlighting wasn't being applied in poetry mode ([6a875a5](https://github.com/jaredparkinson/sp.editor/commit/6a875a5))
+* Fixed error where verse highlighting wasn't being reset ([ea6d139](https://github.com/jaredparkinson/sp.editor/commit/ea6d139))
+* Fixed issue where highlights didn't go away ([73eb0c9](https://github.com/jaredparkinson/sp.editor/commit/73eb0c9))
+* Fixed issue where note phrase was outputting tags ([f9fb1f7](https://github.com/jaredparkinson/sp.editor/commit/f9fb1f7))
+* Fixed layout issues ([5aea4cd](https://github.com/jaredparkinson/sp.editor/commit/5aea4cd))
+* Fixed line spacing ([51cbf4e](https://github.com/jaredparkinson/sp.editor/commit/51cbf4e))
+* Fixed navigation issues ([63fbf82](https://github.com/jaredparkinson/sp.editor/commit/63fbf82))
+* Fixed poetry ([3aeb17c](https://github.com/jaredparkinson/sp.editor/commit/3aeb17c))
+* Fixed scrolling error in Chrome with curly braces ([a20ebb2](https://github.com/jaredparkinson/sp.editor/commit/a20ebb2))
+* Fixed service worker ([8279f71](https://github.com/jaredparkinson/sp.editor/commit/8279f71))
+* Fixed sync scrolling where it went past the first verse and last verse ([286c948](https://github.com/jaredparkinson/sp.editor/commit/286c948))
+* fixed TG notes ([d76575c](https://github.com/jaredparkinson/sp.editor/commit/d76575c))
+* fixed to secondary notes ([c5b04f1](https://github.com/jaredparkinson/sp.editor/commit/c5b04f1))
+* fixed underlining ([30874df](https://github.com/jaredparkinson/sp.editor/commit/30874df))
+* fixed verse highlighting ([23b0c15](https://github.com/jaredparkinson/sp.editor/commit/23b0c15))
+* Fixed verse select errors ([042e642](https://github.com/jaredparkinson/sp.editor/commit/042e642))
+* fixed visual bug ([85463cc](https://github.com/jaredparkinson/sp.editor/commit/85463cc))
+* Forgot sync scrollingin one place ([32fa45f](https://github.com/jaredparkinson/sp.editor/commit/32fa45f))
+* Forgot to add css classes ([6468a39](https://github.com/jaredparkinson/sp.editor/commit/6468a39))
+* Forgot to add css classes ([f96ef5e](https://github.com/jaredparkinson/sp.editor/commit/f96ef5e))
+* Had to remove ability to easily dismiss dropdown ([b691f17](https://github.com/jaredparkinson/sp.editor/commit/b691f17))
+* Hid the scroll bars ([a542a03](https://github.com/jaredparkinson/sp.editor/commit/a542a03))
+* highlighting works now ([2f216c4](https://github.com/jaredparkinson/sp.editor/commit/2f216c4))
+* I may have fixed scrolling to verse ([beb7f51](https://github.com/jaredparkinson/sp.editor/commit/beb7f51))
+* I think I understand observables now ([7ebdf18](https://github.com/jaredparkinson/sp.editor/commit/7ebdf18))
+* icon changes ([aa14e18](https://github.com/jaredparkinson/sp.editor/commit/aa14e18))
+* Improved dropdown style ([217af84](https://github.com/jaredparkinson/sp.editor/commit/217af84))
+* Improved dropdown style ([dd1e2d3](https://github.com/jaredparkinson/sp.editor/commit/dd1e2d3))
+* In Page search does not work ([b2ebf6d](https://github.com/jaredparkinson/sp.editor/commit/b2ebf6d))
+* indexBy ([eae519a](https://github.com/jaredparkinson/sp.editor/commit/eae519a))
+* Init commit ([54a478d](https://github.com/jaredparkinson/sp.editor/commit/54a478d))
+* Init Commit ([0618a80](https://github.com/jaredparkinson/sp.editor/commit/0618a80))
+* Init Commit ([b8c616d](https://github.com/jaredparkinson/sp.editor/commit/b8c616d))
+* Init electron Commit ([09c462c](https://github.com/jaredparkinson/sp.editor/commit/09c462c))
+* Init vue project ([488c78f](https://github.com/jaredparkinson/sp.editor/commit/488c78f))
+* Initial commit ([f110822](https://github.com/jaredparkinson/sp.editor/commit/f110822))
+* Integrating notes ([64b7197](https://github.com/jaredparkinson/sp.editor/commit/64b7197))
+* interface updates ([ffa20bd](https://github.com/jaredparkinson/sp.editor/commit/ffa20bd))
+* Interface updates ([c27201a](https://github.com/jaredparkinson/sp.editor/commit/c27201a))
+* Interface work ([ba62f75](https://github.com/jaredparkinson/sp.editor/commit/ba62f75))
+* json notes ([8199b8d](https://github.com/jaredparkinson/sp.editor/commit/8199b8d))
+* layout ([fba480e](https://github.com/jaredparkinson/sp.editor/commit/fba480e))
+* layout changes ([a5df08c](https://github.com/jaredparkinson/sp.editor/commit/a5df08c))
+* Layout changes ([ef539f8](https://github.com/jaredparkinson/sp.editor/commit/ef539f8))
+* Layout fixes ([90e87f3](https://github.com/jaredparkinson/sp.editor/commit/90e87f3))
+* Layout update ([bb4f823](https://github.com/jaredparkinson/sp.editor/commit/bb4f823))
+* Layout updates ([943230f](https://github.com/jaredparkinson/sp.editor/commit/943230f))
+* Layout updates ([ba99d19](https://github.com/jaredparkinson/sp.editor/commit/ba99d19))
+* Layout work ([ad22bc1](https://github.com/jaredparkinson/sp.editor/commit/ad22bc1))
+* Line end fixes ([95a380d](https://github.com/jaredparkinson/sp.editor/commit/95a380d))
+* Loading update ([ea1c723](https://github.com/jaredparkinson/sp.editor/commit/ea1c723))
+* Mobile layout updates ([0861495](https://github.com/jaredparkinson/sp.editor/commit/0861495))
+* More borders ([302101f](https://github.com/jaredparkinson/sp.editor/commit/302101f))
+* More buttons on mobile ([1e9c0b8](https://github.com/jaredparkinson/sp.editor/commit/1e9c0b8))
+* More fixes ([5a5647c](https://github.com/jaredparkinson/sp.editor/commit/5a5647c))
+* More mobile ([a9a306b](https://github.com/jaredparkinson/sp.editor/commit/a9a306b))
+* More mobile fixes ([8dcb10f](https://github.com/jaredparkinson/sp.editor/commit/8dcb10f))
+* More nav fixes ([1ed4c59](https://github.com/jaredparkinson/sp.editor/commit/1ed4c59))
+* More nav fixes ([e5c7011](https://github.com/jaredparkinson/sp.editor/commit/e5c7011))
+* more notes on page ([7b5f9a6](https://github.com/jaredparkinson/sp.editor/commit/7b5f9a6))
+* More understanding ([67472a6](https://github.com/jaredparkinson/sp.editor/commit/67472a6))
+* More verse selection improvements ([99cd12a](https://github.com/jaredparkinson/sp.editor/commit/99cd12a))
+* move css out of html for find in page ([3e52fda](https://github.com/jaredparkinson/sp.editor/commit/3e52fda))
+* Moved more of sync scrolling into angular ([743cfde](https://github.com/jaredparkinson/sp.editor/commit/743cfde))
+* Moved note settings into seperate component ([2836133](https://github.com/jaredparkinson/sp.editor/commit/2836133))
+* Moved over to new wtag system for verses ([c544af4](https://github.com/jaredparkinson/sp.editor/commit/c544af4))
+* moved span-references to mixin ([831ee10](https://github.com/jaredparkinson/sp.editor/commit/831ee10))
+* moved test data to seperate file ([29a2bbd](https://github.com/jaredparkinson/sp.editor/commit/29a2bbd))
+* Moved to lodash from underscore ([9bc262c](https://github.com/jaredparkinson/sp.editor/commit/9bc262c))
+* moved verse select ([70b5032](https://github.com/jaredparkinson/sp.editor/commit/70b5032))
+* nav ([bab21bd](https://github.com/jaredparkinson/sp.editor/commit/bab21bd))
+* Nav improvements ([d1d7daa](https://github.com/jaredparkinson/sp.editor/commit/d1d7daa))
+* nav updates ([99a24cf](https://github.com/jaredparkinson/sp.editor/commit/99a24cf))
+* nav updates ([aceda3f](https://github.com/jaredparkinson/sp.editor/commit/aceda3f))
+* nav work ([855d1fb](https://github.com/jaredparkinson/sp.editor/commit/855d1fb))
+* Nav work ([5608b8b](https://github.com/jaredparkinson/sp.editor/commit/5608b8b))
+* Nav work ([9fb623b](https://github.com/jaredparkinson/sp.editor/commit/9fb623b))
+* Nav work ([f17a878](https://github.com/jaredparkinson/sp.editor/commit/f17a878))
+* Nav work ([0f652ef](https://github.com/jaredparkinson/sp.editor/commit/0f652ef))
+* Nav work ([d67bf1f](https://github.com/jaredparkinson/sp.editor/commit/d67bf1f))
+* Nav work ([c557e32](https://github.com/jaredparkinson/sp.editor/commit/c557e32))
+* Nav Work ([ccce105](https://github.com/jaredparkinson/sp.editor/commit/ccce105))
+* Nav works ([9f3b25a](https://github.com/jaredparkinson/sp.editor/commit/9f3b25a))
+* Navigation fixes ([239b883](https://github.com/jaredparkinson/sp.editor/commit/239b883))
+* Need to aff guard ([268d820](https://github.com/jaredparkinson/sp.editor/commit/268d820))
+* Need to fix web app ([aea30e7](https://github.com/jaredparkinson/sp.editor/commit/aea30e7))
+* Needed that router-outlet ([8e1d994](https://github.com/jaredparkinson/sp.editor/commit/8e1d994))
+* New  verse system ([c9f7419](https://github.com/jaredparkinson/sp.editor/commit/c9f7419))
+* New data integrated ([04b6746](https://github.com/jaredparkinson/sp.editor/commit/04b6746))
+* New highlighting system ([09133aa](https://github.com/jaredparkinson/sp.editor/commit/09133aa))
+* Note booleans updated ([732a65e](https://github.com/jaredparkinson/sp.editor/commit/732a65e))
+* note phrases actually fixed ([08cb1a4](https://github.com/jaredparkinson/sp.editor/commit/08cb1a4))
+* Note settings all on one page ([aa7089d](https://github.com/jaredparkinson/sp.editor/commit/aa7089d))
+* Note settings fixes ([02a877d](https://github.com/jaredparkinson/sp.editor/commit/02a877d))
+* Note underlinging back to previous level ([b10eae3](https://github.com/jaredparkinson/sp.editor/commit/b10eae3))
+* note underlinging partially back ([dc1eca1](https://github.com/jaredparkinson/sp.editor/commit/dc1eca1))
+* Note underlining partially returns ([3d9c591](https://github.com/jaredparkinson/sp.editor/commit/3d9c591))
+* notePhraseClick ([ab9a939](https://github.com/jaredparkinson/sp.editor/commit/ab9a939))
+* Notes are now selected ([a213bb1](https://github.com/jaredparkinson/sp.editor/commit/a213bb1))
+* notes fixes ([5e0fc3e](https://github.com/jaredparkinson/sp.editor/commit/5e0fc3e))
+* Notes layout fixed a bit ([a2f7f1a](https://github.com/jaredparkinson/sp.editor/commit/a2f7f1a))
+* Notes show correctly now ([9962194](https://github.com/jaredparkinson/sp.editor/commit/9962194))
+* Now displaying chapter list ([a23366f](https://github.com/jaredparkinson/sp.editor/commit/a23366f))
+* null error fixed ([cee5d96](https://github.com/jaredparkinson/sp.editor/commit/cee5d96))
+* Number changes ([cc409e3](https://github.com/jaredparkinson/sp.editor/commit/cc409e3))
+* offline storage v2 ([264ab4a](https://github.com/jaredparkinson/sp.editor/commit/264ab4a))
+* package updates ([c006b51](https://github.com/jaredparkinson/sp.editor/commit/c006b51))
+* Package updates ([3f41528](https://github.com/jaredparkinson/sp.editor/commit/3f41528))
+* patch ([6282613](https://github.com/jaredparkinson/sp.editor/commit/6282613))
+* patch ([ba7303d](https://github.com/jaredparkinson/sp.editor/commit/ba7303d))
+* patch ([d842f31](https://github.com/jaredparkinson/sp.editor/commit/d842f31))
+* Patch ([07d091a](https://github.com/jaredparkinson/sp.editor/commit/07d091a))
+* Patches ([d269f35](https://github.com/jaredparkinson/sp.editor/commit/d269f35))
+* Patches ([dd899f8](https://github.com/jaredparkinson/sp.editor/commit/dd899f8))
+* pkuPlus button css ([11bb8b1](https://github.com/jaredparkinson/sp.editor/commit/11bb8b1))
+* Poetry button now works ([8b65fa5](https://github.com/jaredparkinson/sp.editor/commit/8b65fa5))
+* production builder ([eb57afc](https://github.com/jaredparkinson/sp.editor/commit/eb57afc))
+* Promises for getChapter are now workign ([e2ecf75](https://github.com/jaredparkinson/sp.editor/commit/e2ecf75))
+* PWA ([fe308d0](https://github.com/jaredparkinson/sp.editor/commit/fe308d0))
+* Refactoring ([856c8e1](https://github.com/jaredparkinson/sp.editor/commit/856c8e1))
+* Refactoring ([6cc81f9](https://github.com/jaredparkinson/sp.editor/commit/6cc81f9))
+* Refactoring ([8e377e7](https://github.com/jaredparkinson/sp.editor/commit/8e377e7))
+* Remove console.logs ([5ae6663](https://github.com/jaredparkinson/sp.editor/commit/5ae6663))
+* Removed Cheerio ([ce4f907](https://github.com/jaredparkinson/sp.editor/commit/ce4f907))
+* Removed more non angular code ([016e5b5](https://github.com/jaredparkinson/sp.editor/commit/016e5b5))
+* Removed overlay from notessettings ([69fd71a](https://github.com/jaredparkinson/sp.editor/commit/69fd71a))
+* removed that extra text: ([22a4d86](https://github.com/jaredparkinson/sp.editor/commit/22a4d86))
+* Reset verse select ([7589d35](https://github.com/jaredparkinson/sp.editor/commit/7589d35))
+* Reset verse select ([34e4657](https://github.com/jaredparkinson/sp.editor/commit/34e4657))
+* Revert "attempting itdeas" ([5015b7e](https://github.com/jaredparkinson/sp.editor/commit/5015b7e))
+* Revert "three panes lowered to 880px" ([49fdbfe](https://github.com/jaredparkinson/sp.editor/commit/49fdbfe))
+* Revert "v3.41.0" ([ffe102d](https://github.com/jaredparkinson/sp.editor/commit/ffe102d))
+* Right pane now back on the right ([6e8a8b1](https://github.com/jaredparkinson/sp.editor/commit/6e8a8b1))
+* Routing is better ([b2041c5](https://github.com/jaredparkinson/sp.editor/commit/b2041c5))
+* Routing problems ([552670f](https://github.com/jaredparkinson/sp.editor/commit/552670f))
+* save ([82f271d](https://github.com/jaredparkinson/sp.editor/commit/82f271d))
+* Save state changes ([47de755](https://github.com/jaredparkinson/sp.editor/commit/47de755))
+* Save state updates ([ccdd837](https://github.com/jaredparkinson/sp.editor/commit/ccdd837))
+* Save state updates ([232d698](https://github.com/jaredparkinson/sp.editor/commit/232d698))
+* script update ([4905608](https://github.com/jaredparkinson/sp.editor/commit/4905608))
+* Scrolling events work again ([f764a19](https://github.com/jaredparkinson/sp.editor/commit/f764a19))
+* settings ([fbfe1a3](https://github.com/jaredparkinson/sp.editor/commit/fbfe1a3))
+* settings ([86ae2d2](https://github.com/jaredparkinson/sp.editor/commit/86ae2d2))
+* Settings pane is now dismissable again ([e672bac](https://github.com/jaredparkinson/sp.editor/commit/e672bac))
+* Shrunk docker build time ([bd07860](https://github.com/jaredparkinson/sp.editor/commit/bd07860))
+* Some fixes ([91b7410](https://github.com/jaredparkinson/sp.editor/commit/91b7410))
+* Spec file updates ([fb136ce](https://github.com/jaredparkinson/sp.editor/commit/fb136ce))
+* Speed improvements for sync scrolling ([03163ec](https://github.com/jaredparkinson/sp.editor/commit/03163ec))
+* styling ([87f3d7d](https://github.com/jaredparkinson/sp.editor/commit/87f3d7d))
+* styling ([e815a55](https://github.com/jaredparkinson/sp.editor/commit/e815a55))
+* Styling updates ([a8488f6](https://github.com/jaredparkinson/sp.editor/commit/a8488f6))
+* Successfully searched ([82a99f2](https://github.com/jaredparkinson/sp.editor/commit/82a99f2))
+* SVG update ([b58b65a](https://github.com/jaredparkinson/sp.editor/commit/b58b65a))
+* Switched to new plus button ([cdaa27d](https://github.com/jaredparkinson/sp.editor/commit/cdaa27d))
+* Switched to underscorejs for foreach from NodeListOf ([0dcdca5](https://github.com/jaredparkinson/sp.editor/commit/0dcdca5))
+* Sync scrolling start ([22abb21](https://github.com/jaredparkinson/sp.editor/commit/22abb21))
+* Sync scrolling update ([7590b28](https://github.com/jaredparkinson/sp.editor/commit/7590b28))
+* Sync scrolling update ([be40c69](https://github.com/jaredparkinson/sp.editor/commit/be40c69))
+* Testing new dialogs ([4a288be](https://github.com/jaredparkinson/sp.editor/commit/4a288be))
+* Testing new sp file dist ([a4b893c](https://github.com/jaredparkinson/sp.editor/commit/a4b893c))
+* Testing new touch events ([add2cba](https://github.com/jaredparkinson/sp.editor/commit/add2cba))
+* testing node update ([0e75f49](https://github.com/jaredparkinson/sp.editor/commit/0e75f49))
+* tests work now ([8c9ab58](https://github.com/jaredparkinson/sp.editor/commit/8c9ab58))
+* tg and gs ([2aafc83](https://github.com/jaredparkinson/sp.editor/commit/2aafc83))
+* tg and gs ([cf310a3](https://github.com/jaredparkinson/sp.editor/commit/cf310a3))
+* tier2 note work ([7f2f6e7](https://github.com/jaredparkinson/sp.editor/commit/7f2f6e7))
+* toggle fixed ([24444fd](https://github.com/jaredparkinson/sp.editor/commit/24444fd))
+* touch ([2c92a8d](https://github.com/jaredparkinson/sp.editor/commit/2c92a8d))
+* touch ([34b2d10](https://github.com/jaredparkinson/sp.editor/commit/34b2d10))
+* trying new layout ([c7f52cb](https://github.com/jaredparkinson/sp.editor/commit/c7f52cb))
+* trying to fix the enter key ([6f9c61e](https://github.com/jaredparkinson/sp.editor/commit/6f9c61e))
+* trying to get scrolling to work ([5f970d1](https://github.com/jaredparkinson/sp.editor/commit/5f970d1))
+* Trying to remove whitespace ([a017a07](https://github.com/jaredparkinson/sp.editor/commit/a017a07))
+* Update nav2 and fixed bug where nav items were large ([06be8ba](https://github.com/jaredparkinson/sp.editor/commit/06be8ba))
+* Update testament nav styles ([7932beb](https://github.com/jaredparkinson/sp.editor/commit/7932beb))
+* Update to highlight to run from style tag ([c226ffa](https://github.com/jaredparkinson/sp.editor/commit/c226ffa))
+* Update to landing page ([2124514](https://github.com/jaredparkinson/sp.editor/commit/2124514))
+* Update to overlay ([38cc6bc](https://github.com/jaredparkinson/sp.editor/commit/38cc6bc))
+* Update version number ([edc7eaa](https://github.com/jaredparkinson/sp.editor/commit/edc7eaa))
+* Updated colors ([07f7d08](https://github.com/jaredparkinson/sp.editor/commit/07f7d08))
+* Updated icons and added msi build ([3fcee49](https://github.com/jaredparkinson/sp.editor/commit/3fcee49))
+* Updated line endings ([f793d43](https://github.com/jaredparkinson/sp.editor/commit/f793d43))
+* updated upload scripts ([2aff888](https://github.com/jaredparkinson/sp.editor/commit/2aff888))
+* Updated version number ([3743efd](https://github.com/jaredparkinson/sp.editor/commit/3743efd))
+* Updating landing page ([5e03f32](https://github.com/jaredparkinson/sp.editor/commit/5e03f32))
+* Updating version number location ([f73a083](https://github.com/jaredparkinson/sp.editor/commit/f73a083))
+* URL Worl ([3de93df](https://github.com/jaredparkinson/sp.editor/commit/3de93df))
+* UrlBuilder almost works ([68ab131](https://github.com/jaredparkinson/sp.editor/commit/68ab131))
+* Urls now work ([a5eb456](https://github.com/jaredparkinson/sp.editor/commit/a5eb456))
+* v3.22.0 ([e75666d](https://github.com/jaredparkinson/sp.editor/commit/e75666d))
+* v3.23.0 ([2763aac](https://github.com/jaredparkinson/sp.editor/commit/2763aac))
+* v3.24.0 ([2f68b0a](https://github.com/jaredparkinson/sp.editor/commit/2f68b0a))
+* v3.25.0 ([1ebee6e](https://github.com/jaredparkinson/sp.editor/commit/1ebee6e))
+* v3.25.0 ([eba170d](https://github.com/jaredparkinson/sp.editor/commit/eba170d))
+* v3.26.0 ([a976c00](https://github.com/jaredparkinson/sp.editor/commit/a976c00))
+* v3.26.1 ([6bda7c4](https://github.com/jaredparkinson/sp.editor/commit/6bda7c4))
+* v3.27.0 ([c7515fc](https://github.com/jaredparkinson/sp.editor/commit/c7515fc))
+* v3.28.0 ([cf99a40](https://github.com/jaredparkinson/sp.editor/commit/cf99a40))
+* v3.29.0 ([55981d3](https://github.com/jaredparkinson/sp.editor/commit/55981d3))
+* v3.31.0 ([2dc8b5b](https://github.com/jaredparkinson/sp.editor/commit/2dc8b5b))
+* v3.32.0 ([b4fbc7c](https://github.com/jaredparkinson/sp.editor/commit/b4fbc7c))
+* v3.33.0 ([5c1979e](https://github.com/jaredparkinson/sp.editor/commit/5c1979e))
+* v3.34.0 ([8a4ef7e](https://github.com/jaredparkinson/sp.editor/commit/8a4ef7e))
+* v3.35.0 ([b8d9d05](https://github.com/jaredparkinson/sp.editor/commit/b8d9d05))
+* v3.36.0 ([cff3a06](https://github.com/jaredparkinson/sp.editor/commit/cff3a06))
+* v3.36.1 ([08dca0d](https://github.com/jaredparkinson/sp.editor/commit/08dca0d))
+* v3.36.2 ([8a88989](https://github.com/jaredparkinson/sp.editor/commit/8a88989))
+* v3.36.3 ([7993f4a](https://github.com/jaredparkinson/sp.editor/commit/7993f4a))
+* v3.36.4 ([866470b](https://github.com/jaredparkinson/sp.editor/commit/866470b))
+* v3.37.0 ([0c352ef](https://github.com/jaredparkinson/sp.editor/commit/0c352ef))
+* v3.38.0 ([9375a1d](https://github.com/jaredparkinson/sp.editor/commit/9375a1d))
+* v3.39.0 ([bf54577](https://github.com/jaredparkinson/sp.editor/commit/bf54577))
+* v3.39.0 ([e095ca3](https://github.com/jaredparkinson/sp.editor/commit/e095ca3))
+* v3.40.0 ([52a7b72](https://github.com/jaredparkinson/sp.editor/commit/52a7b72))
+* v3.40.1 ([4d801d3](https://github.com/jaredparkinson/sp.editor/commit/4d801d3))
+* v3.40.10 ([83aa8ca](https://github.com/jaredparkinson/sp.editor/commit/83aa8ca))
+* v3.40.11 ([fe62344](https://github.com/jaredparkinson/sp.editor/commit/fe62344))
+* v3.40.12 ([b2dce6c](https://github.com/jaredparkinson/sp.editor/commit/b2dce6c))
+* v3.40.13 ([933a279](https://github.com/jaredparkinson/sp.editor/commit/933a279))
+* v3.40.14 ([ccace9b](https://github.com/jaredparkinson/sp.editor/commit/ccace9b))
+* v3.40.16 ([ee64a42](https://github.com/jaredparkinson/sp.editor/commit/ee64a42))
+* v3.40.17 ([ad127a4](https://github.com/jaredparkinson/sp.editor/commit/ad127a4))
+* v3.40.18 ([2922955](https://github.com/jaredparkinson/sp.editor/commit/2922955))
+* v3.40.19 ([0964b4c](https://github.com/jaredparkinson/sp.editor/commit/0964b4c))
+* v3.40.2 ([5ddaf22](https://github.com/jaredparkinson/sp.editor/commit/5ddaf22))
+* v3.40.20 ([4c6b053](https://github.com/jaredparkinson/sp.editor/commit/4c6b053))
+* v3.40.21 ([0407a7b](https://github.com/jaredparkinson/sp.editor/commit/0407a7b))
+* v3.40.22 ([19979e5](https://github.com/jaredparkinson/sp.editor/commit/19979e5))
+* v3.40.23 ([49f4133](https://github.com/jaredparkinson/sp.editor/commit/49f4133))
+* v3.40.24 ([99ca4ab](https://github.com/jaredparkinson/sp.editor/commit/99ca4ab))
+* v3.40.25 ([d29ee95](https://github.com/jaredparkinson/sp.editor/commit/d29ee95))
+* v3.40.26 ([99f6200](https://github.com/jaredparkinson/sp.editor/commit/99f6200))
+* v3.40.27 ([efba666](https://github.com/jaredparkinson/sp.editor/commit/efba666))
+* v3.40.28 ([3d8730f](https://github.com/jaredparkinson/sp.editor/commit/3d8730f))
+* v3.40.29 ([59b7850](https://github.com/jaredparkinson/sp.editor/commit/59b7850))
+* v3.40.3 ([dee2e5a](https://github.com/jaredparkinson/sp.editor/commit/dee2e5a))
+* v3.40.30 ([cf94d38](https://github.com/jaredparkinson/sp.editor/commit/cf94d38))
+* v3.40.31 ([1072cd1](https://github.com/jaredparkinson/sp.editor/commit/1072cd1))
+* v3.40.32 ([1616ae2](https://github.com/jaredparkinson/sp.editor/commit/1616ae2))
+* v3.40.33 ([f9b039d](https://github.com/jaredparkinson/sp.editor/commit/f9b039d))
+* v3.40.34 ([413bd16](https://github.com/jaredparkinson/sp.editor/commit/413bd16))
+* v3.40.35 ([f18d959](https://github.com/jaredparkinson/sp.editor/commit/f18d959))
+* v3.40.36 ([eb38979](https://github.com/jaredparkinson/sp.editor/commit/eb38979))
+* v3.40.37 ([8a230fd](https://github.com/jaredparkinson/sp.editor/commit/8a230fd))
+* v3.40.38 ([385b63b](https://github.com/jaredparkinson/sp.editor/commit/385b63b))
+* v3.40.39 ([7f01174](https://github.com/jaredparkinson/sp.editor/commit/7f01174))
+* v3.40.4 ([44f89a2](https://github.com/jaredparkinson/sp.editor/commit/44f89a2))
+* v3.40.40 ([8e7ee97](https://github.com/jaredparkinson/sp.editor/commit/8e7ee97))
+* v3.40.41 ([b90df91](https://github.com/jaredparkinson/sp.editor/commit/b90df91))
+* v3.40.5 ([8f5c672](https://github.com/jaredparkinson/sp.editor/commit/8f5c672))
+* v3.40.6 ([187f1bb](https://github.com/jaredparkinson/sp.editor/commit/187f1bb))
+* v3.40.7 ([fd771ac](https://github.com/jaredparkinson/sp.editor/commit/fd771ac))
+* v3.40.8 ([842fc65](https://github.com/jaredparkinson/sp.editor/commit/842fc65))
+* v3.40.9 ([949dae3](https://github.com/jaredparkinson/sp.editor/commit/949dae3))
+* v3.41.0 ([76fec1d](https://github.com/jaredparkinson/sp.editor/commit/76fec1d))
+* v3.41.1 ([659bb72](https://github.com/jaredparkinson/sp.editor/commit/659bb72))
+* v3.41.10 ([73c5022](https://github.com/jaredparkinson/sp.editor/commit/73c5022))
+* v3.41.11 ([d15b426](https://github.com/jaredparkinson/sp.editor/commit/d15b426))
+* v3.41.12 ([f6735b0](https://github.com/jaredparkinson/sp.editor/commit/f6735b0))
+* v3.41.13 ([508e46d](https://github.com/jaredparkinson/sp.editor/commit/508e46d))
+* v3.41.14 ([e8af55f](https://github.com/jaredparkinson/sp.editor/commit/e8af55f))
+* v3.41.15 ([fb82fb8](https://github.com/jaredparkinson/sp.editor/commit/fb82fb8))
+* v3.41.16 ([e96d3a9](https://github.com/jaredparkinson/sp.editor/commit/e96d3a9))
+* v3.41.17 ([60d4349](https://github.com/jaredparkinson/sp.editor/commit/60d4349))
+* v3.41.18 ([59134cc](https://github.com/jaredparkinson/sp.editor/commit/59134cc))
+* v3.41.19 ([a9f76a2](https://github.com/jaredparkinson/sp.editor/commit/a9f76a2))
+* v3.41.2 ([3542f78](https://github.com/jaredparkinson/sp.editor/commit/3542f78))
+* v3.41.20 ([2bfec83](https://github.com/jaredparkinson/sp.editor/commit/2bfec83))
+* v3.41.21 ([80a2305](https://github.com/jaredparkinson/sp.editor/commit/80a2305))
+* v3.41.22 ([15f771c](https://github.com/jaredparkinson/sp.editor/commit/15f771c))
+* v3.41.23 ([f213117](https://github.com/jaredparkinson/sp.editor/commit/f213117))
+* v3.41.24 ([c4ea93a](https://github.com/jaredparkinson/sp.editor/commit/c4ea93a))
+* v3.41.25 ([311a762](https://github.com/jaredparkinson/sp.editor/commit/311a762))
+* v3.41.26 ([2b858db](https://github.com/jaredparkinson/sp.editor/commit/2b858db))
+* v3.41.27 ([91751da](https://github.com/jaredparkinson/sp.editor/commit/91751da))
+* v3.41.28 ([5dfcb5d](https://github.com/jaredparkinson/sp.editor/commit/5dfcb5d))
+* v3.41.29 ([01d2a2a](https://github.com/jaredparkinson/sp.editor/commit/01d2a2a))
+* v3.41.3 ([40b5ce2](https://github.com/jaredparkinson/sp.editor/commit/40b5ce2))
+* v3.41.30 ([375e625](https://github.com/jaredparkinson/sp.editor/commit/375e625))
+* v3.41.31 ([82d5331](https://github.com/jaredparkinson/sp.editor/commit/82d5331))
+* v3.41.5 ([f6e5a8c](https://github.com/jaredparkinson/sp.editor/commit/f6e5a8c))
+* v3.41.6 ([812db16](https://github.com/jaredparkinson/sp.editor/commit/812db16))
+* v3.41.7 ([096bc70](https://github.com/jaredparkinson/sp.editor/commit/096bc70))
+* v3.41.8 ([57b3be9](https://github.com/jaredparkinson/sp.editor/commit/57b3be9))
+* v3.41.9 ([10e7760](https://github.com/jaredparkinson/sp.editor/commit/10e7760))
+* v3.42.0 ([46d34a9](https://github.com/jaredparkinson/sp.editor/commit/46d34a9))
+* v3.42.1 ([e9b3dfa](https://github.com/jaredparkinson/sp.editor/commit/e9b3dfa))
+* v3.42.10 ([f948a17](https://github.com/jaredparkinson/sp.editor/commit/f948a17))
+* v3.42.11 ([85af218](https://github.com/jaredparkinson/sp.editor/commit/85af218))
+* v3.42.12 ([ca8e7b5](https://github.com/jaredparkinson/sp.editor/commit/ca8e7b5))
+* v3.42.14 ([c5da093](https://github.com/jaredparkinson/sp.editor/commit/c5da093))
+* v3.42.15 ([d98bf71](https://github.com/jaredparkinson/sp.editor/commit/d98bf71))
+* v3.42.16 ([c7df056](https://github.com/jaredparkinson/sp.editor/commit/c7df056))
+* v3.42.17 ([a4956e0](https://github.com/jaredparkinson/sp.editor/commit/a4956e0))
+* v3.42.18 ([c089c63](https://github.com/jaredparkinson/sp.editor/commit/c089c63))
+* v3.42.19 ([abe270e](https://github.com/jaredparkinson/sp.editor/commit/abe270e))
+* v3.42.2 ([37d28c1](https://github.com/jaredparkinson/sp.editor/commit/37d28c1))
+* v3.42.20 ([577ca88](https://github.com/jaredparkinson/sp.editor/commit/577ca88))
+* v3.42.21 ([3897aa1](https://github.com/jaredparkinson/sp.editor/commit/3897aa1))
+* v3.42.22 ([48d2d86](https://github.com/jaredparkinson/sp.editor/commit/48d2d86))
+* v3.42.23 ([67ddb8e](https://github.com/jaredparkinson/sp.editor/commit/67ddb8e))
+* v3.42.24 ([fef79c7](https://github.com/jaredparkinson/sp.editor/commit/fef79c7))
+* v3.42.25 ([841b5dc](https://github.com/jaredparkinson/sp.editor/commit/841b5dc))
+* v3.42.26 ([f2bd6d4](https://github.com/jaredparkinson/sp.editor/commit/f2bd6d4))
+* v3.42.27 ([63c738c](https://github.com/jaredparkinson/sp.editor/commit/63c738c))
+* v3.42.28 ([ac2db49](https://github.com/jaredparkinson/sp.editor/commit/ac2db49))
+* v3.42.29 ([17c4329](https://github.com/jaredparkinson/sp.editor/commit/17c4329))
+* v3.42.3 ([51e4bcb](https://github.com/jaredparkinson/sp.editor/commit/51e4bcb))
+* v3.42.30 ([b5a8af0](https://github.com/jaredparkinson/sp.editor/commit/b5a8af0))
+* v3.42.31 ([488dcec](https://github.com/jaredparkinson/sp.editor/commit/488dcec))
+* v3.42.32 ([fbe3246](https://github.com/jaredparkinson/sp.editor/commit/fbe3246))
+* v3.42.33 ([e39d612](https://github.com/jaredparkinson/sp.editor/commit/e39d612))
+* v3.42.34 ([4558d76](https://github.com/jaredparkinson/sp.editor/commit/4558d76))
+* v3.42.35 ([a63623f](https://github.com/jaredparkinson/sp.editor/commit/a63623f))
+* v3.42.36 ([f59da27](https://github.com/jaredparkinson/sp.editor/commit/f59da27))
+* v3.42.37 ([e72db1d](https://github.com/jaredparkinson/sp.editor/commit/e72db1d))
+* v3.42.38 ([06fecb4](https://github.com/jaredparkinson/sp.editor/commit/06fecb4))
+* v3.42.39 ([58b1511](https://github.com/jaredparkinson/sp.editor/commit/58b1511))
+* v3.42.4 ([f19b823](https://github.com/jaredparkinson/sp.editor/commit/f19b823))
+* v3.42.40 ([d82ee0c](https://github.com/jaredparkinson/sp.editor/commit/d82ee0c))
+* v3.42.41 ([2949374](https://github.com/jaredparkinson/sp.editor/commit/2949374))
+* v3.42.42 ([9c61992](https://github.com/jaredparkinson/sp.editor/commit/9c61992))
+* v3.42.43 ([3c5acf5](https://github.com/jaredparkinson/sp.editor/commit/3c5acf5))
+* v3.42.44 ([755c609](https://github.com/jaredparkinson/sp.editor/commit/755c609))
+* v3.42.45 ([8ae0253](https://github.com/jaredparkinson/sp.editor/commit/8ae0253))
+* v3.42.5 ([67258f0](https://github.com/jaredparkinson/sp.editor/commit/67258f0))
+* v3.42.6 ([4515b2f](https://github.com/jaredparkinson/sp.editor/commit/4515b2f))
+* v3.42.7 ([6b86e3b](https://github.com/jaredparkinson/sp.editor/commit/6b86e3b))
+* v3.42.8 ([f2249f9](https://github.com/jaredparkinson/sp.editor/commit/f2249f9))
+* v3.42.9 ([03d6da0](https://github.com/jaredparkinson/sp.editor/commit/03d6da0))
+* verse highlight update ([c4885e9](https://github.com/jaredparkinson/sp.editor/commit/c4885e9))
+* verse patch ([d0eb393](https://github.com/jaredparkinson/sp.editor/commit/d0eb393))
+* Verse select in notes is now correct ([de4c667](https://github.com/jaredparkinson/sp.editor/commit/de4c667))
+* verse select refactor ([4f366dd](https://github.com/jaredparkinson/sp.editor/commit/4f366dd))
+* verse select update ([1dadcfe](https://github.com/jaredparkinson/sp.editor/commit/1dadcfe))
+* Verse select update ([49db085](https://github.com/jaredparkinson/sp.editor/commit/49db085))
+* Verse select update ([0c312b6](https://github.com/jaredparkinson/sp.editor/commit/0c312b6))
+* Verse selection is back ([bfb0589](https://github.com/jaredparkinson/sp.editor/commit/bfb0589))
+* Versoin ([e5b2fce](https://github.com/jaredparkinson/sp.editor/commit/e5b2fce))
+* Visibile-hidden ([321322e](https://github.com/jaredparkinson/sp.editor/commit/321322e))
+* Working ([ead8a96](https://github.com/jaredparkinson/sp.editor/commit/ead8a96))
+* Working on all of the notes now ([fe0fd21](https://github.com/jaredparkinson/sp.editor/commit/fe0fd21))
+* Working on double click ([72cb8c6](https://github.com/jaredparkinson/sp.editor/commit/72cb8c6))
+* Working on downloads ([a8e24df](https://github.com/jaredparkinson/sp.editor/commit/a8e24df))
+* working on electon builds ([3f3472f](https://github.com/jaredparkinson/sp.editor/commit/3f3472f))
+* Working on file system ([a0f211c](https://github.com/jaredparkinson/sp.editor/commit/a0f211c))
+* working on flyout ([e57b86a](https://github.com/jaredparkinson/sp.editor/commit/e57b86a))
+* Working on layout ([b98f0a7](https://github.com/jaredparkinson/sp.editor/commit/b98f0a7))
+* Working on new note logic ([851507e](https://github.com/jaredparkinson/sp.editor/commit/851507e))
+* working on new verses ([74a2df6](https://github.com/jaredparkinson/sp.editor/commit/74a2df6))
+* Working on plus button ([f046463](https://github.com/jaredparkinson/sp.editor/commit/f046463))
+* Working on promises ([8651ee7](https://github.com/jaredparkinson/sp.editor/commit/8651ee7))
+* Working on search ([a845312](https://github.com/jaredparkinson/sp.editor/commit/a845312))
+* working on url builder ([55a377c](https://github.com/jaredparkinson/sp.editor/commit/55a377c))
+* Working on zip files ([8e193e6](https://github.com/jaredparkinson/sp.editor/commit/8e193e6))
+* WTag Updates ([ace44dd](https://github.com/jaredparkinson/sp.editor/commit/ace44dd))
+* wTag work ([d13a7ea](https://github.com/jaredparkinson/sp.editor/commit/d13a7ea))
+* wtags ([62becd6](https://github.com/jaredparkinson/sp.editor/commit/62becd6))
+
+
+

@@ -46,7 +46,7 @@
     "electron:mac": "yarn run build:prod && npx electron-builder build --mac",
     "test": "yarn run postinstall:web && ng test",
     "e2e": "yarn run postinstall:web && ng e2e",
-    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "dependencies": {
     "@angular/animations": "latest",

@@ -41,6 +41,7 @@ export class ChapterService {
   public resetNotes(): void {
     lodash.each(this.chapter2.notes, note => {
       note.o = false;
+      note.v = this.saveState.data.secondaryNotesVisible;
     });
   }
 

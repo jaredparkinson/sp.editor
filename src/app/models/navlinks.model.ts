@@ -1,4 +1,4 @@
-import * as _ from 'underscore';
+import * as _ from 'lodash';
 import { Book } from './Book';
 
 export class NavLinks {

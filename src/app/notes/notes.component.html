@@ -49,7 +49,7 @@
             #notes
           >
             <ng-container *ngFor="let sn of secondaryNote.seNote">
-              <ng-container *ngIf="showSecondaryNote(sn)">
+              <ng-container *ngIf="showSecondaryNote(note, sn)">
                 <p
                   *ngIf="sn[1].trim().includes('note-phrase'); else noteref"
                   (click)="this.notePhraseClick(secondaryNote)"

@@ -122,6 +122,7 @@ export class HeaderComponent implements OnInit {
       // console.log('tasdofjaosdfj');
 
       // this.chapterService.resetNotes();
+      this.chapterService.resetNotes();
       this.chapterService.resetVerseSelect();
     });
   }

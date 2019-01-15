@@ -120,6 +120,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
 
   noteButtonClick(note: Note2) {
+    console.log(note);
+
     switch (note.o) {
       case true: {
         note.v = !note.v;
@@ -168,8 +170,15 @@ export class NotesComponent implements OnInit, AfterViewInit {
     // vis = false;
     return vis;
   }
-  showSecondaryNote(seNote: [string, string, string, string]): boolean {
+  showSecondaryNote(
+    note: Note2,
+    seNote: [string, string, string, string]
+  ): boolean {
     let vis = true;
+
+    if (seNote[1].includes('-2') && note.o && !note.v) {
+      return false;
+    }
     if (seNote[2].includes('reference-label')) {
       if (
         (seNote[2].includes('reference-label-quotation') &&
@@ -205,37 +214,37 @@ export class NotesComponent implements OnInit, AfterViewInit {
     seNote[1].split(' ').forEach(c => {
       switch (c) {
         case 'note-phrase-eng-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
         }
         case 'note-reference-eng-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
         }
         case 'note-phrase-tc-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
         }
         case 'note-reference-tc-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
         }
         case 'note-phrase-new-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
         }
         case 'note-reference-new-2': {
-          if (!this.saveState.data.secondaryNotesVisible) {
+          if (this.getNoteVisibility(note)) {
             vis = false;
           }
           break;
@@ -247,5 +256,9 @@ export class NotesComponent implements OnInit, AfterViewInit {
     });
     // vis = false;
     return vis;
+  }
+
+  private getNoteVisibility(note: Note2) {
+    return !this.saveState.data.secondaryNotesVisible || (note.o && !note.v);
   }
 }

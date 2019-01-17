@@ -7,10 +7,12 @@ import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { Verse } from '../modelsJson/Verse';
+import { DataService } from './data.service';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
+import { VerseSelectService } from './verse-select.service';
 
 @Injectable()
 export class ChapterService {
@@ -20,7 +22,9 @@ export class ChapterService {
     private httpClient: HttpClient,
     private stringService: StringService,
     private saveState: SaveStateService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private verseSelectService: VerseSelectService,
+    private dataService: DataService
   ) {
     this.fs = (window as any).fs;
   }
@@ -29,17 +33,12 @@ export class ChapterService {
 
   public verseNums: number[] = [];
   public contextNums: number[] = [];
-  public halfNotes = false;
   private fs: any;
-
-  chapter2: Chapter2 = new Chapter2();
 
   scrollIntoView: Element;
 
-  public notes: ElementRef[] = [];
-
   public resetNotes(): void {
-    lodash.each(this.chapter2.notes, note => {
+    lodash.each(this.dataService.chapter2.notes, note => {
       note.o = false;
       note.v = this.saveState.data.secondaryNotesVisible;
     });
@@ -111,7 +110,7 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void
       ) => {
-        lodash.forEach(this.chapter2.paragraphs, paragraph => {
+        lodash.forEach(this.dataService.chapter2.paragraphs, paragraph => {
           lodash.forEach(paragraph.verses, verse => {
             if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
               verse.highlight = true;
@@ -197,8 +196,8 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void
       ) => {
-        this.chapter2 = new Chapter2();
-        this.chapter2 = JSON.parse(data) as Chapter2;
+        this.dataService.chapter2 = new Chapter2();
+        this.dataService.chapter2 = JSON.parse(data) as Chapter2;
 
         this.setHighlighting().then(() => {
           this.verseFocus().then(() => {
@@ -236,337 +235,5 @@ export class ChapterService {
     }
 
     return verseNums;
-  }
-
-  public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
-    this.saveState.data.verseSelect = toggle;
-    // console.log(toggle);
-
-    this.saveState.save();
-    this.resetVerseSelect();
-  }
-  public toggleVerseSuperScripts(
-    toggle: boolean = !this.saveState.data.verseSuperScripts
-  ) {
-    this.saveState.data.verseSuperScripts = toggle;
-    console.log(this.saveState.data.verseSuperScripts);
-    this.saveState.save();
-    this.resetVerseSelect();
-  }
-
-  public modifyWTag(callback: (elem: Element) => void) {
-    this.wTags.forEach(e => {
-      callback(e.nativeElement as Element);
-    });
-  }
-
-  public resetVerseNotes(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-
-      boolean
-    ] = null
-  ) {
-    this.resetNotes2();
-    this.resetVerseSelect(wTag);
-  }
-
-  public resetVerseSelect(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-
-      string[],
-      boolean
-    ] = null
-  ) {
-    this.modifyWTags(
-      (
-        wa: [
-          string,
-          string,
-          string,
-          string,
-          string,
-          string,
-          number,
-          string[],
-          string[],
-          boolean
-        ]
-      ) => {
-        if (wa !== wTag) {
-          wa[7] = [];
-
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-          if (true) {
-            this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
-            this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
-            this.createRefList(
-              wa,
-              this.saveState.data.translatorNotesVisible,
-              5
-            );
-
-            if (wa[7].length !== 0) {
-              wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'verse-select-1'
-              );
-
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'verse-select-2'
-              );
-            }
-          }
-        }
-      }
-    );
-  }
-
-  private createRefList(
-    wa: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean
-    ],
-    vis: boolean,
-    noteNumber: number
-  ) {
-    if (vis) {
-      (wa[noteNumber] as string).split(',').forEach(w => {
-        if (w.trim() !== '') {
-          if (
-            (w.includes('-t2') && this.saveState.data.secondaryNotesVisible) ||
-            !w.includes('-t2')
-          ) {
-            wa[7].push(w);
-          }
-        }
-      });
-      wa[9] = wa[7].length > 1;
-    }
-  }
-
-  public modifyWTags(
-    callBack: (
-      w: [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        number,
-        string[],
-        string[],
-        boolean
-      ]
-    ) => void
-  ) {
-    this.chapter2.paragraphs.forEach(paragrah => {
-      paragrah.verses.forEach(verse => {
-        verse.wTags2.forEach(wa => {
-          callBack(wa);
-        });
-      });
-    });
-  }
-
-  public resetNotes2() {
-    this.notes.forEach(n => {
-      (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
-    });
-  }
-
-  public wTagClick(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-
-      boolean
-    ],
-    verse: Verse
-  ) {
-    // console.log(w[3].split(','));
-    this.halfNotes = false;
-    if (
-      w[7].length === 0 &&
-      !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
-      !this.stringService.hasAttribute(w[0], 'verse-select-1')
-    ) {
-      return;
-    }
-    if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
-      this.firstClick(w, verse);
-    } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
-      this.resetVerseNotes();
-      this.openHalfNotes(w, verse);
-    } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-      this.selectNote(verse, w);
-    }
-    // if (this.saveState.data.verseSelect) {
-    // }
-  }
-  private firstClick(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-
-      boolean
-    ],
-    verse: Verse
-  ) {
-    this.resetVerseSelect();
-    // console.log(w[7]);
-
-    this.highlightRelatedWords(verse, w);
-    this.selectNote(verse, w, false);
-  }
-
-  private highlightRelatedWords(
-    verse: Verse,
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-
-      string[],
-      boolean
-    ]
-  ) {
-    verse.wTags2.forEach(wr => {
-      w[7].forEach(ref => {
-        if (wr[7].includes(ref) && wr[7].length >= 1) {
-          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
-          wr[0] =
-            wr[7].length > 1
-              ? this.stringService.addAttribute(wr[0], 'verse-select-2')
-              : this.stringService.addAttribute(wr[0], 'verse-select-1');
-        }
-      });
-    });
-  }
-
-  private selectNote(
-    verse: Verse,
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-
-      string[],
-      boolean
-    ],
-    resetVerse: boolean = true
-  ) {
-    this.resetNotes2();
-    if (wTag[7].length === 0) {
-      this.resetVerseNotes();
-      this.openHalfNotes(wTag, verse);
-      return;
-    }
-    const note = lodash.find(this.notes, (n: ElementRef) => {
-      return (n.nativeElement as HTMLElement).id === wTag[7][0];
-    });
-
-    if (note) {
-      (note.nativeElement as HTMLElement).classList.add('verse-select-1');
-      (note.nativeElement as HTMLElement).scrollIntoView({
-        block: 'start'
-      });
-
-      document.querySelector('footer').scrollBy(0, -10);
-
-      if (resetVerse) {
-        this.resetVerseSelect(wTag);
-        this.highlightRelatedWords(verse, wTag);
-      }
-
-      wTag[7].shift();
-      this.openHalfNotes(wTag, verse);
-      this.navService.rightPaneToggle = true;
-    } else {
-      this.resetVerseNotes();
-      this.openHalfNotes(wTag, verse);
-    }
-  }
-
-  private openHalfNotes(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-
-      boolean
-    ],
-    verse: Verse
-  ) {
-    if (this.helperService.getWidth() < 511.98) {
-      // console.log(w);
-
-      // console.log(
-      //   document
-      //     .querySelector('#' + verse.id + ' >:nth-child(' + w[2] + ')')
-      //     .scrollIntoView()
-      // );
-      document.getElementById(verse.id).scrollIntoView();
-      this.halfNotes = true;
-    }
   }
 }

@@ -16,6 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public helperService: HelperService,
     public chapterService: ChapterService,
+    public dataService: DataService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
     public verseSelectService: VerseSelectService,
@@ -108,7 +110,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnOriginalNotesPress();
   }
   btnRightPanePress() {
-    this.chapterService.halfNotes = false;
+    this.verseSelectService.halfNotes = false;
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {
@@ -122,8 +124,10 @@ export class HeaderComponent implements OnInit {
       // console.log('tasdofjaosdfj');
 
       // this.chapterService.resetNotes();
-      this.chapterService.resetNotes();
-      this.chapterService.resetVerseSelect();
+      // this.chapterService.resetNotes();
+      // this.chapterService.resetVerseSelect();
+
+      this.verseSelectService.resetVisibility();
     });
   }
   btnLeftPanePress() {

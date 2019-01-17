@@ -20,9 +20,11 @@ import { Note } from '../models/Note';
 import { Note2 } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
   selector: 'app-notes',
@@ -35,7 +37,9 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public navServices: NavigationService,
     public saveState: SaveStateService,
     private stringService: StringService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public dataService: DataService,
+    public verseSelectService: VerseSelectService
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -49,7 +53,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   async ngAfterViewInit() {
     await setTimeout(() => {
       this.notes.changes.subscribe(() => {
-        this.chapterService.notes = this.notes.toArray();
+        this.verseSelectService.notes = this.notes.toArray();
       });
     }, 0);
   }
@@ -70,13 +74,13 @@ export class NotesComponent implements OnInit, AfterViewInit {
         (note.nativeElement as Element).classList.contains('verse-select-1')
       ) {
         // this.chapterService.resetVerseSelect();
-        this.chapterService.resetVerseNotes();
+        this.verseSelectService.resetVerseNotes();
 
         return;
       }
-      this.chapterService.resetVerseNotes();
+      this.verseSelectService.resetVerseNotes();
 
-      this.chapterService.modifyWTags(
+      this.verseSelectService.modifyWTags(
         (
           w: [
             string,
@@ -141,6 +145,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     return note.id;
   }
   showNote(secondaryNote: SecondaryNote): boolean {
+    return this.verseSelectService.noteVisibility.get(secondaryNote.id);
     let vis = true;
     secondaryNote.cn.split(' ').forEach(c => {
       switch (c) {
@@ -168,6 +173,11 @@ export class NotesComponent implements OnInit, AfterViewInit {
       }
     });
     // vis = false;
+
+    this.verseSelectService.noteVisibility.set(secondaryNote.id, vis);
+
+    // console.log(this.verseSelectService.noteVisibility);
+
     return vis;
   }
   showSecondaryNote(

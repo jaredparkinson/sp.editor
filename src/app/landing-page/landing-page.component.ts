@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,9 +9,12 @@ import { ChapterService } from '../services/chapter.service';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-  constructor(public chapterService: ChapterService) {}
+  constructor(
+    public chapterService: ChapterService,
+    public dataService: DataService
+  ) {}
 
   ngOnInit() {
-    this.chapterService.chapter2 = new Chapter2();
+    this.dataService.chapter2 = new Chapter2();
   }
 }

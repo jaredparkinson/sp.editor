@@ -11,9 +11,7 @@
       <button
         class="body-block-nav"
         id="btnPreviousChapter"
-        (click)="
-          navService.btnPreviousPagePress(chapterService.chapter2.pageUrl)
-        "
+        (click)="navService.btnPreviousPagePress(dataService.chapter2.pageUrl)"
       >
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronLeft" size="2x"></fa-icon>
@@ -34,17 +32,17 @@
     }"
   >
     <div id="bodyBlockTop"></div>
-    <ng-container *ngIf="chapterService.chapter2.paragraphs.length !== 0">
+    <ng-container *ngIf="dataService.chapter2.paragraphs.length !== 0">
       <header
         [innerHTML]="
-          sanitizer.bypassSecurityTrustHtml(chapterService.chapter2.header)
+          sanitizer.bypassSecurityTrustHtml(dataService.chapter2.header)
         "
       ></header>
     </ng-container>
     <div
       class="hidden-paragraph"
       *ngFor="
-        let paragraph of chapterService.chapter2.paragraphs;
+        let paragraph of dataService.chapter2.paragraphs;
         trackBy: trackById
       "
       id="{{ paragraph.id }}"
@@ -73,7 +71,7 @@
             <ng-container *ngIf="saveState.data.verseSuperScripts">
               <ng-container *ngFor="let item of w[8]">
                 <g
-                  *ngIf="getSuperScriptVisibility(item)"
+                  *ngIf="getSuperScriptVisibility(item, w)"
                   class="{{ item }}"
                 ></g>
               </ng-container>
@@ -87,8 +85,8 @@
       </span>
     </div>
     <div
-      *ngIf="chapterService.chapter2.bb"
-      [innerHtml]="chapterService.chapter2.bodyBlock"
+      *ngIf="dataService.chapter2.bb"
+      [innerHtml]="dataService.chapter2.bodyBlock"
     ></div>
     <div id="body-block-whitespace" class="body-block-whitespace"></div>
   </div>
@@ -98,7 +96,7 @@
       <button
         class="body-block-nav"
         id="btnNextChapter"
-        (click)="navService.btnNextPagePress(chapterService.chapter2.pageUrl)"
+        (click)="navService.btnNextPagePress(dataService.chapter2.pageUrl)"
       >
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronRight" size="2x"></fa-icon>

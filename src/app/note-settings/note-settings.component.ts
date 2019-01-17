@@ -36,38 +36,39 @@ export class NoteSettingsComponent implements OnInit {
       console.log('asdfiojkasofjafjaosdfjoiasdfjioj');
 
       // this.chapterService.resetNotes();
-      this.chapterService.resetVerseSelect();
+      this.verseSelectService.resetVisibility();
     });
   }
+
   btnOriginalNotesPress(): void {
     this.navServices.btnOriginalNotesPress().then((value: boolean) => {
-      this.chapterService.resetVerseSelect();
+      this.verseSelectService.resetVisibility();
     });
   }
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
-      this.chapterService.resetVerseSelect();
+      this.verseSelectService.resetVisibility();
     });
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress().then((value: boolean) => {
-      this.chapterService.resetVerseSelect();
+      this.verseSelectService.resetVisibility();
     });
   }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress().then((value: boolean) => {
       console.log(value);
 
-      this.chapterService.resetVerseSelect();
+      this.verseSelectService.resetVisibility();
     });
   }
   toggleVerseSelect() {
-    this.chapterService.toggleVerseSuperScripts(false);
-    this.chapterService.toggleVerseSelect();
+    this.verseSelectService.toggleVerseSuperScripts(false);
+    this.verseSelectService.toggleVerseSelect();
   }
   toggleVerseSuperScripts() {
-    this.chapterService.toggleVerseSelect(false);
-    this.chapterService.toggleVerseSuperScripts();
+    this.verseSelectService.toggleVerseSelect(false);
+    this.verseSelectService.toggleVerseSuperScripts();
   }
   settings() {
     this.router.navigateByUrl('settings');

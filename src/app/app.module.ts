@@ -43,6 +43,7 @@ import { DownloadService } from './services/download.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
+import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -97,6 +98,7 @@ export function load(saveState: SaveStateService) {
     UrlBuilder,
     DownloadService,
     SaveStateService,
+    VerseSelectService,
     {
       provide: APP_INITIALIZER,
       useFactory: load,

@@ -19,9 +19,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -42,9 +44,11 @@ export class BodyblockComponent
     // public activatedRoute: ActivatedRoute,
     public sanitizer: DomSanitizer,
     public chapterService: ChapterService,
+    public dataService: DataService,
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,
+    public verseSelectService: VerseSelectService,
     private route: ActivatedRoute
   ) {}
 
@@ -59,15 +63,17 @@ export class BodyblockComponent
       const chapter = params['chapter'];
 
       if (book !== undefined && chapter !== undefined) {
-        await this.chapterService.getChapter(book, chapter).then(() => {
+        await this.chapterService.getChapter(book, chapter).then(async () => {
           // console.log(this.synchronizedScrolling());
           // this.synchronizedScrolling();
-          this.chapterService.resetVerseSelect();
+          // this.chapterService.resetVerseSelect();
+          await this.verseSelectService.resetVisibility();
           this.synchronizedScrolling();
         });
       } else if (book === undefined && chapter !== undefined) {
         await this.chapterService.getChapter(chapter, '').then(() => {
-          this.chapterService.resetVerseSelect();
+          // this.chapterService.resetVerseSelect();
+          this.verseSelectService.resetVisibility();
           this.synchronizedScrolling();
         });
         // setTimeout(() => {
@@ -80,7 +86,22 @@ export class BodyblockComponent
     this.wordSelection();
   }
 
-  getSuperScriptVisibility(item: string): boolean {
+  getSuperScriptVisibility(
+    item: string,
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      boolean
+    ]
+  ): boolean {
+    console.log(w);
+
     if (
       (item.includes('new-') && this.saveState.data.newNotesVisible) ||
       (item.includes('tc-') && this.saveState.data.translatorNotesVisible) ||
@@ -174,7 +195,7 @@ export class BodyblockComponent
     console.log(wTag);
     console.log((event.currentTarget as Element).getBoundingClientRect());
 
-    this.chapterService.wTagClick(wTag, verse);
+    this.verseSelectService.wTagClick(wTag, verse);
   }
 
   async ngAfterViewInit() {

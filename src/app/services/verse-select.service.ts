@@ -1,225 +1,503 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import * as lodash from 'lodash';
+import { Note2 } from '../modelsJson/Note';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
+import { Verse } from '../modelsJson/Verse';
+import { ChapterService } from './chapter.service';
+import { DataService } from './data.service';
+import { HelperService } from './helper.service';
+import { NavigationService } from './navigation.service';
+import { SaveStateService } from './save-state.service';
+import { StringService } from './string.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerseSelectService {
-  // wTags: ElementRef[];
-  constructor() {}
-  // verseSelect = false;
-  // parser = new DOMParser();
-  // verseSelected = false;
-  // public notes: ElementRef[] = [];
-  // // public verses: ElementRef[] = [];
+  public halfNotes = false;
+  public notes: ElementRef[] = [];
+  constructor(
+    private saveState: SaveStateService,
+    private helperService: HelperService,
+    private navService: NavigationService,
+    private dataService: DataService,
+    private stringService: StringService
+  ) {}
+  public noteVisibility: Map<string, boolean> = new Map<string, boolean>();
 
-  // public toggleVerseSelect() {
-  //   this.saveState.data.verseSelect = !this.saveState.data.verseSelect;
-  //   this.saveState.save();
-  //   switch (this.saveState.data.verseSelect) {
-  //     case true: {
-  //       this.resetVerseSelect();
+  public async resetVisibility() {
+    await this.resetNoteVisibility().then(() => {
+      console.log(this.noteVisibility);
 
-  //       break;
-  //     }
-  //     case false:
-  //     default: {
-  //       this.removeVerseSelect();
+      this.resetVerseSelect();
+    });
+  }
+  private async resetNoteVisibility(): Promise<void> {
+    return new Promise<void>(
+      (
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void
+      ) => {
+        this.dataService.chapter2.notes.forEach((note: Note2) => {
+          note.sn.forEach((secondaryNote: SecondaryNote) => {
+            let vis = false;
+            secondaryNote.seNote.forEach(seNote => {
+              if (this.showSecondaryNote(note, seNote)) {
+                vis = true;
+              }
+            });
+            secondaryNote.cn.split(' ').forEach(c => {
+              switch (c) {
+                case 'tc-note': {
+                  if (!this.saveState.data.translatorNotesVisible) {
+                    vis = false;
+                  }
+                  break;
+                }
+                case 'new-note': {
+                  if (!this.saveState.data.newNotesVisible) {
+                    vis = false;
+                  }
+                  break;
+                }
+                case 'eng-note': {
+                  if (!this.saveState.data.englishNotesVisible) {
+                    vis = false;
+                  }
+                  break;
+                }
+                default: {
+                  vis = vis;
+                }
+              }
+            });
+            // vis = false;
 
-  //       this.resetNotes();
-  //       break;
-  //     }
-  //   }
-  // }
-  // public test(
-  //   w: [string, string, string, string, string, string, string, string, string]
-  // ) {}
-  // public resetVerseSelect() {
-  //   // this.verseSelected = false;
-  //   this.resetNotes();
+            console.log(vis);
 
-  //   this.modifyWTags(
-  //     (
-  //       wa: [string, string, string, string, string, string, number, string[], number]
-  //     ) => {
-  //       wa[7] = [];
+            this.noteVisibility.set(secondaryNote.id, vis);
+          });
+        });
+        resolve(null);
+      }
+    );
+  }
 
-  //       wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
+  private showSecondaryNote(
+    note: Note2,
+    seNote: [string, string, string, string]
+  ): boolean {
+    let vis = true;
 
-  //       this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
-  //       this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
-  //       this.createRefList(wa, this.saveState.data.translatorNotesVisible, 5);
-  //       // console.log(wa[7]);
+    if (seNote[1].includes('-2') && note.o && !note.v) {
+      return false;
+    }
+    if (seNote[2].includes('reference-label')) {
+      if (
+        (seNote[2].includes('reference-label-quotation') &&
+          !this.saveState.data.refQUO) ||
+        (seNote[2].includes('reference-label-phrasing') &&
+          !this.saveState.data.refPHR) ||
+        (seNote[2].includes('reference-label-or') &&
+          !this.saveState.data.refOR) ||
+        (seNote[2].includes('reference-label-ie') &&
+          !this.saveState.data.refIE) ||
+        (seNote[2].includes('reference-label-hebrew') &&
+          !this.saveState.data.refHEB) ||
+        (seNote[2].includes('reference-label-greek') &&
+          !this.saveState.data.refGR) ||
+        (seNote[2].includes('reference-label-archaic') &&
+          !this.saveState.data.refKJV) ||
+        (seNote[2].includes('reference-label-historical') &&
+          !this.saveState.data.refHST) ||
+        (seNote[2].includes('reference-label-cr') &&
+          !this.saveState.data.refCR) ||
+        (seNote[2].includes('reference-label-alt') &&
+          !this.saveState.data.refALT) ||
+        (seNote[2].includes('reference-label-harmony') &&
+          !this.saveState.data.refHMY) ||
+        (seNote[2].includes('reference-label-tg') &&
+          !this.saveState.data.refTG) ||
+        (seNote[2].includes('reference-label-gs') && !this.saveState.data.refGS)
+      ) {
+        // console.log('gtcrd');
+        return false;
+      }
+    }
+    seNote[1].split(' ').forEach(c => {
+      switch (c) {
+        case 'note-phrase-eng-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-eng-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-phrase-tc-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-tc-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-phrase-new-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        case 'note-reference-new-2': {
+          if (this.getNoteVisibility(note)) {
+            vis = false;
+          }
+          break;
+        }
+        default: {
+          vis = vis;
+        }
+      }
+    });
+    // vis = false;
+    return vis;
+  }
+  private getNoteVisibility(note: Note2) {
+    return !this.saveState.data.secondaryNotesVisible || (note.o && !note.v);
+  }
 
-  //       if (wa[7].length !== 0) {
-  //         wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-  //         wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-  //         wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-2');
-  //       }
-  //     }
-  //   );
-  // }
+  public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
+    this.saveState.data.verseSelect = toggle;
+    // console.log(toggle);
 
-  // private createRefList(
-  //   wa: [string, string, string, string, string, string, number, string[], number],
-  //   vis: boolean,
-  //   noteNumber: number
-  // ) {
-  //   // console.log(vis);
+    this.saveState.save();
+    this.resetVerseSelect();
+  }
+  public toggleVerseSuperScripts(
+    toggle: boolean = !this.saveState.data.verseSuperScripts
+  ) {
+    this.saveState.data.verseSuperScripts = toggle;
+    console.log(this.saveState.data.verseSuperScripts);
+    this.saveState.save();
+    this.resetVerseSelect();
+  }
 
-  //   if (vis) {
-  //     (wa[noteNumber] as string).split(' ').forEach(w => {
-  //       if (w.trim() !== '') {
-  //         wa[7].push(w);
-  //       }
-  //     });
-  //   }
-  // }
+  public resetVerseNotes(
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
 
-  // private modifyWTags(
-  //   callBack: (
-  //     w: [string, string, string, string, string, string, number, string[], number]
-  //   ) => void
-  // ) {
-  //   _.each(this.chapterService.chapter2.paragraphs, paragrah => {
-  //     _.each(paragrah.verses, verse => {
-  //       _.each(verse.wTags2, wa => {
-  //         callBack(wa);
-  //       });
-  //     });
-  //   });
-  // }
+      boolean
+    ] = null
+  ) {
+    this.resetNotes2();
+    this.resetVerseSelect(wTag);
+  }
 
-  // private resetNotes() {
-  //   _.each<ElementRef>(this.notes, n => {
-  //     (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
-  //   });
-  //   // _.each(this.chapterService.notes2, note => {
-  //   //   note.resetVerseSelect();
-  //   // });
-  // }
+  public resetVerseSelect(
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
 
-  // public removeVerseSelect() {
-  //   this.modifyWTags(
-  //     (
-  //       wa: [string, string, string, string, string, string, number, string[], number]
-  //     ) => {
-  //       for (let x = 0; x < 10; x++) {
-  //         wa[0] = this.stringService.removeAttribute(
-  //           wa[0],
-  //           'verse-select-' + x
-  //         );
-  //       }
-  //     }
-  //   );
+      string[],
+      boolean
+    ] = null
+  ) {
+    this.modifyWTags(
+      (
+        wa: [
+          string,
+          string,
+          string,
+          string,
+          string,
+          string,
+          number,
+          string[],
+          string[],
+          boolean
+        ]
+      ) => {
+        if (wa !== wTag) {
+          wa[7] = [];
 
-  //   // _.each(this.chapterService.wTags, wTag => {
-  //   //   wTag[0] = wTag[0].replace(' verse-select-0', '');
-  //   // });
-  // }
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
+          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
+          if (true) {
+            this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
+            this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
+            this.createRefList(
+              wa,
+              this.saveState.data.translatorNotesVisible,
+              5
+            );
 
-  // public wTagClick(
-  //   w: [string, string, string, string, string, string, number, string[], number],
-  //   verse: Verse
-  // ) {
-  //   console.log(this.saveState.data.verseSelect);
+            if (wa[7].length !== 0) {
+              wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+              wa[0] = this.stringService.removeAttribute(
+                wa[0],
+                'verse-select-1'
+              );
 
-  //   if (
-  //     w[7].length === 0 &&
-  //     !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
-  //     !this.stringService.hasAttribute(w[0], 'verse-select-1')
-  //   ) {
-  //     return;
-  //   }
-  //   if (this.saveState.data.verseSelect) {
-  //     console.log('asodifj');
+              wa[0] = this.stringService.removeAttribute(
+                wa[0],
+                'verse-select-2'
+              );
+            }
+          }
+        }
+      }
+    );
+  }
 
-  //     if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
-  //       this.firstClick(w, verse);
-  //     } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
-  //       this.resetVerseSelect();
-  //     } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
-  //       // console.log('asdfasdfasdfasdfasdf');
-  //       this.selectNote(w);
-  //     }
-  //   }
-  // }
-  // resetVerseSelect1(): void {
-  //   this.modifyWTags(
-  //     (
-  //       wa: [string, string, string, string, string, string, number, string[], number]
-  //     ) => {
-  //       if (wa[3].trim() !== '') {
-  //         wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
-  //         wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-  //       }
-  //       if (wa[4].trim() !== '') {
-  //         wa[0] = this.stringService.addAttribute(wa[0], 'verse-og-select-0');
-  //         wa[0] = this.stringService.removeAttribute(
-  //           wa[0],
-  //           'verse-og-select-1'
-  //         );
-  //       }
-  //       if (wa[5].trim() !== '') {
-  //         wa[0] = this.stringService.addAttribute(wa[0], 'verse-tc-select-0');
-  //         wa[0] = this.stringService.removeAttribute(
-  //           wa[0],
-  //           'verse-tc-select-1'
-  //         );
-  //       }
-  //     }
-  //   );
-  // }
+  private createRefList(
+    wa: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
+      boolean
+    ],
+    vis: boolean,
+    noteNumber: number
+  ) {
+    (wa[noteNumber] as string).split(',').forEach(w => {
+      if (w.trim() !== '' && this.noteVisibility.get(w)) {
+        wa[7].push(w);
+        // if (
+        //   (w.includes('-t2') && this.saveState.data.secondaryNotesVisible) ||
+        //   !w.includes('-t2')
+        // ) {
+        //   wa[7].push(w);
+        // }
+      }
+    });
+    wa[9] = wa[7].length > 1;
+    if (vis) {
+    }
+  }
 
-  // private firstClick(
-  //   w: [string, string, string, string, string, string, number, string[], number],
-  //   verse: Verse
-  // ) {
-  //   this.resetVerseSelect();
-  //   // this.verseSelected = true;
-  //   console.log(w[7]);
-  //   verse.wTags2.forEach(wr => {
-  //     // console.log(wr);
+  public modifyWTags(
+    callBack: (
+      w: [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        number,
+        string[],
+        string[],
+        boolean
+      ]
+    ) => void
+  ) {
+    this.dataService.chapter2.paragraphs.forEach(paragrah => {
+      paragrah.verses.forEach(verse => {
+        verse.wTags2.forEach(wa => {
+          callBack(wa);
+        });
+      });
+    });
+  }
 
-  //     w[7].forEach(ref => {
-  //       if (wr[3].includes(ref) && wr[7].length >= 1) {
-  //         wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
-  //         wr[0] =
-  //           wr[7].length > 1
-  //             ? this.stringService.addAttribute(wr[0], 'verse-select-2')
-  //             : this.stringService.addAttribute(wr[0], 'verse-select-1');
-  //       }
-  //     });
-  //   });
-  //   this.selectNote(w);
-  // }
+  public resetNotes2() {
+    this.notes.forEach(n => {
+      (n.nativeElement as HTMLElement).classList.remove('verse-select-1');
+    });
+  }
 
-  // private refCount(refs: string): number {
-  //   return refs.split(' ').length;
-  // }
-  // private selectNote(
-  //   wTag: [string, string, string, string, string, string, number, string[], number]
-  // ) {
-  //   console.log(wTag[7].length);
-  //   if (wTag[7].length === 0) {
-  //     console.log(wTag[7]);
+  public wTagClick(
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
 
-  //     this.resetVerseSelect();
-  //     return;
-  //   }
-  //   const note = _.find(this.notes, (n: ElementRef) => {
-  //     return (n.nativeElement as HTMLElement).id === wTag[7][0];
-  //   });
-  //   wTag[7].shift();
-  //   console.log(note);
+      boolean
+    ],
+    verse: Verse
+  ) {
+    // console.log(w[3].split(','));
+    this.halfNotes = false;
+    if (
+      w[7].length === 0 &&
+      !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
+      !this.stringService.hasAttribute(w[0], 'verse-select-1')
+    ) {
+      return;
+    }
+    if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
+      this.firstClick(w, verse);
+    } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
+      this.resetVerseNotes();
+      this.openHalfNotes(w, verse);
+    } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+      this.selectNote(verse, w);
+    }
+    // if (this.saveState.data.verseSelect) {
+    // }
+  }
+  private firstClick(
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
 
-  //   if (note) {
-  //     (note.nativeElement as HTMLElement).classList.add('verse-select-1');
-  //     (note.nativeElement as HTMLElement).scrollIntoView({
-  //       block: 'center'
-  //     });
-  //   } else {
-  //     this.resetVerseSelect();
-  //   }
-  // }
+      boolean
+    ],
+    verse: Verse
+  ) {
+    this.resetVerseSelect();
+    // console.log(w[7]);
+
+    this.highlightRelatedWords(verse, w);
+    this.selectNote(verse, w, false);
+  }
+
+  private highlightRelatedWords(
+    verse: Verse,
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+
+      string[],
+      boolean
+    ]
+  ) {
+    verse.wTags2.forEach(wr => {
+      w[7].forEach(ref => {
+        if (wr[7].includes(ref) && wr[7].length >= 1) {
+          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
+          wr[0] =
+            wr[7].length > 1
+              ? this.stringService.addAttribute(wr[0], 'verse-select-2')
+              : this.stringService.addAttribute(wr[0], 'verse-select-1');
+        }
+      });
+    });
+  }
+
+  private selectNote(
+    verse: Verse,
+    wTag: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+
+      string[],
+      boolean
+    ],
+    resetVerse: boolean = true
+  ) {
+    this.resetNotes2();
+    if (wTag[7].length === 0) {
+      this.resetVerseNotes();
+      this.openHalfNotes(wTag, verse);
+      return;
+    }
+    const note = lodash.find(this.notes, (n: ElementRef) => {
+      return (n.nativeElement as HTMLElement).id === wTag[7][0];
+    });
+
+    if (note) {
+      (note.nativeElement as HTMLElement).classList.add('verse-select-1');
+      (note.nativeElement as HTMLElement).scrollIntoView({
+        block: 'start'
+      });
+
+      document.querySelector('footer').scrollBy(0, -10);
+
+      if (resetVerse) {
+        this.resetVerseSelect(wTag);
+        this.highlightRelatedWords(verse, wTag);
+      }
+
+      wTag[7].shift();
+      this.openHalfNotes(wTag, verse);
+      this.navService.rightPaneToggle = true;
+    } else {
+      this.resetVerseNotes();
+      this.openHalfNotes(wTag, verse);
+    }
+  }
+
+  private openHalfNotes(
+    w: [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      number,
+      string[],
+      string[],
+
+      boolean
+    ],
+    verse: Verse
+  ) {
+    if (this.helperService.getWidth() < 511.98) {
+      // console.log(w);
+
+      // console.log(
+      //   document
+      //     .querySelector('#' + verse.id + ' >:nth-child(' + w[2] + ')')
+      //     .scrollIntoView()
+      // );
+      document.getElementById(verse.id).scrollIntoView();
+      this.halfNotes = true;
+    }
+  }
 }

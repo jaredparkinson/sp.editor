@@ -6,6 +6,7 @@ import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
+import { VerseSelectService } from './services/verse-select.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     public chapterServices: ChapterService,
     public navService: NavigationService,
     public saveState: SaveStateService,
+    public verseSelectService: VerseSelectService,
     public httpClient: HttpClient
   ) {
     this.translate.setDefaultLang('en');

@@ -1,76 +1,162 @@
 <div class="menu-bar pop-out">
   <div id="headerLeftPane">
-    <button id='navToggle' (click)="btnLeftPanePress()"><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
-        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-        version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+    <button id="navToggle" (click)="btnLeftPanePress()">
+      <svg
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+      >
         <g transform="translate(0,-952.36218)">
-          <path style="color:#000000;enable-background:accumulate;" d="m 18,966.3622 0,58 c 12.793163,-0.069 22.32638,6.9097 30,13.3125 l 0,-59.31252 C 39.508362,971.24463 29.963324,966.3513 18,966.3622 z m 64,0 c -11.963324,-0.0109 -21.508362,4.88243 -30,11.99998 l 0,59.31252 c 7.67362,-6.4027 17.206837,-13.3814 30,-13.3125 z m -74,8 0,58 35,6 c -6.651752,-5.0153 -15.042675,-10.054 -25,-10 l -2,0 c -1.047169,-10e-5 -1.999895,-0.9529 -2,-2 l 0,-2 0,-49.15625 z m 84,0 -6,0.84375 0,49.15625 0,2 c -1.05e-4,1.0472 -0.952831,1.9999 -2,2 l -2,0 c -9.957325,-0.054 -18.348248,4.9847 -25,10 l 35,-6 z"
-            fill="#000000" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"></path>
+          <path
+            style="color:#000000;enable-background:accumulate;"
+            d="m 18,966.3622 0,58 c 12.793163,-0.069 22.32638,6.9097 30,13.3125 l 0,-59.31252 C 39.508362,971.24463 29.963324,966.3513 18,966.3622 z m 64,0 c -11.963324,-0.0109 -21.508362,4.88243 -30,11.99998 l 0,59.31252 c 7.67362,-6.4027 17.206837,-13.3814 30,-13.3125 z m -74,8 0,58 35,6 c -6.651752,-5.0153 -15.042675,-10.054 -25,-10 l -2,0 c -1.047169,-10e-5 -1.999895,-0.9529 -2,-2 l 0,-2 0,-49.15625 z m 84,0 -6,0.84375 0,49.15625 0,2 c -1.05e-4,1.0472 -0.952831,1.9999 -2,2 l -2,0 c -9.957325,-0.054 -18.348248,4.9847 -25,10 l 35,-6 z"
+            fill="#000000"
+            stroke="none"
+            marker="none"
+            visibility="visible"
+            display="inline"
+            overflow="visible"
+          ></path>
         </g>
       </svg>
     </button>
     <span id="empty "></span>
   </div>
   <div id="headerMiddlePane">
-
-    <button id="btnParagraph" [ngClass]="{'nav-btn-on': saveState.data.paragraphsVisible}" (click)="btnParagraphPress()">
+    <button
+      id="btnParagraph"
+      [ngClass]="{ 'nav-btn-on': saveState.data.paragraphsVisible }"
+      (click)="btnParagraphPress()"
+    >
       <fa-icon [icon]="faParagraph" size="lg"></fa-icon>
     </button>
-    <button id="btnPoetry" [ngClass]="{'nav-btn-on': saveState.data.poetryVisible}" (click)="btnPoetryPress();">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
-        viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+    <button
+      id="btnPoetry"
+      [ngClass]="{ 'nav-btn-on': saveState.data.poetryVisible }"
+      (click)="btnPoetryPress()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 50 50"
+        style="enable-background:new 0 0 50 50;"
+        xml:space="preserve"
+      >
         <g>
-          <path d="M46.8,28.3c-0.9-4.6-8.4-19.5-8.4-19.5c0.9,0,1.6,0,2.3-0.1c3.4-0.4,5.2-4.1,3-6.5c-2.4-2.6-7.2-0.9-8.4,3.2   C35,6.6,35,7.6,35,7.6c-0.1,0.9,0.1,2.1,0.4,3.4H33V7.7c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7   c0,0.6,0.3,1,0.7,1.4V11H26V4.4c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7c0,0.6,0.3,1,0.7,1.4V11   h-5.1V6.9c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7c0,0.6,0.3,1,0.7,1.4V11h-2.3   c0.3-1.4,0.4-2.6,0.4-3.4c0,0-0.1-1.2-0.6-2.7c-1.3-3.7-5.8-5.2-8.1-2.7c-2.2,2.4-0.4,6.1,3,6.5c0.7,0.1,1.4,0.1,2.3,0.1   c0,0-7.5,15-8.4,19.5c0,0-3.6,12.5,14,16.6l-1.5,1.9c-0.7,0.9-0.1,2.2,1,2.2h16.6c1.1,0,1.7-1.3,1-2.2l-1.5-1.9   C50.4,40.8,46.8,28.3,46.8,28.3z M31.1,13v26c-1.7,0.5-3.2,0.7-4.3,0.9c-0.3,0-0.5,0.1-0.8,0.1V13H31.1z M24,13v26.9   c-0.3,0-0.5,0-0.8-0.1c-1.1-0.1-2.7-0.4-4.3-0.9V13H24z M10,25.1c0,0,2.7-6.7,4.2-12.1H17v25.3C12.3,36.5,7.7,32.8,10,25.1z    M33,38.3V13h2.8c1.4,5.4,4.2,12.1,4.2,12.1C42.3,32.8,37.7,36.5,33,38.3z"></path>
+          <path
+            d="M46.8,28.3c-0.9-4.6-8.4-19.5-8.4-19.5c0.9,0,1.6,0,2.3-0.1c3.4-0.4,5.2-4.1,3-6.5c-2.4-2.6-7.2-0.9-8.4,3.2   C35,6.6,35,7.6,35,7.6c-0.1,0.9,0.1,2.1,0.4,3.4H33V7.7c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7   c0,0.6,0.3,1,0.7,1.4V11H26V4.4c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7c0,0.6,0.3,1,0.7,1.4V11   h-5.1V6.9c0.4-0.3,0.7-0.8,0.7-1.4c0-0.9-0.7-1.7-1.7-1.7c-0.9,0-1.7,0.7-1.7,1.7c0,0.6,0.3,1,0.7,1.4V11h-2.3   c0.3-1.4,0.4-2.6,0.4-3.4c0,0-0.1-1.2-0.6-2.7c-1.3-3.7-5.8-5.2-8.1-2.7c-2.2,2.4-0.4,6.1,3,6.5c0.7,0.1,1.4,0.1,2.3,0.1   c0,0-7.5,15-8.4,19.5c0,0-3.6,12.5,14,16.6l-1.5,1.9c-0.7,0.9-0.1,2.2,1,2.2h16.6c1.1,0,1.7-1.3,1-2.2l-1.5-1.9   C50.4,40.8,46.8,28.3,46.8,28.3z M31.1,13v26c-1.7,0.5-3.2,0.7-4.3,0.9c-0.3,0-0.5,0.1-0.8,0.1V13H31.1z M24,13v26.9   c-0.3,0-0.5,0-0.8-0.1c-1.1-0.1-2.7-0.4-4.3-0.9V13H24z M10,25.1c0,0,2.7-6.7,4.2-12.1H17v25.3C12.3,36.5,7.7,32.8,10,25.1z    M33,38.3V13h2.8c1.4,5.4,4.2,12.1,4.2,12.1C42.3,32.8,37.7,36.5,33,38.3z"
+          ></path>
         </g>
       </svg>
     </button>
-    <button id="btnBack" (click)="btnBackPress();"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+    <button id="btnBack" (click)="btnBackPress()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+        style="enable-background:new 0 0 100 100;"
+        xml:space="preserve"
+      >
         <g>
-          <polygon points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "></polygon>
+          <polygon
+            points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "
+          ></polygon>
         </g>
       </svg>
-
     </button>
 
-    <div id="bookName" [innerHtml]="chapterService.chapter2.title"></div>
+    <div id="bookName" [innerHtml]="dataService.chapter2.title"></div>
 
-    <button id="btnForward" (click)="btnForwardPress();">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
-        viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-        <g transform="translate(50 50)  rotate(180) translate(-50 -50)" style="fill:#000000;">
-          <polygon points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "></polygon>
+    <button id="btnForward" (click)="btnForwardPress()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+        style="enable-background:new 0 0 100 100;"
+        xml:space="preserve"
+      >
+        <g
+          transform="translate(50 50)  rotate(180) translate(-50 -50)"
+          style="fill:#000000;"
+        >
+          <polygon
+            points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "
+          ></polygon>
         </g>
       </svg>
-
     </button>
-    <button id="btnNotesFlyout" (click)="btnNotesSettingsPress()" class="right-pane-ignore notes-settings fas fa-ellipsis-v"
-      [ngClass]="{'nav-btn-on': navServices.notesSettings}">
-    </button>
-    <button id="btnSecondaryNotes" [ngClass]="{'nav-btn-on': saveState.data.secondaryNotesVisible}" (click)="btnSecondaryNotesPress();">
-      <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 48 48" x="0px" y="0px">
+    <button
+      id="btnNotesFlyout"
+      (click)="btnNotesSettingsPress()"
+      class="right-pane-ignore notes-settings fas fa-ellipsis-v"
+      [ngClass]="{ 'nav-btn-on': navServices.notesSettings }"
+    ></button>
+    <button
+      id="btnSecondaryNotes"
+      [ngClass]="{ 'nav-btn-on': saveState.data.secondaryNotesVisible }"
+      (click)="btnSecondaryNotesPress()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        data-name="Layer 2"
+        viewBox="0 0 48 48"
+        x="0px"
+        y="0px"
+      >
         <title>video music player</title>
-        <path d="M34,22.19H26v-8a2,2,0,1,0-4,0v8H14a2,2,0,1,0,0,4h8v8a2,2,0,0,0,4,0v-8h8a2,2,0,0,0,0-4Z"></path>
-      </svg> </button>
-
+        <path
+          d="M34,22.19H26v-8a2,2,0,1,0-4,0v8H14a2,2,0,1,0,0,4h8v8a2,2,0,0,0,4,0v-8h8a2,2,0,0,0,0-4Z"
+        ></path>
+      </svg>
+    </button>
   </div>
   <div id="headerRightPane">
-
     <span id="empty "></span>
-    <button id="btnRightPane " (click)="btnRightPanePress() " class="right-pane-ignore ">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
-        viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+    <button
+      id="btnRightPane "
+      (click)="btnRightPanePress()"
+      class="right-pane-ignore "
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+        enable-background="new 0 0 100 100"
+        xml:space="preserve"
+      >
         <circle cx="8.8" cy="24.3" r="6.4"></circle>
         <rect x="22.8" y="20.3" width="74.5" height="7.9"></rect>
         <circle cx="8.8" cy="50.3" r="6.4"></circle>
         <rect x="22.8" y="46.3" width="74.5" height="7.9"></rect>
         <circle cx="8.8" cy="76.3" r="6.4"></circle>
         <rect x="22.8" y="72.3" width="74.5" height="7.9"></rect>
-      </svg></button>
+      </svg>
+    </button>
   </div>
-
-
 </div>
 <app-note-settings *ngIf="this.navServices.notesSettings"></app-note-settings>
-<div [ngClass]="{'hidden': !navServices.notesSettings}" class="overlay" (click)="btnNotesSettingsPress()"></div>
+<div
+  [ngClass]="{ hidden: !navServices.notesSettings }"
+  class="overlay"
+  (click)="btnNotesSettingsPress()"
+></div>

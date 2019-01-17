@@ -130,5 +130,7 @@ export class NoteSettingsComponent implements OnInit {
       }
     }
     this.saveState.save();
+
+    this.verseSelectService.resetVisibility();
   }
 }

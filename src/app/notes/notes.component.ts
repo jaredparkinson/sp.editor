@@ -139,6 +139,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
         break;
       }
     }
+
+    this.verseSelectService.setNoteVisibility(note);
   }
 
   trackById(note: Note) {

@@ -50,6 +50,7 @@ export class ChapterService {
     // synchronizedScrolling: () => Promise<void>
   ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+      this.verseSelectService.noteVisibility.clear();
       this.notes2 = [];
       this.navService.pageTitle = '';
 

@@ -27,7 +27,7 @@ export class VerseSelectService {
 
   public async resetVisibility() {
     await this.resetNoteVisibility().then(() => {
-      console.log(this.noteVisibility);
+      // console.log(this.noteVisibility);
 
       this.resetVerseSelect();
     });
@@ -39,48 +39,52 @@ export class VerseSelectService {
         reject: (rejectValue: void) => void
       ) => {
         this.dataService.chapter2.notes.forEach((note: Note2) => {
-          note.sn.forEach((secondaryNote: SecondaryNote) => {
-            let vis = false;
-            secondaryNote.seNote.forEach(seNote => {
-              if (this.showSecondaryNote(note, seNote)) {
-                vis = true;
-              }
-            });
-            secondaryNote.cn.split(' ').forEach(c => {
-              switch (c) {
-                case 'tc-note': {
-                  if (!this.saveState.data.translatorNotesVisible) {
-                    vis = false;
-                  }
-                  break;
-                }
-                case 'new-note': {
-                  if (!this.saveState.data.newNotesVisible) {
-                    vis = false;
-                  }
-                  break;
-                }
-                case 'eng-note': {
-                  if (!this.saveState.data.englishNotesVisible) {
-                    vis = false;
-                  }
-                  break;
-                }
-                default: {
-                  vis = vis;
-                }
-              }
-            });
-            // vis = false;
-
-            console.log(vis);
-
-            this.noteVisibility.set(secondaryNote.id, vis);
-          });
+          this.setNoteVisibility(note);
         });
         resolve(null);
       }
     );
+  }
+
+  public setNoteVisibility(note: Note2) {
+    note.sn.forEach((secondaryNote: SecondaryNote) => {
+      let vis = false;
+      secondaryNote.seNote.forEach(seNote => {
+        if (this.showSecondaryNote(note, seNote)) {
+          vis = true;
+          console.log(`${secondaryNote.id}, ${seNote}`);
+        }
+      });
+      secondaryNote.cn.split(' ').forEach(c => {
+        switch (c) {
+          case 'tc-note': {
+            if (!this.saveState.data.translatorNotesVisible) {
+              vis = false;
+            }
+            break;
+          }
+          case 'new-note': {
+            if (!this.saveState.data.newNotesVisible) {
+              vis = false;
+            }
+            break;
+          }
+          case 'eng-note': {
+            if (!this.saveState.data.englishNotesVisible) {
+              vis = false;
+            }
+            break;
+          }
+          default: {
+            vis = vis;
+          }
+        }
+      });
+      // vis = false;
+      // console.log(vis);
+
+      this.noteVisibility.set(secondaryNote.id, vis);
+    });
   }
 
   private showSecondaryNote(
@@ -92,35 +96,54 @@ export class VerseSelectService {
     if (seNote[1].includes('-2') && note.o && !note.v) {
       return false;
     }
-    if (seNote[2].includes('reference-label')) {
+    if (
+      seNote[1].includes('reference-label') ||
+      seNote[2].includes('reference-label')
+    ) {
       if (
-        (seNote[2].includes('reference-label-quotation') &&
+        ((seNote[2].includes('reference-label-quotation') ||
+          seNote[1].includes('reference-label-quotation')) &&
           !this.saveState.data.refQUO) ||
-        (seNote[2].includes('reference-label-phrasing') &&
+        ((seNote[2].includes('reference-label-phrasing') ||
+          seNote[1].includes('reference-label-phrasing')) &&
           !this.saveState.data.refPHR) ||
-        (seNote[2].includes('reference-label-or') &&
+        ((seNote[2].includes('reference-label-or') ||
+          seNote[1].includes('reference-label-or')) &&
           !this.saveState.data.refOR) ||
-        (seNote[2].includes('reference-label-ie') &&
+        ((seNote[2].includes('reference-label-ie') ||
+          seNote[1].includes('reference-label-ie')) &&
           !this.saveState.data.refIE) ||
-        (seNote[2].includes('reference-label-hebrew') &&
+        ((seNote[2].includes('reference-label-hebrew') ||
+          seNote[1].includes('reference-label-hebrew')) &&
           !this.saveState.data.refHEB) ||
-        (seNote[2].includes('reference-label-greek') &&
+        ((seNote[2].includes('reference-label-greek') ||
+          seNote[1].includes('reference-label-greek')) &&
           !this.saveState.data.refGR) ||
-        (seNote[2].includes('reference-label-archaic') &&
+        ((seNote[2].includes('reference-label-archaic') ||
+          seNote[1].includes('reference-label-archaic')) &&
           !this.saveState.data.refKJV) ||
-        (seNote[2].includes('reference-label-historical') &&
+        ((seNote[2].includes('reference-label-historical') ||
+          seNote[1].includes('reference-label-historical')) &&
           !this.saveState.data.refHST) ||
-        (seNote[2].includes('reference-label-cr') &&
+        ((seNote[2].includes('reference-label-cr') ||
+          seNote[1].includes('reference-label-cr')) &&
           !this.saveState.data.refCR) ||
-        (seNote[2].includes('reference-label-alt') &&
+        ((seNote[2].includes('reference-label-alt') ||
+          seNote[1].includes('reference-label-alt')) &&
           !this.saveState.data.refALT) ||
-        (seNote[2].includes('reference-label-harmony') &&
+        ((seNote[2].includes('reference-label-harmony') ||
+          seNote[1].includes('reference-label-harmony')) &&
           !this.saveState.data.refHMY) ||
-        (seNote[2].includes('reference-label-tg') &&
+        ((seNote[2].includes('reference-label-tg') ||
+          seNote[1].includes('reference-label-tg')) &&
           !this.saveState.data.refTG) ||
-        (seNote[2].includes('reference-label-gs') && !this.saveState.data.refGS)
+        ((seNote[2].includes('reference-label-gs') ||
+          seNote[1].includes('reference-label-gs')) &&
+          !this.saveState.data.refGS)
       ) {
         // console.log('gtcrd');
+        console.log(seNote[2].includes('reference-label-archaic'));
+
         return false;
       }
     }

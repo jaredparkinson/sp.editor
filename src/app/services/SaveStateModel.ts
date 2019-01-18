@@ -16,8 +16,8 @@ export class SaveStateModel implements ISaveModel {
   public backtrack: string[] = [];
   public forward: string[] = [];
   public currentPage = '';
-  public verseSelect = false;
-  public verseSuperScripts = true;
+  public verseSelect = true;
+  public verseSuperScripts = false;
   public refQUO = true;
   public refPHR = true;
   public refOR = true;

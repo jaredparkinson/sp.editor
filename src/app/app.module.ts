@@ -45,6 +45,7 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
+import { EditorComponent } from './editor/editor.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -69,7 +70,8 @@ export function load(saveState: SaveStateService) {
     // ButtonHighlightDirective,
     // SyncScrollingDirective,
     SettingsComponent,
-    NoteSettingsComponent
+    NoteSettingsComponent,
+    EditorComponent
     // SearchBarComponent
   ],
   imports: [

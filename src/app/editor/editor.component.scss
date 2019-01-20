@@ -1,0 +1,204 @@
+@import '../../css.penguin/view_vars';
+$font-stack: serif;
+
+//This is for when the poetry is not being shown
+body {
+  font-family: $font-stack;
+}
+
+.content-pane {
+  @media only screen and (max-width: 1023.98px) {
+    grid-template-columns: 10vw 80vw 10vw;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: $fr_5 $fr11 $fr_5;
+  }
+
+  .show-paragraph {
+    div.hidden-paragraph {
+      margin-bottom: 6pt;
+    }
+  }
+
+  w {
+    &.marker {
+      font-style: italic;
+      font-size: 8pt;
+    }
+
+    &.verse-number {
+      color: DimGray;
+      font-weight: bold;
+    }
+  }
+
+  .body-block {
+    span.part {
+      margin-left: 6pt;
+    }
+
+    span.answer {
+      text-indent: 1em;
+    }
+  }
+
+  #bodyBlock.show-poetry div.hidden-paragraph {
+    span.line {
+      padding-right: 6pt;
+    }
+
+    span.break {
+      margin-bottom: 6pt;
+    }
+  }
+
+  //This is styling for when poetry is being shown
+  .body-block.show-poetry {
+    // w.line-start::before {
+    //   content: "\A";
+    //   // background: inherit;
+    //   // display: block;
+    // }
+
+    & .break {
+      display: block;
+      margin-bottom: 6pt;
+    }
+  }
+
+  #bodyBlock {
+    w.verse-number {
+      vertical-align: super;
+      font-size: 8pt;
+    }
+  }
+
+  #bodyBlock.hidden-paragraph {
+    span {
+
+      &.part,
+      &.question,
+      &.answer {
+        font-family: $font-stack;
+        display: block;
+      }
+
+      &.verse {
+        position: relative;
+        font-family: $font-stack;
+        text-align: left;
+        // margin: 0;
+        // margin-bottom: 6pt;
+        display: block;
+        // padding-left: 5px;
+        padding: 0 0 6pt 5px;
+
+        w.verse-number {
+          vertical-align: unset;
+          font-size: inherit;
+        }
+
+        div.hidden-paragraph & {
+          display: inline; // w.verse-number {
+          //   vertical-align: super;
+          //   font-size: 8pt;
+          // }
+        }
+      }
+    }
+  }
+
+  .notes-hide-original {
+    w.marker {
+      display: none;
+    }
+  }
+
+  .notes-show-original {
+    w.study-note-ref {
+      color: #007fa4;
+    }
+
+    w.marker {
+      font-style: italic;
+      font-size: 8pt;
+      display: initial;
+      vertical-align: super;
+      /* when original notes showing, display:none */
+    }
+  }
+
+  .body-block-nav-flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  .body-block-nav {
+    position: fixed;
+    top: 50%;
+    background: inherit;
+    color: #c4bebe;
+  }
+
+  span.small-caps {
+    font-variant: small-caps;
+  }
+
+  span.uppercase {
+    text-transform: uppercase;
+  }
+
+  span.clarity-word {
+    font-style: italic;
+  }
+
+  span.key-letter {
+    display: none;
+  }
+
+  span.key-word {
+    font-style: italic;
+  }
+
+  div.paragraph {
+    margin-bottom: 6pt;
+  }
+
+  p.subtitle,
+  p.title-number {
+    text-align: center;
+  }
+
+  p.title-number {
+    font-weight: bold;
+  }
+
+  p.study-summary1,
+  p.study-intro {
+    font-style: italic;
+  }
+
+  h2#title1 {
+    text-align: center;
+    font-size: 12pt;
+  }
+
+  p.signature {
+    font-variant: small-caps;
+  }
+
+  //   @for $x from 1 to 300 {
+  //     #highlight-holder.p#{
+  //  $x
+  //   }
+
+  //   ~#bodyBlock #p#{
+  //  $x
+  // }
+
+  //   {
+  //   border-left: 3px solid #f68d2e;
+  // }
+  // }
+}

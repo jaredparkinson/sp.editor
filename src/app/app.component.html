@@ -12,7 +12,9 @@
     <!--
       <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock>
     -->
-    <app-notes class="right-pane "></app-notes>
+    <router-outlet name="notes-outlet" class="right-pane"></router-outlet>
+
+    <!-- <app-notes class="right-pane "></app-notes>Ks -->
     <div
       [ngClass]="{
         none: !navService.rightPaneToggle,

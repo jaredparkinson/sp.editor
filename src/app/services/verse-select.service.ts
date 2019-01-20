@@ -52,7 +52,7 @@ export class VerseSelectService {
       secondaryNote.seNote.forEach(seNote => {
         if (this.showSecondaryNote(note, seNote)) {
           vis = true;
-          console.log(`${secondaryNote.id}, ${seNote}`);
+          // console.log(`${secondaryNote.id}, ${seNote}`);
         }
       });
       secondaryNote.cn.split(' ').forEach(c => {
@@ -142,7 +142,7 @@ export class VerseSelectService {
           !this.saveState.data.refGS)
       ) {
         // console.log('gtcrd');
-        console.log(seNote[2].includes('reference-label-archaic'));
+        // console.log(seNote[2].includes('reference-label-archaic'));
 
         return false;
       }
@@ -208,7 +208,7 @@ export class VerseSelectService {
     toggle: boolean = !this.saveState.data.verseSuperScripts
   ) {
     this.saveState.data.verseSuperScripts = toggle;
-    console.log(this.saveState.data.verseSuperScripts);
+    // console.log(this.saveState.data.verseSuperScripts);
     this.saveState.save();
     this.resetVerseSelect();
   }

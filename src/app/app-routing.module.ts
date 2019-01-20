@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
+import { EditorComponent } from './editor/editor.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -13,33 +14,45 @@ const routes: Routes = [
   // },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
   },
   {
     path: 'search/:search',
-    component: SearchComponent
+    component: SearchComponent,
   },
   {
     path: ':book/:chapter',
-    component: BodyblockComponent
+    component: BodyblockComponent,
+  },
+  {
+    path: 'edit/:book/:chapter',
+    component: EditorComponent,
   },
   {
     path: ':chapter',
-    component: BodyblockComponent
+    component: BodyblockComponent,
+  },
+  {
+    path: 'edit/:chapter',
+    component: EditorComponent,
   },
   {
     path: '',
     component: LandingPageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    component: BodyblockComponent
-  }
+    component: BodyblockComponent,
+  },
+  {
+    path: 'edit/**',
+    component: EditorComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

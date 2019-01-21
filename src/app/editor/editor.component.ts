@@ -83,6 +83,23 @@ export class EditorComponent
     });
     this.wordSelection();
   }
+  verseSelectionClick(verse: Verse): void {
+    console.log(verse);
+
+    const selection = window.getSelection().getRangeAt(0);
+
+
+    const selectedElements = selection.cloneContents();
+
+    const nTags = selectedElements.querySelectorAll('n');
+
+    for (let x = parseInt( nTags[0].className, 10); x < parseInt( nTags[nTags.length - 1].className, 10); x++) {
+
+      verse.wTags2[x][10] = true;
+
+    }
+
+  }
 
   getSuperScriptVisibility(
     item: string,

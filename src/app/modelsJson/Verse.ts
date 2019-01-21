@@ -16,6 +16,7 @@ export class Verse {
       number,
       string[],
       string[],
+      boolean,
       boolean
     ]
   > = [];

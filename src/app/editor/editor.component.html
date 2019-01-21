@@ -49,7 +49,7 @@
     >
       <span
         class="verse {{verse.classList}}"
-        
+        (mouseup)="verseSelectionClick(verse)"
         [ngClass]="{
           'highlight-verse': verse.highlight,
           'highlight-context': !verse.highlight && verse.context
@@ -60,13 +60,12 @@
           let i = index;
           trackBy: trackById
         "
-        [disabled]="true"
         #verses
       >
         <ng-container *ngFor="let w of verse.wTags2; trackBy: wTagTrackBy">
           <w
             class="{{ getWColor(w) }}"
-            [ngClass]="{ wRef: w[9] }"
+            [ngClass]="{ wRef: w[9], select: w[10] }"
             (click)="wTagClick(w, verse, $event)"
             #wTags
           >
@@ -78,7 +77,8 @@
                 ></g>
               </ng-container>
             </ng-container>
-            <n>{{ w[1] }}</n></w
+            <n
+            class="{{w[2]}}">{{ w[1] }}</n></w
           >
           <ng-container *ngIf="saveState.data.poetryVisible">
             <br *ngIf="w[0].includes('line-end')" />

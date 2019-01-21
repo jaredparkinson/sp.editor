@@ -22,6 +22,9 @@ body {
   }
 
   w {
+    &.select {
+      background-color: lightgrey;
+    }
     &.marker {
       font-style: italic;
       font-size: 8pt;

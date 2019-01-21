@@ -6,13 +6,13 @@ import {
   ElementRef,
   OnInit,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import {
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Verse } from '../modelsJson/Verse';
@@ -26,7 +26,7 @@ import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss']
+  styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent
   implements OnInit, AfterViewInit, AfterContentInit {
@@ -47,7 +47,7 @@ export class EditorComponent
     public saveState: SaveStateService,
     public stringService: StringService,
     public verseSelectService: VerseSelectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngAfterContentInit(): void {}
@@ -96,7 +96,7 @@ export class EditorComponent
       number,
       string[],
       boolean
-    ]
+    ],
   ): boolean {
     console.log(w);
 
@@ -121,7 +121,7 @@ export class EditorComponent
       number,
       string[],
       boolean
-    ]
+    ],
   ) {
     let wClass = w[0];
 
@@ -166,7 +166,7 @@ export class EditorComponent
       string[],
       string[],
       boolean
-    ]
+    ],
   ) {
     return wTag[2];
   }
@@ -185,7 +185,7 @@ export class EditorComponent
       boolean
     ],
     verse: Verse,
-    event: Event
+    event: Event,
   ) {
     if (!this.saveState.data.rightPanePin) {
     }
@@ -228,7 +228,7 @@ export class EditorComponent
   async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
     console.log(
-      'sync scrolling 2 ' + document.querySelectorAll('.verse').length
+      'sync scrolling 2 ' + document.querySelectorAll('.verse').length,
     );
 
     console.log('sync scrolling ' + this.verses.length);

@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'css.penguin/view_vars';
 @import 'app/bodyblock/bodyblock.component';
-@import 'app/notes/notes.component';
+// @import 'app/notes/notes.component';
+
 $btnOn: #8cadb8;
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @mixin w-super($selector, $color) {
   $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',

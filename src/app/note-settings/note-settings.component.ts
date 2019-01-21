@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
@@ -9,7 +10,7 @@ import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-note-settings',
   templateUrl: './note-settings.component.html',
-  styleUrls: ['./note-settings.component.scss']
+  styleUrls: ['./note-settings.component.scss'],
 })
 export class NoteSettingsComponent implements OnInit {
   versionNumber = '';
@@ -18,8 +19,9 @@ export class NoteSettingsComponent implements OnInit {
     public navServices: NavigationService,
     public verseSelectService: VerseSelectService,
     private router: Router,
+    public dataService: DataService,
     public chapterService: ChapterService,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
   ) {}
 
   ngOnInit() {
@@ -31,6 +33,17 @@ export class NoteSettingsComponent implements OnInit {
         console.log('data ' + this.versionNumber);
       });
   }
+
+  editPage(): void {
+    console.log(this.router.url);
+
+    if (this.router.url.includes('edit')) {
+      this.router.navigateByUrl(this.router.url.replace('edit', ''));
+    } else {
+      this.router.navigateByUrl(`${this.router.url}/edit`);
+    }
+  }
+
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
       console.log('asdfiojkasofjafjaosdfjoiasdfjioj');

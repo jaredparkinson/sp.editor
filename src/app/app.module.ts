@@ -2,7 +2,7 @@ import {
   APP_INITIALIZER,
   CUSTOM_ELEMENTS_SCHEMA,
   NgModule,
-  NO_ERRORS_SCHEMA
+  NO_ERRORS_SCHEMA,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,16 +27,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 // import { ButtonHighlightDirective } from './button-highlight.directive';
 import { HomeComponent } from './components/home/home.component';
+import { EditorComponent } from './editor/editor.component';
 // import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
 import { FilesComponent } from './files/files.component';
 import { UrlBuilder } from './files/UrlBuilder';
 import { HeaderComponent } from './header/header.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NoteEditorComponent } from './note-editor/note-editor.component';
 import { NoteSettingsComponent } from './note-settings/note-settings.component';
 import { NotesComponent } from './notes/notes.component';
+import { BodyBlockParentComponent } from './outlets/body-block-parent/body-block-parent.component';
+import { EditorParentComponent } from './outlets/editor-parent/editor-parent.component';
+import { LandingPageParentComponent } from './outlets/landing-page-parent/landing-page-parent.component';
 import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
 import { DownloadService } from './services/download.service';
@@ -45,10 +51,6 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
-import { EditorComponent } from './editor/editor.component';
-import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
-import { EditorParentComponent } from './outlets/editor-parent/editor-parent.component';
-import { BodyBlockParentComponent } from './outlets/body-block-parent/body-block-parent.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -66,6 +68,7 @@ export function load(saveState: SaveStateService) {
     WebviewDirective,
     FilesComponent,
     BodyblockComponent,
+    NoteEditorComponent,
     NotesComponent,
     HeaderComponent,
     LandingPageComponent,
@@ -77,7 +80,8 @@ export function load(saveState: SaveStateService) {
     EditorComponent,
     BodyBlockHolderComponent,
     EditorParentComponent,
-    BodyBlockParentComponent
+    BodyBlockParentComponent,
+    LandingPageParentComponent,
     // SearchBarComponent
   ],
   imports: [
@@ -91,12 +95,12 @@ export function load(saveState: SaveStateService) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: AppConfig.production
-    })
+      enabled: AppConfig.production,
+    }),
   ],
   providers: [
     ElectronService,
@@ -111,11 +115,11 @@ export function load(saveState: SaveStateService) {
       provide: APP_INITIALIZER,
       useFactory: load,
       deps: [SaveStateService],
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {
   constructor() {}

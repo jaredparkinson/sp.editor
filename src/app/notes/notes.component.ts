@@ -4,7 +4,8 @@ import {
   ElementRef,
   OnInit,
   QueryList,
-  ViewChildren
+  ViewChildren,
+  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
@@ -13,7 +14,7 @@ import {
   faGlobe,
   faListUl,
   faParagraph,
-  faPlus
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Note } from '../models/Note';
@@ -29,7 +30,8 @@ import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./notes.component.scss'],
 })
 export class NotesComponent implements OnInit, AfterViewInit {
   constructor(
@@ -39,7 +41,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     private stringService: StringService,
     public sanitizer: DomSanitizer,
     public dataService: DataService,
-    public verseSelectService: VerseSelectService
+    public verseSelectService: VerseSelectService,
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -93,7 +95,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
             string[],
             string[],
             boolean
-          ]
+          ],
         ) => {
           w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
           if (lodash.includes(w[7], secondaryNote.id)) {
@@ -104,7 +106,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
             w[0] = this.stringService.addAttribute(w[0], 'note-select-1');
             count++;
           }
-        }
+        },
       );
 
       if (count > 0) {
@@ -112,7 +114,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
 
         const verseId = (note.nativeElement as Element).parentElement.id.replace(
           'note',
-          'p'
+          'p',
         );
         document.getElementById(verseId).scrollIntoView();
         if (note) {
@@ -184,7 +186,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   showSecondaryNote(
     note: Note2,
-    seNote: [string, string, string, string]
+    seNote: [string, string, string, string],
   ): boolean {
     let vis = true;
 

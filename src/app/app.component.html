@@ -7,14 +7,13 @@
 >
   <div class="header"><app-header></app-header></div>
   <div id="gridBody" class="grid body">
-    <app-files class="left-pane"></app-files>
-    <div><router-outlet></router-outlet></div>
+    <router-outlet></router-outlet>
     <!--
       <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock>
     -->
-    <router-outlet name="notes-outlet" class="right-pane"></router-outlet>
+    <!-- <router-outlet name="notes-outlet" class="right-pane"></router-outlet> -->
 
-    <!-- <app-notes class="right-pane "></app-notes>Ks -->
+    <!-- <app-notes class="right-pane "></app-notes> -->
     <div
       [ngClass]="{
         none: !navService.rightPaneToggle,

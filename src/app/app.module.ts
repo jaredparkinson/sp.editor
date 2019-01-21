@@ -46,6 +46,9 @@ import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
 import { EditorComponent } from './editor/editor.component';
+import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
+import { EditorParentComponent } from './outlets/editor-parent/editor-parent.component';
+import { BodyBlockParentComponent } from './outlets/body-block-parent/body-block-parent.component';
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -71,7 +74,10 @@ export function load(saveState: SaveStateService) {
     // SyncScrollingDirective,
     SettingsComponent,
     NoteSettingsComponent,
-    EditorComponent
+    EditorComponent,
+    BodyBlockHolderComponent,
+    EditorParentComponent,
+    BodyBlockParentComponent
     // SearchBarComponent
   ],
   imports: [

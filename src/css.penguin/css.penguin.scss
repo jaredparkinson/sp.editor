@@ -11,7 +11,7 @@
 .main {
   // display: grid;
   height: 100vh;
-  grid-template-areas: 'header''body';
+  grid-template-areas: 'header' 'body';
   grid-template-rows: 40px auto;
 
   .header {
@@ -20,10 +20,11 @@
     background-color: lightblue;
   }
 
-  .body {
+  .body .router-outlet {
     // grid-area: body
     // width: 100vw;
     // height: 95vh;
+    display: grid;
     background-color: #fffcf7;
     grid-template-areas: 'left-pane content-pane right-pane'; // grid-template-areas: left-pane content-pane right-pane;
 
@@ -166,7 +167,6 @@
   // Small Screen Sizes Postfix: -s
   // Screen Size up to 720px
   @media only screen and (max-width: 1023.98px) {
-
     // .body {
     //   grid-template-columns: 0 $vw12 0;
     // }
@@ -314,16 +314,14 @@
       top: 0;
       z-index: 50;
       opacity: 1;
-      background: rgba(0, 0, 0, .288);
+      background: rgba(0, 0, 0, 0.288);
     }
 
     .left-pane-container,
     .study-notes {
       z-index: 300;
     }
-
   }
-
 
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px

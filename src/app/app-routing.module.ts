@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 import { EditorComponent } from './editor/editor.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
+import { BodyBlockParentComponent } from './outlets/body-block-parent/body-block-parent.component';
+import { EditorParentComponent } from './outlets/editor-parent/editor-parent.component';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 
 const routes: Routes = [
@@ -22,19 +25,19 @@ const routes: Routes = [
   },
   {
     path: ':book/:chapter',
-    component: BodyblockComponent,
+    component: BodyBlockParentComponent,
   },
   {
     path: 'edit/:book/:chapter',
-    component: EditorComponent,
+    component: EditorParentComponent,
   },
   {
     path: ':chapter',
-    component: BodyblockComponent,
+    component: BodyBlockParentComponent,
   },
   {
     path: 'edit/:chapter',
-    component: EditorComponent,
+    component: EditorParentComponent,
   },
   {
     path: '',
@@ -43,11 +46,11 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: BodyblockComponent,
+    component: BodyBlockParentComponent,
   },
   {
     path: 'edit/**',
-    component: EditorComponent,
+    component: EditorParentComponent,
   },
 ];
 

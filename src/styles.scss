@@ -308,7 +308,7 @@ body.find {
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
 
-  .body {
+  .body .router-outlet {
     grid-template-columns: 0 100vw 0; //$leftPaneWidth $bodyBlockWidth $rightPaneWidth;
 
     .right-pane footer {
@@ -356,7 +356,7 @@ body.find {
   $bodyBlockWidth: $vw7_5;
   $rightPaneWidth: $vw2_5;
 
-  .body {
+  .body .router-outlet {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
 
@@ -436,7 +436,7 @@ body.find {
   $bodyBlockWidth: $vw7;
   $rightPaneWidth: $vw3;
 
-  .body {
+  .body .router-outlet {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
 

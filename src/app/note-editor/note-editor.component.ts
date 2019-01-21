@@ -19,7 +19,9 @@ import {
 import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Note2 } from '../modelsJson/Note';
+import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
+import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
@@ -59,7 +61,28 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       });
     }, 0);
   }
-  ngOnInit() {}
+  ngOnInit() { }
+
+  editNoteClick(note: Note2, secondaryNote: SecondaryNote): void {
+    let verseSelected: Verse;
+    this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+
+      paragraph.verses.forEach((verse: Verse) => {
+        if (verse.id !== `p${note.id.replace('note', '')}`) {
+          verse.classList = 'verse-disable';
+          verse.disabled = true;
+
+        } else {
+          verse.classList = '';
+          verseSelected = verse;
+          verse.disabled = false;
+        }
+      });
+
+    });
+    console.log(verseSelected);
+
+  }
   notePhraseClick(secondaryNote: SecondaryNote) {
     if (true) {
       let count = 0;

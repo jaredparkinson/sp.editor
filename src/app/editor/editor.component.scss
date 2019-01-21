@@ -3,7 +3,7 @@ $font-stack: serif;
 
 //This is for when the poetry is not being shown
 body {
-  font-family: $font-stack;
+  font-family: $font-stack !important;
 }
 
 .content-pane {
@@ -85,6 +85,11 @@ body {
       }
 
       &.verse {
+        &.verse-disable {
+          pointer-events: none;
+          opacity: 0.4;
+          user-select: none;
+        }
         position: relative;
         font-family: $font-stack;
         text-align: left;

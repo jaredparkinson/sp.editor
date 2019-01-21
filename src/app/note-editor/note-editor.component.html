@@ -44,8 +44,9 @@
             }"
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
-            id="{{ secondaryNote.id }}"
+            
             *ngIf="showNote(secondaryNote)"
+            (click)="editNoteClick(note, secondaryNote)"
             #notes
           >
             <ng-container *ngFor="let sn of secondaryNote.seNote">

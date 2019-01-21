@@ -48,7 +48,8 @@
       id="{{ paragraph.id }}"
     >
       <span
-        class="verse"
+        class="verse {{verse.classList}}"
+        
         [ngClass]="{
           'highlight-verse': verse.highlight,
           'highlight-context': !verse.highlight && verse.context
@@ -59,6 +60,7 @@
           let i = index;
           trackBy: trackById
         "
+        [disabled]="true"
         #verses
       >
         <ng-container *ngFor="let w of verse.wTags2; trackBy: wTagTrackBy">

@@ -2,6 +2,8 @@ export class Verse {
   public id: string;
   // public innerHtml: string;
   public highlight = false;
+  public classList = '';
+  public disabled = false;
   // public wTags: WTag[] = [];
   public wTags2: Array<
     [

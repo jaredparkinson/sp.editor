@@ -38,7 +38,7 @@ export class NoteSettingsComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url.includes('edit')) {
-      this.router.navigateByUrl(this.router.url.replace('edit', ''));
+      this.router.navigateByUrl(this.router.url.replace('/edit', ''));
     } else {
       this.router.navigateByUrl(`${this.router.url}/edit`);
     }

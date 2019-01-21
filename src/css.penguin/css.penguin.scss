@@ -39,7 +39,8 @@
 
   .left-pane,
   .content-pane,
-  .right-pane {
+  .right-pane,
+  .right-pane-editor {
     height: 95vh;
   }
 
@@ -326,7 +327,8 @@
   /* Medium Screen Sizes Postfix: -m */
   // Screen Size up to 1080px
   @media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
-    .right-pane {
+    .right-pane,
+    .right-pane-editor {
       grid-area: right-pane;
     }
 
@@ -482,7 +484,8 @@
       visibility: visible;
     }
 
-    .right-pane {
+    .right-pane,
+    .right-pane-editor {
       grid-area: right-pane;
     }
 
@@ -632,7 +635,8 @@
   /* Extra Large Screen Sizes Postfix -xl*/
   // Screen Sizes from 1920px and up
   @media only screen and (min-width: 1921px) {
-    .right-pane {
+    .right-pane,
+    .right-pane-editor {
       grid-area: right-pane;
     }
 

@@ -34,6 +34,7 @@ export class ChapterService {
   public verseNums: number[] = [];
   public contextNums: number[] = [];
   private fs: any;
+  public wTagSelectMode=false;
 
   scrollIntoView: Element;
 

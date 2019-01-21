@@ -122,6 +122,7 @@ export class BodyblockComponent
       string,
       number,
       string[],
+      boolean,
       boolean
     ]
   ) {
@@ -184,6 +185,7 @@ export class BodyblockComponent
       number,
       string[],
       string[],
+      boolean,
       boolean
     ],
     verse: Verse,

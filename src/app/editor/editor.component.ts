@@ -84,6 +84,7 @@ export class EditorComponent
     this.wordSelection();
   }
   verseSelectionClick(verse: Verse): void {
+    if(this.chapterService.wTagSelectMode){
     console.log(verse);
 
     const selection = window.getSelection().getRangeAt(0);
@@ -97,7 +98,7 @@ export class EditorComponent
 
       verse.wTags2[x][10] = true;
 
-    }
+    }}
 
   }
 
@@ -112,6 +113,7 @@ export class EditorComponent
       string,
       number,
       string[],
+      boolean,
       boolean
     ],
   ): boolean {
@@ -137,6 +139,7 @@ export class EditorComponent
       string,
       number,
       string[],
+      boolean,
       boolean
     ],
   ) {
@@ -199,6 +202,7 @@ export class EditorComponent
       number,
       string[],
       string[],
+      boolean,
       boolean
     ],
     verse: Verse,

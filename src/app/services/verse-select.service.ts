@@ -225,6 +225,7 @@ export class VerseSelectService {
       string[],
       string[],
 
+      boolean,
       boolean
     ] = null
   ) {
@@ -244,6 +245,7 @@ export class VerseSelectService {
       string[],
 
       string[],
+      boolean,
       boolean
     ] = null
   ) {
@@ -259,6 +261,7 @@ export class VerseSelectService {
           number,
           string[],
           string[],
+          boolean,
           boolean
         ]
       ) => {
@@ -306,6 +309,7 @@ export class VerseSelectService {
       number,
       string[],
       string[],
+      boolean,
       boolean
     ],
     vis: boolean,
@@ -339,6 +343,7 @@ export class VerseSelectService {
         number,
         string[],
         string[],
+        boolean,
         boolean
       ]
     ) => void
@@ -369,7 +374,7 @@ export class VerseSelectService {
       number,
       string[],
       string[],
-
+      boolean,
       boolean
     ],
     verse: Verse
@@ -405,7 +410,7 @@ export class VerseSelectService {
       number,
       string[],
       string[],
-
+      boolean,
       boolean
     ],
     verse: Verse
@@ -430,6 +435,7 @@ export class VerseSelectService {
       string[],
 
       string[],
+      boolean,
       boolean
     ]
   ) {
@@ -457,8 +463,8 @@ export class VerseSelectService {
       string,
       number,
       string[],
-
       string[],
+      boolean,
       boolean
     ],
     resetVerse: boolean = true
@@ -506,7 +512,7 @@ export class VerseSelectService {
       number,
       string[],
       string[],
-
+      boolean,
       boolean
     ],
     verse: Verse

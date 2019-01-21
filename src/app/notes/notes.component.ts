@@ -94,6 +94,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
             number,
             string[],
             string[],
+            boolean,
             boolean
           ],
         ) => {

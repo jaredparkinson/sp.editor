@@ -64,6 +64,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   editNoteClick(note: Note2, secondaryNote: SecondaryNote): void {
+    this.chapterService.wTagSelectMode = true;
     let verseSelected: Verse;
     this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
 
@@ -117,6 +118,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
             number,
             string[],
             string[],
+            boolean,
             boolean
           ],
         ) => {

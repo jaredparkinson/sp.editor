@@ -84,7 +84,7 @@ export class EditorComponent
     this.wordSelection();
   }
   verseSelectionClick(verse: Verse): void {
-    if(this.chapterService.wTagSelectMode){
+    if (this.chapterService.wTagSelectMode) {
     console.log(verse);
 
     const selection = window.getSelection().getRangeAt(0);

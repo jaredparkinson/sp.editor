@@ -62,9 +62,25 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     }, 0);
   }
   ngOnInit() { }
+  setNotePhraseText(sn: [string, string, string, string]) {
+
+    console.log(sn);
+
+    const wTags = document.querySelectorAll('w.select');
+
+    if (wTags) {
+      sn[2] = '';
+      wTags.forEach((elem: Element) => {
+        sn[2] = `${sn[2]}${elem.textContent}`;
+
+      });
+      }
+
+  }
 
   editNoteClick(note: Note2, secondaryNote: SecondaryNote): void {
     this.chapterService.wTagSelectMode = true;
+    this.chapterService.selectedSecondaryNote = secondaryNote;
     let verseSelected: Verse;
     this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
 

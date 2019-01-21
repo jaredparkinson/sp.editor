@@ -6,6 +6,7 @@ import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { DataService } from './data.service';
 import { HelperService } from './helper.service';
@@ -17,6 +18,7 @@ import { VerseSelectService } from './verse-select.service';
 @Injectable()
 export class ChapterService {
   wTags: QueryList<ElementRef>;
+  public selectedSecondaryNote: SecondaryNote;
   constructor(
     private navService: NavigationService,
     private httpClient: HttpClient,
@@ -34,7 +36,7 @@ export class ChapterService {
   public verseNums: number[] = [];
   public contextNums: number[] = [];
   private fs: any;
-  public wTagSelectMode=false;
+  public wTagSelectMode = false;
 
   scrollIntoView: Element;
 

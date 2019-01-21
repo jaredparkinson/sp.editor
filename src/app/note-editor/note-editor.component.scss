@@ -16,14 +16,14 @@ $font-stack: PalatinoldsLat-Roman, serif;
 .note-phrase[class*='reference-label'] {
   display: none;
 }
-.right-pane {
+.right-pane-editor {
   z-index: 100;
 
   note {
     div {
       border-style: solid;
       border-color: red;
-      border-width: 10px;
+      border-width: 2px;
     }
     > div > div.original-note-marker {
       display: none;

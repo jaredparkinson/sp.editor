@@ -21,6 +21,11 @@ $font-stack: PalatinoldsLat-Roman, serif;
 
   note {
     div {
+      span.edit-buttons {
+        margin-top: 10px;
+        display: block;
+        text-align: left;
+      }
       border-style: solid;
       border-color: black;
       border-width: 2px;

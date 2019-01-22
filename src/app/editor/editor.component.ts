@@ -94,11 +94,18 @@ export class EditorComponent
 
     const nTags = selectedElements.querySelectorAll('n');
 
-    for (let x = parseInt( nTags[0].className, 10); x < parseInt( nTags[nTags.length - 1].className, 10); x++) {
+    for (let x = parseInt( nTags[0].className, 10) - 1;  x < parseInt( nTags[nTags.length - 1].className, 10); x++) {
+
+      console.log(x);
+
+
 
       verse.wTags2[x][10] = true;
 
-    }}
+      }
+    }
+
+    window.getSelection().removeAllRanges();
 
   }
 

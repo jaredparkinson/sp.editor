@@ -40,13 +40,13 @@
           <div
             [ngClass]="{
               'tier-2-note-hide': !note.v && note.o,
-              'tier-2-note-show': note.v && note.o
+              'tier-2-note-show': note.v && note.o,
+              'note-disabled': secondaryNote.disabled
             }"
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
-            
             *ngIf="showNote(secondaryNote)"
-            (click)="editNoteClick(note, secondaryNote)"
+            (click)="editNoteClick(note, secondaryNote, $event)"
             #notes
           >
             <ng-container *ngFor="let sn of secondaryNote.seNote">
@@ -57,7 +57,17 @@
                   class="{{ sn[1] }}"
                   [id]="sn[0]"
                 >
-                <button (click)="setNotePhraseText(sn)">Set Text</button>
+                  <span
+                    *ngIf="!secondaryNote.disabled && dataService.editState"
+                    class="edit-buttons"
+                  >
+                    <button (click)="setNotePhraseText(sn)">
+                      Set Text
+                    </button>
+                    <button (click)="disableEditMode()">
+                      Cancel
+                    </button>
+                  </span>
                   <span
                     class="note-superscript"
                     *ngIf="saveState.data.verseSuperScripts"

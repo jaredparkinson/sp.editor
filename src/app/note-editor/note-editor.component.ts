@@ -61,47 +61,75 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       });
     }, 0);
   }
-  ngOnInit() { }
+  ngOnInit() {}
   setNotePhraseText(sn: [string, string, string, string]) {
-
     console.log(sn);
 
     const wTags = document.querySelectorAll('w.select');
 
     if (wTags) {
+      let notePhrase = '« ';
       sn[2] = '';
       wTags.forEach((elem: Element) => {
-        sn[2] = `${sn[2]}${elem.textContent}`;
-
-      });
-      }
-
-  }
-
-  editNoteClick(note: Note2, secondaryNote: SecondaryNote): void {
-    this.chapterService.wTagSelectMode = true;
-    this.chapterService.selectedSecondaryNote = secondaryNote;
-    let verseSelected: Verse;
-    this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
-
-      paragraph.verses.forEach((verse: Verse) => {
-        if (verse.id !== `p${note.id.replace('note', '')}`) {
-          verse.classList = 'verse-disable';
-          verse.disabled = true;
-
+        if (elem.textContent === 'louer') {
+          notePhrase = `${notePhrase} ... ${elem.textContent}`;
         } else {
-          verse.classList = '';
-          verseSelected = verse;
-          verse.disabled = false;
+          notePhrase = `${notePhrase}${elem.textContent}`;
         }
       });
 
-    });
-    console.log(verseSelected);
+      if (notePhrase[0] === ',') {
+        notePhrase = notePhrase.substring(1, notePhrase.length);
+      }
+      sn[2] = `${notePhrase.trim()} »`;
+    }
+  }
 
+  editNoteClick(note: Note2, secondaryNote: SecondaryNote, event: Event): void {
+    console.log(event);
+
+    if (
+      !this.dataService.editState &&
+      (event.target as HTMLElement).localName !== 'button'
+    ) {
+      console.log('asdjfasdf');
+
+      this.chapterService.wTagSelectMode = true;
+      this.chapterService.selectedSecondaryNote = secondaryNote;
+      // let verseSelected: Verse;
+
+      this.dataService.setEditMove(true, note, secondaryNote);
+    }
+
+    // this.dataService.chapter2.notes.forEach((chapterNote: Note2) => {
+    //   chapterNote.sn.forEach((sn: SecondaryNote) => {
+    //     if (sn !== secondaryNote) {
+    //       sn.disabled = true;
+    //     }
+    //   });
+    //  });
+    // this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+
+    //   paragraph.verses.forEach((verse: Verse) => {
+    //     if (verse.id !== `p${note.id.replace('note', '')}`) {
+    //       verse.classList = 'verse-disable';
+    //       verse.disabled = true;
+
+    //     } else {
+    //       verse.classList = '';
+    //       verseSelected = verse;
+    //       verse.disabled = false;
+    //     }
+    //   });
+
+    // });
+    // console.log(verseSelected);
+  }
+  disableEditMode(): void {
+    this.dataService.setEditMove(false, null, null);
   }
   notePhraseClick(secondaryNote: SecondaryNote) {
-    if (true) {
+    if (false) {
       let count = 0;
 
       // console.log(secondaryNote.id);

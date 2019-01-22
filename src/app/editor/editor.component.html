@@ -48,11 +48,12 @@
       id="{{ paragraph.id }}"
     >
       <span
-        class="verse {{verse.classList}}"
+        class="verse {{ verse.classList }}"
         (mouseup)="verseSelectionClick(verse)"
         [ngClass]="{
           'highlight-verse': verse.highlight,
-          'highlight-context': !verse.highlight && verse.context
+          'highlight-context': !verse.highlight && verse.context,
+          'verse-disable': verse.disabled
         }"
         id="{{ verse.id }}"
         *ngFor="
@@ -77,8 +78,7 @@
                 ></g>
               </ng-container>
             </ng-container>
-            <n
-            class="{{w[2]}}">{{ w[1] }}</n></w
+            <n class="{{ w[2] }}">{{ w[1] }}</n></w
           >
           <ng-container *ngIf="saveState.data.poetryVisible">
             <br *ngIf="w[0].includes('line-end')" />

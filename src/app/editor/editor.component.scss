@@ -23,7 +23,7 @@ body {
 
   w {
     &.select {
-      background-color: lightgrey;
+      background-color: yellow;
     }
     &.marker {
       font-style: italic;
@@ -79,7 +79,6 @@ body {
 
   #bodyBlock.hidden-paragraph {
     span {
-
       &.part,
       &.question,
       &.answer {

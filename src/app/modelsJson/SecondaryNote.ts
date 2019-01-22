@@ -5,6 +5,7 @@ export class SecondaryNote {
   // public iH: string = '';
   public t2 = '';
   public seNote: Array<[string, string, string, string]> = [];
+  public disabled = false;
 
   // constructor(element: Element) {
   //   this.className = element.className;

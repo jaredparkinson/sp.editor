@@ -48,6 +48,13 @@ body {
   }
 }
 
+.verse.verse-disable,
+note >div.note-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  user-select: none;
+}
+
 .note-superscript {
   .note-title {
     // .note-short-title {

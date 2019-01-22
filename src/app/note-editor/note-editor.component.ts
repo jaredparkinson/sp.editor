@@ -66,6 +66,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     secondaryNote: SecondaryNote,
     sn: [string, string, string, string],
   ) {
+    this.setUnderlining(secondaryNote);
     if (secondaryNote.id === '2018-09-15-15-14-47-28-t2') {
       secondaryNote.seNote[0][2] = '«&nbsp;ravi en vision&nbsp;»';
       secondaryNote.seNote[1][2] = `<span class=\"reference-label-phrasing\">&nbsp;</span><a class=\"scripture-ref\" href=\"#/1-kgs/18.11-12\">1&nbsp;R 18:11–12</a>; <a class=\"scripture-ref\" href=\"#/ezek/37.1\">Éz 37:1</a>; <a class=\"scripture-ref\" href=\"#/rev/17.3\">Ap 17:3</a>; <a class=\"scripture-ref\" href=\"#/rev/21.10\">21:10</a>; <a class=\"scripture-ref\" href=\"#/1-ne/11.19,29\">1&nbsp;Né 11:19, 29</a>; <a class=\"scripture-ref\" href=\"#/1-ne/14.30\">14:30</a>; <a class=\"scripture-ref\" href=\"#/1-ne/15.1\">15:1</a>; <a class=\"scripture-ref\" href=\"#/2-ne/4.25\">2&nbsp;Né 4:25</a>; <a class=\"scripture-ref\" href=\"#/alma/19.6\">Al 19:6</a>; <a class=\"scripture-ref\" href=\"#/alma/29.16\">29:16</a>; <a class=\"scripture-ref\" href=\"#/moses/6.64\">Moï 6:64</a>; see <a class=\"scripture-ref\" href=\"#/matt/4.1\">Mt 4:1</a>; TJS <a class=\"scripture-ref\" href=\"#/matt/4.5,8\">Mt 4:5, 8</a> (see Matthew verse notes); TJS <a class=\"scripture-ref\" href=\"#/luke/4.5,9\">Lu 4:5, 9</a> (see Luke verse notes); <a class=\"scripture-ref\" href=\"#/luke/4.29-30\">Lu 4:29–30</a>; <a class=\"scripture-ref\" href=\"#/hel/10.16-17\">Hél 10:16–17</a>`;
@@ -100,6 +101,36 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     }
 
     this.dataService.setEditMove(false, null, null);
+    this.verseSelectService.resetVerseSelect();
+  }
+  setUnderlining(secondaryNote: SecondaryNote): void {
+    const wTags = document.querySelectorAll('w.select');
+
+    console.log(wTags);
+
+    if (wTags) {
+      const verseId = wTags[0].parentElement.id;
+      console.log(verseId);
+      if (verseId) {
+        wTags.forEach((elem: Element) => {
+          const wTagId = elem.firstElementChild.className;
+
+          this.dataService.chapter2.paragraphs.forEach(
+            (paragraph: Paragraph) => {
+              paragraph.verses.forEach((verse: Verse) => {
+                if (verse.id === verseId.toString()) {
+                  verse.wTags2.forEach(wTag => {
+                    if (wTag[2] == wTagId) {
+                      wTag[3] = `${wTag[3]}${secondaryNote.id}`;
+                    }
+                  });
+                }
+              });
+            },
+          );
+        });
+      }
+    }
   }
 
   editNoteClick(note: Note2, secondaryNote: SecondaryNote, event: Event): void {

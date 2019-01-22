@@ -34,7 +34,7 @@ export class VerseSelectService {
           reject: (rejectValue: void) => void,
         ) => {
           this.resetVerseSelect();
-          resolve();
+          resolve(undefined);
         },
       );
     });

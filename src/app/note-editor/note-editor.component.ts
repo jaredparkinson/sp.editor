@@ -142,7 +142,6 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     ) {
       console.log('asdjfasdf');
 
-      this.chapterService.wTagSelectMode = true;
       this.chapterService.selectedSecondaryNote = secondaryNote;
       // let verseSelected: Verse;
 

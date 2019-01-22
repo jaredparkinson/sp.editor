@@ -61,7 +61,7 @@
                     *ngIf="!secondaryNote.disabled && dataService.editState"
                     class="edit-buttons"
                   >
-                    <button (click)="setNotePhraseText(sn)">
+                    <button (click)="setNotePhraseText(secondaryNote, sn)">
                       Set Text
                     </button>
                     <button (click)="disableEditMode()">

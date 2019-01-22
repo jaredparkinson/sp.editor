@@ -11,7 +11,7 @@ import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VerseSelectService {
   public halfNotes = false;
@@ -21,28 +21,35 @@ export class VerseSelectService {
     private helperService: HelperService,
     private navService: NavigationService,
     private dataService: DataService,
-    private stringService: StringService
+    private stringService: StringService,
   ) {}
   public noteVisibility: Map<string, boolean> = new Map<string, boolean>();
 
   public async resetVisibility() {
     await this.resetNoteVisibility().then(() => {
       // console.log(this.noteVisibility);
-
-      this.resetVerseSelect();
+      return new Promise<void>(
+        (
+          resolve: (resolveValue: void) => void,
+          reject: (rejectValue: void) => void,
+        ) => {
+          this.resetVerseSelect();
+          resolve();
+        },
+      );
     });
   }
   private async resetNoteVisibility(): Promise<void> {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         this.dataService.chapter2.notes.forEach((note: Note2) => {
           this.setNoteVisibility(note);
         });
         resolve(null);
-      }
+      },
     );
   }
 
@@ -89,7 +96,7 @@ export class VerseSelectService {
 
   private showSecondaryNote(
     note: Note2,
-    seNote: [string, string, string, string]
+    seNote: [string, string, string, string],
   ): boolean {
     let vis = true;
 
@@ -205,7 +212,7 @@ export class VerseSelectService {
     this.resetVerseSelect();
   }
   public toggleVerseSuperScripts(
-    toggle: boolean = !this.saveState.data.verseSuperScripts
+    toggle: boolean = !this.saveState.data.verseSuperScripts,
   ) {
     this.saveState.data.verseSuperScripts = toggle;
     // console.log(this.saveState.data.verseSuperScripts);
@@ -227,7 +234,7 @@ export class VerseSelectService {
 
       boolean,
       boolean
-    ] = null
+    ] = null,
   ) {
     this.resetNotes2();
     this.resetVerseSelect(wTag);
@@ -247,7 +254,7 @@ export class VerseSelectService {
       string[],
       boolean,
       boolean
-    ] = null
+    ] = null,
   ) {
     this.modifyWTags(
       (
@@ -263,7 +270,7 @@ export class VerseSelectService {
           string[],
           boolean,
           boolean
-        ]
+        ],
       ) => {
         if (wa !== wTag) {
           wa[7] = [];
@@ -277,24 +284,24 @@ export class VerseSelectService {
             this.createRefList(
               wa,
               this.saveState.data.translatorNotesVisible,
-              5
+              5,
             );
 
             if (wa[7].length !== 0) {
               wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
               wa[0] = this.stringService.removeAttribute(
                 wa[0],
-                'verse-select-1'
+                'verse-select-1',
               );
 
               wa[0] = this.stringService.removeAttribute(
                 wa[0],
-                'verse-select-2'
+                'verse-select-2',
               );
             }
           }
         }
-      }
+      },
     );
   }
 
@@ -313,7 +320,7 @@ export class VerseSelectService {
       boolean
     ],
     vis: boolean,
-    noteNumber: number
+    noteNumber: number,
   ) {
     (wa[noteNumber] as string).split(',').forEach(w => {
       if (w.trim() !== '' && this.noteVisibility.get(w)) {
@@ -345,8 +352,8 @@ export class VerseSelectService {
         string[],
         boolean,
         boolean
-      ]
-    ) => void
+      ],
+    ) => void,
   ) {
     this.dataService.chapter2.paragraphs.forEach(paragrah => {
       paragrah.verses.forEach(verse => {
@@ -377,7 +384,7 @@ export class VerseSelectService {
       boolean,
       boolean
     ],
-    verse: Verse
+    verse: Verse,
   ) {
     // console.log(w[3].split(','));
     this.halfNotes = false;
@@ -413,7 +420,7 @@ export class VerseSelectService {
       boolean,
       boolean
     ],
-    verse: Verse
+    verse: Verse,
   ) {
     this.resetVerseSelect();
     // console.log(w[7]);
@@ -437,7 +444,7 @@ export class VerseSelectService {
       string[],
       boolean,
       boolean
-    ]
+    ],
   ) {
     verse.wTags2.forEach(wr => {
       w[7].forEach(ref => {
@@ -467,7 +474,7 @@ export class VerseSelectService {
       boolean,
       boolean
     ],
-    resetVerse: boolean = true
+    resetVerse: boolean = true,
   ) {
     this.resetNotes2();
     if (wTag[7].length === 0) {
@@ -482,7 +489,7 @@ export class VerseSelectService {
     if (note) {
       (note.nativeElement as HTMLElement).classList.add('verse-select-1');
       (note.nativeElement as HTMLElement).scrollIntoView({
-        block: 'start'
+        block: 'start',
       });
 
       document.querySelector('footer').scrollBy(0, -10);
@@ -515,7 +522,7 @@ export class VerseSelectService {
       boolean,
       boolean
     ],
-    verse: Verse
+    verse: Verse,
   ) {
     if (this.helperService.getWidth() < 511.98) {
       // console.log(w);

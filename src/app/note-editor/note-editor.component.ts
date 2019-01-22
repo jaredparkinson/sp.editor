@@ -62,27 +62,44 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     }, 0);
   }
   ngOnInit() {}
-  setNotePhraseText(sn: [string, string, string, string]) {
-    console.log(sn);
+  setNotePhraseText(
+    secondaryNote: SecondaryNote,
+    sn: [string, string, string, string],
+  ) {
+    if (secondaryNote.id === '2018-09-15-15-14-47-28-t2') {
+      secondaryNote.seNote[0][2] = '«&nbsp;ravi en vision&nbsp;»';
+      secondaryNote.seNote[1][2] = `<span class=\"reference-label-phrasing\">&nbsp;</span><a class=\"scripture-ref\" href=\"#/1-kgs/18.11-12\">1&nbsp;R 18:11–12</a>; <a class=\"scripture-ref\" href=\"#/ezek/37.1\">Éz 37:1</a>; <a class=\"scripture-ref\" href=\"#/rev/17.3\">Ap 17:3</a>; <a class=\"scripture-ref\" href=\"#/rev/21.10\">21:10</a>; <a class=\"scripture-ref\" href=\"#/1-ne/11.19,29\">1&nbsp;Né 11:19, 29</a>; <a class=\"scripture-ref\" href=\"#/1-ne/14.30\">14:30</a>; <a class=\"scripture-ref\" href=\"#/1-ne/15.1\">15:1</a>; <a class=\"scripture-ref\" href=\"#/2-ne/4.25\">2&nbsp;Né 4:25</a>; <a class=\"scripture-ref\" href=\"#/alma/19.6\">Al 19:6</a>; <a class=\"scripture-ref\" href=\"#/alma/29.16\">29:16</a>; <a class=\"scripture-ref\" href=\"#/moses/6.64\">Moï 6:64</a>; see <a class=\"scripture-ref\" href=\"#/matt/4.1\">Mt 4:1</a>; TJS <a class=\"scripture-ref\" href=\"#/matt/4.5,8\">Mt 4:5, 8</a> (see Matthew verse notes); TJS <a class=\"scripture-ref\" href=\"#/luke/4.5,9\">Lu 4:5, 9</a> (see Luke verse notes); <a class=\"scripture-ref\" href=\"#/luke/4.29-30\">Lu 4:29–30</a>; <a class=\"scripture-ref\" href=\"#/hel/10.16-17\">Hél 10:16–17</a>`;
+    } else if (secondaryNote.id === '2018-09-15-15-14-47-82-t2') {
+      secondaryNote.seNote[0][2] = '«&nbsp;de voir les cieux s’ouvrir&nbsp;»';
+      secondaryNote.seNote[1][2] = `<span class=\"reference-label-phrasing\">&nbsp;</span><a class=\"scripture-ref\" href=\"#/ezek/1.1\">Éz 1:1</a>; <a class=\"scripture-ref\" href=\"#/matt/3.16\">Mt 3:16</a>; <a class=\"scripture-ref\" href=\"#/john/1.51\">Jn 1:51</a>; <a class=\"scripture-ref\" href=\"#/acts/7.55-56\">Ac 7:55–56</a>; <a class=\"scripture-ref\" href=\"#/1-ne/11.14,27,30\">1&nbsp;Né 11:14, 27, 30</a>; <a class=\"scripture-ref\" href=\"#/moses/7.3\">Moï 7:3</a>; <a class=\"scripture-ref\" href=\"#/js-h/1.43\">JS, H 1:43</a>; see also <a class=\"scripture-ref\" href=\"#/mal/3.10\">Mal 3:10</a>`;
+    } else if (secondaryNote.id === '2018-09-15-15-14-48-38-t2') {
+      secondaryNote.seNote[0][2] =
+        '«&nbsp;concours innombrable d’anges … louer leur Dieu&nbsp;»';
+      secondaryNote.seNote[1][2] = `<span class=\"reference-label-phrasing\">&nbsp;</span><a class=\"scripture-ref\" href=\"#/alma/36.22\">Al 36:22</a>`;
+    } else {
+      console.log(sn);
 
-    const wTags = document.querySelectorAll('w.select');
+      const wTags = document.querySelectorAll('w.select');
 
-    if (wTags) {
-      let notePhrase = '« ';
-      sn[2] = '';
-      wTags.forEach((elem: Element) => {
-        if (elem.textContent === 'louer') {
-          notePhrase = `${notePhrase} ... ${elem.textContent}`;
-        } else {
-          notePhrase = `${notePhrase}${elem.textContent}`;
+      if (wTags) {
+        let notePhrase = '« ';
+        sn[2] = '';
+        wTags.forEach((elem: Element) => {
+          if (elem.textContent === 'louer') {
+            notePhrase = `${notePhrase} ... ${elem.textContent}`;
+          } else {
+            notePhrase = `${notePhrase}${elem.textContent}`;
+          }
+        });
+
+        if (notePhrase[0] === ',') {
+          notePhrase = notePhrase.substring(1, notePhrase.length);
         }
-      });
-
-      if (notePhrase[0] === ',') {
-        notePhrase = notePhrase.substring(1, notePhrase.length);
+        sn[2] = `${notePhrase.trim()} »`;
       }
-      sn[2] = `${notePhrase.trim()} »`;
     }
+
+    this.dataService.setEditMove(false, null, null);
   }
 
   editNoteClick(note: Note2, secondaryNote: SecondaryNote, event: Event): void {

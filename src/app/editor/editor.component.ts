@@ -72,7 +72,7 @@ export class EditorComponent
         await this.chapterService.getChapter(chapter, '').then(() => {
           // this.chapterService.resetVerseSelect();
           this.verseSelectService.resetVisibility();
-          this.synchronizedScrolling();
+          // this.synchronizedScrolling();
         });
         // setTimeout(() => {
         //   if (this.saveState.data.verseSelect) {
@@ -81,32 +81,33 @@ export class EditorComponent
         // }, 1000);
       }
     });
+    setTimeout(() => {
+      this.synchronizedScrolling();
+    }, 500);
     this.wordSelection();
   }
   verseSelectionClick(verse: Verse): void {
     if (this.chapterService.wTagSelectMode) {
-    console.log(verse);
+      console.log(verse);
 
-    const selection = window.getSelection().getRangeAt(0);
+      const selection = window.getSelection().getRangeAt(0);
 
+      const selectedElements = selection.cloneContents();
 
-    const selectedElements = selection.cloneContents();
+      const nTags = selectedElements.querySelectorAll('n');
 
-    const nTags = selectedElements.querySelectorAll('n');
+      for (
+        let x = parseInt(nTags[0].className, 10) - 1;
+        x < parseInt(nTags[nTags.length - 1].className, 10);
+        x++
+      ) {
+        console.log(x);
 
-    for (let x = parseInt( nTags[0].className, 10) - 1;  x < parseInt( nTags[nTags.length - 1].className, 10); x++) {
-
-      console.log(x);
-
-
-
-      verse.wTags2[x][10] = true;
-
+        verse.wTags2[x][10] = true;
       }
     }
 
     window.getSelection().removeAllRanges();
-
   }
 
   getSuperScriptVisibility(

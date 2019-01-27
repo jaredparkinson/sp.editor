@@ -14,7 +14,7 @@ export class DataService {
   chapter2: Chapter2 = new Chapter2();
   constructor(private stringService: StringService) {}
 
-  public setEditMove(
+  public setEditMode(
     editState: boolean,
     note: Note2,
     secondaryNote: SecondaryNote,

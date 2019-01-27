@@ -1,5 +1,5 @@
 {
-  "productName": "SP Editor",
+  "productName": "sp_editor",
   "directories": {
     "output": "app-builds"
   },

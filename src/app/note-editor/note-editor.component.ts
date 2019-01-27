@@ -100,7 +100,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.dataService.setEditMove(false, null, null);
+    this.dataService.setEditMode(false, null, null);
     this.verseSelectService.resetVerseSelect();
   }
   setUnderlining(secondaryNote: SecondaryNote): void {
@@ -121,7 +121,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
                 if (verse.id === verseId.toString()) {
                   verse.wTags2.forEach(wTag => {
                     if (wTag[2] == wTagId) {
-                      wTag[3] = `${wTag[3]}${secondaryNote.id}`;
+                      wTag[3] = `${wTag[3]},${secondaryNote.id}`;
                     }
                   });
                 }
@@ -145,7 +145,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       this.chapterService.selectedSecondaryNote = secondaryNote;
       // let verseSelected: Verse;
 
-      this.dataService.setEditMove(true, note, secondaryNote);
+      this.dataService.setEditMode(true, note, secondaryNote);
     }
 
     // this.dataService.chapter2.notes.forEach((chapterNote: Note2) => {
@@ -173,7 +173,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     // console.log(verseSelected);
   }
   disableEditMode(): void {
-    this.dataService.setEditMove(false, null, null);
+    this.dataService.setEditMode(false, null, null);
   }
   notePhraseClick(secondaryNote: SecondaryNote) {
     if (false) {

@@ -19,6 +19,7 @@ import { VerseSelectService } from './verse-select.service';
 export class ChapterService {
   wTags: QueryList<ElementRef>;
   public selectedSecondaryNote: SecondaryNote;
+  public url: string;
   constructor(
     private navService: NavigationService,
     private httpClient: HttpClient,
@@ -26,7 +27,7 @@ export class ChapterService {
     private saveState: SaveStateService,
     private helperService: HelperService,
     private verseSelectService: VerseSelectService,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.fs = (window as any).fs;
   }
@@ -49,7 +50,7 @@ export class ChapterService {
 
   public async getChapter(
     book: string,
-    chapter: string
+    chapter: string,
     // synchronizedScrolling: () => Promise<void>
   ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -88,7 +89,7 @@ export class ChapterService {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         setTimeout(() => {
           if (this.verseNums.length === 0) {
@@ -104,7 +105,7 @@ export class ChapterService {
           }
         });
         resolve(null);
-      }
+      },
     );
   }
 
@@ -112,7 +113,7 @@ export class ChapterService {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         lodash.forEach(this.dataService.chapter2.paragraphs, paragraph => {
           lodash.forEach(paragraph.verses, verse => {
@@ -127,24 +128,24 @@ export class ChapterService {
           });
         });
         resolve(null);
-      }
+      },
     );
   }
 
   private getChapterFS(
     book: string,
-    vSplit: string[]
+    vSplit: string[],
     // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         const url2 =
           this.navService.urlBuilder(
             book.toLowerCase(),
-            vSplit[0].toLowerCase()
+            vSplit[0].toLowerCase(),
           ) + '.json';
 
         this.fs.readFile(
@@ -152,53 +153,55 @@ export class ChapterService {
           'utf8',
           (err, data) => {
             this.setChapter(data);
-          }
+          },
         );
         resolve(null);
-      }
+      },
     );
   }
 
   private async getChapterWeb(
     book: string,
-    vSplit: string[]
+    vSplit: string[],
     // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<void>(
       async (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         const saved = false; // await localForage.getItem(book + '\\' + vSplit[0]);
 
         if (saved) {
           this.setChapter(saved as string);
         } else {
+          this.url =
+            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
           const url2 =
             'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
 
           this.httpClient
             .get(url2, {
               observe: 'body',
-              responseType: 'text'
+              responseType: 'text',
             })
             .subscribe(data => {
               this.setChapter(data);
               resolve(null);
             });
         }
-      }
+      },
     );
   }
 
   private async setChapter(
-    data: string
+    data: string,
     // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<void>(
       async (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void
+        reject: (rejectValue: void) => void,
       ) => {
         this.dataService.chapter2 = new Chapter2();
         this.dataService.chapter2 = JSON.parse(data) as Chapter2;
@@ -209,7 +212,7 @@ export class ChapterService {
             resolve(null);
           });
         });
-      }
+      },
     );
   }
 

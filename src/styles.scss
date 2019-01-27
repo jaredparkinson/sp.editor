@@ -49,7 +49,7 @@ body {
 }
 
 .verse.verse-disable,
-note >div.note-disabled {
+note > div.note-disabled {
   pointer-events: none;
   opacity: 0.4;
   user-select: none;
@@ -146,8 +146,8 @@ body.find {
 }
 
 .left-pane nav,
-.right-pane footer, .right-pane-editor footer 
-{
+.right-pane footer,
+.right-pane-editor footer {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -156,17 +156,20 @@ body.find {
 }
 
 .body {
+  background-color: #fffcf7;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
-.right-pane footer, .right-pane-editor footer {
+.right-pane footer,
+.right-pane-editor footer {
   overflow-y: scroll; // position: fixed;
   height: 100vh;
 }
 
 .left-pane nav,
-.right-pane footer, .right-pane-editor footer {
+.right-pane footer,
+.right-pane-editor footer {
   // overflow-y: scroll;
   position: fixed;
   height: 100vh;
@@ -269,12 +272,14 @@ body.find {
 }
 
 @media only screen and (max-width: 499.98px) {
-  .right-pane footer,.right-pane-editor footer,
+  .right-pane footer,
+  .right-pane-editor footer,
   .left-pane nav {
     width: $vw11;
   }
 
-  .right-pane footer, .right-pane-editor footer {
+  .right-pane footer,
+  .right-pane-editor footer {
     float: right;
     position: absolute;
     right: 0px;
@@ -299,7 +304,8 @@ body.find {
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1023.98px) {
-  .right-pane footer, .right-pane-editor footer {
+  .right-pane footer,
+  .right-pane-editor footer {
     width: $vw6;
   }
 
@@ -320,7 +326,8 @@ body.find {
   .body .router-outlet {
     grid-template-columns: 0 100vw 0; //$leftPaneWidth $bodyBlockWidth $rightPaneWidth;
 
-    .right-pane footer, .right-pane-editor footer {
+    .right-pane footer,
+    .right-pane-editor footer {
       float: right;
       position: absolute;
       right: 0px;
@@ -369,7 +376,8 @@ body.find {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
 
-  .right-pane footer, .right-pane-editor footer {
+  .right-pane footer,
+  .right-pane-editor footer {
     width: 23vw;
   }
 
@@ -449,7 +457,8 @@ body.find {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
 
-  .right-pane footer, .right-pane-editor footer {
+  .right-pane footer,
+  .right-pane-editor footer {
     width: $rightPaneWidth;
   }
 

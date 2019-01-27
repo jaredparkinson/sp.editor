@@ -20,13 +20,12 @@ $font-stack: PalatinoldsLat-Roman, serif;
   z-index: 100;
 
   note {
-    
     > div > div.original-note-marker {
       display: none;
     }
-    > div > *.note-phrase {
-      margin-left: 1em !important;
-    }
+    // > div > *.note-phrase {
+    //   margin-left: 1em !important;
+    // }
 
     // margin-left: 1em;
     display: grid;

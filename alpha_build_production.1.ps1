@@ -23,15 +23,3 @@ ssh -t jared@192.168.1.150 'docker kill scriptures_project_v3_alpha'
 
 ssh -t jared@192.168.1.150 'docker run -d -e "VIRTUAL_HOST=alpha.scripturesproject.review" -e "LETSENCRYPT_HOST=alpha.scripturesproject.review" -e "LETSENCRYPT_EMAIL=jared@parkinson.im" -p 11000 -it --rm --name scriptures_project_v3_alpha scriptures_project_v3_alpha'
 
-Move-Item .\src\assets\scriptures\ ..
-
-# yarn run electron:windows:beta
-
-yarn electron:windows:alpha
-
-Move-Item ..\scriptures\ .\src\assets\
-
-
-Rename-Item (ls .\app-builds\sp_edi*.exe)[(ls .\app-builds\sp_edi*.exe).Count - 1].FullName ("sp.project_" + (Get-Date).ToString("yyyyMMddmmFFFFFF") + ".exe")
-$path = (ls .\app-builds\sp.project*.exe)[(ls .\app-builds\sp.project*.exe).Count - 1].FullName
-Move-Item $path ~\OneDrive\scripture_file_share\scriptures_project\

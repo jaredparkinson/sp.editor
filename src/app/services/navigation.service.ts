@@ -36,7 +36,7 @@ export class NavigationService {
     private httpClient: HttpClient,
     private saveState: SaveStateService,
     private helperService: HelperService,
-    private router: Router
+    private router: Router,
   ) {
     this.initNavigation();
     // this.fs = (window as any).fs;
@@ -58,7 +58,7 @@ export class NavigationService {
     }
 
     this.router.navigateByUrl(
-      previousSibling.getAttribute('href').replace('#/', '')
+      previousSibling.getAttribute('href').replace('#/', ''),
     );
   }
 
@@ -72,7 +72,7 @@ export class NavigationService {
       : node.nextElementSibling;
 
     this.router.navigateByUrl(
-      nextSibling.getAttribute('href').replace('#/', '')
+      nextSibling.getAttribute('href').replace('#/', ''),
     );
   }
   btnPoetryPress(): Promise<boolean> {
@@ -181,7 +181,7 @@ export class NavigationService {
   }
   public getNavigation2() {
     return this.httpClient.get('assets/nav/nav.json', {
-      responseType: 'text'
+      responseType: 'text',
     });
   }
   public getChapter(book: string, chapter: string): Observable<string> {
@@ -355,6 +355,8 @@ export class NavigationService {
   }
 
   private initNavigation() {
+    console.log('nav');
+
     this.httpClient
       .get('assets/nav/nav2.html', { observe: 'body', responseType: 'text' })
       .subscribe(data => {
@@ -366,7 +368,7 @@ export class NavigationService {
     this.httpClient
       .get('assets/nav/nav.html', {
         observe: 'body',
-        responseType: 'text'
+        responseType: 'text',
       })
       .subscribe(data => {
         const parser = new DOMParser();
@@ -385,7 +387,7 @@ export class NavigationService {
 
             const tempChapters: Chapter[] = [];
             let chapters = lodash.toArray<HTMLElement>(
-              book.querySelectorAll('ul li a')
+              book.querySelectorAll('ul li a'),
             );
 
             if (!chapters) {
@@ -397,7 +399,7 @@ export class NavigationService {
                 chapter
                   .querySelector('.title')
                   .innerHTML.replace('&nbsp;', ' '),
-                chapter.getAttribute('href').replace('.html', '')
+                chapter.getAttribute('href').replace('.html', ''),
               );
 
               tempChapters.push(tempChapter);

@@ -32,7 +32,7 @@ export class DataService {
   private disableEditMode(): void {
     this.editState = false;
     this.chapter2.notes.forEach((chapterNote: Note2) => {
-      chapterNote.sn.forEach((sn: SecondaryNote) => {
+      chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
         sn.disabled = false;
       });
     });
@@ -69,7 +69,7 @@ export class DataService {
 
   private enableEditMode(note: Note2, secondaryNote: SecondaryNote) {
     this.chapter2.notes.forEach((chapterNote: Note2) => {
-      chapterNote.sn.forEach((sn: SecondaryNote) => {
+      chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
         if (sn !== secondaryNote) {
           sn.disabled = true;
         }

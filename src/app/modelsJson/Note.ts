@@ -3,12 +3,12 @@
 import { SecondaryNote } from './SecondaryNote';
 
 export class Note2 {
-  public id = '';
-  public nT = ''; // noteTitle
-  public nST = ''; // NoteShortTitle
-  public cn = ''; // ClassName
-  public o = false; // Override
-  public v = false; // Visible
-  public btn = false;
-  public sn: SecondaryNote[] = [];
+  public id: string = '';
+  public noteTitle: string = ''; // noteTitle
+  public noteShortTitle: string = ''; // NoteShortTitle
+  public classList: string = ''; // ClassName
+  public override: boolean = false; // Override
+  public visible: boolean = false; // Visible
+  public plusbutton: boolean = false;
+  public secondaryNotes: SecondaryNote[] = [];
 }

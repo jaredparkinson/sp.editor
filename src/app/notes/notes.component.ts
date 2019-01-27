@@ -129,16 +129,16 @@ export class NotesComponent implements OnInit, AfterViewInit {
   noteButtonClick(note: Note2) {
     console.log(note);
 
-    switch (note.o) {
+    switch (note.override) {
       case true: {
-        note.v = !note.v;
+        note.visible = !note.visible;
         break;
       }
 
       default: {
-        note.o = true;
+        note.override = true;
 
-        note.v = !this.saveState.data.secondaryNotesVisible;
+        note.visible = !this.saveState.data.secondaryNotesVisible;
         break;
       }
     }
@@ -191,7 +191,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
   ): boolean {
     let vis = true;
 
-    if (seNote[1].includes('-2') && note.o && !note.v) {
+    if (seNote[1].includes('-2') && note.override && !note.visible) {
       return false;
     }
     if (seNote[2].includes('reference-label')) {
@@ -274,6 +274,9 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
 
   private getNoteVisibility(note: Note2) {
-    return !this.saveState.data.secondaryNotesVisible || (note.o && !note.v);
+    return (
+      !this.saveState.data.secondaryNotesVisible ||
+      (note.override && !note.visible)
+    );
   }
 }

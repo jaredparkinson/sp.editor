@@ -28,19 +28,19 @@
       <!-- <div class="half-notes-margin"></div> -->
       <note
         [ngClass]="{
-          'secondary-override-off': !note.o
+          'secondary-override-off': !note.override
         }"
         *ngFor="let note of dataService.chapter2.notes; trackBy: trackById"
         id="{{ note.id }}"
-        class="{{ note.cn }}"
+        class="{{ note.classList }}"
       >
-        <p class="note-title">{{ note.nT }}</p>
-        <p class="note-short-title">{{ note.nST }}</p>
-        <ng-container *ngFor="let secondaryNote of note.sn">
+        <p class="note-title">{{ note.noteTitle }}</p>
+        <p class="note-short-title">{{ note.noteShortTitle }}</p>
+        <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
           <div
             [ngClass]="{
-              'tier-2-note-hide': !note.v && note.o,
-              'tier-2-note-show': note.v && note.o
+              'tier-2-note-hide': !note.visible && note.override,
+              'tier-2-note-show': note.visible && note.override
             }"
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
@@ -77,12 +77,12 @@
           </div>
         </ng-container>
         <button
-          *ngIf="note.btn"
+          *ngIf="note.plusButton"
           class="note-button note-button-buttons all-buttons"
           [ngClass]="{
             ' note-button-toggled-on':
-              (!note.o && saveState.data.secondaryNotesVisible) ||
-              (note.o && note.v)
+              (!note.override && saveState.data.secondaryNotesVisible) ||
+              (note.override && note.visible)
           }"
           id="note-button-{{ note.id }}"
           (click)="noteButtonClick(note)"

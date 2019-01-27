@@ -54,7 +54,7 @@ export class VerseSelectService {
   }
 
   public setNoteVisibility(note: Note2) {
-    note.sn.forEach((secondaryNote: SecondaryNote) => {
+    note.secondaryNotes.forEach((secondaryNote: SecondaryNote) => {
       let vis = false;
       secondaryNote.seNote.forEach(seNote => {
         if (this.showSecondaryNote(note, seNote)) {
@@ -100,7 +100,7 @@ export class VerseSelectService {
   ): boolean {
     let vis = true;
 
-    if (seNote[1].includes('-2') && note.o && !note.v) {
+    if (seNote[1].includes('-2') && note.override && !note.visible) {
       return false;
     }
     if (
@@ -201,7 +201,10 @@ export class VerseSelectService {
     return vis;
   }
   private getNoteVisibility(note: Note2) {
-    return !this.saveState.data.secondaryNotesVisible || (note.o && !note.v);
+    return (
+      !this.saveState.data.secondaryNotesVisible ||
+      (note.override && !note.visible)
+    );
   }
 
   public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {

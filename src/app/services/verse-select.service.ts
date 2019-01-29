@@ -330,7 +330,7 @@ export class VerseSelectService {
             }
           },
         );
-        resolve();
+        resolve(null);
       },
     );
   }

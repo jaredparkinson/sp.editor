@@ -6,12 +6,12 @@ import {
   ElementRef,
   OnInit,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 
@@ -28,7 +28,7 @@ import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
-  styleUrls: ['./bodyblock.component.scss']
+  styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
@@ -49,32 +49,44 @@ export class BodyblockComponent
     public saveState: SaveStateService,
     public stringService: StringService,
     public verseSelectService: VerseSelectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngAfterContentInit(): void {}
   ngOnInit() {
     this.initSyncScrolling();
-    this.route.params.subscribe(async params => {
+    this.route.params.subscribe(params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
+
+      console.log(params);
 
       const book = params['book'];
       const chapter = params['chapter'];
 
       if (book !== undefined && chapter !== undefined) {
-        await this.chapterService.getChapter(book, chapter).then(async () => {
-          // console.log(this.synchronizedScrolling());
-          // this.synchronizedScrolling();
-          // this.chapterService.resetVerseSelect();
-          await this.verseSelectService.resetVisibility();
-          this.synchronizedScrolling();
-        });
+        this.chapterService
+          .getChapter(book, chapter)
+          .then(async (value: void) => {
+            console.log(value);
+
+            // console.log(this.synchronizedScrolling());
+            // this.synchronizedScrolling();
+            // this.chapterService.resetVerseSelect();
+            this.verseSelectService.resetVisibility().then(() => {
+              setTimeout(() => {
+                this.synchronizedScrolling();
+              }, 50);
+            });
+          });
       } else if (book === undefined && chapter !== undefined) {
-        await this.chapterService.getChapter(chapter, '').then(() => {
+        this.chapterService.getChapter(chapter, '').then(() => {
           // this.chapterService.resetVerseSelect();
-          this.verseSelectService.resetVisibility();
-          this.synchronizedScrolling();
+          this.verseSelectService.resetVisibility().then(() => {
+            setTimeout(() => {
+              this.synchronizedScrolling();
+            }, 50);
+          });
         });
         // setTimeout(() => {
         //   if (this.saveState.data.verseSelect) {
@@ -98,7 +110,7 @@ export class BodyblockComponent
       number,
       string[],
       boolean
-    ]
+    ],
   ): boolean {
     console.log(w);
 
@@ -124,7 +136,7 @@ export class BodyblockComponent
       string[],
       boolean,
       boolean
-    ]
+    ],
   ) {
     let wClass = w[0];
 
@@ -169,7 +181,7 @@ export class BodyblockComponent
       string[],
       string[],
       boolean
-    ]
+    ],
   ) {
     return wTag[2];
   }
@@ -189,7 +201,7 @@ export class BodyblockComponent
       boolean
     ],
     verse: Verse,
-    event: Event
+    event: Event,
   ) {
     if (!this.saveState.data.rightPanePin) {
     }
@@ -232,7 +244,7 @@ export class BodyblockComponent
   async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
     console.log(
-      'sync scrolling 2 ' + document.querySelectorAll('.verse').length
+      'sync scrolling 2 ' + document.querySelectorAll('.verse').length,
     );
 
     console.log('sync scrolling ' + this.verses.length);

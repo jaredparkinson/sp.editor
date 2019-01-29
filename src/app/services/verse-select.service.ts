@@ -33,8 +33,11 @@ export class VerseSelectService {
           resolve: (resolveValue: void) => void,
           reject: (rejectValue: void) => void,
         ) => {
-          this.resetVerseSelect();
-          resolve(undefined);
+          this.resetVerseSelect().then(() => {
+            console.log('asdfiojaoijvnbviuoasdjf');
+
+            resolve(undefined);
+          });
         },
       );
     });
@@ -258,52 +261,76 @@ export class VerseSelectService {
       boolean,
       boolean
     ] = null,
-  ) {
-    this.modifyWTags(
+  ): Promise<void> {
+    return new Promise<void>(
       (
-        wa: [
-          string,
-          string,
-          string,
-          string,
-          string,
-          string,
-          number,
-          string[],
-          string[],
-          boolean,
-          boolean
-        ],
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void,
       ) => {
-        if (wa !== wTag) {
-          wa[7] = [];
+        this.modifyWTags(
+          (
+            wa: [
+              string,
+              string,
+              string,
+              string,
+              string,
+              string,
+              number,
+              string[],
+              string[],
+              boolean,
+              boolean
+            ],
+          ) => {
+            if (wa !== wTag) {
+              wa[7] = [];
 
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-0');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'note-select-1');
-          wa[0] = this.stringService.removeAttribute(wa[0], 'verse-select-1');
-          if (true) {
-            this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
-            this.createRefList(wa, this.saveState.data.englishNotesVisible, 4);
-            this.createRefList(
-              wa,
-              this.saveState.data.translatorNotesVisible,
-              5,
-            );
-
-            if (wa[7].length !== 0) {
-              wa[0] = this.stringService.addAttribute(wa[0], 'verse-select-0');
+              wa[0] = this.stringService.removeAttribute(
+                wa[0],
+                'verse-select-0',
+              );
+              wa[0] = this.stringService.removeAttribute(
+                wa[0],
+                'note-select-1',
+              );
               wa[0] = this.stringService.removeAttribute(
                 wa[0],
                 'verse-select-1',
               );
+              if (true) {
+                this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
+                this.createRefList(
+                  wa,
+                  this.saveState.data.englishNotesVisible,
+                  4,
+                );
+                this.createRefList(
+                  wa,
+                  this.saveState.data.translatorNotesVisible,
+                  5,
+                );
 
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'verse-select-2',
-              );
+                if (wa[7].length !== 0) {
+                  wa[0] = this.stringService.addAttribute(
+                    wa[0],
+                    'verse-select-0',
+                  );
+                  wa[0] = this.stringService.removeAttribute(
+                    wa[0],
+                    'verse-select-1',
+                  );
+
+                  wa[0] = this.stringService.removeAttribute(
+                    wa[0],
+                    'verse-select-2',
+                  );
+                }
+              }
             }
-          }
-        }
+          },
+        );
+        resolve();
       },
     );
   }

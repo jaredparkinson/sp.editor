@@ -75,11 +75,11 @@ export class ChapterService {
 
       if (this.fs) {
         this.getChapterFS(book, vSplit).then(() => {
-          resolve(null);
+          resolve(undefined);
         });
       } else {
         this.getChapterWeb(book, vSplit).then(() => {
-          resolve(null);
+          resolve(undefined);
         });
       }
     });
@@ -103,8 +103,10 @@ export class ChapterService {
               .toString();
             document.getElementById('p' + focusVerse).scrollIntoView();
           }
+          console.log('verseFocus');
+
+          resolve(null);
         });
-        resolve(null);
       },
     );
   }
@@ -152,10 +154,11 @@ export class ChapterService {
           'c:/ScripturesProject/' + url2,
           'utf8',
           (err, data) => {
-            this.setChapter(data);
+            this.setChapter(data).then(() => {
+              resolve(null);
+            });
           },
         );
-        resolve(null);
       },
     );
   }
@@ -186,8 +189,9 @@ export class ChapterService {
               responseType: 'text',
             })
             .subscribe(data => {
-              this.setChapter(data);
-              resolve(null);
+              this.setChapter(data).then(() => {
+                resolve(null);
+              });
             });
         }
       },

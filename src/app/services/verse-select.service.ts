@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import * as lodash from 'lodash';
-import { Note2 } from '../modelsJson/Note';
+import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from './chapter.service';
@@ -9,6 +9,8 @@ import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
+import { W } from '../modelsJson/WTag';
+import { Paragraph } from '../modelsJson/Paragraph';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +50,7 @@ export class VerseSelectService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.dataService.chapter2.notes.forEach((note: Note2) => {
+        this.dataService.chapter2.notes.forEach((note: Note) => {
           this.setNoteVisibility(note);
         });
         resolve(null);
@@ -56,7 +58,7 @@ export class VerseSelectService {
     );
   }
 
-  public setNoteVisibility(note: Note2) {
+  public setNoteVisibility(note: Note) {
     note.secondaryNotes.forEach((secondaryNote: SecondaryNote) => {
       let vis = false;
       secondaryNote.seNote.forEach(seNote => {
@@ -98,7 +100,7 @@ export class VerseSelectService {
   }
 
   private showSecondaryNote(
-    note: Note2,
+    note: Note,
     seNote: [string, string, string, string],
   ): boolean {
     let vis = true;
@@ -203,7 +205,7 @@ export class VerseSelectService {
     // vis = false;
     return vis;
   }
-  private getNoteVisibility(note: Note2) {
+  private getNoteVisibility(note: Note) {
     return (
       !this.saveState.data.secondaryNotesVisible ||
       (note.override && !note.visible)
@@ -226,169 +228,73 @@ export class VerseSelectService {
     this.resetVerseSelect();
   }
 
-  public resetVerseNotes(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-
-      boolean,
-      boolean
-    ] = null,
-  ) {
+  public resetVerseNotes(wTag: W = null) {
     this.resetNotes2();
     this.resetVerseSelect(wTag);
   }
 
-  public resetVerseSelect(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-
-      string[],
-      boolean,
-      boolean
-    ] = null,
-  ): Promise<void> {
+  public resetVerseSelect(wTag: W = null): Promise<void> {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.modifyWTags(
-          (
-            wa: [
-              string,
-              string,
-              string,
-              string,
-              string,
-              string,
-              number,
-              string[],
-              string[],
-              boolean,
-              boolean
-            ],
-          ) => {
-            if (wa !== wTag) {
-              wa[7] = [];
+        this.modifyWTags((wa: W) => {
+          if (wa !== wTag) {
+            wa.visibleRefs = [];
 
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'verse-select-0',
-              );
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'note-select-1',
-              );
-              wa[0] = this.stringService.removeAttribute(
-                wa[0],
-                'verse-select-1',
-              );
-              if (true) {
-                this.createRefList(wa, this.saveState.data.newNotesVisible, 3);
-                this.createRefList(
-                  wa,
-                  this.saveState.data.englishNotesVisible,
-                  4,
+            wa.classList = this.stringService.removeAttributeArray(
+              wa.classList,
+              'verse-select-0',
+            );
+            wa.classList = this.stringService.removeAttributeArray(
+              wa.classList,
+              'note-select-1',
+            );
+            wa.classList = this.stringService.removeAttributeArray(
+              wa.classList,
+              'verse-select-1',
+            );
+
+            if (true) {
+              this.createRefList(wa);
+
+              if (wa.visibleRefs.length !== 0) {
+                wa.classList = this.stringService.addAttributeArray(
+                  wa.classList,
+                  'verse-select-0',
                 );
-                this.createRefList(
-                  wa,
-                  this.saveState.data.translatorNotesVisible,
-                  5,
+                wa.classList = this.stringService.removeAttributeArray(
+                  wa.classList,
+                  'verse-select-1',
                 );
 
-                if (wa[7].length !== 0) {
-                  wa[0] = this.stringService.addAttribute(
-                    wa[0],
-                    'verse-select-0',
-                  );
-                  wa[0] = this.stringService.removeAttribute(
-                    wa[0],
-                    'verse-select-1',
-                  );
-
-                  wa[0] = this.stringService.removeAttribute(
-                    wa[0],
-                    'verse-select-2',
-                  );
-                }
+                wa.classList = this.stringService.removeAttributeArray(
+                  wa.classList,
+                  'verse-select-2',
+                );
               }
             }
-          },
-        );
+          }
+        });
         resolve(null);
       },
     );
   }
 
-  private createRefList(
-    wa: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    vis: boolean,
-    noteNumber: number,
-  ) {
-    (wa[noteNumber] as string).split(',').forEach(w => {
+  private createRefList(wa: W) {
+    wa.refs.forEach(w => {
       if (w.trim() !== '' && this.noteVisibility.get(w)) {
-        wa[7].push(w);
-        // if (
-        //   (w.includes('-t2') && this.saveState.data.secondaryNotesVisible) ||
-        //   !w.includes('-t2')
-        // ) {
-        //   wa[7].push(w);
-        // }
+        wa.visibleRefs.push(w);
       }
     });
-    wa[9] = wa[7].length > 1;
-    if (vis) {
-    }
   }
 
-  public modifyWTags(
-    callBack: (
-      w: [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        number,
-        string[],
-        string[],
-        boolean,
-        boolean
-      ],
-    ) => void,
-  ) {
-    this.dataService.chapter2.paragraphs.forEach(paragrah => {
-      paragrah.verses.forEach(verse => {
-        verse.wTags2.forEach(wa => {
-          callBack(wa);
+  public modifyWTags(callBack: (wa: W) => void) {
+    this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+      paragraph.verses.forEach((verse: Verse) => {
+        verse.wTags.forEach((w: W) => {
+          callBack(w);
         });
       });
     });
@@ -400,120 +306,70 @@ export class VerseSelectService {
     });
   }
 
-  public wTagClick(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    verse: Verse,
-  ) {
+  public wTagClick(w: W, verse: Verse) {
     // console.log(w[3].split(','));
     this.halfNotes = false;
     if (
-      w[7].length === 0 &&
-      !this.stringService.hasAttribute(w[0], 'verse-select-2') &&
-      !this.stringService.hasAttribute(w[0], 'verse-select-1')
+      w.refs.length === 0 &&
+      !this.stringService.hasAttributeArray(w.classList, 'verse-select-2') &&
+      !this.stringService.hasAttributeArray(w.classList, 'verse-select-1')
     ) {
       return;
     }
-    if (this.stringService.hasAttribute(w[0], 'verse-select-0')) {
+    if (this.stringService.hasAttributeArray(w.classList, 'verse-select-0')) {
       this.firstClick(w, verse);
-    } else if (this.stringService.hasAttribute(w[0], 'verse-select-1')) {
+    } else if (
+      this.stringService.hasAttributeArray(w.classList, 'verse-select-1')
+    ) {
       this.resetVerseNotes();
       this.openHalfNotes(w, verse);
-    } else if (this.stringService.hasAttribute(w[0], 'verse-select-2')) {
+    } else if (
+      this.stringService.hasAttributeArray(w.classList, 'verse-select-2')
+    ) {
       this.selectNote(verse, w);
     }
     // if (this.saveState.data.verseSelect) {
     // }
   }
-  private firstClick(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    verse: Verse,
-  ) {
+  private firstClick(w: W, verse: Verse) {
     this.resetVerseSelect();
-    // console.log(w[7]);
 
     this.highlightRelatedWords(verse, w);
     this.selectNote(verse, w, false);
   }
 
-  private highlightRelatedWords(
-    verse: Verse,
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-
-      string[],
-      boolean,
-      boolean
-    ],
-  ) {
-    verse.wTags2.forEach(wr => {
-      w[7].forEach(ref => {
-        if (wr[7].includes(ref) && wr[7].length >= 1) {
-          wr[0] = this.stringService.removeAttribute(wr[0], 'verse-select-0');
-          wr[0] =
-            wr[7].length > 1
-              ? this.stringService.addAttribute(wr[0], 'verse-select-2')
-              : this.stringService.addAttribute(wr[0], 'verse-select-1');
+  private highlightRelatedWords(verse: Verse, w: W) {
+    verse.wTags.forEach(wr => {
+      w.visibleRefs.forEach((ref: string) => {
+        if (wr.visibleRefs.includes(ref) && wr.visibleRefs.length >= 1) {
+          wr.classList = this.stringService.removeAttributeArray(
+            wr.classList,
+            'verse-select-0',
+          );
+          wr.classList =
+            wr.classList.length > 1
+              ? this.stringService.addAttributeArray(
+                  wr.classList,
+                  'verse-select-2',
+                )
+              : this.stringService.addAttributeArray(
+                  wr.classList,
+                  'verse-select-1',
+                );
         }
       });
     });
   }
 
-  private selectNote(
-    verse: Verse,
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    resetVerse: boolean = true,
-  ) {
+  private selectNote(verse: Verse, wTag: W, resetVerse: boolean = true) {
     this.resetNotes2();
-    if (wTag[7].length === 0) {
+    if (wTag.refs.length === 0) {
       this.resetVerseNotes();
       this.openHalfNotes(wTag, verse);
       return;
     }
     const note = lodash.find(this.notes, (n: ElementRef) => {
-      return (n.nativeElement as HTMLElement).id === wTag[7][0];
+      return (n.nativeElement as HTMLElement).id === wTag.refs[0];
     });
 
     if (note) {
@@ -529,7 +385,7 @@ export class VerseSelectService {
         this.highlightRelatedWords(verse, wTag);
       }
 
-      wTag[7].shift();
+      wTag.refs.shift();
       this.openHalfNotes(wTag, verse);
       this.navService.rightPaneToggle = true;
     } else {
@@ -538,30 +394,8 @@ export class VerseSelectService {
     }
   }
 
-  private openHalfNotes(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    verse: Verse,
-  ) {
+  private openHalfNotes(w: W, verse: Verse) {
     if (this.helperService.getWidth() < 511.98) {
-      // console.log(w);
-
-      // console.log(
-      //   document
-      //     .querySelector('#' + verse.id + ' >:nth-child(' + w[2] + ')')
-      //     .scrollIntoView()
-      // );
       document.getElementById(verse.id).scrollIntoView();
       this.halfNotes = true;
     }

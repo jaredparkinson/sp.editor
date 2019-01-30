@@ -1,8 +1,8 @@
-import { Chapter } from './Chapter';
+import { NavigationChapter } from './Chapter';
 
 export class Book {
   public bookName: string;
-  public chapters: Chapter[];
+  public chapters: NavigationChapter[];
   public showChildren = false;
   constructor(book: HTMLElement) {
     this.bookName = book

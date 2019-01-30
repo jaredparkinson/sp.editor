@@ -1,18 +1,17 @@
-import { Note2 } from './Note';
+import { Note } from './Note';
 import { Paragraph } from './Paragraph';
 
 export class Chapter2 {
-  public pageUrl = '';
+  public pageUrl: string = '';
 
-  public title = '';
+  public title: string = '';
   public header: string;
-  public notes: Note2[] = [];
+  public notes: Note[] = [];
   public paragraphs: Paragraph[] = [];
 
-  public bodyBlock = '';
-  public bb = false;
-  // public newWTagRefs: [string, string, string, string][][] = [];
-  // public ogWTagRefs: [string, string, string, string][][] = [];
-  // public tcWTagRefs: [string, string, string, string][][] = [];
-  private hiddenParagraph = '.hidden-paragraph';
+  public bodyBlock: string = '';
+  public bb: boolean = false;
+  public noteVisibility: [string, boolean][] = [];
+
+  private hiddenParagraph: string = '.hidden-paragraph';
 }

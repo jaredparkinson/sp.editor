@@ -2,7 +2,7 @@
 
 import { SecondaryNote } from './SecondaryNote';
 
-export class Note2 {
+export class Note {
   public id: string = '';
   public noteTitle: string = ''; // noteTitle
   public noteShortTitle: string = ''; // NoteShortTitle

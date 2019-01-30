@@ -17,8 +17,7 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
-import { Note } from '../models/Note';
-import { Note2 } from '../modelsJson/Note';
+import { Note } from '../modelsJson/Note';
 import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
@@ -135,7 +134,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
-  editNoteClick(note: Note2, secondaryNote: SecondaryNote, event: Event): void {
+  editNoteClick(note: Note, secondaryNote: SecondaryNote, event: Event): void {
     console.log(event);
 
     if (
@@ -199,33 +198,20 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       }
       this.verseSelectService.resetVerseNotes();
 
-      this.verseSelectService.modifyWTags(
-        (
-          w: [
-            string,
-            string,
-            string,
-            string,
-            string,
-            string,
-            number,
-            string[],
-            string[],
-            boolean,
-            boolean
-          ],
-        ) => {
-          w[0] = this.stringService.removeAttribute(w[0], 'note-select-1');
-          if (lodash.includes(w[7], secondaryNote.id)) {
-            // console.log(w);
+      this.verseSelectService.modifyWTags((w: W) => {
+        w.classList = this.stringService.removeAttributeArray(
+          w.classList,
+          'note-select-1',
+        );
 
-            console.log(w[7]);
-
-            w[0] = this.stringService.addAttribute(w[0], 'note-select-1');
-            count++;
-          }
-        },
-      );
+        if (w.classList.includes(secondaryNote.id)) {
+          w.classList = this.stringService.addAttributeArray(
+            w.classList,
+            'note-select-1',
+          );
+          count++;
+        }
+      });
 
       if (count > 0) {
         console.log();
@@ -243,7 +229,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
-  noteButtonClick(note: Note2) {
+  noteButtonClick(note: Note) {
     console.log(note);
 
     switch (note.override) {
@@ -303,7 +289,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     return vis;
   }
   showSecondaryNote(
-    note: Note2,
+    note: Note,
     seNote: [string, string, string, string],
   ): boolean {
     let vis = true;
@@ -390,7 +376,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     return vis;
   }
 
-  private getNoteVisibility(note: Note2) {
+  private getNoteVisibility(note: Note) {
     return (
       !this.saveState.data.secondaryNotesVisible ||
       (note.override && !note.visible)

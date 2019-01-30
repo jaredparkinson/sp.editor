@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Chapter2 } from '../modelsJson/Chapter';
-import { Note2 } from '../modelsJson/Note';
+import { Note } from '../modelsJson/Note';
 import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { StringService } from './string.service';
+import * as lodash from 'lodash';
+import { W } from '../modelsJson/WTag';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class DataService {
 
   public setEditMode(
     editState: boolean,
-    note: Note2,
+    note: Note,
     secondaryNote: SecondaryNote,
   ): void {
     this.editState = editState;
@@ -31,7 +33,7 @@ export class DataService {
   }
   private disableEditMode(): void {
     this.editState = false;
-    this.chapter2.notes.forEach((chapterNote: Note2) => {
+    this.chapter2.notes.forEach((chapterNote: Note) => {
       chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
         sn.disabled = false;
       });
@@ -44,31 +46,19 @@ export class DataService {
         //   'verse-disable',
         // );
 
-        verse.wTags2.forEach(
-          (
-            w: [
-              string,
-              string,
-              string,
-              string,
-              string,
-              string,
-              number,
-              string[],
-              string[],
-              boolean,
-              boolean
-            ],
-          ) => {
-            w[10] = false;
-          },
+        verse.classList = this.stringService.removeAttributeArray(
+          verse.classList,
+          'verse-disable',
         );
+        verse.wTags.forEach((w: W) => {
+          w.selected = false;
+        });
       });
     });
   }
 
-  private enableEditMode(note: Note2, secondaryNote: SecondaryNote) {
-    this.chapter2.notes.forEach((chapterNote: Note2) => {
+  private enableEditMode(note: Note, secondaryNote: SecondaryNote) {
+    this.chapter2.notes.forEach((chapterNote: Note) => {
       chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
         if (sn !== secondaryNote) {
           sn.disabled = true;
@@ -86,7 +76,7 @@ export class DataService {
 
           verse.disabled = true;
         } else {
-          verse.classList = '';
+          verse.classList = [];
           // verseSelected = verse;
           verse.disabled = false;
         }

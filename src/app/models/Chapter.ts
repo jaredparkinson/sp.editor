@@ -1,4 +1,4 @@
-export class Chapter {
+export class NavigationChapter {
   public name: string;
   public link: string;
   constructor(name: string, link: string) {

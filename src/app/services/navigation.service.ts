@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import * as lodash from 'lodash';
 import { Book } from '../models/Book';
-import { Chapter } from '../models/Chapter';
+import { NavigationChapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
 
@@ -385,7 +385,7 @@ export class NavigationService {
           lodash.each(testament.querySelectorAll('div>ul>li'), book => {
             const tempBook = new Book(book as HTMLElement);
 
-            const tempChapters: Chapter[] = [];
+            const tempChapters: NavigationChapter[] = [];
             let chapters = lodash.toArray<HTMLElement>(
               book.querySelectorAll('ul li a'),
             );
@@ -395,7 +395,7 @@ export class NavigationService {
             }
 
             lodash.each(chapters, chapter => {
-              const tempChapter = new Chapter(
+              const tempChapter = new NavigationChapter(
                 chapter
                   .querySelector('.title')
                   .innerHTML.replace('&nbsp;', ' '),

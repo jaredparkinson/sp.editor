@@ -24,6 +24,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { W } from '../modelsJson/WTag';
 
 @Component({
   selector: 'app-bodyblock',
@@ -124,35 +125,37 @@ export class BodyblockComponent
     return false;
   }
 
-  getWColor(
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      boolean,
-      boolean
-    ],
-  ) {
-    let wClass = w[0];
+  getWColor(w: W) {
+    let wClass = w.classList.toString().replace(',', ' ');
+    let engVis = true;
+    let newVis = true;
+    let tcVis = true;
 
-    if (w[0].includes('verse-select')) {
+    if (w.classList.includes('verse-select')) {
       if (this.saveState.data.verseSuperScripts) {
-        if (w[4].trim().length > 0 && this.saveState.data.englishNotesVisible) {
+        w.refs.forEach(ref => {
+          const engRegex = new RegExp(`\d{9}`);
+          const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
+          const tcRegex = new RegExp(`tc.*`);
+
+          if (this.verseSelectService.noteVisibility.get(ref)) {
+            if (engRegex.exec(ref)) {
+              engVis = true;
+            } else if (newRegex.exec(ref)) {
+              newVis = true;
+            } else if (tcRegex.exec(ref)) {
+              tcVis = true;
+            }
+          }
+        });
+
+        if (engVis) {
           wClass = this.stringService.addAttribute(wClass, 'eng-color');
-        } else if (
-          w[5].trim().length > 0 &&
-          this.saveState.data.translatorNotesVisible
-        ) {
+        }
+        if (newVis) {
           wClass = this.stringService.addAttribute(wClass, 'tc-color');
-        } else if (
-          w[3].trim().length > 0 &&
-          this.saveState.data.newNotesVisible
-        ) {
+        }
+        if (tcVis) {
           wClass = this.stringService.addAttribute(wClass, 'new-color');
         }
       }
@@ -186,23 +189,7 @@ export class BodyblockComponent
     return wTag[2];
   }
 
-  wTagClick(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    verse: Verse,
-    event: Event,
-  ) {
+  wTagClick(wTag: W, verse: Verse, event: Event) {
     if (!this.saveState.data.rightPanePin) {
     }
     this.saveState.data.notesPopover = true;

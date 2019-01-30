@@ -61,10 +61,10 @@
         "
         #verses
       >
-        <ng-container *ngFor="let w of verse.wTags2; trackBy: wTagTrackBy">
+        <ng-container *ngFor="let w of verse.wTags; trackBy: wTagTrackBy">
           <w
             class="{{ getWColor(w) }}"
-            [ngClass]="{ wRef: w[9] }"
+            [ngClass]="{ wRef: visibleRefs.Length > 0 }"
             (click)="wTagClick(w, verse, $event)"
             #wTags
           >

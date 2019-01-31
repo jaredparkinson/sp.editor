@@ -16,6 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Verse } from '../modelsJson/Verse';
+import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
@@ -103,7 +104,7 @@ export class EditorComponent
       ) {
         console.log(x);
 
-        verse.wTags2[x][10] = true;
+        verse.wTags[x].selected = true;
       }
     }
 
@@ -199,23 +200,7 @@ export class EditorComponent
     return wTag[2];
   }
 
-  wTagClick(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean,
-      boolean
-    ],
-    verse: Verse,
-    event: Event,
-  ) {
+  wTagClick(wTag: W, verse: Verse, event: Event) {
     if (!this.saveState.data.rightPanePin) {
     }
     this.saveState.data.notesPopover = true;

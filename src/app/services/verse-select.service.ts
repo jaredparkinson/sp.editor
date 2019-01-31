@@ -1,16 +1,16 @@
 import { ElementRef, Injectable } from '@angular/core';
 import * as lodash from 'lodash';
 import { Note } from '../modelsJson/Note';
+import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
+import { W } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
-import { W } from '../modelsJson/WTag';
-import { Paragraph } from '../modelsJson/Paragraph';
 
 @Injectable({
   providedIn: 'root',
@@ -229,6 +229,8 @@ export class VerseSelectService {
   }
 
   public resetVerseNotes(wTag: W = null) {
+    console.log('g gvgvgbmnh');
+
     this.resetNotes2();
     this.resetVerseSelect(wTag);
   }
@@ -274,18 +276,23 @@ export class VerseSelectService {
                   'verse-select-2',
                 );
               }
+              // console.log(wa.classList);
             }
           }
+          resolve(null);
         });
-        resolve(null);
       },
     );
   }
 
   private createRefList(wa: W) {
+    wa.wRef = false;
     wa.refs.forEach(w => {
       if (w.trim() !== '' && this.noteVisibility.get(w)) {
+        // console.log(w);
+
         wa.visibleRefs.push(w);
+        wa.wRef = true;
       }
     });
   }
@@ -385,7 +392,7 @@ export class VerseSelectService {
         this.highlightRelatedWords(verse, wTag);
       }
 
-      wTag.refs.shift();
+      wTag.visibleRefs.shift();
       this.openHalfNotes(wTag, verse);
       this.navService.rightPaneToggle = true;
     } else {

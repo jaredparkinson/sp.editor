@@ -64,22 +64,22 @@
         <ng-container *ngFor="let w of verse.wTags; trackBy: wTagTrackBy">
           <w
             class="{{ getWColor(w) }}"
-            [ngClass]="{ wRef: visibleRefs.Length > 0 }"
+            [ngClass]="{ wRef: w.wRef }"
             (click)="wTagClick(w, verse, $event)"
             #wTags
           >
             <ng-container *ngIf="saveState.data.verseSuperScripts">
-              <ng-container *ngFor="let item of w[8]">
+              <ng-container *ngFor="let item of w.superscripts">
                 <g
                   *ngIf="getSuperScriptVisibility(item, w)"
                   class="{{ item }}"
                 ></g>
               </ng-container>
             </ng-container>
-            <n>{{ w[1] }}</n></w
+            <n>{{ w.innerHtml }}</n></w
           >
           <ng-container *ngIf="saveState.data.poetryVisible">
-            <br *ngIf="w[0].includes('line-end')" />
+            <br *ngIf="w.classList.includes('line-end')" />
           </ng-container>
         </ng-container>
       </span>

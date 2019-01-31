@@ -26,13 +26,18 @@ export class StringService {
   }
   public addAttributeArray(target: string[], word: string) {
     if (!target.includes(word)) {
+      console.log(word);
+
       target.push(word);
+      // console.log(target);
     }
     return target;
   }
   public removeAttributeArray(target: string[], word: string) {
     return lodash.remove(target, (c: string) => {
-      return c === word;
+      // console.log(c);
+
+      return c !== word;
     });
   }
 }

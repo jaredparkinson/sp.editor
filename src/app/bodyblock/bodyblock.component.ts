@@ -18,13 +18,13 @@ import * as lodash from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
+import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
-import { W } from '../modelsJson/WTag';
 
 @Component({
   selector: 'app-bodyblock',
@@ -160,6 +160,7 @@ export class BodyblockComponent
         }
       }
     }
+    // console.log(wClass);
 
     return wClass;
   }
@@ -172,21 +173,8 @@ export class BodyblockComponent
     return paragraph.id;
   }
 
-  wTagTrackBy(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean
-    ],
-  ) {
-    return wTag[2];
+  wTagTrackBy(wTag: W) {
+    return wTag.num;
   }
 
   wTagClick(wTag: W, verse: Verse, event: Event) {

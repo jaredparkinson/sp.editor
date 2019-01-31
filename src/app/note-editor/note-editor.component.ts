@@ -27,6 +27,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { W } from '../modelsJson/WTag';
 
 @Component({
   selector: 'app-note-editor',
@@ -120,9 +121,11 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
             (paragraph: Paragraph) => {
               paragraph.verses.forEach((verse: Verse) => {
                 if (verse.id === verseId.toString()) {
-                  verse.wTags2.forEach(wTag => {
-                    if (wTag[2] == wTagId) {
-                      wTag[3] = `${wTag[3]},${secondaryNote.id}`;
+
+                  verse.wTags.forEach(wTag => {
+                    if (wTag.num == wTagId) {
+                      // wTag[3] = `${wTag[3]},${secondaryNote.id}`;
+                      wTag.refs = this.stringService.addAttributeArray(wTag.refs, secondaryNote.id);
                     }
                   });
                 }

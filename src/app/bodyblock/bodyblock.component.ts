@@ -126,7 +126,16 @@ export class BodyblockComponent
   }
 
   getWColor(w: W) {
-    let wClass = w.classList.toString().replace(',', ' ');
+    let wClass = w.classList.toString().replace(/\,/g, ' ');
+    // .replace(',', ' ');
+    // wClass = wClass.replace(',', ' ');
+
+    if (
+      w.classList.includes('verse-select-1') &&
+      w.classList.includes('verse-select-2')
+    ) {
+      console.log(wClass);
+    }
     let engVis = true;
     let newVis = true;
     let tcVis = true;

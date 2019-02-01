@@ -36,7 +36,7 @@ export class VerseSelectService {
           reject: (rejectValue: void) => void,
         ) => {
           this.resetVerseSelect().then(() => {
-            console.log('asdfiojaoijvnbviuoasdjf');
+            // console.log('asdfiojaoijvnbviuoasdjf');
 
             resolve(undefined);
           });
@@ -229,7 +229,7 @@ export class VerseSelectService {
   }
 
   public resetVerseNotes(wTag: W = null) {
-    console.log('g gvgvgbmnh');
+    // console.log('g gvgvgbmnh');
 
     this.resetNotes2();
     this.resetVerseSelect(wTag);
@@ -279,8 +279,8 @@ export class VerseSelectService {
               // console.log(wa.classList);
             }
           }
-          resolve(null);
         });
+        resolve(null);
       },
     );
   }
@@ -292,9 +292,11 @@ export class VerseSelectService {
         // console.log(w);
 
         wa.visibleRefs.push(w);
-        wa.wRef = true;
       }
     });
+    if (wa.visibleRefs.length > 1) {
+      wa.wRef = true;
+    }
   }
 
   public modifyWTags(callBack: (wa: W) => void) {
@@ -339,10 +341,10 @@ export class VerseSelectService {
     // }
   }
   private firstClick(w: W, verse: Verse) {
-    this.resetVerseSelect();
-
-    this.highlightRelatedWords(verse, w);
-    this.selectNote(verse, w, false);
+    this.resetVerseSelect().then(() => {
+      this.highlightRelatedWords(verse, w);
+      this.selectNote(verse, w, false);
+    });
   }
 
   private highlightRelatedWords(verse: Verse, w: W) {
@@ -354,7 +356,7 @@ export class VerseSelectService {
             'verse-select-0',
           );
           wr.classList =
-            wr.classList.length > 1
+            wr.visibleRefs.length > 1
               ? this.stringService.addAttributeArray(
                   wr.classList,
                   'verse-select-2',
@@ -376,7 +378,7 @@ export class VerseSelectService {
       return;
     }
     const note = lodash.find(this.notes, (n: ElementRef) => {
-      return (n.nativeElement as HTMLElement).id === wTag.refs[0];
+      return (n.nativeElement as HTMLElement).id === wTag.visibleRefs[0];
     });
 
     if (note) {

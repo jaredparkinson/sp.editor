@@ -26,7 +26,7 @@ export class StringService {
   }
   public addAttributeArray(target: string[], word: string) {
     if (!target.includes(word)) {
-      console.log(word);
+      // console.log(word);
 
       target.push(word);
       // console.log(target);

@@ -29,15 +29,12 @@ export class VerseSelectService {
 
   public async resetVisibility() {
     await this.resetNoteVisibility().then(() => {
-      // console.log(this.noteVisibility);
       return new Promise<void>(
         (
           resolve: (resolveValue: void) => void,
           reject: (rejectValue: void) => void,
         ) => {
           this.resetVerseSelect().then(() => {
-            // console.log('asdfiojaoijvnbviuoasdjf');
-
             resolve(undefined);
           });
         },
@@ -64,7 +61,6 @@ export class VerseSelectService {
       secondaryNote.seNote.forEach(seNote => {
         if (this.showSecondaryNote(note, seNote)) {
           vis = true;
-          // console.log(`${secondaryNote.id}, ${seNote}`);
         }
       });
       secondaryNote.cn.split(' ').forEach(c => {
@@ -92,8 +88,6 @@ export class VerseSelectService {
           }
         }
       });
-      // vis = false;
-      // console.log(vis);
 
       this.noteVisibility.set(secondaryNote.id, vis);
     });
@@ -103,9 +97,16 @@ export class VerseSelectService {
     note: Note,
     seNote: [string, string, string, string],
   ): boolean {
+    const engRegex = new RegExp(`\d{9}`);
+    const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
+    const tcRegex = new RegExp(`tc.*`);
+
     let vis = true;
 
-    if (seNote[1].includes('-2') && note.override && !note.visible) {
+    if (
+      seNote[1].includes('-2') &&
+      !this.saveState.data.secondaryNotesVisible
+    ) {
       return false;
     }
     if (
@@ -153,68 +154,25 @@ export class VerseSelectService {
           seNote[1].includes('reference-label-gs')) &&
           !this.saveState.data.refGS)
       ) {
-        // console.log('gtcrd');
-        // console.log(seNote[2].includes('reference-label-archaic'));
-
         return false;
       }
     }
     seNote[1].split(' ').forEach(c => {
-      switch (c) {
-        case 'note-phrase-eng-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-eng-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-phrase-tc-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-tc-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-phrase-new-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-new-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        default: {
-          vis = vis;
+      if (c.includes('-t2')) {
+        if (!this.getNoteVisibility(note)) {
+          vis = false;
         }
       }
     });
-    // vis = false;
+
     return vis;
   }
   private getNoteVisibility(note: Note) {
-    return (
-      !this.saveState.data.secondaryNotesVisible ||
-      (note.override && !note.visible)
-    );
+    return !this.saveState.data.secondaryNotesVisible;
   }
 
   public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
     this.saveState.data.verseSelect = toggle;
-    // console.log(toggle);
 
     this.saveState.save();
     this.resetVerseSelect();
@@ -223,14 +181,12 @@ export class VerseSelectService {
     toggle: boolean = !this.saveState.data.verseSuperScripts,
   ) {
     this.saveState.data.verseSuperScripts = toggle;
-    // console.log(this.saveState.data.verseSuperScripts);
+
     this.saveState.save();
     this.resetVerseSelect();
   }
 
   public resetVerseNotes(wTag: W = null) {
-    // console.log('g gvgvgbmnh');
-
     this.resetNotes2();
     this.resetVerseSelect(wTag);
   }
@@ -276,7 +232,6 @@ export class VerseSelectService {
                   'verse-select-2',
                 );
               }
-              // console.log(wa.classList);
             }
           }
         });
@@ -289,8 +244,6 @@ export class VerseSelectService {
     wa.wRef = false;
     wa.refs.forEach(w => {
       if (w.trim() !== '' && this.noteVisibility.get(w)) {
-        // console.log(w);
-
         wa.visibleRefs.push(w);
       }
     });
@@ -316,7 +269,6 @@ export class VerseSelectService {
   }
 
   public wTagClick(w: W, verse: Verse) {
-    // console.log(w[3].split(','));
     this.halfNotes = false;
     if (
       w.refs.length === 0 &&
@@ -337,8 +289,6 @@ export class VerseSelectService {
     ) {
       this.selectNote(verse, w);
     }
-    // if (this.saveState.data.verseSelect) {
-    // }
   }
   private firstClick(w: W, verse: Verse) {
     this.resetVerseSelect().then(() => {

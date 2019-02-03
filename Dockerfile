@@ -1,9 +1,9 @@
-FROM mhart/alpine-node as node-angular-cli
+FROM mhart/alpine-node:10.15.1 as node-angular-cli
 WORKDIR /app
 COPY package.json /app
-RUN npm install
+RUN yarn 
 COPY . /app
-RUN npm run build:web
+RUN yarn build:web
 
 
 FROM mhart/alpine-node

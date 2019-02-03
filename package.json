@@ -1,6 +1,6 @@
 {
   "name": "sp-editor",
-  "version": "3.42.117",
+  "version": "3.42.118",
   "description": "sp-project version 3",
   "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
@@ -69,6 +69,7 @@
     "path": "^0.12.7",
     "rxjs": "^6.3.3",
     "stream": "^0.0.2",
+    "terser": "^3.14.1",
     "tslint-config-prettier": "^1.14.0",
     "tslint-microsoft-contrib": "^5.1.0"
   },

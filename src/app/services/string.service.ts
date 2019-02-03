@@ -40,4 +40,8 @@ export class StringService {
       return c !== word;
     });
   }
+
+  public arrayToString(array: string[]): string {
+    return array.toString().replace(/\,/g, ' ');
+  }
 }

@@ -76,19 +76,6 @@
             </ng-container>
           </div>
         </ng-container>
-        <button
-          *ngIf="note.plusButton"
-          class="note-button note-button-buttons all-buttons"
-          [ngClass]="{
-            ' note-button-toggled-on':
-              (!note.override && saveState.data.secondaryNotesVisible) ||
-              (note.override && note.visible)
-          }"
-          id="note-button-{{ note.id }}"
-          (click)="noteButtonClick(note)"
-        >
-          +
-        </button>
       </note>
 
       <div id="study-notes-whitespace" class="study-notes-whitespace"></div>

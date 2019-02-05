@@ -1,13 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
-
-import * as benchmark from 'benchmark';
-import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { Verse } from '../modelsJson/Verse';
 import { DataService } from './data.service';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
@@ -184,11 +180,13 @@ export class ChapterService {
             'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
 
           this.httpClient
-            .get(url2, {
+            .get('http://127.0.0.1:5984/sp.project/heb-1', {
               observe: 'body',
               responseType: 'text',
             })
             .subscribe(data => {
+              console.log(data);
+
               this.setChapter(data).then(() => {
                 resolve(null);
               });

@@ -42,7 +42,6 @@ export class BodyblockComponent
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
-    // public activatedRoute: ActivatedRoute,
     public sanitizer: DomSanitizer,
     public chapterService: ChapterService,
     public dataService: DataService,
@@ -71,9 +70,6 @@ export class BodyblockComponent
           .then(async (value: void) => {
             console.log(value);
 
-            // console.log(this.synchronizedScrolling());
-            // this.synchronizedScrolling();
-            // this.chapterService.resetVerseSelect();
             this.verseSelectService.resetVisibility().then(() => {
               setTimeout(() => {
                 this.synchronizedScrolling();
@@ -82,18 +78,12 @@ export class BodyblockComponent
           });
       } else if (book === undefined && chapter !== undefined) {
         this.chapterService.getChapter(chapter, '').then(() => {
-          // this.chapterService.resetVerseSelect();
           this.verseSelectService.resetVisibility().then(() => {
             setTimeout(() => {
               this.synchronizedScrolling();
             }, 50);
           });
         });
-        // setTimeout(() => {
-        //   if (this.saveState.data.verseSelect) {
-        //     this.chapterService.resetVerseSelect();
-        //   }
-        // }, 1000);
       }
     });
     this.wordSelection();
@@ -127,8 +117,6 @@ export class BodyblockComponent
 
   getWColor(w: W) {
     let wClass = w.classList.toString().replace(/\,/g, ' ');
-    // .replace(',', ' ');
-    // wClass = wClass.replace(',', ' ');
 
     if (
       w.classList.includes('verse-select-1') &&
@@ -169,7 +157,6 @@ export class BodyblockComponent
         }
       }
     }
-    // console.log(wClass);
 
     return wClass;
   }
@@ -196,21 +183,7 @@ export class BodyblockComponent
     this.verseSelectService.wTagClick(wTag, verse);
   }
 
-  async ngAfterViewInit() {
-    // this.verses.changes.subscribe(() => {
-    //   setTimeout(async () => {
-    //     this.chapterService.verses = this.verses.toArray();
-    //     await this.synchronizedScrolling().catch(err => {
-    //       console.log('failed');
-    //     });
-    //   }, 100);
-    // });
-    // this.verses.changes.subscribe(() => {
-    //   setTimeout(() => {
-    //     this.chapterService.wTags = this.wTags.toArray();
-    //   }, 100);
-    // });
-  }
+  async ngAfterViewInit() {}
   onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(async () => {
@@ -220,11 +193,8 @@ export class BodyblockComponent
         await this.synchronizedScrolling();
       });
     }, 50);
-    // this.ngZone.runOutsideAngular();
   }
-  // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
-  //   return Array.prototype.slice.call(list) as Element[];
-  // }
+
   async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
     console.log(
@@ -264,12 +234,9 @@ export class BodyblockComponent
       const top = element.getBoundingClientRect().top;
       const height = element.getBoundingClientRect().height;
 
-      // console.log('Top: ' + top + ' height: ' + height + ' start: ' + start);
-
       const start = 35;
       if (top + height > start) {
         this.scrollNotesTop();
-        // console.log('test gojbvhgv');
       } else {
         this.scrollNotesBottom();
       }
@@ -287,19 +254,7 @@ export class BodyblockComponent
   private scrollNotesTop() {
     this.chapterService.scrollIntoView = document.querySelector('note');
     this.chapterService.scrollIntoView.scrollIntoView();
-    // scrollIntoView;
   }
 
-  private initSyncScrolling() {
-    // this.ngZone.runOutsideAngular(() => {
-    //   document.getElementById('appBodyBlock').addEventListener('wheel', () => {
-    //     this.onScroll();
-    //   });
-    //   document
-    //     .getElementById('appBodyBlock')
-    //     .addEventListener('touchend', () => {
-    //       this.onScroll();
-    //     });
-    // });
-  }
+  private initSyncScrolling() {}
 }

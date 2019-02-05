@@ -38,40 +38,42 @@
         <p class="note-short-title">{{ note.noteShortTitle }}</p>
         <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
           <div
-            [ngClass]="{
-              'tier-2-note-hide': !note.visible && note.override,
-              'tier-2-note-show': note.visible && note.override
-            }"
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
-            id="{{ secondaryNote.id }}"
             *ngIf="showNote(secondaryNote)"
             #notes
           >
-            <ng-container *ngFor="let sn of secondaryNote.seNote">
-              <ng-container *ngIf="showSecondaryNote(note, sn)">
+            <p
+              (click)="this.notePhraseClick(secondaryNote)"
+              class="{{
+                this.stringService.arrayToString(
+                  secondaryNote.notePhrase.classList
+                )
+              }}"
+            >
+              <span
+                class="note-superscript"
+                *ngIf="saveState.data.verseSuperScripts"
+                >{{ secondaryNote.notePhrase.superscripts }}
+              </span>
+              <span
+                [innerHTML]="
+                  sanitizer.bypassSecurityTrustHtml(
+                    secondaryNote.notePhrase.text
+                  )
+                "
+              ></span>
+            </p>
+            <ng-container *ngFor="let sn of secondaryNote.noteRefs">
+              <ng-container *ngIf="sn.visible">
                 <p
-                  *ngIf="sn[1].trim().includes('note-phrase'); else noteref"
-                  (click)="this.notePhraseClick(secondaryNote)"
-                  class="{{ sn[1] }}"
-                  [id]="sn[0]"
+                  class="{{ this.stringService.arrayToString(sn.classList) }}"
+                  [id]="sn.id"
                 >
                   <span
-                    class="note-superscript"
-                    *ngIf="saveState.data.verseSuperScripts"
-                    >{{ sn[3] }}
-                  </span>
-                  <span
-                    [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
+                    [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn.text)"
                   ></span>
                 </p>
-                <ng-template #noteref>
-                  <p class="{{ sn[1] }}" [id]="sn[0]">
-                    <span
-                      [innerHTML]="sanitizer.bypassSecurityTrustHtml(sn[2])"
-                    ></span>
-                  </p>
-                </ng-template>
               </ng-container>
             </ng-container>
           </div>

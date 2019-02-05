@@ -19,13 +19,13 @@ import {
 import * as lodash from 'lodash';
 import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
+import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
-import { W } from '../modelsJson/WTag';
 
 @Component({
   selector: 'app-notes',
@@ -178,7 +178,10 @@ export class NotesComponent implements OnInit, AfterViewInit {
   ): boolean {
     let vis = true;
 
-    if (seNote[1].includes('-2') && note.override && !note.visible) {
+    if (
+      seNote[1].includes('-2') &&
+      !this.saveState.data.secondaryNotesVisible
+    ) {
       return false;
     }
     if (seNote[2].includes('reference-label')) {

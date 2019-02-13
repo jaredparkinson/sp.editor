@@ -72,16 +72,9 @@ export class ChapterService {
       //   console.log(a);
       this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
       this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-
-      if (this.fs) {
-        this.getChapterFS(book, vSplit).then(() => {
-          resolve(undefined);
-        });
-      } else {
-        this.getChapterWeb(book, vSplit).then(() => {
-          resolve(undefined);
-        });
-      }
+      this.getChapterWeb(book, vSplit).then(() => {
+        resolve(undefined);
+      });
     });
   }
 
@@ -179,9 +172,13 @@ export class ChapterService {
           this.setChapter(saved as string);
         } else {
           this.url =
-            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/main/' +
+            this.navService.urlBuilder(book, vSplit[0]) +
+            '.json';
           const url2 =
-            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/main/' +
+            this.navService.urlBuilder(book, vSplit[0]) +
+            '.json';
 
           this.httpClient
             .get(url2, {

@@ -30,7 +30,7 @@
         [ngClass]="{
           'secondary-override-off': !note.override
         }"
-        *ngFor="let note of dataService.chapter2.notes; trackBy: trackById"
+        *ngFor="let note of editService.chapter2.notes; trackBy: trackById"
         id="{{ note.id }}"
         class="{{ note.classList }}"
       >
@@ -58,7 +58,7 @@
                   [id]="sn[0]"
                 >
                   <span
-                    *ngIf="!secondaryNote.disabled && dataService.editState"
+                    *ngIf="!secondaryNote.disabled && editService.editState"
                     class="edit-buttons"
                   >
                     <button (click)="setNotePhraseText(secondaryNote, sn)">

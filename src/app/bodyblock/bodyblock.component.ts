@@ -20,7 +20,7 @@ import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
@@ -44,7 +44,7 @@ export class BodyblockComponent
     public httpClient: HttpClient,
     public sanitizer: DomSanitizer,
     public chapterService: ChapterService,
-    public dataService: DataService,
+    public editService: EditService,
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,

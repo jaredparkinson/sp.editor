@@ -3,7 +3,7 @@ import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { DownloadService } from '../services/download.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -18,11 +18,11 @@ export class SettingsComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     public chapterService: ChapterService,
-    public dataService: DataService
+    public editService: EditService
   ) {}
 
   ngOnInit() {
-    this.dataService.chapter2 = new Chapter2();
+    this.editService.chapter2 = new Chapter2();
     this.navServices.notesSettings = false;
   }
 

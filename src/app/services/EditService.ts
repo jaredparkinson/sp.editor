@@ -4,30 +4,25 @@ import { Note } from '../modelsJson/Note';
 import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
-import { StringService } from './string.service';
-import * as lodash from 'lodash';
 import { W } from '../modelsJson/WTag';
-
+import { StringService } from './string.service';
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class EditService {
   public editState = false;
   chapter2: Chapter2 = new Chapter2();
   constructor(private stringService: StringService) {}
-
   public setEditMode(
     editState: boolean,
     note: Note,
     secondaryNote: SecondaryNote,
   ): void {
     this.editState = editState;
-
     if (this.editState) {
       this.enableEditMode(note, secondaryNote);
     } else {
       console.log(this.editState);
-
       this.disableEditMode();
     }
   }
@@ -45,7 +40,6 @@ export class DataService {
         //   verse.classList,
         //   'verse-disable',
         // );
-
         verse.classList = this.stringService.removeAttributeArray(
           verse.classList,
           'verse-disable',
@@ -56,7 +50,6 @@ export class DataService {
       });
     });
   }
-
   private enableEditMode(note: Note, secondaryNote: SecondaryNote) {
     this.chapter2.notes.forEach((chapterNote: Note) => {
       chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
@@ -73,7 +66,6 @@ export class DataService {
           //   'verse-disable',
           // );
           // console.log(verse.classList);
-
           verse.disabled = true;
         } else {
           verse.classList = [];

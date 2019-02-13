@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
@@ -19,7 +19,7 @@ export class NoteSettingsComponent implements OnInit {
     public navServices: NavigationService,
     public verseSelectService: VerseSelectService,
     private router: Router,
-    public dataService: DataService,
+    public editService: EditService,
     public chapterService: ChapterService,
     public httpClient: HttpClient,
   ) {}
@@ -38,7 +38,7 @@ export class NoteSettingsComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url.includes('edit')) {
-      // const saveData = JSON.stringify(this.dataService.chapter2);
+      // const saveData = JSON.stringify(this.editService.chapter2);
 
       // // this.httpClient.put()
       // this.httpClient.post(this.chapterService.url, saveData);

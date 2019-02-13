@@ -18,7 +18,7 @@ import * as lodash from 'lodash';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
@@ -43,7 +43,7 @@ export class EditorComponent
     // public activatedRoute: ActivatedRoute,
     public sanitizer: DomSanitizer,
     public chapterService: ChapterService,
-    public dataService: DataService,
+    public editService: EditService,
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,
@@ -88,7 +88,7 @@ export class EditorComponent
     this.wordSelection();
   }
   verseSelectionClick(verse: Verse): void {
-    if (this.dataService.editState) {
+    if (this.editService.editState) {
       console.log(verse);
 
       const selection = window.getSelection().getRangeAt(0);

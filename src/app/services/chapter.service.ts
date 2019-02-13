@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
+import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { DataService } from './data.service';
+import { EditService } from "./EditService";
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
-
 @Injectable()
 export class ChapterService {
   wTags: QueryList<ElementRef>;
   public selectedSecondaryNote: SecondaryNote;
   public url: string;
+  public db = new PouchDB('alpha.oneinthinehand.org');
   constructor(
     private navService: NavigationService,
     private httpClient: HttpClient,
@@ -23,7 +24,7 @@ export class ChapterService {
     private saveState: SaveStateService,
     private helperService: HelperService,
     private verseSelectService: VerseSelectService,
-    private dataService: DataService,
+    private editService: EditService,
   ) {
     this.fs = (window as any).fs;
   }
@@ -38,7 +39,7 @@ export class ChapterService {
   scrollIntoView: Element;
 
   public resetNotes(): void {
-    lodash.each(this.dataService.chapter2.notes, note => {
+    lodash.each(this.editService.chapter2.notes, note => {
       note.override = false;
       note.visible = this.saveState.data.secondaryNotesVisible;
     });
@@ -68,16 +69,9 @@ export class ChapterService {
       //   console.log(a);
       this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
       this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-
-      if (this.fs) {
-        this.getChapterFS(book, vSplit).then(() => {
-          resolve(undefined);
-        });
-      } else {
-        this.getChapterWeb(book, vSplit).then(() => {
-          resolve(undefined);
-        });
-      }
+      this.getChapterWeb(book, vSplit).then(() => {
+        resolve(undefined);
+      });
     });
   }
 
@@ -113,7 +107,7 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        lodash.forEach(this.dataService.chapter2.paragraphs, paragraph => {
+        lodash.forEach(this.editService.chapter2.paragraphs, paragraph => {
           lodash.forEach(paragraph.verses, verse => {
             if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
               verse.highlight = true;
@@ -130,34 +124,6 @@ export class ChapterService {
     );
   }
 
-  private getChapterFS(
-    book: string,
-    vSplit: string[],
-    // synchronizedScrolling: () => Promise<void>
-  ) {
-    return new Promise<void>(
-      (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        const url2 =
-          this.navService.urlBuilder(
-            book.toLowerCase(),
-            vSplit[0].toLowerCase(),
-          ) + '.json';
-
-        this.fs.readFile(
-          'c:/ScripturesProject/' + url2,
-          'utf8',
-          (err, data) => {
-            this.setChapter(data).then(() => {
-              resolve(null);
-            });
-          },
-        );
-      },
-    );
-  }
 
   private async getChapterWeb(
     book: string,
@@ -180,13 +146,14 @@ export class ChapterService {
             'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
 
           this.httpClient
-            .get('http://127.0.0.1:5984/sp.project/heb-1', {
+            .get(url2, {
               observe: 'body',
               responseType: 'text',
             })
             .subscribe(data => {
               console.log(data);
-
+              this.db.put(JSON.parse(data));
+              
               this.setChapter(data).then(() => {
                 resolve(null);
               });
@@ -205,8 +172,8 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.dataService.chapter2 = new Chapter2();
-        this.dataService.chapter2 = JSON.parse(data) as Chapter2;
+        this.editService.chapter2 = new Chapter2();
+        this.editService.chapter2 = JSON.parse(data) as Chapter2;
 
         this.setHighlighting().then(() => {
           this.verseFocus().then(() => {

@@ -22,7 +22,7 @@ import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
@@ -42,7 +42,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     public saveState: SaveStateService,
     private stringService: StringService,
     public sanitizer: DomSanitizer,
-    public dataService: DataService,
+    public editService: EditService,
     public verseSelectService: VerseSelectService,
   ) {}
   faBars = faBars;
@@ -102,7 +102,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     //   }
     // }
 
-    // this.dataService.setEditMode(false, null, null);
+    // this.editService.setEditMode(false, null, null);
     // this.verseSelectService.resetVerseSelect();
   }
   setUnderlining(secondaryNote: SecondaryNote): void {
@@ -117,7 +117,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
         wTags.forEach((elem: Element) => {
           const wTagId = elem.firstElementChild.className;
 
-          this.dataService.chapter2.paragraphs.forEach(
+          this.editService.chapter2.paragraphs.forEach(
             (paragraph: Paragraph) => {
               paragraph.verses.forEach((verse: Verse) => {
                 if (verse.id === verseId.toString()) {
@@ -141,7 +141,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     console.log(event);
 
     if (
-      !this.dataService.editState &&
+      !this.editService.editState &&
       (event.target as HTMLElement).localName !== 'button'
     ) {
       console.log('asdjfasdf');
@@ -149,17 +149,17 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       this.chapterService.selectedSecondaryNote = secondaryNote;
       // let verseSelected: Verse;
 
-      this.dataService.setEditMode(true, note, secondaryNote);
+      this.editService.setEditMode(true, note, secondaryNote);
     }
 
-    // this.dataService.chapter2.notes.forEach((chapterNote: Note2) => {
+    // this.editService.chapter2.notes.forEach((chapterNote: Note2) => {
     //   chapterNote.sn.forEach((sn: SecondaryNote) => {
     //     if (sn !== secondaryNote) {
     //       sn.disabled = true;
     //     }
     //   });
     //  });
-    // this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+    // this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
 
     //   paragraph.verses.forEach((verse: Verse) => {
     //     if (verse.id !== `p${note.id.replace('note', '')}`) {
@@ -177,7 +177,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     // console.log(verseSelected);
   }
   disableEditMode(): void {
-    this.dataService.setEditMode(false, null, null);
+    this.editService.setEditMode(false, null, null);
   }
   notePhraseClick(secondaryNote: SecondaryNote) {
     if (false) {

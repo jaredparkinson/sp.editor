@@ -21,7 +21,7 @@ import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
@@ -40,7 +40,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public saveState: SaveStateService,
     private stringService: StringService,
     public sanitizer: DomSanitizer,
-    public dataService: DataService,
+    public editService: EditService,
     public verseSelectService: VerseSelectService,
   ) {}
   faBars = faBars;

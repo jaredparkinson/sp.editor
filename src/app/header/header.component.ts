@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { ChapterService } from '../services/chapter.service';
-import { DataService } from '../services/data.service';
+import { EditService } from "../services/EditService";
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public helperService: HelperService,
     public chapterService: ChapterService,
-    public dataService: DataService,
+    public editService: EditService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
     public verseSelectService: VerseSelectService,

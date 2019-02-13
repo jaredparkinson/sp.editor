@@ -6,7 +6,7 @@ import { NoteRef, SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
-import { DataService } from './data.service';
+import { EditService } from "./EditService";
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
@@ -22,7 +22,7 @@ export class VerseSelectService {
     private saveState: SaveStateService,
     private helperService: HelperService,
     private navService: NavigationService,
-    private dataService: DataService,
+    private editService: EditService,
     private stringService: StringService,
   ) {}
   public noteVisibility: Map<string, boolean> = new Map<string, boolean>();
@@ -47,7 +47,7 @@ export class VerseSelectService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.dataService.chapter2.notes.forEach((note: Note) => {
+        this.editService.chapter2.notes.forEach((note: Note) => {
           this.setNoteVisibility(note);
         });
         resolve(null);
@@ -249,7 +249,7 @@ export class VerseSelectService {
   }
 
   public modifyWTags(callBack: (wa: W) => void) {
-    this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+    this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
       paragraph.verses.forEach((verse: Verse) => {
         verse.wTags.forEach((w: W) => {
           callBack(w);

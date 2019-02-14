@@ -15,16 +15,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from "../services/EditService";
+import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { W2 } from '../modelsJson/W2';
+import { TemplateGroup } from '../modelsJson/TemplateGroup';
 
 @Component({
   selector: 'app-bodyblock',
@@ -115,6 +117,10 @@ export class BodyblockComponent
     return false;
   }
 
+  public stringSplit(text: string): string[] {
+    return Array.from(text);
+  }
+
   getWColor(w: W) {
     let wClass = w.classList.toString().replace(/\,/g, ' ');
 
@@ -161,16 +167,57 @@ export class BodyblockComponent
     return wClass;
   }
 
+  public getTemplateGroups(verse: Verse): TemplateGroup[] {
+    let templateGroups: TemplateGroup[] = [];
+    let tempTemplateGroup: TemplateGroup = new TemplateGroup();
+
+    for (let x = 0; x < Array.from(verse.text).length; x++) {
+      const t = verse.text[x];
+
+      tempTemplateGroup.text = `${tempTemplateGroup.text}${t}`;
+
+      if (verse.w2[x]) {
+        tempTemplateGroup.isWTag = true;
+        tempTemplateGroup.classList = verse.w2[x].classList;
+        tempTemplateGroup.refs = verse.w2[x].classList;
+      }
+
+      if (
+        x + 1 === verse.text.length ||
+        !this.isPartOfGroup(verse.w2[x], verse.w2[x + 1])
+      ) {
+        templateGroups.push(tempTemplateGroup);
+        tempTemplateGroup = new TemplateGroup();
+      }
+    }
+
+    console.log(templateGroups);
+
+    return templateGroups;
+  }
+  isPartOfGroup(w1: W2, w2: W2): boolean {
+    if (w1 === w2) {
+      return true;
+    } else {
+      if (!w1 || !w2) {
+        return false;
+      } else if (
+        lodash.isEqual(w1.classList, w2.classList) &&
+        lodash.isEqual(w1.refs, w2.refs)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   private wordSelection() {
     lodash.each(document.querySelectorAll('w'), () => {});
   }
 
   trackById(paragraph: any) {
     return paragraph.id;
-  }
-
-  wTagTrackBy(wTag: W) {
-    return wTag.num;
   }
 
   wTagClick(wTag: W, verse: Verse, event: Event) {

@@ -61,7 +61,25 @@
         "
         #verses
       >
-        <ng-container *ngFor="let w of verse.wTags; trackBy: wTagTrackBy">
+        <ng-container
+          *ngFor="let templateGroup of this.getTemplateGroups(verse)"
+        >
+          <w *ngIf="templateGroup.isWTag; else elseBlock">
+            {{ templateGroup.text }}
+          </w>
+          <ng-template>
+            {{ templateGroup.text }}
+          </ng-template>
+        </ng-container>
+        <!-- <ng-container
+          *ngFor="let t of this.stringSplit(verse.text); let vT = index"
+        >
+          <ng-container *ngIf="!verse.w2[vT]">
+            {{t}}
+            
+          </ng-container>
+        </ng-container> -->
+        <!-- <ng-container *ngFor="let w of verse.w2">
           <w
             class="{{ getWColor(w) }}"
             [ngClass]="{ wRef: w.wRef }"
@@ -81,7 +99,7 @@
           <ng-container *ngIf="saveState.data.poetryVisible">
             <br *ngIf="w.classList.includes('line-end')" />
           </ng-container>
-        </ng-container>
+        </ng-container> -->
       </span>
     </div>
     <div

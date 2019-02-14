@@ -63,7 +63,7 @@
         "
         #verses
       >
-        <ng-container *ngFor="let w of verse.wTags; trackBy: wTagTrackBy">
+        <ng-container *ngFor="let w of verse.wTags">
           <w
             class="{{ getWColor(w) }}"
             [ngClass]="{ wRef: w.visibleRefs.Length > 0, select: w.selected }"

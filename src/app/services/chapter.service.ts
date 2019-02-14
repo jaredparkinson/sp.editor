@@ -141,9 +141,9 @@ export class ChapterService {
           this.setChapter(saved as string);
         } else {
           this.url =
-            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/alpha/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
           const url2 =
-            'assets/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/alpha/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
 
           this.httpClient
             .get(url2, {

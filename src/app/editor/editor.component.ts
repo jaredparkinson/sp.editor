@@ -18,7 +18,7 @@ import * as lodash from 'lodash';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from "../services/EditService";
+import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
@@ -181,23 +181,6 @@ export class EditorComponent
 
   trackById(paragraph: any) {
     return paragraph.id;
-  }
-
-  wTagTrackBy(
-    wTag: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      string[],
-      boolean
-    ],
-  ) {
-    return wTag[2];
   }
 
   wTagClick(wTag: W, verse: Verse, event: Event) {

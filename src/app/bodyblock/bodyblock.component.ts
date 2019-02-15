@@ -27,6 +27,7 @@ import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { W2 } from '../modelsJson/W2';
 import { TemplateGroup } from '../modelsJson/TemplateGroup';
+import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -36,7 +37,7 @@ import { TemplateGroup } from '../modelsJson/TemplateGroup';
 export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
-
+  
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
@@ -52,6 +53,7 @@ export class BodyblockComponent
     public stringService: StringService,
     public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
+    private wTagBuilderService:WTagService
   ) {}
 
   ngAfterContentInit(): void {}
@@ -73,9 +75,12 @@ export class BodyblockComponent
             console.log(value);
 
             this.verseSelectService.resetVisibility().then(() => {
-              setTimeout(() => {
-                this.synchronizedScrolling();
-              }, 50);
+              this.wTagBuilderService.buildWTags().then((() => {
+                
+                setTimeout(() => {
+                  this.synchronizedScrolling();
+                }, 50);
+              }))
             });
           });
       } else if (book === undefined && chapter !== undefined) {
@@ -121,7 +126,10 @@ export class BodyblockComponent
     return Array.from(text);
   }
 
-  getWColor(w: W) {
+  getWColor(w: TemplateGroup) {
+    if (!w.classList) {
+      return '';
+    }
     let wClass = w.classList.toString().replace(/\,/g, ' ');
 
     if (
@@ -162,7 +170,7 @@ export class BodyblockComponent
           wClass = this.stringService.addAttribute(wClass, 'new-color');
         }
       }
-    }
+    } 
 
     return wClass;
   }

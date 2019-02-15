@@ -51,6 +51,8 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
+import { VerseComponent } from './components/verse/verse.component';
+
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 // AoT requires an exported function for factories
@@ -82,6 +84,7 @@ export function load(saveState: SaveStateService) {
     EditorParentComponent,
     BodyBlockParentComponent,
     LandingPageParentComponent,
+    VerseComponent,
     // SearchBarComponent
   ],
   imports: [

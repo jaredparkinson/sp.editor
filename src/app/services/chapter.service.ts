@@ -5,7 +5,7 @@ import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { EditService } from "./EditService";
+import { EditService } from './EditService';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
@@ -124,7 +124,6 @@ export class ChapterService {
     );
   }
 
-
   private async getChapterWeb(
     book: string,
     vSplit: string[],
@@ -141,9 +140,13 @@ export class ChapterService {
           this.setChapter(saved as string);
         } else {
           this.url =
-            'https://storage.oneinthinehand.org/alpha/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/alpha/' +
+            this.navService.urlBuilder(book, vSplit[0]) +
+            '.json';
           const url2 =
-            'https://storage.oneinthinehand.org/alpha/' + this.navService.urlBuilder(book, vSplit[0]) + '.json';
+            'https://storage.oneinthinehand.org/alpha/' +
+            this.navService.urlBuilder(book, vSplit[0]) +
+            '.json';
 
           this.httpClient
             .get(url2, {
@@ -151,9 +154,9 @@ export class ChapterService {
               responseType: 'text',
             })
             .subscribe(data => {
-              console.log(data);
-              this.db.put(JSON.parse(data));
-              
+              // console.log(data);
+              // this.db.put(JSON.parse(data));
+
               this.setChapter(data).then(() => {
                 resolve(null);
               });

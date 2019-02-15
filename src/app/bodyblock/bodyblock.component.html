@@ -47,60 +47,14 @@
       "
       id="{{ paragraph.id }}"
     >
-      <span
-        class="verse"
-        [ngClass]="{
-          'highlight-verse': verse.highlight,
-          'highlight-context': !verse.highlight && verse.context
-        }"
-        id="{{ verse.id }}"
+      <app-verse
+        [verse]="verse"
         *ngFor="
           let verse of paragraph.verses;
           let i = index;
           trackBy: trackById
         "
-        #verses
-      >
-        <ng-container *ngFor="let templateGroup of verse.wTagGroups">
-          <w
-            class="{{ getWColor(templateGroup) }}"
-            (click)="this.wTagBuilderService.wTagClick(verse, templateGroup)"
-            *ngIf="templateGroup.isWTag; else elseBlock"
-            >{{ templateGroup.text }}</w
-          ><ng-template #elseBlock
-            ><w>{{ templateGroup.text }}</w>
-          </ng-template>
-        </ng-container>
-        <!-- <ng-container
-          *ngFor="let t of this.stringSplit(verse.text); let vT = index"
-        >
-          <ng-container *ngIf="!verse.w2[vT]">
-            {{t}}
-            
-          </ng-container>
-        </ng-container> -->
-        <!-- <ng-container *ngFor="let w of verse.w2">
-          <w
-            class="{{ getWColor(w) }}"
-            [ngClass]="{ wRef: w.wRef }"
-            (click)="wTagClick(w, verse, $event)"
-            #wTags
-          >
-            <ng-container *ngIf="saveState.data.verseSuperScripts">
-              <ng-container *ngFor="let item of w.superscripts">
-                <g
-                  *ngIf="getSuperScriptVisibility(item, w)"
-                  class="{{ item }}"
-                ></g>
-              </ng-container>
-            </ng-container>
-            <n>{{ w.innerHtml }}</n></w
-          >
-          <ng-container *ngIf="saveState.data.poetryVisible">
-            <br *ngIf="w.classList.includes('line-end')" />
-          </ng-container>
-        </ng-container> -->
-      </span>
+      ></app-verse>
     </div>
     <div
       *ngIf="editService.chapter2.bb"

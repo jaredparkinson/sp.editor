@@ -13,6 +13,7 @@ export class Chapter2 {
 
   public bodyBlock: string = '';
   public bb: boolean = false;
+  public pageUrl: string = '';
 
   private hiddenParagraph: string = '.hidden-paragraph';
 }

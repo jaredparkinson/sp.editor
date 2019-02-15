@@ -37,7 +37,7 @@ import { WTagService } from '../services/wtag-builder.service';
 export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
-  
+
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
@@ -53,7 +53,7 @@ export class BodyblockComponent
     public stringService: StringService,
     public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
-    private wTagBuilderService:WTagService
+    private wTagBuilderService: WTagService,
   ) {}
 
   ngAfterContentInit(): void {}
@@ -75,12 +75,11 @@ export class BodyblockComponent
             console.log(value);
 
             this.verseSelectService.resetVisibility().then(() => {
-              this.wTagBuilderService.buildWTags().then((() => {
-                
+              this.wTagBuilderService.buildWTags().then(() => {
                 setTimeout(() => {
                   this.synchronizedScrolling();
                 }, 50);
-              }))
+              });
             });
           });
       } else if (book === undefined && chapter !== undefined) {
@@ -170,7 +169,7 @@ export class BodyblockComponent
           wClass = this.stringService.addAttribute(wClass, 'new-color');
         }
       }
-    } 
+    }
 
     return wClass;
   }
@@ -242,7 +241,7 @@ export class BodyblockComponent
   onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(async () => {
-      console.log(this.verses);
+      // console.log(this.verses);
 
       await this.synchronizedScrolling().then(async () => {
         await this.synchronizedScrolling();
@@ -296,7 +295,7 @@ export class BodyblockComponent
         this.scrollNotesBottom();
       }
 
-      resolve(null);
+      // resolve(null);
     }
   }
 

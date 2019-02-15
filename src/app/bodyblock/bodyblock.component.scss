@@ -21,18 +21,6 @@ body {
     }
   }
 
-  w {
-    &.marker {
-      font-style: italic;
-      font-size: 8pt;
-    }
-
-    &.verse-number {
-      color: DimGray;
-      font-weight: bold;
-    }
-  }
-
   .body-block {
     span.part {
       margin-left: 6pt;
@@ -71,41 +59,6 @@ body {
     w.verse-number {
       vertical-align: super;
       font-size: 8pt;
-    }
-  }
-
-  #bodyBlock.hidden-paragraph {
-    span {
-
-      &.part,
-      &.question,
-      &.answer {
-        font-family: $font-stack;
-        display: block;
-      }
-
-      &.verse {
-        position: relative;
-        font-family: $font-stack;
-        text-align: left;
-        // margin: 0;
-        // margin-bottom: 6pt;
-        display: block;
-        // padding-left: 5px;
-        padding: 0 0 6pt 5px;
-
-        w.verse-number {
-          vertical-align: unset;
-          font-size: inherit;
-        }
-
-        div.hidden-paragraph & {
-          display: inline; // w.verse-number {
-          //   vertical-align: super;
-          //   font-size: 8pt;
-          // }
-        }
-      }
     }
   }
 

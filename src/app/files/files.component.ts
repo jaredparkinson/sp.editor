@@ -11,7 +11,7 @@ import { UrlBuilder } from './UrlBuilder';
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.scss']
+  styleUrls: ['./files.component.scss'],
 })
 export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
@@ -25,7 +25,7 @@ export class FilesComponent implements OnInit {
     public saveState: SaveStateService,
     public navService: NavigationService,
     private router: Router,
-    private urlBuilder: UrlBuilder
+    private urlBuilder: UrlBuilder,
   ) {}
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class FilesComponent implements OnInit {
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(
-        'addressBar'
+        'addressBar',
       ) as HTMLInputElement).value;
       addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();
@@ -55,7 +55,7 @@ export class FilesComponent implements OnInit {
 
   private buildUrl() {
     const urlAsdf = this.urlBuilder.urlParser(
-      (this.addressBar.nativeElement as HTMLInputElement).value
+      (this.addressBar.nativeElement as HTMLInputElement).value,
     );
     console.log(urlAsdf);
 

@@ -63,7 +63,6 @@ export class BodyblockComponent
   ngAfterContentInit(): void {}
   ngOnDestroy() {}
   ngOnInit() {
-    this.initSyncScrolling();
     this.route.params.subscribe(params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
@@ -81,49 +80,13 @@ export class BodyblockComponent
 
             this.verseSelectService.resetVisibility().then(() => {
               this.wTagBuilderService.buildWTags().then(() => {
-                setTimeout(() => {
-                  this.synchronizedScrolling();
-                }, 50);
+                this.onScroll();
               });
             });
           });
-      } else if (book === undefined && chapter !== undefined) {
-        this.chapterService.getChapter(chapter, '').then(() => {
-          this.verseSelectService.resetVisibility().then(() => {
-            setTimeout(() => {
-              this.synchronizedScrolling();
-            }, 50);
-          });
-        });
       }
     });
     this.wordSelection();
-  }
-
-  getSuperScriptVisibility(
-    item: string,
-    w: [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      number,
-      string[],
-      boolean
-    ],
-  ): boolean {
-    console.log(w);
-
-    if (
-      (item.includes('new-') && this.saveState.data.newNotesVisible) ||
-      (item.includes('tc-') && this.saveState.data.translatorNotesVisible) ||
-      (item.includes('eng-') && this.saveState.data.englishNotesVisible)
-    ) {
-      return true;
-    }
-    return false;
   }
 
   public stringSplit(text: string): string[] {
@@ -248,17 +211,4 @@ export class BodyblockComponent
   }
 
   synchronizedScrolling(): void {}
-
-  private scrollNotesBottom() {
-    const notes = document.querySelectorAll('note');
-    this.chapterService.scrollIntoView = notes[notes.length - 1];
-    this.chapterService.scrollIntoView.scrollIntoView();
-  }
-
-  private scrollNotesTop() {
-    this.chapterService.scrollIntoView = document.querySelector('note');
-    this.chapterService.scrollIntoView.scrollIntoView();
-  }
-
-  private initSyncScrolling() {}
 }

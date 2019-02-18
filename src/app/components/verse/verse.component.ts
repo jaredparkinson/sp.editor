@@ -89,7 +89,7 @@ export class VerseComponent implements OnInit {
                 1,
                 this.verse.id.length,
               )}`;
-              console.log(`${value[0]} ${value[1]} ${noteID}`);
+              // console.log(`${value[0]} ${value[1]} ${noteID}`);
               resolve([true, noteID]);
             } else {
               resolve(null);

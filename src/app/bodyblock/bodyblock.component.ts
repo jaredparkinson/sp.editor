@@ -29,6 +29,7 @@ import { W2 } from '../modelsJson/W2';
 import { TemplateGroup } from '../modelsJson/TemplateGroup';
 import { WTagService } from '../services/wtag-builder.service';
 import { VerseComponent } from '../components/verse/verse.component';
+import { SyncScrollingService } from '../services/sync-scrolling.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -37,8 +38,6 @@ import { VerseComponent } from '../components/verse/verse.component';
 })
 export class BodyblockComponent
   implements OnInit, AfterViewInit, AfterContentInit {
-  private timer: NodeJS.Timer;
-
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
@@ -55,6 +54,7 @@ export class BodyblockComponent
     public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
     private wTagBuilderService: WTagService,
+    public syncScrollingService: SyncScrollingService,
   ) {}
 
   ngAfterContentInit(): void {}
@@ -240,120 +240,10 @@ export class BodyblockComponent
 
   async ngAfterViewInit() {}
   onScroll() {
-    clearTimeout(this.timer);
-    this.timer = setTimeout(async () => {
-      // console.log(this.verses);
-
-      await this.synchronizedScrolling().then(async () => {
-        // await this.synchronizedScrolling();
-      });
-    }, 100);
+    this.syncScrollingService.onScroll();
   }
 
-  async synchronizedScrolling(): Promise<void> {
-    // const verses = document.querySelectorAll('span.verse');
-    // console.log(
-    //   'sync scrolling 2 ' + document.querySelectorAll('.verse').length,
-    // );
-    // console.log('sync scrolling ' + this.verses.length);
-    // let scrollIntoView: Element;
-    // let tempVerse: VerseComponent;
-    // this.verses.forEach(verse => {});
-    const isTop: Promise<[boolean, string]>[] = [];
-
-    this.verses.forEach(verse => {
-      isTop.push(verse.isTop());
-    });
-    Promise.all(isTop)
-      .then(values => {
-        const filter = lodash.filter(values, value => {
-          return value !== null;
-        });
-        let lastElement =
-          filter.length === 3 ? filter[1] : lodash.first(filter);
-
-        if (lastElement) {
-          console.log(lodash.mean(filter));
-
-          document.getElementById(lastElement[1]).scrollIntoView();
-          return;
-        } else {
-          const verseTop = lodash
-            .last(document.querySelectorAll('span.verse'))
-            .getBoundingClientRect().top;
-          if (verseTop <= 33) {
-            lodash.last(document.querySelectorAll('note')).scrollIntoView();
-          } else {
-            document.querySelector('note').scrollIntoView();
-          }
-          console.log(document.querySelector('#p1').getBoundingClientRect());
-          console.log(
-            lodash
-              .last(document.querySelectorAll('span.verse'))
-              .getBoundingClientRect(),
-          );
-        }
-      })
-      .catch(() => {
-        document.querySelector('note').scrollIntoView();
-      });
-
-    // this.verses.forEach(verse => {
-    //   verse
-    //     .isTop()
-    //     .then(value => {
-    //       tempVerse = verse;
-    //     })
-    //     .catch(() => {
-    //       if (tempVerse) {
-    //         const noteID = `note${tempVerse.verse.id.substr(
-    //           1,
-    //           tempVerse.verse.id.length,
-    //         )}`;
-    //         // const noteID =
-    //         //   'note' +
-    //         //   (tempVerse.span.nativeElement as HTMLElement).id.substring(
-    //         //     1,
-    //         //     scrollIntoView.id.length,
-    //         //   );
-    //         document.getElementById(noteID).scrollIntoView();
-    //       }
-    //     });
-    // });
-    // this.verses.toArray().some(verse => {
-    // });
-    // Promise.all(isTop);
-    // this.verses.toArray().forEach(verse => {
-    //   const top = (verse.nativeElement as HTMLElement).getBoundingClientRect()
-    //     .top;
-    //   const height = (verse.nativeElement as HTMLElement).getBoundingClientRect()
-    //     .height;
-    //   const start = 35;
-    //   if (top + height > start && top < start + height) {
-    //     scrollIntoView = verse.nativeElement as HTMLElement;
-    //   } else if (scrollIntoView !== undefined) {
-    //     const noteID =
-    //       'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
-    //     console.log('nojgtgcd' + noteID);
-    //     document.getElementById(noteID).scrollIntoView();
-    //     return true;
-    //   }
-    // });
-    // this.chapterService.scrollIntoView = scrollIntoView;
-    // if (scrollIntoView === undefined) {
-    //   console.log(scrollIntoView);
-    //   const element = verses[0];
-    //   const top = element.getBoundingClientRect().top;
-    //   const height = element.getBoundingClientRect().height;
-    //   const start = 35;
-    //   if (top + height > start) {
-    //     this.scrollNotesTop();
-    //   } else {
-    //     this.scrollNotesBottom();
-    //   }
-    //   // resolve(null);
-    // }
-  }
+  synchronizedScrolling(): void {}
 
   private scrollNotesBottom() {
     const notes = document.querySelectorAll('note');

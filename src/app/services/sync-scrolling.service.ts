@@ -4,45 +4,46 @@ import { Injectable } from '@angular/core';
 export class SyncScrollingService {
   constructor() {}
 
+  private timer: NodeJS.Timer;
+
+  public onScroll() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(async () => {
+      // console.log(this.verses);
+
+      this.synchronizedScrolling();
+      // this.synchronizedScrolling();
+    }, 150);
+  }
+
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
-    let scrollIntoView: Element;
 
-    for (let x = 0; x < verses.length; x++) {
-      const element = verses[x];
-      const top = element.getBoundingClientRect().top;
-      const height = element.getBoundingClientRect().height;
-      const start = 35;
-      if (top + height > start && top < start + height) {
-        scrollIntoView = element;
-      } else if (scrollIntoView !== undefined) {
-        const noteID =
-          'note' + scrollIntoView.id.substring(1, scrollIntoView.id.length);
-
-        document.getElementById(noteID).scrollIntoView();
-
-        break;
-      }
-    }
-
-    if (scrollIntoView === undefined) {
-      console.log(scrollIntoView);
-
-      const element = verses[0];
-
-      const top = element.getBoundingClientRect().top;
-      const height = element.getBoundingClientRect().height;
-
-      // console.log('Top: ' + top + ' height: ' + height + ' start: ' + start);
-
-      const start = 35;
-      if (top + height > start) {
+    if (verses) {
+      if (verses[0].getBoundingClientRect().top > 34) {
         this.scrollNotesTop();
-        // console.log('test gojbvhgv');
       } else {
-        this.scrollNotesBottom();
+        let belowTop: Element[] = [];
+        verses.forEach(verse => {
+          if (verse.getBoundingClientRect().top > 34) {
+            console.log(verse);
+
+            belowTop.push(verse);
+          }
+        });
+
+        if (belowTop.length > 0) {
+          this.scrollIntoView(belowTop);
+        } else {
+          this.scrollNotesBottom();
+        }
       }
     }
+  }
+  scrollIntoView(belowTop: Element[]): void {
+    document
+      .querySelector(`#${belowTop[0].id.replace('p', 'note')}`)
+      .scrollIntoView();
   }
 
   private scrollNotesBottom() {
@@ -65,8 +66,5 @@ export class SyncScrollingService {
     //       this.onScroll();
     //     });
     // });
-  }
-  onScroll(): any {
-    throw new Error('Method not implemented.');
   }
 }

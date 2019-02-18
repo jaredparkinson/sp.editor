@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { WTagService } from '../../services/wtag-builder.service';
 import { Verse } from '../../modelsJson/Verse';
 import { SaveStateService } from '../../services/save-state.service';
@@ -12,13 +12,15 @@ import { TemplateGroup } from '../../modelsJson/TemplateGroup';
   styleUrls: ['./verse.component.scss'],
 })
 export class VerseComponent implements OnInit {
-  @Input() verse: Verse;
+  @Input() public verse: Verse;
   constructor(
     public wTagBuilderService: WTagService,
     public saveState: SaveStateService,
     public verseSelectService: VerseSelectService,
     public stringService: StringService,
   ) {}
+
+  @ViewChild('span') span!: ElementRef;
 
   ngOnInit() {}
 
@@ -71,5 +73,48 @@ export class VerseComponent implements OnInit {
     }
 
     return wClass;
+  }
+
+  public isTop(): Promise<[boolean, string]> {
+    return new Promise<[boolean, string]>(
+      (
+        resolve: (resolveValue: [boolean, string]) => void,
+        reject: (rejectValue: [boolean, string]) => void,
+      ) => {
+        this.getBoundingClientRect()
+          .then(value => {
+            const start = 35;
+            if (value[0] + value[1] > start && value[0] < start + value[1]) {
+              const noteID = `note${this.verse.id.substr(
+                1,
+                this.verse.id.length,
+              )}`;
+              resolve([true, noteID]);
+            } else {
+              resolve(null);
+            }
+          })
+          .catch(() => {
+            reject(null);
+          });
+      },
+    );
+  }
+
+  public getBoundingClientRect(): Promise<[number, number]> {
+    return new Promise<[number, number]>(
+      (
+        resolve: (resolveValue: [number, number]) => void,
+        reject: (rejectValue: [number, number]) => void,
+      ) => {
+        if (this.span) {
+          const clientRect = (this.span
+            .nativeElement as HTMLElement).getBoundingClientRect();
+          resolve([clientRect.top, clientRect.height]);
+        } else {
+          reject(null);
+        }
+      },
+    );
   }
 }

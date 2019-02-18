@@ -5,6 +5,7 @@
     'highlight-context': !verse.highlight && verse.context
   }"
   id="{{ verse.id }}"
+  #span
   ><ng-container *ngFor="let templateGroup of this.verse.wTagGroups">
     <w
       class="{{ getWColor(templateGroup) }}"

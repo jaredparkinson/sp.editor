@@ -15,6 +15,10 @@ body {
     grid-template-columns: $fr_5 $fr11 $fr_5;
   }
 
+  &#appBodyBlock {
+    overflow-y: scroll;
+  }
+
   .show-paragraph {
     div.hidden-paragraph {
       margin-bottom: 6pt;

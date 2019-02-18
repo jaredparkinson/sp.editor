@@ -7,6 +7,8 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  OnDestroy,
+  NgZone,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -37,7 +39,7 @@ import { SyncScrollingService } from '../services/sync-scrolling.service';
   styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent
-  implements OnInit, AfterViewInit, AfterContentInit {
+  implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
@@ -55,9 +57,11 @@ export class BodyblockComponent
     private route: ActivatedRoute,
     private wTagBuilderService: WTagService,
     public syncScrollingService: SyncScrollingService,
+    private ngZone: NgZone,
   ) {}
 
   ngAfterContentInit(): void {}
+  ngOnDestroy() {}
   ngOnInit() {
     this.initSyncScrolling();
     this.route.params.subscribe(params => {

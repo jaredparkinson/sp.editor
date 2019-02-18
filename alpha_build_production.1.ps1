@@ -1,6 +1,5 @@
 # yarn version --patch
 
-# (Get-Content .\package.json)[2] | Out-File .\src\assets\version.txt
 
 # # Move-Item .\src\assets\scriptures ..
 
@@ -26,6 +25,8 @@
 
 
 yarn version --patch
+
+(Get-Content .\package.json)[2] | Out-File .\src\assets\version.txt
 
 yarn build:web
 

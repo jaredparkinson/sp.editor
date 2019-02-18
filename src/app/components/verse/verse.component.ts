@@ -84,11 +84,12 @@ export class VerseComponent implements OnInit {
         this.getBoundingClientRect()
           .then(value => {
             const start = 35;
-            if (value[0] + value[1] > start && value[0] < start + value[1]) {
+            if (value[0] >= 33) {
               const noteID = `note${this.verse.id.substr(
                 1,
                 this.verse.id.length,
               )}`;
+              console.log(`${value[0]} ${value[1]} ${noteID}`);
               resolve([true, noteID]);
             } else {
               resolve(null);

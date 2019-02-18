@@ -247,7 +247,7 @@ export class BodyblockComponent
       await this.synchronizedScrolling().then(async () => {
         // await this.synchronizedScrolling();
       });
-    }, 50);
+    }, 100);
   }
 
   async synchronizedScrolling(): Promise<void> {
@@ -269,16 +269,19 @@ export class BodyblockComponent
         const filter = lodash.filter(values, value => {
           return value !== null;
         });
-        const lastElement = lodash.last(filter);
+        let lastElement =
+          filter.length === 3 ? filter[1] : lodash.first(filter);
+
         if (lastElement) {
+          console.log(lodash.mean(filter));
+
           document.getElementById(lastElement[1]).scrollIntoView();
           return;
         } else {
           const verseTop = lodash
             .last(document.querySelectorAll('span.verse'))
             .getBoundingClientRect().top;
-
-          if (verseTop <= 0) {
+          if (verseTop <= 33) {
             lodash.last(document.querySelectorAll('note')).scrollIntoView();
           } else {
             document.querySelector('note').scrollIntoView();

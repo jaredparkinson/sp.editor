@@ -18,7 +18,7 @@ export class SyncScrollingService {
   synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
 
-    if (verses) {
+    if (verses && verses.length > 0) {
       if (verses[0].getBoundingClientRect().top > 34) {
         this.scrollNotesTop();
       } else {

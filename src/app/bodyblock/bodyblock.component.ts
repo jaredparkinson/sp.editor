@@ -79,9 +79,14 @@ export class BodyblockComponent
             console.log(value);
 
             this.verseSelectService.resetVisibility().then(() => {
-              this.wTagBuilderService.buildWTags().then(() => {
-                this.onScroll();
-              });
+              this.wTagBuilderService
+                .buildWTags()
+                .then(() => {
+                  this.onScroll();
+                })
+                .catch(() => {
+                  this.onScroll();
+                });
             });
           });
       }

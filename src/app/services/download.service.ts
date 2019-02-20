@@ -60,13 +60,18 @@ export class DownloadService {
     // });
   }
   public downloadScriptures(file: Download) {
+    this.dataBaseService.getDocumentCount();
     file.downloading = true;
     let promises = [];
     let promises2 = [];
     this.download(file).subscribe(data => {
+      console.log(data);
+
       jszip.loadAsync(data).then(zip => {
         zip.forEach(async file2 => {
           if (zip.file(file2)) {
+            console.log(file2);
+
             promises.push(zip.file(file2).async('text'));
             // const value = await zip.file(file2).async('text');
             // await this.dataBaseService.put(value);
@@ -76,11 +81,7 @@ export class DownloadService {
 
         Promise.all(promises).then(async (scriptureFiles: string[]) => {
           scriptureFiles.forEach(scriptureFile => {
-            promises2.push(
-              this.dataBaseService.put(scriptureFile).catch(reason => {
-                console.log(reason);
-              }),
-            );
+            promises2.push(this.dataBaseService.bulkUpdate(scriptureFile));
           });
           Promise.all(promises2)
             .then(() => {

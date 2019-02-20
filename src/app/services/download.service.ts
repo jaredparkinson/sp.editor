@@ -66,6 +66,7 @@ export class DownloadService {
     let promises2 = [];
     this.download(file).subscribe(data => {
       console.log(data);
+      this.dataBaseService.setAllDocs();
 
       jszip.loadAsync(data).then(zip => {
         zip.forEach(async file2 => {
@@ -73,9 +74,6 @@ export class DownloadService {
             console.log(file2);
 
             promises.push(zip.file(file2).async('text'));
-            // const value = await zip.file(file2).async('text');
-            // await this.dataBaseService.put(value);
-            // console.log(`Finished ${file2}`);
           }
         });
 
@@ -83,8 +81,6 @@ export class DownloadService {
           scriptureFiles.forEach(scriptureFile => {
             promises2.push(this.dataBaseService.bulkDocs(scriptureFile));
           });
-          console.log(promises2.length);
-
           Promise.all(promises2)
             .then(() => {
               file.downloaded = true;
@@ -94,49 +90,8 @@ export class DownloadService {
               console.log(reason);
             });
         });
-
-        console.log('oiasdjfoaisdjf');
-        // Promise.all(this.loading(zip)).then(async (value: any[]) => {
-        //   value.forEach(v => {
-        //     promises2.push(this.dataBaseService.put(v));
-        //   });
-        //   console.log(promises2.length);
-
-        //   const results = await Promise.all(
-        //     promises2.map(p => {
-        //       p.catch(e => e);
-        //     }),
-        //   );
-
-        //   file.downloaded = true;
-        //   file.downloading = false;
-        //   console.log('aoisdjfioasdjfoiasjdf');
-
-        //   // Promise.all(promises2).then(ddd => {
-        //   //   ddd.forEach(d => {
-        //   //     console.log(d);
-        //   //   });
-        //   //   console.log(ddd);
-        //   // });
-        // });
       });
-
-      // Promise.all(promises).then(() => {});
     });
-  }
-
-  private loading(zip: jszip) {
-    let promise = [];
-    zip.forEach(async file2 => {
-      if (zip.file(file2)) {
-        promise.push(zip.file(file2).async('text'));
-        // .then(value => {
-        //   promises.push(this.dataBaseService.put(value));
-        // });
-      }
-    });
-
-    return promise;
   }
 
   download(file: Download) {
@@ -144,52 +99,5 @@ export class DownloadService {
       observe: 'body',
       responseType: 'arraybuffer',
     });
-
-    // .subscribe(async data => {
-    //   return data;
-    //   // const i = pako.gzip(, {});
-    //   // const asdf = await this.loadData(data);
-    //   // console.log(asdf);
-
-    //   await this.loadData(data).then(() => {
-    //     this.downloads[0].downloaded = true;
-    //   });
-    //   // this.downloads[0] = true;
-
-    //   // Promise.all(this.loadData(data)).then(() => {
-    //   // });
-    // });
-  }
-
-  private loadData(data: ArrayBuffer) {
-    return new Promise<void>(
-      (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        jszip.loadAsync(data).then(zip => {
-          console.log(zip);
-          zip.forEach(async file2 => {
-            // console.log(file2);
-            if (zip.file(file2)) {
-              const output = await zip.file(file2).async('text');
-              await this.dataBaseService.put(output);
-              // zip
-              //   .file(file2)
-              //   .async('text')
-              //   .then(async value => {
-              //     await this.dataBaseService.put(value);
-              //   });
-              // promises.push(
-              // );
-            }
-          });
-          // return promises;
-        });
-        resolve(undefined);
-      },
-    );
-
-    // return promises;
   }
 }

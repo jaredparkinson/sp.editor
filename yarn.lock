@@ -10870,7 +10870,7 @@ stylus-loader@3.0.2:
     lodash.clonedeep "^4.5.0"
     when "~3.6.x"
 
-stylus@0.54.5:
+stylus@0.54.5, stylus@^0.54.5:
   version "0.54.5"
   resolved "https://registry.yarnpkg.com/stylus/-/stylus-0.54.5.tgz#42b9560931ca7090ce8515a798ba9e6aa3d6dc79"
   integrity sha1-QrlWCTHKcJDOhRWnmLqeaqPW3Hk=

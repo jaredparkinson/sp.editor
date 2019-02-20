@@ -6,12 +6,13 @@ import { Chapter2 } from '../modelsJson/Chapter';
   providedIn: 'root',
 })
 export class DatabaseService {
+  public db = new PouchDB('alpha.oneinthinehand.org');
+  private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
+  constructor() {}
+
   async allDocs() {
     console.log(await this.db.allDocs());
   }
-  public db = new PouchDB('alpha.oneinthinehand.org');
-  constructor() {}
-
   public get(id: string): Promise<{}> {
     return this.db.get(id);
   }
@@ -28,7 +29,6 @@ export class DatabaseService {
         resolve: (resolveValue: string) => void,
         reject: (rejectValue: string) => void,
       ) => {
-        // this.db.put()
         this.db
           .get(id)
           .then(value => {
@@ -46,45 +46,33 @@ export class DatabaseService {
     chaper._rev = await this.getRevision(chaper._id);
 
     return this.db.put(chaper).catch(() => {});
+  }
 
-    // await this.db
-    //   .get(chaper._id)
-    //   .then(value => {
-    //     chaper._rev = value._rev;
-    //     // console.log();
-    //     return this.db.put(chaper);
-    //     // resolve(this.db.put(chaper));
-    //   })
-    //   .catch(() => {
-    //     return this.db.put(chaper);
-    //   });
+  public async setAllDocs() {
+    this.tempAllDocs = await this.db.allDocs();
   }
 
   public bulkDocs(dataFile: string) {
     return new Promise(resolve => {
-      this.db.allDocs().then(allDocs => {
-        console.log(allDocs);
+      console.log(this.tempAllDocs);
 
-        const scriptureFiles = JSON.parse(dataFile) as [];
+      const scriptureFiles = JSON.parse(dataFile) as [];
 
-        if (scriptureFiles) {
-          scriptureFiles.forEach((scriptureFile: any) => {
-            const savedDoc = allDocs.rows.filter(doc => {
-              return doc.id == scriptureFile._id;
-            });
-
-            if (savedDoc && savedDoc.length > 0) {
-              scriptureFile._rev = savedDoc[0].value.rev;
-            }
+      if (scriptureFiles) {
+        scriptureFiles.forEach((scriptureFile: any) => {
+          const savedDoc = this.tempAllDocs.rows.filter(doc => {
+            return doc.id == scriptureFile._id;
           });
 
-          this.db.bulkDocs(scriptureFiles).then(() => {
-            resolve();
-          });
-          // resolve();
-          // console.log(scriptureFiles);
-        }
-      });
+          if (savedDoc && savedDoc.length > 0) {
+            scriptureFile._rev = savedDoc[0].value.rev;
+          }
+        });
+
+        this.db.bulkDocs(scriptureFiles).then(() => {
+          resolve();
+        });
+      }
     });
   }
 }

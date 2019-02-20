@@ -4,6 +4,7 @@ import * as jszip from 'jszip';
 import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Download } from '../models/download';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,10 @@ export class DownloadService {
   private forageRegex: RegExp = new RegExp(
     /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/,
   );
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private dataBaseService: DatabaseService,
+  ) {
     this.downloads.push(
       new Download('assets/scriptures.zip', 'scriptures', false),
     );
@@ -55,65 +59,133 @@ export class DownloadService {
     //   }
     // });
   }
-  download(file: Download) {
+  public downloadScriptures(file: Download) {
     file.downloading = true;
-    this.httpClient
-      .get(file.fileName, {
-        observe: 'body',
-        responseType: 'arraybuffer',
-      })
-      .subscribe(async data => {
-        // const i = pako.gzip(, {});
-        console.log(data);
-
-        jszip.loadAsync(data).then(zip => {
-          console.log(zip);
-
-          zip.forEach(file2 => {
-            console.log(file2);
-
-            if (zip.file(file2)) {
-              zip
-                .file(file2)
-                .async('text')
-                .then(value => {
-                  console.log(value.length);
-                });
-            }
-          });
+    let promises = [];
+    let promises2 = [];
+    this.download(file).subscribe(data => {
+      jszip.loadAsync(data).then(zip => {
+        zip.forEach(async file2 => {
+          if (zip.file(file2)) {
+            promises.push(zip.file(file2).async('text'));
+            // const value = await zip.file(file2).async('text');
+            // await this.dataBaseService.put(value);
+            // console.log(`Finished ${file2}`);
+          }
         });
 
-        // console.log(zip);
-        // await zip.forEach(async file2 => {
+        Promise.all(promises).then(async (scriptureFiles: string[]) => {
+          scriptureFiles.forEach(scriptureFile => {
+            promises2.push(
+              this.dataBaseService.put(scriptureFile).catch(reason => {
+                console.log(reason);
+              }),
+            );
+          });
+          Promise.all(promises2)
+            .then(() => {
+              console.log('all Finished');
+            })
+            .catch(reason => {
+              console.log(reason);
+            });
+        });
 
-        // const contents = await zip.file(file2).async('text');
-
-        // console.log(contents);
-
-        // localStorage.setItem(file2, contents);
-        // const saveName = this.forageRegex.exec(file2).toString();
-
-        // const test = await localForage.getItem(saveName);
-        // // console.log(test !== null);
-        // if (!test) {
-        //   await localForage.setItem(saveName, contents).then(() => {
-        //     // console.log('finished ' + saveName + zip.files.length);
+        console.log('oiasdjfoaisdjf');
+        // Promise.all(this.loading(zip)).then(async (value: any[]) => {
+        //   value.forEach(v => {
+        //     promises2.push(this.dataBaseService.put(v));
         //   });
-        //   file.downloading = false;
+        //   console.log(promises2.length);
+
+        //   const results = await Promise.all(
+        //     promises2.map(p => {
+        //       p.catch(e => e);
+        //     }),
+        //   );
+
         //   file.downloaded = true;
-        //   localForage.setItem(file.title, JSON.stringify(file));
-        //   localForage.setItem(file.title, JSON.stringify(file));
-        // } else {
         //   file.downloading = false;
-        //   file.downloaded = true;
-        //   localForage.setItem(file.title, JSON.stringify(file));
-        // }
+        //   console.log('aoisdjfioasdjfoiasjdf');
+
+        //   // Promise.all(promises2).then(ddd => {
+        //   //   ddd.forEach(d => {
+        //   //     console.log(d);
+        //   //   });
+        //   //   console.log(ddd);
+        //   // });
         // });
-        // console.log(zip);
-
-        // console.log('Finished');
-
-        // pako.inflate(data);
       });
+
+      // Promise.all(promises).then(() => {});
+    });
+  }
+
+  private loading(zip: jszip) {
+    let promise = [];
+    zip.forEach(async file2 => {
+      if (zip.file(file2)) {
+        promise.push(zip.file(file2).async('text'));
+        // .then(value => {
+        //   promises.push(this.dataBaseService.put(value));
+        // });
+      }
+    });
+
+    return promise;
+  }
+
+  download(file: Download) {
+    return this.httpClient.get(file.fileName, {
+      observe: 'body',
+      responseType: 'arraybuffer',
+    });
+
+    // .subscribe(async data => {
+    //   return data;
+    //   // const i = pako.gzip(, {});
+    //   // const asdf = await this.loadData(data);
+    //   // console.log(asdf);
+
+    //   await this.loadData(data).then(() => {
+    //     this.downloads[0].downloaded = true;
+    //   });
+    //   // this.downloads[0] = true;
+
+    //   // Promise.all(this.loadData(data)).then(() => {
+    //   // });
+    // });
+  }
+
+  private loadData(data: ArrayBuffer) {
+    return new Promise<void>(
+      (
+        resolve: (resolveValue: void) => void,
+        reject: (rejectValue: void) => void,
+      ) => {
+        jszip.loadAsync(data).then(zip => {
+          console.log(zip);
+          zip.forEach(async file2 => {
+            // console.log(file2);
+            if (zip.file(file2)) {
+              const output = await zip.file(file2).async('text');
+              await this.dataBaseService.put(output);
+              // zip
+              //   .file(file2)
+              //   .async('text')
+              //   .then(async value => {
+              //     await this.dataBaseService.put(value);
+              //   });
+              // promises.push(
+              // );
+            }
+          });
+          // return promises;
+        });
+        resolve(undefined);
+      },
+    );
+
+    // return promises;
   }
 }

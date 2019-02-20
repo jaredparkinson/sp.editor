@@ -11,6 +11,7 @@ import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
+import { DatabaseService } from './database.service';
 @Injectable()
 export class ChapterService {
   wTags: QueryList<ElementRef>;
@@ -25,6 +26,7 @@ export class ChapterService {
     private helperService: HelperService,
     private verseSelectService: VerseSelectService,
     private editService: EditService,
+    private dataBaseService: DatabaseService,
   ) {
     this.fs = (window as any).fs;
   }
@@ -139,35 +141,44 @@ export class ChapterService {
         if (saved) {
           this.setChapter(saved as string);
         } else {
-          this.url =
-            'https://storage.oneinthinehand.org/alpha/' +
-            this.navService.urlBuilder(book, vSplit[0]) +
-            '.json';
-          const url2 =
-            'https://storage.oneinthinehand.org/alpha/' +
-            this.navService.urlBuilder(book, vSplit[0]) +
-            '.json';
+          console.log();
+          this.dataBaseService.get(`${book}-${vSplit[0]}`).then(value => {
+            console.log(value as Chapter2);
 
-          this.httpClient
-            .get(url2, {
-              observe: 'body',
-              responseType: 'text',
-            })
-            .subscribe(data => {
-              // console.log(data);
-              // this.db.put(JSON.parse(data));
-
-              this.setChapter(data).then(() => {
-                resolve(null);
-              });
+            this.setChapter(value as string).then(() => {
+              resolve(null);
             });
+          });
+
+          // this.url =
+          //   'https://storage.oneinthinehand.org/alpha/' +
+          //   this.navService.urlBuilder(book, vSplit[0]) +
+          //   '.json';
+          // const url2 =
+          //   'https://storage.oneinthinehand.org/alpha/' +
+          //   this.navService.urlBuilder(book, vSplit[0]) +
+          //   '.json';
+
+          // this.httpClient
+          //   .get(url2, {
+          //     observe: 'body',
+          //     responseType: 'text',
+          //   })
+          //   .subscribe(data => {
+          //     // console.log(data);
+          //     // this.db.put(JSON.parse(data));
+
+          //     this.setChapter(data).then(() => {
+          //       resolve(null);
+          //     });
+          //   });
         }
       },
     );
   }
 
   private async setChapter(
-    data: string,
+    data: {},
     // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<void>(
@@ -176,7 +187,7 @@ export class ChapterService {
         reject: (rejectValue: void) => void,
       ) => {
         this.editService.chapter2 = new Chapter2();
-        this.editService.chapter2 = JSON.parse(data) as Chapter2;
+        this.editService.chapter2 = data as Chapter2;
 
         this.setHighlighting().then(() => {
           this.verseFocus().then(() => {

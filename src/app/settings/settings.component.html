@@ -1,29 +1,60 @@
 <div class="settings">
   <div class="download" *ngFor="let download of downloadService.downloads">
     <span></span>
-    <button (click)="downloadService.download(download)" class="btn" [disabled]="download.downloading">
-      <svg *ngIf="!download.downloaded" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+    <button
+      (click)="downloadService.downloadScriptures(download)"
+      class="btn"
+      [disabled]="download.downloading"
+    >
+      <svg
+        *ngIf="!download.downloaded"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="0px"
+        y="0px"
+        viewBox="0 0 50 50"
+        enable-background="new 0 0 50 50"
+        xml:space="preserve"
+      >
         <g>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M50,47.16H0V50h50V47.16z M10.864,28.762l14.144,14.136l14.128-14.138   l-8.455,0.001V0H19.319v28.761L10.864,28.762z"></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M50,47.16H0V50h50V47.16z M10.864,28.762l14.144,14.136l14.128-14.138   l-8.455,0.001V0H19.319v28.761L10.864,28.762z"
+          ></path>
         </g>
       </svg>
-      <svg *ngIf="download.downloaded" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;"
-        viewBox="0 0 233 233" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd">
+      <svg
+        *ngIf="download.downloaded"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xml:space="preserve"
+        version="1.1"
+        style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;"
+        viewBox="0 0 233 233"
+        x="0px"
+        y="0px"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+      >
         <defs>
           <style type="text/css">
             .fil0 {
-              fill: black
+              fill: black;
             }
           </style>
         </defs>
         <g>
-          <polygon class="fil0" points="233,22 211,0 117,94 22,0 0,22 94,117 0,211 22,233 117,139 211,233 233,211 139,117 "></polygon>
+          <polygon
+            class="fil0"
+            points="233,22 211,0 117,94 22,0 0,22 94,117 0,211 22,233 117,139 211,233 233,211 139,117 "
+          ></polygon>
         </g>
       </svg>
-    </button> <span></span>
-    <span>{{download.title}}</span>
+    </button>
+    <span></span>
+    <span>{{ download.title }}</span>
   </div>
-  <button (click)="reset();">Reset</button>
+  <button (click)="reset()">Reset</button>
 </div>

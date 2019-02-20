@@ -3,6 +3,7 @@ import { Paragraph } from './Paragraph';
 
 export class Chapter2 {
   public _id: string = '';
+  public _rev: string = '';
   public language: string = '';
   public testament: string = '';
 

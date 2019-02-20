@@ -9,11 +9,10 @@ export class SyncScrollingService {
   public onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(async () => {
-      // console.log(this.verses);
-
       this.synchronizedScrolling();
+      // console.log(this.verses);
       // this.synchronizedScrolling();
-    }, 150);
+    }, 50);
   }
 
   synchronizedScrolling(): void {
@@ -26,7 +25,7 @@ export class SyncScrollingService {
         let belowTop: Element[] = [];
         verses.forEach(verse => {
           if (verse.getBoundingClientRect().top > 34) {
-            console.log(verse);
+            // console.log(verse);
 
             belowTop.push(verse);
           }

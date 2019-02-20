@@ -88,6 +88,7 @@ export class DownloadService {
           Promise.all(promises2)
             .then(() => {
               file.downloaded = true;
+              console.log('Finished');
             })
             .catch(reason => {
               console.log(reason);

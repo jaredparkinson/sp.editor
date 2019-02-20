@@ -60,26 +60,31 @@ export class DatabaseService {
     //   });
   }
 
-  public bulkUpdate(dataFile: string) {
-    this.db.allDocs().then(allDocs => {
-      console.log(allDocs);
+  public bulkDocs(dataFile: string) {
+    return new Promise(resolve => {
+      this.db.allDocs().then(allDocs => {
+        console.log(allDocs);
 
-      const scriptureFiles = JSON.parse(dataFile) as [];
+        const scriptureFiles = JSON.parse(dataFile) as [];
 
-      if (scriptureFiles) {
-        scriptureFiles.forEach((scriptureFile: any) => {
-          const savedDoc = allDocs.rows.filter(doc => {
-            return doc.id == scriptureFile._id;
+        if (scriptureFiles) {
+          scriptureFiles.forEach((scriptureFile: any) => {
+            const savedDoc = allDocs.rows.filter(doc => {
+              return doc.id == scriptureFile._id;
+            });
+
+            if (savedDoc && savedDoc.length > 0) {
+              scriptureFile._rev = savedDoc[0].value.rev;
+            }
           });
 
-          if (savedDoc && savedDoc.length > 0) {
-            scriptureFile._rev = savedDoc[0].value.rev;
-          }
-        });
-
-        this.db.bulkDocs(scriptureFiles);
-        // console.log(scriptureFiles);
-      }
+          this.db.bulkDocs(scriptureFiles).then(() => {
+            resolve();
+          });
+          // resolve();
+          // console.log(scriptureFiles);
+        }
+      });
     });
   }
 }

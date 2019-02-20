@@ -81,11 +81,13 @@ export class DownloadService {
 
         Promise.all(promises).then(async (scriptureFiles: string[]) => {
           scriptureFiles.forEach(scriptureFile => {
-            promises2.push(this.dataBaseService.bulkUpdate(scriptureFile));
+            promises2.push(this.dataBaseService.bulkDocs(scriptureFile));
           });
+          console.log(promises2.length);
+
           Promise.all(promises2)
             .then(() => {
-              console.log('all Finished');
+              file.downloaded = true;
             })
             .catch(reason => {
               console.log(reason);

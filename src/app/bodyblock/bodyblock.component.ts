@@ -18,7 +18,7 @@ import {
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { resolve } from 'path';
+// import { resolve } from 'path';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';

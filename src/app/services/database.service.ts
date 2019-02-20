@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-
+import WorkerPouch from 'worker-pouch';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
+
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
+  // public PouchDB = require('pouchdb-browser');
   public db = new PouchDB('alpha.oneinthinehand.org');
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
-  constructor() {}
+  constructor() {
+    // (<any>PouchDB).adapter('worker', WorkerPouch);
+    // this.db = new PouchDB('alpha.oneinthinehand.org');
+  }
 
   async allDocs() {
     console.log(await this.db.allDocs());

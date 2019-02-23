@@ -63,7 +63,7 @@ export class FilesComponent implements OnInit {
   }
 
   onChapterClick(book: string, chapter: string) {
-    this.chapterService.getChapter(book, chapter);
+    this.chapterService.getChapterOld(book, chapter);
   }
   public getNavigation() {}
 

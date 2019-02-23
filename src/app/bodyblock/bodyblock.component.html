@@ -29,20 +29,20 @@
     }"
   >
     <div id="bodyBlockTop"></div>
-    <ng-container *ngIf="editService.chapter2.paragraphs.length !== 0">
-      <header
-        [innerHTML]="
-          sanitizer.bypassSecurityTrustHtml(editService.chapter2.header)
-        "
-      ></header>
-    </ng-container>
-    <div
+    <!-- <ng-container *ngIf="editService.chapter2.paragraphs.length !== 0"> -->
+    <header
+      [innerHTML]="
+        sanitizer.bypassSecurityTrustHtml(editService.chapter2.header)
+      "
+    ></header>
+    <!-- </ng-container> -->
+    <!-- <div<<
       class="hidden-paragraph"
       *ngFor="
         let paragraph of editService.chapter2.paragraphs;
         trackBy: trackById
       "
-      id="{{ paragraph.id }}"
+      id=>"{{ paragraph.id }}"
     >
       <app-verse
         [verse]="verse"
@@ -53,11 +53,11 @@
         "
         #verses
       ></app-verse>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       *ngIf="editService.chapter2.bb"
       [innerHtml]="editService.chapter2.bodyBlock"
-    ></div>
+    ></div> -->
     <div id="body-block-whitespace" class="body-block-whitespace"></div>
   </div>
 

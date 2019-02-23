@@ -47,9 +47,9 @@ export class VerseSelectService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.editService.chapter2.notes.forEach((note: Note) => {
-          this.setNoteVisibility(note);
-        });
+        // this.editService.chapter2.notes.forEach((note: Note) => {
+        //   this.setNoteVisibility(note);
+        // });
         resolve(null);
       },
     );
@@ -249,13 +249,13 @@ export class VerseSelectService {
   }
 
   public modifyWTags(callBack: (wa: W) => void) {
-    this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
-      paragraph.verses.forEach((verse: Verse) => {
-        verse.wTags.forEach((w: W) => {
-          callBack(w);
-        });
-      });
-    });
+    // this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+    //   paragraph.verses.forEach((verse: Verse) => {
+    //     verse.wTags.forEach((w: W) => {
+    //       callBack(w);
+    //     });
+    //   });
+    // });
   }
 
   public resetNotes2() {

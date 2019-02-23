@@ -4,11 +4,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  NgZone,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
-  OnDestroy,
-  NgZone,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -18,20 +18,20 @@ import {
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-// import { resolve } from 'path';
+import { resolve } from 'path';
+import { VerseComponent } from '../components/verse/verse.component';
+import { TemplateGroup } from '../modelsJson/TemplateGroup';
 import { Verse } from '../modelsJson/Verse';
+import { W2 } from '../modelsJson/W2';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
-import { VerseSelectService } from '../services/verse-select.service';
-import { W2 } from '../modelsJson/W2';
-import { TemplateGroup } from '../modelsJson/TemplateGroup';
-import { WTagService } from '../services/wtag-builder.service';
-import { VerseComponent } from '../components/verse/verse.component';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
+import { VerseSelectService } from '../services/verse-select.service';
+import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -72,24 +72,29 @@ export class BodyblockComponent
       const book = params['book'];
       const chapter = params['chapter'];
 
-      if (book !== undefined && chapter !== undefined) {
-        this.chapterService
-          .getChapter(book, chapter)
-          .then(async (value: void) => {
-            console.log(value);
+      const id = `${params['book']}-${params['chapter']}-${params['language']}`;
+      console.log(id);
+      this.chapterService.getChapter(id).then(chapter => {
+        console.log(chapter);
+      });
+      // if (book !== undefined && chapter !== undefined) {
+      //   this.chapterService
+      //     .getChapterOld(id)
+      //     .then(async (value: void) => {
+      //       console.log(value);
 
-            this.verseSelectService.resetVisibility().then(() => {
-              this.wTagBuilderService
-                .buildWTags()
-                .then(() => {
-                  this.onScroll();
-                })
-                .catch(() => {
-                  this.onScroll();
-                });
-            });
-          });
-      }
+      //       this.verseSelectService.resetVisibility().then(() => {
+      //         this.wTagBuilderService
+      //           .buildWTags()
+      //           .then(() => {
+      //             this.onScroll();
+      //           })
+      //           .catch(() => {
+      //             this.onScroll();
+      //           });
+      //       });
+      //     });
+      // }
     });
     this.wordSelection();
   }
@@ -148,7 +153,7 @@ export class BodyblockComponent
   }
 
   public getTemplateGroups(verse: Verse): TemplateGroup[] {
-    let templateGroups: TemplateGroup[] = [];
+    const templateGroups: TemplateGroup[] = [];
     let tempTemplateGroup: TemplateGroup = new TemplateGroup();
 
     for (let x = 0; x < Array.from(verse.text).length; x++) {

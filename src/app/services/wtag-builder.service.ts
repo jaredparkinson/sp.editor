@@ -24,18 +24,18 @@ export class WTagService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        if (this.dataService.chapter2.paragraphs.length === 0) {
-          reject(undefined);
-        } else {
-          this.dataService.chapter2.paragraphs.forEach(
-            (pararaph: Paragraph) => {
-              pararaph.verses.forEach(verse => {
-                verse.wTagGroups = this.getTemplateGroups(verse);
-              });
-            },
-          );
-          resolve(undefined);
-        }
+        // if (this.dataService.chapter2.paragraphs.length === 0) {
+        //   reject(undefined);
+        // } else {
+        //   this.dataService.chapter2.paragraphs.forEach(
+        //     (pararaph: Paragraph) => {
+        //       pararaph.verses.forEach(verse => {
+        //         verse.wTagGroups = this.getTemplateGroups(verse);
+        //       });
+        //     },
+        //   );
+        //   resolve(undefined);
+        // }
       },
     );
   }

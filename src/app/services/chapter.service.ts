@@ -5,13 +5,13 @@ import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
+import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
-import { DatabaseService } from './database.service';
 @Injectable()
 export class ChapterService {
   wTags: QueryList<ElementRef>;
@@ -42,14 +42,37 @@ export class ChapterService {
 
   public resetNotes(): void {
     lodash.each(this.editService.chapter2.notes, note => {
-      note.override = false;
-      note.visible = this.saveState.data.secondaryNotesVisible;
+      // note.override = false;
+      // note.visible = this.saveState.data.secondaryNotesVisible;
     });
   }
 
-  public async getChapter(
-    book: string,
-    chapter: string,
+  public getChapter(id: string) {
+    return new Promise<Chapter2>(
+      (
+        resolve: (resolveValue: Chapter2) => void,
+        reject: (rejectValue: Chapter2) => void,
+      ) => {
+        this.dataBaseService
+          .get(id)
+          .then(chapter => {
+            resolve(chapter as Chapter2);
+          })
+          .catch(() => {
+            reject(undefined);
+          });
+      },
+    );
+  }
+
+  public setHighlightging(chapter: Chapter2, highlight: [string, string]) {
+    return new Promise<Chapter2>(resolve => {
+      resolve(chapter);
+    });
+  }
+
+  public async getChapterOld(
+    id: string,
     // synchronizedScrolling: () => Promise<void>
   ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -57,11 +80,11 @@ export class ChapterService {
       this.notes2 = [];
       this.navService.pageTitle = '';
 
-      let vSplit = chapter.split('.');
+      // let vSplit = chapter.split('.');
 
-      if (chapter === '') {
-        vSplit = book.split('.');
-      }
+      // if (chapter === '') {
+      //   vSplit = book.split('.');
+      // }
 
       // const suite = new benchmark.Suite();
       // const a = suite
@@ -69,9 +92,9 @@ export class ChapterService {
       //   })
       //   .run();
       //   console.log(a);
-      this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
-      this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-      this.getChapterWeb(book, vSplit).then(() => {
+      // this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
+      // this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
+      this.getChapterWeb(id).then(() => {
         resolve(undefined);
       });
     });
@@ -103,32 +126,31 @@ export class ChapterService {
     );
   }
 
-  private async setHighlighting(): Promise<void> {
+  private async oldSetHighlighting(): Promise<void> {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        lodash.forEach(this.editService.chapter2.paragraphs, paragraph => {
-          lodash.forEach(paragraph.verses, verse => {
-            if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
-              verse.highlight = true;
-            }
-            if (
-              this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))
-            ) {
-              verse.context = true;
-            }
-          });
-        });
+        // lodash.forEach(this.editService.chapter2.paragraphs, paragraph => {
+        //   lodash.forEach(paragraph.verses, verse => {
+        //     if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
+        //       verse.highlight = true;
+        //     }
+        //     if (
+        //       this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))
+        //     ) {
+        //       verse.context = true;
+        //     }
+        //   });
+        // });
         resolve(null);
       },
     );
   }
 
   private async getChapterWeb(
-    book: string,
-    vSplit: string[],
+    id: string,
     // synchronizedScrolling: () => Promise<void>
   ) {
     return new Promise<void>(
@@ -142,7 +164,7 @@ export class ChapterService {
           this.setChapter(saved as string);
         } else {
           console.log();
-          this.dataBaseService.get(`${book}-${vSplit[0]}`).then(value => {
+          this.dataBaseService.get(`${id}`).then(value => {
             console.log(value as Chapter2);
 
             this.setChapter(value as string).then(() => {
@@ -189,7 +211,7 @@ export class ChapterService {
         this.editService.chapter2 = new Chapter2();
         this.editService.chapter2 = data as Chapter2;
 
-        this.setHighlighting().then(() => {
+        this.oldSetHighlighting().then(() => {
           this.verseFocus().then(() => {
             // synchronizedScrolling();
             resolve(null);

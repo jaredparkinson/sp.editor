@@ -62,7 +62,7 @@ export class EditorComponent
       const chapter = params['chapter'];
 
       if (book !== undefined && chapter !== undefined) {
-        await this.chapterService.getChapter(book, chapter).then(async () => {
+        await this.chapterService.getChapterOld(book, chapter).then(async () => {
           // console.log(this.synchronizedScrolling());
           // this.synchronizedScrolling();
           // this.chapterService.resetVerseSelect();
@@ -70,7 +70,7 @@ export class EditorComponent
           this.synchronizedScrolling();
         });
       } else if (book === undefined && chapter !== undefined) {
-        await this.chapterService.getChapter(chapter, '').then(() => {
+        await this.chapterService.getChapterOld(chapter, '').then(() => {
           // this.chapterService.resetVerseSelect();
           this.verseSelectService.resetVisibility();
           // this.synchronizedScrolling();

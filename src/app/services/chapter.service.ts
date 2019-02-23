@@ -97,36 +97,72 @@ export class ChapterService {
   public buildWTags(chapter: Chapter2) {
     return new Promise<Chapter2>(resolve => {
       chapter.verses.verses.forEach(verse => {
-        verse.wTags.forEach(w => (w.text = ''));
-        let tempWTagText = '';
-        let newWTags: W[] = [];
-        let y = 0;
-        for (let x = 0; x < verse.text.length; x++) {
-          const character = verse.text[x];
-          // console.log(character);
-          if (y < verse.wTags.length && verse.wTags[y].id.includes(x)) {
-            verse.wTags[y].text += character;
-            if (tempWTagText.length > 0) {
-              newWTags.push(new W(tempWTagText));
-              tempWTagText = '';
+        let start: number = null;
+        let end: number = null;
+        let tempWad: W[] = [];
+        verse.wTags.forEach(w => {
+          w.text = '';
+          w.text = this.getWTagText(w.id, verse.text);
+          tempWad.push(w);
+          if (!start) {
+            start = lodash.last(w.id) + 1;
+          } else {
+            const tempW = new W('');
+            end = lodash.first(w.id);
+            if (lodash.last(verse.wTags) === w) {
+              start = lodash.last(w.id) + 1;
+              end = verse.text.length;
+              // console.log(start);
+              console.log(end);
             }
-            continue;
+            for (let x = start; x < end; x++) {
+              tempW.id.push(x);
+            }
+            tempW.text = this.getWTagText(tempW.id, verse.text);
+            tempWad.push(tempW);
+            start = null;
           }
-          if (y < verse.wTags.length && lodash.last(verse.wTags[y].id) < x) {
-            newWTags.push(verse.wTags[y]);
-            y = y + 1;
-            continue;
-          }
-          if (y < verse.wTags.length && lodash.first(verse.wTags[y].id) > x) {
-            tempWTagText = `${tempWTagText}${character}`;
-          }
-        }
+        });
+        console.log('tempasdf');
+        console.log(tempWad);
 
-        verse.builtWTags = newWTags;
-        console.log(newWTags);
+        // let newWTags: W[] = [];
+
+        // let tempWTagText = '';
+        // let y = 0;
+        // for (let x = 0; x < verse.text.length; x++) {
+        //   const character = verse.text[x];
+        //   // console.log(character);
+        //   if (y < verse.wTags.length && verse.wTags[y].id.includes(x)) {
+        //     verse.wTags[y].text += character;
+        //     if (tempWTagText.length > 0) {
+        //       newWTags.push(new W(`${tempWTagText}${character}`));
+        //       tempWTagText = '';
+        //     }
+        //     continue;
+        //   }
+        //   if (y < verse.wTags.length && lodash.last(verse.wTags[y].id) < x) {
+        //     newWTags.push(verse.wTags[y]);
+        //     y = y + 1;
+        //     continue;
+        //   }
+        //   if (y < verse.wTags.length && lodash.first(verse.wTags[y].id) > x) {
+        //     tempWTagText = `${tempWTagText}${character}`;
+        //   }
+        // }
+
+        verse.builtWTags = tempWad;
+        // console.log(newWTags);
       });
       resolve(chapter);
     });
+  }
+  getWTagText(id: number[], text: string): string {
+    let tempText = '';
+    id.forEach(i => {
+      tempText = `${tempText}${text[i]}`;
+    });
+    return tempText;
   }
 
   public async getChapterOld(

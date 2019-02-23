@@ -85,7 +85,7 @@ export class BodyblockComponent
           .then(chapter => {
             this.chapterService.buildWTags(chapter);
           });
-        console.log(chapter);
+        // console.log(chapter);
       });
       // if (book !== undefined && chapter !== undefined) {
       //   this.chapterService

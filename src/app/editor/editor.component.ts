@@ -53,39 +53,37 @@ export class EditorComponent
 
   ngAfterContentInit(): void {}
   ngOnInit() {
-    this.initSyncScrolling();
-    this.route.params.subscribe(async params => {
-      this.navService.rightPaneToggle = false;
-      this.navService.leftPaneToggle = false;
-
-      const book = params['book'];
-      const chapter = params['chapter'];
-
-      if (book !== undefined && chapter !== undefined) {
-        await this.chapterService.getChapterOld(book, chapter).then(async () => {
-          // console.log(this.synchronizedScrolling());
-          // this.synchronizedScrolling();
-          // this.chapterService.resetVerseSelect();
-          await this.verseSelectService.resetVisibility();
-          this.synchronizedScrolling();
-        });
-      } else if (book === undefined && chapter !== undefined) {
-        await this.chapterService.getChapterOld(chapter, '').then(() => {
-          // this.chapterService.resetVerseSelect();
-          this.verseSelectService.resetVisibility();
-          // this.synchronizedScrolling();
-        });
-        // setTimeout(() => {
-        //   if (this.saveState.data.verseSelect) {
-        //     this.chapterService.resetVerseSelect();
-        //   }
-        // }, 1000);
-      }
-    });
-    setTimeout(() => {
-      this.synchronizedScrolling();
-    }, 500);
-    this.wordSelection();
+    // this.initSyncScrolling();
+    // this.route.params.subscribe(async params => {
+    //   this.navService.rightPaneToggle = false;
+    //   this.navService.leftPaneToggle = false;
+    //   const book = params['book'];
+    //   const chapter = params['chapter'];
+    //   if (book !== undefined && chapter !== undefined) {
+    //     await this.chapterService.getChapterOld(book, chapter).then(async () => {
+    //       // console.log(this.synchronizedScrolling());
+    //       // this.synchronizedScrolling();
+    //       // this.chapterService.resetVerseSelect();
+    //       await this.verseSelectService.resetVisibility();
+    //       this.synchronizedScrolling();
+    //     });
+    //   } else if (book === undefined && chapter !== undefined) {
+    //     await this.chapterService.getChapterOld(chapter, '').then(() => {
+    //       // this.chapterService.resetVerseSelect();
+    //       this.verseSelectService.resetVisibility();
+    //       // this.synchronizedScrolling();
+    //     });
+    //     // setTimeout(() => {
+    //     //   if (this.saveState.data.verseSelect) {
+    //     //     this.chapterService.resetVerseSelect();
+    //     //   }
+    //     // }, 1000);
+    //   }
+    // });
+    // setTimeout(() => {
+    //   this.synchronizedScrolling();
+    // }, 500);
+    // this.wordSelection();
   }
   verseSelectionClick(verse: Verse): void {
     if (this.editService.editState) {

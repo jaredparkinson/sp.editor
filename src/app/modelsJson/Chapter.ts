@@ -57,6 +57,10 @@ export class SecondaryNote {
 export class Verse {
   public id: string;
   public text: string;
+  public wTags: W[] = [];
+  public builtWTags: W[] = [];
+  public highlight: boolean = false;
+  public context: boolean = false;
   constructor(element: Element) {
     this.id = element.id;
     this.text = element.textContent;
@@ -66,15 +70,17 @@ export class Verse {
 }
 export class Verses {
   public verses: Verse[] = [];
-  public wTags: W[] = [];
   private count = 0;
 }
 export class W {
+  public id: number[] = [];
   public classList: string[] = [];
-  public innerHtml = '';
-  public id = '';
   public refs: string[] = [];
   public visibleRefs: string[] = [];
-  public selected = false;
-  public superscripts: string[] = [];
+  public char: string;
+  public text: string = '';
+
+  constructor(text: string) {
+    this.text = text;
+  }
 }

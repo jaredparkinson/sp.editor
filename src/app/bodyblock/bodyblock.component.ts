@@ -18,7 +18,7 @@ import {
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { resolve } from 'path';
+
 import { VerseComponent } from '../components/verse/verse.component';
 import { TemplateGroup } from '../modelsJson/TemplateGroup';
 import { Verse } from '../modelsJson/Verse';
@@ -70,11 +70,21 @@ export class BodyblockComponent
       console.log(params);
 
       const book = params['book'];
-      const chapter = params['chapter'];
+      const chapter = params['chapter'].toString();
+      const highlighting: string[] = chapter.split('.');
 
-      const id = `${params['book']}-${params['chapter']}-${params['language']}`;
+      const id = `${params['book']}-${highlighting.pop()}-${
+        params['language']
+      }`;
+      console.log(highlighting);
+
       console.log(id);
       this.chapterService.getChapter(id).then(chapter => {
+        this.chapterService
+          .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
+          .then(chapter => {
+            this.chapterService.buildWTags(chapter);
+          });
         console.log(chapter);
       });
       // if (book !== undefined && chapter !== undefined) {

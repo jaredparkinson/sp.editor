@@ -3,7 +3,7 @@ import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
-import { Chapter2, W } from '../modelsJson/Chapter';
+import { Chapter2, Paragraph, W } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
@@ -14,10 +14,6 @@ import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
 @Injectable()
 export class ChapterService {
-  wTags: QueryList<ElementRef>;
-  public selectedSecondaryNote: SecondaryNote;
-  public url: string;
-  public db = new PouchDB('alpha.oneinthinehand.org');
   constructor(
     private navService: NavigationService,
     private httpClient: HttpClient,
@@ -30,6 +26,10 @@ export class ChapterService {
   ) {
     this.fs = (window as any).fs;
   }
+  wTags: QueryList<ElementRef>;
+  public selectedSecondaryNote: SecondaryNote;
+  public url: string;
+  public db = new PouchDB('alpha.oneinthinehand.org');
 
   public notes2: Note[] = [];
 
@@ -39,6 +39,23 @@ export class ChapterService {
   public wTagSelectMode = false;
 
   scrollIntoView: Element;
+  buildParagraphs(chapter: Chapter2): Promise<Chapter2> {
+    return new Promise<Chapter2>(resolve => {
+      console.log(chapter);
+
+      chapter.paragraphs.paragraphs.forEach(paragraph => {
+        paragraph.verses = [];
+        paragraph.verseIds.forEach(verseId => {
+          paragraph.verses.push(
+            lodash.find(chapter.verses.verses, verse => {
+              return verse.id === verseId;
+            }),
+          );
+        });
+      });
+      resolve(chapter);
+    });
+  }
 
   public resetNotes(): void {
     lodash.each(this.editService.chapter2.notes, note => {
@@ -97,34 +114,42 @@ export class ChapterService {
   public buildWTags(chapter: Chapter2) {
     return new Promise<Chapter2>(resolve => {
       chapter.verses.verses.forEach(verse => {
-        let start: number = null;
-        let end: number = null;
-        let tempWad: W[] = [];
-        verse.wTags.forEach(w => {
-          w.text = '';
-          w.text = this.getWTagText(w.id, verse.text);
-          tempWad.push(w);
-          if (!start) {
-            start = lodash.last(w.id) + 1;
-          } else {
-            const tempW = new W('');
-            end = lodash.first(w.id);
-            if (lodash.last(verse.wTags) === w) {
-              start = lodash.last(w.id) + 1;
-              end = verse.text.length;
-              // console.log(start);
-              console.log(end);
-            }
-            for (let x = start; x < end; x++) {
-              tempW.id.push(x);
-            }
-            tempW.text = this.getWTagText(tempW.id, verse.text);
-            tempWad.push(tempW);
-            start = null;
-          }
+        verse.wTags.forEach(wTag => {
+          wTag.text = '';
+          wTag.id.forEach(i => {
+            wTag.text = `${wTag.text}${verse.text[i]}`;
+          });
+          console.log(wTag.text);
         });
-        console.log('tempasdf');
-        console.log(tempWad);
+
+        // let start: number = null;
+        // let end: number = null;
+        // const tempWad: W[] = [];
+        // verse.wTags.forEach(w => {
+        //   w.text = '';
+        //   w.text = this.getWTagText(w.id, verse.text);
+        //   tempWad.push(w);
+        //   if (!start) {
+        //     start = lodash.last(w.id) + 1;
+        //   } else {
+        //     const tempW = new W('');
+        //     end = lodash.first(w.id);
+        //     if (lodash.last(verse.wTags) === w) {
+        //       start = lodash.last(w.id) + 1;
+        //       end = verse.text.length;
+        //       // console.log(start);
+        //       console.log(end);
+        //     }
+        //     for (let x = start; x < end; x++) {
+        //       tempW.id.push(x);
+        //     }
+        //     tempW.text = this.getWTagText(tempW.id, verse.text);
+        //     tempWad.push(tempW);
+        //     start = null;
+        //   }
+        // });
+        // console.log('tempasdf');
+        // console.log(tempWad);
 
         // let newWTags: W[] = [];
 
@@ -151,7 +176,7 @@ export class ChapterService {
         //   }
         // }
 
-        verse.builtWTags = tempWad;
+        // verse.builtWTags = tempWad;
         // console.log(newWTags);
       });
       resolve(chapter);

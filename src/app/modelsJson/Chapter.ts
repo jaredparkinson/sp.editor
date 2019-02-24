@@ -9,6 +9,7 @@ export class Chapter2 {
   public notes: Notes;
   public verses: Verses;
   public _rev = '';
+  public paragraphs: Paragraphs;
 }
 
 export class Note {
@@ -58,9 +59,9 @@ export class Verse {
   public id: string;
   public text: string;
   public wTags: W[] = [];
-  public builtWTags: W[] = [];
-  public highlight: boolean = false;
-  public context: boolean = false;
+  // public builtWTags: W[] = [];
+  public highlight = false;
+  public context = false;
   constructor(element: Element) {
     this.id = element.id;
     this.text = element.textContent;
@@ -77,10 +78,18 @@ export class W {
   public classList: string[] = [];
   public refs: string[] = [];
   public visibleRefs: string[] = [];
-  public char: string;
-  public text: string = '';
+  public text: string;
 
   constructor(text: string) {
     this.text = text;
   }
+}
+
+export class Paragraph {
+  public verseIds: string[] = [];
+  public verses: Verse[] = [];
+}
+
+export class Paragraphs {
+  public paragraphs: Paragraph[] = [];
 }

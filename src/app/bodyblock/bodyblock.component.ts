@@ -83,7 +83,13 @@ export class BodyblockComponent
         this.chapterService
           .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
           .then(chapter => {
-            this.chapterService.buildWTags(chapter);
+            this.chapterService.buildWTags(chapter).then(chapter => {
+              this.chapterService.buildParagraphs(chapter).then(chapter => {
+                console.log(chapter);
+
+                this.editService.chapter2 = chapter;
+              });
+            });
           });
         // console.log(chapter);
       });

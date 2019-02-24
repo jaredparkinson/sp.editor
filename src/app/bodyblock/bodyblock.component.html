@@ -32,6 +32,11 @@
         sanitizer.bypassSecurityTrustHtml(editService.chapter2.header)
       "
     ></header>
+    <app-paragraph
+      class="hidden-paragraph"
+      [paragraph]="paragraph"
+      *ngFor="let paragraph of editService.chapter2.paragraphs.paragraphs"
+    ></app-paragraph>
     <!-- </ng-container> -->
     <!-- <div<<
       class="hidden-paragraph"

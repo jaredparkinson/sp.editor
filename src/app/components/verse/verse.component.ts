@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { WTagService } from '../../services/wtag-builder.service';
-import { Verse } from '../../modelsJson/Verse';
-import { SaveStateService } from '../../services/save-state.service';
-import { VerseSelectService } from '../../services/verse-select.service';
-import { StringService } from '../../services/string.service';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Verse, W } from '../../modelsJson/Chapter';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
+// import { Verse } from '../../modelsJson/Verse';
+import { SaveStateService } from '../../services/save-state.service';
+import { StringService } from '../../services/string.service';
+import { VerseSelectService } from '../../services/verse-select.service';
+import { WTagService } from '../../services/wtag-builder.service';
 
 @Component({
   selector: 'app-verse',
@@ -24,6 +25,20 @@ export class VerseComponent implements OnInit {
 
   ngOnInit() {}
 
+  filterClassList(classList: string[]) {
+    if (!classList) {
+      return '';
+    }
+
+    return classList.toString();
+  }
+
+  wTagClick(w: W) {
+    if (!w.visibleRefs || w.visibleRefs.length === 0) {
+      console.log('hffd');
+      return;
+    }
+  }
   getWColor(w: TemplateGroup) {
     // console.log(w.classList);
 

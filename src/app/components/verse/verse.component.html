@@ -1,4 +1,16 @@
-<span
+<span class="verse">
+  <!-- {{ verse.text }} -->
+  <ng-container *ngFor="let w of verse.wTags">
+    <w
+      [class]="filterClassList(w.classList)"
+      *ngIf="w.refs"
+      (click)="wTagClick(w)"
+      >{{ w.text }}</w
+    >
+    <w [class]="filterClassList(w.classList)" *ngIf="!w.refs">{{ w.text }}</w>
+  </ng-container>
+</span>
+<!-- <span
   class="verse"
   [ngClass]="{
     'highlight-verse': verse.highlight,
@@ -17,7 +29,7 @@
       <w>{{ templateGroup.text }}</w>
     </ng-template>
   </ng-container>
-</span>
+</span> -->
 <!-- <ng-container
           *ngFor="let t of this.stringSplit(verse.text); let vT = index"
         >

@@ -5,6 +5,10 @@
       [class]="filterClassList(w.classList)"
       *ngIf="w.refs"
       (click)="wTagClick(w)"
+      [ngClass]="{
+        'verse-select-0': w.visibleRefs && w.visibleRefs.length > 0,
+        wRef: w.visibleRefs && w.visibleRefs.length > 1
+      }"
       >{{ w.text }}</w
     >
     <w [class]="filterClassList(w.classList)" *ngIf="!w.refs">{{ w.text }}</w>

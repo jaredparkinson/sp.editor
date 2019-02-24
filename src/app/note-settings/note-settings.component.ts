@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from "../services/EditService";
+import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
@@ -52,9 +52,10 @@ export class NoteSettingsComponent implements OnInit {
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
       console.log('asdfiojkasofjafjaosdfjoiasdfjioj');
+      this.chapterService.buildWTags(this.editService.chapter2);
 
       // this.chapterService.resetNotes();
-      this.verseSelectService.resetVisibility();
+      // this.verseSelectService.resetVisibility();
     });
   }
 
@@ -65,19 +66,22 @@ export class NoteSettingsComponent implements OnInit {
   }
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
-      this.verseSelectService.resetVisibility();
+      // this.verseSelectService.resetVisibility();
+      this.chapterService.buildWTags(this.editService.chapter2);
     });
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress().then((value: boolean) => {
-      this.verseSelectService.resetVisibility();
+      // this.verseSelectService.resetVisibility();
+      this.chapterService.buildWTags(this.editService.chapter2);
     });
   }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress().then((value: boolean) => {
       console.log(value);
+      this.chapterService.buildWTags(this.editService.chapter2);
 
-      this.verseSelectService.resetVisibility();
+      // this.verseSelectService.resetVisibility();
     });
   }
   toggleVerseSelect() {

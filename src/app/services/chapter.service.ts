@@ -3,7 +3,7 @@ import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
-import { Chapter2, Paragraph, W } from '../modelsJson/Chapter';
+import { Chapter2, Paragraph, Verse, W } from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
@@ -61,6 +61,51 @@ export class ChapterService {
     lodash.each(this.editService.chapter2.notes, note => {
       // note.override = false;
       // note.visible = this.saveState.data.secondaryNotesVisible;
+    });
+  }
+
+  resetRefVisible(chapter: Chapter2) {
+    const engRegex = new RegExp(/\d{9}/g);
+    const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
+    const tcRegex = new RegExp(/tc.*/g);
+
+    const regex: RegExp[] = [];
+
+    if (this.saveState.data.englishNotesVisible) {
+      regex.push(engRegex);
+    }
+    if (this.saveState.data.newNotesVisible) {
+      regex.push(newRegex);
+    }
+    if (this.saveState.data.translatorNotesVisible) {
+      regex.push(tcRegex);
+    }
+
+    chapter.verses.verses.forEach(verse => {
+      // lodash.filter(verse.wTags,( wTag as W) => {
+      //   wTag
+      //   let vis = false;
+      //   regex.forEach(r => {
+      //     if (r.test(wTag)) {
+      //       vis = true;
+      //     }
+      //   })
+      // } )
+      verse.wTags.forEach(wTag => {
+        if (wTag.refs) {
+          wTag.visibleRefs = [];
+
+          wTag.refs.forEach(id => {
+            regex.forEach(r => {
+              if (r.test(id.toString())) {
+                console.log(id);
+
+                wTag.visibleRefs.push(id);
+              }
+            });
+          });
+        }
+      });
     });
   }
 
@@ -122,6 +167,7 @@ export class ChapterService {
           console.log(wTag.text);
         });
 
+        this.resetRefVisible(chapter);
         // let start: number = null;
         // let end: number = null;
         // const tempWad: W[] = [];

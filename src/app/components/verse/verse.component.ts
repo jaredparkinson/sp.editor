@@ -35,9 +35,10 @@ export class VerseComponent implements OnInit {
 
   wTagClick(w: W) {
     if (!w.visibleRefs || w.visibleRefs.length === 0) {
-      console.log('hffd');
+      console.log(w);
       return;
     }
+    console.log(w.visibleRefs);
   }
   getWColor(w: TemplateGroup) {
     // console.log(w.classList);

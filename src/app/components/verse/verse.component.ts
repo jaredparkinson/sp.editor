@@ -6,7 +6,9 @@ import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
-
+import  * as lodash from "lodash";
+import { ChapterService } from '../../services/chapter.service';
+import { EditService } from '../../services/EditService';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',
@@ -19,6 +21,8 @@ export class VerseComponent implements OnInit {
     public saveState: SaveStateService,
     public verseSelectService: VerseSelectService,
     public stringService: StringService,
+    public chapterService: ChapterService,
+    public dataService:EditService
   ) {}
 
   @ViewChild('span') span!: ElementRef;
@@ -38,6 +42,13 @@ export class VerseComponent implements OnInit {
       console.log(w);
       return;
     }
+      if (lodash.isEmpty(w.visibleRefs)) {
+        this.chapterService.buildWTags(this.dataService.chapter2);
+      }
+      if (w.clicked ) {
+    }
+    
+    else{}
     console.log(w.visibleRefs);
   }
   getWColor(w: TemplateGroup) {

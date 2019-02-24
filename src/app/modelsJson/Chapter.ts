@@ -79,7 +79,8 @@ export class W {
   public refs: string[] = [];
   public visibleRefs: string[] = [];
   public text: string;
-
+  public selected: boolean;
+  clicked: boolean;
   constructor(text: string) {
     this.text = text;
   }

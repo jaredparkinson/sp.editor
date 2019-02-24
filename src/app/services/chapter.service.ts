@@ -164,6 +164,8 @@ export class ChapterService {
           wTag.id.forEach(i => {
             wTag.text = `${wTag.text}${verse.text[i]}`;
           });
+          wTag.selected = false;
+          wTag.clicked = false;
           console.log(wTag.text);
         });
 

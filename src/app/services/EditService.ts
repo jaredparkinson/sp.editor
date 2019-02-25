@@ -11,7 +11,6 @@ import { StringService } from './string.service';
 })
 export class EditService {
   public editState = false;
-  chapter2: Chapter2 = new Chapter2();
   constructor(private stringService: StringService) {}
   public setEditMode(
     editState: boolean,

@@ -32,6 +32,7 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -57,7 +58,7 @@ export class BodyblockComponent
     private route: ActivatedRoute,
     private wTagBuilderService: WTagService,
     public syncScrollingService: SyncScrollingService,
-    private ngZone: NgZone,
+    public dataService: DataService,
   ) {}
 
   ngAfterContentInit(): void {}
@@ -87,7 +88,7 @@ export class BodyblockComponent
               this.chapterService.buildParagraphs(chapter).then(chapter => {
                 console.log(chapter);
 
-                this.editService.chapter2 = chapter;
+                this.dataService.chapter2 = chapter;
               });
             });
           });

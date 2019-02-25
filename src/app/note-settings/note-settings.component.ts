@@ -6,6 +6,7 @@ import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-note-settings',
@@ -22,6 +23,7 @@ export class NoteSettingsComponent implements OnInit {
     public editService: EditService,
     public chapterService: ChapterService,
     public httpClient: HttpClient,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class NoteSettingsComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url.includes('edit')) {
-      // const saveData = JSON.stringify(this.editService.chapter2);
+      // const saveData = JSON.stringify(this.dataService.chapter2);
 
       // // this.httpClient.put()
       // this.httpClient.post(this.chapterService.url, saveData);
@@ -52,7 +54,7 @@ export class NoteSettingsComponent implements OnInit {
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
       console.log('asdfiojkasofjafjaosdfjoiasdfjioj');
-      this.chapterService.buildWTags(this.editService.chapter2);
+      this.chapterService.buildWTags(this.dataService.chapter2);
 
       // this.chapterService.resetNotes();
       // this.verseSelectService.resetVisibility();
@@ -67,19 +69,19 @@ export class NoteSettingsComponent implements OnInit {
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
       // this.verseSelectService.resetVisibility();
-      this.chapterService.buildWTags(this.editService.chapter2);
+      this.chapterService.buildWTags(this.dataService.chapter2);
     });
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress().then((value: boolean) => {
       // this.verseSelectService.resetVisibility();
-      this.chapterService.buildWTags(this.editService.chapter2);
+      this.chapterService.buildWTags(this.dataService.chapter2);
     });
   }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress().then((value: boolean) => {
       console.log(value);
-      this.chapterService.buildWTags(this.editService.chapter2);
+      this.chapterService.buildWTags(this.dataService.chapter2);
 
       // this.verseSelectService.resetVisibility();
     });

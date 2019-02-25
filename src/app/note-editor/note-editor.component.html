@@ -30,7 +30,7 @@
         [ngClass]="{
           'secondary-override-off': !note.override
         }"
-        *ngFor="let note of editService.chapter2.notes; trackBy: trackById"
+        *ngFor="let note of dataService.chapter2.notes; trackBy: trackById"
         id="{{ note.id }}"
         class="{{ note.classList }}"
       >

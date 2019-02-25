@@ -12,6 +12,7 @@ import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
+import { DataService } from './data.service';
 @Injectable()
 export class ChapterService {
   constructor(
@@ -23,6 +24,7 @@ export class ChapterService {
     private verseSelectService: VerseSelectService,
     private editService: EditService,
     private dataBaseService: DatabaseService,
+    private dataService: DataService,
   ) {
     this.fs = (window as any).fs;
   }
@@ -58,7 +60,7 @@ export class ChapterService {
   }
 
   public resetNotes(): void {
-    lodash.each(this.editService.chapter2.notes, note => {
+    lodash.each(this.dataService.chapter2.notes, note => {
       // note.override = false;
       // note.visible = this.saveState.data.secondaryNotesVisible;
     });
@@ -299,7 +301,7 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        // lodash.forEach(this.editService.chapter2.paragraphs, paragraph => {
+        // lodash.forEach(this.dataService.chapter2.paragraphs, paragraph => {
         //   lodash.forEach(paragraph.verses, verse => {
         //     if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
         //       verse.highlight = true;
@@ -375,8 +377,8 @@ export class ChapterService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        this.editService.chapter2 = new Chapter2();
-        this.editService.chapter2 = data as Chapter2;
+        this.dataService.chapter2 = new Chapter2();
+        this.dataService.chapter2 = data as Chapter2;
 
         this.oldSetHighlighting().then(() => {
           this.verseFocus().then(() => {

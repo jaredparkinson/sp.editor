@@ -28,6 +28,7 @@ import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { W } from '../modelsJson/WTag';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-note-editor',
@@ -44,6 +45,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     public editService: EditService,
     public verseSelectService: VerseSelectService,
+    public dataService: DataService,
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -109,7 +111,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     //   if (verseId) {
     //     wTags.forEach((elem: Element) => {
     //       const wTagId = elem.firstElementChild.className;
-    //       this.editService.chapter2.paragraphs.forEach(
+    //       this.dataService.chapter2.paragraphs.forEach(
     //         (paragraph: Paragraph) => {
     //           paragraph.verses.forEach((verse: Verse) => {
     //             if (verse.id === verseId.toString()) {
@@ -143,14 +145,14 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
       this.editService.setEditMode(true, note, secondaryNote);
     }
 
-    // this.editService.chapter2.notes.forEach((chapterNote: Note2) => {
+    // this.dataService.chapter2.notes.forEach((chapterNote: Note2) => {
     //   chapterNote.sn.forEach((sn: SecondaryNote) => {
     //     if (sn !== secondaryNote) {
     //       sn.disabled = true;
     //     }
     //   });
     //  });
-    // this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+    // this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
 
     //   paragraph.verses.forEach((verse: Verse) => {
     //     if (verse.id !== `p${note.id.replace('note', '')}`) {

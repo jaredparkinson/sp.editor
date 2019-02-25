@@ -6,7 +6,7 @@ import { NoteRef, SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from './chapter.service';
-import { EditService } from "./EditService";
+import { EditService } from './EditService';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
@@ -47,7 +47,7 @@ export class VerseSelectService {
         resolve: (resolveValue: void) => void,
         reject: (rejectValue: void) => void,
       ) => {
-        // this.editService.chapter2.notes.forEach((note: Note) => {
+        // this.dataService.chapter2.notes.forEach((note: Note) => {
         //   this.setNoteVisibility(note);
         // });
         resolve(null);
@@ -159,7 +159,6 @@ export class VerseSelectService {
     });
 
     console.log(seNote.visible);
-    
 
     return seNote.visible;
   }
@@ -249,7 +248,7 @@ export class VerseSelectService {
   }
 
   public modifyWTags(callBack: (wa: W) => void) {
-    // this.editService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
+    // this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
     //   paragraph.verses.forEach((verse: Verse) => {
     //     verse.wTags.forEach((w: W) => {
     //       callBack(w);

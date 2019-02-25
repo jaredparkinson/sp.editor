@@ -58,11 +58,8 @@ export class ChapterService {
       // const noteVisibility: Map<string, boolean> = new Map();
       chapter.notes.notes.forEach(note => {
         note.secondary.forEach(secondaryNote => {
-          noteVisibility.set(
-            secondaryNote.id,
-            this.getSecondaryNoteVisibility(secondaryNote),
-          );
-          if (noteVisibility.get(secondaryNote.id)) {
+          noteVisibility.set(secondaryNote.id, false);
+          if (this.getSecondaryNoteVisibility(secondaryNote)) {
             secondaryNote.noteRefs.forEach(noteRef => {
               if (this.getNoteRefVisibility(noteRef)) {
                 noteVisibility.set(secondaryNote.id, true);
@@ -100,15 +97,15 @@ export class ChapterService {
     ) {
       visible = false;
     }
-    if (visible) {
-      console.log(
-        visible +
-          ' ' +
-          secondaryNote.notePhrase.text +
-          ' ' +
-          secondaryNote.notePhrase.classList,
-      );
-    }
+    // if (visible) {
+    //   console.log(
+    //     visible +
+    //       ' ' +
+    //       secondaryNote.notePhrase.text +
+    //       ' ' +
+    //       secondaryNote.notePhrase.classList,
+    //   );
+    // }
 
     return visible;
   }

@@ -85,10 +85,10 @@ export class BodyblockComponent
           .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
           .then(chapter => {
             this.chapterService.buildWTags(chapter).then(chapter => {
-              this.chapterService.buildParagraphs(chapter).then(chapter => {
-                console.log(chapter);
-
-                this.dataService.chapter2 = chapter;
+              this.dataService.chapter2 = chapter;
+              this.chapterService.buildParagraphs(chapter).then(paragraphs => {
+                this.dataService.paragraphs = paragraphs;
+                console.log(this.dataService.chapter2.notes);
               });
             });
           });

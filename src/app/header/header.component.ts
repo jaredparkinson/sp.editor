@@ -12,19 +12,20 @@ import {
   faGlobe,
   faListUl,
   faParagraph,
-  faPlus
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from "../services/EditService";
+import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   faBars = faBars;
@@ -48,7 +49,8 @@ export class HeaderComponent implements OnInit {
     public verseSelectService: VerseSelectService,
     private router: Router,
     public httpClient: HttpClient,
-    private location: Location
+    private location: Location,
+    public dataService: DataService,
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
@@ -71,7 +73,7 @@ export class HeaderComponent implements OnInit {
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(
-        'addressBar'
+        'addressBar',
       ) as HTMLInputElement).value;
       addressBarValue = addressBarValue.replace('/', ' ');
       const address = addressBarValue.split(' ').filter(f => {

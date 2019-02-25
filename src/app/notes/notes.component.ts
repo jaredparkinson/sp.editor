@@ -21,11 +21,12 @@ import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from "../services/EditService";
+import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-notes',
@@ -42,6 +43,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     public editService: EditService,
     public verseSelectService: VerseSelectService,
+    public dataService: DataService,
   ) {}
   faBars = faBars;
   faParagraph = faParagraph;
@@ -53,11 +55,11 @@ export class NotesComponent implements OnInit, AfterViewInit {
   notes!: QueryList<ElementRef>;
 
   async ngAfterViewInit() {
-    await setTimeout(() => {
-      this.notes.changes.subscribe(() => {
-        this.verseSelectService.notes = this.notes.toArray();
-      });
-    }, 0);
+    // await setTimeout(() => {
+    //   this.notes.changes.subscribe(() => {
+    //     this.verseSelectService.notes = this.notes.toArray();
+    //   });
+    // }, 0);
   }
   ngOnInit() {}
   notePhraseClick(secondaryNote: SecondaryNote) {

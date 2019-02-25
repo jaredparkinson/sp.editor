@@ -26,17 +26,17 @@
     <div id="footerTop"></div>
     <footer id="studyNotes" class="study-notes half-notes">
       <!-- <div class="half-notes-margin"></div> -->
+      <!-- [ngClass]="{
+        'secondary-override-off': !note.override
+      }" -->
       <note
-        [ngClass]="{
-          'secondary-override-off': !note.override
-        }"
-        *ngFor="let note of dataService.chapter2.notes; trackBy: trackById"
+        *ngFor="let note of dataService.chapter2.notes.notes"
         id="{{ note.id }}"
         class="{{ note.classList }}"
       >
         <p class="note-title">{{ note.noteTitle }}</p>
         <p class="note-short-title">{{ note.noteShortTitle }}</p>
-        <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
+        <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
           <div
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
@@ -77,7 +77,7 @@
               </ng-container>
             </ng-container>
           </div>
-        </ng-container>
+        </ng-container> -->
       </note>
 
       <div id="study-notes-whitespace" class="study-notes-whitespace"></div>

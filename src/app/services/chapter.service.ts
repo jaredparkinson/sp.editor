@@ -3,7 +3,13 @@ import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
-import { Chapter2, Paragraph, Verse, W } from '../modelsJson/Chapter';
+import {
+  Chapter2,
+  Paragraph,
+  Verse,
+  W,
+  Paragraphs,
+} from '../modelsJson/Chapter';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
@@ -41,11 +47,11 @@ export class ChapterService {
   public wTagSelectMode = false;
 
   scrollIntoView: Element;
-  buildParagraphs(chapter: Chapter2): Promise<Chapter2> {
-    return new Promise<Chapter2>(resolve => {
-      console.log(chapter);
+  buildParagraphs(chapter: Chapter2): Promise<Paragraphs> {
+    return new Promise<Paragraphs>(resolve => {
+      const paragraphs = lodash.cloneDeep(chapter.paragraphs);
 
-      chapter.paragraphs.paragraphs.forEach(paragraph => {
+      paragraphs.paragraphs.forEach(paragraph => {
         paragraph.verses = [];
         paragraph.verseIds.forEach(verseId => {
           paragraph.verses.push(
@@ -55,7 +61,10 @@ export class ChapterService {
           );
         });
       });
-      resolve(chapter);
+      console.log(paragraphs);
+      paragraphs.paragraphs[0].verseIds.push('d');
+
+      resolve(paragraphs);
     });
   }
 

@@ -6,7 +6,7 @@ export class Chapter2 {
   public title = '';
   public header: string;
   // public oldNotes: OldNote[] = [];
-  public notes: Notes;
+  public notes: Notes = new Notes();
   public verses: Verses;
   public _rev = '';
   public paragraphs: Paragraphs;

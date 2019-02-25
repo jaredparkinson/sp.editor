@@ -61,6 +61,14 @@ export class NotesComponent implements OnInit, AfterViewInit {
     //   });
     // }, 0);
   }
+
+  filterClassList(classList: string[]): string {
+    if (!classList) {
+      return '';
+    }
+
+    return classList.toString();
+  }
   ngOnInit() {}
   notePhraseClick(secondaryNote: SecondaryNote) {
     if (true) {

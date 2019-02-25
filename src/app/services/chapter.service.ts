@@ -8,9 +8,11 @@ import {
   Paragraph,
   Verse,
   W,
+  SecondaryNote,
   Paragraphs,
+  Verses,
+  NoteRef,
 } from '../modelsJson/Chapter';
-import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
 import { HelperService } from './helper.service';
@@ -47,15 +49,118 @@ export class ChapterService {
   public wTagSelectMode = false;
 
   scrollIntoView: Element;
-  buildParagraphs(chapter: Chapter2): Promise<Paragraphs> {
-    return new Promise<Paragraphs>(resolve => {
-      const paragraphs = lodash.cloneDeep(chapter.paragraphs);
+
+  resetNoteVisibility(
+    chapter: Chapter2,
+    noteVisibility: Map<string, boolean>,
+  ): Promise<void> {
+    return new Promise<void>((resolve: (resolveValue: void) => void) => {
+      // const noteVisibility: Map<string, boolean> = new Map();
+      chapter.notes.notes.forEach(note => {
+        note.secondary.forEach(secondaryNote => {
+          noteVisibility.set(
+            secondaryNote.id,
+            this.getSecondaryNoteVisibility(secondaryNote),
+          );
+          if (noteVisibility.get(secondaryNote.id)) {
+            secondaryNote.noteRefs.forEach(noteRef => {
+              if (this.getNoteRefVisibility(noteRef)) {
+                noteVisibility.set(secondaryNote.id, true);
+              }
+              // console.log(noteRef.referenceLabel);
+            });
+          }
+        });
+      });
+      resolve();
+    });
+  }
+  getSecondaryNoteVisibility(secondaryNote: SecondaryNote): boolean {
+    let visible = false;
+
+    if (
+      (this.saveState.data.newNotesVisible &&
+        (secondaryNote.notePhrase.classList.includes('note-phrase-new') ||
+          secondaryNote.notePhrase.classList.includes('note-phrase-new-2'))) ||
+      (this.saveState.data.translatorNotesVisible &&
+        (secondaryNote.notePhrase.classList.includes('note-phrase-tc') ||
+          secondaryNote.notePhrase.classList.includes('note-phrase-tc-2'))) ||
+      (this.saveState.data.englishNotesVisible &&
+        (secondaryNote.notePhrase.classList.includes('note-phrase-eng') ||
+          secondaryNote.notePhrase.classList.includes('note-phrase-eng-2')))
+    ) {
+      visible = true;
+    }
+
+    if (
+      !this.saveState.data.secondaryNotesVisible &&
+      (secondaryNote.notePhrase.classList.includes('note-phrase-new-2') ||
+        secondaryNote.notePhrase.classList.includes('note-phrase-tc-2') ||
+        secondaryNote.notePhrase.classList.includes('note-phrase-eng-2'))
+    ) {
+      visible = false;
+    }
+    if (visible) {
+      console.log(
+        visible +
+          ' ' +
+          secondaryNote.notePhrase.text +
+          ' ' +
+          secondaryNote.notePhrase.classList,
+      );
+    }
+
+    return visible;
+  }
+  getNoteRefVisibility(noteRef: NoteRef): boolean {
+    // console.log(noteRef.referenceLabel.refLabelName);
+    noteRef.visible = false;
+
+    if (
+      (noteRef.referenceLabel.refLabelName === 'quotation' &&
+        this.saveState.data.refQUO) ||
+      (noteRef.referenceLabel.refLabelName === 'phrasing' &&
+        this.saveState.data.refPHR) ||
+      (noteRef.referenceLabel.refLabelName === 'or' &&
+        this.saveState.data.refOR) ||
+      (noteRef.referenceLabel.refLabelName === 'ie' &&
+        this.saveState.data.refIE) ||
+      (noteRef.referenceLabel.refLabelName === 'hebrew' &&
+        this.saveState.data.refHEB) ||
+      (noteRef.referenceLabel.refLabelName === 'greek' &&
+        this.saveState.data.refGR) ||
+      (noteRef.referenceLabel.refLabelName === 'archaic' &&
+        this.saveState.data.refKJV) ||
+      (noteRef.referenceLabel.refLabelName === 'historical' &&
+        this.saveState.data.refHST) ||
+      (noteRef.referenceLabel.refLabelName === 'cr' &&
+        this.saveState.data.refCR) ||
+      (noteRef.referenceLabel.refLabelName === 'alt' &&
+        this.saveState.data.refALT) ||
+      (noteRef.referenceLabel.refLabelName === 'harmony' &&
+        this.saveState.data.refHMY) ||
+      (noteRef.referenceLabel.refLabelName === 'tg' &&
+        this.saveState.data.refTG) ||
+      (noteRef.referenceLabel.refLabelName === 'gs' &&
+        this.saveState.data.refGS)
+    ) {
+      // console.log('gtcrd');
+      noteRef.visible = true;
+    }
+    // console.log(`${noteRef.referenceLabel.refLabelName} ${visibile}`);
+
+    return noteRef.visible;
+  }
+
+  buildParagraphs(paragraphs: Paragraphs, verses: Verses): Promise<void> {
+    return new Promise<void>(resolve => {
+      // const paragraphs = lodash.cloneDeep(chapter.paragraphs);
 
       paragraphs.paragraphs.forEach(paragraph => {
         paragraph.verses = [];
         paragraph.verseIds.forEach(verseId => {
           paragraph.verses.push(
-            lodash.find(chapter.verses.verses, verse => {
+            lodash.find(verses.verses, verse => {
               return verse.id === verseId;
             }),
           );
@@ -64,7 +169,7 @@ export class ChapterService {
       console.log(paragraphs);
       paragraphs.paragraphs[0].verseIds.push('d');
 
-      resolve(paragraphs);
+      resolve();
     });
   }
 
@@ -75,49 +180,62 @@ export class ChapterService {
     });
   }
 
-  resetRefVisible(chapter: Chapter2) {
-    const engRegex = new RegExp(/\d{9}/g);
-    const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
-    const tcRegex = new RegExp(/tc.*/g);
-
-    const regex: RegExp[] = [];
-
-    if (this.saveState.data.englishNotesVisible) {
-      regex.push(engRegex);
-    }
-    if (this.saveState.data.newNotesVisible) {
-      regex.push(newRegex);
-    }
-    if (this.saveState.data.translatorNotesVisible) {
-      regex.push(tcRegex);
-    }
-
-    chapter.verses.verses.forEach(verse => {
-      // lodash.filter(verse.wTags,( wTag as W) => {
-      //   wTag
-      //   let vis = false;
-      //   regex.forEach(r => {
-      //     if (r.test(wTag)) {
-      //       vis = true;
-      //     }
-      //   })
-      // } )
+  resetRefVisible(verses: Verses, noteVisibility: Map<string, boolean>) {
+    verses.verses.forEach(verse => {
       verse.wTags.forEach(wTag => {
         if (wTag.refs) {
           wTag.visibleRefs = [];
-
-          wTag.refs.forEach(id => {
-            regex.forEach(r => {
-              if (r.test(id.toString())) {
-                console.log(id);
-
-                wTag.visibleRefs.push(id);
-              }
-            });
+          wTag.refs.forEach(ref => {
+            if (noteVisibility.get(ref)) {
+              wTag.visibleRefs.push(ref);
+            }
           });
         }
       });
     });
+
+    // const engRegex = new RegExp(/\d{9}/g);
+    // const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
+    // const tcRegex = new RegExp(/tc.*/g);
+
+    // const regex: RegExp[] = [];
+
+    // if (this.saveState.data.englishNotesVisible) {
+    //   regex.push(engRegex);
+    // }
+    // if (this.saveState.data.newNotesVisible) {
+    //   regex.push(newRegex);
+    // }
+    // if (this.saveState.data.translatorNotesVisible) {
+    //   regex.push(tcRegex);
+    // }
+
+    // verses.verses.forEach(verse => {
+    //   // lodash.filter(verse.wTags,( wTag as W) => {
+    //   //   wTag
+    //   //   let vis = false;
+    //   //   regex.forEach(r => {
+    //   //     if (r.test(wTag)) {
+    //   //       vis = true;
+    //   //     }
+    //   //   })
+    //   // } )
+    //   verse.wTags.forEach(wTag => {
+    //     if (wTag.refs) {
+    //       wTag.visibleRefs = [];
+
+    //       wTag.refs.forEach(id => {
+    //         regex.forEach(r => {
+    //           if (r.test(id.toString())) {
+    //             // console.log(id);
+
+    //             wTag.visibleRefs.push(id);
+    //           }
+    //         });
+    //       });
+    //     }
+    //   });
+    // });
   }
 
   public getChapter(id: string) {
@@ -149,27 +267,27 @@ export class ChapterService {
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
       chapter.verses.verses.forEach(verse => {
-        console.log(verse);
+        // console.log(verse);
 
         const verseNumber = parseInt(verse.id.replace('p', ''), 10);
         verse.highlight = lodash.includes(highlight, verseNumber)
           ? true
           : false;
         verse.context = lodash.includes(context, verseNumber) ? true : false;
-        if (!lodash.includes(highlight, verseNumber)) {
-          console.log(verse);
-        }
-        if (!lodash.includes(context, verseNumber)) {
-          console.log(verse);
-        }
+        // if (!lodash.includes(highlight, verseNumber)) {
+        //   console.log(verse);
+        // }
+        // if (!lodash.includes(context, verseNumber)) {
+        //   console.log(verse);
+        // }
       });
       resolve(chapter);
     });
   }
 
-  public buildWTags(chapter: Chapter2) {
-    return new Promise<Chapter2>(resolve => {
-      chapter.verses.verses.forEach(verse => {
+  public buildWTags(verses: Verses, noteVisibility: Map<string, boolean>) {
+    return new Promise<void>(resolve => {
+      verses.verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
           wTag.text = '';
           wTag.id.forEach(i => {
@@ -177,10 +295,10 @@ export class ChapterService {
           });
           wTag.selected = false;
           wTag.clicked = false;
-          console.log(wTag.text);
+          // console.log(wTag.text);
         });
 
-        this.resetRefVisible(chapter);
+        this.resetRefVisible(verses, noteVisibility);
         // let start: number = null;
         // let end: number = null;
         // const tempWad: W[] = [];
@@ -238,7 +356,7 @@ export class ChapterService {
         // verse.builtWTags = tempWad;
         // console.log(newWTags);
       });
-      resolve(chapter);
+      resolve();
     });
   }
   getWTagText(id: number[], text: string): string {

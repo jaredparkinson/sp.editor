@@ -139,7 +139,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     ) {
       console.log('asdjfasdf');
 
-      this.chapterService.selectedSecondaryNote = secondaryNote;
+      // this.chapterService.selectedSecondaryNote = secondaryNote;
       // let verseSelected: Verse;
 
       this.editService.setEditMode(true, note, secondaryNote);

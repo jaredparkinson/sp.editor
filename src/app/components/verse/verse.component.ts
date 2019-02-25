@@ -44,7 +44,10 @@ export class VerseComponent implements OnInit {
       return;
     }
     if (lodash.isEmpty(w.visibleRefs)) {
-      this.chapterService.buildWTags(this.dataService.chapter2);
+      this.chapterService.buildWTags(
+        this.dataService.verses,
+        this.dataService.noteVisibility,
+      );
     }
     if (w.clicked) {
     } else {

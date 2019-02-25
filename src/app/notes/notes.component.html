@@ -36,6 +36,22 @@
       >
         <p class="note-title">{{ note.noteTitle }}</p>
         <p class="note-short-title">{{ note.noteShortTitle }}</p>
+        <ng-container *ngFor="let secondaryNote of note.secondary">
+          <div
+            [class]="filterClassList(secondaryNote.classList)"
+            *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
+          >
+            <p>{{ secondaryNote.notePhrase.text }}</p>
+            <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
+              <p
+                [class]="filterClassList(noteRef.classList)"
+                *ngIf="noteRef.visible"
+              >
+                <span [innerHTML]="noteRef.text"></span>
+              </p>
+            </ng-container>
+          </div>
+        </ng-container>
         <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
           <div
             id="{{ secondaryNote.id }}"

@@ -53,37 +53,28 @@ export class NoteSettingsComponent implements OnInit {
 
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
-      console.log('asdfiojkasofjafjaosdfjoiasdfjioj');
-      this.chapterService.buildWTags(this.dataService.chapter2);
-
-      // this.chapterService.resetNotes();
-      // this.verseSelectService.resetVisibility();
+      this.resetNotes();
     });
   }
 
   btnOriginalNotesPress(): void {
     this.navServices.btnOriginalNotesPress().then((value: boolean) => {
-      this.verseSelectService.resetVisibility();
+      this.resetNotes();
     });
   }
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
-      // this.verseSelectService.resetVisibility();
-      this.chapterService.buildWTags(this.dataService.chapter2);
+      this.resetNotes();
     });
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress().then((value: boolean) => {
-      // this.verseSelectService.resetVisibility();
-      this.chapterService.buildWTags(this.dataService.chapter2);
+      this.resetNotes();
     });
   }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress().then((value: boolean) => {
-      console.log(value);
-      this.chapterService.buildWTags(this.dataService.chapter2);
-
-      // this.verseSelectService.resetVisibility();
+      this.resetNotes();
     });
   }
   toggleVerseSelect() {
@@ -126,6 +117,8 @@ export class NoteSettingsComponent implements OnInit {
       }
       case 'KJV': {
         this.saveState.data.refKJV = !this.saveState.data.refKJV;
+        console.log(this.saveState.data.refKJV);
+
         break;
       }
       case 'HST': {
@@ -155,6 +148,19 @@ export class NoteSettingsComponent implements OnInit {
     }
     this.saveState.save();
 
-    this.verseSelectService.resetVisibility();
+    this.resetNotes();
+  }
+  private resetNotes() {
+    this.chapterService
+      .resetNoteVisibility(
+        this.dataService.chapter2,
+        this.dataService.noteVisibility,
+      )
+      .then(() => {
+        this.chapterService.buildWTags(
+          this.dataService.verses,
+          this.dataService.noteVisibility,
+        );
+      });
   }
 }

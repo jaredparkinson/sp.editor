@@ -35,6 +35,8 @@ export class NoteRef {
   public classList: string[] = [];
   public text: string;
   public referenceLabel: ReferenceLabel;
+
+  public visible: boolean = true;
 }
 
 export class Notes {
@@ -53,6 +55,7 @@ export class SecondaryNote {
   public noteMarker: string;
   public verseMarker: string;
   public isTier2: boolean = undefined;
+  public visible: boolean = true;
 }
 
 export class Verse {

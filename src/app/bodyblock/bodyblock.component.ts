@@ -77,20 +77,37 @@ export class BodyblockComponent
       const id = `${params['book']}-${highlighting.pop()}-${
         params['language']
       }`;
-      console.log(highlighting);
+      // console.log(highlighting);
 
-      console.log(id);
+      // console.log(id);
       this.chapterService.getChapter(id).then(chapter => {
         this.chapterService
           .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
           .then(chapter => {
-            this.chapterService.buildWTags(chapter).then(chapter => {
-              this.dataService.chapter2 = chapter;
-              this.chapterService.buildParagraphs(chapter).then(paragraphs => {
-                this.dataService.paragraphs = paragraphs;
-                console.log(this.dataService.chapter2.notes);
+            this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
+            this.dataService.verses = lodash.cloneDeep(chapter.verses);
+            this.chapterService
+              .resetNoteVisibility(chapter, this.dataService.noteVisibility)
+              .then(() => {
+                this.chapterService
+                  .buildWTags(
+                    this.dataService.verses,
+                    this.dataService.noteVisibility,
+                  )
+                  .then(() => {
+                    this.chapterService
+                      .buildParagraphs(
+                        this.dataService.paragraphs,
+                        this.dataService.verses,
+                      )
+                      .then(paragraphs => {
+                        this.dataService.chapter2 = chapter;
+                        console.log(this.dataService.paragraphs);
+
+                        // console.log(this.dataService.chapter2.notes);
+                      });
+                  });
               });
-            });
           });
         // console.log(chapter);
       });

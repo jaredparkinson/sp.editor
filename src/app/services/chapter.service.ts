@@ -54,7 +54,7 @@ export class ChapterService {
     chapter: Chapter2,
     noteVisibility: Map<string, boolean>,
   ): Promise<void> {
-    return new Promise<void>((resolve: (resolveValue: void) => void) => {
+    return new Promise<void>(resolve => {
       // const noteVisibility: Map<string, boolean> = new Map();
       chapter.notes.notes.forEach(note => {
         note.secondary.forEach(secondaryNote => {
@@ -187,6 +187,12 @@ export class ChapterService {
               wTag.visibleRefs.push(ref);
             }
           });
+          if (wTag.visibleRefs.length === 0) {
+            wTag.visibleRefs = undefined;
+          } else {
+            wTag.visibleRefCount = wTag.visibleRefs.length;
+            // console.log(wTag.visibleRefCount);
+          }
         }
       });
     });

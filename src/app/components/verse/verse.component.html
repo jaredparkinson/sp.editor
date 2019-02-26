@@ -6,8 +6,10 @@
       *ngIf="w.refs"
       (click)="wTagClick(w)"
       [ngClass]="{
-        'verse-select-0': w.visibleRefs && w.visibleRefs.length > 0,
-        wRef: w.visibleRefs && w.visibleRefs.length > 1
+        'verse-select-0': !w.selected && w.visibleRefs,
+        'verse-select-1': w.selected && w.visibleRefCount === 1,
+        'verse-select-2': w.selected && w.visibleRefCount > 1,
+        wRef: w.visibleRefs && w.visibleRefCount > 1
       }"
       >{{ w.text }}</w
     >

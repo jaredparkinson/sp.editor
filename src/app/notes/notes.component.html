@@ -40,6 +40,7 @@
           <div
             [class]="filterClassList(secondaryNote.classList)"
             *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
+            id="{{ secondaryNote.id }}"
           >
             <p>{{ secondaryNote.notePhrase.text }}</p>
             <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">

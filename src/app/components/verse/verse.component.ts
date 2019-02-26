@@ -10,6 +10,7 @@ import * as lodash from 'lodash';
 import { ChapterService } from '../../services/chapter.service';
 import { EditService } from '../../services/EditService';
 import { DataService } from '../../services/data.service';
+import { resolve } from 'dns';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',
@@ -39,21 +40,70 @@ export class VerseComponent implements OnInit {
   }
 
   wTagClick(w: W) {
-    if (!w.visibleRefs || w.visibleRefs.length === 0) {
+    if (!w.visibleRefs) {
       console.log(w);
       return;
     }
+    console.log(w.visibleRefCount);
+
     if (lodash.isEmpty(w.visibleRefs)) {
-      this.chapterService.buildWTags(
-        this.dataService.verses,
-        this.dataService.noteVisibility,
-      );
-    }
-    if (w.clicked) {
+      console.log('asodifj');
+
+      this.resetNotes();
     } else {
+      if (w.clicked) {
+        this.wTagSelect(w);
+      } else {
+        this.resetNotes().then(() => {
+          w.clicked = true;
+
+          this.wTagSelect(w);
+        });
+      }
     }
-    console.log(w.visibleRefs);
+    // console.log(w.visibleRefs);
   }
+
+  private wTagSelect(w: W) {
+    return new Promise<void>(resolve => {
+      const ref = w.visibleRefs.pop();
+      w.selected = true;
+      this.dataService.verses.verses.forEach(verse => {
+        verse.wTags.forEach(wTag => {
+          if (wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
+            wTag.selected = true;
+            console.log(wTag);
+          }
+        });
+      });
+      console.log(document.getElementById(ref).scrollIntoView());
+
+      resolve();
+    });
+  }
+
+  private resetNotes(): Promise<void> {
+    return new Promise<void>(resolve => {
+      console.log('test');
+
+      this.chapterService
+        .resetNoteVisibility(
+          this.dataService.chapter2,
+          this.dataService.noteVisibility,
+        )
+        .then(() => {
+          this.chapterService
+            .buildWTags(
+              this.dataService.verses,
+              this.dataService.noteVisibility,
+            )
+            .then(() => {
+              resolve();
+            });
+        });
+    });
+  }
+
   getWColor(w: TemplateGroup) {
     // console.log(w.classList);
 

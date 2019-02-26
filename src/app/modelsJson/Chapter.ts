@@ -84,6 +84,7 @@ export class W {
   public text: string;
   public selected: boolean;
   clicked: boolean;
+  visibleRefCount: number = 0;
   constructor(text: string) {
     this.text = text;
   }

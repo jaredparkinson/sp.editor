@@ -309,6 +309,11 @@ export class ChapterService {
           ? true
           : false;
         verse.context = lodash.includes(context, verseNumber) ? true : false;
+
+        if (verse.context) {
+          console.log(verse.id);
+          console.log(context);
+        }
         // if (!lodash.includes(highlight, verseNumber)) {
         //   console.log(verse);
         // }

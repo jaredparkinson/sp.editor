@@ -2,7 +2,9 @@
   class="verse"
   id="{{ verse.id }}"
   [ngClass]="{
-    'show-paragraph': saveState.data.paragraphsVisible
+    'show-paragraph': saveState.data.paragraphsVisible,
+    'highlight-verse': verse.highlight,
+    'highlight-context': verse.context
   }"
 >
   <!-- {{ verse.text }} -->

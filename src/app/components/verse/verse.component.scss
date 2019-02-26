@@ -10,27 +10,28 @@ w {
   &.verse-number {
     color: DimGray;
     font-weight: bold;
+    vertical-align: super;
+    font-size: 8pt;
   }
-}
+  &.small-caps {
+    font-variant: small-caps;
+  }
 
-span.small-caps {
-  font-variant: small-caps;
-}
+  &.uppercase {
+    text-transform: uppercase;
+  }
 
-span.uppercase {
-  text-transform: uppercase;
-}
+  &.clarity-word {
+    font-style: italic;
+  }
 
-span.clarity-word {
-  font-style: italic;
-}
+  &.key-letter {
+    display: none;
+  }
 
-span.key-letter {
-  display: none;
-}
-
-span.key-word {
-  font-style: italic;
+  &.key-word {
+    font-style: italic;
+  }
 }
 
 div.paragraph {
@@ -55,10 +56,6 @@ h2#title1 {
   text-align: center;
   font-size: 12pt;
 }
-w.verse-number {
-  vertical-align: super;
-  font-size: 8pt;
-}
 .notes-hide-original {
   w.marker {
     display: none;
@@ -79,21 +76,6 @@ w.verse-number {
   }
 }
 
-.show-paragraph {
-  div.hidden-paragraph {
-    margin-bottom: 6pt;
-  }
-}
-
-.body-block {
-  span.part {
-    margin-left: 6pt;
-  }
-
-  span.answer {
-    text-indent: 1em;
-  }
-}
 span {
   &.part,
   &.question,
@@ -102,6 +84,13 @@ span {
     display: block;
   }
 
+  &.part {
+    margin-left: 6pt;
+  }
+
+  &.answer {
+    text-indent: 1em;
+  }
   &.verse {
     position: relative;
     font-family: $font-stack;
@@ -123,5 +112,8 @@ span {
       //   font-size: 8pt;
       // }
     }
+  }
+  &.show-paragraph.verse {
+    display: inline !important;
   }
 }

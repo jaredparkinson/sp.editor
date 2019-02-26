@@ -1,4 +1,10 @@
-<span class="verse" id="{{ verse.id }}">
+<span
+  class="verse"
+  id="{{ verse.id }}"
+  [ngClass]="{
+    'show-paragraph': saveState.data.paragraphsVisible
+  }"
+>
   <!-- {{ verse.text }} -->
   <ng-container *ngFor="let w of verse.wTags">
     <w

@@ -36,7 +36,7 @@ export class VerseComponent implements OnInit {
       return '';
     }
 
-    return classList.toString();
+    return classList.toString().replace(',', ' ');
   }
 
   wTagClick(w: W) {

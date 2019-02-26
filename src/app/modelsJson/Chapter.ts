@@ -59,6 +59,7 @@ export class SecondaryNote {
   public verseMarker: string;
   public isTier2: boolean = undefined;
   public visible: boolean = true;
+  public clicked: boolean = false;
 }
 
 export class Verse {

@@ -39,10 +39,13 @@
         <ng-container *ngFor="let secondaryNote of note.secondary">
           <div
             [class]="filterClassList(secondaryNote.classList)"
+            [ngClass]="{ 'verse-select-1': secondaryNote.clicked }"
             *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
             id="{{ secondaryNote.id }}"
           >
-            <p>{{ secondaryNote.notePhrase.text }}</p>
+            <p (click)="this.notePhraseClick(secondaryNote)">
+              {{ secondaryNote.notePhrase.text }}
+            </p>
             <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
               <p
                 [class]="filterClassList(noteRef.classList)"

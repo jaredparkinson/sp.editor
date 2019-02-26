@@ -50,6 +50,23 @@ export class ChapterService {
 
   scrollIntoView: Element;
 
+  public resetNotes(): Promise<void> {
+    return new Promise<void>(resolve => {
+      console.log('test');
+
+      this.resetNoteVisibility(
+        this.dataService.chapter2,
+        this.dataService.noteVisibility,
+      ).then(() => {
+        this.buildWTags(
+          this.dataService.verses,
+          this.dataService.noteVisibility,
+        ).then(() => {
+          resolve();
+        });
+      });
+    });
+  }
   resetNoteVisibility(
     chapter: Chapter2,
     noteVisibility: Map<string, boolean>,
@@ -60,6 +77,7 @@ export class ChapterService {
         note.secondary.forEach(secondaryNote => {
           noteVisibility.set(secondaryNote.id, false);
           if (this.getSecondaryNoteVisibility(secondaryNote)) {
+            secondaryNote.clicked = false;
             secondaryNote.noteRefs.forEach(noteRef => {
               if (this.getNoteRefVisibility(noteRef)) {
                 noteVisibility.set(secondaryNote.id, true);
@@ -170,13 +188,6 @@ export class ChapterService {
     });
   }
 
-  public resetNotes(): void {
-    lodash.each(this.dataService.chapter2.notes, note => {
-      // note.override = false;
-      // note.visible = this.saveState.data.secondaryNotesVisible;
-    });
-  }
-
   resetRefVisible(verses: Verses, noteVisibility: Map<string, boolean>) {
     verses.verses.forEach(verse => {
       verse.wTags.forEach(wTag => {
@@ -190,6 +201,11 @@ export class ChapterService {
           if (wTag.visibleRefs.length === 0) {
             wTag.visibleRefs = undefined;
           } else {
+            wTag.visibleRefs = wTag.visibleRefs.sort(
+              (a: string, b: string): number => {
+                return this.getSortingKey(a) - this.getSortingKey(b);
+              },
+            );
             wTag.visibleRefCount = wTag.visibleRefs.length;
             // console.log(wTag.visibleRefCount);
           }
@@ -239,6 +255,22 @@ export class ChapterService {
     //     }
     //   });
     // });
+  }
+  getSortingKey(b: string): number {
+    const engRegex = new RegExp(/\d{9}/g);
+    const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
+    const tcRegex = new RegExp(/tc.*/g);
+
+    if (engRegex.test(b)) {
+      return 2;
+    }
+    if (newRegex.test(b)) {
+      return 3;
+    }
+    if (tcRegex.test(b)) {
+      return 1;
+    }
+    return 4;
   }
 
   public getChapter(id: string) {

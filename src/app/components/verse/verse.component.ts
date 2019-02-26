@@ -49,12 +49,12 @@ export class VerseComponent implements OnInit {
     if (lodash.isEmpty(w.visibleRefs)) {
       console.log('asodifj');
 
-      this.resetNotes();
+      this.chapterService.resetNotes();
     } else {
       if (w.clicked) {
         this.wTagSelect(w);
       } else {
-        this.resetNotes().then(() => {
+        this.chapterService.resetNotes().then(() => {
           w.clicked = true;
 
           this.wTagSelect(w);
@@ -74,6 +74,12 @@ export class VerseComponent implements OnInit {
             wTag.selected = true;
             console.log(wTag);
           }
+        });
+      });
+
+      this.dataService.chapter2.notes.notes.forEach(note => {
+        note.secondary.forEach(secondaryNote => {
+          secondaryNote.clicked = secondaryNote.id === ref;
         });
       });
       console.log(document.getElementById(ref).scrollIntoView());

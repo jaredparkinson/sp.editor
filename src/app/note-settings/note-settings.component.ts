@@ -53,28 +53,28 @@ export class NoteSettingsComponent implements OnInit {
 
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
   }
 
   btnOriginalNotesPress(): void {
     this.navServices.btnOriginalNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
   }
   btnTranslatorNotesPress(): void {
     this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
   }
   btnEnglishNotesPress(): void {
     this.navServices.btnEnglishNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
   }
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
   }
   toggleVerseSelect() {
@@ -148,19 +148,19 @@ export class NoteSettingsComponent implements OnInit {
     }
     this.saveState.save();
 
-    this.resetNotes();
+    this.chapterService.resetNotes();
   }
-  private resetNotes() {
-    this.chapterService
-      .resetNoteVisibility(
-        this.dataService.chapter2,
-        this.dataService.noteVisibility,
-      )
-      .then(() => {
-        this.chapterService.buildWTags(
-          this.dataService.verses,
-          this.dataService.noteVisibility,
-        );
-      });
-  }
+  // private resetNotes() {
+  //   this.chapterService
+  //     .resetNoteVisibility(
+  //       this.dataService.chapter2,
+  //       this.dataService.noteVisibility,
+  //     )
+  //     .then(() => {
+  //       this.chapterService.buildWTags(
+  //         this.dataService.verses,
+  //         this.dataService.noteVisibility,
+  //       );
+  //     });
+  // }
 }

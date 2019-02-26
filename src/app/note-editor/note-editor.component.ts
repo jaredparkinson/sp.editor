@@ -173,56 +173,7 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
     this.editService.setEditMode(false, null, null);
   }
   notePhraseClick(secondaryNote: SecondaryNote) {
-    if (false) {
-      let count = 0;
-
-      // console.log(secondaryNote.id);
-
-      const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
-        return (n.nativeElement as Element).id === secondaryNote.id;
-      });
-      // console.log(note);
-
-      if (
-        note &&
-        (note.nativeElement as Element).classList.contains('verse-select-1')
-      ) {
-        // this.chapterService.resetVerseSelect();
-        this.verseSelectService.resetVerseNotes();
-
-        return;
-      }
-      this.verseSelectService.resetVerseNotes();
-
-      this.verseSelectService.modifyWTags((w: W) => {
-        w.classList = this.stringService.removeAttributeArray(
-          w.classList,
-          'note-select-1',
-        );
-
-        if (w.classList.includes(secondaryNote.id)) {
-          w.classList = this.stringService.addAttributeArray(
-            w.classList,
-            'note-select-1',
-          );
-          count++;
-        }
-      });
-
-      if (count > 0) {
-        console.log();
-
-        const verseId = (note.nativeElement as Element).parentElement.id.replace(
-          'note',
-          'p',
-        );
-        document.getElementById(verseId).scrollIntoView();
-        if (note) {
-          (note.nativeElement as Element).classList.add('verse-select-1');
-        }
-      }
-      // console.log(secondaryNote.cn);
-    }
+    console.log(secondaryNote.id);
   }
 
   noteButtonClick(note: Note) {

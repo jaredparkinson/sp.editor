@@ -18,7 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Note } from '../modelsJson/Note';
-import { SecondaryNote } from '../modelsJson/SecondaryNote';
+// import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { EditService } from '../services/EditService';
@@ -27,6 +27,7 @@ import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { DataService } from '../services/data.service';
+import { SecondaryNote } from '../modelsJson/Chapter';
 
 @Component({
   selector: 'app-notes',
@@ -71,56 +72,27 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {}
   notePhraseClick(secondaryNote: SecondaryNote) {
-    if (true) {
-      let count = 0;
+    console.log(secondaryNote.id);
+    const clicked = secondaryNote.clicked;
+    console.log(clicked);
 
-      // console.log(secondaryNote.id);
-
-      const note = lodash.find(this.notes.toArray(), (n: ElementRef) => {
-        return (n.nativeElement as Element).id === secondaryNote.id;
-      });
-      // console.log(note);
-
-      if (
-        note &&
-        (note.nativeElement as Element).classList.contains('verse-select-1')
-      ) {
-        // this.chapterService.resetVerseSelect();
-        this.verseSelectService.resetVerseNotes();
-
-        return;
+    this.chapterService.resetNotes().then(() => {
+      secondaryNote.clicked = clicked;
+      if (clicked) {
+        secondaryNote.clicked = false;
+      } else {
+        secondaryNote.clicked = true;
+        this.dataService.verses.verses.forEach(verse => {
+          verse.wTags.forEach(wTag => {
+            if (wTag.refs && wTag.refs.includes(secondaryNote.id)) {
+              wTag.selected = true;
+            } else {
+              wTag.selected = false;
+            }
+          });
+        });
       }
-      this.verseSelectService.resetVerseNotes();
-
-      this.verseSelectService.modifyWTags((w: W) => {
-        w.classList = this.stringService.removeAttributeArray(
-          w.classList,
-          'note-select-1',
-        );
-
-        if (w.classList.includes(secondaryNote.id)) {
-          w.classList = this.stringService.addAttributeArray(
-            w.classList,
-            'note-select-1',
-          );
-          count++;
-        }
-      });
-
-      if (count > 0) {
-        console.log();
-
-        const verseId = (note.nativeElement as Element).parentElement.id.replace(
-          'note',
-          'p',
-        );
-        document.getElementById(verseId).scrollIntoView();
-        if (note) {
-          (note.nativeElement as Element).classList.add('verse-select-1');
-        }
-      }
-      // console.log(secondaryNote.cn);
-    }
+    });
   }
 
   noteButtonClick(note: Note) {
@@ -148,39 +120,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   showNote(secondaryNote: SecondaryNote): boolean {
     return this.verseSelectService.noteVisibility.get(secondaryNote.id);
-    let vis = true;
-    secondaryNote.cn.split(' ').forEach(c => {
-      switch (c) {
-        case 'tc-note': {
-          if (!this.saveState.data.translatorNotesVisible) {
-            vis = false;
-          }
-          break;
-        }
-        case 'new-note': {
-          if (!this.saveState.data.newNotesVisible) {
-            vis = false;
-          }
-          break;
-        }
-        case 'eng-note': {
-          if (!this.saveState.data.englishNotesVisible) {
-            vis = false;
-          }
-          break;
-        }
-        default: {
-          vis = vis;
-        }
-      }
-    });
-    // vis = false;
-
-    this.verseSelectService.noteVisibility.set(secondaryNote.id, vis);
-
-    // console.log(this.verseSelectService.noteVisibility);
-
-    return vis;
   }
   showSecondaryNote(
     note: Note,

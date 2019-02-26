@@ -123,21 +123,8 @@ export class HeaderComponent implements OnInit {
   }
   btnSecondaryNotesPress() {
     this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
-      this.resetNotes();
+      this.chapterService.resetNotes();
     });
-  }
-  private resetNotes() {
-    this.chapterService
-      .resetNoteVisibility(
-        this.dataService.chapter2,
-        this.dataService.noteVisibility,
-      )
-      .then(() => {
-        this.chapterService.buildWTags(
-          this.dataService.verses,
-          this.dataService.noteVisibility,
-        );
-      });
   }
 
   btnLeftPanePress() {

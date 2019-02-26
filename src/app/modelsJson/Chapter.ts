@@ -10,6 +10,9 @@ export class Chapter2 {
   public verses: Verses;
   public _rev = '';
   public paragraphs: Paragraphs;
+
+  public previousPage: string = '';
+  public nextPage: string = '';
 }
 
 export class Note {

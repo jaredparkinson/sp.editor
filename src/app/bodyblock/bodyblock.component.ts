@@ -10,7 +10,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   faChevronLeft,
   faChevronRight,
@@ -59,6 +59,7 @@ export class BodyblockComponent
     private wTagBuilderService: WTagService,
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
+    public router: Router,
   ) {}
 
   ngAfterContentInit(): void {}
@@ -80,37 +81,7 @@ export class BodyblockComponent
       // console.log(highlighting);
 
       // console.log(id);
-      this.chapterService.getChapter(id).then(chapter => {
-        this.chapterService
-          .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
-          .then(chapter => {
-            this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
-            this.dataService.verses = lodash.cloneDeep(chapter.verses);
-            this.chapterService
-              .resetNoteVisibility(chapter, this.dataService.noteVisibility)
-              .then(() => {
-                this.chapterService
-                  .buildWTags(
-                    this.dataService.verses,
-                    this.dataService.noteVisibility,
-                  )
-                  .then(() => {
-                    this.chapterService
-                      .buildParagraphs(
-                        this.dataService.paragraphs,
-                        this.dataService.verses,
-                      )
-                      .then(paragraphs => {
-                        this.dataService.chapter2 = chapter;
-                        console.log(this.dataService.paragraphs);
-
-                        // console.log(this.dataService.chapter2.notes);
-                      });
-                  });
-              });
-          });
-        // console.log(chapter);
-      });
+      this.getChapter(id, highlighting);
       // if (book !== undefined && chapter !== undefined) {
       //   this.chapterService
       //     .getChapterOld(id)
@@ -131,6 +102,37 @@ export class BodyblockComponent
       // }
     });
     this.wordSelection();
+  }
+
+  private getChapter(id: string, highlighting: string[] = []) {
+    this.chapterService.getChapter(id).then(chapter => {
+      this.chapterService
+        .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
+        .then(chapter => {
+          this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
+          this.dataService.verses = lodash.cloneDeep(chapter.verses);
+          this.chapterService
+            .resetNoteVisibility(chapter, this.dataService.noteVisibility)
+            .then(() => {
+              this.chapterService
+                .buildWTags(
+                  this.dataService.verses,
+                  this.dataService.noteVisibility,
+                )
+                .then(() => {
+                  this.chapterService
+                    .buildParagraphs(
+                      this.dataService.paragraphs,
+                      this.dataService.verses,
+                    )
+                    .then(paragraphs => {
+                      this.dataService.chapter2 = chapter;
+                      console.log(this.dataService.paragraphs);
+                    });
+                });
+            });
+        });
+    });
   }
 
   public stringSplit(text: string): string[] {

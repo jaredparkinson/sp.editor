@@ -5,7 +5,11 @@
 
   <div class="left-content-pane">
     <div class="body-block-nav-flex">
-      <button class="body-block-nav" id="btnPreviousChapter">
+      <button
+        class="body-block-nav"
+        id="btnPreviousChapter"
+        (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)"
+      >
         <!-- (click)="navService.btnPreviousPagePress(dataService.chapter2.pageUrl)" -->
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronLeft" size="2x"></fa-icon>
@@ -65,7 +69,11 @@
 
   <div class="right-content-pane">
     <div class="body-block-nav-flex">
-      <button class="body-block-nav" id="btnNextChapter">
+      <button
+        class="body-block-nav"
+        id="btnNextChapter"
+        (click)="this.router.navigateByUrl(dataService.chapter2.nextPage)"
+      >
         <!-- (click)="navService.btnNextPagePress(dataService.chapter2.pageUrl)" -->
         <!-- Secondary Notes -->
         <fa-icon [icon]="faChevronRight" size="2x"></fa-icon>

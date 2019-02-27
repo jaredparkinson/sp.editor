@@ -65,6 +65,7 @@ export class BodyblockComponent
   ngAfterContentInit(): void {}
   ngOnDestroy() {}
   ngOnInit() {
+    
     this.route.params.subscribe(params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
@@ -74,7 +75,10 @@ export class BodyblockComponent
       const book = params['book'];
       const chapter = params['chapter'].toString();
       const highlighting: string[] = chapter.split('.').reverse();
-      const language = params['language'];
+      const language = params['language'] ? params['language'] : this.saveState.data.language;;
+
+      console.log(language);
+      
       const id = `${book}-${highlighting.pop()}-${language}`;
       // console.log(highlighting);
 

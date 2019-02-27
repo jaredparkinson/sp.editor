@@ -11,8 +11,8 @@ export class Chapter2 {
   public _rev = '';
   public paragraphs: Paragraphs;
 
-  public previousPage: string = '';
-  public nextPage: string = '';
+  public previousPage = '';
+  public nextPage = '';
 }
 
 export class Note {
@@ -39,13 +39,14 @@ export class NoteRef {
   public text: string;
   public referenceLabel: ReferenceLabel;
 
-  public visible: boolean = true;
+  public visible = true;
 }
 
 export class Notes {
   public notes: Note[] = [];
 }
 export class ReferenceLabel {
+  public visible: boolean;
   public refLabelName: string;
   public refLabelShortName: string;
 }
@@ -58,8 +59,8 @@ export class SecondaryNote {
   public noteMarker: string;
   public verseMarker: string;
   public isTier2: boolean = undefined;
-  public visible: boolean = true;
-  public clicked: boolean = false;
+  public visible = true;
+  public clicked = false;
 }
 
 export class Verse {
@@ -88,7 +89,7 @@ export class W {
   public text: string;
   public selected: boolean;
   clicked: boolean;
-  visibleRefCount: number = 0;
+  visibleRefCount = 0;
   constructor(text: string) {
     this.text = text;
   }

@@ -60,7 +60,7 @@
     <button id="versionNumber">Version {{ this.versionNumber }}</button>
     <button id="settings" (click)="settings()">Settings</button>
 
-    <button
+    <!-- <button
       (click)="subNotesClick('QUO')"
       [ngClass]="{ 'nav-btn-on': this.saveState.data.refQUO }"
     >
@@ -137,6 +137,14 @@
       [ngClass]="{ 'nav-btn-on': this.saveState.data.refGS }"
     >
       GS
+    </button> -->
+
+    <button
+      (click)="setCategory(category)"
+      [ngClass]="{ 'nav-btn-on': category.visible }"
+      *ngFor="let category of saveState.data.noteCategories"
+    >
+      {{ category.refLabelName }}
     </button>
   </div>
 </div>

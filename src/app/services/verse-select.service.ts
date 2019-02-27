@@ -93,75 +93,75 @@ export class VerseSelectService {
     });
   }
 
-  private showSecondaryNote(note: Note, seNote: NoteRef): boolean {
-    // const engRegex = new RegExp(`\d{9}`);
-    // const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
-    // const tcRegex = new RegExp(`tc.*`);
+  // private showSecondaryNote(note: Note, seNote: NoteRef): boolean {
+  //   // const engRegex = new RegExp(`\d{9}`);
+  //   // const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
+  //   // const tcRegex = new RegExp(`tc.*`);
 
-    seNote.visible = true;
+  //   seNote.visible = true;
 
-    if (
-      seNote.classList.includes('reference-label') ||
-      seNote.text.includes('reference-label')
-    ) {
-      if (
-        ((seNote.classList.includes('reference-label-quotation') ||
-          seNote.text.includes('reference-label-quotation')) &&
-          !this.saveState.data.refQUO) ||
-        ((seNote.classList.includes('reference-label-phrasing') ||
-          seNote.text.includes('reference-label-phrasing')) &&
-          !this.saveState.data.refPHR) ||
-        ((seNote.classList.includes('reference-label-or') ||
-          seNote.text.includes('reference-label-or')) &&
-          !this.saveState.data.refOR) ||
-        ((seNote.classList.includes('reference-label-ie') ||
-          seNote.text.includes('reference-label-ie')) &&
-          !this.saveState.data.refIE) ||
-        ((seNote.classList.includes('reference-label-hebrew') ||
-          seNote.text.includes('reference-label-hebrew')) &&
-          !this.saveState.data.refHEB) ||
-        ((seNote.classList.includes('reference-label-greek') ||
-          seNote.text.includes('reference-label-greek')) &&
-          !this.saveState.data.refGR) ||
-        ((seNote.classList.includes('reference-label-archaic') ||
-          seNote.text.includes('reference-label-archaic')) &&
-          !this.saveState.data.refKJV) ||
-        ((seNote.classList.includes('reference-label-historical') ||
-          seNote.text.includes('reference-label-historical')) &&
-          !this.saveState.data.refHST) ||
-        ((seNote.classList.includes('reference-label-cr') ||
-          seNote.text.includes('reference-label-cr')) &&
-          !this.saveState.data.refCR) ||
-        ((seNote.classList.includes('reference-label-alt') ||
-          seNote.text.includes('reference-label-alt')) &&
-          !this.saveState.data.refALT) ||
-        ((seNote.classList.includes('reference-label-harmony') ||
-          seNote.text.includes('reference-label-harmony')) &&
-          !this.saveState.data.refHMY) ||
-        ((seNote.classList.includes('reference-label-tg') ||
-          seNote.text.includes('reference-label-tg')) &&
-          !this.saveState.data.refTG) ||
-        ((seNote.classList.includes('reference-label-gs') ||
-          seNote.text.includes('reference-label-gs')) &&
-          !this.saveState.data.refGS)
-      ) {
-        seNote.visible = false;
+  //   if (
+  //     seNote.classList.includes('reference-label') ||
+  //     seNote.text.includes('reference-label')
+  //   ) {
+  //     if (
+  //       ((seNote.classList.includes('reference-label-quotation') ||
+  //         seNote.text.includes('reference-label-quotation')) &&
+  //         !this.saveState.data.refQUO) ||
+  //       ((seNote.classList.includes('reference-label-phrasing') ||
+  //         seNote.text.includes('reference-label-phrasing')) &&
+  //         !this.saveState.data.refPHR) ||
+  //       ((seNote.classList.includes('reference-label-or') ||
+  //         seNote.text.includes('reference-label-or')) &&
+  //         !this.saveState.data.refOR) ||
+  //       ((seNote.classList.includes('reference-label-ie') ||
+  //         seNote.text.includes('reference-label-ie')) &&
+  //         !this.saveState.data.refIE) ||
+  //       ((seNote.classList.includes('reference-label-hebrew') ||
+  //         seNote.text.includes('reference-label-hebrew')) &&
+  //         !this.saveState.data.refHEB) ||
+  //       ((seNote.classList.includes('reference-label-greek') ||
+  //         seNote.text.includes('reference-label-greek')) &&
+  //         !this.saveState.data.refGR) ||
+  //       ((seNote.classList.includes('reference-label-archaic') ||
+  //         seNote.text.includes('reference-label-archaic')) &&
+  //         !this.saveState.data.refKJV) ||
+  //       ((seNote.classList.includes('reference-label-historical') ||
+  //         seNote.text.includes('reference-label-historical')) &&
+  //         !this.saveState.data.refHST) ||
+  //       ((seNote.classList.includes('reference-label-cr') ||
+  //         seNote.text.includes('reference-label-cr')) &&
+  //         !this.saveState.data.refCR) ||
+  //       ((seNote.classList.includes('reference-label-alt') ||
+  //         seNote.text.includes('reference-label-alt')) &&
+  //         !this.saveState.data.refALT) ||
+  //       ((seNote.classList.includes('reference-label-harmony') ||
+  //         seNote.text.includes('reference-label-harmony')) &&
+  //         !this.saveState.data.refHMY) ||
+  //       ((seNote.classList.includes('reference-label-tg') ||
+  //         seNote.text.includes('reference-label-tg')) &&
+  //         !this.saveState.data.refTG) ||
+  //       ((seNote.classList.includes('reference-label-gs') ||
+  //         seNote.text.includes('reference-label-gs')) &&
+  //         !this.saveState.data.refGS)
+  //     ) {
+  //       seNote.visible = false;
 
-        // return false;
-      }
-    }
-    seNote.classList.forEach(c => {
-      if (c.includes('-t2')) {
-        if (!this.getNoteVisibility(note)) {
-          seNote.visible = false;
-        }
-      }
-    });
+  //       // return false;
+  //     }
+  //   }
+  //   seNote.classList.forEach(c => {
+  //     if (c.includes('-t2')) {
+  //       if (!this.getNoteVisibility(note)) {
+  //         seNote.visible = false;
+  //       }
+  //     }
+  //   });
 
-    console.log(seNote.visible);
+  //   console.log(seNote.visible);
 
-    return seNote.visible;
-  }
+  //   return seNote.visible;
+  // }
   private getNoteVisibility(note: Note) {
     return !this.saveState.data.secondaryNotesVisible;
   }

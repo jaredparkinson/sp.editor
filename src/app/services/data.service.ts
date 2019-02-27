@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Chapter2, Paragraphs, Verses } from '../modelsJson/Chapter';
+import { Chapter2, Note, Paragraphs, Verses } from '../modelsJson/Chapter';
 
 @Injectable({
   providedIn: 'root',
@@ -9,5 +9,6 @@ export class DataService {
   paragraphs: Paragraphs = new Paragraphs();
   noteVisibility: Map<string, boolean> = new Map();
   verses: Verses = new Verses();
+  notea: Map<string, Note> = new Map<string, Note>();
   constructor() {}
 }

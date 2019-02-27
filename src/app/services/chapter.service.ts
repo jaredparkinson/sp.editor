@@ -86,6 +86,7 @@ export class ChapterService {
             });
           }
         });
+        
       });
       resolve();
     });
@@ -131,33 +132,33 @@ export class ChapterService {
     // console.log(noteRef.referenceLabel.refLabelName);
     noteRef.visible = false;
 
-    if (
-      (noteRef.referenceLabel.refLabelName === 'quotation' &&
-        this.saveState.data.refQUO) ||
-      (noteRef.referenceLabel.refLabelName === 'phrasing' &&
-        this.saveState.data.refPHR) ||
-      (noteRef.referenceLabel.refLabelName === 'or' &&
-        this.saveState.data.refOR) ||
-      (noteRef.referenceLabel.refLabelName === 'ie' &&
-        this.saveState.data.refIE) ||
-      (noteRef.referenceLabel.refLabelName === 'hebrew' &&
-        this.saveState.data.refHEB) ||
-      (noteRef.referenceLabel.refLabelName === 'greek' &&
-        this.saveState.data.refGR) ||
-      (noteRef.referenceLabel.refLabelName === 'archaic' &&
-        this.saveState.data.refKJV) ||
-      (noteRef.referenceLabel.refLabelName === 'historical' &&
-        this.saveState.data.refHST) ||
-      (noteRef.referenceLabel.refLabelName === 'cr' &&
-        this.saveState.data.refCR) ||
-      (noteRef.referenceLabel.refLabelName === 'alt' &&
-        this.saveState.data.refALT) ||
-      (noteRef.referenceLabel.refLabelName === 'harmony' &&
-        this.saveState.data.refHMY) ||
-      (noteRef.referenceLabel.refLabelName === 'tg' &&
-        this.saveState.data.refTG) ||
-      (noteRef.referenceLabel.refLabelName === 'gs' &&
-        this.saveState.data.refGS)
+    if (noteRef.referenceLabel&& lodash.find(this.saveState.data.noteCategories, c => { return c.refLabelName.toLowerCase() === noteRef.referenceLabel.refLabelName.toLowerCase() }).visible
+      // (noteRef.referenceLabel.refLabelName === 'quotation' &&
+      //   this.saveState.data.refQUO) ||
+      // (noteRef.referenceLabel.refLabelName === 'phrasing' &&
+      //   this.saveState.data.refPHR) ||
+      // (noteRef.referenceLabel.refLabelName === 'or' &&
+      //   this.saveState.data.refOR) ||
+      // (noteRef.referenceLabel.refLabelName === 'ie' &&
+      //   this.saveState.data.refIE) ||
+      // (noteRef.referenceLabel.refLabelName === 'hebrew' &&
+      //   this.saveState.data.refHEB) ||
+      // (noteRef.referenceLabel.refLabelName === 'greek' &&
+      //   this.saveState.data.refGR) ||
+      // (noteRef.referenceLabel.refLabelName === 'archaic' &&
+      //   this.saveState.data.refKJV) ||
+      // (noteRef.referenceLabel.refLabelName === 'historical' &&
+      //   this.saveState.data.refHST) ||
+      // (noteRef.referenceLabel.refLabelName === 'cr' &&
+      //   this.saveState.data.refCR) ||
+      // (noteRef.referenceLabel.refLabelName === 'alt' &&
+      //   this.saveState.data.refALT) ||
+      // (noteRef.referenceLabel.refLabelName === 'harmony' &&
+      //   this.saveState.data.refHMY) ||
+      // (noteRef.referenceLabel.refLabelName === 'tg' &&
+      //   this.saveState.data.refTG) ||
+      // (noteRef.referenceLabel.refLabelName === 'gs' &&
+      //   this.saveState.data.refGS)
     ) {
       // console.log('gtcrd');
       noteRef.visible = true;

@@ -25,11 +25,15 @@ const routes: Routes = [
     component: SearchComponent,
   },
   {
-    path: ':language/:book/:chapter/edit',
+    path: ':book/:chapter/:language/edit',
     component: EditorParentComponent,
   },
   {
-    path: ':language/:book/:chapter',
+    path: ':book/:chapter/:language',
+    component: BodyBlockParentComponent,
+  },
+  {
+    path: ':book/:chapter',
     component: BodyBlockParentComponent,
   },
   {

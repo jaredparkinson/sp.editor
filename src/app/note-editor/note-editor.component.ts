@@ -235,93 +235,93 @@ export class NoteEditorComponent implements OnInit, AfterViewInit {
 
     return vis;
   }
-  showSecondaryNote(
-    note: Note,
-    seNote: [string, string, string, string],
-  ): boolean {
-    let vis = true;
+  // showSecondaryNote(
+  //   note: Note,
+  //   seNote: [string, string, string, string],
+  // ): boolean {
+  //   let vis = true;
 
-    if (seNote[1].includes('-2') && note.override && !note.visible) {
-      return false;
-    }
-    if (seNote[2].includes('reference-label')) {
-      if (
-        (seNote[2].includes('reference-label-quotation') &&
-          !this.saveState.data.refQUO) ||
-        (seNote[2].includes('reference-label-phrasing') &&
-          !this.saveState.data.refPHR) ||
-        (seNote[2].includes('reference-label-or') &&
-          !this.saveState.data.refOR) ||
-        (seNote[2].includes('reference-label-ie') &&
-          !this.saveState.data.refIE) ||
-        (seNote[2].includes('reference-label-hebrew') &&
-          !this.saveState.data.refHEB) ||
-        (seNote[2].includes('reference-label-greek') &&
-          !this.saveState.data.refGR) ||
-        (seNote[2].includes('reference-label-archaic') &&
-          !this.saveState.data.refKJV) ||
-        (seNote[2].includes('reference-label-historical') &&
-          !this.saveState.data.refHST) ||
-        (seNote[2].includes('reference-label-cr') &&
-          !this.saveState.data.refCR) ||
-        (seNote[2].includes('reference-label-alt') &&
-          !this.saveState.data.refALT) ||
-        (seNote[2].includes('reference-label-harmony') &&
-          !this.saveState.data.refHMY) ||
-        (seNote[2].includes('reference-label-tg') &&
-          !this.saveState.data.refTG) ||
-        (seNote[2].includes('reference-label-gs') && !this.saveState.data.refGS)
-      ) {
-        // console.log('gtcrd');
-        return false;
-      }
-    }
-    seNote[1].split(' ').forEach(c => {
-      switch (c) {
-        case 'note-phrase-eng-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-eng-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-phrase-tc-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-tc-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-phrase-new-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        case 'note-reference-new-2': {
-          if (this.getNoteVisibility(note)) {
-            vis = false;
-          }
-          break;
-        }
-        default: {
-          vis = vis;
-        }
-      }
-    });
-    // vis = false;
-    return vis;
-  }
+  //   if (seNote[1].includes('-2') && note.override && !note.visible) {
+  //     return false;
+  //   }
+  //   if (seNote[2].includes('reference-label')) {
+  //     if (
+  //       (seNote[2].includes('reference-label-quotation') &&
+  //         !this.saveState.data.refQUO) ||
+  //       (seNote[2].includes('reference-label-phrasing') &&
+  //         !this.saveState.data.refPHR) ||
+  //       (seNote[2].includes('reference-label-or') &&
+  //         !this.saveState.data.refOR) ||
+  //       (seNote[2].includes('reference-label-ie') &&
+  //         !this.saveState.data.refIE) ||
+  //       (seNote[2].includes('reference-label-hebrew') &&
+  //         !this.saveState.data.refHEB) ||
+  //       (seNote[2].includes('reference-label-greek') &&
+  //         !this.saveState.data.refGR) ||
+  //       (seNote[2].includes('reference-label-archaic') &&
+  //         !this.saveState.data.refKJV) ||
+  //       (seNote[2].includes('reference-label-historical') &&
+  //         !this.saveState.data.refHST) ||
+  //       (seNote[2].includes('reference-label-cr') &&
+  //         !this.saveState.data.refCR) ||
+  //       (seNote[2].includes('reference-label-alt') &&
+  //         !this.saveState.data.refALT) ||
+  //       (seNote[2].includes('reference-label-harmony') &&
+  //         !this.saveState.data.refHMY) ||
+  //       (seNote[2].includes('reference-label-tg') &&
+  //         !this.saveState.data.refTG) ||
+  //       (seNote[2].includes('reference-label-gs') && !this.saveState.data.refGS)
+  //     ) {
+  //       // console.log('gtcrd');
+  //       return false;
+  //     }
+  //   }
+  //   seNote[1].split(' ').forEach(c => {
+  //     switch (c) {
+  //       case 'note-phrase-eng-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       case 'note-reference-eng-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       case 'note-phrase-tc-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       case 'note-reference-tc-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       case 'note-phrase-new-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       case 'note-reference-new-2': {
+  //         if (this.getNoteVisibility(note)) {
+  //           vis = false;
+  //         }
+  //         break;
+  //       }
+  //       default: {
+  //         vis = vis;
+  //       }
+  //     }
+  //   });
+  //   // vis = false;
+  //   return vis;
+  // }
 
   private getNoteVisibility(note: Note) {
     return (

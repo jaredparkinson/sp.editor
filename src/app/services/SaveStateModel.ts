@@ -1,3 +1,5 @@
+import { ReferenceLabel } from '../modelsJson/Chapter';
+
 export class SaveStateModel implements ISaveModel {
   id = '';
   public foldersVisible = true;
@@ -18,20 +20,22 @@ export class SaveStateModel implements ISaveModel {
   public currentPage = '';
   public verseSelect = true;
   public verseSuperScripts = false;
-  public refQUO = true;
-  public refPHR = true;
-  public refOR = true;
-  public refIE = true;
-  public refHEB = true;
-  public refGR = true;
-  public refKJV = true;
-  public refHST = true;
-  public refCR = true;
-  public refALT = true;
-  public refHMY = true;
-  public refTG = true;
-  public refGS = true;
+  // public refQUO = true;
+  // public refPHR = true;
+  // public refOR = true;
+  // public refIE = true;
+  // public refHEB = true;
+  // public refGR = true;
+  // public refKJV = true;
+  // public refHST = true;
+  // public refCR = true;
+  // public refALT = true;
+  // public refHMY = true;
+  // public refTG = true;
+  // public refGS = true;
   public notesPopover = false;
+  public noteCategories: ReferenceLabel[] = [];
+  public language: string;
 
   constructor() {}
 }

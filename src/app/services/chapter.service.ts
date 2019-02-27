@@ -182,8 +182,14 @@ export class ChapterService {
           );
         });
       });
-      console.log(paragraphs);
-      paragraphs.paragraphs[0].verseIds.push('d');
+
+      if (paragraphs.paragraphs.length===0) {
+        const ara = new Paragraph();
+        ara.verses = verses.verses;
+        paragraphs.paragraphs.push(ara)
+      }
+      // console.log(paragraphs);
+      // paragraphs.paragraphs[0].verseIds.push('d');
 
       resolve();
     });

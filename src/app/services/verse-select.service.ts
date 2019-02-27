@@ -58,11 +58,11 @@ export class VerseSelectService {
   public setNoteVisibility(note: Note) {
     note.secondaryNotes.forEach((secondaryNote: SecondaryNote) => {
       let vis = false;
-      secondaryNote.noteRefs.forEach(seNote => {
-        if (this.showSecondaryNote(note, seNote)) {
-          vis = true;
-        }
-      });
+      // secondaryNote.noteRefs.forEach(seNote => {
+      //   if (this.showSecondaryNote(note, seNote)) {
+      //     vis = true;
+      //   }
+      // });
       secondaryNote.cn.split(' ').forEach(c => {
         switch (c) {
           case 'tc-note': {

@@ -110,6 +110,8 @@ export class BodyblockComponent
 
   private getChapter(id: string, highlighting: string[] = []) {
     this.chapterService.getChapter(id).then(chapter => {
+      console.log(chapter);
+      
       this.chapterService
         .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
         .then(chapter => {

@@ -32,6 +32,10 @@ w {
   &.key-word {
     font-style: italic;
   }
+  &.poetry::before {
+    content: '\A';
+    white-space: pre;
+  }
 }
 
 div.paragraph {

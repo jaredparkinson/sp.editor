@@ -1,11 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
 import * as lodash from 'lodash';
 import { Note } from '../modelsJson/Note';
-import { Paragraph } from '../modelsJson/Paragraph';
-import { NoteRef, SecondaryNote } from '../modelsJson/SecondaryNote';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
-import { ChapterService } from './chapter.service';
 import { EditService } from './EditService';
 import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
@@ -22,7 +20,6 @@ export class VerseSelectService {
     private saveState: SaveStateService,
     private helperService: HelperService,
     private navService: NavigationService,
-    private editService: EditService,
     private stringService: StringService,
   ) {}
   public noteVisibility: Map<string, boolean> = new Map<string, boolean>();
@@ -32,7 +29,6 @@ export class VerseSelectService {
       return new Promise<void>(
         (
           resolve: (resolveValue: void) => void,
-          reject: (rejectValue: void) => void,
         ) => {
           this.resetVerseSelect().then(() => {
             resolve(undefined);
@@ -45,7 +41,6 @@ export class VerseSelectService {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
       ) => {
         // this.dataService.chapter2.notes.forEach((note: Note) => {
         //   this.setNoteVisibility(note);
@@ -93,78 +88,6 @@ export class VerseSelectService {
     });
   }
 
-  // private showSecondaryNote(note: Note, seNote: NoteRef): boolean {
-  //   // const engRegex = new RegExp(`\d{9}`);
-  //   // const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
-  //   // const tcRegex = new RegExp(`tc.*`);
-
-  //   seNote.visible = true;
-
-  //   if (
-  //     seNote.classList.includes('reference-label') ||
-  //     seNote.text.includes('reference-label')
-  //   ) {
-  //     if (
-  //       ((seNote.classList.includes('reference-label-quotation') ||
-  //         seNote.text.includes('reference-label-quotation')) &&
-  //         !this.saveState.data.refQUO) ||
-  //       ((seNote.classList.includes('reference-label-phrasing') ||
-  //         seNote.text.includes('reference-label-phrasing')) &&
-  //         !this.saveState.data.refPHR) ||
-  //       ((seNote.classList.includes('reference-label-or') ||
-  //         seNote.text.includes('reference-label-or')) &&
-  //         !this.saveState.data.refOR) ||
-  //       ((seNote.classList.includes('reference-label-ie') ||
-  //         seNote.text.includes('reference-label-ie')) &&
-  //         !this.saveState.data.refIE) ||
-  //       ((seNote.classList.includes('reference-label-hebrew') ||
-  //         seNote.text.includes('reference-label-hebrew')) &&
-  //         !this.saveState.data.refHEB) ||
-  //       ((seNote.classList.includes('reference-label-greek') ||
-  //         seNote.text.includes('reference-label-greek')) &&
-  //         !this.saveState.data.refGR) ||
-  //       ((seNote.classList.includes('reference-label-archaic') ||
-  //         seNote.text.includes('reference-label-archaic')) &&
-  //         !this.saveState.data.refKJV) ||
-  //       ((seNote.classList.includes('reference-label-historical') ||
-  //         seNote.text.includes('reference-label-historical')) &&
-  //         !this.saveState.data.refHST) ||
-  //       ((seNote.classList.includes('reference-label-cr') ||
-  //         seNote.text.includes('reference-label-cr')) &&
-  //         !this.saveState.data.refCR) ||
-  //       ((seNote.classList.includes('reference-label-alt') ||
-  //         seNote.text.includes('reference-label-alt')) &&
-  //         !this.saveState.data.refALT) ||
-  //       ((seNote.classList.includes('reference-label-harmony') ||
-  //         seNote.text.includes('reference-label-harmony')) &&
-  //         !this.saveState.data.refHMY) ||
-  //       ((seNote.classList.includes('reference-label-tg') ||
-  //         seNote.text.includes('reference-label-tg')) &&
-  //         !this.saveState.data.refTG) ||
-  //       ((seNote.classList.includes('reference-label-gs') ||
-  //         seNote.text.includes('reference-label-gs')) &&
-  //         !this.saveState.data.refGS)
-  //     ) {
-  //       seNote.visible = false;
-
-  //       // return false;
-  //     }
-  //   }
-  //   seNote.classList.forEach(c => {
-  //     if (c.includes('-t2')) {
-  //       if (!this.getNoteVisibility(note)) {
-  //         seNote.visible = false;
-  //       }
-  //     }
-  //   });
-
-  //   console.log(seNote.visible);
-
-  //   return seNote.visible;
-  // }
-  private getNoteVisibility(note: Note) {
-    return !this.saveState.data.secondaryNotesVisible;
-  }
 
   public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
     this.saveState.data.verseSelect = toggle;
@@ -190,46 +113,8 @@ export class VerseSelectService {
     return new Promise<void>(
       (
         resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
       ) => {
-        this.modifyWTags((wa: W) => {
-          if (wa !== wTag) {
-            wa.visibleRefs = [];
-
-            wa.classList = this.stringService.removeAttributeArray(
-              wa.classList,
-              'verse-select-0',
-            );
-            wa.classList = this.stringService.removeAttributeArray(
-              wa.classList,
-              'note-select-1',
-            );
-            wa.classList = this.stringService.removeAttributeArray(
-              wa.classList,
-              'verse-select-1',
-            );
-
-            if (true) {
-              this.createRefList(wa);
-
-              if (wa.visibleRefs.length !== 0) {
-                wa.classList = this.stringService.addAttributeArray(
-                  wa.classList,
-                  'verse-select-0',
-                );
-                wa.classList = this.stringService.removeAttributeArray(
-                  wa.classList,
-                  'verse-select-1',
-                );
-
-                wa.classList = this.stringService.removeAttributeArray(
-                  wa.classList,
-                  'verse-select-2',
-                );
-              }
-            }
-          }
-        });
+        this.modifyWTags();
         resolve(null);
       },
     );
@@ -247,7 +132,7 @@ export class VerseSelectService {
     }
   }
 
-  public modifyWTags(callBack: (wa: W) => void) {
+  public modifyWTags() {
     // this.dataService.chapter2.paragraphs.forEach((paragraph: Paragraph) => {
     //   paragraph.verses.forEach((verse: Verse) => {
     //     verse.wTags.forEach((w: W) => {
@@ -278,7 +163,7 @@ export class VerseSelectService {
       this.stringService.hasAttributeArray(w.classList, 'verse-select-1')
     ) {
       this.resetVerseNotes();
-      this.openHalfNotes(w, verse);
+      this.openHalfNotes(verse);
     } else if (
       this.stringService.hasAttributeArray(w.classList, 'verse-select-2')
     ) {
@@ -319,7 +204,7 @@ export class VerseSelectService {
     this.resetNotes2();
     if (wTag.refs.length === 0) {
       this.resetVerseNotes();
-      this.openHalfNotes(wTag, verse);
+      this.openHalfNotes(verse);
       return;
     }
     const note = lodash.find(this.notes, (n: ElementRef) => {
@@ -340,15 +225,15 @@ export class VerseSelectService {
       }
 
       wTag.visibleRefs.shift();
-      this.openHalfNotes(wTag, verse);
+      this.openHalfNotes(verse);
       this.navService.rightPaneToggle = true;
     } else {
       this.resetVerseNotes();
-      this.openHalfNotes(wTag, verse);
+      this.openHalfNotes(verse);
     }
   }
 
-  private openHalfNotes(w: W, verse: Verse) {
+  private openHalfNotes(verse: Verse) {
     if (this.helperService.getWidth() < 511.98) {
       document.getElementById(verse.id).scrollIntoView();
       this.halfNotes = true;

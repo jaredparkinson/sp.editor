@@ -5,14 +5,15 @@ import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
 import {
   Chapter2,
-  Paragraph,
-  Verse,
-  W,
-  SecondaryNote,
-  Paragraphs,
-  Verses,
   NoteRef,
+  Paragraph,
+  Paragraphs,
+  SecondaryNote,
+  Verse,
+  Verses,
+  W,
 } from '../modelsJson/Chapter';
+import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';
 import { HelperService } from './helper.service';
@@ -20,7 +21,6 @@ import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
 import { VerseSelectService } from './verse-select.service';
-import { DataService } from './data.service';
 @Injectable()
 export class ChapterService {
   constructor(
@@ -86,7 +86,6 @@ export class ChapterService {
             });
           }
         });
-        
       });
       resolve();
     });
@@ -132,7 +131,21 @@ export class ChapterService {
     // console.log(noteRef.referenceLabel.refLabelName);
     noteRef.visible = false;
 
-    if (noteRef.referenceLabel&& lodash.find(this.saveState.data.noteCategories, c => { return c.refLabelName.toLowerCase() === noteRef.referenceLabel.refLabelName.toLowerCase() }).visible
+    if (
+      noteRef.referenceLabel &&
+      lodash.find(this.saveState.data.noteCategories, c => {
+        // console.log(noteRef);
+
+        if
+          (!noteRef.referenceLabel.refLabelName) {
+          return true
+          }
+
+        return (
+          c.refLabelName.toLowerCase() ===
+          noteRef.referenceLabel.refLabelName.toLowerCase()
+        );
+      }).visible
       // (noteRef.referenceLabel.refLabelName === 'quotation' &&
       //   this.saveState.data.refQUO) ||
       // (noteRef.referenceLabel.refLabelName === 'phrasing' &&
@@ -183,10 +196,10 @@ export class ChapterService {
         });
       });
 
-      if (paragraphs.paragraphs.length===0) {
+      if (paragraphs.paragraphs.length === 0) {
         const ara = new Paragraph();
         ara.verses = verses.verses;
-        paragraphs.paragraphs.push(ara)
+        paragraphs.paragraphs.push(ara);
       }
       // console.log(paragraphs);
       // paragraphs.paragraphs[0].verseIds.push('d');

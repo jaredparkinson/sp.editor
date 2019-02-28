@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import WorkerPouch from 'worker-pouch';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
+import WorkerPouch from 'worker-pouch';
 
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({

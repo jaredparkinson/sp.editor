@@ -62,11 +62,11 @@ export class DownloadService {
   public downloadScriptures(file: Download) {
     this.dataBaseService.getDocumentCount();
     file.downloading = true;
-    let promises = [];
-    let promises2 = [];
-    this.download(file).subscribe(data => {
+    const promises = [];
+    const promises2 = [];
+    this.download(file).subscribe(async data => {
       console.log(data);
-      this.dataBaseService.setAllDocs();
+      await this.dataBaseService.setAllDocs();
 
       jszip.loadAsync(data).then(zip => {
         zip.forEach(async file2 => {

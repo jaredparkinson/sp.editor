@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Chapter2 } from '../modelsJson/Chapter';
 import { Note } from '../modelsJson/Note';
-import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { Verse } from '../modelsJson/Verse';
-import { W } from '../modelsJson/WTag';
-import { StringService } from './string.service';
 @Injectable({
   providedIn: 'root',
 })
 export class EditService {
   public editState = false;
-  constructor(private stringService: StringService) {}
+  constructor() {}
   public setEditMode(
     editState: boolean,
-    note: Note,
-    secondaryNote: SecondaryNote,
   ): void {
     this.editState = editState;
     if (this.editState) {
-      this.enableEditMode(note, secondaryNote);
+      this.enableEditMode();
     } else {
       console.log(this.editState);
       this.disableEditMode();
@@ -49,7 +42,7 @@ export class EditService {
     //   });
     // });
   }
-  private enableEditMode(note: Note, secondaryNote: SecondaryNote) {
+  private enableEditMode() {
     // this.chapter2.notes.forEach((chapterNote: Note) => {
     //   chapterNote.secondaryNotes.forEach((sn: SecondaryNote) => {
     //     if (sn !== secondaryNote) {

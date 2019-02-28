@@ -20,6 +20,8 @@ export class SaveStateService {
   }
   public load(): Promise<any> {
     return new Promise(resolve => {
+      console.log('settings load');
+
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
       this.data = temp !== null ? temp : new SaveStateModel();
       this.data.leftPaneToggle = false;

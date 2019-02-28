@@ -25,6 +25,7 @@ import { Verse } from '../modelsJson/Verse';
 import { W2 } from '../modelsJson/W2';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -32,7 +33,6 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
-import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -65,8 +65,7 @@ export class BodyblockComponent
   ngAfterContentInit(): void {}
   ngOnDestroy() {}
   ngOnInit() {
-    
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async params => {
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
 
@@ -75,17 +74,20 @@ export class BodyblockComponent
       const book = params['book'];
       const chapter = params['chapter'].toString();
       const highlighting: string[] = chapter.split('.').reverse();
-      const language = params['language'] ? params['language'] : this.saveState.data.language;;
+      const language = params['language']
+        ? params['language']
+        : this.saveState.data.language;
 
       console.log(language);
-      
+
       const id = `${book}-${highlighting.pop()}-${language}`;
       // console.log(highlighting);
 
       // console.log(id);
-      console.log(highlighting);
 
-      this.getChapter(id, highlighting);
+      this.getChapter(id, highlighting).then(() => {
+        console.log(`highlight ${highlighting}`);
+      });
       // if (book !== undefined && chapter !== undefined) {
       //   this.chapterService
       //     .getChapterOld(id)
@@ -109,35 +111,45 @@ export class BodyblockComponent
   }
 
   private getChapter(id: string, highlighting: string[] = []) {
-    this.chapterService.getChapter(id).then(chapter => {
-      console.log(chapter);
-      
-      this.chapterService
-        .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
-        .then(chapter => {
-          this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
-          this.dataService.verses = lodash.cloneDeep(chapter.verses);
-          this.chapterService
-            .resetNoteVisibility(chapter, this.dataService.noteVisibility)
-            .then(() => {
-              this.chapterService
-                .buildWTags(
-                  this.dataService.verses,
-                  this.dataService.noteVisibility,
-                )
-                .then(() => {
-                  this.chapterService
-                    .buildParagraphs(
-                      this.dataService.paragraphs,
-                      this.dataService.verses,
-                    )
-                    .then(paragraphs => {
-                      this.dataService.chapter2 = chapter;
-                      console.log(this.dataService.paragraphs);
-                    });
-                });
-            });
-        });
+    return new Promise((resolve) => {
+      this.chapterService.getChapter(id).then(chapter => {
+        console.log(chapter);
+
+        this.chapterService
+          .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
+          .then(chapter => {
+            this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
+            this.dataService.verses = lodash.cloneDeep(chapter.verses);
+            this.chapterService
+              .resetNoteVisibility(chapter, this.dataService.noteVisibility)
+              .then(() => {
+                console.log('test1');
+
+                this.chapterService
+                  .buildWTags(
+                    this.dataService.verses,
+                    this.dataService.noteVisibility,
+                  )
+                  .then(() => {
+                    console.log('test2');
+
+                    this.chapterService
+                      .buildParagraphs(
+                        this.dataService.paragraphs,
+                        this.dataService.verses,
+                      )
+                      .then(paragraphs => {
+                        console.log('test3');
+
+                        this.dataService.chapter2 = chapter;
+                        console.log(this.dataService.paragraphs);
+                        resolve()
+                      });
+                  });
+              });
+          });
+        
+      });
     });
   }
 

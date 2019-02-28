@@ -1,16 +1,23 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import { resolve } from 'dns';
+import * as lodash from 'lodash';
 import { Verse, W } from '../../modelsJson/Chapter';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
+import { ChapterService } from '../../services/chapter.service';
+import { DataService } from '../../services/data.service';
+import { EditService } from '../../services/EditService';
 // import { Verse } from '../../modelsJson/Verse';
 import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
-import * as lodash from 'lodash';
-import { ChapterService } from '../../services/chapter.service';
-import { EditService } from '../../services/EditService';
-import { DataService } from '../../services/data.service';
-import { resolve } from 'dns';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',

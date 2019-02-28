@@ -2,11 +2,11 @@
   class="verse"
   id="{{ verse.id }}"
   [ngClass]="{
-    'show-paragraph': saveState.data.paragraphsVisible,
     'highlight-verse': verse.highlight,
     'highlight-context': verse.context
   }"
 >
+  <!-- 'show-paragraph': saveState.data.paragraphsVisible, -->
   <!-- {{ verse.text }} -->
   <ng-container *ngFor="let w of verse.wTags">
     <w

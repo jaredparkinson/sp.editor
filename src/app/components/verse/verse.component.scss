@@ -37,6 +37,9 @@ w {
     white-space: pre;
   }
 }
+span.verse .poetry:first-of-type::before {
+  content: '' !important;
+}
 
 div.paragraph {
   margin-bottom: 6pt;

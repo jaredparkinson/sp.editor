@@ -66,6 +66,7 @@ export class BodyblockComponent
   ngOnDestroy() {}
   ngOnInit() {
     this.route.params.subscribe(async params => {
+      document.querySelector('.body-block').scrollIntoView();
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
 
@@ -81,75 +82,50 @@ export class BodyblockComponent
       console.log(language);
 
       const id = `${book}-${highlighting.pop()}-${language}`;
-      // console.log(highlighting);
-
-      // console.log(id);
 
       this.getChapter(id, highlighting).then(() => {
         console.log(`highlight ${highlighting}`);
       });
-      // if (book !== undefined && chapter !== undefined) {
-      //   this.chapterService
-      //     .getChapterOld(id)
-      //     .then(async (value: void) => {
-      //       console.log(value);
-
-      //       this.verseSelectService.resetVisibility().then(() => {
-      //         this.wTagBuilderService
-      //           .buildWTags()
-      //           .then(() => {
-      //             this.onScroll();
-      //           })
-      //           .catch(() => {
-      //             this.onScroll();
-      //           });
-      //       });
-      //     });
-      // }
     });
-    this.wordSelection();
   }
 
   private getChapter(id: string, highlighting: string[] = []) {
-    return new Promise((resolve) => {
-      this.chapterService.getChapter(id).then(chapter => {
-        console.log(chapter);
+    return new Promise(async resolve => {
+      const chapter = await this.chapterService.getChapter(id);
+      // .then(async chapter => {
+      //   console.log(chapter);
 
-        this.chapterService
-          .setHighlightging(chapter, [highlighting.pop(), highlighting.pop()])
-          .then(chapter => {
-            this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
-            this.dataService.verses = lodash.cloneDeep(chapter.verses);
-            this.chapterService
-              .resetNoteVisibility(chapter, this.dataService.noteVisibility)
-              .then(() => {
-                console.log('test1');
+      await this.chapterService.setHighlightging(chapter, [
+        highlighting.pop(),
+        highlighting.pop(),
+      ]);
+      // .then(async chapter => {
+      this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
+      this.dataService.verses = lodash.cloneDeep(chapter.verses);
+      await this.chapterService.resetNoteVisibility(
+        chapter,
+        this.dataService.noteVisibility,
+      );
+      // .then(() => {
+      //   console.log('test1');
 
-                this.chapterService
-                  .buildWTags(
-                    this.dataService.verses,
-                    this.dataService.noteVisibility,
-                  )
-                  .then(() => {
-                    console.log('test2');
+      await this.chapterService.buildWTags(
+        this.dataService.verses,
+        this.dataService.noteVisibility,
+      );
+      // .then(() => {
+      //   console.log('test2');
 
-                    this.chapterService
-                      .buildParagraphs(
-                        this.dataService.paragraphs,
-                        this.dataService.verses,
-                      )
-                      .then(paragraphs => {
-                        console.log('test3');
+      await this.chapterService.buildParagraphs(
+        this.dataService.paragraphs,
+        this.dataService.verses,
+      );
+      // .then(() => {
+      //   console.log('test3');
 
-                        this.dataService.chapter2 = chapter;
-                        console.log(this.dataService.paragraphs);
-                        resolve()
-                      });
-                  });
-              });
-          });
-        
-      });
+      this.dataService.chapter2 = chapter;
+      console.log(this.dataService.paragraphs);
+      resolve();
     });
   }
 

@@ -6,8 +6,6 @@
     'highlight-context': verse.context
   }"
 >
-  <!-- 'show-paragraph': saveState.data.paragraphsVisible, -->
-  <!-- {{ verse.text }} -->
   <ng-container *ngFor="let w of verse.wTags">
     <w
       [class]="filterClassList(w.classList)"
@@ -20,56 +18,6 @@
         wRef: w.visibleRefs && w.visibleRefCount > 1
       }"
       >{{ w.text }}</w
-    >
-    <w [class]="filterClassList(w.classList)" *ngIf="!w.refs">{{ w.text }}</w>
+    ><w [class]="filterClassList(w.classList)" *ngIf="!w.refs">{{ w.text }}</w>
   </ng-container>
 </span>
-<!-- <span
-  class="verse"
-  [ngClass]="{
-    'highlight-verse': verse.highlight,
-    'highlight-context': !verse.highlight && verse.context
-  }"
-  id="{{ verse.id }}"
-  #span
-  ><ng-container *ngFor="let templateGroup of this.verse.wTagGroups">
-    <w
-      class="{{ getWColor(templateGroup) }}"
-      (click)="this.wTagBuilderService.wTagClick(verse, templateGroup)"
-      *ngIf="templateGroup.isWTag; else elseBlock"
-      >{{ templateGroup.text }}</w
-    >
-    <ng-template #elseBlock>
-      <w>{{ templateGroup.text }}</w>
-    </ng-template>
-  </ng-container>
-</span> -->
-<!-- <ng-container
-          *ngFor="let t of this.stringSplit(verse.text); let vT = index"
-        >
-          <ng-container *ngIf="!verse.w2[vT]">
-            {{t}}
-            
-          </ng-container>
-        </ng-container> -->
-<!-- <ng-container *ngFor="let w of verse.w2">
-          <w
-            class="{{ getWColor(w) }}"
-            [ngClass]="{ wRef: w.wRef }"
-            (click)="wTagClick(w, verse, $event)"
-            #wTags
-          >
-            <ng-container *ngIf="saveState.data.verseSuperScripts">
-              <ng-container *ngFor="let item of w.superscripts">
-                <g
-                  *ngIf="getSuperScriptVisibility(item, w)"
-                  class="{{ item }}"
-                ></g>
-              </ng-container>
-            </ng-container>
-            <n>{{ w.innerHtml }}</n></w
-          >
-          <ng-container *ngIf="saveState.data.poetryVisible">
-            <br *ngIf="w.classList.includes('line-end')" />
-          </ng-container>
-        </ng-container> -->

@@ -531,8 +531,14 @@ div.paragraph {
   border-left: 3px solid #f68d2e !important;
 }
 
-.show-paragraph .hidden-paragraph .highlight-verse {
-  background-color: rgba(184, 184, 106, 0.815);
+.show-paragraph {
+  .hidden-paragraph .highlight-verse {
+    background-color: rgba(184, 184, 106, 0.815);
+  }
+  .verse-number {
+    vertical-align: super !important;
+    font-size: 8pt !important;
+  }
 }
 
 .hidden-paragraph .hidden-paragraph .highlight-context {

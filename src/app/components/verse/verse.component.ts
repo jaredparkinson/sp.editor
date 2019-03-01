@@ -5,8 +5,8 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import { resolve } from 'dns';
 import * as lodash from 'lodash';
 import { Verse, W } from '../../modelsJson/Chapter';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
@@ -22,6 +22,7 @@ import { WTagService } from '../../services/wtag-builder.service';
   selector: 'app-verse',
   templateUrl: './verse.component.html',
   styleUrls: ['./verse.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerseComponent implements OnInit {
   @Input() public verse: Verse;

@@ -311,16 +311,16 @@ export class ChapterService {
   }
 
   public setHighlightging(
-    chapter: Chapter2,
+    verses: Verses,
     highlightNumbers: [string, string],
   ) {
-    return new Promise<Chapter2>(resolve => {
+    return new Promise<void>(resolve => {
       console.log(this.parseHighlightedVerses(highlightNumbers[0]));
       console.log(this.parseHighlightedVerses(highlightNumbers[1]));
 
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
-      chapter.verses.verses.forEach(verse => {
+      verses.verses.forEach(verse => {
         // console.log(verse);
 
         const verseNumber = parseInt(verse.id.replace('p', ''), 10);
@@ -340,7 +340,7 @@ export class ChapterService {
         //   console.log(verse);
         // }
       });
-      resolve(chapter);
+      resolve();
     });
   }
 

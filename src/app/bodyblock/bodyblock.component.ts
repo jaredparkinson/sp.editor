@@ -45,6 +45,7 @@ export class BodyblockComponent
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<VerseComponent>;
+  private pageId = '';
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -91,17 +92,21 @@ export class BodyblockComponent
 
   private getChapter(id: string, highlighting: string[] = []) {
     return new Promise(async resolve => {
-      const chapter = await this.chapterService.getChapter(id);
+      let chapter = this.dataService.chapter2;
+      if (this.pageId !== id) {
+        chapter = await this.chapterService.getChapter(id);
+        this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
+        this.dataService.verses = lodash.cloneDeep(chapter.verses);
+      }
+      this.pageId = id;
       // .then(async chapter => {
       //   console.log(chapter);
 
-      await this.chapterService.setHighlightging(chapter, [
+      await this.chapterService.setHighlightging(this.dataService.verses, [
         highlighting.pop(),
         highlighting.pop(),
       ]);
       // .then(async chapter => {
-      this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
-      this.dataService.verses = lodash.cloneDeep(chapter.verses);
       await this.chapterService.resetNoteVisibility(
         chapter,
         this.dataService.noteVisibility,
@@ -124,7 +129,7 @@ export class BodyblockComponent
       //   console.log('test3');
 
       this.dataService.chapter2 = chapter;
-      console.log(this.dataService.paragraphs);
+      // console.log(this.dataService.paragraphs);
       resolve();
     });
   }

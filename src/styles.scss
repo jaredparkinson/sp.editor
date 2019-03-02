@@ -536,6 +536,9 @@ div.paragraph {
     content: '\A';
     white-space: pre;
   }
+  .paragraph w.poetry:first-of-type::before {
+    content: '' !important;
+  }
 }
 .show-paragraph {
   .hidden-paragraph .highlight-verse {

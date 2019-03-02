@@ -531,6 +531,12 @@ div.paragraph {
   border-left: 3px solid #f68d2e !important;
 }
 
+.show-poetry {
+  w.poetry::before {
+    content: '\A';
+    white-space: pre;
+  }
+}
 .show-paragraph {
   .hidden-paragraph .highlight-verse {
     background-color: rgba(184, 184, 106, 0.815);

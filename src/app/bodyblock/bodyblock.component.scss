@@ -35,13 +35,19 @@ body {
     }
   }
 
-  #bodyBlock.show-poetry div.hidden-paragraph {
-    span.line {
-      padding-right: 6pt;
-    }
+  span.break {
+    margin-bottom: 6pt;
+  }
 
-    span.break {
-      margin-bottom: 6pt;
+  .show-poetry {
+    div.hidden-paragraph {
+      span.line {
+        padding-right: 6pt;
+      }
+    }
+    w.poetry::before {
+      content: '\A';
+      white-space: pre;
     }
   }
 

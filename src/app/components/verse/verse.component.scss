@@ -32,14 +32,10 @@ w {
   &.key-word {
     font-style: italic;
   }
-  &.poetry::before {
-    content: '\A';
-    white-space: pre;
-  }
 }
-span.verse .poetry:first-of-type::before {
-  content: '' !important;
-}
+// span.verse .poetry:first-of-type::before {
+//   content: '' !important;
+// }
 
 div.paragraph {
   margin-bottom: 6pt;

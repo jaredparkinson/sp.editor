@@ -1,49 +1,47 @@
 <div
   id="study-notes-parent"
   [ngClass]="{
-    'hide-l hide-m': !saveState.data.rightPanePin,
-    'show-s': navServices.rightPaneToggle,
-    'hide-s': !navServices.rightPaneToggle,
-    'notesPopover-on':
-      !saveState.data.rightPanePin && this.saveState.data.notesPopover
+    'hide-notes': !saveState.data.rightPanePin
   }"
   class="study-notes-parent "
 >
-  <div>
-    <div id="footerTop"></div>
-    <footer id="studyNotes" class="study-notes half-notes">
-      <!-- <div class="half-notes-margin"></div> -->
-      <!-- [ngClass]="{
+  <!-- 'hide-s': !navServices.rightPaneToggle -->
+  <!-- 'hide-l hide-m': !saveState.data.rightPanePin, -->
+  <!-- <div> -->
+  <div id="footerTop"></div>
+  <footer id="studyNotes" class="study-notes half-notes">
+    <!-- <div class="half-notes-margin"></div> -->
+    <!-- [ngClass]="{
         'secondary-override-off': !note.override
       }" -->
-      <note
-        *ngFor="let note of dataService.chapter2.notes.notes"
-        id="{{ note.id }}"
-        class="{{ note.classList }}"
-      >
-        <p class="note-title">{{ note.noteTitle }}</p>
-        <p class="note-short-title">{{ note.noteShortTitle }}</p>
-        <ng-container *ngFor="let secondaryNote of note.secondary">
-          <div
-            [class]="filterClassList(secondaryNote.classList)"
-            [ngClass]="{ 'verse-select-1': secondaryNote.clicked }"
-            *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
-            id="{{ secondaryNote.id }}"
-          >
-            <p (click)="this.notePhraseClick(secondaryNote)">
-              {{ secondaryNote.notePhrase.text }}
+    <note
+      *ngFor="let note of dataService.chapter2.notes.notes"
+      id="{{ note.id }}"
+      class="{{ note.classList }}"
+    >
+      <p class="note-title">{{ note.noteTitle }}</p>
+      <p class="note-short-title">{{ note.noteShortTitle }}</p>
+      <ng-container *ngFor="let secondaryNote of note.secondary">
+        <div
+          [class]="filterClassList(secondaryNote.classList)"
+          [ngClass]="{ 'verse-select-1': secondaryNote.clicked }"
+          *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
+          id="{{ secondaryNote.id }}"
+        >
+          <p (click)="this.notePhraseClick(secondaryNote)">
+            {{ secondaryNote.notePhrase.text }}
+          </p>
+          <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
+            <p
+              [class]="filterClassList(noteRef.classList)"
+              *ngIf="noteRef.visible"
+            >
+              <span [innerHTML]="noteRef.text"></span>
             </p>
-            <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
-              <p
-                [class]="filterClassList(noteRef.classList)"
-                *ngIf="noteRef.visible"
-              >
-                <span [innerHTML]="noteRef.text"></span>
-              </p>
-            </ng-container>
-          </div>
-        </ng-container>
-        <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">
           <div
             id="{{ secondaryNote.id }}"
             class="{{ secondaryNote.cn }} secondary-note"
@@ -85,9 +83,9 @@
             </ng-container>
           </div>
         </ng-container> -->
-      </note>
+    </note>
 
-      <div id="study-notes-whitespace" class="study-notes-whitespace"></div>
-    </footer>
-  </div>
+    <div id="study-notes-whitespace" class="study-notes-whitespace"></div>
+  </footer>
+  <!-- </div> -->
 </div>

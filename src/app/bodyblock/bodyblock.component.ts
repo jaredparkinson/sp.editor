@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {
+  AfterContentChecked,
   AfterContentInit,
   AfterViewInit,
   Component,
@@ -9,6 +10,7 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  AfterViewChecked,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -40,12 +42,12 @@ import { WTagService } from '../services/wtag-builder.service';
   styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent
-  implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
-  @ViewChildren('verses')
-  verses!: QueryList<VerseComponent>;
-  private pageId = '';
+  implements
+    OnInit,
+    AfterViewInit,
+    AfterContentInit,
+    OnDestroy
+     {
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -62,6 +64,12 @@ export class BodyblockComponent
     public dataService: DataService,
     public router: Router,
   ) {}
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  @ViewChildren('verses')
+  verses!: QueryList<VerseComponent>;
+  private pageId = '';
+  
 
   ngAfterContentInit(): void {}
   ngOnDestroy() {}
@@ -102,10 +110,10 @@ export class BodyblockComponent
       // .then(async chapter => {
       //   console.log(chapter);
 
-      await this.chapterService.setHighlightging(this.dataService.verses, [
-        highlighting.pop(),
-        highlighting.pop(),
-      ]);
+      const v = await this.chapterService.setHighlightging(
+        this.dataService.verses,
+        [highlighting.pop(), highlighting.pop()],
+      );
       // .then(async chapter => {
       await this.chapterService.resetNoteVisibility(
         chapter,
@@ -129,6 +137,10 @@ export class BodyblockComponent
       //   console.log('test3');
 
       this.dataService.chapter2 = chapter;
+
+      if (v) {
+        document.getElementById('p' + v).scrollIntoView();
+      }
       // console.log(this.dataService.paragraphs);
       resolve();
     });
@@ -250,7 +262,9 @@ export class BodyblockComponent
     this.verseSelectService.wTagClick(wTag, verse);
   }
 
-  async ngAfterViewInit() {}
+  ngAfterViewInit() {
+    console.log('ff');
+  }
   onScroll() {
     this.syncScrollingService.onScroll();
   }

@@ -138,17 +138,20 @@ export class NavigationService {
     this.notesSettings = !this.notesSettings;
   }
   btnRightPanePress() {
-    if (this.helperService.getWidth() >= 1024) {
-      this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
-    } else {
-      this.saveState.data.rightPaneToggle = !this.saveState.data
-        .rightPaneToggle;
-      this.rightPaneToggle = !this.rightPaneToggle;
-    }
+    this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
+    // if (this.helperService.getWidth() >= 1024 ) {
+    // } else {
+    //   this.saveState.data.rightPaneToggle = !this.saveState.data
+    //     .rightPaneToggle;
+    //   }
+    // this.rightPaneToggle = !this.rightPaneToggle;
     this.saveState.save();
   }
   btnLeftPanePress() {
-    if (this.helperService.getWidth() >= 1024) {
+    if (
+      this.helperService.getWidth() >= 1024 &&
+      window.matchMedia('(orientation: landscape)').matches
+    ) {
       this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
     } else {
       this.leftPaneToggle = !this.leftPaneToggle;

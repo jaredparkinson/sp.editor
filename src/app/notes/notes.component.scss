@@ -1,3 +1,5 @@
+// @import 'css.penguin/view_vars';
+@import '../styles/notes.scss';
 $font-stack: PalatinoldsLat-Roman, serif;
 
 @mixin span-reference($selector: '', $content: '') {

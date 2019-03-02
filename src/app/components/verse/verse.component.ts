@@ -1,11 +1,11 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
   OnInit,
   ViewChild,
   ViewEncapsulation,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import * as lodash from 'lodash';
 import { Verse, W } from '../../modelsJson/Chapter';
@@ -90,6 +90,7 @@ export class VerseComponent implements OnInit {
           secondaryNote.clicked = secondaryNote.id === ref;
         });
       });
+      this.saveState.data.rightPanePin = true;
       console.log(document.getElementById(ref).scrollIntoView());
 
       resolve();

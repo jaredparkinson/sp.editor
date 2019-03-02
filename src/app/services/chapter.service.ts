@@ -310,13 +310,10 @@ export class ChapterService {
     );
   }
 
-  public setHighlightging(
-    verses: Verses,
-    highlightNumbers: [string, string],
-  ) {
-    return new Promise<void>(resolve => {
-      console.log(this.parseHighlightedVerses(highlightNumbers[0]));
-      console.log(this.parseHighlightedVerses(highlightNumbers[1]));
+  public setHighlightging(verses: Verses, highlightNumbers: [string, string]) {
+    return new Promise<number>(resolve => {
+      // console.log(this.parseHighlightedVerses(highlightNumbers[0]));
+      // console.log(this.parseHighlightedVerses(highlightNumbers[1]));
 
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
@@ -329,18 +326,22 @@ export class ChapterService {
           : false;
         verse.context = lodash.includes(context, verseNumber) ? true : false;
 
+
+
         if (verse.context) {
           console.log(verse.id);
           console.log(context);
         }
-        // if (!lodash.includes(highlight, verseNumber)) {
+        // if (!lodash.includes(highlight, verseNumber)) {pn
         //   console.log(verse);
         // }
         // if (!lodash.includes(context, verseNumber)) {
         //   console.log(verse);
         // }
       });
-      resolve();
+      // console.log();
+      
+      resolve(highlight.sort()[0]);
     });
   }
 
@@ -349,7 +350,10 @@ export class ChapterService {
       verses.verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
           wTag.text = '';
-          wTag.text=verse.text.substring(wTag.id[0], lodash.last(wTag.id)+1)
+          wTag.text = verse.text.substring(
+            wTag.id[0],
+            lodash.last(wTag.id) + 1,
+          );
           // wTag.id.forEach(i => {
           //   wTag.text = `${wTag.text}${verse.text[i]}`;
           // });
@@ -360,7 +364,7 @@ export class ChapterService {
       });
       this.resetRefVisible(verses, noteVisibility);
       console.log('aasdf');
-      
+
       resolve(undefined);
     });
   }
@@ -370,156 +374,6 @@ export class ChapterService {
       tempText = `${tempText}${text[i]}`;
     });
     return tempText;
-  }
-
-  public async getChapterOld(
-    id: string,
-    // synchronizedScrolling: () => Promise<void>
-  ): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.verseSelectService.noteVisibility.clear();
-      this.notes2 = [];
-      this.navService.pageTitle = '';
-
-      // let vSplit = chapter.split('.');
-
-      // if (chapter === '') {
-      //   vSplit = book.split('.');
-      // }
-
-      // const suite = new benchmark.Suite();
-      // const a = suite
-      //   .add('hhj', () => {
-      //   })
-      //   .run();
-      //   console.log(a);
-      // this.verseNums = this.parseHighlightedVerses2(vSplit[1]);
-      // this.contextNums = this.parseHighlightedVerses2(vSplit[2]);
-      this.getChapterWeb(id).then(() => {
-        resolve(undefined);
-      });
-    });
-  }
-
-  private async verseFocus(): Promise<void> {
-    return new Promise<void>(
-      (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        setTimeout(() => {
-          if (this.verseNums.length === 0) {
-            document.getElementById('bodyBlockTop').scrollIntoView();
-          } else {
-            const focusVerse = this.contextNums
-              .concat(this.verseNums)
-              .sort((a, b) => {
-                return a - b;
-              })[0]
-              .toString();
-            document.getElementById('p' + focusVerse).scrollIntoView();
-          }
-          console.log('verseFocus');
-
-          resolve(null);
-        });
-      },
-    );
-  }
-
-  private async oldSetHighlighting(): Promise<void> {
-    return new Promise<void>(
-      (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        // lodash.forEach(this.dataService.chapter2.paragraphs, paragraph => {
-        //   lodash.forEach(paragraph.verses, verse => {
-        //     if (this.verseNums.includes(parseInt(verse.id.split('p')[1], 10))) {
-        //       verse.highlight = true;
-        //     }
-        //     if (
-        //       this.contextNums.includes(parseInt(verse.id.split('p')[1], 10))
-        //     ) {
-        //       verse.context = true;
-        //     }
-        //   });
-        // });
-        resolve(null);
-      },
-    );
-  }
-
-  private async getChapterWeb(
-    id: string,
-    // synchronizedScrolling: () => Promise<void>
-  ) {
-    return new Promise<void>(
-      async (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        const saved = false; // await localForage.getItem(book + '\\' + vSplit[0]);
-
-        if (saved) {
-          this.setChapter(saved as string);
-        } else {
-          console.log();
-          this.dataBaseService.get(`${id}`).then(value => {
-            console.log(value as Chapter2);
-
-            this.setChapter(value as string).then(() => {
-              resolve(null);
-            });
-          });
-
-          // this.url =
-          //   'https://storage.oneinthinehand.org/alpha/' +
-          //   this.navService.urlBuilder(book, vSplit[0]) +
-          //   '.json';
-          // const url2 =
-          //   'https://storage.oneinthinehand.org/alpha/' +
-          //   this.navService.urlBuilder(book, vSplit[0]) +
-          //   '.json';
-
-          // this.httpClient
-          //   .get(url2, {
-          //     observe: 'body',
-          //     responseType: 'text',
-          //   })
-          //   .subscribe(data => {
-          //     // console.log(data);
-          //     // this.db.put(JSON.parse(data));
-
-          //     this.setChapter(data).then(() => {
-          //       resolve(null);
-          //     });
-          //   });
-        }
-      },
-    );
-  }
-
-  private async setChapter(
-    data: {},
-    // synchronizedScrolling: () => Promise<void>
-  ) {
-    return new Promise<void>(
-      async (
-        resolve: (resolveValue: void) => void,
-        reject: (rejectValue: void) => void,
-      ) => {
-        this.dataService.chapter2 = new Chapter2();
-        this.dataService.chapter2 = data as Chapter2;
-
-        this.oldSetHighlighting().then(() => {
-          this.verseFocus().then(() => {
-            // synchronizedScrolling();
-            resolve(null);
-          });
-        });
-      },
-    );
   }
 
   public parseHighlightedVerses(v: string): number[] {

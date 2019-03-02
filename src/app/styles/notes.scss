@@ -1,0 +1,35 @@
+@media only screen and (max-width: 499.98px), (orientation: portrait) {
+  // .right-pane footer,
+  // .right-pane-editor footer,
+  // .left-pane nav {
+  //   width: $vw11;
+  // }
+
+  .right-pane footer,
+  .right-pane-editor footer {
+    float: right;
+    position: absolute;
+    right: 0px;
+    .half-notes-margin {
+      display: none;
+    }
+
+    &.half-notes {
+      position: fixed !important;
+      width: 100%;
+      top: 50%;
+      border-top: 5px solid darkgrey;
+      // .half-notes-margin {
+      //   display: block !important;
+      //   position: fixed;
+      //   width: 100%;
+      //   height: 20px;
+      //   background: grey;
+      // }
+    }
+  }
+}
+
+.hide-notes {
+  display: none;
+}

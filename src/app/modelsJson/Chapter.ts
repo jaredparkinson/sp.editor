@@ -4,7 +4,7 @@ export class Chapter2 {
   public testament = '';
 
   public title = '';
-  public header: string = '';
+  public header = '';
   // public oldNotes: OldNote[] = [];
   public notes: Notes = new Notes();
   public verses: Verses;
@@ -64,12 +64,13 @@ export class SecondaryNote {
 }
 
 export class Verse {
-  public id: string = '';
-  public text: string = '';
+  public id = '';
+  public text = '';
   public wTags: W[] = [];
   // public builtWTags: W[] = [];
   public highlight = false;
   public context = false;
+  _id: string;
   constructor(element: Element) {
     this.id = element.id;
     this.text = element.textContent;

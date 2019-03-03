@@ -536,7 +536,7 @@ div.paragraph {
     content: '\A';
     white-space: pre;
   }
-  .paragraph w.poetry:first-of-type::before {
+  .app-verse:first-of-type w.poetry:first-of-type::before {
     content: '' !important;
   }
 }

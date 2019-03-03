@@ -3,7 +3,7 @@
   "rules": {
     "selector-type-no-unknown": [
       true,
-      { "ignoreTypes": ["note", "footer", "w"] }
+      { "ignoreTypes": ["note", "footer", "w", "app-verse"] }
     ]
   }
 }

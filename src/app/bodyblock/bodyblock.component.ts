@@ -35,6 +35,7 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-bodyblock',
@@ -42,12 +43,7 @@ import { WTagService } from '../services/wtag-builder.service';
   styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent
-  implements
-    OnInit,
-    AfterViewInit,
-    AfterContentInit,
-    OnDestroy
-     {
+  implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -63,13 +59,17 @@ export class BodyblockComponent
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
     public router: Router,
-  ) {}
+    private swUpdate: SwUpdate,
+  ) {
+    this.swUpdate.available.subscribe(evt => {
+      alert('App Update is Avaliable');
+    });
+  }
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<VerseComponent>;
   private pageId = '';
-  
 
   ngAfterContentInit(): void {}
   ngOnDestroy() {}

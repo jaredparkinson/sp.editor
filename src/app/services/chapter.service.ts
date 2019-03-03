@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
-import * as PouchDB from 'pouchdb/dist/pouchdb';
+// import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Note } from '../models/Note';
 import {
   Chapter2,

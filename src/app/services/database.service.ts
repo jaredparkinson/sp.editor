@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as PouchDB from 'pouchdb/dist/pouchdb';
-import WorkerPouch from 'worker-pouch';
+import * as lodash from 'lodash';
+// import * as PouchDB from 'pouchdb/dist/pouchdb';
+// import WorkerPouch from 'worker-pouch';
+import * as PouchDBFind from 'pouchdb-find';
+import * as WorkerPouch from 'worker-pouch';
 
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
@@ -8,17 +11,21 @@ import { Chapter2 } from '../modelsJson/Chapter';
 })
 export class DatabaseService {
   // public PouchDB = require('pouchdb-browser');
-  public db = new PouchDB('alpha.oneinthinehand.org');
+  public db = new PouchDB('http://localhost:3000/ggg');
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
   constructor() {
     // (<any>PouchDB).adapter('worker', WorkerPouch);
     // this.db = new PouchDB('alpha.oneinthinehand.org');
+    // PouchDB.plugin('pouchdb-find');
+    PouchDB.plugin(PouchDBFind);
+    // this.db.createIndex({ index: { fields: ['verse'] } });
   }
 
   async allDocs() {
     console.log(await this.db.allDocs());
   }
-  public get(id: string): Promise<{}> {
+  public async get(id: string): Promise<{}> {
+    console.log(await this.db.find({ selector: { verse: 'jethro' } }));
     return this.db.get(id);
   }
 
@@ -58,10 +65,22 @@ export class DatabaseService {
   }
 
   public bulkDocs(dataFile: string) {
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
       console.log(this.tempAllDocs);
 
-      const scriptureFiles = JSON.parse(dataFile) as [];
+      const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
+      const verses = [];
+      scriptureFiles.forEach(c => {
+        c.verses.verses.forEach(verse => {
+          const v = lodash.cloneDeep(verse);
+          v._id = c._id + v.id;
+          v.wTags = undefined;
+          verses.push(v);
+        });
+      });
+      // await this.db.bulkDocs(verses);
+
+      console.log(verses);
 
       if (scriptureFiles) {
         scriptureFiles.forEach((scriptureFile: any) => {

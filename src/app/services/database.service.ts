@@ -11,8 +11,9 @@ import { Chapter2 } from '../modelsJson/Chapter';
 })
 export class DatabaseService {
   // public PouchDB = require('pouchdb-browser');
-  // public db = new PouchDB('http://localhost:5984//ggg');
+  // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
   public db = new PouchDB('alpha.oneinthinehand.org');
+  // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
   constructor() {
     // (<any>PouchDB).adapter('worker', WorkerPouch);
@@ -65,41 +66,50 @@ export class DatabaseService {
     this.tempAllDocs = await this.db.allDocs();
   }
 
-  public async bulkDocs(dataFile: string) {
-    await PouchDB.sync(this.db, 'http://localhost:5984/ggg');
+  public bulkDocs(dataFile: string) {
+    // await PouchDB.sync(
+    //   this.db,
+    //   'https://couch.parkinson.im/alpha_oneinthinehand',
+    // );
     // this.db.sync('http://localhost:5984/ggg');
-    // return new Promise(async resolve => {
-    //   console.log(this.tempAllDocs);
+    return new Promise<void>(async resolve => {
+      await PouchDB.replicate(
+        'https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand',
+        this.db,
+      );
+      resolve();
+    });
+    // return this.addFiles(dataFile);
+  }
 
-    //   const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
-    //   const verses = [];
-    //   scriptureFiles.forEach(c => {
-    //     c.verses.verses.forEach(verse => {
-    //       const v = lodash.cloneDeep(verse);
-    //       v._id = c._id + v.id;
-    //       v.wTags = undefined;
-    //       verses.push(v);
-    //     });
-    //   });
-    //   // await this.db.bulkDocs(verses);
-
-    //   console.log(verses);
-
-    //   if (scriptureFiles) {
-    //     scriptureFiles.forEach((scriptureFile: any) => {
-    //       const savedDoc = this.tempAllDocs.rows.filter(doc => {
-    //         return doc.id == scriptureFile._id;
-    //       });
-
-    //       if (savedDoc && savedDoc.length > 0) {
-    //         scriptureFile._rev = savedDoc[0].value.rev;
-    //       }
-    //     });
-
-    //     this.db.bulkDocs(scriptureFiles).then(() => {
-    //       resolve();
-    //     });
-    //   }
-    // });
+  private addFiles(dataFile: string) {
+    return new Promise(async resolve => {
+      console.log(this.tempAllDocs);
+      const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
+      const verses = [];
+      scriptureFiles.forEach(c => {
+        c.verses.verses.forEach(verse => {
+          const v = lodash.cloneDeep(verse);
+          v._id = c._id + v.id;
+          v.wTags = undefined;
+          verses.push(v);
+        });
+      });
+      // await this.db.bulkDocs(verses);
+      console.log(verses);
+      if (scriptureFiles) {
+        scriptureFiles.forEach((scriptureFile: any) => {
+          const savedDoc = this.tempAllDocs.rows.filter(doc => {
+            return doc.id == scriptureFile._id;
+          });
+          if (savedDoc && savedDoc.length > 0) {
+            scriptureFile._rev = savedDoc[0].value.rev;
+          }
+        });
+        this.db.bulkDocs(scriptureFiles).then(() => {
+          resolve();
+        });
+      }
+    });
   }
 }

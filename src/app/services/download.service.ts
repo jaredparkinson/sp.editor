@@ -59,7 +59,14 @@ export class DownloadService {
     //   }
     // });
   }
-  public downloadScriptures(file: Download) {
+  public async downloadScriptures(file: Download) {
+    file.downloaded = false;
+    file.downloading = true;
+    this.dataBaseService.bulkDocs('').then(() => {
+      console.log('Finished');
+      file.downloading = false;
+    });
+    return;
     this.dataBaseService.getDocumentCount();
     file.downloading = true;
     const promises = [];

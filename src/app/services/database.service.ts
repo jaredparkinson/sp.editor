@@ -73,7 +73,7 @@ export class DatabaseService {
     // );
     // this.db.sync('http://localhost:5984/ggg');
     return new Promise<void>(async resolve => {
-      await PouchDB.replicate(
+      await (PouchDB as any).replicate(
         'https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand',
         this.db,
       );

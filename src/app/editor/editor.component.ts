@@ -10,10 +10,6 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
@@ -33,8 +29,8 @@ export class EditorComponent
   implements OnInit, AfterViewInit, AfterContentInit {
   private timer: NodeJS.Timer;
 
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
+  // faChevronLeft = faChevronLeft;
+  // faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<ElementRef>;
   constructor(

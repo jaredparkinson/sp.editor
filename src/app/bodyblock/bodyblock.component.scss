@@ -151,6 +151,25 @@ body {
     font-variant: small-caps;
   }
 
+  button.body-block-nav {
+    &:hover,
+    &:focus {
+      outline: none;
+      border: none;
+    }
+    svg {
+      height: 48px;
+      width: 48px;
+      path {
+        fill: rgb(196, 190, 190);
+      }
+    }
+    &#btnNextChapter {
+      svg {
+        transform: scaleX(-1);
+      }
+    }
+  }
   //   @for $x from 1 to 300 {
   //     #highlight-holder.p#{
   //  $x

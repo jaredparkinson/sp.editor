@@ -8,14 +8,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {
-  faBars,
-  faBookOpen,
-  faGlobe,
-  faListUl,
-  faParagraph,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
 import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { ChapterService } from '../services/chapter.service';

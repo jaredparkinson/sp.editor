@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
@@ -14,7 +13,6 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  faCoffee = faCoffee;
   ipcRenderer: any;
 
   public testStyle = '#gridBody {background-color: black;}';

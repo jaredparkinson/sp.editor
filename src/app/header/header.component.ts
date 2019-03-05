@@ -3,17 +3,6 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {
-  faArrowLeft,
-  faArrowRight,
-  faBars,
-  faBookOpen,
-  faCaretDown,
-  faGlobe,
-  faListUl,
-  faParagraph,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { ChapterService } from '../services/chapter.service';
 import { EditService } from '../services/EditService';
@@ -28,15 +17,15 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  faBars = faBars;
-  faParagraph = faParagraph;
-  faBookOpen = faBookOpen;
-  faPlus = faPlus;
-  faListUl = faListUl;
-  faGlobe = faGlobe;
-  faCaretDown = faCaretDown;
-  faArrowLeft = faArrowLeft;
-  faArrowRight = faArrowRight;
+  // faBars = faBars;
+  // faParagraph = faParagraph;
+  // faBookOpen = faBookOpen;
+  // faPlus = faPlus;
+  // faListUl = faListUl;
+  // faGlobe = faGlobe;
+  // faCaretDown = faCaretDown;
+  // faArrowLeft = faArrowLeft;
+  // faArrowRight = faArrowRight;
   @ViewChildren('wtag')
   wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;

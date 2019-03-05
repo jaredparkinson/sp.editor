@@ -13,10 +13,6 @@ import {
   AfterViewChecked,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -60,8 +56,6 @@ export class BodyblockComponent
     public dataService: DataService,
     public router: Router,
   ) {}
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
   @ViewChildren('verses')
   verses!: QueryList<VerseComponent>;
   private pageId = '';

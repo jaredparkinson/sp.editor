@@ -8,14 +8,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {
-  faBars,
-  faBookOpen,
-  faGlobe,
-  faListUl,
-  faParagraph,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
 import * as lodash from 'lodash';
 import { Note } from '../modelsJson/Note';
 // import { SecondaryNote } from '../modelsJson/SecondaryNote';
@@ -46,12 +38,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public verseSelectService: VerseSelectService,
     public dataService: DataService,
   ) {}
-  faBars = faBars;
-  faParagraph = faParagraph;
-  faBookOpen = faBookOpen;
-  faPlus = faPlus;
-  faListUl = faListUl;
-  faGlobe = faGlobe;
   @ViewChildren('notes')
   notes!: QueryList<ElementRef>;
 

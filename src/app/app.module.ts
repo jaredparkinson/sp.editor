@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import 'reflect-metadata';
 import 'zone.js/dist/zone-mix';
 import '../polyfills';
@@ -96,7 +95,6 @@ export function load(saveState: SaveStateService) {
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

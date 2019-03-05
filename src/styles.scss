@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/normalize.css/normalize.css';
+@import '../node_modules/materialize-css/sass/materialize.scss';
+@import './app/styles/materialize-overrides.scss';
 @import 'css.penguin/view_vars';
 
 // @import 'app/bodyblock/bodyblock.component';
@@ -7,6 +9,9 @@
 // @import 'app/note-editor/note-editor.component.scss';
 $font-stack: serif;
 $btnOn: #8cadb8;
+body {
+  font-family: $font-stack !important;
+}
 
 @mixin w-super($selector, $color) {
   $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',

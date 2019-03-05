@@ -11,6 +11,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { DataService } from '../services/data.service';
+import * as matCSS from 'materialize-css';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -89,6 +90,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnNewNotesPress();
   }
   btnPoetryPress() {
+    matCSS.toast({ html: 'App Update is Avaliable' });
     this.navServices.btnPoetryPress();
   }
   btnEnglishNotesPress() {

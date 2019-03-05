@@ -7,6 +7,7 @@ import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SwUpdate } from '@angular/service-worker';
+import * as matCSS from 'materialize-css';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('en');
 
     this.swUpdate.available.subscribe(evt => {
-      alert('App Update is Avaliable');
+      matCSS.toast({ html: 'App Update is Avaliable' });
     });
     if (this.electronService.isElectron()) {
     }

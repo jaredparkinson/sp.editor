@@ -501,6 +501,9 @@ button {
 
   &:hover {
     background-color: #9dc6d4;
+    &.nav-btn-on {
+      background-color: #8cadb8 !important;
+    }
   }
   // &:hover {
   //   border-color: black;

@@ -30,7 +30,10 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('en');
 
     this.swUpdate.available.subscribe(evt => {
-      matCSS.toast({ html: 'App Update is Avaliable' });
+      matCSS.toast({
+        html: `<span onclick="location.reload()">Click here to update</span>`,
+        displayLength: 1000000,
+      });
     });
     if (this.electronService.isElectron()) {
     }

@@ -54,6 +54,7 @@ import { VerseComponent } from './components/verse/verse.component';
 import { SyncScrollingService } from './services/sync-scrolling.service';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { DataService } from './services/data.service';
+import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -88,6 +89,7 @@ export function load(saveState: SaveStateService) {
     LandingPageParentComponent,
     VerseComponent,
     ParagraphComponent,
+    SettingsParentComponent,
     // SearchBarComponent
   ],
   imports: [

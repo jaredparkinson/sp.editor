@@ -488,6 +488,14 @@ body.find {
 }
 
 button {
+  &:hover,
+  &:focus {
+    outline: none;
+    border: none;
+  }
+  &:focus {
+    background-color: initial;
+  }
   outline: none;
   background-color: lightblue;
   border-color: lightblue; // border: 1px solid black;

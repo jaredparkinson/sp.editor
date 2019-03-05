@@ -9,6 +9,7 @@ import { EditorParentComponent } from './outlets/editor-parent/editor-parent.com
 import { LandingPageParentComponent } from './outlets/landing-page-parent/landing-page-parent.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
   // },
   {
     path: 'settings',
-    component: SettingsComponent,
+    component: SettingsParentComponent,
   },
   {
     path: 'search/:search',

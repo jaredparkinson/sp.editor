@@ -26,11 +26,17 @@
   font-size: 20px !important;
 }
 
-#navToggle,
-#btnRightPane {
+#navToggle {
   font-size: 35px;
 }
-
+.menu-bar {
+  i {
+    font-size: 1em;
+  }
+  .header-arrows {
+    font-size: 2em;
+  }
+}
 #btnNotesFlyout {
   svg {
     font-size: 48px;

@@ -156,7 +156,10 @@ body {
     &:focus {
       outline: none;
       border: none;
-      background-color: lightblue !important;
+      background-color: initial !important;
+    }
+    i {
+      font-size: 48px;
     }
     svg {
       height: 48px;

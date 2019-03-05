@@ -26,6 +26,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.dataService.chapter2 = new Chapter2();
     this.navServices.notesSettings = false;
+    this.dataService.chapter2.title = 'Settings';
   }
 
   download() {

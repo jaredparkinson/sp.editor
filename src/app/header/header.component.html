@@ -75,46 +75,13 @@
       </svg>
     </button>
     <button id="btnBack" (click)="btnBackPress()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 100 100"
-        style="enable-background:new 0 0 100 100;"
-        xml:space="preserve"
-      >
-        <g>
-          <polygon
-            points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "
-          ></polygon>
-        </g>
-      </svg>
+      <i class="header-arrows material-icons black-text">arrow_back</i>
     </button>
 
     <div id="bookName" [innerHtml]="dataService.chapter2.title"></div>
 
     <button id="btnForward" (click)="btnForwardPress()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 100 100"
-        style="enable-background:new 0 0 100 100;"
-        xml:space="preserve"
-      >
-        <g
-          transform="translate(50 50)  rotate(180) translate(-50 -50)"
-          style="fill:#000000;"
-        >
-          <polygon
-            points="53.9,69.6 38.9,54.5 78.2,54.5 78.2,45.5 38.9,45.5 53.9,30.4 47.6,24.1 21.6,50 47.6,75.9  "
-          ></polygon>
-        </g>
-      </svg>
+      <i class="header-arrows material-icons black-text">arrow_forward</i>
     </button>
     <button
       id="btnNotesFlyout"
@@ -122,24 +89,14 @@
       class="right-pane-ignore notes-settings "
       [ngClass]="{ 'nav-btn-on': navServices.notesSettings }"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <path d="M54 25h-9v10h10V25zM45 45v10h10V45h-1zM45 65v10h10V65h-1z" />
-      </svg>
+      <i class="material-icons black-text">more_vert</i>
     </button>
     <button
       id="btnSecondaryNotes"
       [ngClass]="{ 'nav-btn-on': saveState.data.secondaryNotesVisible }"
       (click)="btnSecondaryNotesPress()"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        data-name="Layer 2"
-        viewBox="0 0 48 48"
-      >
-        <path
-          d="M34 22.19h-8v-8a2 2 0 1 0-4 0v8h-8a2 2 0 1 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4z"
-        />
-      </svg>
+      <i class="header-arrows material-icons black-text">add</i>
     </button>
   </div>
   <div id="headerRightPane">
@@ -149,23 +106,7 @@
       (click)="btnRightPanePress()"
       class="right-pane-ignore "
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 100 100"
-        enable-background="new 0 0 100 100"
-        xml:space="preserve"
-      >
-        <circle cx="8.8" cy="24.3" r="6.4"></circle>
-        <rect x="22.8" y="20.3" width="74.5" height="7.9"></rect>
-        <circle cx="8.8" cy="50.3" r="6.4"></circle>
-        <rect x="22.8" y="46.3" width="74.5" height="7.9"></rect>
-        <circle cx="8.8" cy="76.3" r="6.4"></circle>
-        <rect x="22.8" y="72.3" width="74.5" height="7.9"></rect>
-      </svg>
+      <i class="material-icons black-text">format_list_bulleted</i>
     </button>
   </div>
 </div>

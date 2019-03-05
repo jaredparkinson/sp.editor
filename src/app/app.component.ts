@@ -7,10 +7,11 @@ import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
+import { SwUpdate } from '@angular/service-worker';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   faCoffee = faCoffee;
@@ -24,10 +25,14 @@ export class AppComponent implements OnInit {
     public navService: NavigationService,
     public saveState: SaveStateService,
     public verseSelectService: VerseSelectService,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
+    private swUpdate: SwUpdate,
   ) {
     this.translate.setDefaultLang('en');
 
+    this.swUpdate.available.subscribe(evt => {
+      alert('App Update is Avaliable');
+    });
     if (this.electronService.isElectron()) {
     }
     // console.log('AppConfig', AppConfig);

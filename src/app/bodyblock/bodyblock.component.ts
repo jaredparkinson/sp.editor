@@ -59,12 +59,7 @@ export class BodyblockComponent
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
     public router: Router,
-    private swUpdate: SwUpdate,
-  ) {
-    this.swUpdate.available.subscribe(evt => {
-      alert('App Update is Avaliable');
-    });
-  }
+  ) {}
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
   @ViewChildren('verses')

@@ -588,12 +588,18 @@ div.paragraph {
 //   position: fixed;
 // }
 h1 {
-  font-family: $font-stack;
-  margin: 0;
-  margin-top: 6pt;
-  margin-bottom: 6pt;
-  text-align: center;
-  padding-right: 20px;
+  font-family: $font-stack !important;
+  margin: 0 !important;
+  margin-top: 6pt !important;
+  margin-bottom: 6pt !important;
+  text-align: center !important;
+  padding-right: 20px !important;
+  font-size: 2em !important;
+  margin-block-start: 0.67em !important;
+  margin-block-end: 0.67em !important;
+  margin-inline-start: 0px !important;
+  margin-inline-end: 0px !important;
+  font-weight: bold !important;
 }
 
 #notesSettings {

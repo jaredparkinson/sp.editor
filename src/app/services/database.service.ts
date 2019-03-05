@@ -23,8 +23,8 @@ export class DatabaseService {
     // this.db.createIndex({ index: { fields: ['verse'] } });
   }
 
-  async allDocs() {
-    console.log(await this.db.allDocs());
+  allDocs() {
+    return this.db.allDocs();
   }
   public async get(id: string): Promise<{}> {
     // console.log(await this.db.find({ selector: { verse: 'jethro' } }));
@@ -72,6 +72,7 @@ export class DatabaseService {
     //   'https://couch.parkinson.im/alpha_oneinthinehand',
     // );
     // this.db.sync('http://localhost:5984/ggg');
+
     return new Promise<void>(async resolve => {
       await (PouchDB as any).replicate(
         'https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand',

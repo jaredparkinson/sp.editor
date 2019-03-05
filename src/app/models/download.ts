@@ -3,6 +3,7 @@ export class Download {
   public title: string;
   public downloaded = false;
   public downloading = false;
+  public deleting = false;
 
   constructor(fileName: string, title: string, downloaded: boolean) {
     this.fileName = fileName;

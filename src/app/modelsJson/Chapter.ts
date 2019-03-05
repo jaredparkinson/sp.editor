@@ -13,6 +13,7 @@ export class Chapter2 {
 
   public previousPage = '';
   public nextPage = '';
+  public _deleted = false;
 }
 
 export class Note {

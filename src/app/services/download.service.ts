@@ -10,7 +10,9 @@ import { DatabaseService } from './database.service';
   providedIn: 'root',
 })
 export class DownloadService {
-  public downloads: Download[] = [];
+  public downloads: Download[] = [
+    new Download('assets/scriptures.zip', 'scriptures', false),
+  ];
   private forageRegex: RegExp = new RegExp(
     /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/,
   );
@@ -18,9 +20,11 @@ export class DownloadService {
     private httpClient: HttpClient,
     private dataBaseService: DatabaseService,
   ) {
-    this.downloads.push(
-      new Download('assets/scriptures.zip', 'scriptures', false),
-    );
+    const tempDownloads = localStorage.getItem('downloads');
+    if (tempDownloads) {
+      this.downloads = JSON.parse(tempDownloads) as [];
+    } else {
+    }
 
     // const testaments = [
     //   'bd',
@@ -62,42 +66,80 @@ export class DownloadService {
   public async downloadScriptures(file: Download) {
     file.downloaded = false;
     file.downloading = true;
-    this.dataBaseService.bulkDocs('').then(() => {
-      console.log('Finished');
-      file.downloading = false;
-    });
-    return;
-    this.dataBaseService.getDocumentCount();
-    file.downloading = true;
-    const promises = [];
-    const promises2 = [];
-    this.download(file).subscribe(async data => {
-      console.log(data);
-      await this.dataBaseService.setAllDocs();
-
-      jszip.loadAsync(data).then(zip => {
-        zip.forEach(async file2 => {
-          if (zip.file(file2)) {
-            console.log(file2);
-
-            promises.push(zip.file(file2).async('text'));
-          }
-        });
-
-        Promise.all(promises).then(async (scriptureFiles: string[]) => {
-          scriptureFiles.forEach(scriptureFile => {
-            promises2.push(this.dataBaseService.bulkDocs(scriptureFile));
-          });
-          Promise.all(promises2)
-            .then(() => {
-              file.downloaded = true;
-              console.log('Finished');
-            })
-            .catch(reason => {
-              console.log(reason);
-            });
-        });
+    await this.dataBaseService.db.allDocs().then(docs => {
+      const deleteRows = [];
+      docs.rows.forEach(row => {
+        let tempRow = { _rev: row.value.rev, _id: row.id, _deleted: false };
+        console.log(tempRow);
+        deleteRows.push(tempRow);
       });
+      this.dataBaseService.db.bulkDocs(deleteRows);
+    });
+    this.dataBaseService
+      .bulkDocs('')
+      .then(() => {
+        console.log('Finished');
+        file.downloading = false;
+        file.downloaded = true;
+        file.deleting = false;
+        localStorage.setItem('downloads', JSON.stringify(this.downloads));
+      })
+      .catch(() => {
+        console.log('Failed, try again');
+        file.downloading = false;
+      });
+    return;
+    // this.dataBaseService.getDocumentCount();
+    // file.downloading = true;
+    // const promises = [];
+    // const promises2 = [];
+    // this.download(file).subscribe(async data => {
+    //   console.log(data);
+    //   await this.dataBaseService.setAllDocs();
+
+    //   jszip.loadAsync(data).then(zip => {
+    //     zip.forEach(async file2 => {
+    //       if (zip.file(file2)) {
+    //         console.log(file2);
+
+    //         promises.push(zip.file(file2).async('text'));
+    //       }
+    //     });
+
+    //     Promise.all(promises).then(async (scriptureFiles: string[]) => {
+    //       scriptureFiles.forEach(scriptureFile => {
+    //         promises2.push(this.dataBaseService.bulkDocs(scriptureFile));
+    //       });
+    //       Promise.all(promises2)
+    //         .then(() => {
+    //           file.downloaded = true;
+    //           console.log('Finished');
+    //         })
+    //         .catch(reason => {
+    //           console.log(reason);
+    //         });
+    //     });
+    //   });
+    // });
+  }
+
+  delete(file: Download) {
+    file.deleting = false;
+    this.dataBaseService.allDocs().then(docs => {
+      const deleteRows = [];
+
+      docs.rows.forEach(row => {
+        let tempRow = { _rev: row.value.rev, _id: row.id, _deleted: true };
+        console.log(tempRow);
+        deleteRows.push(tempRow);
+      });
+
+      file.deleting = true;
+      file.downloading = false;
+      file.downloaded = false;
+      console.log(file);
+
+      localStorage.setItem('downloads', JSON.stringify(this.downloads));
     });
   }
 

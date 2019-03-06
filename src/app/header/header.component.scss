@@ -1,48 +1,47 @@
-#bookName {
-  margin-top: 6px;
-  margin-left: 10px;
-  text-align: center;
-  font-size: 16pt;
-}
-
-#btnPoetry,
-#btnParagraph,
-#btnRightPane,
-#navToggle,
-#btnNotesFlyout {
-  padding-top: 1px;
-  font-size: 27px;
-  font-weight: bolder;
-
-  svg {
-    width: 0.85em;
-    // height: 100%;
-    display: inline-block;
-  }
-}
-
-#btnParagraph {
-  padding-top: 6px;
-  font-size: 20px !important;
-}
-
-#navToggle {
-  font-size: 35px;
-}
 .menu-bar {
+  button {
+    background-color: inherit;
+    color: inherit !important;
+
+    &#btnParagraph {
+      padding-top: 6px;
+      font-size: 20px !important;
+    }
+    &#navToggle {
+      font-size: 35px;
+    }
+    &#btnNotesFlyout {
+      svg {
+        font-size: 48px;
+        vertical-align: middle;
+      }
+    }
+    &#btnPoetry,
+    &#btnParagraph,
+    &#btnRightPane,
+    &#navToggle,
+    &#btnNotesFlyout {
+      padding-top: 1px;
+      font-size: 27px;
+      font-weight: bolder;
+
+      svg {
+        width: 0.85em;
+        // height: 100%;
+        display: inline-block;
+      }
+    }
+  }
   i {
     font-size: 1em;
   }
   .header-arrows {
     font-size: 2em;
   }
-}
-#btnNotesFlyout {
-  svg {
-    font-size: 48px;
-    vertical-align: middle;
+  #bookName {
+    margin-top: 6px;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 16pt;
   }
 }
-// #btnRightPane {
-//   font-size: 1000px;
-// }

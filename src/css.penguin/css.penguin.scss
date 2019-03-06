@@ -14,11 +14,11 @@
   grid-template-areas: 'header' 'body';
   grid-template-rows: 40px auto;
 
-  .header {
-    // grid-area: header;
-    // height: 5vh;
-    background-color: lightblue;
-  }
+  // .header {
+  //   // grid-area: header;
+  //   // height: 5vh;
+  //   background-color: lightblue;
+  // }
 
   .body .router-outlet {
     // grid-area: body

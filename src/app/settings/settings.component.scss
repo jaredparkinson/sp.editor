@@ -1,5 +1,12 @@
 .settings-page {
   margin-bottom: 25px;
+  .switch label input[type='checkbox']:checked + .lever {
+    background-color: #03a9f4;
+  }
+
+  .switch label input[type='checkbox']:checked + .lever:after {
+    background-color: #0288d1;
+  }
 }
 .download-btn {
   text-align: center;

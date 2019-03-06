@@ -190,7 +190,7 @@ body.find {
 #headerMiddlePane,
 #headerRightPane {
   display: grid;
-  background-color: lightblue;
+  // background-color: lightblue;
 }
 
 @media only screen and (max-width: 511.98px) {
@@ -497,8 +497,8 @@ button {
     background-color: initial;
   }
   outline: none;
-  background-color: lightblue;
-  border-color: lightblue; // border: 1px solid black;
+  // background-color: lightblue;
+  // border-color: lightblue; // border: 1px solid black;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-style: none;
 

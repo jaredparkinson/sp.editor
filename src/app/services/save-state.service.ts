@@ -16,7 +16,9 @@ export class SaveStateService {
     // this.load();
   }
   public save(): void {
-    localStorage.setItem(this.id, JSON.stringify(this.data));
+    setTimeout(() => {
+      localStorage.setItem(this.id, JSON.stringify(this.data));
+    }, 100);
   }
   public load(): Promise<any> {
     return new Promise(resolve => {

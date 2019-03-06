@@ -1,4 +1,4 @@
-<div class="section container">
+<div class="section container settings-page">
   <div class="row">
     <div class="col s12 m4">
       <span class="settings-title">Note Types</span>
@@ -22,6 +22,7 @@
                 <input
                   type="checkbox"
                   [(ngModel)]="saveState.data.newNotesVisible"
+                  (click)="this.saveSettings()"
                 />
                 <span class="lever"></span>
               </label>

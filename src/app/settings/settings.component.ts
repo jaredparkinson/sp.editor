@@ -35,4 +35,7 @@ export class SettingsComponent implements OnInit {
   reset() {
     localForage.clear();
   }
+  saveSettings() {
+    this.saveState.save();
+  }
 }

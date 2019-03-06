@@ -28,17 +28,19 @@
           *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
           id="{{ secondaryNote.id }}"
         >
-          <p (click)="this.notePhraseClick(secondaryNote)">
+        <div>
+          <p (click)="this.notePhraseClick(secondaryNote)"> 
             {{ secondaryNote.notePhrase.text }}
           </p>
           <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
             <p
               [class]="filterClassList(noteRef.classList)"
               *ngIf="noteRef.visible"
-            >
+              >
               <span [innerHTML]="noteRef.text"></span>
             </p>
           </ng-container>
+        </div>
         </div>
       </ng-container>
       <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">

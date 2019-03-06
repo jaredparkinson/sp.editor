@@ -4,8 +4,9 @@
     color: inherit !important;
 
     &#btnParagraph {
+      font-family: 'Courier New', Courier, monospace;
       padding-top: 6px;
-      font-size: 20px !important;
+      font-size: 29px !important;
     }
     &#navToggle {
       font-size: 35px;
@@ -39,9 +40,10 @@
     font-size: 2em;
   }
   #bookName {
-    margin-top: 6px;
+    // margin-top: 6px;
     margin-left: 10px;
+    font-weight: bold;
     text-align: center;
-    font-size: 16pt;
+    font-size: 30px;
   }
 }

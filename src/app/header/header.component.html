@@ -1,8 +1,8 @@
-<div class="menu-bar pop-out light-blue dark-text">
+<div class="menu-bar pop-out light-blue lighten-4 dark-text">
   <div id="headerLeftPane">
     <button
       id="navToggle"
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       (click)="btnLeftPanePress()"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -21,30 +21,14 @@
       [ngClass]="{
         'darken-2': saveState.data.paragraphsVisible
       }"
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       (click)="btnParagraphPress()"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        version="1.1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 75 100"
-        style="enable-background:new 0 0 75 100;"
-        xml:space="preserve"
-      >
-        <path
-          d="M75,0H62.5H50H37.5H25C11.193,0,0,11.193,0,25s11.193,25,25,25v50h12.5V12.5H50V100h12.5V12.5H75V0z"
-          fill="#010101"
-        ></path>
-      </svg>
-    </button>
+    >¶</button>
     <button
       id="btnPoetry"
       [ngClass]="{ 'darken-2': saveState.data.poetryVisible }"
       (click)="btnPoetryPress()"
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <path
@@ -53,7 +37,7 @@
       </svg>
     </button>
     <button
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       id="btnBack"
       (click)="btnBackPress()"
     >
@@ -62,12 +46,12 @@
 
     <div
       id="bookName"
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       [innerHtml]="dataService.chapter2.title"
     ></div>
 
     <button
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       id="btnForward"
       (click)="btnForwardPress()"
     >
@@ -83,7 +67,7 @@
     </button>
     <button
       id="btnSecondaryNotes"
-      class="light-blue waves-effect waves-light"
+      class="light-blue lighten-4 waves-effect waves-light"
       [ngClass]="{
         'darken-2': saveState.data.secondaryNotesVisible
       }"

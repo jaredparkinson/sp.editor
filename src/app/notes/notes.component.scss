@@ -22,6 +22,10 @@ $font-stack: PalatinoldsLat-Roman, serif;
   z-index: 100;
 
   note {
+    > div > div {
+      margin-left: 10px;
+    }
+    margin-left: 10px;
     > div > div.original-note-marker {
       display: none;
     }

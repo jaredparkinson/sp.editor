@@ -1,22 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+import * as matCSS from 'materialize-css';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
-import { SwUpdate } from '@angular/service-worker';
-import * as matCSS from 'materialize-css';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  ipcRenderer: any;
-
-  public testStyle = '#gridBody {background-color: black;}';
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     public electronService: ElectronService,
     private translate: TranslateService,
@@ -46,6 +43,13 @@ export class AppComponent implements OnInit {
     // } else {
     //   console.log('Mode web');
     // }import searchInPage from 'electron-in-page-search';
+  }
+  ipcRenderer: any;
+
+  public testStyle = '#gridBody {background-color: black;}';
+  ngAfterViewInit(): void {
+    const elems = document.querySelectorAll('.dropdown-trigger');
+    const instances = matCSS.Dropdown.init(elems, {closeOnClick:false});
   }
 
   @HostListener('document:keydown', ['$event'])

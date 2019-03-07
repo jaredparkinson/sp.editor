@@ -1,49 +1,73 @@
-.menu-bar {
-  button {
-    background-color: inherit;
-    color: inherit !important;
-
-    &#btnParagraph {
-      font-family: 'Courier New', Courier, monospace;
-      padding-top: 6px;
-      font-size: 29px !important;
-    }
-    &#navToggle {
-      font-size: 35px;
-    }
-    &#btnNotesFlyout {
-      svg {
-        font-size: 48px;
-        vertical-align: middle;
-      }
-    }
-    &#btnPoetry,
-    &#btnParagraph,
-    &#btnRightPane,
-    &#navToggle,
-    &#btnNotesFlyout {
-      padding-top: 1px;
-      font-size: 27px;
-      font-weight: bolder;
-
-      svg {
-        width: 0.85em;
-        // height: 100%;
-        display: inline-block;
-      }
+.nav-bar {
+  a {
+    color: #000 !important;
+  }
+  svg {
+    width: 28px !important;
+    height: inherit !important;
+    path {
+      fill: #000;
     }
   }
-  i {
-    font-size: 1em;
+  ul {
+    a,
+    i {
+      font-size: 32px !important;
+      color: #000 !important;
+      font-weight: bold;
+    }
   }
-  .header-arrows {
-    font-size: 2em;
-  }
-  #bookName {
-    // margin-top: 6px;
-    margin-left: 10px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 30px;
+  #btnParagraph {
+    font-family: 'Courier New', Courier, monospace;
   }
 }
+
+// .menu-bar {
+//   button {
+//     background-color: inherit;
+//     color: inherit !important;
+
+//     &#btnParagraph {
+//       font-family: 'Courier New', Courier, monospace;
+//       padding-top: 6px;
+//       font-size: 29px !important;
+//     }
+//     &#navToggle {
+//       font-size: 35px;
+//     }
+//     &#btnNotesFlyout {
+//       svg {
+//         font-size: 48px;
+//         vertical-align: middle;
+//       }
+//     }
+//     &#btnPoetry,
+//     &#btnParagraph,
+//     &#btnRightPane,
+//     &#navToggle,
+//     &#btnNotesFlyout {
+//       padding-top: 1px;
+//       font-size: 27px;
+//       font-weight: bolder;
+
+//       svg {
+//         width: 0.85em;
+//         // height: 100%;
+//         display: inline-block;
+//       }
+//     }
+//   }
+//   i {
+//     font-size: 1em;
+//   }
+//   .header-arrows {
+//     font-size: 2em;
+//   }
+//   #bookName {
+//     // margin-top: 6px;
+//     margin-left: 10px;
+//     font-weight: bold;
+//     text-align: center;
+//     font-size: 30px;
+//   }
+// }

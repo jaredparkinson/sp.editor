@@ -1,36 +1,31 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import * as lodash from 'lodash';
+import * as matCSS from 'materialize-css';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
-import { DataService } from '../services/data.service';
-import * as matCSS from 'materialize-css';
-import { SwUpdate } from '@angular/service-worker';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  // faBars = faBars;
-  // faParagraph = faParagraph;
-  // faBookOpen = faBookOpen;
-  // faPlus = faPlus;
-  // faListUl = faListUl;
-  // faGlobe = faGlobe;
-  // faCaretDown = faCaretDown;
-  // faArrowLeft = faArrowLeft;
-  // faArrowRight = faArrowRight;
-  @ViewChildren('wtag')
-  wTags2: QueryList<any>;
-  // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
     public chapterService: ChapterService,
@@ -43,9 +38,10 @@ export class HeaderComponent implements OnInit {
     private location: Location,
     public dataService: DataService,
     public swUpdate: SwUpdate,
-  ) {
-    // this.leftPaneNav = document.getElementById('leftPaneNav');
-  }
+  ) {}
+
+  @ViewChildren('wtag')
+  wTags2: QueryList<any>;
 
   ngOnInit() {}
 
@@ -53,11 +49,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.toggleNotes();
   }
 
-  toggleVerseSelect() {
-    // this.verseSelectService.toggleVerseSelect();
-    // console.log(this.wTags2);
-    // this.chapterService.toggleVerseSelect(this.verseSelect);
-  }
+  toggleVerseSelect() {}
 
   settings() {
     this.router.navigateByUrl('settings');
@@ -74,7 +66,6 @@ export class HeaderComponent implements OnInit {
       console.log(address);
       if (address.length >= 2) {
         this.router.navigateByUrl(address[0] + '/' + address[1]);
-        // this.chapterService.getChapter(address[0], address[1]);
       }
     }
   }
@@ -85,9 +76,7 @@ export class HeaderComponent implements OnInit {
   btnForwardPress() {
     this.location.forward();
   }
-  // toggleNavButton(id: string, targetId: string, on: string, off: string) {
-  //   this.navServices.toggleNavButton(id, targetId, on, off);
-  // }
+
   btnNewNotesPress() {
     this.navServices.btnNewNotesPress();
   }
@@ -108,9 +97,6 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {
-    // const dialogConfig = new MatDialogConfig();
-
-    // this.dialog.open(DialogBodyComponent, { width: '0px', height: '0px' });
     this.navServices.btnNotesSettingsPress();
   }
   btnSecondaryNotesPress() {

@@ -30,6 +30,9 @@ import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
 // import { ButtonHighlightDirective } from './button-highlight.directive';
 import { HomeComponent } from './components/home/home.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
+import { VerseComponent } from './components/verse/verse.component';
 import { EditorComponent } from './editor/editor.component';
 // import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
 import { FilesComponent } from './files/files.component';
@@ -44,17 +47,14 @@ import { EditorParentComponent } from './outlets/editor-parent/editor-parent.com
 import { LandingPageParentComponent } from './outlets/landing-page-parent/landing-page-parent.component';
 import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
+import { DataService } from './services/data.service';
 import { DownloadService } from './services/download.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
+import { SyncScrollingService } from './services/sync-scrolling.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
-import { VerseComponent } from './components/verse/verse.component';
-import { SyncScrollingService } from './services/sync-scrolling.service';
-import { ParagraphComponent } from './components/paragraph/paragraph.component';
-import { DataService } from './services/data.service';
-import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 
 // import { TSQuery } from './TSQuery';
 // import { SearchBarComponent } from './search-bar/search-bar.component';

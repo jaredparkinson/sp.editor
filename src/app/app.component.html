@@ -1,4 +1,4 @@
-<div
+<!-- <div
   class="grid main row-05"
   [ngClass]="{
     'note-underline': this.saveState.data.verseSelect,
@@ -7,21 +7,8 @@
 >
   <div class="header"><app-header></app-header></div>
   <div id="gridBody" class="grid body">
-    <router-outlet></router-outlet>
-    <!--
-      <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock>
-    -->
-    <!-- <router-outlet name="notes-outlet" class="right-pane"></router-outlet> -->
+    
 
-    <!-- <app-notes class="right-pane "></app-notes> -->
-    <!-- <div
-      [ngClass]="{
-        none: !navService.rightPaneToggle,
-        'overlay-toggle':
-          navService.rightPaneToggle && !verseSelectService.halfNotes
-      }"
-      (click)="navService.btnRightPanePress()"
-    ></div> -->
     <div
       [ngClass]="{
         none: !navService.leftPaneToggle,
@@ -30,8 +17,14 @@
       (click)="navService.btnLeftPanePress()"
     ></div>
   </div>
-</div>
-
-<!--
-  <app-search-bar *ngIf="electronService.isElectron()" style="position:absolute;"></app-search-bar>
--->
+</div> -->
+<header><app-header></app-header></header>
+<main>
+  <div class="container">
+    <div class="l3 m3 s0"></div>
+    <div class=" s12 m9 l9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>
+<footer></footer>

@@ -3,11 +3,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { AppComponent } from './app.component';
+import { AppComponent } from './AppComponent';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
-import { NavigationService } from './services/navigation.service';
 import { HelperService } from './services/helper.service';
+import { NavigationService } from './services/navigation.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,15 +17,15 @@ describe('AppComponent', () => {
         ElectronService,
         ChapterService,
         NavigationService,
-        HelperService
+        HelperService,
       ],
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
 
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 

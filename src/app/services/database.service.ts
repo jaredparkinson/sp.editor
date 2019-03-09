@@ -66,7 +66,7 @@ export class DatabaseService {
     this.tempAllDocs = await this.db.allDocs();
   }
 
-  public bulkDocs(dataFile: string) {
+  public bulkDocs(databaseName: string) {
     // await PouchDB.sync(
     //   this.db,
     //   'https://couch.parkinson.im/alpha_oneinthinehand',
@@ -75,7 +75,7 @@ export class DatabaseService {
 
     return new Promise<void>(async resolve => {
       await (PouchDB as any).replicate(
-        'https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand',
+        `https://sp_users:test@couch.parkinson.im/${databaseName}`,
         this.db,
       );
       resolve();
@@ -101,7 +101,7 @@ export class DatabaseService {
       if (scriptureFiles) {
         scriptureFiles.forEach((scriptureFile: any) => {
           const savedDoc = this.tempAllDocs.rows.filter(doc => {
-            return doc.id == scriptureFile._id;
+            return doc.id === scriptureFile._id;
           });
           if (savedDoc && savedDoc.length > 0) {
             scriptureFile._rev = savedDoc[0].value.rev;

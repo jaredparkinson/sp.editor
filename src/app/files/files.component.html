@@ -35,7 +35,7 @@
       [ngClass]="{ 'nav-hide': !saveState.data.foldersVisible }"
     >
       <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
-      <ul class="left-pane-ignore grid">
+      <!-- <ul class="left-pane-ignore grid">
         <li
           *ngFor="let folder of fileManager.nav"
           (click)="
@@ -45,6 +45,16 @@
           <div class="left-nav-item">{{ folder.text }}</div>
           <div class="left-nav-plus" style="text-align: right;">+</div>
         </li>
+      </ul> -->
+      <ul class="grid">
+        <ng-container *ngFor="let i of this.navigation">
+          <li (click)="i.visible = i.visible ? !i.visible : true">
+            {{ i.title }}
+          </li>
+          <ng-container *ngIf="i.visible">
+            <li *ngFor="let n of i.navigation">{{ n.title }}</li>
+          </ng-container></ng-container
+        >
       </ul>
       <!-- <a>
         

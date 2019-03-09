@@ -11,7 +11,8 @@ import { DatabaseService } from './database.service';
 })
 export class DownloadService {
   public downloads: Download[] = [
-    new Download('assets/scriptures.zip', 'scriptures', false),
+    new Download('alpha_oneinthinehand', 'scriptures', false),
+    new Download('navigation', 'scriptures', false),
   ];
   private forageRegex: RegExp = new RegExp(
     /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/,
@@ -69,14 +70,14 @@ export class DownloadService {
     await this.dataBaseService.db.allDocs().then(docs => {
       const deleteRows = [];
       docs.rows.forEach(row => {
-        let tempRow = { _rev: row.value.rev, _id: row.id, _deleted: false };
+        const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: false };
         console.log(tempRow);
         deleteRows.push(tempRow);
       });
       this.dataBaseService.db.bulkDocs(deleteRows);
     });
     this.dataBaseService
-      .bulkDocs('')
+      .bulkDocs(file.fileName)
       .then(() => {
         console.log('Finished');
         file.downloading = false;
@@ -129,7 +130,7 @@ export class DownloadService {
       const deleteRows = [];
 
       docs.rows.forEach(row => {
-        let tempRow = { _rev: row.value.rev, _id: row.id, _deleted: true };
+        const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: true };
         console.log(tempRow);
         deleteRows.push(tempRow);
       });

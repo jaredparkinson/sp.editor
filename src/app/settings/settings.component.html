@@ -108,9 +108,7 @@
     <div class="col s12 m4" *ngFor="let download of downloadService.downloads">
       <div class="card small white">
         <div class="card-content">
-          <p>
-            This is a placeholder to allow for downloading of the scripture
-            files.
+          <p>{{download.fileName}}
           </p>
         </div>
         <div class="download-btn card-action">

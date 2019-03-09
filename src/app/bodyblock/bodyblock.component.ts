@@ -60,7 +60,9 @@ export class BodyblockComponent
   verses!: QueryList<VerseComponent>;
   private pageId = '';
 
-  ngAfterContentInit(): void {}
+  ngAfterContentInit(): void {
+    
+  }
   ngOnDestroy() {}
   ngOnInit() {
     this.route.params.subscribe(async params => {

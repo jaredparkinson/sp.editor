@@ -1,19 +1,26 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  HostListener,
+  OnInit,
+} from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+import * as matCSS from 'materialize-css';
+import { Navigation } from './modelsJson/Chapter';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
+import { DatabaseService } from './services/database.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { VerseSelectService } from './services/verse-select.service';
-import { SwUpdate } from '@angular/service-worker';
-import * as matCSS from 'materialize-css';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentInit {
   ipcRenderer: any;
 
   public testStyle = '#gridBody {background-color: black;}';
@@ -25,6 +32,7 @@ export class AppComponent implements OnInit {
     public saveState: SaveStateService,
     public verseSelectService: VerseSelectService,
     public httpClient: HttpClient,
+    public databaseService: DatabaseService,
     private swUpdate: SwUpdate,
   ) {
     this.translate.setDefaultLang('en');
@@ -47,7 +55,7 @@ export class AppComponent implements OnInit {
     //   console.log('Mode web');
     // }import searchInPage from 'electron-in-page-search';
   }
-
+  ngAfterContentInit(): void {}
   @HostListener('document:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent): void {
     if (this.electronService.isElectron()) {

@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { HttpClient } from '@angular/common/http';
 import * as lodash from 'lodash';
 import { NavLinks } from '../models/navlinks.model';
+import { Navigation } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -17,6 +19,7 @@ export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
+  public navigation: Navigation[] = [];
   // private addressBar: HTMLInputElement;
   @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
@@ -26,9 +29,18 @@ export class FilesComponent implements OnInit {
     public navService: NavigationService,
     private router: Router,
     private urlBuilder: UrlBuilder,
+    public httpClient: HttpClient,
   ) {}
 
   ngOnInit() {
+    this.httpClient
+      .get('assets/nav/nav_rev.json', {
+        responseType: 'text',
+      })
+      .subscribe(data => {
+        console.log();
+        this.navigation = JSON.parse(data) as Navigation[];
+      });
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }

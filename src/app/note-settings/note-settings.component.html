@@ -60,7 +60,6 @@
       Toggle Superscripts
     </button>
     <button id="versionNumber">Version {{ this.versionNumber }}</button>
-    <button id="settings" (click)="settings()">Settings</button>
 
     <button
       (click)="setCategory(category)"
@@ -72,7 +71,8 @@
       {{ category.refLabelName }}
     </button>
   </div>
-  <div class="note-settings single">
+  <div class="note-settings ">
+    <button id="settings" (click)="settings()">Settings</button>
     <button (click)="editPage()">Edit</button>
   </div>
 </div>

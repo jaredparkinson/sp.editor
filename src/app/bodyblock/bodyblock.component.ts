@@ -83,10 +83,19 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         console.log(`highlight ${highlighting}`);
 
         console.log(this.dataService.chapter2._id);
-        // if (this.v) {
-        //   document.getElementById('p' + this.v).scrollIntoView();
-        // }
+        this.scrollToVerse();
       });
+    });
+  }
+
+  private scrollToVerse() {
+    setTimeout(() => {
+      const selectedVerse = document.querySelector(`#p${this.v}`);
+      if (selectedVerse) {
+        selectedVerse.scrollIntoView();
+      } else {
+        document.querySelector('header').scrollIntoView();
+      }
     });
   }
 
@@ -99,38 +108,29 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         this.dataService.verses = lodash.cloneDeep(chapter.verses);
       }
       this.pageId = id;
-      // .then(async chapter => {
-      //   console.log(chapter);
 
       this.v = await this.chapterService.setHighlightging(
         this.dataService.verses,
         [highlighting.pop(), highlighting.pop()],
       );
-      // .then(async chapter => {
+
       await this.chapterService.resetNoteVisibility(
         chapter,
         this.dataService.noteVisibility,
       );
-      // .then(() => {
-      //   console.log('test1');
 
       await this.chapterService.buildWTags(
         this.dataService.verses,
         this.dataService.noteVisibility,
       );
-      // .then(() => {
-      //   console.log('test2');
 
       await this.chapterService.buildParagraphs(
         this.dataService.paragraphs,
         this.dataService.verses,
       );
-      // .then(() => {
-      //   console.log('test3');
 
       this.dataService.chapter2 = chapter;
 
-      // console.log(this.dataService.paragraphs);
       resolve();
     });
   }

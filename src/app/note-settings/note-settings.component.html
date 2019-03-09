@@ -1,7 +1,5 @@
 <div [ngClass]="{ none: !navServices.notesSettings }" id="notesSettings">
-  <div class="settings"></div>
   <div class="note-settings">
-    <button (click)="editPage()">Edit</button>
     <button
       id="btnNewNotes"
       [ngClass]="{
@@ -73,5 +71,8 @@
     >
       {{ category.refLabelName }}
     </button>
+  </div>
+  <div class="note-settings single">
+    <button (click)="editPage()">Edit</button>
   </div>
 </div>

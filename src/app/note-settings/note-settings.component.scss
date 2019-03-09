@@ -29,6 +29,9 @@ $font-stack: serif !important;
   background-color: $light_primary_color;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  &.single {
+    grid-template-columns: 1fr;
+  }
   font-size: 15px;
   font-family: $font-stack;
 

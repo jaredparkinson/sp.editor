@@ -1,11 +1,16 @@
+@import '../styles/color';
 .settings-page {
   margin-bottom: 25px;
-  .switch label input[type='checkbox']:checked + .lever {
-    background-color: #03a9f4;
-  }
-
-  .switch label input[type='checkbox']:checked + .lever:after {
-    background-color: #0288d1;
+  label {
+    .lever {
+      background-color: $accent_color;
+    }
+    input[type='checkbox']:checked + .lever:after {
+      background-color: $primary_color;
+    }
+    input[type='checkbox']:checked + .lever {
+      background-color: $dark_primary_color;
+    }
   }
 }
 .download-btn {

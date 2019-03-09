@@ -1,8 +1,8 @@
-<div class="menu-bar pop-out light-blue lighten-4 dark-text">
+<div class="menu-bar pop-out  dark-text">
   <div id="headerLeftPane">
     <button
       id="navToggle"
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       (click)="btnLeftPanePress()"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -21,7 +21,7 @@
       [ngClass]="{
         'darken-2': saveState.data.paragraphsVisible
       }"
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       (click)="btnParagraphPress()"
     >
       ¶
@@ -30,7 +30,7 @@
       id="btnPoetry"
       [ngClass]="{ 'darken-2': saveState.data.poetryVisible }"
       (click)="btnPoetryPress()"
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -39,25 +39,25 @@
       </svg>
     </button>
     <button
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       id="btnBack"
       (click)="btnBackPress()"
     >
-      <i class="header-arrows material-icons black-text">arrow_back</i>
+      <i class="header-arrows material-icons ">arrow_back</i>
     </button>
 
     <div
       id="bookName"
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       [innerHtml]="dataService.chapter2.title"
     ></div>
 
     <button
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       id="btnForward"
       (click)="btnForwardPress()"
     >
-      <i class="header-arrows material-icons black-text">arrow_forward</i>
+      <i class="header-arrows material-icons ">arrow_forward</i>
     </button>
     <button
       id="btnNotesFlyout"
@@ -65,17 +65,17 @@
       class="right-pane-ignore notes-settings waves-effect waves-light"
       [ngClass]="{ 'darken-2': navServices.notesSettings }"
     >
-      <i class="material-icons black-text">more_vert</i>
+      <i class="material-icons ">more_vert</i>
     </button>
     <button
       id="btnSecondaryNotes"
-      class="light-blue lighten-4 waves-effect waves-light"
+      class=" waves-effect waves-light"
       [ngClass]="{
         'darken-2': saveState.data.secondaryNotesVisible
       }"
       (click)="btnSecondaryNotesPress()"
     >
-      <i class="header-arrows material-icons black-text">add</i>
+      <i class="header-arrows material-icons ">add</i>
     </button>
   </div>
   <div id="headerRightPane">
@@ -85,7 +85,7 @@
       (click)="btnRightPanePress()"
       class="right-pane-ignore"
     >
-      <i class="material-icons black-text">format_list_bulleted</i>
+      <i class="material-icons ">format_list_bulleted</i>
     </button>
   </div>
 </div>

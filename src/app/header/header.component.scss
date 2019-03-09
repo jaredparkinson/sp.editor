@@ -1,4 +1,8 @@
+@import '../styles/color';
 .menu-bar {
+  background-color: $light_primary_color;
+  color: $text_color;
+  fill: $text_color;
   button {
     background-color: inherit;
     color: inherit !important;

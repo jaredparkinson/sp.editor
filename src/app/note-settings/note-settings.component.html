@@ -1,13 +1,12 @@
-<div>
-  <div
-    id="notesSettings"
-    [ngClass]="{ none: !navServices.notesSettings }"
-    class="notes-settings"
-  >
+<div [ngClass]="{ none: !navServices.notesSettings }" id="notesSettings">
+  <div class="settings"></div>
+  <div class="note-settings">
     <button (click)="editPage()">Edit</button>
     <button
       id="btnNewNotes"
-      [ngClass]="{ 'nav-btn-on': saveState.data.newNotesVisible }"
+      [ngClass]="{
+        'nav-btn-on  ': saveState.data.newNotesVisible
+      }"
       (click)="btnNewNotesPress()"
       class="notes-settings"
     >
@@ -15,7 +14,9 @@
     </button>
     <button
       id="btnEnglishNotes"
-      [ngClass]="{ 'nav-btn-on': saveState.data.englishNotesVisible }"
+      [ngClass]="{
+        'nav-btn-on  ': saveState.data.englishNotesVisible
+      }"
       (click)="btnEnglishNotesPress()"
       class="notes-settings"
     >
@@ -23,7 +24,9 @@
     </button>
     <button
       id="btnTranslatorNotes"
-      [ngClass]="{ 'nav-btn-on': saveState.data.translatorNotesVisible }"
+      [ngClass]="{
+        'nav-btn-on  ': saveState.data.translatorNotesVisible
+      }"
       (click)="btnTranslatorNotesPress()"
       class="notes-settings"
     >
@@ -32,7 +35,9 @@
 
     <button
       id="btnSecondaryNotes"
-      [ngClass]="{ 'nav-btn-on': saveState.data.secondaryNotesVisible }"
+      [ngClass]="{
+        'nav-btn-on  ': saveState.data.secondaryNotesVisible
+      }"
       (click)="btnSecondaryNotesPress()"
       class="notes-settings"
     >
@@ -41,14 +46,18 @@
     <button
       id="verseSelect"
       (click)="toggleVerseSelect()"
-      [ngClass]="{ 'nav-btn-on': this.saveState.data.verseSelect }"
+      [ngClass]="{
+        'nav-btn-on  ': this.saveState.data.verseSelect
+      }"
     >
       Note Underlining
     </button>
     <button
       id="verseSelect"
       (click)="toggleVerseSuperScripts()"
-      [ngClass]="{ 'nav-btn-on': this.saveState.data.verseSuperScripts }"
+      [ngClass]="{
+        'nav-btn-on  ': this.saveState.data.verseSuperScripts
+      }"
     >
       Toggle Superscripts
     </button>
@@ -57,7 +66,9 @@
 
     <button
       (click)="setCategory(category)"
-      [ngClass]="{ 'nav-btn-on': category.visible }"
+      [ngClass]="{
+        'nav-btn-on  ': category.visible
+      }"
       *ngFor="let category of saveState.data.noteCategories"
     >
       {{ category.refLabelName }}

@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/normalize.css/normalize.css';
+// @import '../node_modules/normalize.css/normalize.css';
 @import '../node_modules/materialize-css/sass/materialize.scss';
 @import './app/styles/materialize-overrides.scss';
 @import 'css.penguin/view_vars';
@@ -514,17 +514,17 @@ button {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-style: none;
 
-  &.nav-btn-on {
-    // background-color: $btnOn;
-    background-color: $btnOn;
-  }
+  // &.nav-btn-on {
+  //   // background-color: $btnOn;
+  //   background-color: $btnOn;
+  // }
 
-  &:hover {
-    background-color: #9dc6d4;
-    &.nav-btn-on {
-      background-color: #8cadb8 !important;
-    }
-  }
+  // &:hover {
+  //   background-color: #9dc6d4;
+  //   &.nav-btn-on {
+  //     background-color: #8cadb8 !important;
+  //   }
+  // }
   // &:hover {
   //   border-color: black;
   //   border-style: solid;

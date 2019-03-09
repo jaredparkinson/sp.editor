@@ -1,771 +1,743 @@
-@import '_view_vars';
-
-.grid {
-  display: grid;
-}
-
-.none {
-  visibility: hidden;
-}
-
-.main {
-  // display: grid;
-  height: 100vh;
-  grid-template-areas: 'header' 'body';
-  grid-template-rows: 40px auto;
-
-  // .header {
-  //   // grid-area: header;
-  //   // height: 5vh;
-  //   background-color: lightblue;
-  // }
-
-  .body .router-outlet {
-    // grid-area: body
-    // width: 100vw;
-    // height: 95vh;
-    display: grid;
-    background-color: #fffcf7;
-    grid-template-areas: 'left-pane content-pane right-pane'; // grid-template-areas: left-pane content-pane right-pane;
-
-    .left-pane {
-      grid-area: left-pane;
-    }
-
-    .content-pane {
-      grid-area: content-pane;
-    }
-  }
-
-  .left-pane,
-  .content-pane,
-  .right-pane,
-  .right-pane-editor {
-    height: 95vh;
-  }
-
-  //Global rows and columns
-  .col-0 {
-    visibility: hidden;
-  }
-
-  .col-05 {
-    width: $vw_5;
-  }
-
-  .col-05 {
-    width: $vw_5;
-  }
-
-  .col-1 {
-    width: $vw1;
-  }
-
-  .row-05 {
-    height: $vh_5;
-  }
-
-  .row-1 {
-    height: $vh1;
-  }
-
-  .col-2 {
-    width: $vw2;
-  }
-
-  .row-2 {
-    height: $vh2;
-  }
-
-  .col-3 {
-    width: $vw3;
-  }
-
-  .row-3 {
-    height: $vh3;
-  }
-
-  .col-4 {
-    width: $vw4;
-  }
-
-  .row-4 {
-    height: $vh4;
-  }
-
-  .col-5 {
-    width: $vw5;
-  }
-
-  .row-5 {
-    height: $vh5;
-  }
-
-  .col-6 {
-    width: $vw6;
-  }
-
-  .row-6 {
-    height: $vh6;
-  }
-
-  .col-7 {
-    width: $vw7;
-  }
-
-  .row-7 {
-    height: $vh7;
-  }
-
-  .col-8 {
-    width: $vw8;
-  }
-
-  .row-8 {
-    height: $vh8;
-  }
-
-  .col-9 {
-    width: $vw9;
-  }
-
-  .row-9 {
-    height: $vh9;
-  }
-
-  .col-10 {
-    width: $vw10;
-  }
-
-  .row-10 {
-    height: $vh10;
-  }
-
-  .col-11 {
-    width: $vw11;
-  }
-
-  .col-11-5 {
-    width: $vw11_5;
-  }
-
-  .row-11 {
-    height: $vh11;
-  }
-
-  .row-11-5 {
-    height: $vh11_5;
-  }
-
-  .col-12 {
-    width: $vw12;
-  }
-
-  .row-12 {
-    height: $vh12;
-  }
-
-  // Small Screen Sizes Postfix: -s
-  // Screen Size up to 720px
-  @media only screen and (max-width: 1023.98px) {
-    // .body {
-    //   grid-template-columns: 0 $vw12 0;
-    // }
-    .grid-s {
-      visibility: visible;
-    }
-
-    .none-s {
-      visibility: hidden;
-    }
-
-    .col-s-0 {
-      visibility: hidden;
-    }
-
-    .col-s-05 {
-      width: $vw_5;
-    }
-
-    .col-s-05 {
-      width: $vw_5;
-    }
-
-    .col-s-1 {
-      width: $vw1;
-    }
-
-    .row-s-05 {
-      height: $vh_5;
-    }
-
-    .row-s-1 {
-      height: $vh1;
-    }
-
-    .col-s-2 {
-      width: $vw2;
-    }
-
-    .row-s-2 {
-      height: $vh2;
-    }
-
-    .col-s-3 {
-      width: $vw3;
-    }
-
-    .row-s-3 {
-      height: $vh3;
-    }
-
-    .col-s-4 {
-      width: $vw4;
-    }
-
-    .row-s-4 {
-      height: $vh4;
-    }
-
-    .col-s-5 {
-      width: $vw5;
-    }
-
-    .row-s-5 {
-      height: $vh5;
-    }
-
-    .col-s-6 {
-      width: $vw6;
-    }
-
-    .row-s-6 {
-      height: $vh6;
-    }
-
-    .col-s-7 {
-      width: $vw7;
-    }
-
-    .row-s-7 {
-      height: $vh7;
-    }
-
-    .col-s-8 {
-      width: $vw8;
-    }
-
-    .row-s-8 {
-      height: $vh8;
-    }
-
-    .col-s-9 {
-      width: $vw9;
-    }
-
-    .row-s-9 {
-      height: $vh9;
-    }
-
-    .col-s-10 {
-      width: $vw10;
-    }
-
-    .row-s-10 {
-      height: $vh10;
-    }
-
-    .col-s-11 {
-      width: $vw11;
-    }
-
-    .col-s-11-5 {
-      width: $vw11_5;
-    }
-
-    .row-s-11 {
-      height: $vh11;
-    }
-
-    .row-s-11-5 {
-      height: $vh11_5;
-    }
-
-    .col-s-12 {
-      width: $vw12;
-    }
-
-    .row-s-12 {
-      height: $vh12;
-    }
-
-    .hide-s {
-      visibility: hidden;
-    }
-
-    .show-s {
-      visibility: visible;
-    }
-
-    .overlay-toggle {
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 50;
-      opacity: 1;
-      background: rgba(0, 0, 0, 0.288);
-    }
-
-    .left-pane-container,
-    .study-notes {
-      z-index: 300;
-    }
-  }
-
-  /* Medium Screen Sizes Postfix: -m */
-  // Screen Size up to 1080px
-  @media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
-    .right-pane,
-    .right-pane-editor {
-      grid-area: right-pane;
-    }
-
-    .none-m {
-      visibility: hidden;
-    }
-
-    .grid-m {
-      visibility: visible;
-    }
-
-    .col-m-0 {
-      visibility: hidden;
-    }
-
-    .col-m-05 {
-      width: $vw_5;
-    }
-
-    .col-m-1 {
-      width: $vw1;
-    }
-
-    .col-m-05 {
-      width: $vw_5;
-    }
-
-    .row-m-05 {
-      height: $vh_5;
-    }
-
-    .row-m-1 {
-      height: $vh1;
-    }
-
-    .col-m-2 {
-      width: $vw2;
-    }
-
-    .row-m-2 {
-      height: $vh2;
-    }
-
-    .col-m-3 {
-      width: $vw3;
-    }
-
-    .col-m-3-05 {
-      width: $vw3_5;
-    }
-
-    .row-m-3 {
-      height: $vh3;
-    }
-
-    .col-m-4 {
-      width: $vw4;
-    }
-
-    .row-m-4 {
-      height: $vh4;
-    }
-
-    .col-m-5 {
-      width: $vw5;
-    }
-
-    .row-m-5 {
-      height: $vh5;
-    }
-
-    .col-m-6 {
-      width: $vw6;
-    }
-
-    .row-m-6 {
-      height: $vh6;
-    }
-
-    .col-m-7 {
-      width: $vw7;
-    }
-
-    .row-m-7 {
-      height: $vh7;
-    }
-
-    .col-m-8 {
-      width: $vw8;
-    }
-
-    .row-m-8 {
-      height: $vh8;
-    }
-
-    .col-m-9 {
-      width: $vw9;
-    }
-
-    .row-m-9 {
-      height: $vh9;
-    }
-
-    .col-m-10 {
-      width: $vw10;
-    }
-
-    .row-m-10 {
-      height: $vh10;
-    }
-
-    .col-m-11 {
-      width: $vw11;
-    }
-
-    .col-m-11-5 {
-      width: $vw11_5;
-    }
-
-    .row-m-11 {
-      height: $vh11;
-    }
-
-    .row-m-11-5 {
-      height: $vh11_5;
-    }
-
-    .col-m-12 {
-      width: $vw12;
-    }
-
-    .row-m-12 {
-      height: $vh12;
-    }
-
-    .hide-m {
-      visibility: hidden;
-    }
-
-    .show-m {
-      visibility: visible;
-    }
-  }
-
-  /* Large Screen Sizes Postfix: -l */
-  // Screen Size up to 1920px
-  @media only screen and (min-width: 1024px) {
-    .hide-l {
-      visibility: hidden;
-    }
-
-    .show-l {
-      visibility: visible;
-    }
-
-    .right-pane,
-    .right-pane-editor {
-      grid-area: right-pane;
-    }
-
-    .grid-l {
-      visibility: visible;
-    }
-
-    .none-l {
-      visibility: hidden;
-    }
-
-    .col-l-0 {
-      visibility: hidden;
-      background-color: black;
-    }
-
-    .col-l-9 {
-      width: 75vw;
-      background-color: rgb(7, 95, 44);
-    }
-
-    .col-l-3 {
-      width: $vw3;
-    }
-
-    .col-l-05 {
-      width: $vw_5;
-    }
-
-    .col-l-1-05 {
-      width: $vw1_5;
-    }
-
-    .col-l-1 {
-      width: $vw1;
-    }
-
-    .col-l-05 {
-      width: $vw_5;
-    }
-
-    .row-l-05 {
-      height: $vh_5;
-    }
-
-    .row-l-1 {
-      height: $vh1;
-    }
-
-    .col-l-2 {
-      width: $vw2;
-    }
-
-    .row-l-2 {
-      height: $vh2;
-    }
-
-    .col-l-3 {
-      width: $vw3;
-    }
-
-    .row-l-3 {
-      height: $vh3;
-    }
-
-    .col-l-4 {
-      width: $vw4;
-    }
-
-    .row-l-4 {
-      height: $vh4;
-    }
-
-    .col-l-5 {
-      width: $vw5;
-    }
-
-    .row-l-5 {
-      height: $vh5;
-    }
-
-    .col-l-6 {
-      width: $vw6;
-    }
-
-    .row-l-6 {
-      height: $vh6;
-    }
-
-    .col-l-7 {
-      width: $vw7;
-    }
-
-    .row-l-7 {
-      height: $vh7;
-    }
-
-    .col-l-8 {
-      width: $vw8;
-    }
-
-    .row-l-8 {
-      height: $vh8;
-    }
-
-    .col-l-9 {
-      width: $vw9;
-    }
-
-    .row-l-9 {
-      height: $vh9;
-    }
-
-    .col-l-10 {
-      width: $vw10;
-    }
-
-    .row-l-10 {
-      height: $vh10;
-    }
-
-    .col-l-11 {
-      width: $vw11;
-    }
-
-    .col-l-11-5 {
-      width: $vw11_5;
-    }
-
-    .row-l-11 {
-      height: $vh11;
-    }
-
-    .row-l-11-5 {
-      height: $vh11_5;
-    }
-
-    .col-l-12 {
-      width: $vw12;
-    }
-
-    .row-l-12 {
-      height: $vh12;
-    }
-  }
-
-  /* Extra Large Screen Sizes Postfix -xl*/
-  // Screen Sizes from 1920px and up
-  @media only screen and (min-width: 1921px) {
-    .right-pane,
-    .right-pane-editor {
-      grid-area: right-pane;
-    }
-
-    .none-xl {
-      visibility: hidden;
-    }
-
-    .col-xl-3 {
-      width: $vw3;
-    }
-
-    .row-xl-3 {
-      height: $vh3;
-    }
-
-    .col-xl-05 {
-      width: $vw_5;
-    }
-
-    .col-xl-1 {
-      width: $vw1;
-    }
-
-    .col-xl-05 {
-      width: $vw_5;
-    }
-
-    .row-xl-05 {
-      height: $vh_5;
-    }
-
-    .row-xl-1 {
-      height: $vh1;
-    }
-
-    .col-xl-2 {
-      width: $vw2;
-    }
-
-    .row-xl-2 {
-      height: $vh2;
-    }
-
-    .col-xl-3 {
-      width: $vw3;
-    }
-
-    .row-xl-3 {
-      height: $vh3;
-    }
-
-    .col-xl-4 {
-      width: $vw4;
-    }
-
-    .row-xl-4 {
-      height: $vh4;
-    }
-
-    .col-xl-5 {
-      width: $vw5;
-    }
-
-    .row-xl-5 {
-      height: $vh5;
-    }
-
-    .col-xl-6 {
-      width: $vw6;
-    }
-
-    .row-xl-6 {
-      height: $vh6;
-    }
-
-    .col-xl-7 {
-      width: $vw7;
-    }
-
-    .row-xl-7 {
-      height: $vh7;
-    }
-
-    .col-xl-8 {
-      width: $vw8;
-    }
-
-    .row-xl-8 {
-      height: $vh8;
-    }
-
-    .col-xl-9 {
-      width: $vw9;
-    }
-
-    .row-xl-9 {
-      height: $vh9;
-    }
-
-    .col-xl-10 {
-      width: $vw10;
-    }
-
-    .row-xl-10 {
-      height: $vh10;
-    }
-
-    .col-xl-11 {
-      width: $vw11;
-    }
-
-    .col-xl-11-5 {
-      width: $vw11_5;
-    }
-
-    .row-xl-11 {
-      height: $vh11;
-    }
-
-    .row-xl-11-5 {
-      height: $vh11_5;
-    }
-
-    .col-xl-12 {
-      width: $vw12;
-    }
-
-    .row-xl-12 {
-      height: $vh12;
-    }
-  }
-}
+// @import '_view_vars';
+
+// .grid {
+//   display: grid;
+// }
+
+// .none {
+//   visibility: hidden;
+// }
+
+// .main {
+//   height: 100vh;
+
+//   grid-template-rows: 40px auto;
+
+//   .body .router-outlet {
+//     display: grid;
+//     background-color: #fffcf7;
+//   }
+
+//   .left-pane,
+//   .content-pane,
+//   .right-pane,
+//   .right-pane-editor {
+//     height: 95vh;
+//   }
+
+//   .col-0 {
+//     visibility: hidden;
+//   }
+
+//   .col-05 {
+//     width: $vw_5;
+//   }
+
+//   .col-05 {
+//     width: $vw_5;
+//   }
+
+//   .col-1 {
+//     width: $vw1;
+//   }
+
+//   .row-05 {
+//     height: $vh_5;
+//   }
+
+//   .row-1 {
+//     height: $vh1;
+//   }
+
+//   .col-2 {
+//     width: $vw2;
+//   }
+
+//   .row-2 {
+//     height: $vh2;
+//   }
+
+//   .col-3 {
+//     width: $vw3;
+//   }
+
+//   .row-3 {
+//     height: $vh3;
+//   }
+
+//   .col-4 {
+//     width: $vw4;
+//   }
+
+//   .row-4 {
+//     height: $vh4;
+//   }
+
+//   .col-5 {
+//     width: $vw5;
+//   }
+
+//   .row-5 {
+//     height: $vh5;
+//   }
+
+//   .col-6 {
+//     width: $vw6;
+//   }
+
+//   .row-6 {
+//     height: $vh6;
+//   }
+
+//   .col-7 {
+//     width: $vw7;
+//   }
+
+//   .row-7 {
+//     height: $vh7;
+//   }
+
+//   .col-8 {
+//     width: $vw8;
+//   }
+
+//   .row-8 {
+//     height: $vh8;
+//   }
+
+//   .col-9 {
+//     width: $vw9;
+//   }
+
+//   .row-9 {
+//     height: $vh9;
+//   }
+
+//   .col-10 {
+//     width: $vw10;
+//   }
+
+//   .row-10 {
+//     height: $vh10;
+//   }
+
+//   .col-11 {
+//     width: $vw11;
+//   }
+
+//   .col-11-5 {
+//     width: $vw11_5;
+//   }
+
+//   .row-11 {
+//     height: $vh11;
+//   }
+
+//   .row-11-5 {
+//     height: $vh11_5;
+//   }
+
+//   .col-12 {
+//     width: $vw12;
+//   }
+
+//   .row-12 {
+//     height: $vh12;
+//   }
+
+//   @media only screen and (max-width: 1023.98px) {
+//     .grid-s {
+//       visibility: visible;
+//     }
+
+//     .none-s {
+//       visibility: hidden;
+//     }
+
+//     .col-s-0 {
+//       visibility: hidden;
+//     }
+
+//     .col-s-05 {
+//       width: $vw_5;
+//     }
+
+//     .col-s-05 {
+//       width: $vw_5;
+//     }
+
+//     .col-s-1 {
+//       width: $vw1;
+//     }
+
+//     .row-s-05 {
+//       height: $vh_5;
+//     }
+
+//     .row-s-1 {
+//       height: $vh1;
+//     }
+
+//     .col-s-2 {
+//       width: $vw2;
+//     }
+
+//     .row-s-2 {
+//       height: $vh2;
+//     }
+
+//     .col-s-3 {
+//       width: $vw3;
+//     }
+
+//     .row-s-3 {
+//       height: $vh3;
+//     }
+
+//     .col-s-4 {
+//       width: $vw4;
+//     }
+
+//     .row-s-4 {
+//       height: $vh4;
+//     }
+
+//     .col-s-5 {
+//       width: $vw5;
+//     }
+
+//     .row-s-5 {
+//       height: $vh5;
+//     }
+
+//     .col-s-6 {
+//       width: $vw6;
+//     }
+
+//     .row-s-6 {
+//       height: $vh6;
+//     }
+
+//     .col-s-7 {
+//       width: $vw7;
+//     }
+
+//     .row-s-7 {
+//       height: $vh7;
+//     }
+
+//     .col-s-8 {
+//       width: $vw8;
+//     }
+
+//     .row-s-8 {
+//       height: $vh8;
+//     }
+
+//     .col-s-9 {
+//       width: $vw9;
+//     }
+
+//     .row-s-9 {
+//       height: $vh9;
+//     }
+
+//     .col-s-10 {
+//       width: $vw10;
+//     }
+
+//     .row-s-10 {
+//       height: $vh10;
+//     }
+
+//     .col-s-11 {
+//       width: $vw11;
+//     }
+
+//     .col-s-11-5 {
+//       width: $vw11_5;
+//     }
+
+//     .row-s-11 {
+//       height: $vh11;
+//     }
+
+//     .row-s-11-5 {
+//       height: $vh11_5;
+//     }
+
+//     .col-s-12 {
+//       width: $vw12;
+//     }
+
+//     .row-s-12 {
+//       height: $vh12;
+//     }
+
+//     .hide-s {
+//       visibility: hidden;
+//     }
+
+//     .show-s {
+//       visibility: visible;
+//     }
+
+//     .overlay-toggle {
+//       height: 100%;
+//       width: 100%;
+//       position: fixed;
+//       left: 0;
+//       top: 0;
+//       z-index: 50;
+//       opacity: 1;
+//       background: rgba(0, 0, 0, 0.288);
+//     }
+
+//     .left-pane-container,
+//     .study-notes {
+//       z-index: 300;
+//     }
+//   }
+
+//   /* Medium Screen Sizes Postfix: -m */
+
+//   @media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
+//     .right-pane,
+//     .right-pane-editor {
+//     }
+
+//     .none-m {
+//       visibility: hidden;
+//     }
+
+//     .grid-m {
+//       visibility: visible;
+//     }
+
+//     .col-m-0 {
+//       visibility: hidden;
+//     }
+
+//     .col-m-05 {
+//       width: $vw_5;
+//     }
+
+//     .col-m-1 {
+//       width: $vw1;
+//     }
+
+//     .col-m-05 {
+//       width: $vw_5;
+//     }
+
+//     .row-m-05 {
+//       height: $vh_5;
+//     }
+
+//     .row-m-1 {
+//       height: $vh1;
+//     }
+
+//     .col-m-2 {
+//       width: $vw2;
+//     }
+
+//     .row-m-2 {
+//       height: $vh2;
+//     }
+
+//     .col-m-3 {
+//       width: $vw3;
+//     }
+
+//     .col-m-3-05 {
+//       width: $vw3_5;
+//     }
+
+//     .row-m-3 {
+//       height: $vh3;
+//     }
+
+//     .col-m-4 {
+//       width: $vw4;
+//     }
+
+//     .row-m-4 {
+//       height: $vh4;
+//     }
+
+//     .col-m-5 {
+//       width: $vw5;
+//     }
+
+//     .row-m-5 {
+//       height: $vh5;
+//     }
+
+//     .col-m-6 {
+//       width: $vw6;
+//     }
+
+//     .row-m-6 {
+//       height: $vh6;
+//     }
+
+//     .col-m-7 {
+//       width: $vw7;
+//     }
+
+//     .row-m-7 {
+//       height: $vh7;
+//     }
+
+//     .col-m-8 {
+//       width: $vw8;
+//     }
+
+//     .row-m-8 {
+//       height: $vh8;
+//     }
+
+//     .col-m-9 {
+//       width: $vw9;
+//     }
+
+//     .row-m-9 {
+//       height: $vh9;
+//     }
+
+//     .col-m-10 {
+//       width: $vw10;
+//     }
+
+//     .row-m-10 {
+//       height: $vh10;
+//     }
+
+//     .col-m-11 {
+//       width: $vw11;
+//     }
+
+//     .col-m-11-5 {
+//       width: $vw11_5;
+//     }
+
+//     .row-m-11 {
+//       height: $vh11;
+//     }
+
+//     .row-m-11-5 {
+//       height: $vh11_5;
+//     }
+
+//     .col-m-12 {
+//       width: $vw12;
+//     }
+
+//     .row-m-12 {
+//       height: $vh12;
+//     }
+
+//     .hide-m {
+//       visibility: hidden;
+//     }
+
+//     .show-m {
+//       visibility: visible;
+//     }
+//   }
+
+//   /* Large Screen Sizes Postfix: -l */
+
+//   @media only screen and (min-width: 1024px) {
+//     .hide-l {
+//       visibility: hidden;
+//     }
+
+//     .show-l {
+//       visibility: visible;
+//     }
+
+//     .right-pane,
+//     .right-pane-editor {
+//     }
+
+//     .grid-l {
+//       visibility: visible;
+//     }
+
+//     .none-l {
+//       visibility: hidden;
+//     }
+
+//     .col-l-0 {
+//       visibility: hidden;
+//       background-color: black;
+//     }
+
+//     .col-l-9 {
+//       width: 75vw;
+//       background-color: rgb(7, 95, 44);
+//     }
+
+//     .col-l-3 {
+//       width: $vw3;
+//     }
+
+//     .col-l-05 {
+//       width: $vw_5;
+//     }
+
+//     .col-l-1-05 {
+//       width: $vw1_5;
+//     }
+
+//     .col-l-1 {
+//       width: $vw1;
+//     }
+
+//     .col-l-05 {
+//       width: $vw_5;
+//     }
+
+//     .row-l-05 {
+//       height: $vh_5;
+//     }
+
+//     .row-l-1 {
+//       height: $vh1;
+//     }
+
+//     .col-l-2 {
+//       width: $vw2;
+//     }
+
+//     .row-l-2 {
+//       height: $vh2;
+//     }
+
+//     .col-l-3 {
+//       width: $vw3;
+//     }
+
+//     .row-l-3 {
+//       height: $vh3;
+//     }
+
+//     .col-l-4 {
+//       width: $vw4;
+//     }
+
+//     .row-l-4 {
+//       height: $vh4;
+//     }
+
+//     .col-l-5 {
+//       width: $vw5;
+//     }
+
+//     .row-l-5 {
+//       height: $vh5;
+//     }
+
+//     .col-l-6 {
+//       width: $vw6;
+//     }
+
+//     .row-l-6 {
+//       height: $vh6;
+//     }
+
+//     .col-l-7 {
+//       width: $vw7;
+//     }
+
+//     .row-l-7 {
+//       height: $vh7;
+//     }
+
+//     .col-l-8 {
+//       width: $vw8;
+//     }
+
+//     .row-l-8 {
+//       height: $vh8;
+//     }
+
+//     .col-l-9 {
+//       width: $vw9;
+//     }
+
+//     .row-l-9 {
+//       height: $vh9;
+//     }
+
+//     .col-l-10 {
+//       width: $vw10;
+//     }
+
+//     .row-l-10 {
+//       height: $vh10;
+//     }
+
+//     .col-l-11 {
+//       width: $vw11;
+//     }
+
+//     .col-l-11-5 {
+//       width: $vw11_5;
+//     }
+
+//     .row-l-11 {
+//       height: $vh11;
+//     }
+
+//     .row-l-11-5 {
+//       height: $vh11_5;
+//     }
+
+//     .col-l-12 {
+//       width: $vw12;
+//     }
+
+//     .row-l-12 {
+//       height: $vh12;
+//     }
+//   }
+
+//   /* Extra Large Screen Sizes Postfix -xl*/
+
+//   @media only screen and (min-width: 1921px) {
+//     .right-pane,
+//     .right-pane-editor {
+//     }
+
+//     .none-xl {
+//       visibility: hidden;
+//     }
+
+//     .col-xl-3 {
+//       width: $vw3;
+//     }
+
+//     .row-xl-3 {
+//       height: $vh3;
+//     }
+
+//     .col-xl-05 {
+//       width: $vw_5;
+//     }
+
+//     .col-xl-1 {
+//       width: $vw1;
+//     }
+
+//     .col-xl-05 {
+//       width: $vw_5;
+//     }
+
+//     .row-xl-05 {
+//       height: $vh_5;
+//     }
+
+//     .row-xl-1 {
+//       height: $vh1;
+//     }
+
+//     .col-xl-2 {
+//       width: $vw2;
+//     }
+
+//     .row-xl-2 {
+//       height: $vh2;
+//     }
+
+//     .col-xl-3 {
+//       width: $vw3;
+//     }
+
+//     .row-xl-3 {
+//       height: $vh3;
+//     }
+
+//     .col-xl-4 {
+//       width: $vw4;
+//     }
+
+//     .row-xl-4 {
+//       height: $vh4;
+//     }
+
+//     .col-xl-5 {
+//       width: $vw5;
+//     }
+
+//     .row-xl-5 {
+//       height: $vh5;
+//     }
+
+//     .col-xl-6 {
+//       width: $vw6;
+//     }
+
+//     .row-xl-6 {
+//       height: $vh6;
+//     }
+
+//     .col-xl-7 {
+//       width: $vw7;
+//     }
+
+//     .row-xl-7 {
+//       height: $vh7;
+//     }
+
+//     .col-xl-8 {
+//       width: $vw8;
+//     }
+
+//     .row-xl-8 {
+//       height: $vh8;
+//     }
+
+//     .col-xl-9 {
+//       width: $vw9;
+//     }
+
+//     .row-xl-9 {
+//       height: $vh9;
+//     }
+
+//     .col-xl-10 {
+//       width: $vw10;
+//     }
+
+//     .row-xl-10 {
+//       height: $vh10;
+//     }
+
+//     .col-xl-11 {
+//       width: $vw11;
+//     }
+
+//     .col-xl-11-5 {
+//       width: $vw11_5;
+//     }
+
+//     .row-xl-11 {
+//       height: $vh11;
+//     }
+
+//     .row-xl-11-5 {
+//       height: $vh11_5;
+//     }
+
+//     .col-xl-12 {
+//       width: $vw12;
+//     }
+
+//     .row-xl-12 {
+//       height: $vh12;
+//     }
+//   }
+// }

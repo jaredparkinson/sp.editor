@@ -11,6 +11,18 @@ $font-stack: serif;
 $btnOn: #8cadb8;
 body {
   font-family: $font-stack !important;
+  .grid {
+    display: grid;
+  }
+  .main {
+    grid-template-rows: 40px auto;
+
+    .body .router-outlet {
+      height: 100vh;
+      display: grid;
+      background-color: #fffcf7;
+    }
+  }
 }
 
 @mixin w-super($selector, $color) {

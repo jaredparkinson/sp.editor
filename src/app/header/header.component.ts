@@ -3,16 +3,16 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import * as lodash from 'lodash';
+import * as matCSS from 'materialize-css';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { VerseSelectService } from '../services/verse-select.service';
-import { DataService } from '../services/data.service';
-import * as matCSS from 'materialize-css';
-import { SwUpdate } from '@angular/service-worker';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

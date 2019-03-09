@@ -47,14 +47,9 @@
         </li>
       </ul> -->
       <ul class="grid">
-        <ng-container *ngFor="let i of this.navigation">
-          <li (click)="i.visible = i.visible ? !i.visible : true">
-            {{ i.title }}
-          </li>
-          <ng-container *ngIf="i.visible">
-            <li *ngFor="let n of i.navigation">{{ n.title }}</li>
-          </ng-container></ng-container
-        >
+        <ng-container *ngFor="let i of this.navService.navigation">
+          <app-navigation [navigation]="i"></app-navigation
+        ></ng-container>
       </ul>
       <!-- <a>
         

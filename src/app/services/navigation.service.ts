@@ -12,6 +12,7 @@ import { NavLinks } from '../models/navlinks.model';
 
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
+import { Navigation } from '../modelsJson/Chapter';
 
 @Injectable()
 export class NavigationService {
@@ -32,6 +33,7 @@ export class NavigationService {
 
   public pageTitle: string;
   private navData: Document;
+  public navigation: Navigation[] = [];
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,

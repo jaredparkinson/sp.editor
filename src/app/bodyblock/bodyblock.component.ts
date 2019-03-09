@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   AfterContentChecked,
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -10,13 +11,13 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
-  AfterViewChecked,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+import { SwUpdate } from '@angular/service-worker';
 import { VerseComponent } from '../components/verse/verse.component';
 import { TemplateGroup } from '../modelsJson/TemplateGroup';
 import { Verse } from '../modelsJson/Verse';
@@ -31,15 +32,13 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
-import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-bodyblock',
   templateUrl: './bodyblock.component.html',
   styleUrls: ['./bodyblock.component.scss'],
 })
-export class BodyblockComponent
-  implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
+export class BodyblockComponent implements OnInit, OnDestroy {
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -56,13 +55,10 @@ export class BodyblockComponent
     public dataService: DataService,
     public router: Router,
   ) {}
+  v: number;
   @ViewChildren('verses')
   verses!: QueryList<VerseComponent>;
   private pageId = '';
-
-  ngAfterContentInit(): void {
-    
-  }
   ngOnDestroy() {}
   ngOnInit() {
     this.route.params.subscribe(async params => {
@@ -85,6 +81,11 @@ export class BodyblockComponent
 
       this.getChapter(id, highlighting).then(() => {
         console.log(`highlight ${highlighting}`);
+
+        console.log(this.dataService.chapter2._id);
+        // if (this.v) {
+        //   document.getElementById('p' + this.v).scrollIntoView();
+        // }
       });
     });
   }
@@ -101,7 +102,7 @@ export class BodyblockComponent
       // .then(async chapter => {
       //   console.log(chapter);
 
-      const v = await this.chapterService.setHighlightging(
+      this.v = await this.chapterService.setHighlightging(
         this.dataService.verses,
         [highlighting.pop(), highlighting.pop()],
       );
@@ -129,9 +130,6 @@ export class BodyblockComponent
 
       this.dataService.chapter2 = chapter;
 
-      if (v) {
-        document.getElementById('p' + v).scrollIntoView();
-      }
       // console.log(this.dataService.paragraphs);
       resolve();
     });
@@ -253,9 +251,13 @@ export class BodyblockComponent
     this.verseSelectService.wTagClick(wTag, verse);
   }
 
-  ngAfterViewInit() {
-    console.log('ff');
+  private scrollIto() {
+    const asdf = document.getElementById(`p${this.v}`);
+    if (asdf) {
+      console.log(asdf.scrollIntoView());
+    }
   }
+
   onScroll() {
     this.syncScrollingService.onScroll();
   }

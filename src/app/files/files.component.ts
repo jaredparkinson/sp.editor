@@ -19,7 +19,6 @@ export class FilesComponent implements OnInit {
   public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
-  public navigation: Navigation[] = [];
   // private addressBar: HTMLInputElement;
   @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
@@ -39,7 +38,7 @@ export class FilesComponent implements OnInit {
       })
       .subscribe(data => {
         console.log();
-        this.navigation = JSON.parse(data) as Navigation[];
+        this.navService.navigation = JSON.parse(data) as Navigation[];
       });
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;

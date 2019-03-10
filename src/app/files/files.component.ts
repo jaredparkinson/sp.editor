@@ -54,6 +54,10 @@ export class FilesComponent implements OnInit {
   setTestament(folder: string) {
     this.fileManager.getTestament(folder);
   }
+  addressBarFocus() {
+    const addressBar = document.getElementById('addressBar');
+    addressBar.focus();
+  }
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(

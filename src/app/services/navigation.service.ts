@@ -60,6 +60,12 @@ export class NavigationService {
         nav.visible = false;
         nav.hide = false;
       });
+      if (navigation.navigation) {
+        navigation.navigation.forEach(nav => {
+          nav.visible = false;
+          nav.hide = false;
+        });
+      }
     }
   }
   btnPreviousPagePress(pageUrl: string) {

@@ -4,6 +4,7 @@
 //     text-decoration: none;
 //   }
 // }
+
 nav {
   background-color: whitesmoke;
   grid-template-rows: 96px 1fr 87px;
@@ -104,4 +105,8 @@ nav {
 #settings {
   border-top-style: solid;
   border-top-width: 0.5px;
+}
+
+.left-pane-container {
+  height: 100%;
 }

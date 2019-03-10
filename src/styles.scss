@@ -3,7 +3,7 @@
 @import '../node_modules/materialize-css/sass/materialize.scss';
 @import './app/styles/materialize-overrides.scss';
 @import 'css.penguin/view_vars';
-
+@import './src/app/styles/navigation';
 // @import 'app/bodyblock/bodyblock.component';
 // @import 'app/notes/notes.component';
 // @import 'app/note-editor/note-editor.component.scss';
@@ -22,6 +22,9 @@ body {
       display: grid;
       background-color: #fffcf7;
     }
+  }
+  .none {
+    display: none;
   }
 }
 

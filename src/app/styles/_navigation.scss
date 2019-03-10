@@ -1,0 +1,36 @@
+#leftPaneNav {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  width: 100%;
+  li {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+  .nav-top {
+    display: grid;
+    grid-auto-rows: 48px;
+  }
+  .nav-list {
+    display: grid;
+    grid-auto-rows: 48px;
+    li a {
+      color: black;
+    }
+  }
+  > .nav-list {
+    overflow-y: auto;
+  }
+  .settings {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    // position: fixed;
+    // bottom: 0px;
+    // width: 100%;
+  }
+  svg {
+    height: 40px;
+    width: 40px;
+  }
+}

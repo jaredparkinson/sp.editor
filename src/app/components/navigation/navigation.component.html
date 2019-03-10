@@ -1,6 +1,7 @@
 <!-- (click)="navigation.visible = navigation.visible ? !navigation.visible : true" -->
 <ng-container *ngIf="!this.navigation.hide">
   <li
+    style="height: 48px; color:green;"
     (click)="
       this.navigationService.navigationClick(this.navigation, this.navigations)
     "
@@ -20,8 +21,10 @@
   <ng-container *ngIf="navigation.visible && navigation.navigation">
     <ng-container *ngFor="let n of navigation.navigation">
       <app-navigation
+        class="nav-list"
         [navigation]="n"
-        [navigations]="[navigation.navigation]"
+        [navigations]="navigation.navigation"
+        [ngClass]="{ none: n.hide }"
       ></app-navigation>
     </ng-container>
   </ng-container>

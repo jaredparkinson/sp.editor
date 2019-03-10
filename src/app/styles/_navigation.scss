@@ -45,6 +45,28 @@
   .nav-header {
     color: $text_color;
   }
+  .search {
+    display: grid;
+    grid-template-columns: 34px auto;
+    grid-gap: 10px;
+    align-items: center;
+    margin-top: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    transition: margin 0.25s ease;
+    #addressBar {
+      margin: 0;
+      &::placeholder {
+        text-align: left;
+        // font-size: 24px;
+        color: rgba($color: #000000, $alpha: 0.5);
+      }
+      &:focus {
+        border: none !important;
+        box-shadow: none;
+      }
+      border: none !important;
+    }
+  }
 
   svg {
     height: 40px;

@@ -17,10 +17,10 @@
     *ngIf="navigation.url"
     class="nav-link"
   >
-    <a href="#/{{ navigation.url }}">{{ navigation.title }}</a
-    ><i _ngcontent-c5="" class="material-icons caret right"
+    <a href="#/{{ navigation.url }}">{{ navigation.title }}</a>
+    <!-- <i _ngcontent-c5="" class="material-icons caret right"
       >keyboard_arrow_right</i
-    >
+    > -->
   </li>
   <ng-container *ngIf="navigation.visible && navigation.navigation">
     <ng-container *ngFor="let n of navigation.navigation">

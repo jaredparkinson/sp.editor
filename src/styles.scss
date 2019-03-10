@@ -397,6 +397,9 @@ body.find {
   .body .router-outlet {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
+  .left-pane-container {
+    width: $leftPaneWidth;
+  }
 
   .right-pane footer,
   .right-pane-editor footer {
@@ -479,6 +482,9 @@ body.find {
     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
   }
 
+  .left-pane-container {
+    width: $leftPaneWidth;
+  }
   .right-pane footer,
   .right-pane-editor footer {
     width: $rightPaneWidth;

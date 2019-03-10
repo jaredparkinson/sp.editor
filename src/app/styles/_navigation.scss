@@ -1,19 +1,32 @@
+@import './color';
 #leftPaneNav {
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100%;
-  width: 100%;
+  background-color: rgb(245, 245, 245);
   li {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    /* align-items: center; */
+    text-align: center;
+    border-bottom-color: $divider_color;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    align-items: center;
+  }
+  .nav-link {
+    a {
+      color: $dark_primary_color !important;
+    }
   }
   .nav-top {
     display: grid;
     grid-auto-rows: 48px;
   }
   .nav-list {
+    width: inherit;
     display: grid;
+    margin-top: 0;
     grid-auto-rows: 48px;
     li a {
       color: black;
@@ -29,6 +42,10 @@
     // bottom: 0px;
     // width: 100%;
   }
+  .nav-header {
+    color: $text_color;
+  }
+
   svg {
     height: 40px;
     width: 40px;

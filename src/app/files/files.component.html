@@ -7,7 +7,7 @@
     'hide-s': !navService.leftPaneToggle
   }"
 >
-  <nav id="leftPaneNav">
+  <div id="leftPaneNav">
     <!-- <li class="left-nav-link" *ngFor="let link of links"> -->
     <div class="grid">
       <ul>
@@ -34,62 +34,18 @@
       *ngIf="!fileManager.showBooks"
       [ngClass]="{ 'nav-hide': !saveState.data.foldersVisible }"
     >
-      <!-- <a class='left-pane-ignore' *ngFor="let folder of fileManager.folders" (click)="setTestament(folder)">{{folder.path}}</a> -->
-      <!-- <ul class="left-pane-ignore grid">
-        <li
-          *ngFor="let folder of fileManager.nav"
-          (click)="
-            fileManager.testamentSelected = folder; fileManager.showBooks = true
-          "
-        >
-          <div class="left-nav-item">{{ folder.text }}</div>
-          <div class="left-nav-plus" style="text-align: right;">+</div>
-        </li>
-      </ul> -->
       <ul class="grid">
         <ng-container *ngFor="let i of this.navService.navigation">
-          <app-navigation [navigation]="i"></app-navigation
-        ></ng-container>
+          <ul>
+            <app-navigation
+              [navigation]="i"
+              [navigations]="this.navService.navigation"
+            ></app-navigation>
+          </ul>
+        </ng-container>
       </ul>
-      <!-- <a>
-        
-      </a> -->
     </div>
 
-    <div class="navigation" *ngIf="fileManager.showBooks">
-      <div *ngFor="let nav of fileManager.testamentSelected.books" class="grid">
-        <div
-          class="chapter-header"
-          (click)="
-            fileManager.testamentSelected.resetVisibility(nav.bookName);
-            nav.showChildren = !nav.showChildren
-          "
-        >
-          <a
-            class="left-pane-ignore chapter-header left-nav-item"
-            id="{{ nav.bookName }}"
-            >{{ nav.bookName }}</a
-          >
-          <div *ngIf="nav.showChildren; then thenBlock; else elseBlock"></div>
-          <ng-template #thenBlock>
-            <div class="left-nav-plus" style="text-align: right;">-</div>
-          </ng-template>
-          <ng-template #elseBlock>
-            <div class="left-nav-plus" style="text-align: right;">+</div>
-          </ng-template>
-        </div>
-
-        <div *ngIf="nav.showChildren" class="grid">
-          <a
-            *ngFor="let chapter of nav.chapters"
-            class="left-pane-ignore left-nav-item"
-            href="{{ chapter.link }}"
-            >{{ chapter.name }}</a
-          >
-        </div>
-      </div>
-      <!-- <a class='left-pane-ignore' *ngFor="let file of folder?.files">{{file.sourceUrl}}</a> -->
-    </div>
     <div id="settings">
       <button (click)="settings()">
         <svg
@@ -123,5 +79,5 @@
         Settings
       </button>
     </div>
-  </nav>
+  </div>
 </div>

@@ -112,4 +112,5 @@ export class Navigation {
   public _id: string = undefined;
   public navigation: Navigation[] = [];
   public visible = false;
+  public hide = false;
 }

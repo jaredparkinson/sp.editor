@@ -10,9 +10,9 @@ import { NavigationChapter } from '../models/Chapter';
 import { Folder } from '../models/Folder';
 import { NavLinks } from '../models/navlinks.model';
 
+import { Navigation } from '../modelsJson/Chapter';
 import { HelperService } from './helper.service';
 import { SaveStateService } from './save-state.service';
-import { Navigation } from '../modelsJson/Chapter';
 
 @Injectable()
 export class NavigationService {
@@ -45,7 +45,23 @@ export class NavigationService {
   }
 
   toggleNotes() {}
+  navigationClick(navigation: Navigation, navigations: Navigation[]) {
+    navigation.visible = navigation.visible ? !navigation.visible : true;
 
+    if (navigation.visible) {
+      navigations.forEach(nav => {
+        if (nav !== navigation) {
+          nav.hide = true;
+          nav.visible = false;
+        }
+      });
+    } else {
+      navigations.forEach(nav => {
+        nav.visible = false;
+        nav.hide = false;
+      });
+    }
+  }
   btnPreviousPagePress(pageUrl: string) {
     console.log(pageUrl);
     (document.getElementById('addressBar') as HTMLInputElement).value = '';

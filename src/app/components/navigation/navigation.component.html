@@ -1,18 +1,28 @@
-<li
-  (click)="navigation.visible = navigation.visible ? !navigation.visible : true"
-  *ngIf="!navigation.url"
->
-  {{ navigation.title }}
-</li>
-<li
-  (click)="navigation.visible = navigation.visible ? !navigation.visible : true"
-  *ngIf="navigation.url"
->
-  <a href="#/{{ navigation.url }}">{{ navigation.title }}</a>
-</li>
+<!-- (click)="navigation.visible = navigation.visible ? !navigation.visible : true" -->
+<ng-container *ngIf="!this.navigation.hide">
+  <li
+    (click)="
+      this.navigationService.navigationClick(this.navigation, this.navigations)
+    "
+    *ngIf="!navigation.url"
+  >
+    {{ navigation.title }}
+  </li>
+  <li
+    (click)="
+      navigation.visible = navigation.visible ? !navigation.visible : true
+    "
+    *ngIf="navigation.url"
+  >
+    <a href="#/{{ navigation.url }}">{{ navigation.title }}</a>
+  </li>
 
-<ng-container *ngIf="navigation.visible && navigation.navigation">
-  <ng-container *ngFor="let n of navigation.navigation">
-    <app-navigation [navigation]="n"></app-navigation>
+  <ng-container *ngIf="navigation.visible && navigation.navigation">
+    <ng-container *ngFor="let n of navigation.navigation">
+      <app-navigation
+        [navigation]="n"
+        [navigations]="[navigation.navigation]"
+      ></app-navigation>
+    </ng-container>
   </ng-container>
 </ng-container>

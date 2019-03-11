@@ -7,31 +7,34 @@
 >
   <div class="header"><app-header></app-header></div>
   <div id="gridBody" class="grid body">
-    <router-outlet></router-outlet>
-    <!--
-      <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock>
-    -->
-    <!-- <router-outlet name="notes-outlet" class="right-pane"></router-outlet> -->
+    <div class="router-outlet">
+      <app-files class="left-pane"></app-files>
+      <router-outlet></router-outlet>
+      <!--
+        <app-bodyblock id="appBodyBlock" class="content-pane grid "></app-bodyblock>
+      -->
+      <!-- <router-outlet name="notes-outlet" class="right-pane"></router-outlet> -->
 
-    <!-- <app-notes class="right-pane "></app-notes> -->
-    <!-- <div
-      [ngClass]="{
-        none: !navService.rightPaneToggle,
-        'overlay-toggle':
+      <!-- <app-notes class="right-pane "></app-notes> -->
+      <!-- <div
+        [ngClass]="{
+          none: !navService.rightPaneToggle,
+          'overlay-toggle':
           navService.rightPaneToggle && !verseSelectService.halfNotes
-      }"
-      (click)="navService.btnRightPanePress()"
-    ></div> -->
-    <div
-      [ngClass]="{
-        none: !navService.leftPaneToggle,
-        'overlay-toggle': navService.leftPaneToggle
-      }"
-      (click)="navService.btnLeftPanePress()"
-    ></div>
+        }"
+        (click)="navService.btnRightPanePress()"
+        ></div> -->
+      <div
+        [ngClass]="{
+          none: !navService.leftPaneToggle,
+          'overlay-toggle': navService.leftPaneToggle
+        }"
+        (click)="navService.btnLeftPanePress()"
+      ></div>
+    </div>
   </div>
 </div>
 
 <!--
-  <app-search-bar *ngIf="electronService.isElectron()" style="position:absolute;"></app-search-bar>
--->
+      <app-search-bar *ngIf="electronService.isElectron()" style="position:absolute;"></app-search-bar>
+    -->

@@ -320,14 +320,14 @@ export class ChapterService {
       verses.verses.forEach(verse => {
         // console.log(verse);
 
-        const verseNumber = parseInt(verse._id.replace('p', ''), 10);
+        const verseNumber = parseInt(verse.id.replace('p', ''), 10);
         verse.highlight = lodash.includes(highlight, verseNumber)
           ? true
           : false;
         verse.context = lodash.includes(context, verseNumber) ? true : false;
 
         if (verse.context) {
-          console.log(verse._id);
+          console.log(verse.id);
           console.log(context);
         }
         // if (!lodash.includes(highlight, verseNumber)) {pn

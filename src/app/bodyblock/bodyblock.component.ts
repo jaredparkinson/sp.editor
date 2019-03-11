@@ -79,16 +79,16 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
       const id = `${book}-${highlighting.pop()}-${language}`;
 
-      this.getChapter(id, highlighting).then(() => {
+      this.getChapter(id, highlighting).then(v => {
         console.log(`highlight ${highlighting}`);
 
         console.log(this.dataService.chapter2._id);
-        this.scrollToVerse();
+        this.scrollToVerse(v);
       });
     });
   }
 
-  private scrollToVerse() {
+  private scrollToVerse(v: number) {
     setTimeout(() => {
       const selectedVerse = document.querySelector(`#p${this.v}`);
       if (selectedVerse) {
@@ -100,7 +100,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   }
 
   private getChapter(id: string, highlighting: string[] = []) {
-    return new Promise(async resolve => {
+    return new Promise<number>(async resolve => {
       let chapter = this.dataService.chapter2;
       if (this.pageId !== id) {
         chapter = await this.chapterService.getChapter(id);
@@ -109,7 +109,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       }
       this.pageId = id;
 
-      this.v = await this.chapterService.setHighlightging(
+      const v = await this.chapterService.setHighlightging(
         this.dataService.verses,
         [highlighting.pop(), highlighting.pop()],
       );
@@ -131,7 +131,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
       this.dataService.chapter2 = chapter;
 
-      resolve();
+      resolve(v);
     });
   }
 

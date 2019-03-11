@@ -172,15 +172,15 @@ export class NavigationService {
     this.saveState.save();
   }
   btnLeftPanePress() {
-    if (
-      this.helperService.getWidth() >= 1024 &&
-      window.matchMedia('(orientation: landscape)').matches
-    ) {
-      this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
-    } else {
-      this.leftPaneToggle = !this.leftPaneToggle;
-      this.saveState.data.leftPaneToggle = !this.saveState.data.leftPaneToggle;
-    }
+    this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
+    // if (
+    //   this.helperService.getWidth() >= 1024 &&
+    //   window.matchMedia('(orientation: landscape)').matches
+    // ) {
+    // } else {
+    //   this.leftPaneToggle = !this.leftPaneToggle;
+    //   this.saveState.data.leftPaneToggle = !this.saveState.data.leftPaneToggle;
+    // }
     this.saveState.save();
   }
   btnParagraphPress() {

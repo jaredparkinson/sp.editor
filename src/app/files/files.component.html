@@ -1,5 +1,9 @@
 <div class="left-pane-container left-pane-ignore">
-  <div id="leftPaneNav">
+  <div
+    id="leftPaneNav"
+    class="navigation-pane"
+    [ngClass]="{ none: !saveState.data.leftPanePin }"
+  >
     <div class="nav-top">
       <div class="search" (click)="this.addressBarFocus()">
         <i class="material-icons">search</i>

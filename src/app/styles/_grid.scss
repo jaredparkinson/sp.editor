@@ -7,9 +7,13 @@
     grid-template-columns: 0 100vw; //$leftPaneWidth $bodyBlockWidth $rightPaneWidth;
     .parent-container {
       display: grid;
-      grid-template-columns: 100vw 0vw;
-      &.settings-container {
+      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+      &.settings-container,
+      &.hidden-notes {
         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
+        .content-pane > div {
+          width: $bodyBlockWidth;
+        }
       }
     }
     .right-pane footer,
@@ -53,8 +57,12 @@
     .parent-container {
       display: grid;
       grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-      &.settings-container {
+      &.settings-container,
+      &.hidden-notes {
         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
+        .content-pane > div {
+          width: $bodyBlockWidth;
+        }
       }
     }
   }
@@ -138,8 +146,12 @@
     .parent-container {
       display: grid;
       grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-      &.settings-container {
+      &.settings-container,
+      &.hidden-notes {
         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
+        .content-pane > div {
+          width: $bodyBlockWidth;
+        }
       }
     }
   }

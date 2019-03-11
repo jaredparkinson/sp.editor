@@ -1,4 +1,9 @@
-<div class="parent-container">
+<div
+  class="parent-container"
+  [ngClass]="{
+    'hidden-notes': !saveState.data.rightPanePin
+  }"
+>
   <div><app-bodyblock></app-bodyblock></div>
   <app-notes class="right-pane"></app-notes>
 </div>

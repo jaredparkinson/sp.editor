@@ -1,12 +1,4 @@
-<div
-  class="left-pane-container left-pane-ignore"
-  style="position: fixed"
-  [ngClass]="{
-    'hide-l hide-m': !saveState.data.leftPanePin,
-    'show-s': navService.leftPaneToggle,
-    'hide-s': !navService.leftPaneToggle
-  }"
->
+<div class="left-pane-container left-pane-ignore">
   <div id="leftPaneNav">
     <div class="nav-top">
       <div class="search" (click)="this.addressBarFocus()">

@@ -43,6 +43,12 @@ export class FilesComponent implements OnInit {
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
+  resetNavigation() {
+    this.navService.navigation.forEach(nav => {
+      nav.visible = false;
+      nav.hide = false;
+    });
+  }
   setVisibility(path: string) {
     this.fileManager.getNavigation(path);
   }

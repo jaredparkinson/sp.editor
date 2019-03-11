@@ -10,14 +10,9 @@
   >
     {{ navigation.title }}
   </li>
-  <li
-    (click)="
-      navigation.visible = navigation.visible ? !navigation.visible : true
-    "
-    *ngIf="navigation.url"
-    class="nav-link"
-  >
-    <a href="#/{{ navigation.url }}">{{ navigation.title }}</a>
+  <li (click)="this.gotoChapter()" *ngIf="navigation.url" class="nav-link">
+    <!-- <a href="#/{{ navigation.url }}"></a> -->
+    {{ navigation.title }}
     <!-- <i _ngcontent-c5="" class="material-icons caret right"
       >keyboard_arrow_right</i
     > -->

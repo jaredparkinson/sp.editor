@@ -180,9 +180,9 @@ export class VerseComponent implements OnInit {
           .then(value => {
             const start = 35;
             if (value[0] >= 33) {
-              const noteID = `note${this.verse.id.substr(
+              const noteID = `note${this.verse._id.substr(
                 1,
-                this.verse.id.length,
+                this.verse._id.length,
               )}`;
               // console.log(`${value[0]} ${value[1]} ${noteID}`);
               resolve([true, noteID]);

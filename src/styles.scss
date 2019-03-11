@@ -4,6 +4,7 @@
 @import './app/styles/materialize-overrides.scss';
 @import 'css.penguin/view_vars';
 @import './src/app/styles/navigation';
+@import './src/app/styles/paragraphs';
 // @import 'app/bodyblock/bodyblock.component';
 // @import 'app/notes/notes.component';
 // @import 'app/note-editor/note-editor.component.scss';
@@ -556,10 +557,6 @@ li {
     list-style: none;
     padding-top: 1px;
   }
-}
-
-div.paragraph {
-  margin-bottom: 6pt;
 }
 
 .body-block-whitespace {

@@ -65,15 +65,15 @@ export class SecondaryNote {
 }
 
 export class Verse {
+  public _id = '';
   public id = '';
   public text = '';
   public wTags: W[] = [];
   // public builtWTags: W[] = [];
   public highlight = false;
   public context = false;
-  _id: string;
   constructor(element: Element) {
-    this.id = element.id;
+    this._id = element.id;
     this.text = element.textContent;
 
     // element.querySelectorAll('.verz=se')

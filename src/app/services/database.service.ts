@@ -91,7 +91,7 @@ export class DatabaseService {
       scriptureFiles.forEach(c => {
         c.verses.verses.forEach(verse => {
           const v = lodash.cloneDeep(verse);
-          v._id = c._id + v.id;
+          v._id = c._id + v._id;
           v.wTags = undefined;
           verses.push(v);
         });

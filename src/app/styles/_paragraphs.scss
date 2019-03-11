@@ -1,0 +1,17 @@
+.hidden-paragraph {
+  div.paragraph {
+    p {
+      display: inline;
+      margin: 0px !important;
+    }
+  }
+}
+
+.show-paragraph {
+  div.paragraph {
+    margin-bottom: 6pt;
+  }
+  div.hidden-paragraph {
+    margin-bottom: 6pt;
+  }
+}

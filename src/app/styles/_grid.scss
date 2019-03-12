@@ -3,27 +3,6 @@
   $bodyBlockWidth: $vw9;
   $rightPaneWidth: $vw1_5;
 
-  .body .router-outlet {
-    grid-template-columns: 0 100vw; //$leftPaneWidth $bodyBlockWidth $rightPaneWidth;
-    .parent-container {
-      display: grid;
-      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-      &.settings-container,
-      &.hidden-notes {
-        grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
-        .content-pane > div {
-          width: $bodyBlockWidth;
-        }
-      }
-    }
-    .right-pane footer,
-    .right-pane-editor footer {
-      float: right;
-      position: absolute;
-      right: 0px;
-    }
-  }
-
   .menu-bar {
     grid-template-columns:
       minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
@@ -141,12 +120,6 @@ button {
 
 @media only screen and (max-width: 499.98px) {
   .right-pane footer,
-  .right-pane-editor footer,
-  .left-pane nav {
-    width: $vw11;
-  }
-
-  .right-pane footer,
   .right-pane-editor footer {
     float: right;
     position: absolute;
@@ -160,23 +133,11 @@ button {
       width: 100%;
       top: 50%;
       border-top: 5px solid darkgrey;
-      // .half-notes-margin {
-      //   display: block !important;
-      //   position: fixed;
-      //   width: 100%;
-      //   height: 20px;
-      //   background: grey;
-      // }
     }
   }
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1023.98px) {
-  .right-pane footer,
-  .right-pane-editor footer {
-    width: $vw6;
-  }
-
   .left-pane nav {
     width: $vw3;
   }
@@ -190,37 +151,65 @@ button {
   display: grid;
   width: 100vw;
 
-  @media screen and (max-width: 899.98px) {
+  @media screen and (max-width: 1023.98px) {
     grid-template-columns: 0 100vw;
     .navigation-pane {
       position: fixed;
       z-index: 10000;
     }
   }
-  @media screen and (min-width: 900px) {
-    $leftPaneWidth: 0;
-    $bodyBlockWidth: $vw9;
-    $rightPaneWidth: $vw3;
-    grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
-    .parent-container {
-      display: grid;
-      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+
+  @mixin main-grid(
+    $mediaQuery,
+    $leftPaneWidth,
+    $bodyBlockWidth,
+    $rightPaneWidth
+  ) {
+    @media #{$mediaQuery} {
+      grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
+      .parent-container {
+        display: grid;
+        grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+        &.settings-container,
+        &.hidden-notes {
+          grid-template-columns: ($bodyBlockWidth + $rightPaneWidth) 0px;
+          .content-pane > div {
+            width: $bodyBlockWidth;
+          }
+        }
+      }
     }
   }
-  @media screen and (min-width: 1024px) {
-    $leftPaneWidth: $vw2;
-    $bodyBlockWidth: $vw7;
-    $rightPaneWidth: $vw3;
-    grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
-    .parent-container {
-      display: grid;
-      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-    }
-  }
-  //   @media screen and (min-width: 1200px) {
-  //     grid-template-columns: 20vw 80vw;
-  //   }
+  @include main-grid('screen and (min-width: 500px)', $vw1, $vw8, $vw3);
+
+  @include main-grid(' screen and (min-width: 1024px)', $vw2, $vw7, $vw3);
+
   .none {
     display: none !important;
+  }
+
+  #appBodyBlock {
+    .body-block-nav-flex {
+      display: flex;
+      justify-content: center;
+
+      .body-block-nav {
+        position: fixed;
+        top: 50%;
+        background: inherit;
+        color: #c4bebe;
+        @media only screen and (max-width: 499.98px), (orientation: portrait) {
+          top: 25%;
+        }
+      }
+    }
+  }
+  i {
+    &.right {
+      margin-left: 0px;
+    }
+    &.left {
+      margin-right: 0px;
+    }
   }
 }

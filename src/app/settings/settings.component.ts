@@ -3,11 +3,11 @@ import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from '../services/EditService';
+import { DataService } from '../services/data.service';
 import { DownloadService } from '../services/download.service';
+import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',

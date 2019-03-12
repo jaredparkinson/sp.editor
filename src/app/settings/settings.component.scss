@@ -21,17 +21,9 @@
   $smallSettingsColumn: 225px;
   $largeSettingsColumn: 225px;
 
-  @include settings-grid('screen and (min-width: 320px)', '300px', (300px));
-  @include settings-grid(
-    'screen and (min-width: 500px)',
-    '225px 225px',
-    ($largeSettingsColumn * 2)
-  );
-  @include settings-grid(
-    'screen and (min-width: 740px)',
-    '225px 225px 225px',
-    ($largeSettingsColumn * 3)
-  );
+  @include settings-grid('screen and (min-width: 320px)', '90vw', 90vw);
+  @include settings-grid('screen and (min-width: 500px)', '60vw', (60vw));
+  // @include settings-grid('screen and (min-width: 740px)', '70vw', (70vw));
   margin-bottom: 25px;
   label {
     .lever {

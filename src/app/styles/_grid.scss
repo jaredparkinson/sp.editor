@@ -169,6 +169,7 @@ button {
       grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
       .parent-container {
         display: grid;
+        height: 100vh;
         grid-template-columns: $bodyBlockWidth $rightPaneWidth;
         &.settings-container,
         &.hidden-notes {
@@ -177,10 +178,18 @@ button {
             width: $bodyBlockWidth;
           }
         }
+        &.settings-container {
+          overflow-y: scroll;
+        }
       }
     }
   }
-  @include main-grid('screen and (min-width: 500px)', $vw1, $vw8, $vw3);
+  @include main-grid('screen and (min-width: 320px)', 0, $vw8, $vw4);
+  @media screen and (orientation: portrait) {
+    .parent-container {
+      grid-template-columns: 100vw 0;
+    }
+  }
 
   @include main-grid(' screen and (min-width: 1024px)', $vw2, $vw7, $vw3);
 

@@ -59,10 +59,32 @@
             {{ category.refLabelName
             }}<i class="switch right">
               <label>
-                <input type="checkbox" [(ngModel)]="category.visible" />
+                <input
+                  type="checkbox"
+                  [(ngModel)]="category.visible"
+                  (click)="this.saveSettings()"
+                />
                 <span class="lever"></span>
               </label>
             </i>
+          </li>
+          <li class="collection-item">
+            Line Height
+            <input
+              type="text"
+              name="line-height"
+              (keyup)="this.saveSettings()"
+              [(ngModel)]="saveState.data.lineHeight"
+            />
+          </li>
+          <li class="collection-item">
+            Font Size
+            <input
+              type="text"
+              name="line-height"
+              (keyup)="this.saveSettings()"
+              [(ngModel)]="saveState.data.fontSize"
+            />
           </li>
         </ul>
       </div>

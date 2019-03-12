@@ -29,6 +29,13 @@ export class SaveStateService {
       this.data.leftPaneToggle = false;
       this.data.rightPaneToggle = false;
       this.data.language = 'eng';
+
+      if (!this.data.fontSize) {
+        this.data.fontSize = '16';
+      }
+      if (!this.data.lineHeight) {
+        this.data.lineHeight = '20';
+      }
       this.setCategories();
 
       resolve();

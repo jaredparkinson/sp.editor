@@ -40,7 +40,7 @@ export class NavigationService {
     private helperService: HelperService,
     private router: Router,
   ) {
-    this.initNavigation();
+    // this.initNavigation();
     // this.fs = (window as any).fs;
   }
 
@@ -381,67 +381,67 @@ export class NavigationService {
     }
   }
 
-  private initNavigation() {
-    console.log('nav');
+  // private initNavigation() {
+  //   console.log('nav');
 
-    this.httpClient
-      .get('assets/nav/nav2.html', { observe: 'body', responseType: 'text' })
-      .subscribe(data => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
-        this.navData = doc;
-      });
+  //   this.httpClient
+  //     .get('assets/nav/nav2.html', { observe: 'body', responseType: 'text' })
+  //     .subscribe(data => {
+  //       const parser = new DOMParser();
+  //       const doc = parser.parseFromString(data, 'text/html');
+  //       this.navData = doc;
+  //     });
 
-    this.httpClient
-      .get('assets/nav/nav.html', {
-        observe: 'body',
-        responseType: 'text',
-      })
-      .subscribe(data => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
+  //   this.httpClient
+  //     .get('assets/nav/nav.html', {
+  //       observe: 'body',
+  //       responseType: 'text',
+  //     })
+  //     .subscribe(data => {
+  //       const parser = new DOMParser();
+  //       const doc = parser.parseFromString(data, 'text/html');
 
-        lodash.each(doc.querySelectorAll('div.book'), testament => {
-          const testamentName = testament
-            .querySelector('header h1')
-            .innerHTML.replace('&nbsp;', ' ');
+  //       lodash.each(doc.querySelectorAll('div.book'), testament => {
+  //         const testamentName = testament
+  //           .querySelector('header h1')
+  //           .innerHTML.replace('&nbsp;', ' ');
 
-          const tempTestament = new NavLinks(testamentName, '');
+  //         const tempTestament = new NavLinks(testamentName, '');
 
-          const tempBooks: Book[] = [];
-          lodash.each(testament.querySelectorAll('div>ul>li'), book => {
-            const tempBook = new Book(book as HTMLElement);
+  //         const tempBooks: Book[] = [];
+  //         lodash.each(testament.querySelectorAll('div>ul>li'), book => {
+  //           const tempBook = new Book(book as HTMLElement);
 
-            const tempChapters: NavigationChapter[] = [];
-            let chapters = lodash.toArray<HTMLElement>(
-              book.querySelectorAll('ul li a'),
-            );
+  //           const tempChapters: NavigationChapter[] = [];
+  //           let chapters = lodash.toArray<HTMLElement>(
+  //             book.querySelectorAll('ul li a'),
+  //           );
 
-            if (!chapters) {
-              chapters = lodash.toArray(book.querySelectorAll('li a'));
-            }
+  //           if (!chapters) {
+  //             chapters = lodash.toArray(book.querySelectorAll('li a'));
+  //           }
 
-            lodash.each(chapters, chapter => {
-              const tempChapter = new NavigationChapter(
-                chapter
-                  .querySelector('.title')
-                  .innerHTML.replace('&nbsp;', ' '),
-                chapter.getAttribute('href').replace('.html', ''),
-              );
+  //           lodash.each(chapters, chapter => {
+  //             const tempChapter = new NavigationChapter(
+  //               chapter
+  //                 .querySelector('.title')
+  //                 .innerHTML.replace('&nbsp;', ' '),
+  //               chapter.getAttribute('href').replace('.html', ''),
+  //             );
 
-              tempChapters.push(tempChapter);
-            });
-            if (tempChapters.length !== 1) {
-              tempChapters.shift();
-            }
-            tempBook.chapters = tempChapters;
+  //             tempChapters.push(tempChapter);
+  //           });
+  //           if (tempChapters.length !== 1) {
+  //             tempChapters.shift();
+  //           }
+  //           tempBook.chapters = tempChapters;
 
-            tempBooks.push(tempBook);
-          });
+  //           tempBooks.push(tempBook);
+  //         });
 
-          tempTestament.books = tempBooks;
-          this.nav.push(tempTestament);
-        });
-      });
-  }
+  //         tempTestament.books = tempBooks;
+  //         this.nav.push(tempTestament);
+  //       });
+  //     });
+  // }
 }

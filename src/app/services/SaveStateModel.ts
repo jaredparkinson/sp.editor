@@ -20,6 +20,8 @@ export class SaveStateModel implements ISaveModel {
   public currentPage = '';
   public verseSelect = true;
   public verseSuperScripts = false;
+  public fontSize = '16';
+  public lineHeight = '20';
   // public refQUO = true;
   // public refPHR = true;
   // public refOR = true;

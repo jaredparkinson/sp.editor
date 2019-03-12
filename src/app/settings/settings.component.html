@@ -86,6 +86,46 @@
               [(ngModel)]="saveState.data.fontSize"
             />
           </li>
+          <li
+            class="collection-item"
+            *ngFor="let download of downloadService.downloads"
+          >
+            {{ download.title }}
+            <a
+              [disabled]="download.downloading"
+              (click)="downloadService.downloadScriptures(download)"
+              class="waves-effect waves-light btn-large blue"
+              *ngIf="!download.downloaded && !download.downloading"
+            >
+              Download
+            </a>
+            <!-- (click)="downloadService.downloadScriptures(download)" -->
+            <a
+              [disabled]="download.downloading"
+              class="waves-effect waves-light btn-large blue"
+              *ngIf="!download.downloaded && download.downloading"
+            >
+              Downloading
+            </a>
+            <a
+              [disabled]="download.deleting"
+              class="waves-effect waves-light btn-large blue"
+              (click)="downloadService.downloadScriptures(download)"
+              *ngIf="download.downloaded && !download.downloading"
+            >
+              Redownload
+            </a>
+          </li>
+          <li class="collection-item">
+            <ng-container *ngIf="this.updating">
+              <a class="btn-large blue"> Checking for updates</a>
+            </ng-container>
+            <ng-container *ngIf="!this.updating">
+              <a class="btn-large blue" (click)="this.checkForUpdates()">
+                Check for updates
+              </a>
+            </ng-container>
+          </li>
         </ul>
       </div>
     </div>
@@ -98,95 +138,6 @@
         </ul>
       </div>
     </div>
-  </div> -->
-
-  <div class="">
-    <div class="">
-      <p></p>
-    </div>
-    <div class="">
-      <div
-        class="card small white"
-        *ngFor="let download of downloadService.downloads"
-      >
-        <div class="card-content">
-          <p>{{ download.fileName }}</p>
-        </div>
-        <div class="download-btn card-action">
-          <a
-            [disabled]="download.downloading"
-            (click)="downloadService.downloadScriptures(download)"
-            class="waves-effect waves-light btn-large blue"
-            *ngIf="!download.downloaded && !download.downloading"
-          >
-            Download
-          </a>
-          <!-- (click)="downloadService.downloadScriptures(download)" -->
-          <a
-            [disabled]="download.downloading"
-            class="waves-effect waves-light btn-large blue"
-            *ngIf="!download.downloaded && download.downloading"
-          >
-            Downloading
-          </a>
-          <!-- <a
-            [disabled]="download.deleting"
-            class="waves-effect waves-light btn-large blue"
-            (click)="downloadService.delete(download)"
-            *ngIf="download.downloaded && !download.downloading"
-          >
-            Delete
-          </a> -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- <div
-      class="preloader-wrapper active big"
-      *ngIf="!download.downloaded && download.downloading"
-    >
-      <div class="spinner-layer spinner-blue-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-          <div class="circle"></div>
-        </div>
-        <div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div> -->
-  <!-- <div>
-    <div class="download" *ngFor="let download of downloadService.downloads">
-    <span></span>
-    <button
-      (click)="downloadService.downloadScriptures(download)"
-      class="waves-effect waves-light btn"
-      [disabled]="download.downloading"
-    >
-      <div
-        class="preloader-wrapper active"
-        *ngIf="!download.downloaded && download.downloading"
-      >
-        <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
-      
-    </button>
-    <span></span>
-    <span>{{ download.title }}</span>
-  </div>
-  <button (click)="reset()">Reset</button>
   </div> -->
 </div>
 

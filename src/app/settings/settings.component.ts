@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 import * as localForage from 'localforage';
 import * as lodash from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
@@ -19,10 +20,12 @@ export class SettingsComponent implements OnInit {
     public saveState: SaveStateService,
     public navServices: NavigationService,
     public chapterService: ChapterService,
+    public swUpdate: SwUpdate,
     public editService: EditService,
     private dataService: DataService,
   ) {}
 
+  public updating = false;
   ngOnInit() {
     this.dataService.chapter2 = new Chapter2();
     this.navServices.notesSettings = false;
@@ -37,5 +40,20 @@ export class SettingsComponent implements OnInit {
   }
   saveSettings() {
     this.saveState.save();
+  }
+
+  checkForUpdates() {
+    this.updating = true;
+    this.swUpdate
+      .checkForUpdate()
+      .then(value => {
+        console.log(value);
+        this.updating = false;
+      })
+      .catch(reason => {
+        console.log(reason);
+
+        this.updating = false;
+      });
   }
 }

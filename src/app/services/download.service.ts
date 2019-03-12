@@ -12,7 +12,6 @@ import { DatabaseService } from './database.service';
 export class DownloadService {
   public downloads: Download[] = [
     new Download('alpha_oneinthinehand', 'scriptures', false),
-    new Download('navigation', 'scriptures', false),
   ];
   private forageRegex: RegExp = new RegExp(
     /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/,
@@ -125,23 +124,30 @@ export class DownloadService {
   }
 
   delete(file: Download) {
-    file.deleting = false;
-    this.dataBaseService.allDocs().then(docs => {
-      const deleteRows = [];
-
-      docs.rows.forEach(row => {
-        const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: true };
-        console.log(tempRow);
-        deleteRows.push(tempRow);
+    this.dataBaseService.db.allDocs().then(docs => {
+      docs.rows.map(row => {
+        this.dataBaseService.db.remove(row.id, row.value.rev);
       });
-
-      file.deleting = true;
       file.downloading = false;
       file.downloaded = false;
-      console.log(file);
-
-      localStorage.setItem('downloads', JSON.stringify(this.downloads));
     });
+    // file.deleting = false;
+    // this.dataBaseService.allDocs().then(docs => {
+    //   const deleteRows = [];
+
+    //   docs.rows.forEach(row => {
+    //     const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: true };
+    //     console.log(tempRow);
+    //     deleteRows.push(tempRow);
+    //   });
+
+    //   file.deleting = true;
+    //   file.downloading = false;
+    //   file.downloaded = false;
+    //   console.log(file);
+
+    //   localStorage.setItem('downloads', JSON.stringify(this.downloads));
+    // });
   }
 
   download(file: Download) {

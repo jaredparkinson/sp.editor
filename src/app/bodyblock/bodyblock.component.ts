@@ -90,7 +90,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
   private scrollToVerse(v: number) {
     setTimeout(() => {
-      const selectedVerse = document.querySelector(`#p${this.v}`);
+      const selectedVerse = document.querySelector(`#p${v}`);
       if (selectedVerse) {
         selectedVerse.scrollIntoView();
       } else {

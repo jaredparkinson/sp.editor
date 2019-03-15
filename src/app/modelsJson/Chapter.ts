@@ -5,11 +5,12 @@ export class Chapter2 {
 
   public title = '';
   public header = '';
+  public shortTitle = '';
   // public oldNotes: OldNote[] = [];
   public notes: Note[] = [];
   public verses: Verse[] = [];
   public _rev = '';
-  public paragraphs: Paragraphs;
+  public paragraphs: Paragraph[] = [];
 
   public previousPage = '';
   public nextPage = '';
@@ -102,9 +103,9 @@ export class Paragraph {
   public verses: Verse[] = [];
 }
 
-export class Paragraphs {
-  public paragraphs: Paragraph[] = [];
-}
+// export class Paragraphs {
+//   public paragraphs: Paragraph[] = [];
+// }
 export class Navigation {
   public title: string;
   public shortTitle: string;

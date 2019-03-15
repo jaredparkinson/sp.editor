@@ -7,7 +7,6 @@ import {
   Chapter2,
   NoteRef,
   Paragraph,
-  Paragraphs,
   SecondaryNote,
   Verse,
   W,
@@ -51,8 +50,6 @@ export class ChapterService {
 
   public resetNotes(): Promise<void> {
     return new Promise<void>(resolve => {
-      console.log('test');
-
       this.resetNoteVisibility(
         this.dataService.chapter2,
         this.dataService.noteVisibility,
@@ -71,7 +68,6 @@ export class ChapterService {
     noteVisibility: Map<string, boolean>,
   ): Promise<void> {
     return new Promise<void>(resolve => {
-      // const noteVisibility: Map<string, boolean> = new Map();
       chapter.notes.forEach(note => {
         note.secondary.forEach(secondaryNote => {
           noteVisibility.set(secondaryNote.id, false);
@@ -81,7 +77,6 @@ export class ChapterService {
               if (this.getNoteRefVisibility(noteRef)) {
                 noteVisibility.set(secondaryNote.id, true);
               }
-              // console.log(noteRef.referenceLabel);
             });
           }
         });
@@ -114,27 +109,15 @@ export class ChapterService {
     ) {
       visible = false;
     }
-    // if (visible) {
-    //   console.log(
-    //     visible +
-    //       ' ' +
-    //       secondaryNote.notePhrase.text +
-    //       ' ' +
-    //       secondaryNote.notePhrase.classList,
-    //   );
-    // }
 
     return visible;
   }
   getNoteRefVisibility(noteRef: NoteRef): boolean {
-    // console.log(noteRef.referenceLabel.refLabelName);
     noteRef.visible = false;
 
     if (
       noteRef.referenceLabel &&
       lodash.find(this.saveState.data.noteCategories, c => {
-        // console.log(noteRef);
-
         if (!noteRef.referenceLabel.refLabelName) {
           return true;
         }
@@ -144,63 +127,27 @@ export class ChapterService {
           noteRef.referenceLabel.refLabelName.toLowerCase()
         );
       }).visible
-      // (noteRef.referenceLabel.refLabelName === 'quotation' &&
-      //   this.saveState.data.refQUO) ||
-      // (noteRef.referenceLabel.refLabelName === 'phrasing' &&
-      //   this.saveState.data.refPHR) ||
-      // (noteRef.referenceLabel.refLabelName === 'or' &&
-      //   this.saveState.data.refOR) ||
-      // (noteRef.referenceLabel.refLabelName === 'ie' &&
-      //   this.saveState.data.refIE) ||
-      // (noteRef.referenceLabel.refLabelName === 'hebrew' &&
-      //   this.saveState.data.refHEB) ||
-      // (noteRef.referenceLabel.refLabelName === 'greek' &&
-      //   this.saveState.data.refGR) ||
-      // (noteRef.referenceLabel.refLabelName === 'archaic' &&
-      //   this.saveState.data.refKJV) ||
-      // (noteRef.referenceLabel.refLabelName === 'historical' &&
-      //   this.saveState.data.refHST) ||
-      // (noteRef.referenceLabel.refLabelName === 'cr' &&
-      //   this.saveState.data.refCR) ||
-      // (noteRef.referenceLabel.refLabelName === 'alt' &&
-      //   this.saveState.data.refALT) ||
-      // (noteRef.referenceLabel.refLabelName === 'harmony' &&
-      //   this.saveState.data.refHMY) ||
-      // (noteRef.referenceLabel.refLabelName === 'tg' &&
-      //   this.saveState.data.refTG) ||
-      // (noteRef.referenceLabel.refLabelName === 'gs' &&
-      //   this.saveState.data.refGS)
     ) {
-      // console.log('gtcrd');
       noteRef.visible = true;
     }
-    // console.log(`${noteRef.referenceLabel.refLabelName} ${visibile}`);
 
     return noteRef.visible;
   }
 
-  buildParagraphs(paragraphs: Paragraphs, verses: Verse[]): Promise<void> {
+  buildParagraphs(paragraphs: Paragraph[], verses: Verse[]): Promise<void> {
     return new Promise<void>(resolve => {
-      // const paragraphs = lodash.cloneDeep(chapter.paragraphs);
-
-      paragraphs.paragraphs.forEach(paragraph => {
-        paragraph.verses = [];
-        paragraph.verseIds.forEach(verseId => {
-          paragraph.verses.push(
-            lodash.find(verses, verse => {
-              return verse.id === verseId;
-            }),
-          );
-        });
+      paragraphs.forEach(paragraph => {
+        paragraph.verses = verses.slice(
+          parseInt(paragraph.verseIds[0], 10) - 1,
+          parseInt(paragraph.verseIds[1], 10),
+        );
       });
 
-      if (paragraphs.paragraphs.length === 0) {
+      if (paragraphs.length === 0) {
         const ara = new Paragraph();
         ara.verses = verses;
-        paragraphs.paragraphs.push(ara);
+        paragraphs.push(ara);
       }
-      // console.log(paragraphs);
-      // paragraphs.paragraphs[0].verseIds.push('d');
 
       resolve();
     });
@@ -225,54 +172,10 @@ export class ChapterService {
               },
             );
             wTag.visibleRefCount = wTag.visibleRefs.length;
-            // console.log(wTag.visibleRefCount);
           }
         }
       });
     });
-
-    // const engRegex = new RegExp(/\d{9}/g);
-    // const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
-    // const tcRegex = new RegExp(/tc.*/g);
-
-    // const regex: RegExp[] = [];
-
-    // if (this.saveState.data.englishNotesVisible) {
-    //   regex.push(engRegex);
-    // }
-    // if (this.saveState.data.newNotesVisible) {
-    //   regex.push(newRegex);
-    // }
-    // if (this.saveState.data.translatorNotesVisible) {
-    //   regex.push(tcRegex);
-    // }
-
-    // verses.verses.forEach(verse => {
-    //   // lodash.filter(verse.wTags,( wTag as W) => {
-    //   //   wTag
-    //   //   let vis = false;
-    //   //   regex.forEach(r => {
-    //   //     if (r.test(wTag)) {
-    //   //       vis = true;
-    //   //     }
-    //   //   })
-    //   // } )
-    //   verse.wTags.forEach(wTag => {
-    //     if (wTag.refs) {
-    //       wTag.visibleRefs = [];
-
-    //       wTag.refs.forEach(id => {
-    //         regex.forEach(r => {
-    //           if (r.test(id.toString())) {
-    //             // console.log(id);
-
-    //             wTag.visibleRefs.push(id);
-    //           }
-    //         });
-    //       });
-    //     }
-    //   });
-    // });
   }
   getSortingKey(b: string): number {
     const engRegex = new RegExp(/\d{9}/g);
@@ -311,32 +214,15 @@ export class ChapterService {
 
   public setHighlightging(verses: Verse[], highlightNumbers: [string, string]) {
     return new Promise<number>(resolve => {
-      // console.log(this.parseHighlightedVerses(highlightNumbers[0]));
-      // console.log(this.parseHighlightedVerses(highlightNumbers[1]));
-
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
       verses.forEach(verse => {
-        // console.log(verse);
-
         const verseNumber = parseInt(verse.id.replace('p', ''), 10);
         verse.highlight = lodash.includes(highlight, verseNumber)
           ? true
           : false;
         verse.context = lodash.includes(context, verseNumber) ? true : false;
-
-        if (verse.context) {
-          console.log(verse.id);
-          console.log(context);
-        }
-        // if (!lodash.includes(highlight, verseNumber)) {pn
-        //   console.log(verse);
-        // }
-        // if (!lodash.includes(context, verseNumber)) {
-        //   console.log(verse);
-        // }
       });
-      // console.log();
 
       resolve(highlight.sort()[0]);
     });
@@ -351,16 +237,12 @@ export class ChapterService {
             wTag.id[0],
             lodash.last(wTag.id) + 1,
           );
-          // wTag.id.forEach(i => {
-          //   wTag.text = `${wTag.text}${verse.text[i]}`;
-          // });
+
           wTag.selected = false;
           wTag.clicked = false;
-          // console.log(wTag.text);
         });
       });
       this.resetRefVisible(verses, noteVisibility);
-      console.log('aasdf');
 
       resolve(undefined);
     });
@@ -388,14 +270,6 @@ export class ChapterService {
           verseNums.push(x);
         }
       });
-
-      // lodash.forEach(verseParams, verseParam => {
-      //   const t = verseParam.split('-');
-      //   const count = t.length > 1 ? 1 : 0;
-      //   for (let x = parseInt(t[0], 10); x <= parseInt(t[count], 10); x++) {
-      //     verseNums.push(x);
-      //   }
-      // });
     }
 
     return verseNums;

@@ -35,26 +35,8 @@ $font-stack: PalatinoldsLat-Roman, serif;
 
     // margin-left: 1em;
     display: grid;
-    grid-template-columns: 9fr 1fr;
-
-    p.note-title {
-      grid-area: auto / 1;
-    }
-
-    p.note-short-title {
-      grid-area: auto / 1;
-    }
-
-    div.note {
-      grid-area: auto / 1;
-    }
-
-    > div {
-      grid-area: auto / 1;
-    }
-
+    grid-auto-flow: row;
     button.note-button {
-      grid-area: 1 / 2;
       height: 24px;
       width: 24px;
       margin-top: 6px;

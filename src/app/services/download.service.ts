@@ -66,15 +66,15 @@ export class DownloadService {
   public async downloadScriptures(file: Download) {
     file.downloaded = false;
     file.downloading = true;
-    await this.dataBaseService.db.allDocs().then(docs => {
-      const deleteRows = [];
-      docs.rows.forEach(row => {
-        const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: false };
-        console.log(tempRow);
-        deleteRows.push(tempRow);
-      });
-      this.dataBaseService.db.bulkDocs(deleteRows);
-    });
+    // await this.dataBaseService.db.allDocs().then(docs => {
+    //   const deleteRows = [];
+    //   docs.rows.forEach(row => {
+    //     const tempRow = { _rev: row.value.rev, _id: row.id, _deleted: false };
+    //     console.log(tempRow);
+    //     deleteRows.push(tempRow);
+    //   });
+    //   this.dataBaseService.db.bulkDocs(deleteRows);
+    // });
     this.dataBaseService
       .bulkDocs(file.fileName)
       .then(() => {

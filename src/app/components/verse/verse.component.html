@@ -3,7 +3,8 @@
   id="{{ verse.id }}"
   [ngClass]="{
     'highlight-verse': verse.highlight,
-    'highlight-context': verse.context
+    'highlight-context': verse.context,
+    'verse-verse': !verse.header
   }"
 >
   <ng-container *ngFor="let w of verse.wTags">

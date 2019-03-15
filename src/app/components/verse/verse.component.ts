@@ -103,6 +103,7 @@ export class VerseComponent implements OnInit {
             .buildWTags(
               this.dataService.verses,
               this.dataService.noteVisibility,
+              this.dataService.chapter2.header2,
             )
             .then(() => {
               resolve();

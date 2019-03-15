@@ -36,7 +36,8 @@ $font-stack: serif;
   display: none;
 }
 
-p {
+p,
+.app-verse {
   &.title,
   &.title-number,
   &.subtitle,
@@ -84,7 +85,8 @@ p {
     font-weight: bold;
   }
 
-  &.subtitle {
+  &.subtitle,
+  #subtitle1 {
     font-family: $font-stack;
     margin: 0;
     margin-bottom: 6pt;

@@ -1,4 +1,5 @@
 export class Chapter2 {
+  public header2: Verse;
   public _id = '';
   public language = '';
   public testament = '';
@@ -70,6 +71,7 @@ export class Verse {
   public id = '';
   public text = '';
   public wTags: W[] = [];
+  public header: boolean;
   // public builtWTags: W[] = [];
   public highlight = false;
   public context = false;

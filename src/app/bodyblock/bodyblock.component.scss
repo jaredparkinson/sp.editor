@@ -115,7 +115,8 @@ body {
   }
 
   p.subtitle,
-  p.title-number {
+  p.title-number,
+  #subtitle1 {
     text-align: center;
   }
 
@@ -173,4 +174,14 @@ body {
   //   border-left: 3px solid #f68d2e;
   // }
   // }
+}
+
+.body-block-header {
+  display: grid;
+  justify-items: center;
+  grid-row-gap: 5px;
+  margin-bottom: 5px;
+  #subtitle1 {
+    color: green;
+  }
 }

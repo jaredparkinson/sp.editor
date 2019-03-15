@@ -20,7 +20,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SwUpdate } from '@angular/service-worker';
 import { VerseComponent } from '../components/verse/verse.component';
 import { TemplateGroup } from '../modelsJson/TemplateGroup';
-import { Verse } from '../modelsJson/Verse';
+
+import { Verse } from '../modelsJson/Chapter';
 import { W2 } from '../modelsJson/W2';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
@@ -122,6 +123,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       await this.chapterService.buildWTags(
         this.dataService.verses,
         this.dataService.noteVisibility,
+        chapter.header2,
       );
 
       await this.chapterService.buildParagraphs(
@@ -130,6 +132,13 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       );
 
       this.dataService.chapter2 = chapter;
+      this.dataService.header = lodash.filter(
+        this.dataService.verses,
+        (verse: Verse) => {
+          return verse.header;
+        },
+      );
+      console.log(this.dataService.header);
 
       resolve(v);
     });
@@ -188,34 +197,34 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return wClass;
   }
 
-  public getTemplateGroups(verse: Verse): TemplateGroup[] {
-    const templateGroups: TemplateGroup[] = [];
-    let tempTemplateGroup: TemplateGroup = new TemplateGroup();
+  // public getTemplateGroups(verse: Verse): TemplateGroup[] {
+  //   const templateGroups: TemplateGroup[] = [];
+  //   let tempTemplateGroup: TemplateGroup = new TemplateGroup();
 
-    for (let x = 0; x < Array.from(verse.text).length; x++) {
-      const t = verse.text[x];
+  //   for (let x = 0; x < Array.from(verse.text).length; x++) {
+  //     const t = verse.text[x];
 
-      tempTemplateGroup.text = `${tempTemplateGroup.text}${t}`;
+  //     tempTemplateGroup.text = `${tempTemplateGroup.text}${t}`;
 
-      if (verse.w2[x]) {
-        tempTemplateGroup.isWTag = true;
-        tempTemplateGroup.classList = verse.w2[x].classList;
-        tempTemplateGroup.refs = verse.w2[x].classList;
-      }
+  //     if (verse.w2[x]) {
+  //       tempTemplateGroup.isWTag = true;
+  //       tempTemplateGroup.classList = verse.w2[x].classList;
+  //       tempTemplateGroup.refs = verse.w2[x].classList;
+  //     }
 
-      if (
-        x + 1 === verse.text.length ||
-        !this.isPartOfGroup(verse.w2[x], verse.w2[x + 1])
-      ) {
-        templateGroups.push(tempTemplateGroup);
-        tempTemplateGroup = new TemplateGroup();
-      }
-    }
+  //     if (
+  //       x + 1 === verse.text.length ||
+  //       !this.isPartOfGroup(verse.w2[x], verse.w2[x + 1])
+  //     ) {
+  //       templateGroups.push(tempTemplateGroup);
+  //       tempTemplateGroup = new TemplateGroup();
+  //     }
+  //   }
 
-    console.log(templateGroups);
+  //   console.log(templateGroups);
 
-    return templateGroups;
-  }
+  //   return templateGroups;
+  // }
   isPartOfGroup(w1: W2, w2: W2): boolean {
     if (w1 === w2) {
       return true;
@@ -241,15 +250,15 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return paragraph.id;
   }
 
-  wTagClick(wTag: W, verse: Verse, event: Event) {
-    if (!this.saveState.data.rightPanePin) {
-    }
-    this.saveState.data.notesPopover = true;
-    console.log(wTag);
-    console.log((event.currentTarget as Element).getBoundingClientRect());
+  // wTagClick(wTag: W, verse: Verse, event: Event) {
+  //   if (!this.saveState.data.rightPanePin) {
+  //   }
+  //   this.saveState.data.notesPopover = true;
+  //   console.log(wTag);
+  //   console.log((event.currentTarget as Element).getBoundingClientRect());
 
-    this.verseSelectService.wTagClick(wTag, verse);
-  }
+  //   this.verseSelectService.wTagClick(wTag, verse);
+  // }
 
   private scrollIto() {
     const asdf = document.getElementById(`p${this.v}`);

@@ -57,6 +57,7 @@ export class ChapterService {
         this.buildWTags(
           this.dataService.verses,
           this.dataService.noteVisibility,
+          this.dataService.chapter2.header2,
         ).then(() => {
           resolve();
         });
@@ -153,8 +154,19 @@ export class ChapterService {
     });
   }
 
-  resetRefVisible(verses: Verse[], noteVisibility: Map<string, boolean>) {
+  resetRefVisible(
+    verses: Verse[],
+    header2: Verse,
+    noteVisibility: Map<string, boolean>,
+  ) {
+    this.setRefVisibility(header2, noteVisibility);
     verses.forEach(verse => {
+      this.setRefVisibility(verse, noteVisibility);
+    });
+  }
+
+  private setRefVisibility(verse: Verse, noteVisibility: Map<string, boolean>) {
+    if (verse) {
       verse.wTags.forEach(wTag => {
         if (wTag.refs) {
           wTag.visibleRefs = [];
@@ -175,8 +187,9 @@ export class ChapterService {
           }
         }
       });
-    });
+    }
   }
+
   getSortingKey(b: string): number {
     const engRegex = new RegExp(/\d{9}/g);
     const newRegex = new RegExp(/\d{4}(\-\d{2}){6}/g);
@@ -228,9 +241,30 @@ export class ChapterService {
     });
   }
 
-  public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
+  public buildWTags(
+    verses: Verse[],
+    noteVisibility: Map<string, boolean>,
+    header2: Verse,
+  ) {
     return new Promise<void>(resolve => {
+      if (header2) {
+        // header2.text = '';
+
+        header2.wTags.forEach(wTag => {
+          wTag.text = '';
+          wTag.text = header2.text.substring(
+            wTag.id[0],
+            lodash.last(wTag.id) + 1,
+          );
+
+          wTag.selected = false;
+          wTag.clicked = false;
+        });
+      }
+
       verses.forEach(verse => {
+        console.log(verse);
+
         verse.wTags.forEach(wTag => {
           wTag.text = '';
           wTag.text = verse.text.substring(
@@ -242,7 +276,7 @@ export class ChapterService {
           wTag.clicked = false;
         });
       });
-      this.resetRefVisible(verses, noteVisibility);
+      this.resetRefVisible(verses, header2, noteVisibility);
 
       resolve(undefined);
     });

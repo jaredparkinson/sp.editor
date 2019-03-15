@@ -317,7 +317,9 @@ li {
 //   z-index: 20;
 //   position: fixed;
 // }
-h1 {
+h1,
+w.dominant {
+  display: block;
   font-family: $font-stack !important;
   margin: 0 !important;
   margin-top: 6pt !important;
@@ -370,4 +372,8 @@ h1 {
 
 .show-paragraph .verse {
   display: inline !important;
+}
+
+header > * {
+  display: block;
 }

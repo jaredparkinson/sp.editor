@@ -30,11 +30,20 @@
     >
       <div id="bodyBlockTop"></div>
       <!-- <ng-container *ngIf="dataService.chapter2.paragraphs.length !== 0"> -->
-      <header
+      <!-- <header
         [innerHTML]="
           sanitizer.bypassSecurityTrustHtml(dataService.chapter2.header)
         "
-      ></header>
+      ></header> -->
+      <header class="body-block-header">
+        <app-verse
+          class="app-verse"
+          [verse]="verse"
+          *ngFor="let verse of dataService.header"
+        ></app-verse>
+      </header>
+
+      <ng-container *ngIf="dataService.chapter2.header2"> </ng-container>
       <app-paragraph
         class="hidden-paragraph"
         [paragraph]="paragraph"

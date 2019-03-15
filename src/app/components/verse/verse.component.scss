@@ -42,7 +42,8 @@ div.paragraph {
 }
 
 p.subtitle,
-p.title-number {
+p.title-number,
+#subtitle1 {
   text-align: center;
 }
 
@@ -50,7 +51,7 @@ p.title-number {
   font-weight: bold;
 }
 p.title-number {
- font-size: 17px; 
+  font-size: 17px;
 }
 
 p.study-summary1,
@@ -97,7 +98,7 @@ span {
   &.answer {
     text-indent: 1em;
   }
-  &.verse {
+  &.verse-verse {
     position: relative;
     font-family: $font-stack;
     text-align: left;
@@ -119,4 +120,22 @@ span {
       // }
     }
   }
+}
+
+#study_summary1 {
+  padding-right: 20px;
+  font-family: $font-stack;
+  margin: 0;
+  margin-bottom: 6pt;
+  font-style: italic;
+}
+
+#title_number1 {
+  padding-right: 20px;
+  font-family: $font-stack;
+  margin: 0;
+  margin-top: 6pt;
+  margin-bottom: 6pt;
+  text-align: center;
+  font-weight: bold;
 }

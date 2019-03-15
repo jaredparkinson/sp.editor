@@ -10,5 +10,6 @@ export class DataService {
   noteVisibility: Map<string, boolean> = new Map();
   verses: Verse[] = [];
   notea: Map<string, Note> = new Map<string, Note>();
+  header: Verse[] = [];
   constructor() {}
 }

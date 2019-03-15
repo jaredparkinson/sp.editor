@@ -6,8 +6,8 @@ export class Chapter2 {
   public title = '';
   public header = '';
   // public oldNotes: OldNote[] = [];
-  public notes: Notes = new Notes();
-  public verses: Verses;
+  public notes: Note[] = [];
+  public verses: Verse[] = [];
   public _rev = '';
   public paragraphs: Paragraphs;
 
@@ -79,10 +79,10 @@ export class Verse {
     // element.querySelectorAll('.verz=se')
   }
 }
-export class Verses {
-  public verses: Verse[] = [];
-  private count = 0;
-}
+// export class Verses {
+//   public verses: Verse[] = [];
+//   private count = 0;
+// }
 export class W {
   public id: number[] = [];
   public classList: string[] = [];

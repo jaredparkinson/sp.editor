@@ -6,8 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
-import { NavigationService } from './services/navigation.service';
 import { HelperService } from './services/helper.service';
+import { NavigationService } from './services/navigation.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,15 +17,15 @@ describe('AppComponent', () => {
         ElectronService,
         ChapterService,
         NavigationService,
-        HelperService
+        HelperService,
       ],
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
       ],
 
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 

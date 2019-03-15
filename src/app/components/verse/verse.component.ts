@@ -76,7 +76,7 @@ export class VerseComponent implements OnInit {
     return new Promise<void>(resolve => {
       const ref = w.visibleRefs.pop();
       w.selected = true;
-      this.dataService.verses.verses.forEach(verse => {
+      this.dataService.verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
           if (wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
             wTag.selected = true;
@@ -85,7 +85,7 @@ export class VerseComponent implements OnInit {
         });
       });
 
-      this.dataService.chapter2.notes.notes.forEach(note => {
+      this.dataService.chapter2.notes.forEach(note => {
         note.secondary.forEach(secondaryNote => {
           secondaryNote.clicked = secondaryNote.id === ref;
         });

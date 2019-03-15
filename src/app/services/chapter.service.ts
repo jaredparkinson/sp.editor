@@ -10,7 +10,6 @@ import {
   Paragraphs,
   SecondaryNote,
   Verse,
-  Verses,
   W,
 } from '../modelsJson/Chapter';
 import { DataService } from './data.service';
@@ -73,7 +72,7 @@ export class ChapterService {
   ): Promise<void> {
     return new Promise<void>(resolve => {
       // const noteVisibility: Map<string, boolean> = new Map();
-      chapter.notes.notes.forEach(note => {
+      chapter.notes.forEach(note => {
         note.secondary.forEach(secondaryNote => {
           noteVisibility.set(secondaryNote.id, false);
           if (this.getSecondaryNoteVisibility(secondaryNote)) {
@@ -180,7 +179,7 @@ export class ChapterService {
     return noteRef.visible;
   }
 
-  buildParagraphs(paragraphs: Paragraphs, verses: Verses): Promise<void> {
+  buildParagraphs(paragraphs: Paragraphs, verses: Verse[]): Promise<void> {
     return new Promise<void>(resolve => {
       // const paragraphs = lodash.cloneDeep(chapter.paragraphs);
 
@@ -188,7 +187,7 @@ export class ChapterService {
         paragraph.verses = [];
         paragraph.verseIds.forEach(verseId => {
           paragraph.verses.push(
-            lodash.find(verses.verses, verse => {
+            lodash.find(verses, verse => {
               return verse.id === verseId;
             }),
           );
@@ -197,7 +196,7 @@ export class ChapterService {
 
       if (paragraphs.paragraphs.length === 0) {
         const ara = new Paragraph();
-        ara.verses = verses.verses;
+        ara.verses = verses;
         paragraphs.paragraphs.push(ara);
       }
       // console.log(paragraphs);
@@ -207,8 +206,8 @@ export class ChapterService {
     });
   }
 
-  resetRefVisible(verses: Verses, noteVisibility: Map<string, boolean>) {
-    verses.verses.forEach(verse => {
+  resetRefVisible(verses: Verse[], noteVisibility: Map<string, boolean>) {
+    verses.forEach(verse => {
       verse.wTags.forEach(wTag => {
         if (wTag.refs) {
           wTag.visibleRefs = [];
@@ -310,14 +309,14 @@ export class ChapterService {
     );
   }
 
-  public setHighlightging(verses: Verses, highlightNumbers: [string, string]) {
+  public setHighlightging(verses: Verse[], highlightNumbers: [string, string]) {
     return new Promise<number>(resolve => {
       // console.log(this.parseHighlightedVerses(highlightNumbers[0]));
       // console.log(this.parseHighlightedVerses(highlightNumbers[1]));
 
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
-      verses.verses.forEach(verse => {
+      verses.forEach(verse => {
         // console.log(verse);
 
         const verseNumber = parseInt(verse.id.replace('p', ''), 10);
@@ -343,9 +342,9 @@ export class ChapterService {
     });
   }
 
-  public buildWTags(verses: Verses, noteVisibility: Map<string, boolean>) {
+  public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
     return new Promise<void>(resolve => {
-      verses.verses.forEach(verse => {
+      verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
           wTag.text = '';
           wTag.text = verse.text.substring(

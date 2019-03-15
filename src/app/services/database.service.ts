@@ -89,7 +89,7 @@ export class DatabaseService {
       const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
       const verses = [];
       scriptureFiles.forEach(c => {
-        c.verses.verses.forEach(verse => {
+        c.verses.forEach(verse => {
           const v = lodash.cloneDeep(verse);
           v._id = c._id + v._id;
           v.wTags = undefined;

@@ -9,17 +9,17 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as lodash from 'lodash';
+import { SecondaryNote } from '../modelsJson/Chapter';
 import { Note } from '../modelsJson/Note';
 // import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
+import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { VerseSelectService } from '../services/verse-select.service';
-import { DataService } from '../services/data.service';
-import { SecondaryNote } from '../modelsJson/Chapter';
 
 @Component({
   selector: 'app-notes',
@@ -68,7 +68,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
         secondaryNote.clicked = false;
       } else {
         secondaryNote.clicked = true;
-        this.dataService.verses.verses.forEach(verse => {
+        this.dataService.verses.forEach(verse => {
           verse.wTags.forEach(wTag => {
             if (wTag.refs && wTag.refs.includes(secondaryNote.id)) {
               wTag.selected = true;

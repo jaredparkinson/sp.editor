@@ -15,7 +15,7 @@
         'secondary-override-off': !note.override
       }" -->
     <note
-      *ngFor="let note of dataService.chapter2.notes.notes"
+      *ngFor="let note of dataService.chapter2.notes"
       id="{{ note.id }}"
       class="{{ note.classList }}"
     >
@@ -28,19 +28,19 @@
           *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
           id="{{ secondaryNote.id }}"
         >
-        <div>
-          <p (click)="this.notePhraseClick(secondaryNote)"> 
-            {{ secondaryNote.notePhrase.text }}
-          </p>
-          <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
-            <p
-              [class]="filterClassList(noteRef.classList)"
-              *ngIf="noteRef.visible"
-              >
-              <span [innerHTML]="noteRef.text"></span>
+          <div>
+            <p (click)="this.notePhraseClick(secondaryNote)">
+              {{ secondaryNote.notePhrase.text }}
             </p>
-          </ng-container>
-        </div>
+            <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
+              <p
+                [class]="filterClassList(noteRef.classList)"
+                *ngIf="noteRef.visible"
+              >
+                <span [innerHTML]="noteRef.text"></span>
+              </p>
+            </ng-container>
+          </div>
         </div>
       </ng-container>
       <!-- <ng-container *ngFor="let secondaryNote of note.secondaryNotes">

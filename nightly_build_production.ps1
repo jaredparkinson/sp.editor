@@ -34,8 +34,8 @@ Set-Location .\dist
 
 tar -czf an.tar.gz *.*
 
-scp -P 7822 an.tar.gz oneinthi@oneinthinehand.org:an.oneinthinehand.org/
+scp -P 7822 an.tar.gz oneinthi@oneinthinehand.org:nightly.oneinthinehand.org/
 
-ssh -t oneinthi@oneinthinehand.org -p 7822 'cd an.oneinthinehand.org && tar xvf an.tar.gz'
+ssh -t oneinthi@oneinthinehand.org -p 7822 'cd nightly.oneinthinehand.org && tar xvf an.tar.gz'
 
 Set-Location ..

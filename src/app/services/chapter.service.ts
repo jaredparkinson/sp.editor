@@ -57,7 +57,6 @@ export class ChapterService {
         this.buildWTags(
           this.dataService.verses,
           this.dataService.noteVisibility,
-          this.dataService.chapter2.header2,
         ).then(() => {
           resolve();
         });
@@ -154,12 +153,7 @@ export class ChapterService {
     });
   }
 
-  resetRefVisible(
-    verses: Verse[],
-    header2: Verse,
-    noteVisibility: Map<string, boolean>,
-  ) {
-    this.setRefVisibility(header2, noteVisibility);
+  resetRefVisible(verses: Verse[], noteVisibility: Map<string, boolean>) {
     verses.forEach(verse => {
       this.setRefVisibility(verse, noteVisibility);
     });
@@ -178,11 +172,12 @@ export class ChapterService {
           if (wTag.visibleRefs.length === 0) {
             wTag.visibleRefs = undefined;
           } else {
-            wTag.visibleRefs = wTag.visibleRefs.sort(
-              (a: string, b: string): number => {
-                return this.getSortingKey(a) - this.getSortingKey(b);
-              },
-            );
+            // wTag.visibleRefs = wTag.visibleRefs.sort(
+            //   (a: string, b: string): number => {
+            //     return this.getSortingKey(a) - this.getSortingKey(b);
+            //   },
+            // );
+            wTag.visibleRefs = lodash.reverse(wTag.visibleRefs);
             wTag.visibleRefCount = wTag.visibleRefs.length;
           }
         }
@@ -241,27 +236,8 @@ export class ChapterService {
     });
   }
 
-  public buildWTags(
-    verses: Verse[],
-    noteVisibility: Map<string, boolean>,
-    header2: Verse,
-  ) {
+  public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
     return new Promise<void>(resolve => {
-      if (header2) {
-        // header2.text = '';
-
-        header2.wTags.forEach(wTag => {
-          wTag.text = '';
-          wTag.text = header2.text.substring(
-            wTag.id[0],
-            lodash.last(wTag.id) + 1,
-          );
-
-          wTag.selected = false;
-          wTag.clicked = false;
-        });
-      }
-
       verses.forEach(verse => {
         // console.log(verse);
 
@@ -276,7 +252,7 @@ export class ChapterService {
           wTag.clicked = false;
         });
       });
-      this.resetRefVisible(verses, header2, noteVisibility);
+      this.resetRefVisible(verses, noteVisibility);
 
       resolve(undefined);
     });

@@ -127,7 +127,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       await this.chapterService.buildWTags(
         this.dataService.verses,
         this.dataService.noteVisibility,
-        chapter.header2,
       );
 
       await this.chapterService.buildParagraphs(

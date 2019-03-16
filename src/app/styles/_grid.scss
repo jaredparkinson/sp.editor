@@ -230,28 +230,28 @@ button {
 
 // iOS only css
 
-@supports not (-webkit-overflow-scrolling: touch) {
-  /* CSS for other than iOS devices */
-  .iosFooter {
-    height: 40px;
-    position: absolute;
-    bottom: 40px;
-    background-color: $primary_color;
-    width: 100vw;
-    z-index: 10000;
-    display: flex;
-    justify-content: space-between;
+.iosFooter {
+  height: 40px;
+  position: absolute;
+  bottom: 40px;
+  background-color: $primary_color;
+  width: 100vw;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-between;
 
-    button {
-      background-color: inherit;
-      height: 40px;
-      width: 40px;
-    }
+  button {
+    background-color: inherit;
+    height: 40px;
+    width: 40px;
   }
 }
-@supports (-webkit-overflow-scrolling: touch) {
-  /* CSS for other than iOS devices */
-  .iosFooter {
-    display: none;
-  }
-}
+// @supports (-webkit-overflow-scrolling: touch) {
+//   /* CSS for other than iOS devices */
+// }
+// @supports (-webkit-overflow-scrolling: touch) {
+//   /* CSS for other than iOS devices */
+//   .iosFooter {
+//     display: none;
+//   }
+// }

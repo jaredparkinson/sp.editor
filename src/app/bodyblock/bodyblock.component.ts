@@ -13,6 +13,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as bowser from 'bowser';
 import * as lodash from 'lodash';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -40,6 +41,7 @@ import { WTagService } from '../services/wtag-builder.service';
   styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent implements OnInit, OnDestroy {
+  isIOS = false;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -62,6 +64,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   private pageId = '';
   ngOnDestroy() {}
   ngOnInit() {
+    this.isIOS =
+      bowser.getParser(window.navigator.userAgent).getOSName() === 'iOS';
     this.route.params.subscribe(async params => {
       document.querySelector('.body-block').scrollIntoView();
       this.navService.rightPaneToggle = false;
@@ -197,34 +201,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return wClass;
   }
 
-  // public getTemplateGroups(verse: Verse): TemplateGroup[] {
-  //   const templateGroups: TemplateGroup[] = [];
-  //   let tempTemplateGroup: TemplateGroup = new TemplateGroup();
-
-  //   for (let x = 0; x < Array.from(verse.text).length; x++) {
-  //     const t = verse.text[x];
-
-  //     tempTemplateGroup.text = `${tempTemplateGroup.text}${t}`;
-
-  //     if (verse.w2[x]) {
-  //       tempTemplateGroup.isWTag = true;
-  //       tempTemplateGroup.classList = verse.w2[x].classList;
-  //       tempTemplateGroup.refs = verse.w2[x].classList;
-  //     }
-
-  //     if (
-  //       x + 1 === verse.text.length ||
-  //       !this.isPartOfGroup(verse.w2[x], verse.w2[x + 1])
-  //     ) {
-  //       templateGroups.push(tempTemplateGroup);
-  //       tempTemplateGroup = new TemplateGroup();
-  //     }
-  //   }
-
-  //   console.log(templateGroups);
-
-  //   return templateGroups;
-  // }
   isPartOfGroup(w1: W2, w2: W2): boolean {
     if (w1 === w2) {
       return true;
@@ -249,16 +225,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   trackById(paragraph: any) {
     return paragraph.id;
   }
-
-  // wTagClick(wTag: W, verse: Verse, event: Event) {
-  //   if (!this.saveState.data.rightPanePin) {
-  //   }
-  //   this.saveState.data.notesPopover = true;
-  //   console.log(wTag);
-  //   console.log((event.currentTarget as Element).getBoundingClientRect());
-
-  //   this.verseSelectService.wTagClick(wTag, verse);
-  // }
 
   private scrollIto() {
     const asdf = document.getElementById(`p${this.v}`);

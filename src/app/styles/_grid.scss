@@ -1,3 +1,4 @@
+@import './color';
 @media only screen and (max-width: 1023.98px) {
   $leftPaneWidth: $vw1_5;
   $bodyBlockWidth: $vw9;
@@ -224,5 +225,33 @@ button {
     &.left {
       margin-right: 0px;
     }
+  }
+}
+
+// iOS only css
+
+@supports not (-webkit-overflow-scrolling: touch) {
+  /* CSS for other than iOS devices */
+  .iosFooter {
+    height: 40px;
+    position: absolute;
+    bottom: 40px;
+    background-color: $primary_color;
+    width: 100vw;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background-color: inherit;
+      height: 40px;
+      width: 40px;
+    }
+  }
+}
+@supports (-webkit-overflow-scrolling: touch) {
+  /* CSS for other than iOS devices */
+  .iosFooter {
+    display: none;
   }
 }

@@ -88,7 +88,11 @@ body {
       /* when original notes showing, display:none */
     }
   }
-
+  @supports (-webkit-overflow-scrolling: touch) {
+    .body-block-nav-flex {
+      display: none !important;
+    }
+  }
   .body-block-nav-flex {
     display: flex;
     justify-content: center;

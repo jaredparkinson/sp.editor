@@ -92,3 +92,20 @@
     </div>
   </div>
 </div>
+
+<div id="iosFooter" class="iosFooter" *ngIf="this.isIOS">
+  <button
+    id="btnFooterPreviousChapter"
+    (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)"
+  >
+    <i class="material-icons caret left">keyboard_arrow_left</i>
+  </button>
+  <button
+    id="btnFooterNextChapter"
+    (click)="this.router.navigateByUrl(dataService.chapter2.nextPage)"
+  >
+    <i _ngcontent-c5="" class="material-icons caret right"
+      >keyboard_arrow_right</i
+    >
+  </button>
+</div>

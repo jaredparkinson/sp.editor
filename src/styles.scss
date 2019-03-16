@@ -284,9 +284,14 @@ li {
 }
 
 .show-poetry {
-  w.poetry::before {
-    content: '\A';
-    white-space: pre;
+  w {
+    &.poetry,
+    &.prose {
+      &::before {
+        content: ' ';
+        display: block;
+      }
+    }
   }
   .app-verse:first-of-type w.poetry:first-of-type::before {
     content: '' !important;

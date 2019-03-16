@@ -85,8 +85,12 @@ export class VerseComponent implements OnInit {
           secondaryNote.clicked = secondaryNote.id === ref;
         });
       });
+
       this.saveState.data.rightPanePin = true;
 
+      if (ref) {
+        document.getElementById(ref).scrollIntoView();
+      }
       resolve();
     });
   }

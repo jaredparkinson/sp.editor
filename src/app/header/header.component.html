@@ -19,18 +19,20 @@
     <button
       id="btnParagraph"
       [ngClass]="{
-        'darken-2': saveState.data.paragraphsVisible
+        'lighten-4': !saveState.data.paragraphsVisible
       }"
-      class=" waves-effect waves-light"
+      class=" waves-effect waves-light blue"
       (click)="btnParagraphPress()"
     >
       ¶
     </button>
     <button
       id="btnPoetry"
-      [ngClass]="{ 'darken-2': saveState.data.poetryVisible }"
+      [ngClass]="{
+        'lighten-4': !saveState.data.poetryVisible
+      }"
       (click)="btnPoetryPress()"
-      class=" waves-effect waves-light"
+      class=" waves-effect waves-light blue"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -69,13 +71,13 @@
     </button>
     <button
       id="btnSecondaryNotes"
-      class=" waves-effect waves-light"
+      class=" waves-effect waves-light blue"
       [ngClass]="{
-        'darken-2': saveState.data.secondaryNotesVisible
+        'lighten-4': !saveState.data.secondaryNotesVisible
       }"
       (click)="btnSecondaryNotesPress()"
     >
-      <i class="header-arrows material-icons ">add</i>
+      <i class="header-arrows material-icons  ">add</i>
     </button>
   </div>
   <div id="headerRightPane">

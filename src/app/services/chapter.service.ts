@@ -263,7 +263,7 @@ export class ChapterService {
       }
 
       verses.forEach(verse => {
-        console.log(verse);
+        // console.log(verse);
 
         verse.wTags.forEach(wTag => {
           wTag.text = '';

@@ -78,6 +78,20 @@ note > div.note-disabled {
   opacity: 0.4;
   user-select: none;
 }
+.show-poetry {
+  w {
+    &.poetry,
+    &.prose {
+      &::before {
+        content: ' ';
+        display: block;
+      }
+    }
+  }
+  .app-verse:first-of-type w.poetry:first-of-type::before {
+    content: '' !important;
+  }
+}
 
 .note-superscript {
   .note-title {
@@ -173,6 +187,8 @@ body.find {
 .right-pane footer,
 .right-pane-editor footer {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: fixed;
+  height: 100vh;
 }
 
 .pop-out {
@@ -190,14 +206,6 @@ body.find {
 .right-pane footer,
 .right-pane-editor footer {
   overflow-y: scroll; // position: fixed;
-  height: 100vh;
-}
-
-.left-pane nav,
-.right-pane footer,
-.right-pane-editor footer {
-  // overflow-y: scroll;
-  position: fixed;
   height: 100vh;
 }
 
@@ -283,20 +291,6 @@ li {
   border-left: 3px solid #f68d2e !important;
 }
 
-.show-poetry {
-  w {
-    &.poetry,
-    &.prose {
-      &::before {
-        content: ' ';
-        display: block;
-      }
-    }
-  }
-  .app-verse:first-of-type w.poetry:first-of-type::before {
-    content: '' !important;
-  }
-}
 .show-paragraph {
   .hidden-paragraph .highlight-verse {
     background-color: rgba(184, 184, 106, 0.815);

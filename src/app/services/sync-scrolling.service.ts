@@ -22,7 +22,7 @@ export class SyncScrollingService {
       if (verses[0].getBoundingClientRect().top > 34) {
         this.scrollNotesTop();
       } else {
-        let belowTop: Element[] = [];
+        const belowTop: Element[] = [];
         verses.forEach(verse => {
           if (verse.getBoundingClientRect().top > 34) {
             // console.log(verse);

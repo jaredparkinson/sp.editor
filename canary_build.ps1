@@ -41,4 +41,4 @@ scp -P 7822 canary.tar.gz oneinthi@oneinthinehand.org:canary.oneinthinehand.org/
 
 ssh -t oneinthi@oneinthinehand.org -p 7822 'cd canary.oneinthinehand.org && tar xvf canary.tar.gz'
 
-Set-Location ..
+# Set-Location ..

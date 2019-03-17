@@ -2,7 +2,10 @@
   <div
     id="leftPaneNav"
     class="navigation-pane"
-    [ngClass]="{ none: !saveState.data.leftPanePin }"
+    [ngClass]="{
+      none: !saveState.data.leftPanePin,
+      'slideInLeft delay-2s	': saveState.data.leftPanePin
+    }"
   >
     <div class="nav-top">
       <div class="search" (click)="this.addressBarFocus()">

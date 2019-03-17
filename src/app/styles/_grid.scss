@@ -197,7 +197,7 @@ button {
     }
   }
   @include main-grid('screen and (min-width: 320px)', 0, $vw8, $vw4);
-  @media screen and (orientation: portrait) {
+  @media screen and (orientation: portrait) and (max-width: 1023.98px) {
     .parent-container,
     .parent-container.hidden-notes {
       grid-template-columns: 100vw 0;
@@ -223,7 +223,8 @@ button {
         top: 50%;
         background: inherit;
         color: #c4bebe;
-        @media only screen and (max-width: 499.98px), (orientation: portrait) {
+        @media only screen and (max-width: 499.98px),
+          (orientation: portrait) and (max-width: 1023.98px) {
           top: 25%;
         }
       }

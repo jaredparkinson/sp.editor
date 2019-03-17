@@ -1,6 +1,7 @@
 // ?@import '../../css.penguin/view_vars';
 $font-stack: serif;
-@media only screen and (max-width: 499.98px), (orientation: portrait) {
+@media only screen and (max-width: 499.98px),
+  (orientation: portrait) and (max-width: 1023.98px) {
   // .right-pane footer,
   // .right-pane-editor footer,
   // .left-pane nav {

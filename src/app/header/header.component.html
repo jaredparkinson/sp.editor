@@ -48,11 +48,14 @@
       <i class="header-arrows material-icons ">arrow_back</i>
     </button>
 
-    <div
-      id="bookName"
-      class=" waves-effect waves-light"
-      [innerHtml]="dataService.chapter2.title"
-    ></div>
+    <div id="bookName" class=" waves-effect waves-light">
+      <div id="chapterTitle">
+        {{ dataService.chapter2.title }}
+      </div>
+      <div id="chapterShortTitle">
+        {{ dataService.chapter2.shortTitle }}
+      </div>
+    </div>
 
     <button
       class=" waves-effect waves-light"

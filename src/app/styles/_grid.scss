@@ -119,6 +119,17 @@ button {
   }
 }
 
+@media only screen and (max-width: 700px) {
+  #chapterTitle {
+    display: none;
+  }
+}
+@media only screen and (min-width: 700px) {
+  #chapterShortTitle {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 499.98px) {
   .right-pane footer,
   .right-pane-editor footer {

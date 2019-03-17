@@ -218,6 +218,7 @@ body.find {
 #headerRightPane {
   display: grid;
   // background-color: lightblue;
+  align-items: center;
 }
 
 @media only screen and (max-width: 511.98px) {

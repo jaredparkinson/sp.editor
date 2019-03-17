@@ -32,12 +32,13 @@ yarn build:web
 
 Set-Location .\dist
 
-tar -czf ../nightly.tar.gz *.*
+tar -czf ../canary.tar.gz *.*
 
 Set-Location ..
 
-scp -P 7822 nightly.tar.gz oneinthi@oneinthinehand.org:nightly.oneinthinehand.org/
+scp -P 7822 canary.tar.gz oneinthi@oneinthinehand.org:canary.oneinthinehand.org/
 
-ssh -t oneinthi@oneinthinehand.org -p 7822 'cd nightly.oneinthinehand.org && tar xvf nightly.tar.gz'
 
-# Set-Location ..
+ssh -t oneinthi@oneinthinehand.org -p 7822 'cd canary.oneinthinehand.org && tar xvf canary.tar.gz'
+
+Set-Location ..

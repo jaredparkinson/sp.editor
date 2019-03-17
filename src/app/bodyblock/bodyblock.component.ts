@@ -147,6 +147,10 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     });
   }
 
+  public onPan(event: Event) {
+    console.log(event);
+  }
+
   public stringSplit(text: string): string[] {
     return Array.from(text);
   }

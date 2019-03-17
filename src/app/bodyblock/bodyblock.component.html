@@ -27,6 +27,8 @@
         'notes-hide-original': !saveState.data.originalNotesVisible,
         'notes-show-original': saveState.data.originalNotesVisible
       }"
+      (swipeleft)="this.router.navigateByUrl(dataService.chapter2.previousPage)"
+      (swiperight)="this.router.navigateByUrl(dataService.chapter2.nextPage)"
     >
       <div id="bodyBlockTop"></div>
       <!-- <ng-container *ngIf="dataService.chapter2.paragraphs.length !== 0"> -->

@@ -21,7 +21,7 @@
       [ngClass]="{
         'lighten-4': !saveState.data.paragraphsVisible
       }"
-      class=" waves-effect waves-light blue"
+      class="hide-small waves-effect waves-light blue"
       (click)="btnParagraphPress()"
     >
       ¶
@@ -32,7 +32,7 @@
         'lighten-4': !saveState.data.poetryVisible
       }"
       (click)="btnPoetryPress()"
-      class=" waves-effect waves-light blue"
+      class="hide-small waves-effect waves-light blue"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -41,7 +41,7 @@
       </svg>
     </button>
     <button
-      class=" waves-effect waves-light"
+      class="hide-small waves-effect waves-light"
       id="btnBack"
       (click)="btnBackPress()"
     >
@@ -58,7 +58,7 @@
     </div>
 
     <button
-      class=" waves-effect waves-light"
+      class="hide-small waves-effect waves-light"
       id="btnForward"
       (click)="btnForwardPress()"
     >
@@ -74,7 +74,7 @@
     </button>
     <button
       id="btnSecondaryNotes"
-      class=" waves-effect waves-light blue"
+      class="hide-small waves-effect waves-light blue"
       [ngClass]="{
         'lighten-4': !saveState.data.secondaryNotesVisible
       }"

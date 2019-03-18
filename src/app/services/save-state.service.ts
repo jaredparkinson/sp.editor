@@ -40,11 +40,26 @@ export class SaveStateService {
       }
 
       this.initISaveStateItems();
+      this.resetSettings();
 
       this.setCategories();
 
       resolve();
     });
+  }
+  resetSettings(): void {
+    // console.log(
+    //   window.matchMedia(
+    //     `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+    //   ),
+    // );
+    if (
+      window.matchMedia(
+        `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+      ).matches
+    ) {
+      this.data.navigationPaneToggle.value = false;
+    }
   }
   initISaveStateItems(): void {
     if (!this.data.navigationPaneToggle) {

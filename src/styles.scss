@@ -225,6 +225,9 @@ body.find {
 @media only screen and (max-width: 511.98px) {
   #headerMiddlePane {
     grid-template-columns: 0 0 0 minmax(48px, auto) 0 48px 0;
+    > .hide-small {
+      visibility: hidden;
+    }
   }
 
   #navToggle {

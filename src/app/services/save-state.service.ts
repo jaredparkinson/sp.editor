@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as lodash from 'lodash';
-import { ReferenceLabel } from '../modelsJson/Chapter';
-import { SaveStateModel } from './SaveStateModel';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
+import { ReferenceLabel } from '../modelsJson/Chapter';
+import { SaveStateModel } from './SaveStateModel';
 
 @Injectable({
   providedIn: 'root',

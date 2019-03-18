@@ -57,6 +57,19 @@ export class NotesComponent implements OnInit, AfterViewInit {
     return classList.toString();
   }
   ngOnInit() {}
+
+  notesOnBottom(): boolean {
+    console.log(
+      window.matchMedia(
+        `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+      ),
+    );
+    console.log('asdfasdfasdfasdfwer23412341234');
+    return window.matchMedia(
+      `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+    ).matches;
+  }
+
   notePhraseClick(secondaryNote: SecondaryNote) {
     console.log(secondaryNote.id);
     const clicked = secondaryNote.clicked;

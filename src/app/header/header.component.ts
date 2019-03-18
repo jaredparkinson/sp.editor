@@ -4,15 +4,13 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import * as lodash from 'lodash';
-import * as matCSS from 'materialize-css';
+import { ISaveStateItem } from '../models/ISaveStateItem';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { ISaveStateItem } from '../models/ISaveStateItem';
 // import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-header',
@@ -115,7 +113,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnNotesSettingsPress();
   }
   btnSecondaryNotesPress() {
-    this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
+    this.navServices.btnSecondaryNotesPress().then(() => {
       this.chapterService.resetNotes();
     });
   }

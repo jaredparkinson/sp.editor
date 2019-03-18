@@ -6,9 +6,12 @@
       !saveState.data.notesPanePin.animated,
     slideOutRight:
       !saveState.data.notesPanePin.value &&
-      saveState.data.notesPanePin.animated,
+      saveState.data.notesPanePin.animated &&
+      !notesOnBottom(),
     slideInRight:
-      saveState.data.notesPanePin.value && saveState.data.notesPanePin.animated
+      saveState.data.notesPanePin.value &&
+      saveState.data.notesPanePin.animated &&
+      !notesOnBottom()
   }"
   class="study-notes-parent animated fastest"
 >
@@ -16,7 +19,20 @@
   <!-- 'hide-l hide-m': !saveState.data.rightPanePin, -->
   <!-- <div> -->
   <div id="footerTop"></div>
-  <footer id="studyNotes" class="study-notes half-notes">
+  <footer
+    id="studyNotes"
+    class="study-notes half-notes animated faster"
+    [ngClass]="{
+      slideOutDown:
+        !saveState.data.notesPanePin.value &&
+        saveState.data.notesPanePin.animated &&
+        notesOnBottom(),
+      slideInUp:
+        saveState.data.notesPanePin.value &&
+        saveState.data.notesPanePin.animated &&
+        notesOnBottom()
+    }"
+  >
     <!-- <div class="half-notes-margin"></div> -->
     <!-- [ngClass]="{
         'secondary-override-off': !note.override

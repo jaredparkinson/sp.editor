@@ -1,10 +1,13 @@
-<div class="left-pane-container left-pane-ignore">
+<div
+  class="left-pane-container left-pane-ignore"
+  (swiperight)="this.swipeRight($event)"
+>
   <div
     id="leftPaneNav"
     class="navigation-pane"
     [ngClass]="{
       none: !saveState.data.leftPanePin,
-      'slideInLeft delay-2s	': saveState.data.leftPanePin
+      'slideInLeft animated	faster': saveState.data.leftPanePin
     }"
   >
     <div class="nav-top">

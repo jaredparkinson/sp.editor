@@ -89,7 +89,6 @@ export class AppComponent implements OnInit, AfterContentInit {
     //   this.navService.notesSettings = false;
     // }
   }
-
   private initNoteSettingsToggle() {
     // document.body
     // this.ngZone.runOutsideAngular(() => {

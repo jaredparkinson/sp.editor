@@ -43,6 +43,13 @@ export class FilesComponent implements OnInit {
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
+
+  swipeRight(event: Event) {
+    console.log('asdoifjasdoifj');
+
+    console.log(event);
+    this.navService.btnLeftPanePress();
+  }
   resetNavigation() {
     this.navService.navigation.forEach(nav => {
       nav.visible = false;

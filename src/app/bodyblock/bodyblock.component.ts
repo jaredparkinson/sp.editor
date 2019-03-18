@@ -152,17 +152,21 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   }
 
   public swipeChapter(event: Event, url: string) {
-    if (event.type === 'swiperight') {
-      // console.log(event);
-      this.swipeLeft = true;
+    console.log(event);
+
+    if ((event as PointerEvent).pointerType === 'touch') {
+      if (event.type === 'swiperight') {
+        // console.log(event);
+        this.swipeLeft = true;
+      }
+      if (event.type === 'swipeleft') {
+        this.swipeRight = true;
+        // console.log(event);
+      }
+      setTimeout(() => {
+        this.router.navigateByUrl(url);
+      }, 150);
     }
-    if (event.type === 'swipeleft') {
-      this.swipeRight = true;
-      // console.log(event);
-    }
-    setTimeout(() => {
-      this.router.navigateByUrl(url);
-    }, 150);
   }
 
   public onPan(event: Event) {

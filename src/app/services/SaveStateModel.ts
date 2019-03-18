@@ -25,6 +25,7 @@ export class SaveStateModel implements ISaveModel {
   public lineHeight = '20';
 
   public navigationPaneToggle: ISaveStateItem<boolean>;
+  public notesPanePin: ISaveStateItem<boolean>;
   // public refQUO = true;
   // public refPHR = true;
   // public refOR = true;

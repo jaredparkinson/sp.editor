@@ -69,7 +69,7 @@ export class VerseComponent implements OnInit {
   }
 
   private wTagSelect(w: W) {
-    return new Promise<void>(resolve => {
+    return new Promise<void>(async resolve => {
       const ref = w.visibleRefs.pop();
       w.selected = true;
       this.dataService.verses.forEach(verse => {
@@ -86,12 +86,27 @@ export class VerseComponent implements OnInit {
         });
       });
 
-      this.saveState.data.rightPanePin = true;
+      await this.animateNotesPane();
 
       if (ref) {
         document.getElementById(ref).scrollIntoView();
       }
       resolve();
+    });
+  }
+  animateNotesPane(): Promise<void> {
+    return new Promise<void>(resolve => {
+      if (!this.saveState.data.notesPanePin.value) {
+        this.saveState.data.notesPanePin.value = true;
+
+        this.saveState.data.notesPanePin.animated = true;
+        setTimeout(() => {
+          this.saveState.data.notesPanePin.animated = false;
+          resolve();
+        }, 400);
+      } else {
+        resolve();
+      }
     });
   }
 

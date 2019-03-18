@@ -49,10 +49,21 @@ export class SaveStateService {
   initISaveStateItems(): void {
     if (!this.data.navigationPaneToggle) {
       this.data.navigationPaneToggle = new SaveStateItem();
-      this.data.navigationPaneToggle.animated = false;
-      this.data.navigationPaneToggle.value = true;
+      this.setSaveStateItemDefaults(this.data.navigationPaneToggle, true);
+    }
+    if (!this.data.notesPanePin) {
+      this.data.notesPanePin = new SaveStateItem();
+      this.setSaveStateItemDefaults(this.data.notesPanePin, true);
     }
   }
+  private setSaveStateItemDefaults<T>(
+    saveSateItem: ISaveStateItem<T>,
+    value: T,
+  ) {
+    saveSateItem.animated = false;
+    saveSateItem.value = value;
+  }
+
   setCategories(): void {
     this.httpClient
       .get('assets/categories.json', { observe: 'body', responseType: 'json' })

@@ -1,9 +1,16 @@
 <div
   id="study-notes-parent"
   [ngClass]="{
-    'hide-notes': !saveState.data.rightPanePin
+    'hide-notes':
+      !saveState.data.notesPanePin.value &&
+      !saveState.data.notesPanePin.animated,
+    slideOutRight:
+      !saveState.data.notesPanePin.value &&
+      saveState.data.notesPanePin.animated,
+    slideInRight:
+      saveState.data.notesPanePin.value && saveState.data.notesPanePin.animated
   }"
-  class="study-notes-parent "
+  class="study-notes-parent animated fastest"
 >
   <!-- 'hide-s': !navServices.rightPaneToggle -->
   <!-- 'hide-l hide-m': !saveState.data.rightPanePin, -->

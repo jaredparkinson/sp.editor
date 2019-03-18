@@ -133,8 +133,7 @@ export class HeaderComponent implements OnInit {
 
     setTimeout(() => {
       saveStateItem.animated = false;
-    }, 3000);
-
-    this.saveState.save();
+      this.saveState.save();
+    }, 500);
   }
 }

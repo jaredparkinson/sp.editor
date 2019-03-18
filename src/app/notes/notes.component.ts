@@ -19,7 +19,7 @@ import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
-import { VerseSelectService } from '../services/verse-select.service';
+// import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
   selector: 'app-notes',
@@ -35,7 +35,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     private stringService: StringService,
     public sanitizer: DomSanitizer,
     public editService: EditService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     public dataService: DataService,
   ) {}
   @ViewChildren('notes')
@@ -99,15 +99,15 @@ export class NotesComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.verseSelectService.setNoteVisibility(note);
+    // this.verseSelectService.setNoteVisibility(note);
   }
 
   trackById(note: Note) {
     return note.id;
   }
-  showNote(secondaryNote: SecondaryNote): boolean {
-    return this.verseSelectService.noteVisibility.get(secondaryNote.id);
-  }
+  // showNote(secondaryNote: SecondaryNote): boolean {
+  //   // return this.verseSelectService.noteVisibility.get(secondaryNote.id);
+  // }
   // showSecondaryNote(
   //   note: Note,
   //   seNote: [string, string, string, string],

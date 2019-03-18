@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
-// import * as PouchDB from 'pouchdb/dist/pouchdb';
-import { Note } from '../models/Note';
 import {
   Chapter2,
   NoteRef,
@@ -18,7 +16,7 @@ import { HelperService } from './helper.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
 import { StringService } from './string.service';
-import { VerseSelectService } from './verse-select.service';
+// // import { VerseSelectService } from './verse-select.service';
 @Injectable()
 export class ChapterService {
   constructor(
@@ -27,7 +25,7 @@ export class ChapterService {
     private stringService: StringService,
     private saveState: SaveStateService,
     private helperService: HelperService,
-    private verseSelectService: VerseSelectService,
+    // private verseSelectService: VerseSelectService,
     private editService: EditService,
     private dataBaseService: DatabaseService,
     private dataService: DataService,
@@ -39,7 +37,7 @@ export class ChapterService {
   public url: string;
   public db = new PouchDB('alpha.oneinthinehand.org');
 
-  public notes2: Note[] = [];
+  // public notes2: Note[] = [];
 
   public verseNums: number[] = [];
   public contextNums: number[] = [];

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import * as lodash from 'lodash';
-import { NavLinks } from '../models/navlinks.model';
+// import { NavLinks } from '../models/navlinks.model';
 import { Navigation } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
@@ -16,7 +16,7 @@ import { UrlBuilder } from './UrlBuilder';
   styleUrls: ['./files.component.scss'],
 })
 export class FilesComponent implements OnInit {
-  public links: NavLinks[] = [];
+  // public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
   // private addressBar: HTMLInputElement;
@@ -56,16 +56,13 @@ export class FilesComponent implements OnInit {
       nav.hide = false;
     });
   }
-  setVisibility(path: string) {
-    this.fileManager.getNavigation(path);
-  }
+  // setVisibility(path: string) {
+  //   this.fileManager.getNavigation(path);
+  // }
   setRoot() {
     this.saveState.data.foldersVisible = true;
     this.fileManager.showBooks = false;
-    this.fileManager.books = [];
-  }
-  setTestament(folder: string) {
-    this.fileManager.getTestament(folder);
+    // this.fileManager.books = [];
   }
   addressBarFocus() {
     const addressBar = document.getElementById('addressBar');
@@ -93,7 +90,7 @@ export class FilesComponent implements OnInit {
   onChapterClick(book: string, chapter: string) {
     // this.chapterService.getChapterOld(book, chapter);
   }
-  public getNavigation() {}
+  // public getNavigation() {}
 
   settings() {
     this.router.navigateByUrl('settings');

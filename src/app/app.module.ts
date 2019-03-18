@@ -58,7 +58,7 @@ import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 import { SyncScrollingService } from './services/sync-scrolling.service';
-import { VerseSelectService } from './services/verse-select.service';
+// // import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -119,7 +119,7 @@ export function load(saveState: SaveStateService) {
     DownloadService,
     SyncScrollingService,
     SaveStateService,
-    VerseSelectService,
+    // VerseSelectService,
     DataService,
     {
       provide: APP_INITIALIZER,

@@ -16,7 +16,7 @@ import { EditService } from '../../services/EditService';
 // import { Verse } from '../../modelsJson/Verse';
 import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
-import { VerseSelectService } from '../../services/verse-select.service';
+// import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
 @Component({
   selector: 'app-verse',
@@ -29,7 +29,7 @@ export class VerseComponent implements OnInit {
   constructor(
     public wTagBuilderService: WTagService,
     public saveState: SaveStateService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     public stringService: StringService,
     public chapterService: ChapterService,
     public dataService: DataService,

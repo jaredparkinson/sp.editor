@@ -11,14 +11,14 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as lodash from 'lodash';
-import { Verse } from '../modelsJson/Verse';
+// import { Verse } from '../modelsJson/Verse';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
-import { VerseSelectService } from '../services/verse-select.service';
+// import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
   selector: 'app-editor',
@@ -43,7 +43,7 @@ export class EditorComponent
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
   ) {}
 
@@ -81,29 +81,29 @@ export class EditorComponent
     // }, 500);
     // this.wordSelection();
   }
-  verseSelectionClick(verse: Verse): void {
-    if (this.editService.editState) {
-      console.log(verse);
+  // verseSelectionClick(verse: Verse): void {
+  //   if (this.editService.editState) {
+  //     console.log(verse);
 
-      const selection = window.getSelection().getRangeAt(0);
+  //     const selection = window.getSelection().getRangeAt(0);
 
-      const selectedElements = selection.cloneContents();
+  //     const selectedElements = selection.cloneContents();
 
-      const nTags = selectedElements.querySelectorAll('n');
+  //     const nTags = selectedElements.querySelectorAll('n');
 
-      for (
-        let x = parseInt(nTags[0].className, 10) - 1;
-        x < parseInt(nTags[nTags.length - 1].className, 10);
-        x++
-      ) {
-        console.log(x);
+  //     for (
+  //       let x = parseInt(nTags[0].className, 10) - 1;
+  //       x < parseInt(nTags[nTags.length - 1].className, 10);
+  //       x++
+  //     ) {
+  //       console.log(x);
 
-        verse.wTags[x].selected = true;
-      }
-    }
+  //       verse.wTags[x].selected = true;
+  //     }
+  //   }
 
-    window.getSelection().removeAllRanges();
-  }
+  //   window.getSelection().removeAllRanges();
+  // }
 
   getSuperScriptVisibility(
     item: string,
@@ -177,15 +177,15 @@ export class EditorComponent
     return paragraph.id;
   }
 
-  wTagClick(wTag: W, verse: Verse, event: Event) {
-    if (!this.saveState.data.rightPanePin) {
-    }
-    this.saveState.data.notesPopover = true;
-    console.log(wTag);
-    console.log((event.currentTarget as Element).getBoundingClientRect());
+  // wTagClick(wTag: W, verse: Verse, event: Event) {
+  //   if (!this.saveState.data.rightPanePin) {
+  //   }
+  //   this.saveState.data.notesPopover = true;
+  //   console.log(wTag);
+  //   console.log((event.currentTarget as Element).getBoundingClientRect());
 
-    this.verseSelectService.wTagClick(wTag, verse);
-  }
+  //   // this.verseSelectService.wTagClick(wTag, verse);
+  // }
 
   async ngAfterViewInit() {
     // this.verses.changes.subscribe(() => {

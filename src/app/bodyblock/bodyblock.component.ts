@@ -32,7 +32,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
-import { VerseSelectService } from '../services/verse-select.service';
+// import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
@@ -53,7 +53,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
     private wTagBuilderService: WTagService,
     public syncScrollingService: SyncScrollingService,

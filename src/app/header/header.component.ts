@@ -12,7 +12,7 @@ import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { VerseSelectService } from '../services/verse-select.service';
+// import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     public editService: EditService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     private router: Router,
     public httpClient: HttpClient,
     private location: Location,
@@ -104,7 +104,7 @@ export class HeaderComponent implements OnInit {
     this.navServices.btnOriginalNotesPress();
   }
   btnRightPanePress() {
-    this.verseSelectService.halfNotes = false;
+    // this.verseSelectService.halfNotes = false;
     this.navServices.btnRightPanePress();
   }
   btnNotesSettingsPress() {

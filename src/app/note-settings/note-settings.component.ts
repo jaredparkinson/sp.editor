@@ -7,7 +7,7 @@ import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { VerseSelectService } from '../services/verse-select.service';
+// import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
   selector: 'app-note-settings',
@@ -19,7 +19,7 @@ export class NoteSettingsComponent implements OnInit {
   constructor(
     public saveState: SaveStateService,
     public navServices: NavigationService,
-    public verseSelectService: VerseSelectService,
+    // public verseSelectService: VerseSelectService,
     private router: Router,
     public editService: EditService,
     public chapterService: ChapterService,
@@ -78,14 +78,18 @@ export class NoteSettingsComponent implements OnInit {
       this.chapterService.resetNotes();
     });
   }
-  toggleVerseSelect() {
-    this.verseSelectService.toggleVerseSuperScripts(false);
-    this.verseSelectService.toggleVerseSelect();
+  toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
+    // this.verseSelectService.toggleVerseSuperScripts(false);
+    // this.verseSelectService.toggleVerseSelect();
+    this.saveState.data.verseSelect = toggle;
+
+    this.saveState.save();
+    // this.chapterService.resetVerseSelect();
   }
-  toggleVerseSuperScripts() {
-    this.verseSelectService.toggleVerseSelect(false);
-    this.verseSelectService.toggleVerseSuperScripts();
-  }
+  // toggleVerseSuperScripts() {
+  //   this.verseSelectService.toggleVerseSelect(false);
+  //   this.verseSelectService.toggleVerseSuperScripts();
+  // }
   settings() {
     this.router.navigateByUrl('settings');
   }

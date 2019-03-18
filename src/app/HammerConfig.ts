@@ -12,7 +12,7 @@ export class HammerConfig extends HammerGestureConfig {
   } as any;
   options: any = {
     cssProps: {
-      userSelect: undefined
-    }
+      userSelect: undefined,
+    },
   } as any;
 }

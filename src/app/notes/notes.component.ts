@@ -70,11 +70,12 @@ export class NotesComponent implements OnInit, AfterViewInit {
         secondaryNote.clicked = true;
         this.dataService.verses.forEach(verse => {
           verse.wTags.forEach(wTag => {
-            if (wTag.refs && wTag.refs.includes(secondaryNote.id)) {
-              wTag.selected = true;
-            } else {
-              wTag.selected = false;
-            }
+            wTag.selected = wTag.refs && wTag.refs.includes(secondaryNote.id);
+            // if (wTag.refs && wTag.refs.includes(secondaryNote.id)) {
+            //   wTag.selected = true;
+            // } else {
+            //   wTag.selected = false;
+            // }
           });
         });
       }

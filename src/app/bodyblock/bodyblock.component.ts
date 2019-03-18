@@ -42,6 +42,8 @@ import { WTagService } from '../services/wtag-builder.service';
 })
 export class BodyblockComponent implements OnInit, OnDestroy {
   isIOS = false;
+  swipeLeft = false;
+  swipeRight = false;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -88,6 +90,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         console.log(`highlight ${highlighting}`);
 
         console.log(this.dataService.chapter2._id);
+        this.swipeRight = false;
+        this.swipeLeft = false;
         this.scrollToVerse(v);
       });
     });
@@ -147,6 +151,20 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     });
   }
 
+  public swipeChapter(event: Event, url: string) {
+    if (event.type === 'swiperight') {
+      // console.log(event);
+      this.swipeLeft = true;
+    }
+    if (event.type === 'swipeleft') {
+      this.swipeRight = true;
+      // console.log(event);
+    }
+    setTimeout(() => {
+      this.router.navigateByUrl(url);
+    }, 150);
+  }
+
   public onPan(event: Event) {
     console.log(event);
   }
@@ -155,85 +173,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return Array.from(text);
   }
 
-  getWColor(w: TemplateGroup) {
-    if (!w.classList) {
-      return '';
-    }
-    let wClass = w.classList.toString().replace(/\,/g, ' ');
-
-    if (
-      w.classList.includes('verse-select-1') &&
-      w.classList.includes('verse-select-2')
-    ) {
-      console.log(wClass);
-    }
-    let engVis = true;
-    let newVis = true;
-    let tcVis = true;
-
-    if (w.classList.includes('verse-select')) {
-      if (this.saveState.data.verseSuperScripts) {
-        w.refs.forEach(ref => {
-          const engRegex = new RegExp(`\d{9}`);
-          const newRegex = new RegExp(`\d{4}(\-\d{2}){6}`);
-          const tcRegex = new RegExp(`tc.*`);
-
-          if (this.verseSelectService.noteVisibility.get(ref)) {
-            if (engRegex.exec(ref)) {
-              engVis = true;
-            } else if (newRegex.exec(ref)) {
-              newVis = true;
-            } else if (tcRegex.exec(ref)) {
-              tcVis = true;
-            }
-          }
-        });
-
-        if (engVis) {
-          wClass = this.stringService.addAttribute(wClass, 'eng-color');
-        }
-        if (newVis) {
-          wClass = this.stringService.addAttribute(wClass, 'tc-color');
-        }
-        if (tcVis) {
-          wClass = this.stringService.addAttribute(wClass, 'new-color');
-        }
-      }
-    }
-
-    return wClass;
-  }
-
-  isPartOfGroup(w1: W2, w2: W2): boolean {
-    if (w1 === w2) {
-      return true;
-    } else {
-      if (!w1 || !w2) {
-        return false;
-      } else if (
-        lodash.isEqual(w1.classList, w2.classList) &&
-        lodash.isEqual(w1.refs, w2.refs)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-
-  private wordSelection() {
-    lodash.each(document.querySelectorAll('w'), () => {});
-  }
-
   trackById(paragraph: any) {
     return paragraph.id;
-  }
-
-  private scrollIto() {
-    const asdf = document.getElementById(`p${this.v}`);
-    if (asdf) {
-      console.log(asdf.scrollIntoView());
-    }
   }
 
   onScroll() {

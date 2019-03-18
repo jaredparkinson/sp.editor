@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import * as lodash from 'lodash';
 import { ReferenceLabel } from '../modelsJson/Chapter';
 import { SaveStateModel } from './SaveStateModel';
+import { ISaveStateItem } from '../models/ISaveStateItem';
+import { SaveStateItem } from '../models/SaveStateItem';
 
 @Injectable({
   providedIn: 'root',
@@ -36,10 +38,20 @@ export class SaveStateService {
       if (!this.data.lineHeight) {
         this.data.lineHeight = '20';
       }
+
+      this.initISaveStateItems();
+
       this.setCategories();
 
       resolve();
     });
+  }
+  initISaveStateItems(): void {
+    if (!this.data.navigationPaneToggle) {
+      this.data.navigationPaneToggle = new SaveStateItem();
+      this.data.navigationPaneToggle.animated = false;
+      this.data.navigationPaneToggle.value = true;
+    }
   }
   setCategories(): void {
     this.httpClient

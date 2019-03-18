@@ -1,3 +1,4 @@
+import { ISaveStateItem } from '../models/ISaveStateItem';
 import { ReferenceLabel } from '../modelsJson/Chapter';
 
 export class SaveStateModel implements ISaveModel {
@@ -22,6 +23,8 @@ export class SaveStateModel implements ISaveModel {
   public verseSuperScripts = false;
   public fontSize = '16';
   public lineHeight = '20';
+
+  public navigationPaneToggle: ISaveStateItem<boolean>;
   // public refQUO = true;
   // public refPHR = true;
   // public refOR = true;

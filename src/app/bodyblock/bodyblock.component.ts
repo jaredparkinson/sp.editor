@@ -1,12 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
   Component,
-  ElementRef,
-  NgZone,
   OnDestroy,
   OnInit,
   QueryList,
@@ -16,15 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as bowser from 'bowser';
 import * as lodash from 'lodash';
 
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
-import { SwUpdate } from '@angular/service-worker';
 import { VerseComponent } from '../components/verse/verse.component';
-import { TemplateGroup } from '../modelsJson/TemplateGroup';
 
 import { Verse } from '../modelsJson/Chapter';
-import { W2 } from '../modelsJson/W2';
-import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
@@ -55,7 +45,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public stringService: StringService,
     // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
-    private wTagBuilderService: WTagService,
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
     public router: Router,

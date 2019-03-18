@@ -12,6 +12,7 @@ import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { ISaveStateItem } from '../models/ISaveStateItem';
 // import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-header',
@@ -124,5 +125,16 @@ export class HeaderComponent implements OnInit {
   }
   btnParagraphPress() {
     this.navServices.btnParagraphPress();
+  }
+
+  btnHeaderButtonPress(saveStateItem: ISaveStateItem<boolean>) {
+    saveStateItem.value = !saveStateItem.value;
+    saveStateItem.animated = true;
+
+    setTimeout(() => {
+      saveStateItem.animated = false;
+    }, 3000);
+
+    this.saveState.save();
   }
 }

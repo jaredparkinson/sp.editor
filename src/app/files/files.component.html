@@ -2,12 +2,21 @@
   class="left-pane-container left-pane-ignore"
   (swiperight)="this.swipeRight($event)"
 >
+  <!-- 'slideInLeft ': saveState.data.navigationPaneToggle.value, -->
   <div
     id="leftPaneNav"
-    class="navigation-pane"
+    class="navigation-pane animated	fastest"
     [ngClass]="{
-      none: !saveState.data.leftPanePin,
-      'slideInLeft animated	faster': saveState.data.leftPanePin
+      none:
+        !saveState.data.navigationPaneToggle.value &&
+        !saveState.data.navigationPaneToggle.animated,
+
+      slideOutLeft:
+        !saveState.data.navigationPaneToggle.value &&
+        saveState.data.navigationPaneToggle.animated,
+      slideInLeft:
+        saveState.data.navigationPaneToggle.value &&
+        saveState.data.navigationPaneToggle.animated
     }"
   >
     <div class="nav-top">

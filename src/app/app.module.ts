@@ -1,7 +1,6 @@
 import {
   APP_INITIALIZER,
   CUSTOM_ELEMENTS_SCHEMA,
-  Injectable,
   NgModule,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
@@ -9,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import {
   BrowserModule,
   HAMMER_GESTURE_CONFIG,
-  HammerGestureConfig,
 } from '@angular/platform-browser';
 import 'reflect-metadata';
 import 'zone.js/dist/zone-mix';
@@ -19,7 +17,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-// NG Translate
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -34,16 +31,17 @@ import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
-// import { ButtonHighlightDirective } from './button-highlight.directive';
+
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 import { VerseComponent } from './components/verse/verse.component';
 import { EditorComponent } from './editor/editor.component';
-// import { SyncScrollingDirective } from './directive/sync-scrolling.directive';
+
 import { FilesComponent } from './files/files.component';
 import { UrlBuilder } from './files/UrlBuilder';
+import { HammerConfig } from './HammerConfig';
 import { HeaderComponent } from './header/header.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NoteEditorComponent } from './note-editor/note-editor.component';
@@ -63,25 +61,6 @@ import { SyncScrollingService } from './services/sync-scrolling.service';
 import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
 
-@Injectable()
-export class HammerConfig extends HammerGestureConfig {
-  overrides: any = {
-    pinch: { enable: false },
-    rotate: { enable: false },
-    swipe: {
-      velocity: 1,
-      threshold: 200,
-    },
-  } as any;
-  options: any = {
-    cssProps: {
-      userSelect: undefined
-    }
-  } as any;
-}
-// import { TSQuery } from './TSQuery';
-// import { SearchBarComponent } from './search-bar/search-bar.component';
-// AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -101,8 +80,7 @@ export function load(saveState: SaveStateService) {
     HeaderComponent,
     LandingPageComponent,
     SearchComponent,
-    // ButtonHighlightDirective,
-    // SyncScrollingDirective,
+
     SettingsComponent,
     NoteSettingsComponent,
     EditorComponent,
@@ -114,7 +92,6 @@ export function load(saveState: SaveStateService) {
     ParagraphComponent,
     SettingsParentComponent,
     NavigationComponent,
-    // SearchBarComponent
   ],
   imports: [
     BrowserModule,

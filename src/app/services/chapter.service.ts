@@ -49,18 +49,27 @@ export class ChapterService {
   scrollIntoView: Element;
 
   public resetNotes(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.resetNoteVisibility(
+    return new Promise<void>(async resolve => {
+      await this.resetNoteVisibility(
         this.dataService.chapter2,
         this.dataService.noteVisibility,
-      ).then(() => {
-        this.buildWTags(
-          this.dataService.verses,
-          this.dataService.noteVisibility,
-        ).then(() => {
-          resolve();
-        });
-      });
+      );
+      await this.buildWTags(
+        this.dataService.verses,
+        this.dataService.noteVisibility,
+      );
+      resolve();
+      // this.resetNoteVisibility(
+      //   this.dataService.chapter2,
+      //   this.dataService.noteVisibility,
+      // ).then(() => {
+      //   this.buildWTags(
+      //     this.dataService.verses,
+      //     this.dataService.noteVisibility,
+      //   ).then(() => {
+      //     resolve();
+      //   });
+      // });
     });
   }
   resetNoteVisibility(
@@ -68,19 +77,40 @@ export class ChapterService {
     noteVisibility: Map<string, boolean>,
   ): Promise<void> {
     return new Promise<void>(resolve => {
-      chapter.notes.forEach(note => {
-        note.secondary.forEach(secondaryNote => {
-          noteVisibility.set(secondaryNote.id, false);
-          if (this.getSecondaryNoteVisibility(secondaryNote)) {
-            secondaryNote.clicked = false;
-            secondaryNote.noteRefs.forEach(noteRef => {
-              if (this.getNoteRefVisibility(noteRef)) {
-                noteVisibility.set(secondaryNote.id, true);
-              }
-            });
-          }
+      lodash
+        .map(chapter.notes, note => {
+          return note.secondary;
+        })
+        .forEach(s => {
+          s.forEach(secondaryNote => {
+            noteVisibility.set(secondaryNote.id, false);
+            if (this.getSecondaryNoteVisibility(secondaryNote)) {
+              secondaryNote.clicked = false;
+              secondaryNote.noteRefs.forEach(noteRef => {
+                if (this.getNoteRefVisibility(noteRef)) {
+                  // if (noteRef.text.includes('insertion')) {
+                  //   console.log(noteRef);
+                  // }
+
+                  noteVisibility.set(secondaryNote.id, true);
+                }
+              });
+            }
+          });
         });
-      });
+      // chapter.notes.forEach(note => {
+      //   note.secondary.forEach(secondaryNote => {
+      //     noteVisibility.set(secondaryNote.id, false);
+      //     if (this.getSecondaryNoteVisibility(secondaryNote)) {
+      //       secondaryNote.clicked = false;
+      //       secondaryNote.noteRefs.forEach(noteRef => {
+      //         if (this.getNoteRefVisibility(noteRef)) {
+      //           noteVisibility.set(secondaryNote.id, true);
+      //         }
+      //       });
+      //     }
+      //   });
+      // });
       resolve();
     });
   }
@@ -88,15 +118,25 @@ export class ChapterService {
     let visible = false;
 
     if (
-      (this.saveState.data.newNotesVisible &&
-        (secondaryNote.notePhrase.classList.includes('note-phrase-new') ||
-          secondaryNote.notePhrase.classList.includes('note-phrase-new-2'))) ||
-      (this.saveState.data.translatorNotesVisible &&
-        (secondaryNote.notePhrase.classList.includes('note-phrase-tc') ||
-          secondaryNote.notePhrase.classList.includes('note-phrase-tc-2'))) ||
-      (this.saveState.data.englishNotesVisible &&
-        (secondaryNote.notePhrase.classList.includes('note-phrase-eng') ||
-          secondaryNote.notePhrase.classList.includes('note-phrase-eng-2')))
+      this.noteTypeVisible(
+        secondaryNote,
+        this.saveState.data.newNotesVisible,
+        'note-phrase-new',
+      ) ||
+      // secondaryNote.notePhrase.classList.includes('note-phrase-new'))
+      // || secondaryNote.notePhrase.classList.includes('note-phrase-new-2'))
+      this.noteTypeVisible(
+        secondaryNote,
+        this.saveState.data.translatorNotesVisible,
+        'note-phrase-tc',
+      ) ||
+      // || secondaryNote.notePhrase.classList.includes('note-phrase-tc-2')
+      this.noteTypeVisible(
+        secondaryNote,
+        this.saveState.data.englishNotesVisible,
+        'note-phrase-eng',
+      )
+      // || secondaryNote.notePhrase.classList.includes('note-phrase-eng-2')
     ) {
       visible = true;
     }
@@ -112,21 +152,34 @@ export class ChapterService {
 
     return visible;
   }
+  private noteTypeVisible(
+    secondaryNote: SecondaryNote,
+    noteVisible: boolean,
+    className: string,
+  ) {
+    return (
+      noteVisible &&
+      // lodash.includes(secondaryNote.notePhrase.classList, (cL: string) => {return cL.includes('note-phrase-new')})
+      lodash.includes(secondaryNote.notePhrase.classList, className)
+    );
+  }
+
   getNoteRefVisibility(noteRef: NoteRef): boolean {
     noteRef.visible = false;
 
     if (
-      noteRef.referenceLabel &&
-      lodash.find(this.saveState.data.noteCategories, c => {
-        if (!noteRef.referenceLabel.refLabelName) {
-          return true;
-        }
+      !noteRef.referenceLabel ||
+      (noteRef.referenceLabel &&
+        lodash.find(this.saveState.data.noteCategories, c => {
+          if (!noteRef.referenceLabel.refLabelName) {
+            return true;
+          }
 
-        return (
-          c.refLabelName.toLowerCase() ===
-          noteRef.referenceLabel.refLabelName.toLowerCase()
-        );
-      }).visible
+          return (
+            c.refLabelName.toLowerCase() ===
+            noteRef.referenceLabel.refLabelName.toLowerCase()
+          );
+        }).visible)
     ) {
       noteRef.visible = true;
     }

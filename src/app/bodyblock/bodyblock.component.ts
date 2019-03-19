@@ -24,6 +24,7 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
+import { MediaQueryService } from '../services/media-query.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -43,6 +44,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public navService: NavigationService,
     public saveState: SaveStateService,
     public stringService: StringService,
+    public mediaQueryService: MediaQueryService,
     // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
     public syncScrollingService: SyncScrollingService,

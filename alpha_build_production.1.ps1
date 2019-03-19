@@ -38,4 +38,5 @@ scp -P 7822 alpha.tar.gz oneinthi@oneinthinehand.org:alpha.oneinthinehand.org/
 
 ssh -t oneinthi@oneinthinehand.org -p 7822 'cd alpha.oneinthinehand.org && tar xvf alpha.tar.gz'
 
+Remove-Item .\alpha.tar.gz
 # Set-Location ..

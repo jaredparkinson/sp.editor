@@ -267,3 +267,21 @@ button {
 //     display: none;
 //   }
 // }
+
+@media screen and (max-width: 499.98px) {
+  .navigation-title {
+    display: none;
+  }
+  .navigation-short-title {
+    display: inline !important;
+  }
+}
+
+.navigation-short-title {
+  display: none;
+}
+
+.navigation-title,
+.navigation-short-title {
+  width: 90%;
+}

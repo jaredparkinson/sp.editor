@@ -38,4 +38,5 @@ scp -P 7822 beta.tar.gz oneinthi@oneinthinehand.org:beta.oneinthinehand.org/
 
 ssh -t oneinthi@oneinthinehand.org -p 7822 'cd beta.oneinthinehand.org && tar xvf beta.tar.gz'
 
+Remove-Item .\beta.tar.gz
 # Set-Location ..

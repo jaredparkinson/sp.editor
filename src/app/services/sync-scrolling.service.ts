@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SyncScrollingService {
+  public syncScrollingAnimated = false;
+  public syncScrollingActivated = false;
   constructor() {}
 
   private timer: NodeJS.Timer;
@@ -31,18 +33,37 @@ export class SyncScrollingService {
           }
         });
 
-        if (belowTop.length > 0) {
-          this.scrollIntoView(belowTop);
-        } else {
-          this.scrollNotesBottom();
-        }
+        this.scrollIntoView(belowTop);
       }
     }
   }
-  scrollIntoView(belowTop: Element[]): void {
-    document
-      .querySelector(`#${belowTop[0].id.replace('p', 'note')}`)
-      .scrollIntoView();
+  private async scrollIntoView(belowTop: Element[]) {
+    this.syncScrollingActivated = true;
+    this.syncScrollingAnimated = true;
+
+    if (belowTop.length > 0) {
+      await this.scrollNoteIntoView(belowTop);
+    } else {
+      await this.scrollNotesBottom();
+    }
+
+    this.syncScrollingActivated = false;
+    this.syncScrollingAnimated = true;
+    setTimeout(() => {
+      this.syncScrollingActivated = false;
+      this.syncScrollingAnimated = false;
+    }, 300);
+  }
+
+  scrollNoteIntoView(belowTop: Element[]): Promise<void> {
+    return new Promise<void>(resolve => {
+      setTimeout(() => {
+        document
+          .querySelector(`#${belowTop[0].id.replace('p', 'note')}`)
+          .scrollIntoView();
+        resolve();
+      }, 300);
+    });
   }
 
   private scrollNotesBottom() {

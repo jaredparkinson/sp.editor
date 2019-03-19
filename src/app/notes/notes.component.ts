@@ -20,6 +20,7 @@ import { MediaQueryService } from '../services/media-query.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { SyncScrollingService } from '../services/sync-scrolling.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
@@ -37,6 +38,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public sanitizer: DomSanitizer,
     public editService: EditService,
     public mediaQueryService: MediaQueryService,
+    public syncScrollingService: SyncScrollingService,
     // public verseSelectService: VerseSelectService,
     public dataService: DataService,
   ) {}

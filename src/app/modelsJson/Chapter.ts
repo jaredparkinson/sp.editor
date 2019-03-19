@@ -116,4 +116,5 @@ export class Navigation {
   public navigation: Navigation[] = [];
   public visible = false;
   public hide = false;
+  public focus = false;
 }

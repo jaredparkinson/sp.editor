@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import * as localForage from 'localforage';
-import * as lodash from 'lodash';
+// import * as localForage from 'localforage';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
@@ -36,7 +35,7 @@ export class SettingsComponent implements OnInit {
     // this.downloadService.download(file);
   }
   reset() {
-    localForage.clear();
+    // localForage.clear();
   }
   saveSettings() {
     this.saveState.save();

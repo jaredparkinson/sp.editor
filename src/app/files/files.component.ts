@@ -9,6 +9,7 @@ import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
+import * as Yallist from 'yallist';
 
 @Component({
   selector: 'app-files',
@@ -20,6 +21,7 @@ export class FilesComponent implements OnInit {
   public foldersVisible = true;
   public booksVisible = false;
 
+  public asasdf: Yallist<Navigation> = new Yallist<Navigation>();
   public tempNav: Navigation[] = [];
   // private addressBar: HTMLInputElement;
   @ViewChild('addressBar') addressBar: ElementRef;
@@ -41,7 +43,13 @@ export class FilesComponent implements OnInit {
       .subscribe(data => {
         console.log();
         this.navService.navigation = JSON.parse(data) as Navigation[];
-        this.setTempNav(this.navService.navigation);
+        // this.setTempNav(this.navService.navigation);
+
+        // this.asasdf.forEach(v => {
+        //   if (v.url === 'gen/1') {
+        //     throw 0;
+        //   }
+        // });
       });
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
@@ -49,7 +57,8 @@ export class FilesComponent implements OnInit {
   setTempNav(navigation: Navigation[]): any {
     navigation.forEach(nav => {
       if (nav.url) {
-        this.tempNav.push(nav);
+        this.asasdf.push(nav);
+        // this.tempNav.push(nav);
       } else {
         this.setTempNav(nav.navigation);
       }

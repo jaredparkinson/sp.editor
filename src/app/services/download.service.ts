@@ -1,8 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as jszip from 'jszip';
-import * as localForage from 'localforage';
-import * as lodash from 'lodash';
 import { Download } from '../models/download';
 import { DatabaseService } from './database.service';
 
@@ -13,9 +10,6 @@ export class DownloadService {
   public downloads: Download[] = [
     new Download('alpha_oneinthinehand', 'scriptures', false),
   ];
-  private forageRegex: RegExp = new RegExp(
-    /(?!\\)[a-zA-Z0-9-_]+\\[a-zA-Z0-9-_]+(?=\.html.json)/,
-  );
   constructor(
     private httpClient: HttpClient,
     private dataBaseService: DatabaseService,

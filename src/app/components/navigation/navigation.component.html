@@ -11,7 +11,12 @@
     <span class="navigation-title">{{ navigation.title }}</span>
     <span class="navigation-short-title">{{ navigation.shortTitle }}</span>
   </li>
-  <li (click)="this.gotoChapter()" *ngIf="navigation.url" class="nav-link">
+  <li
+    (click)="this.gotoChapter()"
+    class="nav-link"
+    *ngIf="navigation.url"
+    [ngClass]="{ 'nav-focus': navigation.focus }"
+  >
     <!-- <a href="#/{{ navigation.url }}"></a> --><span
       class="navigation-title"
       >{{ navigation.title }}</span

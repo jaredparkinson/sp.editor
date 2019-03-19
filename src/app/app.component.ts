@@ -14,6 +14,7 @@ import { ChapterService } from './services/chapter.service';
 import { DatabaseService } from './services/database.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
+import { MediaQueryService } from './services/media-query.service';
 // // import { VerseSelectService } from './services/verse-select.service';
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
     public httpClient: HttpClient,
+    public mediaQueryService: MediaQueryService,
     public databaseService: DatabaseService,
     private swUpdate: SwUpdate,
   ) {

@@ -14,17 +14,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { VerseComponent } from '../components/verse/verse.component';
 
-import { Verse } from '../modelsJson/Chapter';
+import { Navigation, Verse } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
+import { MediaQueryService } from '../services/media-query.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
-import { MediaQueryService } from '../services/media-query.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -35,6 +35,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   isIOS = false;
   chapterFadeOut = false;
   swipeRight = false;
+  url: string;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -59,6 +60,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isIOS =
       bowser.getParser(window.navigator.userAgent).getOSName() === 'iOS';
+    // this.closeNavigation();
     this.route.params.subscribe(async params => {
       document.querySelector('.body-block').scrollIntoView();
       this.navService.rightPaneToggle = false;
@@ -75,6 +77,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
       console.log(language);
 
+      this.url = `${book}/${lodash.last(highlighting)}`;
       const id = `${book}-${highlighting.pop()}-${language}`;
 
       this.getChapter(id, highlighting).then(v => {
@@ -84,8 +87,40 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         // this.swipeRight = false;
         this.chapterService.chapterFadeOut = false;
         this.scrollToVerse(v);
+        this.setNavigation(this.navService.navigation);
       });
     });
+  }
+  closeNavigation(): void {
+    if (this.mediaQueryService.isSmallScreen()) {
+      this.navService.btnHeaderButtonPress(
+        this.saveState.data.navigationPaneToggle,
+      );
+    }
+  }
+  setNavigation(navigation: Navigation[]): boolean {
+    let isNav = false;
+    navigation.forEach(nav => {
+      if (nav.url) {
+        // console.log(this.url);
+        nav.focus = nav.url === this.url;
+        if (nav.focus) {
+          isNav = true;
+        }
+      } else {
+        if (this.setNavigation(nav.navigation)) {
+          console.log(nav);
+          nav.visible = true;
+          nav.hide = false;
+          isNav = true;
+        } else {
+          nav.hide = true;
+          nav.visible = false;
+        }
+      }
+    });
+
+    return isNav;
   }
 
   private scrollToVerse(v: number) {

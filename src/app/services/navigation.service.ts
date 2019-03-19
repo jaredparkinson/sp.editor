@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Navigation } from '../modelsJson/Chapter';
 import { SaveStateService } from './save-state.service';
+import { ISaveStateItem } from '../models/ISaveStateItem';
 
 @Injectable()
 export class NavigationService {
@@ -128,6 +129,15 @@ export class NavigationService {
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
 
+  btnHeaderButtonPress(saveStateItem: ISaveStateItem<boolean>) {
+    saveStateItem.value = !saveStateItem.value;
+    saveStateItem.animated = true;
+
+    setTimeout(() => {
+      saveStateItem.animated = false;
+      this.saveState.save();
+    }, 500);
+  }
   public getTestament(): void {}
 
   public urlBuilder(book: string, chapter: string): string {

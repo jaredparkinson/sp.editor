@@ -16,6 +16,9 @@
   }
   .nav-link {
     color: $dark_primary_color !important;
+    &.nav-focus {
+      background-color: $light_primary_color !important;
+    }
   }
   .nav-top {
     display: grid;

@@ -60,8 +60,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isIOS =
       bowser.getParser(window.navigator.userAgent).getOSName() === 'iOS';
-    // this.closeNavigation();
     this.route.params.subscribe(async params => {
+      this.closeNavigation();
       document.querySelector('.body-block').scrollIntoView();
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
@@ -92,7 +92,10 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     });
   }
   closeNavigation(): void {
-    if (this.mediaQueryService.isSmallScreen()) {
+    if (
+      this.saveState.data.navigationPaneToggle.value &&
+      this.mediaQueryService.isSmallScreen()
+    ) {
       this.navService.btnHeaderButtonPress(
         this.saveState.data.navigationPaneToggle,
       );

@@ -129,8 +129,11 @@ export class NavigationService {
     return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
   }
 
-  btnHeaderButtonPress(saveStateItem: ISaveStateItem<boolean>) {
-    saveStateItem.value = !saveStateItem.value;
+  btnHeaderButtonPress(
+    saveStateItem: ISaveStateItem<boolean>,
+    value: boolean = false,
+  ) {
+    saveStateItem.value = value;
     saveStateItem.animated = true;
 
     setTimeout(() => {

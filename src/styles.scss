@@ -341,16 +341,19 @@ w.dominant {
 #notesSettings {
   z-index: 400;
 }
-
-.overlay {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 300;
-  opacity: 1;
-  // background: rgba(0, 0, 0, .288);
+@media only screen and (max-width: 499.98px),
+  (orientation: portrait) and (max-width: 1023.98px) {
+  .overlay,
+  .overlay-toggle {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 300;
+    opacity: 1;
+    // background: rgba(0, 0, 0, .288);
+  }
 }
 
 .hidden {

@@ -31,14 +31,12 @@
         }"
         (click)="navService.btnRightPanePress()"
         ></div> -->
+      <!-- class="overlay" -->
       <div
         id="testOverLay"
-        class="overlay"
         [ngClass]="{
           none: !saveState.data.navigationPaneToggle.value,
-          'overlay-toggle':
-            saveState.data.navigationPaneToggle.value &&
-            mediaQueryService.isSmallScreen()
+          'overlay-toggle': saveState.data.navigationPaneToggle.value
         }"
         (click)="
           navService.btnHeaderButtonPress(

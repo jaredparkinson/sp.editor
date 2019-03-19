@@ -1,7 +1,9 @@
 <div
   class="parent-container"
   [ngClass]="{
-    'hidden-notes': !saveState.data.notesPanePin.value
+    'hidden-notes':
+      !saveState.data.notesPanePin.value &&
+      !saveState.data.notesPanePin.animated
   }"
 >
   <div><app-bodyblock></app-bodyblock></div>

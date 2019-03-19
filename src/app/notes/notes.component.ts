@@ -19,6 +19,7 @@ import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { MediaQueryService } from '../services/media-query.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
@@ -35,6 +36,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     private stringService: StringService,
     public sanitizer: DomSanitizer,
     public editService: EditService,
+    public mediaQueryService: MediaQueryService,
     // public verseSelectService: VerseSelectService,
     public dataService: DataService,
   ) {}

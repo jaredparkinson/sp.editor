@@ -32,7 +32,7 @@ import { WTagService } from '../services/wtag-builder.service';
 })
 export class BodyblockComponent implements OnInit, OnDestroy {
   isIOS = false;
-  swipeLeft = false;
+  chapterFadeOut = false;
   swipeRight = false;
   constructor(
     public fileManager: NavigationService,
@@ -79,8 +79,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         console.log(`highlight ${highlighting}`);
 
         console.log(this.dataService.chapter2._id);
-        this.swipeRight = false;
-        this.swipeLeft = false;
+        // this.swipeRight = false;
+        this.chapterService.chapterFadeOut = false;
         this.scrollToVerse(v);
       });
     });
@@ -144,14 +144,15 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     console.log(event);
 
     if ((event as PointerEvent).pointerType === 'touch') {
-      if (event.type === 'swiperight') {
-        // console.log(event);
-        this.swipeLeft = true;
-      }
-      if (event.type === 'swipeleft') {
-        this.swipeRight = true;
-        // console.log(event);
-      }
+      this.chapterService.chapterFadeOut = true;
+      // if (event.type === 'swiperight') {
+      //   // console.log(event);
+      //   this.fadeOut = true;
+      // }
+      // if (event.type === 'swipeleft') {
+      //   this.swipeRight = true;
+      //   // console.log(event);
+      // }
       setTimeout(() => {
         this.router.navigateByUrl(url);
       }, 150);

@@ -26,8 +26,8 @@
         'show-poetry': saveState.data.poetryVisible,
         'notes-hide-original': !saveState.data.originalNotesVisible,
         'notes-show-original': saveState.data.originalNotesVisible,
-        fadeOut: this.swipeRight || this.swipeLeft,
-        fadeIn: !this.swipeRight && !this.swipeLeft
+        fadeOut: this.chapterService.chapterFadeOut,
+        fadeIn: !this.chapterService.chapterFadeOut
       }"
       (swiperight)="swipeChapter($event, dataService.chapter2.previousPage)"
       (swipeleft)="swipeChapter($event, dataService.chapter2.nextPage)"

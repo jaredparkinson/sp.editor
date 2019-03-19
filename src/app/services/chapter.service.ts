@@ -30,21 +30,23 @@ export class ChapterService {
     private dataBaseService: DatabaseService,
     private dataService: DataService,
   ) {
-    this.fs = (window as any).fs;
+    // this.fs = (window as any).fs;
   }
-  wTags: QueryList<ElementRef>;
-  public selectedSecondaryNote: SecondaryNote;
-  public url: string;
-  public db = new PouchDB('alpha.oneinthinehand.org');
+  // wTags: QueryList<ElementRef>;
+  // public selectedSecondaryNote: SecondaryNote;
+  // public url: string;
+  // public db = new PouchDB('alpha.oneinthinehand.org');
 
   // public notes2: Note[] = [];
 
-  public verseNums: number[] = [];
-  public contextNums: number[] = [];
-  private fs: any;
-  public wTagSelectMode = false;
+  // public verseNums: number[] = [];
+  // public contextNums: number[] = [];
+  // private fs: any;
+  // public wTagSelectMode = false;
 
-  scrollIntoView: Element;
+  // scrollIntoView: Element;
+
+  public chapterFadeOut = false;
 
   public resetNotes(): Promise<void> {
     return new Promise<void>(async resolve => {

@@ -7,11 +7,11 @@
     slideOutRight:
       !saveState.data.notesPanePin.value &&
       saveState.data.notesPanePin.animated &&
-      !notesOnBottom(),
+      !mediaQueryService.isSmallScreen(),
     slideInRight:
       saveState.data.notesPanePin.value &&
       saveState.data.notesPanePin.animated &&
-      !notesOnBottom()
+      !mediaQueryService.isSmallScreen()
   }"
   class="study-notes-parent animated fastest"
 >
@@ -26,11 +26,11 @@
       slideOutDown:
         !saveState.data.notesPanePin.value &&
         saveState.data.notesPanePin.animated &&
-        notesOnBottom(),
+        mediaQueryService.isSmallScreen(),
       slideInUp:
         saveState.data.notesPanePin.value &&
         saveState.data.notesPanePin.animated &&
-        notesOnBottom()
+        mediaQueryService.isSmallScreen()
     }"
   >
     <!-- <div class="half-notes-margin"></div> -->

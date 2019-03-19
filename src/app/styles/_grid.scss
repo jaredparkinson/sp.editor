@@ -39,6 +39,7 @@
   }
   .left-pane-container {
     width: $leftPaneWidth;
+    background-color: whitesmoke;
   }
 
   .left-pane nav {
@@ -281,7 +282,7 @@ button {
   display: none;
 }
 
-.navigation-title,
-.navigation-short-title {
-  width: 90%;
-}
+// .navigation-title,
+// .navigation-short-title {
+//   width: 90%;
+// }

@@ -246,7 +246,7 @@ export class EditorComponent
       }
     });
 
-    this.chapterService.scrollIntoView = scrollIntoView;
+    // this.chapterService.scrollIntoView = scrollIntoView;
     if (scrollIntoView === undefined) {
       console.log(scrollIntoView);
 
@@ -271,13 +271,13 @@ export class EditorComponent
 
   private scrollNotesBottom() {
     const notes = document.querySelectorAll('note');
-    this.chapterService.scrollIntoView = notes[notes.length - 1];
-    this.chapterService.scrollIntoView.scrollIntoView();
+    // this.chapterService.scrollIntoView = notes[notes.length - 1];
+    // // this.chapterService.scrollIntoView.scrollIntoView();
   }
 
   private scrollNotesTop() {
-    this.chapterService.scrollIntoView = document.querySelector('note');
-    this.chapterService.scrollIntoView.scrollIntoView();
+    // this.chapterService.scrollIntoView = document.querySelector('note');
+    // this.chapterService.scrollIntoView.scrollIntoView();
     // scrollIntoView;
   }
 

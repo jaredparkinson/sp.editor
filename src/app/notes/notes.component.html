@@ -40,7 +40,11 @@
     <note
       *ngFor="let note of dataService.chapter2.notes"
       id="{{ note.id }}"
-      class="{{ note.classList }}"
+      class="{{ note.classList }} animated fastest"
+      [ngClass]="{
+        fadeOut: this.chapterService.chapterFadeOut,
+        fadeIn: !this.chapterService.chapterFadeOut
+      }"
     >
       <p class="note-title">{{ note.noteTitle }}</p>
       <p class="note-short-title">{{ note.noteShortTitle }}</p>

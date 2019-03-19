@@ -16,10 +16,10 @@ import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
+import { MediaQueryService } from '../services/media-query.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
-import { MediaQueryService } from '../services/media-query.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({

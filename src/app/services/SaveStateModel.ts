@@ -1,5 +1,5 @@
 import { ISaveStateItem } from '../models/ISaveStateItem';
-import { ReferenceLabel } from '../modelsJson/Chapter';
+import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 
 export class SaveStateModel implements ISaveModel {
   id = '';

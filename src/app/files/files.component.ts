@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import * as lodash from 'lodash';
-// import { NavLinks } from '../models/navlinks.model';
-import { Navigation } from '../modelsJson/Chapter';
+import * as Yallist from 'yallist';
+import { Navigation } from '../modelsJson/Navigation';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
-import * as Yallist from 'yallist';
 
 @Component({
   selector: 'app-files',

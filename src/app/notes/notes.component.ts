@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as lodash from 'lodash';
-import { SecondaryNote } from '../modelsJson/Chapter';
-import { Note } from '../modelsJson/Note';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
+// tslint:disable-next-line:ordered-imports
 // import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
 import { ChapterService } from '../services/chapter.service';
@@ -21,6 +21,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
+import { Note } from '../modelsJson/Note';
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
@@ -97,26 +98,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
         });
       }
     });
-  }
-
-  noteButtonClick(note: Note) {
-    console.log(note);
-
-    switch (note.override) {
-      case true: {
-        note.visible = !note.visible;
-        break;
-      }
-
-      default: {
-        note.override = true;
-
-        note.visible = !this.saveState.data.secondaryNotesVisible;
-        break;
-      }
-    }
-
-    // this.verseSelectService.setNoteVisibility(note);
   }
 
   trackById(note: Note) {
@@ -215,11 +196,4 @@ export class NotesComponent implements OnInit, AfterViewInit {
   //   // vis = false;
   //   return vis;
   // }
-
-  private getNoteVisibility(note: Note) {
-    return (
-      !this.saveState.data.secondaryNotesVisible ||
-      (note.override && !note.visible)
-    );
-  }
 }

@@ -8,8 +8,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import * as lodash from 'lodash';
-import { Verse, W } from '../../modelsJson/Chapter';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
+import { Verse } from '../../modelsJson/Verse';
+import { W } from '../../modelsJson/W';
 import { ChapterService } from '../../services/chapter.service';
 import { DataService } from '../../services/data.service';
 import { EditService } from '../../services/EditService';

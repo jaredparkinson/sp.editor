@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Navigation } from '../modelsJson/Chapter';
-import { SaveStateService } from './save-state.service';
 import { ISaveStateItem } from '../models/ISaveStateItem';
+import { Navigation } from '../modelsJson/Navigation';
+import { SaveStateService } from './save-state.service';
 
 @Injectable()
 export class NavigationService {

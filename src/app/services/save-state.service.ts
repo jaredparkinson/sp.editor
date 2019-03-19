@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as lodash from 'lodash';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
-import { ReferenceLabel } from '../modelsJson/Chapter';
+import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { SaveStateModel } from './SaveStateModel';
 
 @Injectable({

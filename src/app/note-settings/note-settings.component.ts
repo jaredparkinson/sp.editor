@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReferenceLabel } from '../modelsJson/Chapter';
+import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';

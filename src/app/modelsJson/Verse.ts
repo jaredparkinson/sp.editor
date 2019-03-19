@@ -1,15 +1,16 @@
-// import { W } from './WTag';
-// import { W2 } from './W2';
-// import { TemplateGroup } from './TemplateGroup';
-// export class Verse {
-//   public id: string;
-//   public highlight: boolean = false;
-//   public wTags: W[] = [];
-//   public text: string = '';
-//   public context: boolean = false;
-//   public num: number;
-//   public w2: W2[] = [];
-//   public classList: string[] = [];
-//   public disabled: boolean = false;
-//   public wTagGroups: TemplateGroup[] = [];
-// }
+import { W } from './W';
+export class Verse {
+  public _id = '';
+  public id = '';
+  public text = '';
+  public wTags: W[] = [];
+  public header: boolean;
+  // public builtWTags: W[] = [];
+  public highlight = false;
+  public context = false;
+  constructor(element: Element) {
+    this._id = element.id;
+    this.text = element.textContent;
+    // element.querySelectorAll('.verz=se')
+  }
+}

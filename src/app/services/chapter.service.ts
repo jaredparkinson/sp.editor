@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
 import * as lodash from 'lodash';
-import {
-  Chapter2,
-  NoteRef,
-  Paragraph,
-  SecondaryNote,
-  Verse,
-  W,
-} from '../modelsJson/Chapter';
+import { Chapter2 } from '../modelsJson/Chapter';
+import { NoteRef } from '../modelsJson/NoteRef';
+import { Paragraph } from '../modelsJson/Paragraph';
+import { SecondaryNote } from '../modelsJson/SecondaryNote';
+import { Verse } from '../modelsJson/Verse';
+import { W } from '../modelsJson/W';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
 import { EditService } from './EditService';

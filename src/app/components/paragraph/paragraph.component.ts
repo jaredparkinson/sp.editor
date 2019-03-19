@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Paragraph } from '../../modelsJson/Chapter';
+import { Paragraph } from '../../modelsJson/Paragraph';
 
 @Component({
   selector: 'app-paragraph',

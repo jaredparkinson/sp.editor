@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Navigation } from '../../modelsJson/Chapter';
-import { NavigationService } from '../../services/navigation.service';
+import { Navigation } from '../../modelsJson/Navigation';
 import { MediaQueryService } from '../../services/media-query.service';
+import { NavigationService } from '../../services/navigation.service';
 import { SaveStateService } from '../../services/save-state.service';
 
 @Component({

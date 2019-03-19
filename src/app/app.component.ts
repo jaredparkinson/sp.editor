@@ -8,13 +8,13 @@ import {
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import * as matCSS from 'materialize-css';
-import { Navigation } from './modelsJson/Chapter';
+import { Navigation } from './modelsJson/Navigation';
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { DatabaseService } from './services/database.service';
+import { MediaQueryService } from './services/media-query.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-import { MediaQueryService } from './services/media-query.service';
 // // import { VerseSelectService } from './services/verse-select.service';
 @Component({
   selector: 'app-root',

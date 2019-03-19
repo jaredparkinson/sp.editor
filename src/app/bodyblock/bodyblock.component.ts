@@ -14,7 +14,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { VerseComponent } from '../components/verse/verse.component';
 
-import { Navigation, Verse } from '../modelsJson/Chapter';
+import { Navigation } from '../modelsJson/Navigation';
+import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';

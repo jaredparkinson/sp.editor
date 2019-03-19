@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Note } from '../modelsJson/Note';
-import { SecondaryNote } from '../modelsJson/SecondaryNote';
 @Injectable({
   providedIn: 'root',
 })
 export class EditService {
   public editState = false;
   constructor() {}
-  public setEditMode(
-    editState: boolean,
-  ): void {
+  public setEditMode(editState: boolean): void {
     this.editState = editState;
     if (this.editState) {
       this.enableEditMode();

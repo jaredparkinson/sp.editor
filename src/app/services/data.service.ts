@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Chapter2, Note, Paragraph, Verse } from '../modelsJson/Chapter';
+import { Chapter2 } from '../modelsJson/Chapter';
+import { Note } from '../modelsJson/Note';
+import { Paragraph } from '../modelsJson/Paragraph';
+import { Verse } from '../modelsJson/Verse';
 
 @Injectable({
   providedIn: 'root',

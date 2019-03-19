@@ -19,6 +19,8 @@ export class FilesComponent implements OnInit {
   // public links: NavLinks[] = [];
   public foldersVisible = true;
   public booksVisible = false;
+
+  public tempNav: Navigation[] = [];
   // private addressBar: HTMLInputElement;
   @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
@@ -39,9 +41,19 @@ export class FilesComponent implements OnInit {
       .subscribe(data => {
         console.log();
         this.navService.navigation = JSON.parse(data) as Navigation[];
+        this.setTempNav(this.navService.navigation);
       });
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
+  }
+  setTempNav(navigation: Navigation[]): any {
+    navigation.forEach(nav => {
+      if (nav.url) {
+        this.tempNav.push(nav);
+      } else {
+        this.setTempNav(nav.navigation);
+      }
+    });
   }
 
   swipeRight(event: Event) {

@@ -6,6 +6,7 @@ import { SaveStateItem } from '../models/SaveStateItem';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { SaveStateModel } from './SaveStateModel';
 
+import * as Bluebird from 'bluebird';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +23,8 @@ export class SaveStateService {
       localStorage.setItem(this.id, JSON.stringify(this.data));
     }, 100);
   }
-  public load(): Promise<any> {
-    return new Promise(resolve => {
+  public load(): Bluebird<any> {
+    return new Bluebird(resolve => {
       console.log('settings load');
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;

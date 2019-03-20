@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as Bluebird from 'bluebird';
 @Injectable()
 export class SyncScrollingService {
   public syncScrollingAnimated = false;
@@ -55,8 +56,8 @@ export class SyncScrollingService {
     }, 300);
   }
 
-  scrollNoteIntoView(belowTop: Element[]): Promise<void> {
-    return new Promise<void>(resolve => {
+  scrollNoteIntoView(belowTop: Element[]): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       setTimeout(() => {
         document
           .querySelector(`#${belowTop[0].id.replace('p', 'note')}`)

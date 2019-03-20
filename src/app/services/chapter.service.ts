@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, QueryList } from '@angular/core';
+import * as Bluebird from 'bluebird';
 import * as lodash from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { NoteRef } from '../modelsJson/NoteRef';
@@ -46,8 +47,8 @@ export class ChapterService {
 
   public chapterFadeOut = false;
 
-  public resetNotes(): Promise<void> {
-    return new Promise<void>(async resolve => {
+  public resetNotes(): Bluebird<void> {
+    return new Bluebird<void>(async resolve => {
       await this.resetNoteVisibility(
         this.dataService.chapter2,
         this.dataService.noteVisibility,
@@ -73,8 +74,8 @@ export class ChapterService {
   resetNoteVisibility(
     chapter: Chapter2,
     noteVisibility: Map<string, boolean>,
-  ): Promise<void> {
-    return new Promise<void>(resolve => {
+  ): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       lodash
         .map(chapter.notes, note => {
           return note.secondary;
@@ -185,8 +186,8 @@ export class ChapterService {
     return noteRef.visible;
   }
 
-  buildParagraphs(paragraphs: Paragraph[], verses: Verse[]): Promise<void> {
-    return new Promise<void>(resolve => {
+  buildParagraphs(paragraphs: Paragraph[], verses: Verse[]): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       paragraphs.forEach(paragraph => {
         paragraph.verses = verses.slice(
           parseInt(paragraph.verseIds[0], 10) - 1,
@@ -254,7 +255,7 @@ export class ChapterService {
   }
 
   public getChapter(id: string) {
-    return new Promise<Chapter2>(
+    return new Bluebird<Chapter2>(
       (
         resolve: (resolveValue: Chapter2) => void,
         reject: (rejectValue: Chapter2) => void,
@@ -272,7 +273,7 @@ export class ChapterService {
   }
 
   public setHighlightging(verses: Verse[], highlightNumbers: [string, string]) {
-    return new Promise<number>(resolve => {
+    return new Bluebird<number>(resolve => {
       const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
       verses.forEach(verse => {
@@ -288,7 +289,7 @@ export class ChapterService {
   }
 
   public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
-    return new Promise<void>(resolve => {
+    return new Bluebird<void>(resolve => {
       verses.forEach(verse => {
         // console.log(verse);
 

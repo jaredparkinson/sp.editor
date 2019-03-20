@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+import * as bluebird from 'bluebird';
 import * as matCSS from 'materialize-css';
 import { Navigation } from './modelsJson/Navigation';
 import { ElectronService } from './providers/electron.service';
@@ -47,6 +48,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     });
     if (this.electronService.isElectron()) {
     }
+    bluebird.longStackTraces();
+
     // console.log('AppConfig', AppConfig);
 
     // if (this.electronService.isElectron()) {

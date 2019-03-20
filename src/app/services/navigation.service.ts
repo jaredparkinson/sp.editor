@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import * as Bluebird from 'bluebird';
 import { Observable } from 'rxjs';
 
 import { ISaveStateItem } from '../models/ISaveStateItem';
@@ -52,46 +53,46 @@ export class NavigationService {
       }
     }
   }
-  btnPoetryPress(): Promise<boolean> {
-    return new Promise<boolean>(() => {
+  btnPoetryPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(() => {
       this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
       this.saveState.save();
     });
   }
-  btnSecondaryNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  btnSecondaryNotesPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(resolve => {
       this.saveState.data.secondaryNotesVisible = !this.saveState.data
         .secondaryNotesVisible;
       this.saveState.save();
       resolve(true);
     });
   }
-  btnOriginalNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  btnOriginalNotesPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(resolve => {
       this.saveState.data.originalNotesVisible = !this.saveState.data
         .originalNotesVisible;
       this.saveState.save();
       resolve(true);
     });
   }
-  btnTranslatorNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  btnTranslatorNotesPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(resolve => {
       this.saveState.data.translatorNotesVisible = !this.saveState.data
         .translatorNotesVisible;
       this.saveState.save();
       resolve(true);
     });
   }
-  btnEnglishNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  btnEnglishNotesPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(resolve => {
       this.saveState.data.englishNotesVisible = !this.saveState.data
         .englishNotesVisible;
       this.saveState.save();
       resolve(true);
     });
   }
-  async btnNewNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
+  btnNewNotesPress(): Bluebird<boolean> {
+    return new Bluebird<boolean>(resolve => {
       this.saveState.data.newNotesVisible = !this.saveState.data
         .newNotesVisible;
       this.saveState.save();

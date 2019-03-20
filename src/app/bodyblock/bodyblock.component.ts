@@ -24,6 +24,8 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
+
+import * as Bluebird from 'bluebird';
 // import { VerseSelectService } from '../services/verse-select.service';
 import { WTagService } from '../services/wtag-builder.service';
 
@@ -90,8 +92,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       });
     });
   }
-  resetNavigationFocus(navigation: Navigation[]): Promise<void> {
-    return new Promise<void>(resolve => {
+  resetNavigationFocus(navigation: Navigation[]): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       navigation.forEach(async nav => {
         if (nav.url) {
           nav.focus = false;
@@ -162,7 +164,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   }
 
   private getChapter(id: string, highlighting: string[] = []) {
-    return new Promise<number>(async resolve => {
+    return new Bluebird<number>(async resolve => {
       let chapter = this.dataService.chapter2;
       if (this.pageId !== id) {
         chapter = await this.chapterService.getChapter(id);

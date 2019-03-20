@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import * as Bluebird from 'bluebird';
 import * as lodash from 'lodash';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
 import { Verse } from '../../modelsJson/Verse';
@@ -70,7 +71,7 @@ export class VerseComponent implements OnInit {
   }
 
   private wTagSelect(w: W) {
-    return new Promise<void>(async resolve => {
+    return new Bluebird<void>(async resolve => {
       const ref = w.visibleRefs.pop();
       w.selected = true;
       this.dataService.verses.forEach(verse => {
@@ -95,8 +96,8 @@ export class VerseComponent implements OnInit {
       resolve();
     });
   }
-  animateNotesPane(): Promise<void> {
-    return new Promise<void>(resolve => {
+  animateNotesPane(): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       if (!this.saveState.data.notesPanePin.value) {
         this.saveState.data.notesPanePin.value = true;
 
@@ -111,8 +112,8 @@ export class VerseComponent implements OnInit {
     });
   }
 
-  private resetNotes(): Promise<void> {
-    return new Promise<void>(resolve => {
+  private resetNotes(): Bluebird<void> {
+    return new Bluebird<void>(resolve => {
       this.chapterService
         .resetNoteVisibility(
           this.dataService.chapter2,

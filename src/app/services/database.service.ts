@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as Bluebird from 'bluebird';
 import * as lodash from 'lodash';
 // import * as PouchDB from 'pouchdb/dist/pouchdb';
 // import WorkerPouch from 'worker-pouch';
@@ -37,8 +38,8 @@ export class DatabaseService {
     console.log(allDocs.rows.length);
   }
 
-  public getRevision(id: string): Promise<string> {
-    return new Promise<string>(
+  public getRevision(id: string): Bluebird<string> {
+    return new Bluebird<string>(
       (
         resolve: (resolveValue: string) => void,
         reject: (rejectValue: string) => void,
@@ -73,7 +74,7 @@ export class DatabaseService {
     // );
     // this.db.sync('http://localhost:5984/ggg');
 
-    return new Promise<void>(async resolve => {
+    return new Bluebird<void>(async resolve => {
       await (PouchDB as any).replicate(
         `https://sp_users:test@couch.parkinson.im/${databaseName}`,
         this.db,
@@ -84,7 +85,7 @@ export class DatabaseService {
   }
 
   private addFiles(dataFile: string) {
-    return new Promise(async resolve => {
+    return new Bluebird(async resolve => {
       console.log(this.tempAllDocs);
       const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
       const verses = [];

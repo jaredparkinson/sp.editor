@@ -1,48 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { ElementRef, Injectable, QueryList } from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as lodash from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { NoteRef } from '../modelsJson/NoteRef';
 import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
-import { W } from '../modelsJson/W';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
-import { EditService } from './EditService';
-import { HelperService } from './helper.service';
-import { NavigationService } from './navigation.service';
 import { SaveStateService } from './save-state.service';
-import { StringService } from './string.service';
-// // import { VerseSelectService } from './verse-select.service';
+
 @Injectable()
 export class ChapterService {
   constructor(
-    private navService: NavigationService,
-    private httpClient: HttpClient,
-    private stringService: StringService,
     private saveState: SaveStateService,
-    private helperService: HelperService,
-    // private verseSelectService: VerseSelectService,
-    private editService: EditService,
     private dataBaseService: DatabaseService,
     private dataService: DataService,
-  ) {
-    // this.fs = (window as any).fs;
-  }
-  // wTags: QueryList<ElementRef>;
-  // public selectedSecondaryNote: SecondaryNote;
-  // public url: string;
-  // public db = new PouchDB('alpha.oneinthinehand.org');
-
-  // public notes2: Note[] = [];
-
-  // public verseNums: number[] = [];
-  // public contextNums: number[] = [];
-  // private fs: any;
-  // public wTagSelectMode = false;
-
-  // scrollIntoView: Element;
+  ) {}
 
   public chapterFadeOut = false;
 
@@ -57,17 +30,6 @@ export class ChapterService {
         this.dataService.noteVisibility,
       );
       resolve();
-      // this.resetNoteVisibility(
-      //   this.dataService.chapter2,
-      //   this.dataService.noteVisibility,
-      // ).then(() => {
-      //   this.buildWTags(
-      //     this.dataService.verses,
-      //     this.dataService.noteVisibility,
-      //   ).then(() => {
-      //     resolve();
-      //   });
-      // });
     });
   }
   resetNoteVisibility(
@@ -86,29 +48,13 @@ export class ChapterService {
               secondaryNote.clicked = false;
               secondaryNote.noteRefs.forEach(noteRef => {
                 if (this.getNoteRefVisibility(noteRef)) {
-                  // if (noteRef.text.includes('insertion')) {
-                  //   console.log(noteRef);
-                  // }
-
                   noteVisibility.set(secondaryNote.id, true);
                 }
               });
             }
           });
         });
-      // chapter.notes.forEach(note => {
-      //   note.secondary.forEach(secondaryNote => {
-      //     noteVisibility.set(secondaryNote.id, false);
-      //     if (this.getSecondaryNoteVisibility(secondaryNote)) {
-      //       secondaryNote.clicked = false;
-      //       secondaryNote.noteRefs.forEach(noteRef => {
-      //         if (this.getNoteRefVisibility(noteRef)) {
-      //           noteVisibility.set(secondaryNote.id, true);
-      //         }
-      //       });
-      //     }
-      //   });
-      // });
+
       resolve();
     });
   }
@@ -121,20 +67,16 @@ export class ChapterService {
         this.saveState.data.newNotesVisible,
         'note-phrase-new',
       ) ||
-      // secondaryNote.notePhrase.classList.includes('note-phrase-new'))
-      // || secondaryNote.notePhrase.classList.includes('note-phrase-new-2'))
       this.noteTypeVisible(
         secondaryNote,
         this.saveState.data.translatorNotesVisible,
         'note-phrase-tc',
       ) ||
-      // || secondaryNote.notePhrase.classList.includes('note-phrase-tc-2')
       this.noteTypeVisible(
         secondaryNote,
         this.saveState.data.englishNotesVisible,
         'note-phrase-eng',
       )
-      // || secondaryNote.notePhrase.classList.includes('note-phrase-eng-2')
     ) {
       visible = true;
     }
@@ -157,7 +99,6 @@ export class ChapterService {
   ) {
     return (
       noteVisible &&
-      // lodash.includes(secondaryNote.notePhrase.classList, (cL: string) => {return cL.includes('note-phrase-new')})
       lodash.includes(secondaryNote.notePhrase.classList, className)
     );
   }
@@ -223,11 +164,6 @@ export class ChapterService {
           if (wTag.visibleRefs.length === 0) {
             wTag.visibleRefs = undefined;
           } else {
-            // wTag.visibleRefs = wTag.visibleRefs.sort(
-            //   (a: string, b: string): number => {
-            //     return this.getSortingKey(a) - this.getSortingKey(b);
-            //   },
-            // );
             wTag.visibleRefs = lodash.reverse(wTag.visibleRefs);
             wTag.visibleRefCount = wTag.visibleRefs.length;
           }
@@ -283,19 +219,13 @@ export class ChapterService {
         verse.context = lodash.includes(context, verseNumber) ? true : false;
       });
 
-      resolve(
-        highlight.sort((a, b) => {
-          return a - b;
-        })[0],
-      );
+      resolve(lodash.sortBy(highlight)[0]);
     });
   }
 
   public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
     return new Promise<void>(resolve => {
       verses.forEach(verse => {
-        // console.log(verse);
-
         verse.wTags.forEach(wTag => {
           wTag.text = '';
           wTag.text = verse.text.substring(
@@ -311,13 +241,6 @@ export class ChapterService {
 
       resolve(undefined);
     });
-  }
-  getWTagText(id: number[], text: string): string {
-    let tempText = '';
-    id.forEach(i => {
-      tempText = `${tempText}${text[i]}`;
-    });
-    return tempText;
   }
 
   public parseHighlightedVerses(v: string): number[] {

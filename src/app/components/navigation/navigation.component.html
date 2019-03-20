@@ -15,7 +15,7 @@
     (click)="this.gotoChapter()"
     class="nav-link"
     *ngIf="navigation.url"
-    [ngClass]="{ 'nav-focus': navigation.focus }"
+    [ngClass]="{ 'nav-focus': navigation.focus, 'test-hide': navigation.hide }"
   >
     <!-- <a href="#/{{ navigation.url }}"></a> --><span
       class="navigation-title"
@@ -26,7 +26,9 @@
       >keyboard_arrow_right</i
     > -->
   </li>
-  <ng-container *ngIf="navigation.visible && navigation.navigation">
+  <ng-container
+    *ngIf="navigation.subNavigationVisible && navigation.navigation"
+  >
     <ng-container *ngFor="let n of navigation.navigation">
       <app-navigation
         class="nav-list"

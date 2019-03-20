@@ -23,8 +23,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {}
 
   gotoChapter() {
-    this.navigation.visible = this.navigation.visible
-      ? !this.navigation.visible
+    this.navigation.subNavigationVisible = this.navigation.subNavigationVisible
+      ? !this.navigation.subNavigationVisible
       : true;
     this.router.navigateByUrl(`${this.navigation.url}`);
   }

@@ -81,15 +81,25 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       this.url = `${book}/${lodash.last(highlighting)}`;
       const id = `${book}-${highlighting.pop()}-${language}`;
 
-      this.getChapter(id, highlighting).then(v => {
-        console.log(`highlight ${highlighting}`);
-
-        console.log(this.dataService.chapter2._id);
+      this.getChapter(id, highlighting).then(async v => {
         // this.swipeRight = false;
         this.chapterService.chapterFadeOut = false;
         this.scrollToVerse(v);
+        await this.resetNavigationFocus(this.navService.navigation);
         this.setNavigation(this.navService.navigation);
       });
+    });
+  }
+  resetNavigationFocus(navigation: Navigation[]): Promise<void> {
+    return new Promise<void>(resolve => {
+      navigation.forEach(async nav => {
+        if (nav.url) {
+          nav.focus = false;
+        } else {
+          await this.resetNavigationFocus(nav.navigation);
+        }
+      });
+      resolve();
     });
   }
   closeNavigation(): void {
@@ -102,27 +112,40 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       );
     }
   }
-  setNavigation(navigation: Navigation[]): boolean {
+  setNavigation(navigation: Navigation[]) {
     let isNav = false;
-    navigation.forEach(nav => {
-      if (nav.url) {
-        // console.log(this.url);
-        nav.focus = nav.url === this.url;
-        if (nav.focus) {
-          isNav = true;
-        }
-      } else {
-        if (this.setNavigation(nav.navigation)) {
-          console.log(nav);
-          nav.visible = true;
-          nav.hide = false;
-          isNav = true;
-        } else {
-          nav.hide = true;
-          nav.visible = false;
-        }
-      }
+
+    const navLink = navigation.filter(n => {
+      return n.url && n.url === this.url;
     });
+    if (navLink.length > 0) {
+      navLink[0].focus = true;
+      navigation.forEach(n => {
+        n.hide = false;
+        if (n !== navLink[0]) {
+          n.focus = false;
+        }
+      });
+      isNav = true;
+    } else {
+      navigation.forEach(n => {
+        n.focus = false;
+        if (!n.url) {
+          if (this.setNavigation(n.navigation)) {
+            n.hide = false;
+            n.subNavigationVisible = true;
+            isNav = true;
+          } else {
+            n.hide = true;
+            n.subNavigationVisible = false;
+          }
+
+          // n.hide = !this.setNavigation(n.navigation);
+        } else {
+          n.hide = true;
+        }
+      });
+    }
 
     return isNav;
   }
@@ -175,7 +198,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
           return verse.header;
         },
       );
-      console.log(this.dataService.header);
 
       resolve(v);
     });

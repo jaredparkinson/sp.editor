@@ -72,7 +72,7 @@ export class FilesComponent implements OnInit {
   }
   resetNavigation() {
     this.navService.navigation.forEach(nav => {
-      nav.visible = false;
+      nav.subNavigationVisible = false;
       nav.hide = false;
     });
   }

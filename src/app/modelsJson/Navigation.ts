@@ -7,7 +7,7 @@ export class Navigation {
   public url: string;
   public _id: string = undefined;
   public navigation: Navigation[] = [];
-  public visible = false;
+  public subNavigationVisible = false;
   public hide = false;
   public focus = false;
 }

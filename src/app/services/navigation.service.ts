@@ -24,23 +24,29 @@ export class NavigationService {
 
   toggleNotes() {}
   navigationClick(navigation: Navigation, navigations: Navigation[]) {
-    navigation.visible = navigation.visible ? !navigation.visible : true;
+    navigation.subNavigationVisible = navigation.subNavigationVisible
+      ? !navigation.subNavigationVisible
+      : true;
 
-    if (navigation.visible) {
+    if (navigation.subNavigationVisible) {
       navigations.forEach(nav => {
         if (nav !== navigation) {
           nav.hide = true;
-          nav.visible = false;
+          nav.subNavigationVisible = false;
         }
+      });
+      navigation.navigation.forEach(nav => {
+        nav.hide = false;
+        nav.subNavigationVisible = false;
       });
     } else {
       navigations.forEach(nav => {
-        nav.visible = false;
+        nav.subNavigationVisible = false;
         nav.hide = false;
       });
       if (navigation.navigation) {
         navigation.navigation.forEach(nav => {
-          nav.visible = false;
+          nav.subNavigationVisible = false;
           nav.hide = false;
         });
       }

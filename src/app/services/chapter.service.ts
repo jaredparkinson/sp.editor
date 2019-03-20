@@ -283,7 +283,11 @@ export class ChapterService {
         verse.context = lodash.includes(context, verseNumber) ? true : false;
       });
 
-      resolve(highlight.sort()[0]);
+      resolve(
+        highlight.sort((a, b) => {
+          return a - b;
+        })[0],
+      );
     });
   }
 

@@ -129,10 +129,19 @@ export class ChapterService {
   buildParagraphs(paragraphs: Paragraph[], verses: Verse[]): Promise<void> {
     return new Promise<void>(resolve => {
       paragraphs.forEach(paragraph => {
-        paragraph.verses = verses.slice(
-          parseInt(paragraph.verseIds[0], 10) - 1,
-          parseInt(paragraph.verseIds[1], 10),
-        );
+        paragraph.verses = [];
+        paragraph.verseIds.forEach(verseId => {
+          const verse = verses.find(v => {
+            return v.id === verseId;
+          });
+          if (verse) {
+            paragraph.verses.push(verse);
+          }
+        });
+        // paragraph.verses = verses.slice(
+        //   parseInt(paragraph.verseIds[0], 10) - 1,
+        //   parseInt(paragraph.verseIds[1], 10),
+        // );
       });
 
       if (paragraphs.length === 0) {

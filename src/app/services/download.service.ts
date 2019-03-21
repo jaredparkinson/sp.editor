@@ -8,7 +8,7 @@ import { DatabaseService } from './database.service';
 })
 export class DownloadService {
   public downloads: Download[] = [
-    new Download('alpha_oneinthinehand', 'scriptures', false),
+    new Download('beta_oneinthinehand', 'scriptures', false),
   ];
   constructor(
     private httpClient: HttpClient,

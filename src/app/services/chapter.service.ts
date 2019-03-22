@@ -8,6 +8,7 @@ import { Verse } from '../modelsJson/Verse';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
 import { SaveStateService } from './save-state.service';
+import { aW } from '../modelsJson/W';
 
 @Injectable()
 export class ChapterService {
@@ -236,20 +237,39 @@ export class ChapterService {
     return new Promise<void>(resolve => {
       verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
-          wTag.text = '';
-          wTag.text = verse.text.substring(
-            wTag.id[0],
-            lodash.last(wTag.id) + 1,
-          );
-
-          wTag.selected = false;
-          wTag.clicked = false;
+          switch (wTag.type) {
+            case 'aW': {
+              ((wTag as unknown) as aW).childWTags.forEach(w => {
+                this.setWTagProperties(w, verse);
+              });
+              break;
+            }
+            case 'rW': {
+              break;
+            }
+            case 'W': {
+              this.setWTagProperties(wTag, verse);
+              break;
+            }
+          }
+          if (wTag.type === 'W') {
+          }
         });
       });
       this.resetRefVisible(verses, noteVisibility);
 
       resolve(undefined);
     });
+  }
+
+  private setWTagProperties(
+    wTag: import('c:/users/jared/source/repos/sp.editor/src/app/modelsJson/W').W,
+    verse: Verse,
+  ) {
+    wTag.text = '';
+    wTag.text = verse.text.substring(wTag.id[0], lodash.last(wTag.id) + 1);
+    wTag.selected = false;
+    wTag.clicked = false;
   }
 
   public parseHighlightedVerses(v: string): number[] {

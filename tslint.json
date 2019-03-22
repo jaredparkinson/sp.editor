@@ -55,6 +55,7 @@
     "object-literal-sort-keys": false,
     "no-implicit-dependencies": false,
     "no-unused-variable": true,
+
     "one-line": [
       true,
       "check-open-brace",
@@ -97,6 +98,7 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "max-classes-per-file": false
   }
 }

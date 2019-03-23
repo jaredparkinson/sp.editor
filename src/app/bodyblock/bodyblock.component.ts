@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as bowser from 'bowser';
-import * as lodash from 'lodash';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -24,7 +23,8 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
-// import { VerseSelectService } from '../services/verse-select.service';
+import { flattenDeep, last, cloneDeep, filter, replace } from 'lodash';
+
 import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
@@ -33,7 +33,6 @@ import { WTagService } from '../services/wtag-builder.service';
   styleUrls: ['./bodyblock.component.scss'],
 })
 export class BodyblockComponent implements OnInit, OnDestroy {
-  isIOS = false;
   chapterFadeOut = false;
   swipeRight = false;
   url: string;
@@ -47,7 +46,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public saveState: SaveStateService,
     public stringService: StringService,
     public mediaQueryService: MediaQueryService,
-    // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
@@ -57,10 +55,9 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   @ViewChildren('verses')
   verses!: QueryList<VerseComponent>;
   private pageId = '';
+  private pageUrl = '';
   ngOnDestroy() {}
   ngOnInit() {
-    this.isIOS =
-      bowser.getParser(window.navigator.userAgent).getOSName() === 'iOS';
     this.route.params.subscribe(async params => {
       this.closeNavigation();
       document.querySelector('.body-block').scrollIntoView();
@@ -78,11 +75,11 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
       console.log(language);
 
-      this.url = `${book}/${lodash.last(highlighting)}`;
+      this.pageUrl = `${book}/${chapter}`;
+      this.url = `${book}/${last(highlighting)}`;
       const id = `${book}-${highlighting.pop()}-${language}`;
 
       this.getChapter(id, highlighting).then(async v => {
-        // this.swipeRight = false;
         this.chapterService.chapterFadeOut = false;
         this.scrollToVerse(v);
         await this.resetNavigationFocus(this.navService.navigation);
@@ -139,8 +136,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
             n.hide = true;
             n.subNavigationVisible = false;
           }
-
-          // n.hide = !this.setNavigation(n.navigation);
         } else {
           n.hide = true;
         }
@@ -166,8 +161,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       let chapter = this.dataService.chapter2;
       if (this.pageId !== id) {
         chapter = await this.chapterService.getChapter(id);
-        this.dataService.paragraphs = lodash.cloneDeep(chapter.paragraphs);
-        this.dataService.verses = lodash.cloneDeep(chapter.verses);
+        this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
+        this.dataService.verses = cloneDeep(chapter.verses);
       }
       this.pageId = id;
 
@@ -192,7 +187,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       );
 
       this.dataService.chapter2 = chapter;
-      this.dataService.header = lodash.filter(
+      this.dataService.header = filter(
         this.dataService.verses,
         (verse: Verse) => {
           return verse.header;
@@ -201,25 +196,6 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
       resolve(v);
     });
-  }
-
-  public swipeChapter(event: Event, url: string) {
-    console.log(event);
-
-    if ((event as PointerEvent).pointerType === 'touch') {
-      this.chapterService.chapterFadeOut = true;
-      // if (event.type === 'swiperight') {
-      //   // console.log(event);
-      //   this.fadeOut = true;
-      // }
-      // if (event.type === 'swipeleft') {
-      //   this.swipeRight = true;
-      //   // console.log(event);
-      // }
-      setTimeout(() => {
-        this.router.navigateByUrl(url);
-      }, 150);
-    }
   }
 
   public onPan(event: Event) {
@@ -236,6 +212,44 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
   onScroll() {
     this.syncScrollingService.onScroll();
+  }
+
+  public swipeChapter(event: Event, direction: number) {
+    const url = this.getNavigationUrl(direction);
+
+    if ((event as PointerEvent).pointerType === 'touch') {
+      this.chapterService.chapterFadeOut = true;
+
+      setTimeout(() => {
+        this.router.navigateByUrl(url);
+      }, 150);
+    }
+  }
+
+  public btnNavigationButtons(direction: number) {
+    this.router.navigateByUrl(this.getNavigationUrl(direction));
+  }
+
+  getNavigationUrl(direction: number) {
+    let url = '';
+
+    for (let x = 0; x < this.navService.flatNavigation.length; x++) {
+      const element = this.navService.flatNavigation[x];
+
+      if (element.url === this.pageUrl) {
+        if (x + direction === -1) {
+          x = this.navService.flatNavigation.length;
+        } else if (x + direction === this.navService.flatNavigation.length) {
+          x = -1;
+        }
+        console.log(x);
+
+        url = this.navService.flatNavigation[x + direction].url;
+
+        x = this.navService.flatNavigation.length;
+      }
+    }
+    return url;
   }
 
   synchronizedScrolling(): void {}

@@ -42,6 +42,10 @@ export class FilesComponent implements OnInit {
       .subscribe(data => {
         console.log();
         this.navService.navigation = JSON.parse(data) as Navigation[];
+
+        this.navService.navigation.forEach(nav => {
+          this.flattenNavigation(this.navService.flatNavigation, nav);
+        });
         // this.setTempNav(this.navService.navigation);
 
         // this.asasdf.forEach(v => {
@@ -53,6 +57,17 @@ export class FilesComponent implements OnInit {
     // console.log(this.fileManager.folders[0].path);
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
+
+  flattenNavigation(navigation: Navigation[], parentNavigation: Navigation) {
+    if (parentNavigation.navigation) {
+      parentNavigation.navigation.forEach(nav => {
+        this.flattenNavigation(navigation, nav);
+      });
+    } else {
+      navigation.push(parentNavigation);
+    }
+  }
+
   setTempNav(navigation: Navigation[]): any {
     navigation.forEach(nav => {
       if (nav.url) {

@@ -8,8 +8,8 @@
     *ngIf="!navigation.url"
     class="nav-header"
   >
-    <span class="navigation-title">{{ navigation.title }}</span>
-    <span class="navigation-short-title">{{ navigation.shortTitle }}</span>
+    <span class="navigation-title" [innerHTML]="navigation.title"></span>
+    <span class="navigation-short-title" [innerHTML]=" navigation.shortTitle"></span>
   </li>
   <li
     (click)="this.gotoChapter()"
@@ -19,9 +19,9 @@
   >
     <!-- <a href="#/{{ navigation.url }}"></a> --><span
       class="navigation-title"
-      >{{ navigation.title }}</span
+      [innerHTML]="navigation.title" ></span
     >
-    <span class="navigation-short-title">{{ navigation.shortTitle }}</span>
+    <span class="navigation-short-title" [innerHTML]=" navigation.shortTitle"></span>
     <!-- <i _ngcontent-c5="" class="material-icons caret right"
       >keyboard_arrow_right</i
     > -->

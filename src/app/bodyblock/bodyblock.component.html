@@ -3,13 +3,14 @@
     <!-- (wheel)="this.onScroll()"
   (touchmove)="this.onScroll()" -->
     <!-- <div id="highlight-holder" class="{{this.highlightClasses}}"></div> -->
+    <!-- (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)" -->
 
     <div class="left-content-pane">
       <div class="body-block-nav-flex">
         <button
           class="body-block-nav"
           id="btnPreviousChapter"
-          (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)"
+          (click)="this.btnNavigationButtons(-1)"
           [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
         >
           <i class="material-icons caret left">keyboard_arrow_left</i>
@@ -30,8 +31,8 @@
         fadeOut: this.chapterService.chapterFadeOut,
         fadeIn: !this.chapterService.chapterFadeOut
       }"
-      (swiperight)="swipeChapter($event, dataService.chapter2.previousPage)"
-      (swipeleft)="swipeChapter($event, dataService.chapter2.nextPage)"
+      (swiperight)="swipeChapter($event, -1)"
+      (swipeleft)="swipeChapter($event, 1)"
     >
       <div id="bodyBlockTop"></div>
       <!-- <ng-container *ngIf="dataService.chapter2.paragraphs.length !== 0"> -->
@@ -85,7 +86,7 @@
           class="body-block-nav"
           [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
           id="btnNextChapter"
-          (click)="this.router.navigateByUrl(dataService.chapter2.nextPage)"
+          (click)="this.btnNavigationButtons(1)"
         >
           <!-- (click)="navService.btnNextPagePress(dataService.chapter2.pageUrl)" -->
           <!-- Secondary Notes -->

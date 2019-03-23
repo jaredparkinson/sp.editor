@@ -79,6 +79,8 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.initNoteSettingsToggle();
+
+    this.databaseService.setDatabases();
   }
   gridBodyClick() {
     // console.log('body clicked');

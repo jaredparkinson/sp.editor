@@ -37,10 +37,8 @@ export class SettingsComponent implements OnInit {
     this.navServices.notesSettings = false;
     this.dataService.chapter2.title = 'Settings';
 
-    this.databaseService.setDatabases().then(() => {
-      this.currentDatabaseList = find(this.databaseService.databaseList, d => {
-        return d.name === location.host.split('.')[0];
-      });
+    this.currentDatabaseList = find(this.databaseService.databaseList, d => {
+      return d.name === location.host.split('.')[0];
     });
   }
 

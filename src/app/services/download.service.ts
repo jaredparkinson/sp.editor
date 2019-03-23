@@ -55,7 +55,11 @@ export class DownloadService {
         file.downloading = false;
         file.downloaded = true;
         file.deleting = false;
-        localStorage.setItem('downloads', JSON.stringify(this.downloads));
+
+        localStorage.setItem(
+          'database-list',
+          JSON.stringify(this.dataBaseService.databaseList),
+        );
       })
       .catch(() => {
         console.log('Failed, try again');

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, merge, find, filter, uniq } from 'lodash';
 // import * as PouchDB from 'pouchdb/dist/pouchdb';
 // import WorkerPouch from 'worker-pouch';
 import * as PouchDBFind from 'pouchdb-find';
@@ -13,12 +13,44 @@ import { HttpClient } from '@angular/common/http';
 export class DatabaseService {
   setDatabases() {
     return new Promise<void>((resolve: (resolveValue: void) => void) => {
+      const tempDatabases = localStorage.getItem('database-list');
+
+      if (tempDatabases) {
+        this.databaseList = JSON.parse(tempDatabases);
+      } else {
+        this.databaseList = [];
+      }
+
       this.httpClient
         .get('assets/data/database-list.json', {
           responseType: 'text',
         })
         .subscribe(data => {
-          this.databaseList = JSON.parse(data) as Database[];
+          const dataDatabase = JSON.parse(data) as Database[];
+
+          dataDatabase.forEach(item => {
+            const existingItem = find(this.databaseList, (d: Database) => {
+              return d.name === item.name;
+            });
+
+            if (existingItem) {
+              merge(existingItem.databaseItems, item.databaseItems);
+              existingItem.databaseItems = uniq(existingItem.databaseItems);
+              filter(existingItem.databaseItems, (i: DatabaseItem) => {
+                return !i.downloaded && i.downloading;
+              }).forEach(i => {
+                i.downloading = false;
+              });
+            } else {
+              this.databaseList.push(item);
+            }
+          });
+
+          localStorage.setItem(
+            'database-list',
+            JSON.stringify(this.databaseList),
+          );
+
           resolve();
         });
     });

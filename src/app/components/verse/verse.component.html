@@ -24,6 +24,6 @@
       *ngIf="!w.refs && w.type === 'W'"
       >{{ w.text }}</w
     ><app-aw [w]="w" *ngIf="w.type === 'aW'"></app-aw
-    ><ruby *ngIf="w.type === 'rW'" [innerHTML]="w.text"></ruby>
+    ><ruby *ngIf="w.type === 'rW'" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(w.text)"></ruby>
   </ng-container>
 </span>

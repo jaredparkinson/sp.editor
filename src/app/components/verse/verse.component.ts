@@ -19,6 +19,7 @@ import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 // import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',
@@ -31,10 +32,13 @@ export class VerseComponent implements OnInit {
     public wTagBuilderService: WTagService,
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
+    public sanitizer: DomSanitizer,
     public stringService: StringService,
     public chapterService: ChapterService,
     public dataService: DataService,
-  ) {}
+  ) {
+    
+  }
 
   @ViewChild('span') span!: ElementRef;
 

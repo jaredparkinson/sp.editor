@@ -51,7 +51,7 @@ export class DatabaseService {
             JSON.stringify(this.databaseList),
           );
 
-          resolve();
+          resolve(undefined);
         });
     });
   }

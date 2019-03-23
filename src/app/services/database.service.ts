@@ -6,16 +6,31 @@ import * as PouchDBFind from 'pouchdb-find';
 import * as WorkerPouch from 'worker-pouch';
 
 import { Chapter2 } from '../modelsJson/Chapter';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
+  setDatabases() {
+    return new Promise<void>((resolve: (resolveValue: void) => void) => {
+      this.httpClient
+        .get('assets/data/database-list.json', {
+          responseType: 'text',
+        })
+        .subscribe(data => {
+          this.databaseList = JSON.parse(data) as Database[];
+          resolve();
+        });
+    });
+  }
   // public PouchDB = require('pouchdb-browser');
   // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
   public db = new PouchDB('alpha.oneinthinehand.org');
+
+  public databaseList: Database[];
   // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     // (<any>PouchDB).adapter('worker', WorkerPouch);
     // this.db = new PouchDB('alpha.oneinthinehand.org');
     // PouchDB.plugin('pouchdb-find');
@@ -113,4 +128,19 @@ export class DatabaseService {
       }
     });
   }
+}
+
+export class DatabaseItem {
+  public title: string;
+  public databaseName: string;
+  public channel: string;
+  public language: string;
+  public downloaded = false;
+  public downloading = false;
+  public deleting = false;
+}
+
+export class Database {
+  public name: string;
+  public databaseItems: DatabaseItem[];
 }

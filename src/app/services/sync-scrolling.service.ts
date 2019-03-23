@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { setTimeout } from 'core-js';
 
 @Injectable()
 export class SyncScrollingService {
@@ -6,7 +7,7 @@ export class SyncScrollingService {
   public syncScrollingActivated = false;
   constructor() {}
 
-  private timer: NodeJS.Timer;
+  private timer: number;
 
   public onScroll() {
     clearTimeout(this.timer);

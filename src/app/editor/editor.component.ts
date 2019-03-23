@@ -18,6 +18,8 @@ import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
+import { setTimeout } from 'core-js';
+
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
@@ -27,8 +29,8 @@ import { StringService } from '../services/string.service';
 })
 export class EditorComponent
   implements OnInit, AfterViewInit, AfterContentInit {
-  private timer: NodeJS.Timer;
-
+  private timer: number;
+  // asd = c.timer
   // faChevronLeft = faChevronLeft;
   // faChevronRight = faChevronRight;
   @ViewChildren('verses')

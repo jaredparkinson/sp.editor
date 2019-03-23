@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import * as lodash from 'lodash';
+import { isEmpty } from 'lodash';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
 import { Verse } from '../../modelsJson/Verse';
 import { W } from '../../modelsJson/W';
@@ -36,9 +36,7 @@ export class VerseComponent implements OnInit {
     public stringService: StringService,
     public chapterService: ChapterService,
     public dataService: DataService,
-  ) {
-    
-  }
+  ) {}
 
   @ViewChild('span') span!: ElementRef;
 
@@ -57,7 +55,7 @@ export class VerseComponent implements OnInit {
       return;
     }
 
-    if (lodash.isEmpty(w.visibleRefs)) {
+    if (isEmpty(w.visibleRefs)) {
       this.chapterService.resetNotes();
     } else {
       if (w.clicked) {

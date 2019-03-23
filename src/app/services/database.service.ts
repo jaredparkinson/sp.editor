@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+import { cloneDeep } from 'lodash';
 // import * as PouchDB from 'pouchdb/dist/pouchdb';
 // import WorkerPouch from 'worker-pouch';
 import * as PouchDBFind from 'pouchdb-find';
@@ -90,7 +90,7 @@ export class DatabaseService {
       const verses = [];
       scriptureFiles.forEach(c => {
         c.verses.forEach(verse => {
-          const v = lodash.cloneDeep(verse);
+          const v = cloneDeep(verse);
           v._id = c._id + v._id;
           v.wTags = undefined;
           verses.push(v);

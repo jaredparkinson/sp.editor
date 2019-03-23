@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
-import * as lodash from 'lodash';
+import {} from 'lodash';
 import * as Yallist from 'yallist';
 import { Navigation } from '../modelsJson/Navigation';
 import { ChapterService } from '../services/chapter.service';

@@ -1,12 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+import { each } from 'lodash';
 // import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
   constructor() {
-    lodash.each(this.bookNames, book => {
+    each(this.bookNames, book => {
       this.bookConvert.push(new BookConvert(book));
     });
   }
@@ -96,7 +96,7 @@ export class UrlBuilder {
       'w-of-m',
       'Words of Mormon',
       'WofM',
-      'w-of-m'
+      'w-of-m',
     ],
     ['Mosiah', 'mosiah', 'Mosiah'],
     ['Alma', 'Alma', 'alma'],
@@ -116,7 +116,7 @@ export class UrlBuilder {
       'DC',
       'Doctrine and Covenants',
       'D&C',
-      'dc'
+      'dc',
     ],
     ['Official Declaration', 'OD', 'od'],
     ['Moses', 'pgp', 'Moses', 'moses'],
@@ -134,7 +134,7 @@ export class UrlBuilder {
       'js-m',
       'Joseph Smith Matthew',
       'JSM',
-      'js-m'
+      'js-m',
     ],
     [
       'Joseph Smith—History',
@@ -148,7 +148,7 @@ export class UrlBuilder {
       'js-h',
       'Joseph Smith History',
       'JSH',
-      'js-h'
+      'js-h',
     ],
     [
       'Articles of Faith',
@@ -156,8 +156,8 @@ export class UrlBuilder {
       'a-of-f',
       'Articles of Faith',
       'AofF',
-      'a-of-f'
-    ]
+      'a-of-f',
+    ],
   ];
   public bookConvert: BookConvert[] = [];
 
@@ -219,8 +219,8 @@ export class UrlBuilder {
   private getBookName(outUrl: string) {
     let bookName = '';
 
-    lodash.each(this.bookConvert, book => {
-      lodash.each(book.names, b => {
+    each(this.bookConvert, book => {
+      each(book.names, b => {
         // console.log(outUrl.includes(b));
         if (
           outUrl.includes(b.toLowerCase()) &&

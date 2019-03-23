@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+import { isEmpty, filter, sortBy } from 'lodash';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
@@ -88,11 +88,11 @@ export class SaveStateService {
         }
         const categories = json as ReferenceLabel[];
         categories.forEach(category => {
-          const filter = lodash.filter(this.data.noteCategories, c => {
+          const filteredCategories = filter(this.data.noteCategories, c => {
             return c.refLabelName === category.refLabelName;
           });
           // console.log(`Filter ${filter}`);
-          if (lodash.isEmpty(filter)) {
+          if (isEmpty(filteredCategories)) {
             // console.log(category);
             this.data.noteCategories.push(category);
           }
@@ -111,7 +111,7 @@ export class SaveStateService {
         );
       });
     // this.data.noteCategories.sort(n =>)
-    lodash.sortBy(this.data.noteCategories, f => {
+    sortBy(this.data.noteCategories, f => {
       return f.refLabelName;
     });
   }

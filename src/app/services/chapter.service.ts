@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+import { map, includes, find, reverse, sortBy, last } from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { NoteRef } from '../modelsJson/NoteRef';
 import { Paragraph } from '../modelsJson/Paragraph';
@@ -38,23 +38,21 @@ export class ChapterService {
     noteVisibility: Map<string, boolean>,
   ): Promise<void> {
     return new Promise<void>(resolve => {
-      lodash
-        .map(chapter.notes, note => {
-          return note.secondary;
-        })
-        .forEach(s => {
-          s.forEach(secondaryNote => {
-            noteVisibility.set(secondaryNote.id, false);
-            if (this.getSecondaryNoteVisibility(secondaryNote)) {
-              secondaryNote.clicked = false;
-              secondaryNote.noteRefs.forEach(noteRef => {
-                if (this.getNoteRefVisibility(noteRef)) {
-                  noteVisibility.set(secondaryNote.id, true);
-                }
-              });
-            }
-          });
+      map(chapter.notes, note => {
+        return note.secondary;
+      }).forEach(s => {
+        s.forEach(secondaryNote => {
+          noteVisibility.set(secondaryNote.id, false);
+          if (this.getSecondaryNoteVisibility(secondaryNote)) {
+            secondaryNote.clicked = false;
+            secondaryNote.noteRefs.forEach(noteRef => {
+              if (this.getNoteRefVisibility(noteRef)) {
+                noteVisibility.set(secondaryNote.id, true);
+              }
+            });
+          }
         });
+      });
 
       resolve();
     });
@@ -99,8 +97,7 @@ export class ChapterService {
     className: string,
   ) {
     return (
-      noteVisible &&
-      lodash.includes(secondaryNote.notePhrase.classList, className)
+      noteVisible && includes(secondaryNote.notePhrase.classList, className)
     );
   }
 
@@ -110,7 +107,7 @@ export class ChapterService {
     if (
       !noteRef.referenceLabel ||
       (noteRef.referenceLabel &&
-        lodash.find(this.saveState.data.noteCategories, c => {
+        find(this.saveState.data.noteCategories, c => {
           if (!noteRef.referenceLabel.refLabelName) {
             return true;
           }
@@ -174,7 +171,7 @@ export class ChapterService {
           if (wTag.visibleRefs.length === 0) {
             wTag.visibleRefs = undefined;
           } else {
-            wTag.visibleRefs = lodash.reverse(wTag.visibleRefs);
+            wTag.visibleRefs = reverse(wTag.visibleRefs);
             wTag.visibleRefCount = wTag.visibleRefs.length;
           }
         }
@@ -223,13 +220,11 @@ export class ChapterService {
       const context = this.parseHighlightedVerses(highlightNumbers[1]);
       verses.forEach(verse => {
         const verseNumber = parseInt(verse.id.replace('p', ''), 10);
-        verse.highlight = lodash.includes(highlight, verseNumber)
-          ? true
-          : false;
-        verse.context = lodash.includes(context, verseNumber) ? true : false;
+        verse.highlight = includes(highlight, verseNumber) ? true : false;
+        verse.context = includes(context, verseNumber) ? true : false;
       });
 
-      resolve(lodash.sortBy(highlight)[0]);
+      resolve(sortBy(highlight)[0]);
     });
   }
 
@@ -267,7 +262,7 @@ export class ChapterService {
     verse: Verse,
   ) {
     wTag.text = '';
-    wTag.text = verse.text.substring(wTag.id[0], lodash.last(wTag.id) + 1);
+    wTag.text = verse.text.substring(wTag.id[0], last(wTag.id) + 1);
     wTag.selected = false;
     wTag.clicked = false;
   }

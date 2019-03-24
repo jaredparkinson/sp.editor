@@ -61,6 +61,7 @@ import { SyncScrollingService } from './services/sync-scrolling.service';
 // // import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
 import { AWComponent } from './components/aw/aw.component';
+import { NoteComponent } from './components/note/note.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,6 +95,7 @@ export function load(saveState: SaveStateService) {
     SettingsParentComponent,
     NavigationComponent,
     AWComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,

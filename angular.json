@@ -26,7 +26,7 @@
               "src/favicon.512x512.png",
               "src/manifest.json"
             ],
-            "styles": ["src/styles.scss", "src/css.penguin/css.penguin.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {

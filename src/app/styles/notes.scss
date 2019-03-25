@@ -19,6 +19,12 @@ $font-stack: serif;
   }
 }
 
+div.verse-select-0,
+div.verse-select-1,
+div.verse-select-2 {
+  border-left: 3.5px solid #f68d2e;
+}
+
 .hide-notes {
   display: none;
 }

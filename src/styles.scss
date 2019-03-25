@@ -5,6 +5,7 @@
 @import './app/styles/material-icon.css';
 @import './app/styles/open-sans.css';
 @import 'css.penguin/view_vars';
+@import './app/styles/w-tags.scss';
 @import './src/app/styles/navigation';
 @import './src/app/styles/paragraphs';
 @import './src/app/styles/grid';
@@ -30,22 +31,6 @@ body {
   }
   .none {
     display: none;
-  }
-}
-
-@mixin w-super($selector, $color) {
-  $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z';
-  @each $letter in $letters {
-    g.#{$selector}-#{$letter}::before {
-      content: $letter;
-      color: $color;
-      vertical-align: super;
-      border-style: none !important;
-      text-decoration: none !important;
-      font-size: 0.75em;
-      font-style: italic;
-    }
   }
 }
 
@@ -81,107 +66,6 @@ note > div.note-disabled {
   opacity: 0.4;
   user-select: none;
 }
-.show-poetry {
-  w {
-    &.poetry,
-    &.prose {
-      &::before {
-        content: ' ';
-        display: block;
-      }
-    }
-  }
-  .app-verse:first-of-type w.poetry:first-of-type::before {
-    content: '' !important;
-  }
-}
-
-.note-superscript {
-  .note-title {
-    // .note-short-title {
-    display: none !important;
-  }
-  note {
-    div {
-      margin-left: 0 !important;
-      p {
-        &.note-phrase {
-          display: grid !important;
-          grid-template-columns: 25px 1fr;
-          grid-column-gap: 6px;
-          padding-left: 0;
-          margin-left: 0;
-          // margin-left: -12px;
-          .note-superscript {
-            justify-self: right;
-            color: rgba(0, 0, 0, 0.4);
-          }
-        }
-        &.note-reference-tc,
-        &.note-reference-eng,
-        &.note-reference-new {
-          margin-left: 2em;
-        }
-      }
-    }
-  }
-  span {
-    &.verse {
-      @include w-super('eng', #007fa4);
-      @include w-super('new', maroon);
-      @include w-super('tc', #098109);
-      w {
-        &.eng-color {
-          color: #007fa4;
-        }
-        &.new-color {
-          color: maroon;
-        }
-        &.tc-color {
-          color: #098109;
-        }
-      }
-    }
-  }
-}
-
-div.verse-select-0,
-div.verse-select-1,
-div.verse-select-2 {
-  border-left: 3.5px solid #f68d2e;
-}
-
-// w.verse-select-0+w {
-//   border-bottom: 1px solid grey;
-// }
-
-w.verse-select-1 // w.verse-select-1+w 
-
- {
-  border-bottom: 3px solid #f68d2e;
-}
-
-w.verse-select-0.note-select-1 // w.verse-select-1+w 
-
- {
-  border-bottom: 3px solid #f68d2e; // !important;
-}
-
-w.verse-select-2,
-// w.verse-select-2+w 
-w.verse-select-3,
-// w.verse-select-2+w 
-w.verse-select-4,
-// w.verse-select-2+w 
-w.verse-select-5,
-w.verse-select-0.note-select-1.wRef {
-  border-bottom: 3px solid #dc143c;
-}
-
-.wtag {
-  border-bottom: 1px solid black;
-}
-
 body.find {
   padding-top: 35px;
 }

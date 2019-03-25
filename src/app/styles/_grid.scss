@@ -187,9 +187,9 @@ button {
         &.settings-container,
         &.hidden-notes {
           grid-template-columns: ($bodyBlockWidth + $rightPaneWidth) 0px;
-          .content-pane > div {
-            width: $bodyBlockWidth;
-          }
+          // .content-pane > div {
+          //   width: $bodyBlockWidth;
+          // }
         }
         &.settings-container {
           overflow-y: scroll;
@@ -202,9 +202,9 @@ button {
     .parent-container,
     .parent-container.hidden-notes {
       grid-template-columns: 100vw 0;
-      .content-pane > div {
-        width: 100vw;
-      }
+      // .content-pane > div {
+      //   // width: 100vw;
+      // }
     }
   }
 

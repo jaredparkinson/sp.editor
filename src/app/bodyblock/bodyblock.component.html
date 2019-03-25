@@ -1,117 +1,84 @@
 <div class="content-pane grid " id="appBodyBlock" (scroll)="this.onScroll()">
-  <div>
-    <!-- (wheel)="this.onScroll()"
-  (touchmove)="this.onScroll()" -->
-    <!-- <div id="highlight-holder" class="{{this.highlightClasses}}"></div> -->
-    <!-- (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)" -->
-
-    <div class="left-content-pane">
-      <div class="body-block-nav-flex">
-        <button
-          class="body-block-nav"
-          id="btnPreviousChapter"
-          (click)="this.btnNavigationButtons(-1)"
-          [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
-        >
-          <i class="material-icons caret left">keyboard_arrow_left</i>
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="bypassSecurityTrustHtml"
-      id="bodyBlock"
-      class="body-block animated faster"
-      [ngClass]="{
-        'hidden-paragraph': !saveState.data.paragraphsVisible,
-        'show-paragraph': saveState.data.paragraphsVisible,
-        'show-poetry': saveState.data.poetryVisible,
-        'notes-hide-original': !saveState.data.originalNotesVisible,
-        'notes-show-original': saveState.data.originalNotesVisible,
-        fadeOut: this.chapterService.chapterFadeOut,
-        fadeIn: !this.chapterService.chapterFadeOut
-      }"
-      (swiperight)="swipeChapter($event, -1)"
-      (swipeleft)="swipeChapter($event, 1)"
-    >
-      <div id="bodyBlockTop"></div>
-      <!-- <ng-container *ngIf="dataService.chapter2.paragraphs.length !== 0"> -->
-      <!-- <header
-        [innerHTML]="
-          sanitizer.bypassSecurityTrustHtml(dataService.chapter2.header)
-        "
-      ></header> -->
-      <header class="body-block-header">
-        <app-verse
-          class="app-verse"
-          [verse]="verse"
-          *ngFor="let verse of dataService.header"
-        ></app-verse>
-      </header>
-
-      <app-paragraph
-        class="hidden-paragraph"
-        [paragraph]="paragraph"
-        *ngFor="let paragraph of dataService.paragraphs"
-      ></app-paragraph>
-      <!-- </ng-container> -->
-      <!-- <div<<
-      class="hidden-paragraph"
-      *ngFor="
-        let paragraph of dataService.chapter2.paragraphs;
-        trackBy: trackById
-      "
-      id=>"{{ paragraph.id }}"
-    >
-      <app-verse
-        [verse]="verse"
-        *ngFor="
-          let verse of paragraph.verses;
-          let i = index;
-          trackBy: trackById
-        "
-        #verses
-      ></app-verse>
-    </div> -->
-      <!-- <div
-      *ngIf="dataService.chapter2.bb"
-      [innerHtml]="dataService.chapter2.bodyBlock"
-    ></div> -->
-      <div id="body-block-whitespace" class="body-block-whitespace"></div>
-    </div>
-
-    <div class="right-content-pane">
-      <div class="body-block-nav-flex">
-        <button
-          class="body-block-nav"
-          [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
-          id="btnNextChapter"
-          (click)="this.btnNavigationButtons(1)"
-        >
-          <!-- (click)="navService.btnNextPagePress(dataService.chapter2.pageUrl)" -->
-          <!-- Secondary Notes -->
-          <i _ngcontent-c5="" class="material-icons caret right"
-            >keyboard_arrow_right</i
-          >
-        </button>
-      </div>
+  <!-- <div> -->
+  <div class="left-content-pane">
+    <div class="body-block-nav-flex">
+      <button
+        class="body-block-nav"
+        id="btnPreviousChapter"
+        (click)="this.btnNavigationButtons(-1)"
+        [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
+      >
+        <i class="material-icons caret left">keyboard_arrow_left</i>
+      </button>
     </div>
   </div>
+
+  <div
+    class="bypassSecurityTrustHtml"
+    id="bodyBlock"
+    class="body-block animated faster"
+    [ngClass]="{
+      'hidden-paragraph': !saveState.data.paragraphsVisible,
+      'show-paragraph': saveState.data.paragraphsVisible,
+      'show-poetry': saveState.data.poetryVisible,
+      'notes-hide-original': !saveState.data.originalNotesVisible,
+      'notes-show-original': saveState.data.originalNotesVisible,
+      fadeOut: this.chapterService.chapterFadeOut,
+      fadeIn: !this.chapterService.chapterFadeOut
+    }"
+    (swiperight)="swipeChapter($event, -1)"
+    (swipeleft)="swipeChapter($event, 1)"
+  >
+    <div id="bodyBlockTop"></div>
+    <header class="body-block-header">
+      <app-verse
+        class="app-verse"
+        [verse]="verse"
+        *ngFor="let verse of dataService.header"
+      ></app-verse>
+    </header>
+
+    <app-paragraph
+      class="hidden-paragraph"
+      [paragraph]="paragraph"
+      *ngFor="let paragraph of dataService.paragraphs"
+    ></app-paragraph>
+    <!-- <div class="body-block-navigation">
+      <button
+        class="body-block-nav"
+        id="btnPreviousChapter"
+        (click)="this.btnNavigationButtons(-1)"
+        [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
+      >
+        <i class="material-icons caret left">keyboard_arrow_left</i>
+      </button>
+      <button
+        class="body-block-nav"
+        [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
+        id="btnNextChapter"
+        (click)="this.btnNavigationButtons(1)"
+      >
+        <i _ngcontent-c5="" class="material-icons caret right"
+          >keyboard_arrow_right</i
+        >
+      </button>
+    </div> -->
+    <div id="body-block-whitespace" class="body-block-whitespace"></div>
+  </div>
+
+  <div class="right-content-pane">
+    <div class="body-block-nav-flex">
+      <button
+        class="body-block-nav"
+        [ngClass]="{ none: mediaQueryService.isSmallScreen() }"
+        id="btnNextChapter"
+        (click)="this.btnNavigationButtons(1)"
+      >
+        <i _ngcontent-c5="" class="material-icons caret right"
+          >keyboard_arrow_right</i
+        >
+      </button>
+    </div>
+  </div>
+  <!-- </div> -->
 </div>
-<!-- 
-<div id="iosFooter" class="iosFooter" *ngIf="this.isIOS">
-  <button
-    id="btnFooterPreviousChapter"
-    (click)="this.router.navigateByUrl(dataService.chapter2.previousPage)"
-  >
-    <i class="material-icons caret left">keyboard_arrow_left</i>
-  </button>
-  <button
-    id="btnFooterNextChapter"
-    (click)="this.router.navigateByUrl(dataService.chapter2.nextPage)"
-  >
-    <i _ngcontent-c5="" class="material-icons caret right"
-      >keyboard_arrow_right</i
-    >
-  </button>
-</div> -->

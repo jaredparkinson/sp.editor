@@ -18,6 +18,7 @@
     <div
       class="secondary-note"
       [class]="filterClassList(secondaryNote.classList)"
+      
       [ngClass]="{ 'verse-select-1': secondaryNote.clicked }"
       *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
       id="{{ secondaryNote.id }}"

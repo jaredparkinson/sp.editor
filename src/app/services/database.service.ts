@@ -3,7 +3,6 @@ import { cloneDeep, merge, find, filter, uniq } from 'lodash';
 // import * as PouchDB from 'pouchdb/dist/pouchdb';
 // import WorkerPouch from 'worker-pouch';
 import * as PouchDBFind from 'pouchdb-find';
-import * as WorkerPouch from 'worker-pouch';
 
 import { Chapter2 } from '../modelsJson/Chapter';
 import { HttpClient } from '@angular/common/http';
@@ -57,7 +56,7 @@ export class DatabaseService {
   }
   // public PouchDB = require('pouchdb-browser');
   // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
-  public db = new PouchDB('alpha.oneinthinehand.org');
+  public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
 
   public databaseList: Database[];
   // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');

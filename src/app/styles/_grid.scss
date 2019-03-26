@@ -18,48 +18,7 @@
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
-  $leftPaneWidth: $vw2;
-  $bodyBlockWidth: $vw7_5;
-  $rightPaneWidth: $vw2_5;
-
-  .body .router-outlet {
-    grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
-    .parent-container {
-      display: grid;
-      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-      &.settings-container,
-      &.hidden-notes {
-        grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
-        .content-pane > div {
-          width: $bodyBlockWidth;
-        }
-      }
-    }
-  }
-  .left-pane-container {
-    width: $leftPaneWidth;
-    background-color: whitesmoke;
-  }
-
-  .left-pane nav {
-    width: $leftPaneWidth;
-  }
-
-  .menu-bar {
-    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
-  }
-
-  #notesSettings {
-    right: $rightPaneWidth;
-  }
-}
-
-@media only screen and (min-width: 1280px) {
-  $leftPaneWidth: $vw2;
-  $bodyBlockWidth: $vw7;
-  $rightPaneWidth: $vw3;
-
+@mixin gridBody($mediaQuery, $leftPaneWidth, $bodyBlockWidth, $rightPaneWidth) {
   .body .router-outlet {
     grid-template-columns: $leftPaneWidth($bodyBlockWidth + $rightPaneWidth);
     .parent-container {
@@ -95,6 +54,97 @@
     right: $rightPaneWidth;
   }
 }
+
+@include gridBody(
+  '@media only screen and (min-width: 1024px) and (max-width: 1279.98px)',
+  $vw2,
+  $vw7_5,
+  $vw2_5
+);
+
+// @media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
+//   $leftPaneWidth: $vw2;
+//   $bodyBlockWidth: $vw7_5;
+//   $rightPaneWidth: $vw2_5;
+
+//   .body .router-outlet {
+//     grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
+//     .parent-container {
+//       display: grid;
+//       grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+//       &.settings-container,
+//       &.hidden-notes {
+//         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
+//         .content-pane > div {
+//           width: $bodyBlockWidth;
+//         }
+//       }
+//     }
+//   }
+//   .left-pane-container {
+//     width: $leftPaneWidth;
+//     background-color: whitesmoke;
+//   }
+
+//   .left-pane nav {
+//     width: $leftPaneWidth;
+//   }
+
+//   .menu-bar {
+//     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+//   }
+
+//   #notesSettings {
+//     right: $rightPaneWidth;
+//   }
+// }
+
+@include gridBody(
+  '@media only screen and (min-width: 1280px)',
+  $vw2,
+  $vw7,
+  $vw3
+);
+// @media only screen and (min-width: 1280px) {
+//   $leftPaneWidth: $vw2;
+//   $bodyBlockWidth: $vw7;
+//   $rightPaneWidth: $vw3;
+
+//   .body .router-outlet {
+//     grid-template-columns: $leftPaneWidth($bodyBlockWidth + $rightPaneWidth);
+//     .parent-container {
+//       display: grid;
+//       grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+//       &.settings-container,
+//       &.hidden-notes {
+//         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
+//         .content-pane > div {
+//           width: $bodyBlockWidth;
+//         }
+//       }
+//     }
+//   }
+
+//   .left-pane-container {
+//     width: $leftPaneWidth;
+//   }
+//   .right-pane footer,
+//   .right-pane-editor footer {
+//     width: $rightPaneWidth;
+//   }
+
+//   .left-pane nav {
+//     width: $leftPaneWidth;
+//   }
+
+//   .menu-bar {
+//     grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+//   }
+
+//   #notesSettings {
+//     right: $rightPaneWidth;
+//   }
+// }
 
 button {
   &:hover,

@@ -40,10 +40,12 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.translate.setDefaultLang('en');
 
     this.swUpdate.available.subscribe(evt => {
-      matCSS.toast({
-        html: `<span onclick="location.reload()">Click here to update</span>`,
-        displayLength: 1000000,
-      });
+      if (!document.querySelector('.update-button')) {
+        matCSS.toast({
+          html: `<span class="update-button" onclick="location.reload()">Click here to update</span>`,
+          displayLength: 1000000,
+        });
+      }
     });
     if (this.electronService.isElectron()) {
     }

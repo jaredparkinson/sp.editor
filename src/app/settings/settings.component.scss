@@ -23,7 +23,7 @@
   $largeSettingsColumn: 225px;
 
   @include settings-grid('screen and (min-width: 320px)', '90vw', 90vw);
-  @include settings-grid('screen and (min-width: 500px)', '60vw', (60vw));
+  @include settings-grid('screen and (min-width: 1024px)', '60vw', (60vw));
   // @include settings-grid('screen and (min-width: 740px)', '70vw', (70vw));
   margin-bottom: 25px;
   label {
@@ -40,4 +40,42 @@
 }
 .download-btn {
   text-align: center;
+}
+
+ul.download.collection {
+  @mixin download-collection-grid($mediaQuery, $gridTemplateColumn) {
+    @media #{$mediaQuery} {
+      grid-template-columns: #{$gridTemplateColumn};
+    }
+  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr !important;
+  grid-gap: 10px;
+  @include download-collection-grid(
+    ' screen and (max-width: 1200px)',
+    '1fr 1fr 1fr !important'
+  );
+  @include download-collection-grid(
+    ' screen and (max-width: 700px)',
+    '1fr 1fr  !important'
+  );
+  @include download-collection-grid(
+    ' screen and (max-width: 500px)',
+    '1fr !important'
+  );
+
+  justify-content: center;
+  .collection-item {
+    padding: 0px;
+  }
+  > * {
+    display: grid;
+    justify-content: center;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+    font-size: 12px;
+    > * {
+      width: 100%;
+    }
+  }
 }

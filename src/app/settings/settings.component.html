@@ -1,134 +1,134 @@
 <div class="section  settings-page">
-  <div class="">
-    <div class="">
-      <div class="settings-group">
-        <ul class="collection">
-          <li class="collection-item">
-            New Notes
-            <i class="switch right">
-              <label>
-                <input
-                  type="checkbox"
-                  [(ngModel)]="saveState.data.newNotesVisible"
-                  (click)="this.saveSettings()"
-                />
-                <span class="lever"></span>
-              </label>
-            </i>
-          </li>
-          <li class="collection-item">
-            English Notes
-            <i class="switch right">
-              <label>
-                <input
-                  type="checkbox"
-                  [(ngModel)]="saveState.data.englishNotesVisible"
-                />
-                <span class="lever"></span>
-              </label>
-            </i>
-          </li>
-          <li class="collection-item">
-            Translator Notes
-            <i class="switch right">
-              <label>
-                <input
-                  type="checkbox"
-                  [(ngModel)]="saveState.data.translatorNotesVisible"
-                />
-                <span class="lever"></span>
-              </label>
-            </i>
-          </li>
-          <li class="collection-item">
-            Secondary Notes
-            <i class="switch right">
-              <label>
-                <input
-                  type="checkbox"
-                  [(ngModel)]="saveState.data.secondaryNotesVisible"
-                />
-                <span class="lever"></span>
-              </label>
-            </i>
-          </li>
-          <li
-            class="collection-item"
-            *ngFor="let category of saveState.data.noteCategories"
-          >
-            {{ category.refLabelName
-            }}<i class="switch right">
-              <label>
-                <input
-                  type="checkbox"
-                  [(ngModel)]="category.visible"
-                  (click)="this.saveSettings()"
-                />
-                <span class="lever"></span>
-              </label>
-            </i>
-          </li>
-          <li class="collection-item">
-            Line Height
+  <div class="settings-group">
+    <ul class="collection">
+      <li class="collection-item">
+        New Notes
+        <i class="switch right">
+          <label>
             <input
-              type="text"
-              name="line-height"
-              (keyup)="this.saveSettings()"
-              [(ngModel)]="saveState.data.lineHeight"
+              type="checkbox"
+              [(ngModel)]="saveState.data.newNotesVisible"
+              (click)="this.saveSettings()"
             />
-          </li>
-          <li class="collection-item">
-            Font Size
+            <span class="lever"></span>
+          </label>
+        </i>
+      </li>
+      <li class="collection-item">
+        English Notes
+        <i class="switch right">
+          <label>
             <input
-              type="text"
-              name="line-height"
-              (keyup)="this.saveSettings()"
-              [(ngModel)]="saveState.data.fontSize"
+              type="checkbox"
+              [(ngModel)]="saveState.data.englishNotesVisible"
             />
-          </li>
-          <li
-            class="collection-item"
-            *ngFor="let download of currentDatabaseList.databaseItems"
-          >
-            {{ download.title }}
-            <a
-              [disabled]="download.downloading"
-              (click)="downloadService.downloadScriptures2(download)"
-              class="waves-effect waves-light btn-large blue"
-              *ngIf="!download.downloaded && !download.downloading"
-            >
-              Download
-            </a>
-            <!-- (click)="downloadService.downloadScriptures2(download)" -->
-            <a
-              [disabled]="download.downloading"
-              class="waves-effect waves-light btn-large blue"
-              *ngIf="!download.downloaded && download.downloading"
-            >
-              Downloading
-            </a>
-            <a
-              [disabled]="download.deleting"
-              class="waves-effect waves-light btn-large blue"
-              (click)="downloadService.downloadScriptures2(download)"
-              *ngIf="download.downloaded && !download.downloading"
-            >
-              Redownload
-            </a>
-          </li>
-          <li class="collection-item">
-            <ng-container *ngIf="this.updating">
-              <a class="btn-large blue"> Checking for updates</a>
-            </ng-container>
-            <ng-container *ngIf="!this.updating">
-              <a class="btn-large blue" (click)="this.checkForUpdates()">
-                Check for updates
-              </a>
-            </ng-container>
-          </li>
-        </ul>
-      </div>
-    </div>
+            <span class="lever"></span>
+          </label>
+        </i>
+      </li>
+      <li class="collection-item">
+        Translator Notes
+        <i class="switch right">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="saveState.data.translatorNotesVisible"
+            />
+            <span class="lever"></span>
+          </label>
+        </i>
+      </li>
+      <li class="collection-item">
+        Secondary Notes
+        <i class="switch right">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="saveState.data.secondaryNotesVisible"
+            />
+            <span class="lever"></span>
+          </label>
+        </i>
+      </li>
+      <li
+        class="collection-item"
+        *ngFor="let category of saveState.data.noteCategories"
+      >
+        {{ category.refLabelName
+        }}<i class="switch right">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="category.visible"
+              (click)="this.saveSettings()"
+            />
+            <span class="lever"></span>
+          </label>
+        </i>
+      </li>
+      <li class="collection-item">
+        Line Height
+        <input
+          type="text"
+          name="line-height"
+          (keyup)="this.saveSettings()"
+          [(ngModel)]="saveState.data.lineHeight"
+        />
+      </li>
+      <li class="collection-item">
+        Font Size
+        <input
+          type="text"
+          name="line-height"
+          (keyup)="this.saveSettings()"
+          [(ngModel)]="saveState.data.fontSize"
+        />
+      </li>
+
+      <li class="collection-item">
+        <ng-container *ngIf="this.updating">
+          <a class="btn-large blue"> Checking for updates</a>
+        </ng-container>
+        <ng-container *ngIf="!this.updating">
+          <a class="btn-large blue" (click)="this.checkForUpdates()">
+            Check for updates
+          </a>
+        </ng-container>
+      </li>
+    </ul>
+    <ul class="collection download">
+      <li
+        class="collection-item"
+        *ngFor="let download of currentDatabaseList.databaseItems"
+      >
+        <img src="assets/book_placeholder.png" alt="book placeholder" />
+        <span>{{ download.title }}</span>
+        <a
+          [disabled]="download.downloading"
+          (click)="downloadService.downloadScriptures2(download)"
+          class="waves-effect waves-light btn-large blue"
+          *ngIf="!download.downloaded && !download.downloading"
+        >
+          Download
+        </a>
+        <!-- (click)="downloadService.downloadScriptures2(download)" -->
+        <a
+          [disabled]="download.downloading"
+          class="waves-effect waves-light btn-large blue"
+          *ngIf="!download.downloaded && download.downloading"
+        >
+          Downloading
+        </a>
+        <a
+          [disabled]="download.deleting"
+          class="waves-effect waves-light btn-large blue"
+          (click)="downloadService.downloadScriptures2(download)"
+          *ngIf="download.downloaded && !download.downloading"
+        >
+          Redownload
+        </a>
+      </li>
+    </ul>
   </div>
   <!-- <div class="">
     <div class="">

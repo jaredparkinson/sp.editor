@@ -173,6 +173,9 @@ button {
     .parent-container,
     .parent-container.hidden-notes {
       grid-template-columns: 100vw 0;
+      .grid.content-pane {
+        width: 100vw !important;
+      }
     }
   }
 

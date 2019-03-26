@@ -196,6 +196,12 @@ li {
   background-color: rgb(207, 232, 235);
 }
 
+#bodyBlock.hidden-paragraph {
+  p {
+    margin: 0;
+  }
+}
+
 // body {
 //   overflow: hidden;
 //   background-color: white;

@@ -1,7 +1,7 @@
 @import './color';
 
 @mixin gridBody($mediaQuery, $leftPaneWidth, $bodyBlockWidth, $rightPaneWidth) {
-  .body .router-outlet {
+  .body {
     grid-template-columns: $leftPaneWidth($bodyBlockWidth + $rightPaneWidth);
     .parent-container {
       display: grid;
@@ -9,7 +9,7 @@
       &.settings-container,
       &.hidden-notes {
         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
-        .content-pane > div {
+        .content-pane {
           width: $bodyBlockWidth;
         }
       }

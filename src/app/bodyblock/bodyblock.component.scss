@@ -5,182 +5,188 @@ $font-stack: serif;
 body {
   font-family: $font-stack;
 }
+.scroll-container {
+  overflow-y: scroll;
 
-.content-pane {
-  display: grid;
-  line-height: normal;
-  // @media only screen and (max-width: 1023.98px) {
-  //   grid-template-columns: 10vw 80vw 10vw;
-  // }
-
-  // @media only screen and (min-width: 1024px) {
-  // }
-  grid-template-columns: $fr_5 $fr11 $fr_5;
-  // > div {
-  // }
-  &#appBodyBlock {
-    overflow-y: scroll;
-    height: 100vh;
-  }
-
-  .body-block {
-    span.part {
-      margin-left: 6pt;
-    }
-
-    span.answer {
-      text-indent: 1em;
-    }
-  }
-
-  span.break {
-    margin-bottom: 6pt;
-  }
-
-  .show-poetry {
-    div.hidden-paragraph {
-      span.line {
-        padding-right: 6pt;
-      }
-    }
-    w.poetry::before {
-      content: '\A';
-      white-space: pre;
-    }
-  }
-
-  //This is styling for when poetry is being shown
-  .body-block.show-poetry {
-    // w.line-start::before {
-    //   content: "\A";
-    //   // background: inherit;
-    //   // display: block;
+  .content-pane {
+    display: grid;
+    line-height: normal;
+    // @media only screen and (max-width: 1023.98px) {
+    //   grid-template-columns: 10vw 80vw 10vw;
     // }
 
-    & .break {
-      display: block;
+    // @media only screen and (min-width: 1024px) {
+    // }
+    grid-template-columns: $fr_5 $fr11 $fr_5;
+    // > div {
+    // }
+
+    .body-block-whitespace {
+      height: 95vh; //This starts at 100vh = 100 percent. Take it down from there. It may need to be 100 to handle cases where there are too many notes to fit on the last screen.
+    }
+    &#appBodyBlock {
+      // overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .body-block {
+      span.part {
+        margin-left: 6pt;
+      }
+
+      span.answer {
+        text-indent: 1em;
+      }
+    }
+
+    span.break {
       margin-bottom: 6pt;
     }
-  }
 
-  #bodyBlock {
-    .paragraph w.verse-number {
-      vertical-align: super;
-      font-size: 8pt;
+    .show-poetry {
+      div.hidden-paragraph {
+        span.line {
+          padding-right: 6pt;
+        }
+      }
+      w.poetry::before {
+        content: '\A';
+        white-space: pre;
+      }
     }
-  }
 
-  .notes-hide-original {
-    w.marker {
+    //This is styling for when poetry is being shown
+    .body-block.show-poetry {
+      // w.line-start::before {
+      //   content: "\A";
+      //   // background: inherit;
+      //   // display: block;
+      // }
+
+      & .break {
+        display: block;
+        margin-bottom: 6pt;
+      }
+    }
+
+    #bodyBlock {
+      .paragraph w.verse-number {
+        vertical-align: super;
+        font-size: 8pt;
+      }
+    }
+
+    .notes-hide-original {
+      w.marker {
+        display: none;
+      }
+    }
+
+    .notes-show-original {
+      w.study-note-ref {
+        color: #007fa4;
+      }
+
+      w.marker {
+        font-style: italic;
+        font-size: 8pt;
+        display: initial;
+        vertical-align: super;
+        /* when original notes showing, display:none */
+      }
+    }
+    @supports (-webkit-overflow-scrolling: touch) {
+      .body-block-nav-flex {
+        display: none !important;
+      }
+    }
+    .body-block-nav-flex {
+      display: flex;
+      justify-content: center;
+    }
+
+    span.small-caps {
+      font-variant: small-caps;
+    }
+
+    span.uppercase {
+      text-transform: uppercase;
+    }
+
+    span.clarity-word {
+      font-style: italic;
+    }
+
+    span.key-letter {
       display: none;
     }
-  }
 
-  .notes-show-original {
-    w.study-note-ref {
-      color: #007fa4;
-    }
-
-    w.marker {
+    span.key-word {
       font-style: italic;
-      font-size: 8pt;
-      display: initial;
-      vertical-align: super;
-      /* when original notes showing, display:none */
     }
-  }
-  @supports (-webkit-overflow-scrolling: touch) {
-    .body-block-nav-flex {
-      display: none !important;
+
+    p.subtitle,
+    p.title-number,
+    #subtitle1 {
+      text-align: center;
     }
-  }
-  .body-block-nav-flex {
-    display: flex;
-    justify-content: center;
-  }
 
-  span.small-caps {
-    font-variant: small-caps;
-  }
-
-  span.uppercase {
-    text-transform: uppercase;
-  }
-
-  span.clarity-word {
-    font-style: italic;
-  }
-
-  span.key-letter {
-    display: none;
-  }
-
-  span.key-word {
-    font-style: italic;
-  }
-
-  p.subtitle,
-  p.title-number,
-  #subtitle1 {
-    text-align: center;
-  }
-
-  p.title-number {
-    font-weight: bold;
-  }
-
-  p.study-summary1,
-  p.study-intro {
-    font-style: italic;
-  }
-
-  h2#title1 {
-    text-align: center;
-    font-size: 12pt;
-  }
-
-  p.signature {
-    font-variant: small-caps;
-  }
-
-  button.body-block-nav {
-    &:hover,
-    &:focus {
-      outline: none;
-      border: none;
-      background-color: initial !important;
+    p.title-number {
+      font-weight: bold;
     }
-    i {
-      font-size: 48px;
+
+    p.study-summary1,
+    p.study-intro {
+      font-style: italic;
     }
-    svg {
-      height: 48px;
-      width: 48px;
-      path {
-        fill: rgb(196, 190, 190);
+
+    h2#title1 {
+      text-align: center;
+      font-size: 12pt;
+    }
+
+    p.signature {
+      font-variant: small-caps;
+    }
+
+    button.body-block-nav {
+      &:hover,
+      &:focus {
+        outline: none;
+        border: none;
+        background-color: initial !important;
       }
-    }
-    &#btnNextChapter {
+      i {
+        font-size: 48px;
+      }
       svg {
-        transform: scaleX(-1);
+        height: 48px;
+        width: 48px;
+        path {
+          fill: rgb(196, 190, 190);
+        }
+      }
+      &#btnNextChapter {
+        svg {
+          transform: scaleX(-1);
+        }
       }
     }
+    //   @for $x from 1 to 300 {
+    //     #highlight-holder.p#{
+    //  $x
+    //   }
+
+    //   ~#bodyBlock #p#{
+    //  $x
+    // }
+
+    //   {
+    //   border-left: 3px solid #f68d2e;
+    // }
+    // }
   }
-  //   @for $x from 1 to 300 {
-  //     #highlight-holder.p#{
-  //  $x
-  //   }
-
-  //   ~#bodyBlock #p#{
-  //  $x
-  // }
-
-  //   {
-  //   border-left: 3px solid #f68d2e;
-  // }
-  // }
 }
-
 .body-block-header {
   display: grid;
   justify-items: center;

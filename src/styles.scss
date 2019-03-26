@@ -170,10 +170,6 @@ li {
   }
 }
 
-.body-block-whitespace {
-  height: 92vh; //This starts at 100vh = 100 percent. Take it down from there. It may need to be 100 to handle cases where there are too many notes to fit on the last screen.
-}
-
 .study-notes-whitespace {
   height: 90vh; //This starts at 100vh = 100 percent. Take it down from there.
 }
@@ -227,21 +223,26 @@ w.dominant {
 #notesSettings {
   z-index: 400;
 }
+@mixin overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 300;
+  opacity: 1;
+}
 @media only screen and (max-width: 499.98px),
   (orientation: portrait) and (max-width: 1023.98px) {
-  .overlay,
   .overlay-toggle {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 300;
-    opacity: 1;
+    @include overlay();
     // background: rgba(0, 0, 0, .288);
   }
 }
 
+.overlay {
+  @include overlay();
+}
 .hidden {
   visibility: hidden;
 }

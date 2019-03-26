@@ -58,6 +58,16 @@ export class FilesComponent implements OnInit {
     // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
   }
 
+  displayNavShortTitle() {
+    const nav = document.querySelector('div.navigation-pane');
+
+    return nav ? (nav as HTMLElement).offsetWidth < 200 : false;
+  }
+  displayNavTitle() {
+    const nav = document.querySelector('div.navigation-pane');
+
+    return nav ? (nav as HTMLElement).offsetWidth > 200 : false;
+  }
   flattenNavigation(navigation: Navigation[], parentNavigation: Navigation) {
     if (parentNavigation.navigation) {
       parentNavigation.navigation.forEach(nav => {

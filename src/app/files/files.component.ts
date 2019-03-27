@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {} from 'lodash';
 import * as Yallist from 'yallist';
+import { Chapter2 } from '../modelsJson/Chapter';
 import { Navigation } from '../modelsJson/Navigation';
 import { ChapterService } from '../services/chapter.service';
+import { DatabaseService } from '../services/database.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
@@ -32,6 +34,7 @@ export class FilesComponent implements OnInit {
     private router: Router,
     private urlBuilder: UrlBuilder,
     public httpClient: HttpClient,
+    private databaseService: DatabaseService,
   ) {}
 
   ngOnInit() {
@@ -113,11 +116,47 @@ export class FilesComponent implements OnInit {
     const addressBar = document.getElementById('addressBar');
     addressBar.focus();
   }
-  addressBarKeyPress(event: KeyboardEvent) {
+  async addressBarKeyPress(event: KeyboardEvent) {
+    console.log(event.key);
+    // this.databaseService.db
+    //   .createIndex({
+    //     index: { fields: ['verses.notes'] },
+    //   })
+    //   .then(value => {
+    //     console.log(value);
+    //   })
+    //   .catch(r => {
+    //     console.log(r);
+    //   });
+
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(
         'addressBar',
       ) as HTMLInputElement).value;
+      const responses = await this.databaseService.db
+        .allDocs()
+        .then(docs => {
+          docs.rows.forEach(f => {
+            if ((f.doc as Chapter2).verses) {
+              (f.doc as Chapter2).verses.forEach(v => {
+                if (v.text.toLowerCase().includes(addressBarValue)) {
+                  console.log(
+                    v.text.toLowerCase().includes(addressBarValue)
+                      ? v.text.toLowerCase()
+                      : '',
+                  );
+                }
+              });
+            }
+          });
+          console.log(docs);
+        })
+        .catch(r => {
+          console.log(r);
+        });
+      // (this.databaseService.db as any).getIndexes();
+      console.log(responses);
+
       addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();
     }

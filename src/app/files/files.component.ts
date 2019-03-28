@@ -11,6 +11,7 @@ import { DatabaseService } from '../services/database.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
+import { Verse } from '../modelsJson/Verse';
 
 @Component({
   selector: 'app-files',
@@ -118,44 +119,34 @@ export class FilesComponent implements OnInit {
   }
   async addressBarKeyPress(event: KeyboardEvent) {
     console.log(event.key);
-    // this.databaseService.db
-    //   .createIndex({
-    //     index: { fields: ['verses.notes'] },
-    //   })
-    //   .then(value => {
-    //     console.log(value);
-    //   })
-    //   .catch(r => {
-    //     console.log(r);
-    //   });
 
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(
         'addressBar',
       ) as HTMLInputElement).value;
+
+      let verses: Verse[] = [];
       const responses = await this.databaseService.db
-        .allDocs()
+        .allDocs({ include_docs: true })
         .then(docs => {
+          console.log(docs);
           docs.rows.forEach(f => {
-            if ((f.doc as Chapter2).verses) {
+            if (f.doc && (f.doc as Chapter2).verses) {
               (f.doc as Chapter2).verses.forEach(v => {
                 if (v.text.toLowerCase().includes(addressBarValue)) {
-                  console.log(
-                    v.text.toLowerCase().includes(addressBarValue)
-                      ? v.text.toLowerCase()
-                      : '',
-                  );
+                  verses.push(v);
+                  // console.log(v.text);
                 }
               });
             }
           });
-          console.log(docs);
+          console.log(verses.length);
         })
         .catch(r => {
           console.log(r);
         });
       // (this.databaseService.db as any).getIndexes();
-      console.log(responses);
+      // console.log(responses);
 
       addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();

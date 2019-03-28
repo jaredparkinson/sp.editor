@@ -129,6 +129,20 @@ export class DatabaseService {
     // return this.addFiles(dataFile);
   }
 
+  public compactDatabase() {
+    const verseDb = new PouchDB(
+      'https://sp_users:test@couch.parkinson.im/verses',
+    );
+
+    verseDb
+      .compact()
+      .then(value => {
+        console.log(value);
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+  }
   private addFiles(dataFile: string) {
     return new Promise(async resolve => {
       console.log(this.tempAllDocs);

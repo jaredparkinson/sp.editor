@@ -18,6 +18,7 @@ import { Database, DatabaseService } from '../services/database.service';
 })
 export class SettingsComponent implements OnInit {
   public currentDatabaseList: Database = new Database();
+  private temp = undefined;
 
   constructor(
     public downloadService: DownloadService,
@@ -52,7 +53,29 @@ export class SettingsComponent implements OnInit {
     this.saveState.save();
   }
 
-  checkForUpdates() {
+  async checkForUpdates() {
+    if (!this.temp)
+      this.databaseService.db
+        .get('testtesttest')
+        .then(value => {
+          this.temp = value;
+          console.log(this.temp);
+        })
+        .catch(() => {
+          this.httpClient
+            .get('assets/data/search_index.json', { responseType: 'text' })
+            .subscribe(data => {
+              this.temp = JSON.parse(data);
+              // localStorage.setItem('search_index', JSON.stringify(this.temp));
+              console.log('Finished');
+              this.temp._id = 'testtesttest';
+              this.databaseService.db.put(this.temp);
+            });
+        });
+    else {
+      this.temp = undefined;
+    }
+    return;
     this.updating = true;
     this.swUpdate
       .checkForUpdate()

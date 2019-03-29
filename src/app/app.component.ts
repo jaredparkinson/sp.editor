@@ -16,6 +16,7 @@ import { MediaQueryService } from './services/media-query.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
 // // import { VerseSelectService } from './services/verse-select.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

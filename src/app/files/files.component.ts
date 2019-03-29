@@ -6,6 +6,7 @@ import {} from 'lodash';
 import * as Yallist from 'yallist';
 import { Navigation } from '../modelsJson/Navigation';
 import { ChapterService } from '../services/chapter.service';
+import { DatabaseService } from '../services/database.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
@@ -32,6 +33,7 @@ export class FilesComponent implements OnInit {
     private router: Router,
     private urlBuilder: UrlBuilder,
     public httpClient: HttpClient,
+    public databaseService: DatabaseService,
   ) {}
 
   ngOnInit() {
@@ -115,21 +117,33 @@ export class FilesComponent implements OnInit {
   }
   addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
-      let addressBarValue = (document.getElementById(
-        'addressBar',
-      ) as HTMLInputElement).value;
-      addressBarValue = addressBarValue.replace('/', ' ');
+      // addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();
     }
   }
 
   private buildUrl() {
-    const urlAsdf = this.urlBuilder.urlParser(
-      (this.addressBar.nativeElement as HTMLInputElement).value,
-    );
-    console.log(urlAsdf);
+    const addressBarValue = (document.getElementById(
+      'addressBar',
+    ) as HTMLInputElement).value;
+    // const urlAsdf =
 
-    this.router.navigateByUrl(urlAsdf);
+    this.urlBuilder
+      .urlParser(addressBarValue)
+      .then(urlAsdf => {
+        this.router.navigateByUrl(urlAsdf);
+      })
+      .catch(() => {
+        console.log(this.databaseService.index.search(addressBarValue));
+      });
+    // const reg = new RegExp(/\w+\/.*/g);
+
+    // if (reg.test(urlAsdf)) {
+    //   // console.log(urlAsdf.includes(/.*//.*/g));
+
+    //   this.router.navigateByUrl(urlAsdf);
+    // } else {
+    // }
   }
 
   onChapterClick(book: string, chapter: string) {

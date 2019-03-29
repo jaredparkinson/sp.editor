@@ -1,16 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 // import * as localForage from 'localforage';
-import { first, find } from 'lodash';
+import { find, first } from 'lodash';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
+import { Database, DatabaseService } from '../services/database.service';
 import { DownloadService } from '../services/download.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { HttpClient } from '@angular/common/http';
-import { Database, DatabaseService } from '../services/database.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -53,6 +53,7 @@ export class SettingsComponent implements OnInit {
   }
 
   checkForUpdates() {
+    return;
     this.updating = true;
     this.swUpdate
       .checkForUpdate()

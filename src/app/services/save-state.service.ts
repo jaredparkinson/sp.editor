@@ -22,7 +22,6 @@ export class SaveStateService {
     private searchService: SearchService,
   ) {
     this.id = 'spEditorSaveState';
-    // this.load();
   }
   public initISaveStateItems(): void {
     if (!this.data.navigationPaneToggle) {
@@ -76,11 +75,6 @@ export class SaveStateService {
   }
 
   public resetSettings(): void {
-    // console.log(
-    //   window.matchMedia(
-    //     `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
-    //   ),
-    // );
     if (
       window.matchMedia(
         `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
@@ -107,12 +101,10 @@ export class SaveStateService {
           const filteredCategories = filter(this.data.noteCategories, c => {
             return c.refLabelName === category.refLabelName;
           });
-          // console.log(`Filter ${filter}`);
+
           if (isEmpty(filteredCategories)) {
-            // console.log(category);
             this.data.noteCategories.push(category);
           }
-          // console.log(this.data.noteCategories); 🧧
         });
         console.log(
           this.data.noteCategories.sort((a, b) => {
@@ -126,25 +118,39 @@ export class SaveStateService {
           }),
         );
       });
-    // this.data.noteCategories.sort(n =>)
+
     sortBy(this.data.noteCategories, f => {
       return f.refLabelName;
     });
   }
   private loadSearch() {
-    return new Promise(resolve => {
-      if (!this.searchService.index) {
-        this.httpClient
-          .get('assets/data/search_index.json', { responseType: 'json' })
-          .subscribe(d => {
-            this.searchService.index = lunr.Index.load(d);
-            console.log('finishr');
-            resolve();
-          });
-      } else {
-        console.log(this.searchService.index.search('nephi'));
+    return new Promise(async resolve => {
+      const promises = [];
+
+      const allDocs = await this.databaseService.db.allDocs();
+      const filteredDocs = allDocs.rows.filter(doc => {
+        return doc.id.includes('index');
+      });
+
+      filteredDocs.forEach(async doc => {
+        promises.push(
+          new Promise(async resolve2 => {
+            const value = await this.databaseService.db.get(doc.id);
+            if ((value as any).data) {
+              this.searchService.indexes.push(
+                lunr.Index.load((value as any).data),
+              );
+            }
+            resolve2();
+          }),
+        );
+      });
+
+      Promise.all(promises).then(() => {
+        console.log(this.searchService.indexes.length);
+
         resolve();
-      }
+      });
     });
   }
   private setSaveStateItemDefaults<T>(

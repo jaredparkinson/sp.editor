@@ -5,6 +5,7 @@ import * as lunr from 'lunr';
 })
 export class SearchService {
   public index: lunr.Index;
+  public indexes: lunr.Index[] = [];
   public verses: Array<{ id: string; text: string }>;
 
   constructor() {}

@@ -3,21 +3,22 @@ import { Paragraph } from './Paragraph';
 import { Verse } from './Verse';
 
 export class Chapter2 {
-  public header2: Verse;
+  public _deleted = false;
   public _id = '';
-  public language = '';
-  public testament = '';
-
-  public title = '';
+  public _rev = '';
+  public dataAid: string = '';
   public header = '';
-  public shortTitle = '';
+  public header2: Verse;
+  public language = '';
+  public nextPage = '';
   // public oldNotes: OldNote[] = [];
   public notes: Note[] = [];
-  public verses: Verse[] = [];
-  public _rev = '';
   public paragraphs: Paragraph[] = [];
 
   public previousPage = '';
-  public nextPage = '';
-  public _deleted = false;
+  public shortTitle = '';
+  public testament = '';
+
+  public title = '';
+  public verses: Verse[] = [];
 }

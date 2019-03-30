@@ -12,6 +12,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { UrlBuilder } from './UrlBuilder';
 import { Verse } from '../modelsJson/Verse';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-files',
@@ -35,7 +36,7 @@ export class FilesComponent implements OnInit {
     private router: Router,
     private urlBuilder: UrlBuilder,
     public httpClient: HttpClient,
-    private databaseService: DatabaseService,
+    private searchService: SearchService,
   ) {}
 
   ngOnInit() {
@@ -138,7 +139,7 @@ export class FilesComponent implements OnInit {
         this.router.navigateByUrl(urlAsdf);
       })
       .catch(() => {
-        console.log(this.databaseService.index.search(addressBarValue));
+        console.log(this.searchService.index.search(addressBarValue));
       });
     // const reg = new RegExp(/\w+\/.*/g);
 

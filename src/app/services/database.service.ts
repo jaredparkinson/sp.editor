@@ -17,7 +17,6 @@ export class DatabaseService {
     PouchDB.plugin(PouchDBFind);
     // this.db.createIndex({ index: { fields: ['verse'] } });
   }
-  public index: lunr.Index;
   // public PouchDB = require('pouchdb-browser');
   // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
   public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });

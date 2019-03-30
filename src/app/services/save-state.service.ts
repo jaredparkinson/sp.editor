@@ -7,6 +7,7 @@ import { SaveStateItem } from '../models/SaveStateItem';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { DatabaseService } from './database.service';
 import { SaveStateModel } from './SaveStateModel';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class SaveStateService {
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService,
+    private searchService: SearchService,
   ) {
     this.id = 'spEditorSaveState';
     // this.load();
@@ -55,16 +57,16 @@ export class SaveStateService {
   }
   private loadSearch() {
     return new Promise(resolve => {
-      if (!this.databaseService.index) {
+      if (!this.searchService.index) {
         this.httpClient
           .get('assets/data/search_index.json', { responseType: 'json' })
           .subscribe(d => {
-            this.databaseService.index = lunr.Index.load(d);
+            this.searchService.index = lunr.Index.load(d);
             console.log('finishr');
             resolve();
           });
       } else {
-        console.log(this.databaseService.index.search('nephi'));
+        console.log(this.searchService.index.search('nephi'));
         resolve();
       }
     });

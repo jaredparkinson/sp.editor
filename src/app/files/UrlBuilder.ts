@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { each, last } from 'lodash';
 import { DatabaseService } from '../services/database.service';
 import { SaveStateService } from '../services/save-state.service';

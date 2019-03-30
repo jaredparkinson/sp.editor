@@ -121,45 +121,33 @@ export class FilesComponent implements OnInit {
     console.log(event.key);
 
     if (event.keyCode === 13) {
-      let addressBarValue = (document.getElementById(
-        'addressBar',
-      ) as HTMLInputElement).value;
-
-      let verses: Verse[] = [];
-      const responses = await this.databaseService.db
-        .allDocs({ include_docs: true })
-        .then(docs => {
-          console.log(docs);
-          docs.rows.forEach(f => {
-            if (f.doc && (f.doc as Chapter2).verses) {
-              (f.doc as Chapter2).verses.forEach(v => {
-                if (v.text.toLowerCase().includes(addressBarValue)) {
-                  verses.push(v);
-                  // console.log(v.text);
-                }
-              });
-            }
-          });
-          console.log(verses.length);
-        })
-        .catch(r => {
-          console.log(r);
-        });
-      // (this.databaseService.db as any).getIndexes();
-      // console.log(responses);
-
-      addressBarValue = addressBarValue.replace('/', ' ');
+      // addressBarValue = addressBarValue.replace('/', ' ');
       this.buildUrl();
     }
   }
 
   private buildUrl() {
-    const urlAsdf = this.urlBuilder.urlParser(
-      (this.addressBar.nativeElement as HTMLInputElement).value,
-    );
-    console.log(urlAsdf);
+    const addressBarValue = (document.getElementById(
+      'addressBar',
+    ) as HTMLInputElement).value;
+    // const urlAsdf =
 
-    this.router.navigateByUrl(urlAsdf);
+    this.urlBuilder
+      .urlParser(addressBarValue)
+      .then(urlAsdf => {
+        this.router.navigateByUrl(urlAsdf);
+      })
+      .catch(() => {
+        console.log(this.databaseService.index.search(addressBarValue));
+      });
+    // const reg = new RegExp(/\w+\/.*/g);
+
+    // if (reg.test(urlAsdf)) {
+    //   // console.log(urlAsdf.includes(/.*//.*/g));
+
+    //   this.router.navigateByUrl(urlAsdf);
+    // } else {
+    // }
   }
 
   onChapterClick(book: string, chapter: string) {

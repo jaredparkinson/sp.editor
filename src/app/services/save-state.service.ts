@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { isEmpty, filter, sortBy } from 'lodash';
+import { filter, isEmpty, sortBy } from 'lodash';
+import * as lunr from 'lunr';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
+import { DatabaseService } from './database.service';
 import { SaveStateModel } from './SaveStateModel';
 
 @Injectable({
@@ -13,7 +15,10 @@ export class SaveStateService {
   id: string;
   data: SaveStateModel;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private databaseService: DatabaseService,
+  ) {
     this.id = 'spEditorSaveState';
     // this.load();
   }
@@ -23,7 +28,8 @@ export class SaveStateService {
     }, 100);
   }
   public load(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
+      await this.loadSearch();
       console.log('settings load');
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
@@ -47,6 +53,23 @@ export class SaveStateService {
       resolve();
     });
   }
+  private loadSearch() {
+    return new Promise(resolve => {
+      if (!this.databaseService.index) {
+        this.httpClient
+          .get('assets/data/search.json', { responseType: 'json' })
+          .subscribe(d => {
+            this.databaseService.index = lunr.Index.load(d);
+            console.log('finishr');
+            resolve();
+          });
+      } else {
+        console.log(this.databaseService.index.search('nephi'));
+        resolve();
+      }
+    });
+  }
+
   resetSettings(): void {
     // console.log(
     //   window.matchMedia(

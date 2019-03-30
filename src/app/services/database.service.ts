@@ -1,15 +1,31 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep, merge, find, filter, uniq } from 'lodash';
+import { cloneDeep, filter, find, merge, uniq } from 'lodash';
 // import * as PouchDB from 'pouchdb/dist/pouchdb';
 // import WorkerPouch from 'worker-pouch';
 import * as PouchDBFind from 'pouchdb-find';
 
-import { Chapter2 } from '../modelsJson/Chapter';
 import { HttpClient } from '@angular/common/http';
+import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
+  constructor(private httpClient: HttpClient) {
+    // (<any>PouchDB).adapter('worker', WorkerPouch);
+    // this.db = new PouchDB('alpha.oneinthinehand.org');
+    // PouchDB.plugin('pouchdb-find');
+    PouchDB.plugin(PouchDBFind);
+    // this.db.createIndex({ index: { fields: ['verse'] } });
+  }
+  public index: lunr.Index;
+  // public PouchDB = require('pouchdb-browser');
+  // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
+  public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
+
+  public databaseList: Database[];
+  // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
+  private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
+
   setDatabases() {
     return new Promise<void>((resolve: (resolveValue: void) => void) => {
       const tempDatabases = localStorage.getItem('database-list');
@@ -53,20 +69,6 @@ export class DatabaseService {
           resolve(undefined);
         });
     });
-  }
-  // public PouchDB = require('pouchdb-browser');
-  // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
-  public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
-
-  public databaseList: Database[];
-  // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
-  private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
-  constructor(private httpClient: HttpClient) {
-    // (<any>PouchDB).adapter('worker', WorkerPouch);
-    // this.db = new PouchDB('alpha.oneinthinehand.org');
-    // PouchDB.plugin('pouchdb-find');
-    PouchDB.plugin(PouchDBFind);
-    // this.db.createIndex({ index: { fields: ['verse'] } });
   }
 
   allDocs() {

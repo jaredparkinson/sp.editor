@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep, filter, find, merge, uniq } from 'lodash';
-// import * as PouchDB from 'pouchdb/dist/pouchdb';
-// import WorkerPouch from 'worker-pouch';
+
 import * as PouchDBFind from 'pouchdb-find';
 
 import { HttpClient } from '@angular/common/http';
@@ -10,22 +9,83 @@ import { Chapter2 } from '../modelsJson/Chapter';
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(private httpClient: HttpClient) {
-    // (<any>PouchDB).adapter('worker', WorkerPouch);
-    // this.db = new PouchDB('alpha.oneinthinehand.org');
-    // PouchDB.plugin('pouchdb-find');
-    PouchDB.plugin(PouchDBFind);
-    // this.db.createIndex({ index: { fields: ['verse'] } });
-  }
-  // public PouchDB = require('pouchdb-browser');
-  // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
+  public databaseList: Database[];
+
   public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
 
-  public databaseList: Database[];
-  // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
+  constructor(private httpClient: HttpClient) {
+    PouchDB.plugin(PouchDBFind);
+  }
 
-  setDatabases() {
+  public allDocs() {
+    return this.db.allDocs();
+  }
+
+  public bulkDocs(databaseName: string) {
+    return new Promise<void>(async resolve => {
+      await (PouchDB as any).replicate(
+        `https://sp_users:test@couch.parkinson.im/${databaseName}`,
+        this.db,
+      );
+      resolve();
+    });
+  }
+
+  public compactDatabase() {
+    const verseDb = new PouchDB(
+      'https://sp_users:test@couch.parkinson.im/verses',
+    );
+
+    verseDb
+      .compact()
+      .then(value => {
+        console.log(value);
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+  }
+  public async get(id: string): Promise<{}> {
+    return this.db.get(id);
+  }
+
+  public async getDocumentCount() {
+    const allDocs = await this.db.allDocs();
+
+    console.log(allDocs.rows.length);
+  }
+
+  public getRevision(id: string): Promise<string> {
+    return new Promise<string>(
+      (
+        resolve: (resolveValue: string) => void,
+        reject: (rejectValue: string) => void,
+      ) => {
+        this.db
+          .get(id)
+          .then(value => {
+            resolve(value._rev);
+          })
+          .catch(() => {
+            resolve(undefined);
+          });
+      },
+    );
+  }
+  public async put(value: string) {
+    const chaper = JSON.parse(value) as Chapter2;
+
+    chaper._rev = await this.getRevision(chaper._id);
+
+    return this.db.put(chaper).catch(() => {});
+  }
+
+  public async setAllDocs() {
+    this.tempAllDocs = await this.db.allDocs();
+  }
+
+  public setDatabases() {
     return new Promise<void>((resolve: (resolveValue: void) => void) => {
       const tempDatabases = localStorage.getItem('database-list');
 
@@ -69,81 +129,6 @@ export class DatabaseService {
         });
     });
   }
-
-  allDocs() {
-    return this.db.allDocs();
-  }
-  public async get(id: string): Promise<{}> {
-    // console.log(await this.db.find({ selector: { verse: 'jethro' } }));
-    return this.db.get(id);
-  }
-
-  public async getDocumentCount() {
-    const allDocs = await this.db.allDocs();
-
-    console.log(allDocs.rows.length);
-  }
-
-  public getRevision(id: string): Promise<string> {
-    return new Promise<string>(
-      (
-        resolve: (resolveValue: string) => void,
-        reject: (rejectValue: string) => void,
-      ) => {
-        this.db
-          .get(id)
-          .then(value => {
-            resolve(value._rev);
-          })
-          .catch(() => {
-            resolve(undefined);
-          });
-      },
-    );
-  }
-  public async put(value: string) {
-    const chaper = JSON.parse(value) as Chapter2;
-
-    chaper._rev = await this.getRevision(chaper._id);
-
-    return this.db.put(chaper).catch(() => {});
-  }
-
-  public async setAllDocs() {
-    this.tempAllDocs = await this.db.allDocs();
-  }
-
-  public bulkDocs(databaseName: string) {
-    // await PouchDB.sync(
-    //   this.db,
-    //   'https://couch.parkinson.im/alpha_oneinthinehand',
-    // );
-    // this.db.sync('http://localhost:5984/ggg');
-
-    return new Promise<void>(async resolve => {
-      await (PouchDB as any).replicate(
-        `https://sp_users:test@couch.parkinson.im/${databaseName}`,
-        this.db,
-      );
-      resolve();
-    });
-    // return this.addFiles(dataFile);
-  }
-
-  public compactDatabase() {
-    const verseDb = new PouchDB(
-      'https://sp_users:test@couch.parkinson.im/verses',
-    );
-
-    verseDb
-      .compact()
-      .then(value => {
-        console.log(value);
-      })
-      .catch(reason => {
-        console.log(reason);
-      });
-  }
   private addFiles(dataFile: string) {
     return new Promise(async resolve => {
       console.log(this.tempAllDocs);
@@ -157,7 +142,7 @@ export class DatabaseService {
           verses.push(v);
         });
       });
-      // await this.db.bulkDocs(verses);
+
       console.log(verses);
       if (scriptureFiles) {
         scriptureFiles.forEach((scriptureFile: any) => {
@@ -177,16 +162,16 @@ export class DatabaseService {
 }
 
 export class DatabaseItem {
-  public title: string;
-  public databaseName: string;
   public channel: string;
-  public language: string;
+  public databaseName: string;
+  public deleting = false;
   public downloaded = false;
   public downloading = false;
-  public deleting = false;
+  public language: string;
+  public title: string;
 }
 
 export class Database {
-  public name: string;
   public databaseItems: DatabaseItem[];
+  public name: string;
 }

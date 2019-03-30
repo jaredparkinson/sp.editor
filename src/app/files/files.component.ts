@@ -3,16 +3,13 @@ import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import {} from 'lodash';
-import * as Yallist from 'yallist';
-import { Chapter2 } from '../modelsJson/Chapter';
 import { Navigation } from '../modelsJson/Navigation';
+import { SearchComponent } from '../search/search.component';
 import { ChapterService } from '../services/chapter.service';
-import { DatabaseService } from '../services/database.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
-import { UrlBuilder } from './UrlBuilder';
-import { Verse } from '../modelsJson/Verse';
 import { SearchService } from '../services/search.service';
+import { UrlBuilder } from './UrlBuilder';
 
 @Component({
   selector: 'app-files',
@@ -20,14 +17,11 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./files.component.scss'],
 })
 export class FilesComponent implements OnInit {
-  // public links: NavLinks[] = [];
-  public foldersVisible = true;
+  @ViewChild('addressBar') public addressBar: ElementRef;
   public booksVisible = false;
+  public foldersVisible = true;
 
-  public asasdf: Yallist<Navigation> = new Yallist<Navigation>();
   public tempNav: Navigation[] = [];
-  // private addressBar: HTMLInputElement;
-  @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
     public fileManager: NavigationService,
     public chapterService: ChapterService,
@@ -39,41 +33,33 @@ export class FilesComponent implements OnInit {
     private searchService: SearchService,
   ) {}
 
-  ngOnInit() {
-    this.httpClient
-      .get('assets/nav/nav_rev.json', {
-        responseType: 'text',
-      })
-      .subscribe(data => {
-        console.log();
-        this.navService.navigation = JSON.parse(data) as Navigation[];
-
-        this.navService.navigation.forEach(nav => {
-          this.flattenNavigation(this.navService.flatNavigation, nav);
-        });
-        // this.setTempNav(this.navService.navigation);
-
-        // this.asasdf.forEach(v => {
-        //   if (v.url === 'gen/1') {
-        //     throw 0;
-        //   }
-        // });
-      });
-    // console.log(this.fileManager.folders[0].path);
-    // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
+  public addressBarClick() {
+    (this.addressBar.nativeElement as HTMLInputElement).select();
+  }
+  public addressBarFocus() {
+    const addressBar = document.getElementById('addressBar');
+    addressBar.focus();
+  }
+  public async addressBarKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.buildUrl();
+    }
   }
 
-  displayNavShortTitle() {
+  public displayNavShortTitle() {
     const nav = document.querySelector('div.navigation-pane');
 
     return nav ? (nav as HTMLElement).offsetWidth < 200 : false;
   }
-  displayNavTitle() {
+  public displayNavTitle() {
     const nav = document.querySelector('div.navigation-pane');
 
     return nav ? (nav as HTMLElement).offsetWidth > 200 : false;
   }
-  flattenNavigation(navigation: Navigation[], parentNavigation: Navigation) {
+  public flattenNavigation(
+    navigation: Navigation[],
+    parentNavigation: Navigation,
+  ) {
     if (parentNavigation.navigation) {
       parentNavigation.navigation.forEach(nav => {
         this.flattenNavigation(navigation, nav);
@@ -83,55 +69,45 @@ export class FilesComponent implements OnInit {
     }
   }
 
-  setTempNav(navigation: Navigation[]): any {
-    navigation.forEach(nav => {
-      if (nav.url) {
-        this.asasdf.push(nav);
-        // this.tempNav.push(nav);
-      } else {
-        this.setTempNav(nav.navigation);
-      }
-    });
+  public ngOnInit() {
+    this.httpClient
+      .get('assets/nav/nav_rev.json', {
+        responseType: 'text',
+      })
+      .subscribe(data => {
+        this.navService.navigation = JSON.parse(data) as Navigation[];
+
+        this.navService.navigation.forEach(nav => {
+          this.flattenNavigation(this.navService.flatNavigation, nav);
+        });
+      });
   }
 
-  swipeRight(event: Event) {
-    console.log('asdoifjasdoifj');
-
-    console.log(event);
-    this.navService.btnLeftPanePress();
-  }
-  resetNavigation() {
+  public onChapterClick() {}
+  public resetNavigation() {
     this.navService.navigation.forEach(nav => {
       nav.subNavigationVisible = false;
       nav.hide = false;
     });
   }
-  // setVisibility(path: string) {
-  //   this.fileManager.getNavigation(path);
-  // }
-  setRoot() {
+
+  public setRoot() {
     this.saveState.data.foldersVisible = true;
     this.fileManager.showBooks = false;
-    // this.fileManager.books = [];
   }
-  addressBarFocus() {
-    const addressBar = document.getElementById('addressBar');
-    addressBar.focus();
-  }
-  async addressBarKeyPress(event: KeyboardEvent) {
-    console.log(event.key);
 
-    if (event.keyCode === 13) {
-      // addressBarValue = addressBarValue.replace('/', ' ');
-      this.buildUrl();
-    }
+  public settings() {
+    this.router.navigateByUrl('settings');
+  }
+
+  public swipeRight(event: Event) {
+    this.navService.btnLeftPanePress();
   }
 
   private buildUrl() {
     const addressBarValue = (document.getElementById(
       'addressBar',
     ) as HTMLInputElement).value;
-    // const urlAsdf =
 
     this.urlBuilder
       .urlParser(addressBarValue)
@@ -139,28 +115,8 @@ export class FilesComponent implements OnInit {
         this.router.navigateByUrl(urlAsdf);
       })
       .catch(() => {
-        console.log(this.searchService.index.search(addressBarValue));
+        this.router.navigate(['/search', addressBarValue]);
+        // this.searchService.index.search(addressBarValue);
       });
-    // const reg = new RegExp(/\w+\/.*/g);
-
-    // if (reg.test(urlAsdf)) {
-    //   // console.log(urlAsdf.includes(/.*//.*/g));
-
-    //   this.router.navigateByUrl(urlAsdf);
-    // } else {
-    // }
-  }
-
-  onChapterClick(book: string, chapter: string) {
-    // this.chapterService.getChapterOld(book, chapter);
-  }
-  // public getNavigation() {}
-
-  settings() {
-    this.router.navigateByUrl('settings');
-  }
-
-  addressBarClick() {
-    (this.addressBar.nativeElement as HTMLInputElement).select();
   }
 }

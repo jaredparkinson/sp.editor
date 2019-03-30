@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, isEmpty, sortBy } from 'lodash';
+import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
@@ -13,8 +13,8 @@ import { SearchService } from './search.service';
   providedIn: 'root',
 })
 export class SaveStateService {
-  id: string;
-  data: SaveStateModel;
+  public data: SaveStateModel;
+  public id: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -24,14 +24,20 @@ export class SaveStateService {
     this.id = 'spEditorSaveState';
     // this.load();
   }
-  public save(): void {
-    setTimeout(() => {
-      localStorage.setItem(this.id, JSON.stringify(this.data));
-    }, 100);
+  public initISaveStateItems(): void {
+    if (!this.data.navigationPaneToggle) {
+      this.data.navigationPaneToggle = new SaveStateItem();
+      this.setSaveStateItemDefaults(this.data.navigationPaneToggle, true);
+    }
+    if (!this.data.notesPanePin) {
+      this.data.notesPanePin = new SaveStateItem();
+      this.setSaveStateItemDefaults(this.data.notesPanePin, true);
+    }
   }
   public load(): Promise<any> {
     return new Promise(async resolve => {
       await this.loadSearch();
+      await this.loadVerseData();
       console.log('settings load');
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
@@ -55,24 +61,21 @@ export class SaveStateService {
       resolve();
     });
   }
-  private loadSearch() {
+  public loadVerseData() {
     return new Promise(resolve => {
-      if (!this.searchService.index) {
-        this.httpClient
-          .get('assets/data/search_index.json', { responseType: 'json' })
-          .subscribe(d => {
-            this.searchService.index = lunr.Index.load(d);
-            console.log('finishr');
-            resolve();
-          });
-      } else {
-        console.log(this.searchService.index.search('nephi'));
-        resolve();
-      }
+      this.httpClient
+        .get('assets/data/verses.json', { responseType: 'json' })
+        .subscribe(data => {
+          this.searchService.verses = data as Array<{
+            id: string;
+            text: string;
+          }>;
+          resolve();
+        });
     });
   }
 
-  resetSettings(): void {
+  public resetSettings(): void {
     // console.log(
     //   window.matchMedia(
     //     `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
@@ -86,25 +89,13 @@ export class SaveStateService {
       this.data.navigationPaneToggle.value = false;
     }
   }
-  initISaveStateItems(): void {
-    if (!this.data.navigationPaneToggle) {
-      this.data.navigationPaneToggle = new SaveStateItem();
-      this.setSaveStateItemDefaults(this.data.navigationPaneToggle, true);
-    }
-    if (!this.data.notesPanePin) {
-      this.data.notesPanePin = new SaveStateItem();
-      this.setSaveStateItemDefaults(this.data.notesPanePin, true);
-    }
-  }
-  private setSaveStateItemDefaults<T>(
-    saveSateItem: ISaveStateItem<T>,
-    value: T,
-  ) {
-    saveSateItem.animated = false;
-    saveSateItem.value = value;
+  public save(): void {
+    setTimeout(() => {
+      localStorage.setItem(this.id, JSON.stringify(this.data));
+    }, 100);
   }
 
-  setCategories(): void {
+  public setCategories(): void {
     this.httpClient
       .get('assets/categories.json', { observe: 'body', responseType: 'json' })
       .subscribe(json => {
@@ -139,5 +130,28 @@ export class SaveStateService {
     sortBy(this.data.noteCategories, f => {
       return f.refLabelName;
     });
+  }
+  private loadSearch() {
+    return new Promise(resolve => {
+      if (!this.searchService.index) {
+        this.httpClient
+          .get('assets/data/search_index.json', { responseType: 'json' })
+          .subscribe(d => {
+            this.searchService.index = lunr.Index.load(d);
+            console.log('finishr');
+            resolve();
+          });
+      } else {
+        console.log(this.searchService.index.search('nephi'));
+        resolve();
+      }
+    });
+  }
+  private setSaveStateItemDefaults<T>(
+    saveSateItem: ISaveStateItem<T>,
+    value: T,
+  ) {
+    saveSateItem.animated = false;
+    saveSateItem.value = value;
   }
 }

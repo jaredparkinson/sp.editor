@@ -1,0 +1,18 @@
+#searchGrid {
+  padding-top: 20px;
+  overflow-y: scroll;
+  height: 100vh;
+  grid-auto-columns: 1fr;
+  grid-gap: 5px;
+  justify-content: center;
+
+  display: grid;
+  > div {
+    width: 80%;
+    justify-self: center;
+  }
+  > span {
+    text-align: center;
+    font-size: 4em;
+  }
+}

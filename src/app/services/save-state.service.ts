@@ -57,7 +57,7 @@ export class SaveStateService {
     return new Promise(resolve => {
       if (!this.databaseService.index) {
         this.httpClient
-          .get('assets/data/search.json', { responseType: 'json' })
+          .get('assets/data/search_index.json', { responseType: 'json' })
           .subscribe(d => {
             this.databaseService.index = lunr.Index.load(d);
             console.log('finishr');

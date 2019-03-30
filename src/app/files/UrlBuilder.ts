@@ -193,7 +193,7 @@ export class UrlBuilder {
           context = '';
         }
 
-        outUrl = outUrl.replace(context, '');
+        outUrl = outUrl.replace(context, '').trim();
 
         // console.log('bookName ' + bookName);
         // console.log('outUrl ' + outUrl);

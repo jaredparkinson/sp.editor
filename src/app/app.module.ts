@@ -39,6 +39,8 @@ import { SettingsParentComponent } from './components/settings-parent/settings-p
 import { VerseComponent } from './components/verse/verse.component';
 import { EditorComponent } from './editor/editor.component';
 
+import { AWComponent } from './components/aw/aw.component';
+import { NoteComponent } from './components/note/note.component';
 import { FilesComponent } from './files/files.component';
 import { UrlBuilder } from './files/UrlBuilder';
 import { HammerConfig } from './HammerConfig';
@@ -53,6 +55,7 @@ import { LandingPageParentComponent } from './outlets/landing-page-parent/landin
 import { SearchComponent } from './search/search.component';
 import { ChapterService } from './services/chapter.service';
 import { DataService } from './services/data.service';
+import { DatabaseService } from './services/database.service';
 import { DownloadService } from './services/download.service';
 import { HelperService } from './services/helper.service';
 import { NavigationService } from './services/navigation.service';
@@ -92,6 +95,8 @@ export function load(saveState: SaveStateService) {
     ParagraphComponent,
     SettingsParentComponent,
     NavigationComponent,
+    AWComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +129,7 @@ export function load(saveState: SaveStateService) {
     {
       provide: APP_INITIALIZER,
       useFactory: load,
-      deps: [SaveStateService],
+      deps: [SaveStateService, DatabaseService],
       multi: true,
     },
     {

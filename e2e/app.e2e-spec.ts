@@ -1,4 +1,4 @@
-import * as lodash from 'lodash';
+import { each } from 'lodash';
 import { browser, by, element } from 'protractor';
 // import * as _ from 'underscore';
 import { UrlBuilder } from '../src/app/files/UrlBuilder';
@@ -24,7 +24,7 @@ describe('sp-editor App', () => {
     const urlBuilder = new UrlBuilder();
 
     const urlData = new UrlData();
-    lodash.each(urlData.urls, url => {
+    each(urlData.urls, url => {
       expect(urlBuilder.urlParser(url[0]).toLowerCase()).toMatch(url[1]);
     });
 

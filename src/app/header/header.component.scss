@@ -3,6 +3,16 @@
   background-color: $light_primary_color;
   color: $text_color;
   fill: $text_color;
+  > div {
+    > * {
+      height: 40px;
+      display: grid;
+      align-items: center;
+    }
+    > button {
+      display: inline !important;
+    }
+  }
   button {
     background-color: inherit;
     color: inherit !important;
@@ -47,6 +57,9 @@
     margin-left: 10px;
     font-weight: bold;
     text-align: center;
+    @media screen and (max-width: 800px), (orientation: portrait) {
+      font-size: 17px !important;
+    }
     font-size: 24px;
     // align-self: center;
   }

@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as lodash from 'lodash';
+import {} from 'lodash';
 import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';

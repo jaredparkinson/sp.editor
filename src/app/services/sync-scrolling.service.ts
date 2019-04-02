@@ -1,12 +1,26 @@
 import { Injectable } from '@angular/core';
+import { setTimeout } from 'core-js';
 
 @Injectable()
 export class SyncScrollingService {
-  public syncScrollingAnimated = false;
   public syncScrollingActivated = false;
+  public syncScrollingAnimated = false;
+
+  private timer: number;
   constructor() {}
 
-  private timer: NodeJS.Timer;
+  public initSyncScrolling() {
+    // this.ngZone.runOutsideAngular(() => {
+    //   document.getElementById('appBodyBlock').addEventListener('wheel', () => {
+    //     this.onScroll();
+    //   });
+    //   document
+    //     .getElementById('appBodyBlock')
+    //     .addEventListener('touchend', () => {
+    //       this.onScroll();
+    //     });
+    // });
+  }
 
   public onScroll() {
     clearTimeout(this.timer);
@@ -17,7 +31,23 @@ export class SyncScrollingService {
     }, 50);
   }
 
-  synchronizedScrolling(): void {
+  public scrollNoteIntoView(belowTop: Element[]): Promise<void> {
+    return new Promise<void>(resolve => {
+      const note = document.querySelector(
+        `#${belowTop[0].id.replace('p', 'note')}`,
+      );
+      if (note) {
+        setTimeout(() => {
+          note.scrollIntoView();
+          resolve();
+        }, 300);
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  public synchronizedScrolling(): void {
     const verses = document.querySelectorAll('span.verse');
 
     if (verses && verses.length > 0) {
@@ -55,36 +85,17 @@ export class SyncScrollingService {
     }, 300);
   }
 
-  scrollNoteIntoView(belowTop: Element[]): Promise<void> {
-    return new Promise<void>(resolve => {
-      setTimeout(() => {
-        document
-          .querySelector(`#${belowTop[0].id.replace('p', 'note')}`)
-          .scrollIntoView();
-        resolve();
-      }, 300);
-    });
-  }
-
   private scrollNotesBottom() {
     const notes = document.querySelectorAll('note');
-    notes[notes.length - 1].scrollIntoView();
+    if (notes && notes[notes.length - 1]) {
+      notes[notes.length - 1].scrollIntoView();
+    }
   }
 
   private scrollNotesTop() {
-    document.querySelector('note').scrollIntoView();
-  }
-
-  public initSyncScrolling() {
-    // this.ngZone.runOutsideAngular(() => {
-    //   document.getElementById('appBodyBlock').addEventListener('wheel', () => {
-    //     this.onScroll();
-    //   });
-    //   document
-    //     .getElementById('appBodyBlock')
-    //     .addEventListener('touchend', () => {
-    //       this.onScroll();
-    //     });
-    // });
+    const note = document.querySelector('note');
+    if (note) {
+      document.querySelector('note').scrollIntoView();
+    }
   }
 }

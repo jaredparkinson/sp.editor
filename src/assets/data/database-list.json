@@ -1,0 +1,406 @@
+[
+  {
+    "name": "alpha",
+    "databaseItems": [
+      {
+        "title": "Old Testament",
+        "databaseName": "ot",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "New Testament",
+        "databaseName": "nt",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Book of Mormon",
+        "databaseName": "bofm",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Doctrine and Covenants",
+        "databaseName": "dc_testament",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Pearl of Great Price",
+        "databaseName": "pgp",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Guide to the Scriptures",
+        "databaseName": "gs",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Topical Guide",
+        "databaseName": "tg",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Dictionary",
+        "databaseName": "bd",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Chronology",
+        "databaseName": "bible_chron",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Harmony of the Gospels",
+        "databaseName": "harmony",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Joseph Smith Translation Appendix",
+        "databaseName": "jst",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Maps",
+        "databaseName": "bible_maps",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Photography",
+        "databaseName": "bible_photos",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Index of the Triple Combination",
+        "databaseName": "triple-index",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Maps",
+        "databaseName": "history_maps",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Photographs",
+        "databaseName": "history_photos",
+        "channel": "alpha",
+        "language": "eng"
+      }
+    ]
+  },
+  {
+    "name": "localhost:4200",
+    "databaseItems": [
+      {
+        "title": "Old Testament",
+        "databaseName": "ot",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "New Testament",
+        "databaseName": "nt",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Book of Mormon",
+        "databaseName": "bofm",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Doctrine and Covenants",
+        "databaseName": "dc_testament",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Pearl of Great Price",
+        "databaseName": "pgp",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Guide to the Scriptures",
+        "databaseName": "gs",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Topical Guide",
+        "databaseName": "tg",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Dictionary",
+        "databaseName": "bd",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Chronology",
+        "databaseName": "bible_chron",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Harmony of the Gospels",
+        "databaseName": "harmony",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Joseph Smith Translation Appendix",
+        "databaseName": "jst",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Maps",
+        "databaseName": "bible_maps",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Photography",
+        "databaseName": "bible_photos",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Index of the Triple Combination",
+        "databaseName": "triple-index",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Maps",
+        "databaseName": "history_maps",
+        "channel": "alpha",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Photographs",
+        "databaseName": "history_photos",
+        "channel": "alpha",
+        "language": "eng"
+      }
+    ]
+  },
+  {
+    "name": "beta",
+    "databaseItems": [
+      {
+        "title": "Old Testament",
+        "databaseName": "ot",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "New Testament",
+        "databaseName": "nt",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Book of Mormon",
+        "databaseName": "bofm",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Doctrine and Covenants",
+        "databaseName": "dc_testament",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Pearl of Great Price",
+        "databaseName": "pgp",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Guide to the Scriptures",
+        "databaseName": "gs",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Topical Guide",
+        "databaseName": "tg",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Dictionary",
+        "databaseName": "bd",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Chronology",
+        "databaseName": "bible_chron",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Harmony of the Gospels",
+        "databaseName": "harmony",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Joseph Smith Translation Appendix",
+        "databaseName": "jst",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Maps",
+        "databaseName": "bible_maps",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Photography",
+        "databaseName": "bible_photos",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Index of the Triple Combination",
+        "databaseName": "triple-index",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Maps",
+        "databaseName": "history_maps",
+        "channel": "beta",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Photographs",
+        "databaseName": "history_photos",
+        "channel": "beta",
+        "language": "eng"
+      }
+    ]
+  },
+  {
+    "name": "oneinthinehand",
+    "databaseItems": [
+      {
+        "title": "Old Testament",
+        "databaseName": "ot",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "New Testament",
+        "databaseName": "nt",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Book of Mormon",
+        "databaseName": "bofm",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Doctrine and Covenants",
+        "databaseName": "dc_testament",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Pearl of Great Price",
+        "databaseName": "pgp",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Guide to the Scriptures",
+        "databaseName": "gs",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Topical Guide",
+        "databaseName": "tg",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Dictionary",
+        "databaseName": "bd",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Chronology",
+        "databaseName": "bible_chron",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Harmony of the Gospels",
+        "databaseName": "harmony",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Joseph Smith Translation Appendix",
+        "databaseName": "jst",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Maps",
+        "databaseName": "bible_maps",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Bible Photography",
+        "databaseName": "bible_photos",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Index of the Triple Combination",
+        "databaseName": "triple-index",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Maps",
+        "databaseName": "history_maps",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      },
+      {
+        "title": "Church History Photographs",
+        "databaseName": "history_photos",
+        "channel": "oneinthinehand",
+        "language": "eng"
+      }
+    ]
+  }
+]

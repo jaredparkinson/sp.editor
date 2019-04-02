@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
 import { BodyblockComponent } from './bodyblock/bodyblock.component';
+import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 import { EditorComponent } from './editor/editor.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BodyBlockParentComponent } from './outlets/body-block-parent/body-block-parent.component';
@@ -9,7 +10,6 @@ import { EditorParentComponent } from './outlets/editor-parent/editor-parent.com
 import { LandingPageParentComponent } from './outlets/landing-page-parent/landing-page-parent.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SettingsParentComponent } from './components/settings-parent/settings-parent.component';
 // import { SearchBarComponent } from './search-bar/search-bar.component';
 
 const routes: Routes = [
@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingsParentComponent,
+  },
+  {
+    path: 'search/:search/:pageNumber',
+    component: SearchComponent,
   },
   {
     path: 'search/:search',

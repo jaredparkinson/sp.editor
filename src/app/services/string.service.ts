@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
+
+import { remove } from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +35,7 @@ export class StringService {
     return target;
   }
   public removeAttributeArray(target: string[], word: string) {
-    return lodash.remove(target, (c: string) => {
+    return remove(target, (c: string) => {
       // console.log(c);
 
       return c !== word;

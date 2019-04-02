@@ -1,0 +1,40 @@
+<note
+  id="{{ note.id }}"
+  class="animated fastest"
+  [ngClass]="{
+    fadeOut:
+      this.chapterService.chapterFadeOut ||
+      (this.syncScrollingService.syncScrollingActivated &&
+        this.syncScrollingService.syncScrollingAnimated),
+    fadeIn:
+      !this.chapterService.chapterFadeOut ||
+      (!this.syncScrollingService.syncScrollingActivated &&
+        this.syncScrollingService.syncScrollingAnimated)
+  }"
+>
+  <div class="note-title">{{ note.noteTitle }}</div>
+  <div class="note-short-title">{{ note.noteShortTitle }}</div>
+  <ng-container *ngFor="let secondaryNote of note.secondary">
+    <div
+      class="secondary-note"
+      [class]="filterClassList(secondaryNote.classList)"
+      
+      [ngClass]="{ 'verse-select-1': secondaryNote.clicked }"
+      *ngIf="dataService.noteVisibility.get(secondaryNote.id)"
+      id="{{ secondaryNote.id }}"
+    >
+      <div class="note-phrase" (click)="this.notePhraseClick(secondaryNote)">
+        {{ secondaryNote.notePhrase.text }}
+      </div>
+      <ng-container *ngFor="let noteRef of secondaryNote.noteRefs">
+        <div
+          class="note-ref"
+          [class]="filterClassList(noteRef.classList)"
+          *ngIf="noteRef.visible"
+        >
+          <span [innerHTML]="noteRef.text"></span>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</note>

@@ -1,4 +1,3 @@
-// @import 'css.penguin/view_vars';
 @import '../styles/notes.scss';
 $font-stack: PalatinoldsLat-Roman, serif;
 
@@ -15,33 +14,19 @@ $font-stack: PalatinoldsLat-Roman, serif;
     }
   }
 }
-.note-phrase[class*='reference-label'] {
-  display: none;
-}
 .right-pane {
   z-index: 100;
 
   note {
-    > div > div {
-      margin-left: 10px;
-    }
-    margin-left: 10px;
-    > div > div.original-note-marker {
-      display: none;
-    }
-    // > div > *.note-phrase {
-    //   margin-left: 1em !important;
-    // }
-
-    // margin-left: 1em;
-    display: grid;
-    grid-auto-flow: row;
     button.note-button {
       height: 24px;
       width: 24px;
       margin-top: 6px;
       border-style: outset;
     }
+  }
+  .note-phrase[class*='reference-label'] {
+    display: none;
   }
 
   .secondary-notes,
@@ -52,7 +37,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
   .new-note,
   div.note,
   div.note-tier-2 {
-    // margin-left: 1em;
     margin-right: 20px;
   }
 
@@ -70,32 +54,27 @@ $font-stack: PalatinoldsLat-Roman, serif;
   @include span-reference('tg', 'TG');
   @include span-reference('gs', 'GS');
 
-  // span.reference-label {
-  //   text-transform: lowercase;
-  //   font-variant: small-caps;
-  //   font-weight: 700;
-  // }
+  span {
+    &.deletion {
+      font-style: italic;
+    }
 
-  span.deletion {
-    font-style: italic;
-  }
+    &.deletion::before {
+      content: '[';
+      font-style: normal;
+    }
 
-  span.deletion::before {
-    content: '[';
-    font-style: normal;
-  }
+    &.deletion::after {
+      content: ']';
+      font-style: normal;
+    }
 
-  span.deletion::after {
-    content: ']';
-    font-style: normal;
-  }
-
-  span.insertion {
-    font-weight: bold;
+    &.insertion {
+      font-weight: bold;
+    }
   }
 
   footer {
-    // position: fixed;
     background-color: Gainsboro;
     padding-top: 6pt;
     padding-bottom: 6pt;
@@ -119,8 +98,6 @@ $font-stack: PalatinoldsLat-Roman, serif;
     }
 
     ul > li {
-      // display: grid;
-
       grid-template-columns: auto 9fr;
       grid-template-rows: auto;
 
@@ -130,11 +107,10 @@ $font-stack: PalatinoldsLat-Roman, serif;
       }
 
       .original-note-note {
-        grid-column-start: 2; // display: contents;
+        grid-column-start: 2;
       }
 
       margin-bottom: 6pt;
-      // margin-top: 3pt;
     }
   }
 
@@ -147,16 +123,16 @@ $font-stack: PalatinoldsLat-Roman, serif;
     background-color: FloralWhite;
   }
 
-  .note-reference-new,
-  .note-reference-new-2,
-  .note-reference-eng,
-  .note-reference-eng-2,
-  .note-reference-tc,
-  .note-reference-tc-2,
-  .note-phrase,
-  [class*='note-phrase'] {
-    margin-bottom: 9pt;
-  }
+  // .note-reference-new,
+  // .note-reference-new-2,
+  // .note-reference-eng,
+  // .note-reference-eng-2,
+  // .note-reference-tc,
+  // .note-reference-tc-2,
+  // .note-phrase,
+  // [class*='note-phrase'] {
+  //   margin-bottom: 9pt;
+  // }
 
   footer {
     background-color: Gainsboro;
@@ -178,87 +154,10 @@ $font-stack: PalatinoldsLat-Roman, serif;
     .note-short-title:empty {
       display: none;
     }
-
-    // .note-phrase,
-    // .note-phrase-eng,
-    // .original-note,
-    // .note-reference-eng,
-    // .note-reference-eng-2,
-    // .note-reference-new,
-    // .note-reference-new-2,
-    // .note-reference-tc-2,
-    // .note-reference-tc,
-    // &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-phrase-eng-2,
-    // &.notes-show-eng.notes-show-tier .tier-2-note-hide .note-reference-eng-2,
-    // &.notes-show-new.notes-show-tier .tier-2-note-hide .note-phrase-new-2,
-    // &.notes-show-new.notes-show-tier .tier-2-note-hide .note-reference-new-2,
-    // &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-phrase-tc-2,
-    // &.notes-show-tc.notes-show-tier .tier-2-note-hide .note-reference-tc-2 {
-    //   display: none;
-    // }
-
-    //     notes-show-tier
-    // notes-show-new
-    // notes-show-tc
-    // notes-show-eng
-
-    &.notes-show-eng .note-reference-eng,
-    &.notes-show-original .original-note,
-    &.notes-show-tc .note-phrase-tc,
-    &.notes-show-eng .note-phrase-eng,
-    &.notes-show-eng .tier-2-note-show .note-phrase-eng-2,
-    &.notes-show-new .note-reference-new,
-    &.notes-show-new .note-phrase-new,
-    &.notes-show-eng .tier-2-note-show .note-reference-eng-2,
-    &.notes-show-new .tier-2-note-show .note-phrase-new-2,
-    &.notes-show-new .tier-2-note-show .note-reference-new-2,
-    &.notes-show-tc .tier-2-note-show .note-phrase-tc-2,
-    &.notes-show-tc .tier-2-note-show .note-reference-tc-2,
-    &.notes-show-eng .tier-2-note-hide.secondary-note .note-phrase-eng,
-    &.notes-show-eng .tier-2-note-hide.secondary-note .note-reference-eng,
-    &.notes-show-new .tier-2-note-hide.secondary-note .note-phrase-new,
-    &.notes-show-new .tier-2-note-hide.secondary-note .note-reference-new,
-    &.notes-show-tc .tier-2-note-hide.secondary-note .note-phrase-tc,
-    &.notes-show-tc .tier-2-note-hide.secondary-note .note-reference-tc,
-    &.notes-show-eng.notes-show-tier .note-phrase-eng-2,
-    &.notes-show-eng.notes-show-tier .note-reference-eng-2,
-    &.notes-show-new.notes-show-tier .note-phrase-new-2,
-    &.notes-show-new.notes-show-tier .note-reference-new-2,
-    &.notes-show-tc.notes-show-tier .note-phrase-tc-2,
-    &.notes-show-tc.notes-show-tier .note-reference-tc-2,
-    &.notes-show-eng.notes-hide-tier .note-phrase-eng,
-    &.notes-show-eng.notes-hide-tier .note-reference-eng,
-    &.notes-show-new.notes-hide-tier .note-phrase-new,
-    &.notes-show-new.notes-hide-tier .note-reference-new,
-    &.notes-show-tc.notes-hide-tier .note-phrase-tc,
-    &.notes-show-tc.notes-hide-tier .note-reference-tc,
-    &.notes-show-tc .note-reference-tc {
-      display: block;
-    }
-
-    note.tier-2-note-show {
-      display: grid;
-    }
   }
 
   .button-toggled-off {
     color: grey;
-  }
-
-  .note-button-buttons,
-  .tier-2-note-buttons,
-  .tier-2-lines-buttons,
-  .original-note-buttons {
-    background-color: rgb(216, 215, 215);
-    border-color: rgb(216, 215, 215);
-    margin-right: 20px;
-    font-size: 9pt;
-
-    &.note-button-toggled-on {
-      background-color: rgb(161, 161, 161);
-      border-color: rgb(161, 161, 161);
-      margin-right: 20px;
-    }
   }
 
   span.id-label {

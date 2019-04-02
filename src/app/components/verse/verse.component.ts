@@ -7,7 +7,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import * as lodash from 'lodash';
+import { isEmpty } from 'lodash';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
 import { Verse } from '../../modelsJson/Verse';
 import { W } from '../../modelsJson/W';
@@ -19,6 +19,7 @@ import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 // import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',
@@ -31,6 +32,7 @@ export class VerseComponent implements OnInit {
     public wTagBuilderService: WTagService,
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
+    public sanitizer: DomSanitizer,
     public stringService: StringService,
     public chapterService: ChapterService,
     public dataService: DataService,
@@ -53,7 +55,7 @@ export class VerseComponent implements OnInit {
       return;
     }
 
-    if (lodash.isEmpty(w.visibleRefs)) {
+    if (isEmpty(w.visibleRefs)) {
       this.chapterService.resetNotes();
     } else {
       if (w.clicked) {

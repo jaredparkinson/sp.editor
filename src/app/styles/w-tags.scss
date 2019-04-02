@@ -1,0 +1,147 @@
+$font-stack: serif;
+.show-poetry {
+  w {
+    &.poetry,
+    &.prose {
+      &::before {
+        content: ' ';
+        display: block;
+      }
+    }
+  }
+  .app-verse:first-of-type w.poetry:first-of-type::before {
+    content: '' !important;
+  }
+}
+
+w {
+  &.verse-select-1,
+  &.verse-select-0.note-select-1 {
+    border-bottom: 3px solid #f68d2e;
+  }
+  &.verse-select-2,
+  &.verse-select-3,
+  &.verse-select-4,
+  &.verse-select-5,
+  &.verse-select-0.note-select-1.wRef {
+    border-bottom: 3px solid #dc143c;
+  }
+  &.question + &.answer:before {
+    content: '\A';
+    white-space: pre;
+  }
+  &.verse-number.question:last-of-type {
+    .verse & > {
+      margin-left: 10px;
+    }
+  }
+}
+
+.wtag {
+  border-bottom: 1px solid black;
+}
+
+.w-div {
+  span {
+    &.part,
+    &.question,
+    &.answer {
+      font-family: $font-stack;
+      display: block;
+    }
+
+    &.part {
+      margin-left: 6pt;
+    }
+
+    &.answer {
+      text-indent: 1em;
+    }
+    &.verse-verse {
+      position: relative;
+      font-family: $font-stack;
+      text-align: left;
+
+      display: block;
+
+      w.verse-number {
+        vertical-align: unset;
+        font-size: inherit;
+      }
+
+      #bodyBlock.show-paragraph & {
+        display: inline;
+      }
+      #bodyBlock.hidden-paragraph & {
+        padding: 0 0 6pt 5px;
+      }
+    }
+  }
+}
+/*
+* Deprecated superscript mode
+*/
+// @mixin w-super($selector, $color) {
+//   $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+//     'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z';
+//   @each $letter in $letters {
+//     g.#{$selector}-#{$letter}::before {
+//       content: $letter;
+//       color: $color;
+//       vertical-align: super;
+//       border-style: none !important;
+//       text-decoration: none !important;
+//       font-size: 0.75em;
+//       font-style: italic;
+//     }
+//   }
+// }
+
+// .note-superscript {
+//   .note-title {
+//     // .note-short-title {
+//     display: none !important;
+//   }
+//   note {
+//     div {
+//       margin-left: 0 !important;
+//       p {
+//         &.note-phrase {
+//           display: grid !important;
+//           grid-template-columns: 25px 1fr;
+//           grid-column-gap: 6px;
+//           padding-left: 0;
+//           margin-left: 0;
+//           // margin-left: -12px;
+//           .note-superscript {
+//             justify-self: right;
+//             color: rgba(0, 0, 0, 0.4);
+//           }
+//         }
+//         &.note-reference-tc,
+//         &.note-reference-eng,
+//         &.note-reference-new {
+//           margin-left: 2em;
+//         }
+//       }
+//     }
+//   }
+//   span {
+//     &.verse {
+//       @include w-super('eng', #007fa4);
+//       @include w-super('new', maroon);
+//       @include w-super('tc', #098109);
+//       w {
+//         &.eng-color {
+//           color: #007fa4;
+//         }
+//         &.new-color {
+//           color: maroon;
+//         }
+//         &.tc-color {
+//           color: #098109;
+//         }
+//       }
+//     }
+//   }
+// }

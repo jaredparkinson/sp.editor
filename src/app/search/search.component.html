@@ -1,3 +1,11 @@
-<p>
-  search works!
-</p>
+<div id="searchGrid">
+  <span>Search Results</span>
+  <ng-container *ngIf="this.searchResults.length > 0">
+    <div *ngFor="let searchResult of this.searchResults">
+      <a href="#/{{ searchResult.id }}">
+        {{ searchResult.text }}
+      </a>
+    </div>
+  </ng-container>
+  <div style="height: 100vh;"></div>
+</div>

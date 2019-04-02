@@ -52,3 +52,5 @@ scriptures_project_v3
 scriptures.tar.gz
 *.tar.gz
 src/assets/nav/nav_rev.json
+src/assets/data/search_index.json
+src/assets/data/verses.json

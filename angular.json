@@ -26,8 +26,12 @@
               "src/favicon.512x512.png",
               "src/manifest.json"
             ],
-            "styles": ["src/styles.scss", "src/css.penguin/css.penguin.scss"],
-            "scripts": []
+            "styles": ["src/styles.scss"],
+            "scripts": [
+              "src/assets/javascript/pouchdb.min.js",
+              "src/assets/javascript/pouchdb.find.min.js",
+              "src/assets/javascript/pouchdb.worker-pouch.min.js"
+            ]
           },
           "configurations": {
             "dev": {

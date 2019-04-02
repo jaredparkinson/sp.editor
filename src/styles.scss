@@ -2,7 +2,10 @@
 // @import '../node_modules/normalize.css/normalize.css';
 @import '../node_modules/materialize-css/sass/materialize.scss';
 @import './app/styles/materialize-overrides.scss';
+@import './app/styles/material-icon.css';
+@import './app/styles/open-sans.css';
 @import 'css.penguin/view_vars';
+@import './app/styles/w-tags.scss';
 @import './src/app/styles/navigation';
 @import './src/app/styles/paragraphs';
 @import './src/app/styles/grid';
@@ -28,22 +31,6 @@ body {
   }
   .none {
     display: none;
-  }
-}
-
-@mixin w-super($selector, $color) {
-  $letters: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z';
-  @each $letter in $letters {
-    g.#{$selector}-#{$letter}::before {
-      content: $letter;
-      color: $color;
-      vertical-align: super;
-      border-style: none !important;
-      text-decoration: none !important;
-      font-size: 0.75em;
-      font-style: italic;
-    }
   }
 }
 
@@ -79,107 +66,6 @@ note > div.note-disabled {
   opacity: 0.4;
   user-select: none;
 }
-.show-poetry {
-  w {
-    &.poetry,
-    &.prose {
-      &::before {
-        content: ' ';
-        display: block;
-      }
-    }
-  }
-  .app-verse:first-of-type w.poetry:first-of-type::before {
-    content: '' !important;
-  }
-}
-
-.note-superscript {
-  .note-title {
-    // .note-short-title {
-    display: none !important;
-  }
-  note {
-    div {
-      margin-left: 0 !important;
-      p {
-        &.note-phrase {
-          display: grid !important;
-          grid-template-columns: 25px 1fr;
-          grid-column-gap: 6px;
-          padding-left: 0;
-          margin-left: 0;
-          // margin-left: -12px;
-          .note-superscript {
-            justify-self: right;
-            color: rgba(0, 0, 0, 0.4);
-          }
-        }
-        &.note-reference-tc,
-        &.note-reference-eng,
-        &.note-reference-new {
-          margin-left: 2em;
-        }
-      }
-    }
-  }
-  span {
-    &.verse {
-      @include w-super('eng', #007fa4);
-      @include w-super('new', maroon);
-      @include w-super('tc', #098109);
-      w {
-        &.eng-color {
-          color: #007fa4;
-        }
-        &.new-color {
-          color: maroon;
-        }
-        &.tc-color {
-          color: #098109;
-        }
-      }
-    }
-  }
-}
-
-div.verse-select-0,
-div.verse-select-1,
-div.verse-select-2 {
-  border-left: 3.5px solid #f68d2e;
-}
-
-// w.verse-select-0+w {
-//   border-bottom: 1px solid grey;
-// }
-
-w.verse-select-1 // w.verse-select-1+w 
-
- {
-  border-bottom: 3px solid #f68d2e;
-}
-
-w.verse-select-0.note-select-1 // w.verse-select-1+w 
-
- {
-  border-bottom: 3px solid #f68d2e; // !important;
-}
-
-w.verse-select-2,
-// w.verse-select-2+w 
-w.verse-select-3,
-// w.verse-select-2+w 
-w.verse-select-4,
-// w.verse-select-2+w 
-w.verse-select-5,
-w.verse-select-0.note-select-1.wRef {
-  border-bottom: 3px solid #dc143c;
-}
-
-.wtag {
-  border-bottom: 1px solid black;
-}
-
 body.find {
   padding-top: 35px;
 }
@@ -284,10 +170,6 @@ li {
   }
 }
 
-.body-block-whitespace {
-  height: 100vh; //This starts at 100vh = 100 percent. Take it down from there. It may need to be 100 to handle cases where there are too many notes to fit on the last screen.
-}
-
 .study-notes-whitespace {
   height: 90vh; //This starts at 100vh = 100 percent. Take it down from there.
 }
@@ -314,6 +196,12 @@ li {
   background-color: rgb(207, 232, 235);
 }
 
+#bodyBlock.hidden-paragraph {
+  p {
+    margin: 0;
+  }
+}
+
 // body {
 //   overflow: hidden;
 //   background-color: white;
@@ -325,37 +213,42 @@ h1,
 w.dominant {
   display: block;
   font-family: $font-stack !important;
-  margin: 0 !important;
-  margin-top: 6pt !important;
-  margin-bottom: 6pt !important;
+  // margin: 0 !important;
+  // margin-top: 6pt !important;
+  // margin-bottom: 6pt !important;
+  // margin-block-start: 0.67em !important;
+  // margin-block-end: 0.67em !important;
+  // margin-inline-start: 0px !important;
+  // margin-inline-end: 0px !important;
   text-align: center !important;
   padding-right: 20px !important;
   font-size: 2em !important;
-  margin-block-start: 0.67em !important;
-  margin-block-end: 0.67em !important;
-  margin-inline-start: 0px !important;
-  margin-inline-end: 0px !important;
   font-weight: bold !important;
 }
 
 #notesSettings {
   z-index: 400;
 }
+@mixin overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 300;
+  opacity: 1;
+}
 @media only screen and (max-width: 499.98px),
   (orientation: portrait) and (max-width: 1023.98px) {
-  .overlay,
   .overlay-toggle {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 300;
-    opacity: 1;
+    @include overlay();
     // background: rgba(0, 0, 0, .288);
   }
 }
 
+.overlay {
+  @include overlay();
+}
 .hidden {
   visibility: hidden;
 }
@@ -383,4 +276,24 @@ w.dominant {
 
 header > * {
   display: block;
+}
+
+// ruby > * {
+//   user-select: none !important;
+// }
+
+.body-block {
+  w.language,
+  w.translit {
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+  [id*='study_summary'] {
+    font-style: italic;
+  }
+}
+[page-name*='title page'] {
+  .hidden-paragraph span.verse {
+    text-align: center;
+  }
 }

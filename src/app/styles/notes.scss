@@ -1,13 +1,6 @@
-// ?@import '../../css.penguin/view_vars';
 $font-stack: serif;
 @media only screen and (max-width: 499.98px),
   (orientation: portrait) and (max-width: 1023.98px) {
-  // .right-pane footer,
-  // .right-pane-editor footer,
-  // .left-pane nav {
-  //   width: $vw11;
-  // }
-
   .right-pane footer,
   .right-pane-editor footer {
     float: right;
@@ -22,197 +15,199 @@ $font-stack: serif;
       width: 100%;
       top: 50%;
       border-top: 5px solid darkgrey;
-      // .half-notes-margin {
-      //   display: block !important;
-      //   position: fixed;
-      //   width: 100%;
-      //   height: 20px;
-      //   background: grey;
-      // }
     }
   }
+}
+
+div.verse-select-0,
+div.verse-select-1,
+div.verse-select-2 {
+  border-left: 3.5px solid #f68d2e;
 }
 
 .hide-notes {
   display: none;
 }
 
-p,
-.app-verse {
-  &.title,
-  &.title-number,
-  &.subtitle,
-  &.study-summary,
-  &.intro,
-  &.para,
-  &.closing,
-  &.salutation,
-  &.office,
-  &.wide-ellipse,
-  &.entry,
-  &.locator,
-  &.note-title,
-  &.note-short-title,
-  &.note-phrase,
-  [class*='note-phrase'],
-  &.note-reference-new,
-  &.note-reference-eng,
-  &.note-reference-tc,
-  &.note-reference-new-2,
-  &.note-reference-eng-2,
-  &.note-reference-tc-2 {
-    padding-right: 20px;
+note {
+  $note-grid-gap: 5px;
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: $note-grid-gap;
+
+  .secondary-note {
+    display: grid;
+    grid-gap: $note-grid-gap;
+    grid-auto-flow: row;
+  }
+  p,
+  div,
+  span {
+    [class*='note-phrase'],
+    [class*='note-reference'] {
+      padding-right: 20px;
+    }
+
+    &.intro {
+      font-family: $font-stack;
+    }
+
+    &.title {
+      font-family: $font-stack;
+      margin: 0;
+      margin-top: 6pt;
+      margin-bottom: 6pt;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    &.title-number {
+      font-family: $font-stack;
+      margin: 0;
+      margin-top: 6pt;
+      margin-bottom: 6pt;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    &.subtitle,
+    #subtitle1 {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+      text-align: center;
+    }
+
+    &.study-summary {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+      font-style: italic;
+    }
+
+    &.para {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+    }
+
+    &.closing {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+    }
+
+    &.salutation {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+    }
+
+    &.office {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+    }
+
+    &.wide-ellipse {
+      font-family: $font-stack;
+      margin: 0;
+      margin-bottom: 6pt;
+      text-align: center;
+    }
+
+    &.entry {
+      font-family: $font-stack;
+      margin-top: 6pt;
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    &.locator {
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-title {
+      display: none;
+    }
+
+    &.note-short-title {
+      font-family: $font-stack;
+      margin-top: 6pt;
+      font-weight: bold;
+    }
+
+    &.note-phrase,
+    &.note-phrase-eng {
+      font-family: $font-stack;
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0;
+      padding-left: 4pt;
+    }
+
+    &.note-reference-new {
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-reference-eng {
+      color: Blue;
+      background-color: LightYellow;
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-reference-tc {
+      color: DodgerBlue;
+      background-color: White;
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-reference-new-2 {
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-reference-eng-2 {
+      color: Blue;
+      background-color: LightYellow;
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.note-reference-tc-2 {
+      color: DodgerBlue;
+      background-color: White;
+      margin-top: 4pt;
+      margin-right: 0;
+      margin-left: 0.25in;
+    }
+
+    &.hanging-indent {
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0.25in;
+      padding-left: 22px;
+      font-size: smaller;
+    }
   }
 
-  &.intro {
-    font-family: $font-stack;
-  }
-
-  &.title {
-    font-family: $font-stack;
-    margin: 0;
-    margin-top: 6pt;
-    margin-bottom: 6pt;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  &.title-number {
-    font-family: $font-stack;
-    margin: 0;
-    margin-top: 6pt;
-    margin-bottom: 6pt;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  &.subtitle,
-  #subtitle1 {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-    text-align: center;
-  }
-
-  &.study-summary {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-    font-style: italic;
-  }
-
-  &.para {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-  }
-
-  &.closing {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-  }
-
-  &.salutation {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-  }
-
-  &.office {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-  }
-
-  &.wide-ellipse {
-    font-family: $font-stack;
-    margin: 0;
-    margin-bottom: 6pt;
-    text-align: center;
-  }
-
-  &.entry {
-    font-family: $font-stack;
-    margin-top: 6pt;
-    margin-right: 0;
-    margin-left: 0; // margin-bottom: 0.0001pt;
-  }
-
-  &.locator {
-    margin-top: 0;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.note-title {
-    display: none;
-  }
-
-  &.note-short-title {
-    font-family: $font-stack;
-    margin-top: 6pt;
-    font-weight: bold;
-  }
-
-  &.note-phrase,
-  &.note-phrase-eng {
-    font-family: $font-stack;
-    margin-top: 0;
-    margin-right: 0;
-    margin-left: 0; // margin-bottom: 0.0001pt;
-    padding-left: 4pt;
-  }
-
-  &.note-reference-new {
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in;
-  }
-
-  &.note-reference-eng {
-    color: Blue;
-    background-color: LightYellow;
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.note-reference-tc {
-    color: DodgerBlue;
-    background-color: White;
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.note-reference-new-2 {
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.note-reference-eng-2 {
-    color: Blue;
-    background-color: LightYellow;
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.note-reference-tc-2 {
-    color: DodgerBlue;
-    background-color: White;
-    margin-top: 4pt;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-  }
-
-  &.hanging-indent {
-    margin-top: 0;
-    margin-right: 0;
-    margin-left: 0.25in; // margin-bottom: 0.0001pt;
-    padding-left: 22px;
-    font-size: smaller;
+  margin-left: 10px;
+  align-content: center;
+  .note-phrase,
+  .note-ref {
+    margin-left: 10px;
+    &.original-note-marker {
+      display: none;
+    }
   }
 }

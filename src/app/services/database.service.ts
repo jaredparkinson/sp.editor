@@ -1,33 +1,52 @@
 import { Injectable } from '@angular/core';
-import * as lodash from 'lodash';
-// import * as PouchDB from 'pouchdb/dist/pouchdb';
-// import WorkerPouch from 'worker-pouch';
-import * as PouchDBFind from 'pouchdb-find';
-import * as WorkerPouch from 'worker-pouch';
+import { cloneDeep, filter, find, merge, uniq } from 'lodash';
 
+import * as PouchDBFind from 'pouchdb-find';
+
+import { HttpClient } from '@angular/common/http';
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  // public PouchDB = require('pouchdb-browser');
-  // public db = new PouchDB('https://couch.parkinson.im/alpha_oneinthinehand');
-  public db = new PouchDB('alpha.oneinthinehand.org');
-  // public db = new PouchDB('http://localhost:5984/alpha_oneinthinehand');
+  public databaseList: Database[];
+
+  public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
+
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
-  constructor() {
-    // (<any>PouchDB).adapter('worker', WorkerPouch);
-    // this.db = new PouchDB('alpha.oneinthinehand.org');
-    // PouchDB.plugin('pouchdb-find');
+  constructor(private httpClient: HttpClient) {
     PouchDB.plugin(PouchDBFind);
-    // this.db.createIndex({ index: { fields: ['verse'] } });
   }
 
-  allDocs() {
+  public allDocs() {
     return this.db.allDocs();
   }
+
+  public bulkDocs(databaseName: string) {
+    return new Promise<void>(async resolve => {
+      await (PouchDB as any).replicate(
+        `https://sp_users:test@couch.parkinson.im/${databaseName}`,
+        this.db,
+      );
+      resolve();
+    });
+  }
+
+  public compactDatabase() {
+    const verseDb = new PouchDB(
+      'https://sp_users:test@couch.parkinson.im/verses',
+    );
+
+    verseDb
+      .compact()
+      .then(value => {
+        console.log(value);
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+  }
   public async get(id: string): Promise<{}> {
-    // console.log(await this.db.find({ selector: { verse: 'jethro' } }));
     return this.db.get(id);
   }
 
@@ -66,23 +85,50 @@ export class DatabaseService {
     this.tempAllDocs = await this.db.allDocs();
   }
 
-  public bulkDocs(databaseName: string) {
-    // await PouchDB.sync(
-    //   this.db,
-    //   'https://couch.parkinson.im/alpha_oneinthinehand',
-    // );
-    // this.db.sync('http://localhost:5984/ggg');
+  public setDatabases() {
+    return new Promise<void>((resolve: (resolveValue: void) => void) => {
+      const tempDatabases = localStorage.getItem('database-list');
 
-    return new Promise<void>(async resolve => {
-      await (PouchDB as any).replicate(
-        `https://sp_users:test@couch.parkinson.im/${databaseName}`,
-        this.db,
-      );
-      resolve();
+      if (tempDatabases) {
+        this.databaseList = JSON.parse(tempDatabases);
+      } else {
+        this.databaseList = [];
+      }
+
+      this.httpClient
+        .get('assets/data/database-list.json', {
+          responseType: 'text',
+        })
+        .subscribe(data => {
+          const dataDatabase = JSON.parse(data) as Database[];
+
+          dataDatabase.forEach(item => {
+            const existingItem = find(this.databaseList, (d: Database) => {
+              return d.name === item.name;
+            });
+
+            if (existingItem) {
+              merge(existingItem.databaseItems, item.databaseItems);
+              existingItem.databaseItems = uniq(existingItem.databaseItems);
+              filter(existingItem.databaseItems, (i: DatabaseItem) => {
+                return !i.downloaded && i.downloading;
+              }).forEach(i => {
+                i.downloading = false;
+              });
+            } else {
+              this.databaseList.push(item);
+            }
+          });
+
+          localStorage.setItem(
+            'database-list',
+            JSON.stringify(this.databaseList),
+          );
+
+          resolve(undefined);
+        });
     });
-    // return this.addFiles(dataFile);
   }
-
   private addFiles(dataFile: string) {
     return new Promise(async resolve => {
       console.log(this.tempAllDocs);
@@ -90,13 +136,13 @@ export class DatabaseService {
       const verses = [];
       scriptureFiles.forEach(c => {
         c.verses.forEach(verse => {
-          const v = lodash.cloneDeep(verse);
+          const v = cloneDeep(verse);
           v._id = c._id + v._id;
           v.wTags = undefined;
           verses.push(v);
         });
       });
-      // await this.db.bulkDocs(verses);
+
       console.log(verses);
       if (scriptureFiles) {
         scriptureFiles.forEach((scriptureFile: any) => {
@@ -113,4 +159,19 @@ export class DatabaseService {
       }
     });
   }
+}
+
+export class DatabaseItem {
+  public channel: string;
+  public databaseName: string;
+  public deleting = false;
+  public downloaded = false;
+  public downloading = false;
+  public language: string;
+  public title: string;
+}
+
+export class Database {
+  public databaseItems: DatabaseItem[];
+  public name: string;
 }

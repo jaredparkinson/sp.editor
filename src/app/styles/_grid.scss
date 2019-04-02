@@ -1,66 +1,7 @@
 @import './color';
-@media only screen and (max-width: 1023.98px) {
-  $leftPaneWidth: $vw1_5;
-  $bodyBlockWidth: $vw9;
-  $rightPaneWidth: $vw1_5;
 
-  .menu-bar {
-    grid-template-columns:
-      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
-      minmax(48px, $rightPaneWidth);
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
-
-    #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      margin-left: 10px;
-    }
-  }
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1279.98px) {
-  $leftPaneWidth: $vw2;
-  $bodyBlockWidth: $vw7_5;
-  $rightPaneWidth: $vw2_5;
-
-  .body .router-outlet {
-    grid-template-columns: $leftPaneWidth ($bodyBlockWidth + $rightPaneWidth);
-    .parent-container {
-      display: grid;
-      grid-template-columns: $bodyBlockWidth $rightPaneWidth;
-      &.settings-container,
-      &.hidden-notes {
-        grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
-        .content-pane > div {
-          width: $bodyBlockWidth;
-        }
-      }
-    }
-  }
-  .left-pane-container {
-    width: $leftPaneWidth;
-    background-color: whitesmoke;
-  }
-
-  .left-pane nav {
-    width: $leftPaneWidth;
-  }
-
-  .menu-bar {
-    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
-  }
-
-  #notesSettings {
-    right: $rightPaneWidth;
-  }
-}
-
-@media only screen and (min-width: 1280px) {
-  $leftPaneWidth: $vw2;
-  $bodyBlockWidth: $vw7;
-  $rightPaneWidth: $vw3;
-
-  .body .router-outlet {
+@mixin gridBody($mediaQuery, $leftPaneWidth, $bodyBlockWidth, $rightPaneWidth) {
+  .body {
     grid-template-columns: $leftPaneWidth($bodyBlockWidth + $rightPaneWidth);
     .parent-container {
       display: grid;
@@ -68,7 +9,7 @@
       &.settings-container,
       &.hidden-notes {
         grid-template-columns: ($bodyBlockWidth + $rightPaneWidth);
-        .content-pane > div {
+        .content-pane {
           width: $bodyBlockWidth;
         }
       }
@@ -95,6 +36,39 @@
     right: $rightPaneWidth;
   }
 }
+
+@media only screen and (max-width: 1023.98px) {
+  $leftPaneWidth: $vw1_5;
+  $bodyBlockWidth: $vw9;
+  $rightPaneWidth: $vw1_5;
+
+  .menu-bar {
+    grid-template-columns:
+      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
+      minmax(48px, $rightPaneWidth);
+    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+
+    #addressBar {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin-left: 10px;
+    }
+  }
+}
+
+@include gridBody(
+  '@media only screen and (min-width: 1024px) and (max-width: 1279.98px)',
+  $vw2,
+  $vw7_5,
+  $vw2_5
+);
+
+@include gridBody(
+  '@media only screen and (min-width: 1280px)',
+  $vw2,
+  $vw7,
+  $vw3
+);
 
 button {
   &:hover,
@@ -187,9 +161,6 @@ button {
         &.settings-container,
         &.hidden-notes {
           grid-template-columns: ($bodyBlockWidth + $rightPaneWidth) 0px;
-          .content-pane > div {
-            width: $bodyBlockWidth;
-          }
         }
         &.settings-container {
           overflow-y: scroll;
@@ -202,8 +173,8 @@ button {
     .parent-container,
     .parent-container.hidden-notes {
       grid-template-columns: 100vw 0;
-      .content-pane > div {
-        width: 100vw;
+      .grid.content-pane {
+        width: 100vw !important;
       }
     }
   }
@@ -240,49 +211,26 @@ button {
     }
   }
 }
-
-// iOS only css
-
-.iosFooter {
-  height: 40px;
-  position: absolute;
-  bottom: 40px;
-  background-color: $primary_color;
-  width: 100vw;
-  z-index: 10000;
-  display: flex;
-  justify-content: space-between;
-
-  button {
-    background-color: inherit;
-    height: 40px;
-    width: 40px;
-  }
-}
-// @supports (-webkit-overflow-scrolling: touch) {
-//   /* CSS for other than iOS devices */
-// }
-// @supports (-webkit-overflow-scrolling: touch) {
-//   /* CSS for other than iOS devices */
-//   .iosFooter {
+// @media screen and (max-width: 499.98px) {
+//   .navigation-title {
 //     display: none;
+//   }
+//   .navigation-short-title {
+//     display: inline !important;
 //   }
 // }
 
-@media screen and (max-width: 499.98px) {
+// .navigation-short-title {
+//   display: none;
+// }
+
+.display-title {
+  .navigation-short-title {
+    display: none;
+  }
+}
+.display-short-title {
   .navigation-title {
     display: none;
   }
-  .navigation-short-title {
-    display: inline !important;
-  }
 }
-
-.navigation-short-title {
-  display: none;
-}
-
-// .navigation-title,
-// .navigation-short-title {
-//   width: 90%;
-// }

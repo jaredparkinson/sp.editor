@@ -2,12 +2,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
-import * as lodash from 'lodash';
-import * as Yallist from 'yallist';
+import {} from 'lodash';
 import { Navigation } from '../modelsJson/Navigation';
+import { SearchComponent } from '../search/search.component';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { SearchService } from '../services/search.service';
 import { UrlBuilder } from './UrlBuilder';
 
 @Component({
@@ -16,14 +17,11 @@ import { UrlBuilder } from './UrlBuilder';
   styleUrls: ['./files.component.scss'],
 })
 export class FilesComponent implements OnInit {
-  // public links: NavLinks[] = [];
-  public foldersVisible = true;
+  @ViewChild('addressBar') public addressBar: ElementRef;
   public booksVisible = false;
+  public foldersVisible = true;
 
-  public asasdf: Yallist<Navigation> = new Yallist<Navigation>();
   public tempNav: Navigation[] = [];
-  // private addressBar: HTMLInputElement;
-  @ViewChild('addressBar') addressBar: ElementRef;
   constructor(
     public fileManager: NavigationService,
     public chapterService: ChapterService,
@@ -32,91 +30,93 @@ export class FilesComponent implements OnInit {
     private router: Router,
     private urlBuilder: UrlBuilder,
     public httpClient: HttpClient,
+    private searchService: SearchService,
   ) {}
 
-  ngOnInit() {
+  public addressBarClick() {
+    (this.addressBar.nativeElement as HTMLInputElement).select();
+  }
+  public addressBarFocus() {
+    const addressBar = document.getElementById('addressBar');
+    addressBar.focus();
+  }
+  public async addressBarKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.buildUrl();
+    }
+  }
+
+  public displayNavShortTitle() {
+    const nav = document.querySelector('div.navigation-pane');
+
+    return nav ? (nav as HTMLElement).offsetWidth < 200 : false;
+  }
+  public displayNavTitle() {
+    const nav = document.querySelector('div.navigation-pane');
+
+    return nav ? (nav as HTMLElement).offsetWidth > 200 : false;
+  }
+  public flattenNavigation(
+    navigation: Navigation[],
+    parentNavigation: Navigation,
+  ) {
+    if (parentNavigation.navigation) {
+      parentNavigation.navigation.forEach(nav => {
+        this.flattenNavigation(navigation, nav);
+      });
+    } else {
+      navigation.push(parentNavigation);
+    }
+  }
+
+  public ngOnInit() {
     this.httpClient
       .get('assets/nav/nav_rev.json', {
         responseType: 'text',
       })
       .subscribe(data => {
-        console.log();
         this.navService.navigation = JSON.parse(data) as Navigation[];
-        // this.setTempNav(this.navService.navigation);
 
-        // this.asasdf.forEach(v => {
-        //   if (v.url === 'gen/1') {
-        //     throw 0;
-        //   }
-        // });
+        this.navService.navigation.forEach(nav => {
+          this.flattenNavigation(this.navService.flatNavigation, nav);
+        });
       });
-    // console.log(this.fileManager.folders[0].path);
-    // this.addressBar = document.getElementById('addressBar') as HTMLInputElement;
-  }
-  setTempNav(navigation: Navigation[]): any {
-    navigation.forEach(nav => {
-      if (nav.url) {
-        this.asasdf.push(nav);
-        // this.tempNav.push(nav);
-      } else {
-        this.setTempNav(nav.navigation);
-      }
-    });
   }
 
-  swipeRight(event: Event) {
-    console.log('asdoifjasdoifj');
-
-    console.log(event);
-    this.navService.btnLeftPanePress();
-  }
-  resetNavigation() {
+  public onChapterClick() {}
+  public resetNavigation() {
     this.navService.navigation.forEach(nav => {
       nav.subNavigationVisible = false;
       nav.hide = false;
     });
   }
-  // setVisibility(path: string) {
-  //   this.fileManager.getNavigation(path);
-  // }
-  setRoot() {
+
+  public setRoot() {
     this.saveState.data.foldersVisible = true;
     this.fileManager.showBooks = false;
-    // this.fileManager.books = [];
-  }
-  addressBarFocus() {
-    const addressBar = document.getElementById('addressBar');
-    addressBar.focus();
-  }
-  addressBarKeyPress(event: KeyboardEvent) {
-    if (event.keyCode === 13) {
-      let addressBarValue = (document.getElementById(
-        'addressBar',
-      ) as HTMLInputElement).value;
-      addressBarValue = addressBarValue.replace('/', ' ');
-      this.buildUrl();
-    }
   }
 
-  private buildUrl() {
-    const urlAsdf = this.urlBuilder.urlParser(
-      (this.addressBar.nativeElement as HTMLInputElement).value,
-    );
-    console.log(urlAsdf);
-
-    this.router.navigateByUrl(urlAsdf);
-  }
-
-  onChapterClick(book: string, chapter: string) {
-    // this.chapterService.getChapterOld(book, chapter);
-  }
-  // public getNavigation() {}
-
-  settings() {
+  public settings() {
     this.router.navigateByUrl('settings');
   }
 
-  addressBarClick() {
-    (this.addressBar.nativeElement as HTMLInputElement).select();
+  public swipeRight(event: Event) {
+    this.navService.btnLeftPanePress();
+  }
+
+  private buildUrl() {
+    const addressBarValue = (document.getElementById(
+      'addressBar',
+    ) as HTMLInputElement).value;
+
+    this.urlBuilder
+      .urlParser(addressBarValue)
+      .then(urlAsdf => {
+        this.router.navigateByUrl(urlAsdf);
+      })
+      .catch(() => {
+        this.router.navigate(['/search', addressBarValue]);
+        // this.searchService.index.search(addressBarValue);
+      });
   }
 }

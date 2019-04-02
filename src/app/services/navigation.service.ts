@@ -16,6 +16,7 @@ export class NavigationService {
   public notesSettings = false;
   public pageTitle: string;
   public navigation: Navigation[] = [];
+  public flatNavigation: Navigation[] = [];
 
   constructor(
     private httpClient: HttpClient,

@@ -1,35 +1,25 @@
 Arguments: 
-  C:\Users\jared\AppData\Local\nvs\node\10.15.0\x64\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/alphanum-sort --dev
+  C:\Users\jared\scoop\apps\nvs\current\nodejs\node\10.15.3\x64\node.exe C:\Users\jared\scoop\apps\yarn\current\Yarn\bin\yarn.js add lunr
 
 PATH: 
-  C:\Users\jared\AppData\Local\nvs\node\10.15.0\x64;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\6\;C:\Program Files\Git\cmd;C:\Program Files\Calibre2\;C:\Program Files\dotnet\;C:\Program Files (x86)\Gpg4win\..\GnuPG\bin;D:\OneDrive\Path\exiftools;C:\Program Files (x86)\Yarn\bin\;C:\Users\jared\source\repos\scripts\powershell_scripts;C:\Users\jared\scoop\shims;C:\Users\jared\.windows-build-tools\python27\;C:\Users\jared\AppData\Local\nvs\node\10.15.0\x64\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\jared\AppData\Local\nvs\node\10.15.0\x64\node_modules\windows-build-tools\node_modules\.bin;C:\Users\jared\AppData\Local\nvs\node\10.15.0\x64\node_modules\.bin;C:\Users\jared\AppData\Local\Microsoft\WindowsApps;C:\Users\jared\AppData\Local\nvs\;C:\Users\jared\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jared\AppData\Roaming\npm;C:\Users\jared\AppData\Local\Yarn\bin;C:\Users\jared\AppData\Local\Keybase\
+  C:\Users\jared\scoop\apps\nvs\current\nodejs\node\10.15.3\x64;C:\Users\jared\scoop\apps\pwsh\current;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\jared\scoop\apps\gpg4win\3.1.5\Gpg4win\..\GnuPG\bin;C:\Users\jared\scoop\apps\yarn\current\Yarn\bin;C:\Users\jared\scoop\apps\yarn\current\global\node_modules\.bin;C:\Users\jared\scoop\apps\gpg4win\current\Gpg4win\bin;C:\Users\jared\scoop\apps\gpg4win\current\GnuPG\bin;C:\Users\jared\scoop\apps\python27\current\scripts;C:\Users\jared\scoop\apps\nmap\current\bin;C:\Users\jared\scoop\apps\dotnet-sdk\current;C:\Users\jared\scoop\shims;C:\Users\jared\AppData\Local\Microsoft\WindowsApps;C:\Users\jared\AppData\Local\Keybase\;C:\Users\jared\.dotnet\tools
 
 Yarn version: 
-  1.12.3
+  1.15.2
 
 Node version: 
-  10.15.0
+  10.15.3
 
 Platform: 
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2falphanum-sort: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65003:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129018:22)
-      at Request.emit (events.js:182:13)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129990:10)
-      at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129912:12)
-      at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
-      at endReadableNT (_stream_readable.js:1094:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: EPERM: operation not permitted, unlink 'C:\users\jared\source\repos\sp.editor\node_modules\node-sass\vendor\win32-x64-64\binding.node'
 
 npm manifest: 
   {
     "name": "sp-editor",
-    "version": "4.0.80",
+    "version": "4.0.96",
     "description": "sp-project version 3",
     "homepage": "https://github.com/maximegris/angular-electron",
     "author": {
@@ -58,11 +48,12 @@ npm manifest:
       "ng": "ng",
       "start": "yarn run postinstall:electron && npm-run-all -p ng:serve electron:serve",
       "build": "yarn run postinstall:electron && yarn run electron:tsc && ng build  --aot",
-      "build:web": "yarn run postinstall:web  && yarn ng build --prod  --aot",
+      "build:web": "yarn run postinstall:web  && yarn ng build --prod  --aot --build-optimizer",
       "build:dev": "yarn run build -- -c dev",
       "build:prod": "yarn run build -- -c production",
       "ng:serve": "ng serve",
       "web": "yarn run postinstall:web && ng serve --aot",
+      "webnoaot": "yarn run postinstall:web && ng serve",
       "web:prod": "yarn run postinstall:web && ng serve --prod",
       "ng:serve:web": "yarn run postinstall:web && ng serve -o",
       "electron:tsc": "tsc main.ts",
@@ -84,7 +75,6 @@ npm manifest:
       "@angular/pwa": "latest",
       "@angular/service-worker": "latest",
       "@types/graceful-fs": "^4.1.2",
-      "alphanum-sort": "^1.0.2",
       "animate.css": "^3.7.0",
       "benchmark": "^2.1.4",
       "bowser": "^2.1.2",
@@ -93,6 +83,7 @@ npm manifest:
       "jszip": "^3.1.5",
       "localforage": "^1.7.2",
       "lodash": "^4.17.11",
+      "lunr": "^2.3.6",
       "mark.js": "^8.11.1",
       "materialize-css": "^1.0.0-rc.2",
       "node-sass": "^4.9.3",
@@ -125,10 +116,12 @@ npm manifest:
       "@ngx-translate/http-loader": "3.0.1",
       "@types/angular": "^1.6.51",
       "@types/benchmark": "^1.0.31",
+      "@types/core-js": "^2.5.0",
       "@types/jasmine": "2.8.8",
       "@types/jasminewd2": "2.0.3",
       "@types/jszip": "^3.1.4",
       "@types/lodash": "^4.14.116",
+      "@types/lunr": "^2.3.2",
       "@types/mark.js": "^8.11.1",
       "@types/materialize-css": "^1.0.6",
       "@types/node": "10.5.2",
@@ -611,6 +604,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/cash/-/cash-0.0.3.tgz#770d6382c605bb4f8572f17cea6f40cec5832496"
     integrity sha512-gS24kdFuVwfo5h7IlStnXyBSIH4e9aFIhNHb4w+o5DwbYDeQJv+i9heh7u7nSvqnOP3v34tQMTe7VoJp2US08w==
   
+  "@types/core-js@^2.5.0":
+    version "2.5.0"
+    resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-2.5.0.tgz#35cc282488de6f10af1d92902899a3b8ca3fbc47"
+    integrity sha512-qjkHL3wF0JMHMqgm/kmL8Pf8rIiqvueEiZ0g6NVTcBX1WN46GWDr+V5z+gsHUeL0n8TfAmXnYmF7ajsxmBp4PQ==
+  
   "@types/debug@*":
     version "4.1.2"
     resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.2.tgz#84824e9259fc583dd9385635738359c9582f7f82"
@@ -672,6 +670,11 @@ Lockfile:
     version "4.14.122"
     resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.122.tgz#3e31394c38cf1e5949fb54c1192cbc406f152c6c"
     integrity sha512-9IdED8wU93ty8gP06ninox+42SBSJHp2IAamsSYMUY76mshRTeUsid/gtbl8ovnOwy8im41ib4cxTiIYMXGKew==
+  
+  "@types/lunr@^2.3.2":
+    version "2.3.2"
+    resolved "https://registry.yarnpkg.com/@types/lunr/-/lunr-2.3.2.tgz#d4a51703315ed0e53c43257216f1014ce6491562"
+    integrity sha512-zcUZYquYDUEegRRPQtkZ068U9CoIjW6pJMYCVDRK25r76FEWvMm1oHqZQUfQh4ayIZ42lipXOpXEiAtGXc1XUg==
   
   "@types/mark.js@^8.11.1":
     version "8.11.3"
@@ -1142,11 +1145,6 @@ Lockfile:
       fast-json-stable-stringify "^2.0.0"
       json-schema-traverse "^0.4.1"
       uri-js "^4.2.2"
-  
-  alphanum-sort@^1.0.2:
-    version "1.0.2"
-    resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
-    integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
   
   amdefine@>=0.0.4:
     version "1.0.1"
@@ -6769,6 +6767,11 @@ Lockfile:
     integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
     dependencies:
       yallist "^3.0.2"
+  
+  lunr@^2.3.6:
+    version "2.3.6"
+    resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.6.tgz#f278beee7ffd56ad86e6e478ce02ab2b98c78dd5"
+    integrity sha512-swStvEyDqQ85MGpABCMBclZcLI/pBIlu8FFDtmX197+oEgKloJ67QnB+Tidh0340HmLMs39c4GrkPY3cmkXp6Q==
   
   magic-string@^0.25.0:
     version "0.25.2"

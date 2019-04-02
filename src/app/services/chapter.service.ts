@@ -208,6 +208,8 @@ export class ChapterService {
             resolve(chapter as Chapter2);
           })
           .catch(() => {
+            console.log(id);
+            
             reject(undefined);
           });
       },

@@ -11,8 +11,11 @@ export class SearchService {
   constructor() {}
 
   public search(searchTerm: string): Promise<lunr.Index.Result[] | undefined> {
+    let searchResults: lunr.Index.Result[] = []; // this.index.search(searchTerm);
     return new Promise<lunr.Index.Result[] | undefined>((resolve, reject) => {
-      const searchResults = this.index.search(searchTerm);
+      this.indexes.forEach(i => {
+        searchResults = searchResults.concat(i.search(searchTerm));
+      });
 
       searchResults.length > 0 ? resolve(searchResults) : reject();
     });

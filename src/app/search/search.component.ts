@@ -41,7 +41,9 @@ export class SearchComponent implements OnInit {
           .search(search)
           .then(searchResults => {
             this.lunrResults = searchResults;
-            this.searchPagination(pageNumber ? pageNumber : 0);
+            console.log(searchResults);
+
+            // this.searchPagination(pageNumber /? pageNumber : 0);
           })
           .catch(() => {
             this.lunrResults = [];

@@ -36,7 +36,7 @@ export class SaveStateService {
   public load(): Promise<any> {
     return new Promise(async resolve => {
       await this.loadSearch();
-      // await this.loadVerseData();
+      await this.loadVerseData();
       console.log('settings load');
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
@@ -61,16 +61,47 @@ export class SaveStateService {
     });
   }
   public loadVerseData() {
-    return new Promise(resolve => {
-      this.httpClient
-        .get('assets/data/verses.json', { responseType: 'json' })
-        .subscribe(data => {
-          this.searchService.verses = data as Array<{
-            id: string;
-            text: string;
-          }>;
-          resolve();
+    return new Promise(async resolve => {
+      const promises = [];
+
+      const allDocs = await this.databaseService.db.allDocs();
+      const filteredDocs = allDocs.rows.filter(doc => {
+        return doc.id.includes('verses');
+      });
+
+      this.searchService.verses = [];
+      // const promises = [];
+      filteredDocs.forEach(async doc => {
+        promises.push(() => {
+          new Promise(async resolve2 => {
+            const value = await this.databaseService.db.get(doc.id);
+
+            console.log(value);
+
+            this.searchService.verses = this.searchService.verses.concat(
+              (value as any).data,
+            );
+            console.log(this.searchService.verses.length);
+            resolve2();
+          });
         });
+      });
+
+      Promise.all(promises).then(() => {
+        console.log(this.searchService.verses.length);
+        resolve();
+      });
+      // this.searchService.verses = t
+
+      // this.httpClient
+      //   .get('assets/data/verses.json', { responseType: 'json' })
+      //   .subscribe(data => {
+      //     this.searchService.verses = data as Array<{
+      //       id: string;
+      //       text: string;
+      //     }>;
+      //     resolve();
+      //   });
     });
   }
 

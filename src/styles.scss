@@ -292,7 +292,7 @@ header > * {
     font-style: italic;
   }
 }
-[page-name='title page'] {
+[page-name*='title page'] {
   .hidden-paragraph span.verse {
     text-align: center;
   }

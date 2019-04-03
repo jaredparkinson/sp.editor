@@ -35,8 +35,8 @@ export class SaveStateService {
   }
   public load(): Promise<any> {
     return new Promise(async resolve => {
-      await this.loadSearch();
-      await this.loadVerseData();
+      // await this.loadSearch();
+      // await this.loadVerseData();
       console.log('settings load');
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;

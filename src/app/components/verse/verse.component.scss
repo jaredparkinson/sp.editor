@@ -83,3 +83,9 @@ h2#title1 {
   font-size: 1.3em;
   font-weight: bold;
 }
+
+:host-context([page-name*='title page']) {
+  span.verse {
+    text-align: center;
+  }
+}

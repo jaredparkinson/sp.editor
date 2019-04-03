@@ -1,8 +1,16 @@
 @import '../styles/color';
 .menu-bar {
-  background-color: $light_primary_color;
+  background-color: #fff;
   color: $text_color;
-  fill: $text_color;
+  fill: black;
+  border-bottom-color: $divider_color;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+
+  .btn-active {
+    color: $dark_primary_color !important;
+    fill: $dark_primary_color !important;
+  }
   > div {
     > * {
       height: 40px;
@@ -15,7 +23,7 @@
   }
   button {
     background-color: inherit;
-    color: inherit !important;
+    color: black !important;
 
     &#btnParagraph {
       font-family: 'Courier New', Courier, monospace;

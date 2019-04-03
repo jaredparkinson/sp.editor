@@ -11,6 +11,7 @@ body {
   .content-pane {
     display: grid;
     line-height: normal;
+    background-color: white;
     // @media only screen and (max-width: 1023.98px) {
     //   grid-template-columns: 10vw 80vw 10vw;
     // }
@@ -20,8 +21,14 @@ body {
     grid-template-columns: $fr_5 $fr11 $fr_5;
     // > div {
     // }
+    .left-content-pane,
+    .right-content-pane {
+      height: 100%;
+      background-color: inherit;
+    }
 
     .body-block-whitespace {
+      background-color: #fff;
       height: 95vh; //This starts at 100vh = 100 percent. Take it down from there. It may need to be 100 to handle cases where there are too many notes to fit on the last screen.
     }
     &#appBodyBlock {

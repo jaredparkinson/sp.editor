@@ -18,6 +18,8 @@ import { SaveStateService } from '../services/save-state.service';
 })
 export class SettingsComponent implements OnInit {
   public currentDatabaseList: Database = new Database();
+
+  public updating = false;
   private temp = undefined;
 
   constructor(
@@ -32,28 +34,7 @@ export class SettingsComponent implements OnInit {
     private databaseService: DatabaseService,
   ) {}
 
-  public updating = false;
-  async ngOnInit() {
-    this.dataService.chapter2 = new Chapter2();
-    this.navServices.notesSettings = false;
-    this.dataService.chapter2.title = 'Settings';
-
-    this.currentDatabaseList = find(this.databaseService.databaseList, d => {
-      return d.name === location.host.split('.')[0];
-    });
-  }
-
-  download() {
-    // this.downloadService.download(file);
-  }
-  reset() {
-    // localForage.clear();
-  }
-  saveSettings() {
-    this.saveState.save();
-  }
-
-  checkForUpdates() {
+  public checkForUpdates() {
     this.updating = true;
     this.swUpdate
       .checkForUpdate()
@@ -66,5 +47,24 @@ export class SettingsComponent implements OnInit {
 
         this.updating = false;
       });
+  }
+
+  public download() {
+    // this.downloadService.download(file);
+  }
+  public async ngOnInit() {
+    this.dataService.chapter2 = new Chapter2();
+    this.navServices.notesSettings = false;
+    this.dataService.chapter2.title = 'Settings';
+
+    this.currentDatabaseList = find(this.databaseService.databaseList, d => {
+      return d.name === location.host.split('.')[0];
+    });
+  }
+  public reset() {
+    // localForage.clear();
+  }
+  public saveSettings() {
+    this.saveState.save();
   }
 }

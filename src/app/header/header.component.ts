@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   // faArrowLeft = faArrowLeft;
   // faArrowRight = faArrowRight;
   @ViewChildren('wtag')
-  wTags2: QueryList<any>;
+  public wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;
   constructor(
     public helperService: HelperService,
@@ -45,23 +45,7 @@ export class HeaderComponent implements OnInit {
   ) {
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
-
-  ngOnInit() {}
-
-  toggleNotes() {
-    this.navServices.toggleNotes();
-  }
-
-  toggleVerseSelect() {
-    // this.verseSelectService.toggleVerseSelect();
-    // console.log(this.wTags2);
-    // this.chapterService.toggleVerseSelect(this.verseSelect);
-  }
-
-  settings() {
-    this.router.navigateByUrl('settings');
-  }
-  addressBarKeyPress(event: KeyboardEvent) {
+  public addressBarKeyPress(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       let addressBarValue = (document.getElementById(
         'addressBar',
@@ -78,54 +62,17 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  btnBackPress() {
+  public btnBackPress() {
     this.location.back();
   }
-  btnForwardPress() {
-    this.location.forward();
-  }
-  // toggleNavButton(id: string, targetId: string, on: string, off: string) {
-  //   this.navServices.toggleNavButton(id, targetId, on, off);
-  // }
-  btnNewNotesPress() {
-    this.navServices.btnNewNotesPress();
-  }
-  btnPoetryPress() {
-    this.navServices.btnPoetryPress();
-  }
-  btnEnglishNotesPress() {
+  public btnEnglishNotesPress() {
     this.navServices.btnEnglishNotesPress();
   }
-  btnTranslatorNotesPress() {
-    this.navServices.btnTranslatorNotesPress();
-  }
-  btnOriginalNotesPress() {
-    this.navServices.btnOriginalNotesPress();
-  }
-  btnRightPanePress() {
-    // this.verseSelectService.halfNotes = false;
-    this.navServices.btnRightPanePress();
-  }
-  btnNotesSettingsPress() {
-    // const dialogConfig = new MatDialogConfig();
-
-    // this.dialog.open(DialogBodyComponent, { width: '0px', height: '0px' });
-    this.navServices.btnNotesSettingsPress();
-  }
-  btnSecondaryNotesPress() {
-    this.navServices.btnSecondaryNotesPress().then(() => {
-      this.chapterService.resetNotes();
-    });
+  public btnForwardPress() {
+    this.location.forward();
   }
 
-  btnLeftPanePress() {
-    this.navServices.btnLeftPanePress();
-  }
-  btnParagraphPress() {
-    this.navServices.btnParagraphPress();
-  }
-
-  btnHeaderButtonPress(saveStateItem: ISaveStateItem<boolean>) {
+  public btnHeaderButtonPress(saveStateItem: ISaveStateItem<boolean>) {
     saveStateItem.value = !saveStateItem.value;
     saveStateItem.animated = true;
 
@@ -133,5 +80,58 @@ export class HeaderComponent implements OnInit {
       saveStateItem.animated = false;
       this.saveState.save();
     }, 500);
+  }
+
+  public btnLeftPanePress() {
+    this.navServices.btnLeftPanePress();
+  }
+  // toggleNavButton(id: string, targetId: string, on: string, off: string) {
+  //   this.navServices.toggleNavButton(id, targetId, on, off);
+  // }
+  public btnNewNotesPress() {
+    this.navServices.btnNewNotesPress();
+  }
+  public btnNotesSettingsPress() {
+    // const dialogConfig = new MatDialogConfig();
+
+    // this.dialog.open(DialogBodyComponent, { width: '0px', height: '0px' });
+    this.navServices.btnNotesSettingsPress();
+  }
+  public btnOriginalNotesPress() {
+    this.navServices.btnOriginalNotesPress();
+  }
+  public btnParagraphPress() {
+    this.navServices.btnParagraphPress();
+  }
+  public btnPoetryPress() {
+    this.navServices.btnPoetryPress();
+  }
+  public btnRightPanePress() {
+    // this.verseSelectService.halfNotes = false;
+    this.navServices.btnRightPanePress();
+  }
+  public btnSecondaryNotesPress() {
+    this.navServices.btnSecondaryNotesPress().then(() => {
+      this.chapterService.resetNotes();
+    });
+  }
+  public btnTranslatorNotesPress() {
+    this.navServices.btnTranslatorNotesPress();
+  }
+
+  public ngOnInit() {}
+
+  public settings() {
+    this.router.navigateByUrl('settings');
+  }
+
+  public toggleNotes() {
+    this.navServices.toggleNotes();
+  }
+
+  public toggleVerseSelect() {
+    // this.verseSelectService.toggleVerseSelect();
+    // console.log(this.wTags2);
+    // this.chapterService.toggleVerseSelect(this.verseSelect);
   }
 }

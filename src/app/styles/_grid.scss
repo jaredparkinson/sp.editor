@@ -1,4 +1,5 @@
 @import './color';
+// @import './'
 
 @mixin gridBody($mediaQuery, $leftPaneWidth, $bodyBlockWidth, $rightPaneWidth) {
   .body {
@@ -29,30 +30,13 @@
   }
 
   .menu-bar {
-    grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+    .header-bottom {
+      grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
+    }
   }
 
   #notesSettings {
     right: $rightPaneWidth;
-  }
-}
-
-@media only screen and (max-width: 1023.98px) {
-  $leftPaneWidth: $vw1_5;
-  $bodyBlockWidth: $vw9;
-  $rightPaneWidth: $vw1_5;
-
-  .menu-bar {
-    grid-template-columns:
-      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
-      minmax(48px, $rightPaneWidth);
-    grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
-
-    #addressBar {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      margin-left: 10px;
-    }
   }
 }
 

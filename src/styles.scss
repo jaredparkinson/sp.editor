@@ -21,7 +21,7 @@ body {
     display: grid;
   }
   .main {
-    grid-template-rows: 40px auto;
+    grid-template-rows: 80px auto;
 
     .body .router-outlet {
       height: 100vh;
@@ -153,16 +153,6 @@ body.find {
 
 #headerLeftPane {
   grid-template-columns: 48px auto;
-}
-
-.menu-bar {
-  display: grid;
-  text-align: center;
-  height: 40px;
-
-  // fa-icon svg {
-  //   height: 100%;
-  // }
 }
 
 li {

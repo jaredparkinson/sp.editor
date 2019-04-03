@@ -1,4 +1,5 @@
 @import '../styles/color';
+@import '../../css.penguin/view_vars';
 .menu-bar {
   background-color: #fff;
   color: $text_color;
@@ -6,69 +7,104 @@
   border-bottom-color: $divider_color;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-
-  .btn-active {
-    color: $dark_primary_color !important;
-    fill: $dark_primary_color !important;
-  }
-  > div {
-    > * {
-      height: 40px;
-      display: grid;
-      align-items: center;
+  display: grid;
+  .header-bottom {
+    .btn-active {
+      color: $dark_primary_color !important;
+      fill: $dark_primary_color !important;
     }
-    > button {
-      display: inline !important;
-    }
-  }
-  button {
-    background-color: inherit;
-    color: black !important;
-
-    &#btnParagraph {
-      font-family: 'Courier New', Courier, monospace;
-
-      font-size: 29px !important;
-    }
-    &#navToggle {
-      font-size: 35px;
-    }
-    &#btnNotesFlyout {
-      svg {
-        font-size: 48px;
-        vertical-align: middle;
+    > div {
+      > * {
+        height: 40px;
+        display: grid;
+        align-items: center;
+      }
+      > button {
+        display: inline !important;
       }
     }
-    &#btnPoetry,
-    &#btnParagraph,
-    &#btnRightPane,
-    &#navToggle,
-    &#btnNotesFlyout {
-      font-size: 27px;
-      font-weight: bolder;
+    button {
+      background-color: inherit;
+      color: black !important;
 
-      svg {
-        width: 0.85em;
-        // height: 100%;
-        display: inline-block;
+      &#btnParagraph {
+        font-family: 'Courier New', Courier, monospace;
+
+        font-size: 29px !important;
+      }
+      &#navToggle {
+        font-size: 35px;
+      }
+      &#btnNotesFlyout {
+        svg {
+          font-size: 48px;
+          vertical-align: middle;
+        }
+      }
+      &#btnPoetry,
+      &#btnParagraph,
+      &#btnRightPane,
+      &#navToggle,
+      &#btnNotesFlyout {
+        font-size: 27px;
+        font-weight: bolder;
+
+        svg {
+          width: 0.85em;
+          // height: 100%;
+          display: inline-block;
+        }
       }
     }
+    i {
+      font-size: 1em;
+    }
+    .header-arrows {
+      font-size: 2em;
+    }
+    #bookName {
+      // margin-top: 6px;
+      margin-left: 10px;
+      font-weight: bold;
+      text-align: center;
+      @media screen and (max-width: 800px), (orientation: portrait) {
+        font-size: 17px !important;
+      }
+      font-size: 24px;
+      // align-self: center;
+    }
   }
-  i {
-    font-size: 1em;
-  }
-  .header-arrows {
-    font-size: 2em;
-  }
-  #bookName {
-    // margin-top: 6px;
-    margin-left: 10px;
-    font-weight: bold;
+}
+
+.menu-bar {
+  .header-bottom {
+    display: grid;
     text-align: center;
-    @media screen and (max-width: 800px), (orientation: portrait) {
-      font-size: 17px !important;
+    height: 40px;
+
+    // fa-icon svg {
+    //   height: 100%;
+    // }
+  }
+}
+
+.menu-bar {
+  .header-bottom {
+    @media only screen and (max-width: 1023.98px) {
+      $leftPaneWidth: $vw1_5;
+      $bodyBlockWidth: $vw9;
+      $rightPaneWidth: $vw1_5;
+
+      grid-template-columns:
+        minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
+        minmax(48px, $rightPaneWidth);
+      grid-template-areas: 'navToggle bookName addressBar btnParagraph btnPoetry empty  btnNewNotes btnEnglishNotes btnTranslatorNotes btnOriginalNotes btnSecondaryNotes btnRightPane';
+
+      #addressBar {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-left: 10px;
+      }
     }
-    font-size: 24px;
-    // align-self: center;
   }
 }

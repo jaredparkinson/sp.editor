@@ -31,16 +31,20 @@
     }
   }
   .header-top {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 40px 1fr auto 1fr 40px;
     border-bottom-color: rgba($color: $divider_color, $alpha: 0.7);
     border-bottom-style: solid;
     border-bottom-width: 1px;
     $leftPaneWidth: $vw1_5;
     $bodyBlockWidth: $vw9;
     $rightPaneWidth: $vw1_5;
-    display: grid;
-    grid-template-columns:
-      minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
-      minmax(48px, $rightPaneWidth);
+    // display: grid;
+    // grid-template-columns:
+    //   minmax(48px, $leftPaneWidth) minmax(auto, $bodyBlockWidth)
+    //   minmax(48px, $rightPaneWidth);
     li {
       display: grid;
       align-items: center;
@@ -58,12 +62,12 @@
       background-color: inherit;
       color: black !important;
 
-      &#btnParagraph {
-        // font-size: 29px !important;
-      }
-      &#navToggle {
-        // font-size: 35px;
-      }
+      // &#btnParagraph {
+      //   // font-size: 29px !important;
+      // }
+      // &#navToggle {
+      //   // font-size: 35px;
+      // }
       &#btnNotesFlyout {
         svg {
           font-size: 48px;

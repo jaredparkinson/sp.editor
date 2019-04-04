@@ -43,16 +43,16 @@
 
 @include gridBody(
   '@media only screen and (min-width: 1024px) and (max-width: 1279.98px)',
-  $vw2,
-  $vw7_5,
-  $vw2_5
+  15vw,
+  65vw,
+  20vw
 );
 
 @include gridBody(
   '@media only screen and (min-width: 1280px)',
-  $vw2,
-  $vw7,
-  $vw3
+  15vw,
+  65vw,
+  20vw
 );
 
 button {
@@ -164,7 +164,7 @@ button {
     }
   }
 
-  @include main-grid(' screen and (min-width: 1024px)', $vw2, $vw7, $vw3);
+  @include main-grid(' screen and (min-width: 1024px)', 15vw, 65vw, 20vw);
 
   .none {
     display: none !important;

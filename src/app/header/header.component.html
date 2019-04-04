@@ -1,7 +1,7 @@
 <div class="menu-bar pop-out  dark-text">
-  <div class="header-bottom">
-    <div id="headerLeftPane">
-      <button
+  <div class="header-top">
+    <div id="" class="headerLeftPane">
+      <li
         id="navToggle"
         class=" waves-effect waves-light"
         (click)="btnHeaderButtonPress(this.saveState.data.navigationPaneToggle)"
@@ -13,11 +13,47 @@
             color="#000"
           />
         </svg>
-      </button>
+      </li>
       <span id="empty "></span>
     </div>
-    <div id="headerMiddlePane">
-      <button
+    <div id="" class="headerMiddlePane">
+      <li></li>
+      <li></li>
+      <li></li>
+
+      <div id="bookName">
+        <div id="chapterTitle">
+          {{ dataService.chapter2.title }}
+        </div>
+        <div id="chapterShortTitle">
+          {{ dataService.chapter2.shortTitle }}
+        </div>
+      </div>
+
+      <li></li>
+
+      <li></li>
+
+      <li></li>
+    </div>
+    <div id="" class="headerRightPane">
+      <span id="empty "></span>
+      <li
+        id="btnRightPane"
+        (click)="btnHeaderButtonPress(this.saveState.data.notesPanePin)"
+        class="right-pane-ignore"
+      >
+        <i class="material-icons ">format_list_bulleted</i>
+      </li>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <div id="" class="headerLeftPane">
+      <li></li>
+      <span id="empty "></span>
+    </div>
+    <div id="" class="headerMiddlePane">
+      <li
         id="btnParagraph"
         [ngClass]="{
           'btn-active': saveState.data.paragraphsVisible
@@ -26,8 +62,8 @@
         (click)="btnParagraphPress()"
       >
         ¶
-      </button>
-      <button
+      </li>
+      <li
         id="btnPoetry"
         (click)="btnPoetryPress()"
         class="hide-small waves-effect waves-light"
@@ -43,40 +79,33 @@
             d="M46.8 28.3c-.9-4.6-8.4-19.5-8.4-19.5.9 0 1.6 0 2.3-.1 3.4-.4 5.2-4.1 3-6.5-2.4-2.6-7.2-.9-8.4 3.2-.3 1.2-.3 2.2-.3 2.2-.1.9.1 2.1.4 3.4H33V7.7c.4-.3.7-.8.7-1.4 0-.9-.7-1.7-1.7-1.7-.9 0-1.7.7-1.7 1.7 0 .6.3 1 .7 1.4V11h-5V4.4c.4-.3.7-.8.7-1.4 0-.9-.7-1.7-1.7-1.7-.9 0-1.7.7-1.7 1.7 0 .6.3 1 .7 1.4V11h-5.1V6.9c.4-.3.7-.8.7-1.4 0-.9-.7-1.7-1.7-1.7-.9 0-1.7.7-1.7 1.7 0 .6.3 1 .7 1.4V11h-2.3c.3-1.4.4-2.6.4-3.4 0 0-.1-1.2-.6-2.7-1.3-3.7-5.8-5.2-8.1-2.7-2.2 2.4-.4 6.1 3 6.5.7.1 1.4.1 2.3.1 0 0-7.5 15-8.4 19.5 0 0-3.6 12.5 14 16.6l-1.5 1.9c-.7.9-.1 2.2 1 2.2h16.6c1.1 0 1.7-1.3 1-2.2l-1.5-1.9c17.6-4.1 14-16.6 14-16.6zM31.1 13v26c-1.7.5-3.2.7-4.3.9-.3 0-.5.1-.8.1V13h5.1zM24 13v26.9c-.3 0-.5 0-.8-.1-1.1-.1-2.7-.4-4.3-.9V13H24zM10 25.1s2.7-6.7 4.2-12.1H17v25.3c-4.7-1.8-9.3-5.5-7-13.2zm23 13.2V13h2.8c1.4 5.4 4.2 12.1 4.2 12.1 2.3 7.7-2.3 11.4-7 13.2z"
           />
         </svg>
-      </button>
-      <button
+      </li>
+      <li
         class="hide-small waves-effect waves-light"
         id="btnBack"
         (click)="btnBackPress()"
       >
         <i class="header-arrows material-icons ">arrow_back</i>
-      </button>
+      </li>
 
-      <div id="bookName">
-        <div id="chapterTitle">
-          {{ dataService.chapter2.title }}
-        </div>
-        <div id="chapterShortTitle">
-          {{ dataService.chapter2.shortTitle }}
-        </div>
-      </div>
+      <li></li>
 
-      <button
+      <li
         class="hide-small waves-effect waves-light"
         id="btnForward"
         (click)="btnForwardPress()"
       >
         <i class="header-arrows material-icons ">arrow_forward</i>
-      </button>
-      <button
+      </li>
+      <li
         id="btnNotesFlyout"
         (click)="btnNotesSettingsPress()"
         class="right-pane-ignore notes-settings waves-effect waves-light"
         [ngClass]="{ 'darken-2': navServices.notesSettings }"
       >
         <i class="material-icons ">more_vert</i>
-      </button>
-      <button
+      </li>
+      <li
         id="btnSecondaryNotes"
         class="hide-small waves-effect waves-light"
         [ngClass]="{
@@ -85,17 +114,11 @@
         (click)="btnSecondaryNotesPress()"
       >
         <i class="header-arrows material-icons  ">add</i>
-      </button>
+      </li>
     </div>
-    <div id="headerRightPane">
+    <div id="" class="headerRightPane">
       <span id="empty "></span>
-      <button
-        id="btnRightPane"
-        (click)="btnHeaderButtonPress(this.saveState.data.notesPanePin)"
-        class="right-pane-ignore"
-      >
-        <i class="material-icons ">format_list_bulleted</i>
-      </button>
+      <li></li>
     </div>
   </div>
 </div>

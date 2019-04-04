@@ -30,7 +30,8 @@
   }
 
   .menu-bar {
-    .header-bottom {
+    .header-bottom,
+    .header-top {
       grid-template-columns: $leftPaneWidth $bodyBlockWidth $rightPaneWidth;
     }
   }
@@ -69,7 +70,7 @@ button {
 }
 
 @media only screen and (min-width: 512px) {
-  #headerMiddlePane {
+  .headerMiddlePane {
     grid-template-columns: 48px 48px 48px auto 48px 48px 48px;
   }
 

@@ -21,7 +21,7 @@ body {
     display: grid;
   }
   .main {
-    grid-template-rows: 80px auto;
+    grid-template-rows: 70px auto;
 
     .body .router-outlet {
       height: 100vh;

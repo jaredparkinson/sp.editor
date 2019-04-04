@@ -1,5 +1,10 @@
 <!-- class="fadeIn animated fastest" -->
-<div [ngClass]="{ none: !navServices.notesSettings }" id="notesSettings">
+<div
+  [ngStyle]="{ top: notesFlyout.top, left: notesFlyout.left }"
+  [ngClass]="{ none: !navServices.notesSettings }"
+  class="animated fadeIn fastest"
+  id="notesSettings"
+>
   <div class="note-settings">
     <button
       id="btnNewNotes"

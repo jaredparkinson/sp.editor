@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   // faGlobe = faGlobe;
   // faCaretDown = faCaretDown;
   // faArrowLeft = faArrowLeft;
-  // faArrowRight = faArrowRight;
+  // faArrowRight = faArrowRight
   @ViewChildren('wtag')
   public wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;

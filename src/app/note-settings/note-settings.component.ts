@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { ChapterService } from '../services/chapter.service';
@@ -15,7 +15,12 @@ import { SaveStateService } from '../services/save-state.service';
   styleUrls: ['./note-settings.component.scss'],
 })
 export class NoteSettingsComponent implements OnInit {
-  versionNumber = '';
+  public notesFlyout: {
+    left: string;
+    top: string;
+  } = { top: '70px', left: '0' };
+  public resizeTimeout: any;
+  public versionNumber = '';
   constructor(
     public saveState: SaveStateService,
     public navServices: NavigationService,
@@ -26,18 +31,35 @@ export class NoteSettingsComponent implements OnInit {
     public httpClient: HttpClient,
     private dataService: DataService,
   ) {}
-
-  ngOnInit() {
-    this.httpClient
-      .get('assets/version.txt', { observe: 'body', responseType: 'text' })
-      .subscribe(data => {
-        const regex = new RegExp(/\d(\.\d{1,3}){1,2}/);
-        this.versionNumber = regex.exec(data)[0];
-        console.log('data ' + this.versionNumber);
-      });
+  public btnEnglishNotesPress(): void {
+    this.navServices.btnEnglishNotesPress().then((value: boolean) => {
+      this.chapterService.resetNotes();
+    });
+  }
+  public btnNewNotesPress() {
+    this.navServices.btnNewNotesPress().then((value: boolean) => {
+      this.chapterService.resetNotes();
+    });
   }
 
-  editPage(): void {
+  public btnOriginalNotesPress(): void {
+    this.navServices.btnOriginalNotesPress().then((value: boolean) => {
+      this.chapterService.resetNotes();
+    });
+  }
+
+  public btnSecondaryNotesPress() {
+    this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
+      this.chapterService.resetNotes();
+    });
+  }
+  public btnTranslatorNotesPress(): void {
+    this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
+      this.chapterService.resetNotes();
+    });
+  }
+
+  public editPage(): void {
     console.log(this.router.url);
 
     if (this.router.url.includes('edit')) {
@@ -52,48 +74,28 @@ export class NoteSettingsComponent implements OnInit {
     }
   }
 
-  btnSecondaryNotesPress() {
-    this.navServices.btnSecondaryNotesPress().then((value: boolean) => {
-      this.chapterService.resetNotes();
-    });
+  public ngOnInit() {
+    this.setLeft();
+    // this.httpClient
+    //   .get('assets/version.txt', { observe: 'body', responseType: 'text' })
+    //   .subscribe(data => {
+    //     const regex = new RegExp(/\d(\.\d{1,3}){1,2}/);
+    //     this.versionNumber = regex.exec(data)[0];
+    //     console.log('data ' + this.versionNumber);
+    //   });
   }
 
-  btnOriginalNotesPress(): void {
-    this.navServices.btnOriginalNotesPress().then((value: boolean) => {
-      this.chapterService.resetNotes();
-    });
+  @HostListener('window:resize')
+  public onWindowResize() {
+    // debounce resize, wait for resize to finish before doing stuff
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      console.log('Resize complete');
+      this.setLeft();
+    }, 50);
   }
-  btnTranslatorNotesPress(): void {
-    this.navServices.btnTranslatorNotesPress().then((value: boolean) => {
-      this.chapterService.resetNotes();
-    });
-  }
-  btnEnglishNotesPress(): void {
-    this.navServices.btnEnglishNotesPress().then((value: boolean) => {
-      this.chapterService.resetNotes();
-    });
-  }
-  btnNewNotesPress() {
-    this.navServices.btnNewNotesPress().then((value: boolean) => {
-      this.chapterService.resetNotes();
-    });
-  }
-  toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
-    // this.verseSelectService.toggleVerseSuperScripts(false);
-    // this.verseSelectService.toggleVerseSelect();
-    this.saveState.data.verseSelect = toggle;
-
-    this.saveState.save();
-    // this.chapterService.resetVerseSelect();
-  }
-  // toggleVerseSuperScripts() {
-  //   this.verseSelectService.toggleVerseSelect(false);
-  //   this.verseSelectService.toggleVerseSuperScripts();
-  // }
-  settings() {
-    this.router.navigateByUrl('settings');
-  }
-
   // subNotesClick(ref: string) {
   //   switch (ref) {
   //     case 'QUO': {
@@ -161,6 +163,27 @@ export class NoteSettingsComponent implements OnInit {
     this.saveState.save();
 
     this.chapterService.resetNotes();
+  }
+  // toggleVerseSuperScripts() {
+  //   this.verseSelectService.toggleVerseSelect(false);
+  //   this.verseSelectService.toggleVerseSuperScripts();
+  // }
+  public settings() {
+    this.router.navigateByUrl('settings');
+  }
+  public toggleVerseSelect(toggle: boolean = !this.saveState.data.verseSelect) {
+    // this.verseSelectService.toggleVerseSuperScripts(false);
+    // this.verseSelectService.toggleVerseSelect();
+    this.saveState.data.verseSelect = toggle;
+
+    this.saveState.save();
+    // this.chapterService.resetVerseSelect();
+  }
+  private setLeft() {
+    const notesSettings = document.getElementById('notesSettings');
+    const elem = document.getElementById('btnNotesFlyout');
+    this.notesFlyout.left = `${elem.getBoundingClientRect().left -
+      notesSettings.getBoundingClientRect().width / 2}px`;
   }
   // private resetNotes() {
   //   this.chapterService

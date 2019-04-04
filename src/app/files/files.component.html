@@ -2,8 +2,8 @@
   class="left-pane-container left-pane-ignore"
   (swiperight)="this.swipeRight($event)"
   [ngClass]="{
-    'display-title': this.displayNavTitle(),
-    'display-short-title': this.displayNavShortTitle()
+    'display-title': this.displayNavTitle,
+    'display-short-title': !this.displayNavTitle
   }"
 >
   <!-- 'slideInLeft ': saveState.data.navigationPaneToggle.value, -->

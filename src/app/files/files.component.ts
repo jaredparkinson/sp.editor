@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
@@ -19,7 +25,9 @@ import { UrlBuilder } from './UrlBuilder';
 export class FilesComponent implements OnInit {
   @ViewChild('addressBar') public addressBar: ElementRef;
   public booksVisible = false;
+  public displayNavTitle = true;
   public foldersVisible = true;
+  public resizeTimeout: any;
 
   public tempNav: Navigation[] = [];
   constructor(
@@ -51,7 +59,7 @@ export class FilesComponent implements OnInit {
 
     return nav ? (nav as HTMLElement).offsetWidth < 200 : false;
   }
-  public displayNavTitle() {
+  public displayNavTitle2() {
     const nav = document.querySelector('div.navigation-pane');
 
     return nav ? (nav as HTMLElement).offsetWidth > 200 : false;
@@ -84,6 +92,22 @@ export class FilesComponent implements OnInit {
   }
 
   public onChapterClick() {}
+  @HostListener('window:resize')
+  public onWindowResize() {
+    // debounce resize, wait for resize to finish before doing stuff
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
+    this.resizeTimeout = setTimeout(() => {
+      console.log('Resize complete');
+      const nav = document.querySelector('div.navigation-pane');
+
+      this.displayNavTitle = nav
+        ? (nav as HTMLElement).offsetWidth > 200
+        : false;
+      // this.setLeft();
+    }, 50);
+  }
   public resetNavigation() {
     this.navService.navigation.forEach(nav => {
       nav.subNavigationVisible = false;

@@ -1,4 +1,10 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +24,7 @@ import { SaveStateService } from '../services/save-state.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  public resizeTimeout: any;
   // faBars = faBars;
   // faParagraph = faParagraph;
   // faBookOpen = faBookOpen;

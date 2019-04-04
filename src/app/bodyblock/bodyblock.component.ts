@@ -7,13 +7,12 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as bowser from 'bowser';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { VerseComponent } from '../components/verse/verse.component';
 
-import { cloneDeep, filter, flattenDeep, last, replace } from 'lodash';
+import { cloneDeep, filter, last } from 'lodash';
 import { Navigation } from '../modelsJson/Navigation';
 import { Verse } from '../modelsJson/Verse';
 import { ChapterService } from '../services/chapter.service';
@@ -25,9 +24,7 @@ import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 
-import { reject } from 'q';
 import { Chapter2 } from '../modelsJson/Chapter';
-import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -211,7 +208,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   }
 
   private buildPage(id: string, highlighting: string[] = []) {
-    return new Promise<number>(async (resolve ,reject)=> {
+    return new Promise<number>(async (resolve, reject) => {
       // let chapter = this.dataService.chapter2;
       // if (this.pageId !== id) {
       //   chapter = await this.chapterService.getChapter(id);

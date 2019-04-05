@@ -127,20 +127,20 @@ body.find {
     text-overflow: clip;
   }
 
-  #btnParagraph {
-    grid-area: 'btnParagraph';
-    visibility: hidden;
-  }
+  // #btnParagraph {
+  //   grid-area: 'btnParagraph';
+  //   visibility: hidden;
+  // }
 
-  #btnBack,
-  #btnForward {
-    visibility: hidden;
-  }
+  // #btnBack,
+  // #btnForward {
+  //   visibility: hidden;
+  // }
 
-  #btnPoetry {
-    grid-area: 'btnParagraph';
-    visibility: hidden;
-  }
+  // #btnPoetry {
+  //   grid-area: 'btnParagraph';
+  //   visibility: hidden;
+  // }
 
   #notesSettings {
     right: 0;
@@ -275,6 +275,7 @@ header > * {
 // }
 
 .body-block {
+  background-color: #fff;
   w.language,
   w.translit {
     font-size: 16px !important;

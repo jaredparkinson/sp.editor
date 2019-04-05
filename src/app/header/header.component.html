@@ -43,21 +43,33 @@
         (click)="btnHeaderButtonPress(this.saveState.data.notesPanePin)"
         class="right-pane-ignore"
       >
-        <i class="material-icons ">format_list_bulleted</i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+          <path
+            d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
+          />
+          <path fill="none" d="M0 0h24v24H0V0z" />
+        </svg>
       </li>
     </div>
   </div>
   <div class="header-bottom">
-    <!-- <div id="" class="headerLeftPane">
-      <li></li>
-      <span id="empty "></span>
-    </div> -->
+    <li class=" waves-effect waves-light" id="btnBack" (click)="btnBackPress()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+        />
+      </svg>
+    </li>
     <li
-      class="hide-small waves-effect waves-light"
-      id="btnBack"
-      (click)="btnBackPress()"
+      class=" waves-effect waves-light"
+      id="btnForward"
+      (click)="btnForwardPress()"
     >
-      <i class="header-arrows material-icons ">arrow_back</i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+      </svg>
     </li>
     <li></li>
     <li
@@ -65,7 +77,7 @@
       [ngClass]="{
         'btn-active': saveState.data.paragraphsVisible
       }"
-      class="hide-small waves-effect waves-light"
+      class=" waves-effect waves-light"
       (click)="btnParagraphPress()"
     >
       ¶
@@ -73,7 +85,7 @@
     <li
       id="btnPoetry"
       (click)="btnPoetryPress()"
-      class="hide-small waves-effect waves-light"
+      class=" waves-effect waves-light"
       [ngClass]="{
         'btn-active': saveState.data.poetryVisible
       }"
@@ -86,7 +98,7 @@
     </li>
     <li
       id="btnSecondaryNotes"
-      class="hide-small waves-effect waves-light"
+      class=" waves-effect waves-light"
       [ngClass]="{
         'btn-active': saveState.data.secondaryNotesVisible
       }"
@@ -107,31 +119,20 @@
         />
       </svg>
     </li>
-    <!-- <li></li> -->
-    <!-- <li></li> -->
     <li
       id="btnNotesFlyout"
       (click)="btnNotesSettingsPress()"
       class="right-pane-ignore notes-settings waves-effect waves-light"
       [ngClass]="{ 'darken-2': navServices.notesSettings }"
     >
-      <i class="material-icons ">more_vert</i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+        />
+      </svg>
     </li>
-    <!-- <li><i class="material-icons">edit</i></li> -->
     <li></li>
-    <li
-      class="hide-small waves-effect waves-light"
-      id="btnForward"
-      (click)="btnForwardPress()"
-    >
-      <i class="header-arrows material-icons ">arrow_forward</i>
-    </li>
-    <!-- <div id="" class="headerMiddlePane">
-    </div>
-    <div id="" class="headerRightPane">
-      <span id="empty "></span>
-      <li></li>
-    </div> -->
   </div>
 </div>
 <app-note-settings *ngIf="this.navServices.notesSettings"></app-note-settings>

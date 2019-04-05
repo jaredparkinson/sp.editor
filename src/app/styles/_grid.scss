@@ -20,10 +20,10 @@
   .left-pane-container {
     width: $leftPaneWidth;
   }
-  .right-pane footer,
-  .right-pane-editor footer {
-    width: $rightPaneWidth;
-  }
+  // .right-pane footer,
+  // .right-pane-editor footer {
+  //   width: $rightPaneWidth;
+  // }
 
   .left-pane nav {
     width: $leftPaneWidth;
@@ -118,6 +118,18 @@ button {
     right: 10vw;
   }
 }
+// .parent-container {
+//   grid-auto-rows: 1fr 1fr;
+//   grid-template-areas:
+//     'test1'
+//     'test2';
+//   footer {
+//     grid-area: 'test2';
+//   }
+//   .body-block {
+//     grid-area: 'test1';
+//   }
+// }
 
 .main-parent {
   display: grid;

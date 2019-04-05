@@ -20,10 +20,10 @@
   .left-pane-container {
     width: $leftPaneWidth;
   }
-  // .right-pane footer,
-  // .right-pane-editor footer {
-  //   width: $rightPaneWidth;
-  // }
+  .right-pane footer,
+  .right-pane-editor footer {
+    width: $rightPaneWidth;
+  }
 
   .left-pane nav {
     width: $leftPaneWidth;
@@ -102,7 +102,7 @@ button {
 
     &.half-notes {
       position: fixed !important;
-      width: 100%;
+      width: 100vw;
       top: 50%;
       border-top: 5px solid darkgrey;
     }
@@ -155,6 +155,9 @@ button {
         display: grid;
         height: 100vh;
         grid-template-columns: $bodyBlockWidth $rightPaneWidth;
+        .right-pane footer {
+          width: $rightPaneWidth;
+        }
         &.settings-container,
         &.hidden-notes {
           grid-template-columns: ($bodyBlockWidth + $rightPaneWidth) 0px;

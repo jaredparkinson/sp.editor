@@ -90,7 +90,7 @@ export class ChapterService {
           .then(chapter => {
             resolve(chapter as Chapter2);
           })
-          .catch(() => {
+          .catch(r => {
             reject(undefined);
           });
       },

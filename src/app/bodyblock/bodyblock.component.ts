@@ -92,6 +92,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     }
     return url;
   }
+
   public ngOnDestroy() {}
   public ngOnInit() {
     this.route.params.subscribe(async params => {
@@ -123,7 +124,9 @@ export class BodyblockComponent implements OnInit, OnDestroy {
           this.setNavigation(this.navService.navigation);
           this.chapterService.chapterFadeOut = false;
         })
-        .catch(() => {
+        .catch(r => {
+          console.log(r);
+
           console.log('failed');
 
           this.router.navigateByUrl('/');

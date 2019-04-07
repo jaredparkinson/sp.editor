@@ -158,8 +158,10 @@ export class HeaderComponent implements OnInit {
       const endContainer = range.endContainer.parentElement;
       let vereParent = range.commonAncestorContainer as Element;
       while (
-        vereParent.classList &&
-        !(vereParent as Element).classList.contains('verse')
+        !vereParent.classList ||
+        (vereParent.classList &&
+          !(vereParent as Element).classList.contains('verse') &&
+          !(vereParent.nodeName === 'span'))
       ) {
         vereParent = vereParent.parentNode as Element;
       }
@@ -181,9 +183,21 @@ export class HeaderComponent implements OnInit {
         ),
         offSet: range.endOffset,
       };
+      console.log(
+        range.toString() ===
+          vereParent.textContent.substring(
+            parseInt(sC.startID) + sC.offSet,
+            parseInt(eC.startID) + eC.offSet,
+          ),
+      );
       if (range.startContainer === range.endContainer) {
-        console.log(vereParent);
-        console.log(range.toString());
+        // console.log(vereParent);
+        console.log();
+
+        console.log(vereParent.textContent);
+
+        console.log(sC);
+        console.log(eC);
 
         console.log(
           range.startContainer.textContent.substring(sC.offSet, eC.offSet),

@@ -64,51 +64,7 @@ export class VerseComponent implements OnInit {
 
   public ngOnInit() {}
   public selectText() {
-    setTimeout(() => {
-      const range = document.getSelection().getRangeAt(0);
-      if (
-        !(
-          range.startContainer === range.endContainer &&
-          range.startOffset === range.endOffset
-        )
-      ) {
-        const startContainer = range.startContainer.parentElement;
-        const endContainer = range.endContainer.parentElement;
-        let vereParent = range.commonAncestorContainer as Element;
-        while (
-          vereParent.classList &&
-          !(vereParent as Element).classList.contains('verse')
-        ) {
-          vereParent = vereParent.parentNode as Element;
-        }
-        const sC = {
-          startID: first(
-            range.startContainer.parentElement.getAttribute('w-ids').split(','),
-          ),
-          lastID: last(
-            range.startContainer.parentElement.getAttribute('w-ids').split(','),
-          ),
-          offSet: range.startOffset,
-        };
-        const eC = {
-          startID: first(
-            range.endContainer.parentElement.getAttribute('w-ids').split(','),
-          ),
-          lastID: last(
-            range.endContainer.parentElement.getAttribute('w-ids').split(','),
-          ),
-          offSet: range.endOffset,
-        };
-        if (range.startContainer === range.endContainer) {
-          console.log(vereParent);
-          console.log(range.toString());
-
-          console.log(
-            range.startContainer.textContent.substring(sC.offSet, eC.offSet),
-          );
-        }
-      }
-    }, 2000);
+    console.log(window.getSelection().getRangeAt(0));
   }
 
   public wTagClick(w: W) {

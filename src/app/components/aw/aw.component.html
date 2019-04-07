@@ -1,3 +1,5 @@
 <a [href]="this.w.href"
-  ><w *ngFor="let c of this.w.childWTags">{{ c.text }}</w>
+  ><w *ngFor="let c of this.w.childWTags" [attr.w-ids]="c.id.toString()">{{
+    c.text
+  }}</w>
 </a>

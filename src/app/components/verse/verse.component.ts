@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  HostListener,
   Input,
   OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { isEmpty } from 'lodash';
+import { DomSanitizer } from '@angular/platform-browser';
+import { first, isEmpty, last } from 'lodash';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
 import { Verse } from '../../modelsJson/Verse';
 import { W } from '../../modelsJson/W';
@@ -19,7 +21,6 @@ import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 // import { VerseSelectService } from '../../services/verse-select.service';
 import { WTagService } from '../../services/wtag-builder.service';
-import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-verse',
   templateUrl: './verse.component.html',
@@ -27,6 +28,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerseComponent implements OnInit {
+  @ViewChild('span') public span!: ElementRef;
   @Input() public verse: Verse;
   constructor(
     public wTagBuilderService: WTagService,
@@ -37,12 +39,22 @@ export class VerseComponent implements OnInit {
     public chapterService: ChapterService,
     public dataService: DataService,
   ) {}
+  public animateNotesPane(): Promise<void> {
+    return new Promise<void>(resolve => {
+      if (!this.saveState.data.notesPanePin.value) {
+        this.saveState.data.notesPanePin.value = true;
 
-  @ViewChild('span') span!: ElementRef;
-
-  ngOnInit() {}
-
-  filterClassList(classList: string[]) {
+        this.saveState.data.notesPanePin.animated = true;
+        setTimeout(() => {
+          this.saveState.data.notesPanePin.animated = false;
+          resolve();
+        }, 400);
+      } else {
+        resolve();
+      }
+    });
+  }
+  public filterClassList(classList: string[]) {
     if (!classList) {
       return '';
     }
@@ -50,7 +62,44 @@ export class VerseComponent implements OnInit {
     return classList.toString().replace(',', ' ');
   }
 
-  wTagClick(w: W) {
+  public ngOnInit() {}
+  public selectText() {
+    const range = window.getSelection().getRangeAt(0);
+    if (
+      !(
+        range.startContainer === range.endContainer &&
+        range.startOffset === range.endOffset
+      )
+    ) {
+      const startContainer = range.startContainer.parentElement;
+      const endContainer = range.endContainer.parentElement;
+      const sC = {
+        startID: first(
+          range.startContainer.parentElement.getAttribute('w-ids').split(','),
+        ),
+        lastID: last(
+          range.startContainer.parentElement.getAttribute('w-ids').split(','),
+        ),
+        offSet: range.startOffset,
+      };
+      const eC = {
+        startID: first(
+          range.endContainer.parentElement.getAttribute('w-ids').split(','),
+        ),
+        lastID: last(
+          range.endContainer.parentElement.getAttribute('w-ids').split(','),
+        ),
+        offSet: range.endOffset,
+      };
+      if (range.startContainer === range.endContainer) {
+        console.log(
+          range.startContainer.textContent.substring(sC.offSet, eC.offSet),
+        );
+      }
+    }
+  }
+
+  public wTagClick(w: W) {
     if (!w.visibleRefs) {
       return;
     }
@@ -69,6 +118,26 @@ export class VerseComponent implements OnInit {
       }
     }
     // console.log(w.visibleRefs);
+  }
+
+  private resetNotes(): Promise<void> {
+    return new Promise<void>(resolve => {
+      this.chapterService
+        .resetNoteVisibility(
+          this.dataService.chapter2,
+          this.dataService.noteVisibility,
+        )
+        .then(() => {
+          this.chapterService
+            .buildWTags(
+              this.dataService.verses,
+              this.dataService.noteVisibility,
+            )
+            .then(() => {
+              resolve();
+            });
+        });
+    });
   }
 
   private wTagSelect(w: W) {
@@ -95,41 +164,6 @@ export class VerseComponent implements OnInit {
         document.getElementById(ref).scrollIntoView();
       }
       resolve();
-    });
-  }
-  animateNotesPane(): Promise<void> {
-    return new Promise<void>(resolve => {
-      if (!this.saveState.data.notesPanePin.value) {
-        this.saveState.data.notesPanePin.value = true;
-
-        this.saveState.data.notesPanePin.animated = true;
-        setTimeout(() => {
-          this.saveState.data.notesPanePin.animated = false;
-          resolve();
-        }, 400);
-      } else {
-        resolve();
-      }
-    });
-  }
-
-  private resetNotes(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.chapterService
-        .resetNoteVisibility(
-          this.dataService.chapter2,
-          this.dataService.noteVisibility,
-        )
-        .then(() => {
-          this.chapterService
-            .buildWTags(
-              this.dataService.verses,
-              this.dataService.noteVisibility,
-            )
-            .then(() => {
-              resolve();
-            });
-        });
     });
   }
 }

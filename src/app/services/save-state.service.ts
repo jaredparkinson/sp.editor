@@ -35,9 +35,9 @@ export class SaveStateService {
   }
   public load(): Promise<any> {
     return new Promise(async resolve => {
-      // await this.loadSearch();
-      // await this.loadVerseData();
       console.log('settings load');
+      await this.loadVerseData();
+      await this.loadSearch();
 
       const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
       this.data = temp !== null ? temp : new SaveStateModel();
@@ -70,7 +70,7 @@ export class SaveStateService {
       });
 
       this.searchService.verses = [];
-      // const promises = [];
+
       filteredDocs.forEach(async doc => {
         promises.push(() => {
           new Promise(async resolve2 => {
@@ -91,17 +91,6 @@ export class SaveStateService {
         console.log(this.searchService.verses.length);
         resolve();
       });
-      // this.searchService.verses = t
-
-      // this.httpClient
-      //   .get('assets/data/verses.json', { responseType: 'json' })
-      //   .subscribe(data => {
-      //     this.searchService.verses = data as Array<{
-      //       id: string;
-      //       text: string;
-      //     }>;
-      //     resolve();
-      //   });
     });
   }
 

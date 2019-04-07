@@ -6,6 +6,7 @@
     'highlight-context': verse.context,
     'verse-verse': !verse.header
   }"
+  (mouseup)="selectText()"
 >
   <ng-container *ngFor="let w of verse.wTags">
     <w
@@ -18,12 +19,18 @@
         'verse-select-2': w.selected && w.visibleRefCount > 1,
         wRef: w.visibleRefs && w.visibleRefCount > 1
       }"
+      [attr.w-ids]="w.id.toString()"
       >{{ w.text }}</w
     ><w
       [class]="filterClassList(w.classList)"
       *ngIf="!w.refs && w.type === 'W'"
+      [attr.w-ids]="w.id.toString()"
       >{{ w.text }}</w
     ><app-aw [w]="w" *ngIf="w.type === 'aW'"></app-aw
-    ><ruby *ngIf="w.type === 'rW'" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(w.text)"></ruby>
+    ><ruby
+      *ngIf="w.type === 'rW'"
+      [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(w.text)"
+      [attr.w-ids]="w.id.toString()"
+    ></ruby>
   </ng-container>
 </span>

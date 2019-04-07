@@ -18,6 +18,7 @@ import { EditService } from '../services/EditService';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
+import { WTagService } from '../services/wtag-builder.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 @Component({
   selector: 'app-header',
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit {
     private location: Location,
     public dataService: DataService,
     public swUpdate: SwUpdate,
+    public wTagService: WTagService,
   ) {
     setInterval(() => {
       if (
@@ -61,8 +63,8 @@ export class HeaderComponent implements OnInit {
           .toString()
           .trim() !== ''
       ) {
-        this.getSelection = window.getSelection();
-        this.cloneRange = window
+        // this.wTagService.getSelection = window.getSelection();
+        this.wTagService.cloneRange = window
           .getSelection()
           .getRangeAt(0)
           .cloneRange();
@@ -147,6 +149,8 @@ export class HeaderComponent implements OnInit {
   }
 
   public markText() {
+    this.wTagService.markText();
+    return;
     const range = this.cloneRange;
     if (
       !(

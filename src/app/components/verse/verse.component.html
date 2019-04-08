@@ -8,7 +8,7 @@
     'highlight-context': verse.context,
     'verse-verse': !verse.header
   }"
-  (click)="this.selectText()"
+  (click)="this.resetCloneRange()"
 >
   <ng-container *ngFor="let w of verse.wTags">
     <w

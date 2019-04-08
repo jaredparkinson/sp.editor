@@ -26,6 +26,7 @@ import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 
 import { Chapter2 } from '../modelsJson/Chapter';
+import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -55,6 +56,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
     public router: Router,
+    private wTagService: WTagService,
   ) {}
 
   public btnNavigationButtons(direction: number) {
@@ -123,6 +125,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
           await this.resetNavigationFocus(this.navService.navigation);
           this.setNavigation(this.navService.navigation);
           this.chapterService.chapterFadeOut = false;
+
+          this.wTagService.init();
         })
         .catch(r => {
           console.log(r);

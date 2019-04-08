@@ -6,18 +6,49 @@ import { first, last } from 'lodash';
 })
 export class WTagService {
   public cloneRange: Range;
+  public rangeInterval: any;
+
+  public convertRange(
+    node: Node,
+    offSet: number,
+  ): { lastID: string; offSet: number; startID: string } {
+    return {
+      startID: first(node.parentElement.getAttribute('w-ids').split(',')),
+      lastID: last(node.parentElement.getAttribute('w-ids').split(',')),
+      offSet,
+    };
+  }
+
+  public init() {
+    clearInterval(this.rangeInterval);
+    this.rangeInterval = setInterval(() => {
+      if (
+        window.getSelection().rangeCount > 0 &&
+        window
+          .getSelection()
+          .toString()
+          .trim() !== ''
+      ) {
+        // this.wTagService.getSelection = window.getSelection();
+        this.cloneRange = window
+          .getSelection()
+          .getRangeAt(0)
+          .cloneRange();
+        // console.log(this.getSelection.getRangeAt(0).cloneRange());
+      }
+      // console.log();/
+    }, 100);
+  }
 
   public markText() {
-    const range = this.cloneRange;
+    // const range = this.cloneRange;
     if (
       !(
-        range.startContainer === range.endContainer &&
-        range.startOffset === range.endOffset
+        this.cloneRange.startContainer === this.cloneRange.endContainer &&
+        this.cloneRange.startOffset === this.cloneRange.endOffset
       )
     ) {
-      const startContainer = range.startContainer.parentElement;
-      const endContainer = range.endContainer.parentElement;
-      let vereParent = range.commonAncestorContainer as Element;
+      let vereParent = this.cloneRange.commonAncestorContainer as Element;
       while (
         !vereParent.classList ||
         (vereParent.classList &&
@@ -26,46 +57,26 @@ export class WTagService {
       ) {
         vereParent = vereParent.parentNode as Element;
       }
-      const sC = {
-        startID: first(
-          range.startContainer.parentElement.getAttribute('w-ids').split(','),
-        ),
-        lastID: last(
-          range.startContainer.parentElement.getAttribute('w-ids').split(','),
-        ),
-        offSet: range.startOffset,
-      };
-      const eC = {
-        startID: first(
-          range.endContainer.parentElement.getAttribute('w-ids').split(','),
-        ),
-        lastID: last(
-          range.endContainer.parentElement.getAttribute('w-ids').split(','),
-        ),
-        offSet: range.endOffset,
-      };
+      const startContainer = this.convertRange(
+        this.cloneRange.startContainer,
+        this.cloneRange.startOffset,
+      );
+      const endContainer = this.convertRange(
+        this.cloneRange.endContainer,
+        this.cloneRange.endOffset,
+      );
       console.log(
-        range.toString() ===
+        this.cloneRange.toString() ===
           vereParent.textContent.substring(
-            parseInt(sC.startID) + sC.offSet,
-            parseInt(eC.startID) + eC.offSet,
+            parseInt(startContainer.startID) + startContainer.offSet,
+            parseInt(endContainer.startID) + endContainer.offSet,
           ),
       );
-      if (range.startContainer === range.endContainer) {
-        // console.log(vereParent);
-        console.log();
-
-        console.log(vereParent.textContent);
-
-        console.log(sC);
-        console.log(eC);
-
-        console.log(
-          range.startContainer.textContent.substring(sC.offSet, eC.offSet),
-        );
-      }
+      this.reset();
     }
   }
 
-  public reset() {}
+  public reset() {
+    this.cloneRange = undefined;
+  }
 }

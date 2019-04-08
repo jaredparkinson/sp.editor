@@ -63,8 +63,8 @@ export class VerseComponent implements OnInit {
   }
 
   public ngOnInit() {}
-  public selectText() {
-    console.log(window.getSelection().getRangeAt(0));
+  public resetCloneRange() {
+    this.wTagBuilderService.reset();
   }
 
   public wTagClick(w: W) {
@@ -86,12 +86,6 @@ export class VerseComponent implements OnInit {
       }
     }
     // console.log(w.visibleRefs);
-  }
-
-  // @HostListener('touchend', ['p'])
-  // @HostListener('click', ['p'])
-  public yyyy() {
-    this.selectText();
   }
 
   private resetNotes(): Promise<void> {
@@ -120,7 +114,7 @@ export class VerseComponent implements OnInit {
       w.selected = true;
       this.dataService.verses.forEach(verse => {
         verse.wTags.forEach(wTag => {
-          if (wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
+          if (ref && wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
             wTag.selected = true;
           }
         });
@@ -134,8 +128,9 @@ export class VerseComponent implements OnInit {
 
       await this.animateNotesPane();
 
-      if (ref) {
-        document.getElementById(ref).scrollIntoView();
+      const elem = ref ? document.getElementById(ref) : undefined;
+      if (elem) {
+        elem.scrollIntoView();
       }
       resolve();
     });

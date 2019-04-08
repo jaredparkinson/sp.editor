@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  NgZone,
   OnInit,
   QueryList,
   ViewChildren,
@@ -9,6 +10,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import {} from 'lodash';
+import { FloatingActionButton } from 'materialize-css';
 import { Note } from '../modelsJson/Note';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { W } from '../modelsJson/WTag';
@@ -29,6 +31,8 @@ import { SyncScrollingService } from '../services/sync-scrolling.service';
   styleUrls: ['./notes.component.scss'],
 })
 export class NotesComponent implements OnInit, AfterViewInit {
+  @ViewChildren('notes')
+  public notes!: QueryList<ElementRef>;
   constructor(
     public chapterService: ChapterService,
     public navServices: NavigationService,
@@ -40,40 +44,35 @@ export class NotesComponent implements OnInit, AfterViewInit {
     public syncScrollingService: SyncScrollingService,
     // public verseSelectService: VerseSelectService,
     public dataService: DataService,
+    public ngZone: NgZone,
   ) {}
-  @ViewChildren('notes')
-  notes!: QueryList<ElementRef>;
 
-  async ngAfterViewInit() {
-    // await setTimeout(() => {
-    //   this.notes.changes.subscribe(() => {
-    //     this.verseSelectService.notes = this.notes.toArray();
-    //   });
-    // }, 0);
-  }
-
-  filterClassList(classList: string[]): string {
+  public filterClassList(classList: string[]): string {
     if (!classList) {
       return '';
     }
 
     return classList.toString();
   }
-  ngOnInit() {}
 
-  notesOnBottom(): boolean {
-    console.log(
-      window.matchMedia(
-        `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
-      ),
-    );
-    console.log('asdfasdfasdfasdfwer23412341234');
-    return window.matchMedia(
-      `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
-    ).matches;
+  public async ngAfterViewInit() {
+    // await setTimeout(() => {
+    //   this.notes.changes.subscribe(() => {
+    //     this.verseSelectService.notes = this.notes.toArray();
+    //   });
+    // }, 0);
+  }
+  public ngOnInit() {
+    this.ngZone.runOutsideAngular(() => {
+      const elems = document.querySelectorAll('.fixed-action-btn');
+      const instances = FloatingActionButton.init(elems, {
+        direction: 'top',
+        hoverEnabled: false,
+      });
+    });
   }
 
-  notePhraseClick(secondaryNote: SecondaryNote) {
+  public notePhraseClick(secondaryNote: SecondaryNote) {
     console.log(secondaryNote.id);
     const clicked = secondaryNote.clicked;
     console.log(clicked);
@@ -98,7 +97,19 @@ export class NotesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  trackById(note: Note) {
+  public notesOnBottom(): boolean {
+    console.log(
+      window.matchMedia(
+        `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+      ),
+    );
+    console.log('asdfasdfasdfasdfwer23412341234');
+    return window.matchMedia(
+      `screen and (max-width: 499.98px), (orientation: portrait) and (max-width: 1023.98px)`,
+    ).matches;
+  }
+
+  public trackById(note: Note) {
     return note.id;
   }
   // showNote(secondaryNote: SecondaryNote): boolean {

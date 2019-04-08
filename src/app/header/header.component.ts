@@ -55,23 +55,6 @@ export class HeaderComponent implements OnInit {
     public swUpdate: SwUpdate,
     public wTagService: WTagService,
   ) {
-    setInterval(() => {
-      if (
-        window.getSelection().rangeCount > 0 &&
-        window
-          .getSelection()
-          .toString()
-          .trim() !== ''
-      ) {
-        // this.wTagService.getSelection = window.getSelection();
-        this.wTagService.cloneRange = window
-          .getSelection()
-          .getRangeAt(0)
-          .cloneRange();
-        // console.log(this.getSelection.getRangeAt(0).cloneRange());
-      }
-      // console.log();/
-    }, 100);
     // this.leftPaneNav = document.getElementById('leftPaneNav');
   }
   public addressBarKeyPress(event: KeyboardEvent) {
@@ -149,7 +132,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public markText() {
-    this.wTagService.markText();
+    if (this.wTagService.cloneRange) {
+      this.wTagService.markText();
+    }
     return;
     const range = this.cloneRange;
     if (

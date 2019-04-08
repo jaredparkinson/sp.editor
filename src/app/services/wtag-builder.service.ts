@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { first, last } from 'lodash';
+import { debounce, first, last } from 'lodash';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,7 @@ export class WTagService {
   public wTagPopupleft: string = '0px';
 
   public wTagPopupTop: string = '0px';
+  constructor() {}
   public convertRange(
     node: Node,
     offSet: number,
@@ -32,24 +35,18 @@ export class WTagService {
           .toString()
           .trim() !== ''
       ) {
-        // this.wTagService.getSelection = window.getSelection();
         this.cloneRange = window
           .getSelection()
           .getRangeAt(0)
           .cloneRange();
 
-        this.wTagPopupTop = `${
-          (this.cloneRange.startContainer as HTMLElement).offsetTop
-        }px`;
-        console.log(this.wTagPopupTop);
-
-        // console.log(this.getSelection.getRangeAt(0).cloneRange());
+        this.wTagPopupTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
+          .top - 90}px`;
+        this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
       }
-      // console.log();/
     }, 100);
   }
   public markText() {
-    // const range = this.cloneRange;
     if (
       !(
         this.cloneRange.startContainer === this.cloneRange.endContainer &&
@@ -87,7 +84,8 @@ export class WTagService {
   public reset() {
     this.cloneRange = undefined;
   }
+
   public showWTagPopup() {
-    this.showPopup = true;
+    // this.showPopup = true;
   }
 }

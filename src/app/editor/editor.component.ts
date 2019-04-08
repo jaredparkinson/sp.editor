@@ -18,7 +18,7 @@ import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
-import { setTimeout } from 'core-js';
+// import { setTimeout } from 'core-js';
 
 // import { VerseSelectService } from '../services/verse-select.service';
 
@@ -29,12 +29,12 @@ import { setTimeout } from 'core-js';
 })
 export class EditorComponent
   implements OnInit, AfterViewInit, AfterContentInit {
-  private timer: number;
   // asd = c.timer
   // faChevronLeft = faChevronLeft;
   // faChevronRight = faChevronRight;
   @ViewChildren('verses')
-  verses!: QueryList<ElementRef>;
+  public verses!: QueryList<ElementRef>;
+  private timer: any;
   constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
@@ -48,41 +48,6 @@ export class EditorComponent
     // public verseSelectService: VerseSelectService,
     private route: ActivatedRoute,
   ) {}
-
-  ngAfterContentInit(): void {}
-  ngOnInit() {
-    // this.initSyncScrolling();
-    // this.route.params.subscribe(async params => {
-    //   this.navService.rightPaneToggle = false;
-    //   this.navService.leftPaneToggle = false;
-    //   const book = params['book'];
-    //   const chapter = params['chapter'];
-    //   if (book !== undefined && chapter !== undefined) {
-    //     await this.chapterService.getChapterOld(book, chapter).then(async () => {
-    //       // console.log(this.synchronizedScrolling());
-    //       // this.synchronizedScrolling();
-    //       // this.chapterService.resetVerseSelect();
-    //       await this.verseSelectService.resetVisibility();
-    //       this.synchronizedScrolling();
-    //     });
-    //   } else if (book === undefined && chapter !== undefined) {
-    //     await this.chapterService.getChapterOld(chapter, '').then(() => {
-    //       // this.chapterService.resetVerseSelect();
-    //       this.verseSelectService.resetVisibility();
-    //       // this.synchronizedScrolling();
-    //     });
-    //     // setTimeout(() => {
-    //     //   if (this.saveState.data.verseSelect) {
-    //     //     this.chapterService.resetVerseSelect();
-    //     //   }
-    //     // }, 1000);
-    //   }
-    // });
-    // setTimeout(() => {
-    //   this.synchronizedScrolling();
-    // }, 500);
-    // this.wordSelection();
-  }
   // verseSelectionClick(verse: Verse): void {
   //   if (this.editService.editState) {
   //     console.log(verse);
@@ -107,7 +72,7 @@ export class EditorComponent
   //   window.getSelection().removeAllRanges();
   // }
 
-  getSuperScriptVisibility(
+  public getSuperScriptVisibility(
     item: string,
     w: [
       string,
@@ -134,7 +99,7 @@ export class EditorComponent
     return false;
   }
 
-  getWColor(
+  public getWColor(
     w: [
       string,
       string,
@@ -171,13 +136,7 @@ export class EditorComponent
     return wClass;
   }
 
-  private wordSelection() {
-    each(document.querySelectorAll('w'), () => {});
-  }
-
-  trackById(paragraph: any) {
-    return paragraph.id;
-  }
+  public ngAfterContentInit(): void {}
 
   // wTagClick(wTag: W, verse: Verse, event: Event) {
   //   if (!this.saveState.data.rightPanePin) {
@@ -189,7 +148,7 @@ export class EditorComponent
   //   // this.verseSelectService.wTagClick(wTag, verse);
   // }
 
-  async ngAfterViewInit() {
+  public async ngAfterViewInit() {
     // this.verses.changes.subscribe(() => {
     //   setTimeout(async () => {
     //     this.chapterService.verses = this.verses.toArray();
@@ -204,7 +163,40 @@ export class EditorComponent
     //   }, 100);
     // });
   }
-  onScroll() {
+  public ngOnInit() {
+    // this.initSyncScrolling();
+    // this.route.params.subscribe(async params => {
+    //   this.navService.rightPaneToggle = false;
+    //   this.navService.leftPaneToggle = false;
+    //   const book = params['book'];
+    //   const chapter = params['chapter'];
+    //   if (book !== undefined && chapter !== undefined) {
+    //     await this.chapterService.getChapterOld(book, chapter).then(async () => {
+    //       // console.log(this.synchronizedScrolling());
+    //       // this.synchronizedScrolling();
+    //       // this.chapterService.resetVerseSelect();
+    //       await this.verseSelectService.resetVisibility();
+    //       this.synchronizedScrolling();
+    //     });
+    //   } else if (book === undefined && chapter !== undefined) {
+    //     await this.chapterService.getChapterOld(chapter, '').then(() => {
+    //       // this.chapterService.resetVerseSelect();
+    //       this.verseSelectService.resetVisibility();
+    //       // this.synchronizedScrolling();
+    //     });
+    //     // setTimeout(() => {
+    //     //   if (this.saveState.data.verseSelect) {
+    //     //     this.chapterService.resetVerseSelect();
+    //     //   }
+    //     // }, 1000);
+    //   }
+    // });
+    // setTimeout(() => {
+    //   this.synchronizedScrolling();
+    // }, 500);
+    // this.wordSelection();
+  }
+  public onScroll() {
     clearTimeout(this.timer);
     this.timer = setTimeout(async () => {
       console.log(this.verses);
@@ -218,7 +210,7 @@ export class EditorComponent
   // private nodeListOfToArray(list: NodeListOf<Element>): Element[] {
   //   return Array.prototype.slice.call(list) as Element[];
   // }
-  async synchronizedScrolling(): Promise<void> {
+  public async synchronizedScrolling(): Promise<void> {
     const verses = document.querySelectorAll('span.verse');
     console.log(
       'sync scrolling 2 ' + document.querySelectorAll('.verse').length,
@@ -271,16 +263,8 @@ export class EditorComponent
     }
   }
 
-  private scrollNotesBottom() {
-    const notes = document.querySelectorAll('note');
-    // this.chapterService.scrollIntoView = notes[notes.length - 1];
-    // // this.chapterService.scrollIntoView.scrollIntoView();
-  }
-
-  private scrollNotesTop() {
-    // this.chapterService.scrollIntoView = document.querySelector('note');
-    // this.chapterService.scrollIntoView.scrollIntoView();
-    // scrollIntoView;
+  public trackById(paragraph: any) {
+    return paragraph.id;
   }
 
   private initSyncScrolling() {
@@ -294,5 +278,21 @@ export class EditorComponent
     //       this.onScroll();
     //     });
     // });
+  }
+
+  private scrollNotesBottom() {
+    const notes = document.querySelectorAll('note');
+    // this.chapterService.scrollIntoView = notes[notes.length - 1];
+    // // this.chapterService.scrollIntoView.scrollIntoView();
+  }
+
+  private scrollNotesTop() {
+    // this.chapterService.scrollIntoView = document.querySelector('note');
+    // this.chapterService.scrollIntoView.scrollIntoView();
+    // scrollIntoView;
+  }
+
+  private wordSelection() {
+    each(document.querySelectorAll('w'), () => {});
   }
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { setTimeout } from 'core-js';
+// import { setTimeout } from 'core-js';
 
 @Injectable()
 export class SyncScrollingService {
   public syncScrollingActivated = false;
   public syncScrollingAnimated = false;
 
-  private timer: number;
+  private timer: any;
   constructor() {}
 
   public initSyncScrolling() {

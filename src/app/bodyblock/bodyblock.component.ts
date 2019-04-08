@@ -25,6 +25,8 @@ import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { WTagService } from '../services/wtag-builder.service';
 
@@ -56,7 +58,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
     public router: Router,
-    private wTagService: WTagService,
+    public wTagService: WTagService,
   ) {}
 
   public btnNavigationButtons(direction: number) {

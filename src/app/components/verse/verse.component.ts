@@ -31,7 +31,7 @@ export class VerseComponent implements OnInit {
   @ViewChild('span') public span!: ElementRef;
   @Input() public verse: Verse;
   constructor(
-    public wTagBuilderService: WTagService,
+    public wTagService: WTagService,
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
     public sanitizer: DomSanitizer,
@@ -64,7 +64,7 @@ export class VerseComponent implements OnInit {
 
   public ngOnInit() {}
   public resetCloneRange() {
-    this.wTagBuilderService.reset();
+    this.wTagService.reset();
   }
 
   public wTagClick(w: W) {

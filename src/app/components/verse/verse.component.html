@@ -8,6 +8,7 @@
     'highlight-context': verse.context,
     'verse-verse': !verse.header
   }"
+  (mouseup)="this.wTagService.showWTagPopup()"
   (click)="this.resetCloneRange()"
 >
   <ng-container *ngFor="let w of verse.wTags">

@@ -70,6 +70,23 @@
       </button>
     </div> -->
       <div id="body-block-whitespace" class="body-block-whitespace"></div>
+      <ul
+        class="w-tag-popup"
+        *ngIf="this.wTagService.showPopup"
+        [ngStyle]="{
+          top: this.wTagService.wTagPopupTop,
+          left: this.wTagService.wTagPopupleft
+        }"
+      >
+        <li>Mark</li>
+        <li>Note</li>
+        <li>PlaceH</li>
+        <li>PlaceH</li>
+        <li>PlaceH</li>
+        <li>PlaceH</li>
+        <li>PlaceH</li>
+        <li>PlaceH</li>
+      </ul>
     </div>
 
     <div class="right-content-pane">

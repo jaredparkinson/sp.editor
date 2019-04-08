@@ -203,3 +203,13 @@ body {
     color: green;
   }
 }
+
+.w-tag-popup {
+  display: grid;
+  position: absolute;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+  grid-template-rows: 48px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

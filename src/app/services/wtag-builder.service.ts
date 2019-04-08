@@ -7,7 +7,10 @@ import { first, last } from 'lodash';
 export class WTagService {
   public cloneRange: Range;
   public rangeInterval: any;
+  public showPopup: boolean = false;
+  public wTagPopupleft: string = '0px';
 
+  public wTagPopupTop: string = '0px';
   public convertRange(
     node: Node,
     offSet: number,
@@ -34,12 +37,17 @@ export class WTagService {
           .getSelection()
           .getRangeAt(0)
           .cloneRange();
+
+        this.wTagPopupTop = `${
+          (this.cloneRange.startContainer as HTMLElement).offsetTop
+        }px`;
+        console.log(this.wTagPopupTop);
+
         // console.log(this.getSelection.getRangeAt(0).cloneRange());
       }
       // console.log();/
     }, 100);
   }
-
   public markText() {
     // const range = this.cloneRange;
     if (
@@ -78,5 +86,8 @@ export class WTagService {
 
   public reset() {
     this.cloneRange = undefined;
+  }
+  public showWTagPopup() {
+    this.showPopup = true;
   }
 }

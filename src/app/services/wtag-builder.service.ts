@@ -3,15 +3,19 @@ import {
   clone,
   cloneDeep,
   debounce,
+  filter,
   find,
   first,
   isEqual,
   last,
+  merge,
   range,
 } from 'lodash';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Verse } from '../modelsJson/Verse';
 import { aW, IW, W } from '../modelsJson/W';
+import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -26,7 +30,10 @@ export class WTagService {
 
   public wTagPopupTop: string = '0px';
   private wTags: Array<{ id: string; w: IW }> = [];
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private chapterService: ChapterService,
+  ) {}
   public convertRange(
     node: Node,
     offSet: number,
@@ -58,6 +65,129 @@ export class WTagService {
         this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
       }
     }, 100);
+  }
+  public async insertNewWTags(
+    verses: Verse[],
+    wTags: Array<{ id: string; w: IW }>,
+  ) {
+    verses.forEach(verse => {
+      const newWTags = merge(
+        filter(this.wTags, w => {
+          return w.id === verse.id;
+        }),
+      ) as Array<{ id: string; w: IW }>;
+      if (newWTags.length > 0) {
+        const newVerse = [];
+        verse.wTags.forEach(wTag => {
+          if ((wTag as any).childWTags) {
+            const a = new aW();
+          } else {
+            let start = first(wTag.id);
+            const end = last(wTag.id);
+            for (start; start <= end; start++) {
+              // const element = array[x];
+              const clonedWTag = clone(wTag);
+              clonedWTag.id = [];
+              clonedWTag.id.push(start);
+              newWTags.forEach(newTag => {
+                if (newTag.w.id.includes(start)) {
+                  clonedWTag.refs
+                    ? clonedWTag.refs.push(newTag.w.refs[0])
+                    : ((clonedWTag.refs = []),
+                      clonedWTag.refs.push(newTag.w.refs[0]));
+
+                  // console.log(eff.w.refs);
+                }
+              });
+              newVerse.push(clonedWTag);
+            }
+          }
+        });
+        const mergeWTag = [];
+        newVerse.forEach(hh => {
+          const l = last(mergeWTag);
+          if (
+            l &&
+            this.isEqual(l.refs, hh.refs) &&
+            this.isEqual(hh.classList, l.classList)
+          ) {
+            l.id.push(last(hh.id));
+          } else {
+            mergeWTag.push(cloneDeep(hh));
+          }
+        });
+        verse.wTags = mergeWTag;
+
+        verse.wTags = mergeWTag;
+        console.log(mergeWTag);
+      }
+      verse.wTags.forEach(m => {
+        m.text = verse.text.substring(first(m.id), last(m.id) + 1);
+      });
+    });
+
+    this.dataService.verses = verses;
+
+    await this.chapterService.resetNoteVisibility(
+      this.dataService.chapter2,
+      this.dataService.noteVisibility,
+    );
+
+    await this.chapterService.buildWTags(
+      this.dataService.verses,
+      this.dataService.noteVisibility,
+    );
+    await this.chapterService.buildParagraphs(
+      this.dataService.paragraphs,
+      this.dataService.verses,
+    );
+
+    // this.wTags.forEach(newTag => {
+    //   const newVerse = [];
+
+    //   cloneDeep(
+    //     find(this.dataService.chapter2.verses, v => {
+    //       return v.id === newTag.id;
+    //     }),
+    //   ).wTags.forEach(wTag => {
+    //     if ((wTag as any).childWTags) {
+    //       const a = new aW();
+    //     } else {
+    //       let start = first(wTag.id);
+    //       const end = last(wTag.id);
+    //       for (start; start <= end; start++) {
+    //         // const element = array[x];
+    //         const clonedWTag = clone(wTag);
+    //         clonedWTag.id = [];
+    //         clonedWTag.id.push(start);
+    //         if (newTag.w.id.includes(start)) {
+    //           clonedWTag.refs
+    //             ? clonedWTag.refs.push(newTag.w.refs[0])
+    //             : ((clonedWTag.refs = []),
+    //               clonedWTag.refs.push(newTag.w.refs[0]));
+
+    //           // console.log(eff.w.refs);
+    //         }
+    //         newVerse.push(clonedWTag);
+    //       }
+    //     }
+    //   });
+
+    //   const mergeWTag = [];
+    //   newVerse.forEach(hh => {
+    //     const l = last(mergeWTag);
+    //     if (
+    //       l &&
+    //       this.isEqual(l.refs, hh.refs) &&
+    //       this.isEqual(hh.classList, l.classList)
+    //     ) {
+    //       l.id.push(last(hh.id));
+    //     } else {
+    //       mergeWTag.push(cloneDeep(hh));
+    //     }
+    //   });
+    //   console.log(mergeWTag);
+    // });
   }
   public isEqual(refs1: [], refs2: []): boolean {
     // throw new Error("Method not implemented.");
@@ -116,52 +246,11 @@ export class WTagService {
       // );
       // console.log(this.wTags);
 
-      this.wTags.forEach(newTag => {
-        const newVerse = [];
+      this.insertNewWTags(
+        cloneDeep(this.dataService.chapter2.verses),
+        this.wTags,
+      );
 
-        cloneDeep(
-          find(this.dataService.chapter2.verses, v => {
-            return v.id === newTag.id;
-          }),
-        ).wTags.forEach(wTag => {
-          if ((wTag as any).childWTags) {
-            const a = new aW();
-          } else {
-            let start = first(wTag.id);
-            const end = last(wTag.id);
-            for (start; start <= end; start++) {
-              // const element = array[x];
-              const clonedWTag = clone(wTag);
-              clonedWTag.id = [];
-              clonedWTag.id.push(start);
-              if (newTag.w.id.includes(start)) {
-                clonedWTag.refs
-                  ? clonedWTag.refs.push(newTag.w.refs[0])
-                  : ((clonedWTag.refs = []),
-                    clonedWTag.refs.push(newTag.w.refs[0]));
-
-                // console.log(eff.w.refs);
-              }
-              newVerse.push(clonedWTag);
-            }
-          }
-        });
-
-        const mergeWTag = [];
-        newVerse.forEach(hh => {
-          const l = last(mergeWTag);
-          if (
-            l &&
-            this.isEqual(l.refs, hh.refs) &&
-            this.isEqual(hh.classList, l.classList)
-          ) {
-            l.id.push(last(hh.id));
-          } else {
-            mergeWTag.push(cloneDeep(hh));
-          }
-        });
-        console.log(mergeWTag);
-      });
       this.reset();
     }
   }

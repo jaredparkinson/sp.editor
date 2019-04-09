@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep, debounce, find, first, isEqual, last, range } from 'lodash';
+import {
+  clone,
+  cloneDeep,
+  debounce,
+  find,
+  first,
+  isEqual,
+  last,
+  range,
+} from 'lodash';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { aW, IW, W } from '../modelsJson/W';
@@ -63,8 +72,7 @@ export class WTagService {
         }
       });
     }
-    return;
-    equals;
+    return equals;
   }
   public markText() {
     if (
@@ -108,32 +116,33 @@ export class WTagService {
       // );
       // console.log(this.wTags);
 
-      this.wTags.forEach(eff => {
+      this.wTags.forEach(newTag => {
         const newVerse = [];
 
         cloneDeep(
-          find(this.dataService.verses, v => {
-            return v.id === eff.id;
+          find(this.dataService.chapter2.verses, v => {
+            return v.id === newTag.id;
           }),
-        ).wTags.forEach(w => {
-          if ((w as any).childWTags) {
+        ).wTags.forEach(wTag => {
+          if ((wTag as any).childWTags) {
             const a = new aW();
           } else {
-            let x = first(w.id);
-            const end = last(w.id);
-            for (x; x <= end; x++) {
+            let start = first(wTag.id);
+            const end = last(wTag.id);
+            for (start; start <= end; start++) {
               // const element = array[x];
-              const gg = w;
-              gg.id = [];
-              gg.id.push(x);
-              if (eff.w.id.includes(x)) {
-                gg.refs
-                  ? gg.refs.push(eff.w.refs[0])
-                  : ((gg.refs = []), gg.refs.push(eff.w.refs[0]));
+              const clonedWTag = clone(wTag);
+              clonedWTag.id = [];
+              clonedWTag.id.push(start);
+              if (newTag.w.id.includes(start)) {
+                clonedWTag.refs
+                  ? clonedWTag.refs.push(newTag.w.refs[0])
+                  : ((clonedWTag.refs = []),
+                    clonedWTag.refs.push(newTag.w.refs[0]));
 
-                console.log(eff.w.refs);
+                // console.log(eff.w.refs);
               }
-              newVerse.push(gg);
+              newVerse.push(clonedWTag);
             }
           }
         });

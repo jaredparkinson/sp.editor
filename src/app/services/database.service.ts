@@ -11,7 +11,7 @@ import { Chapter2 } from '../modelsJson/Chapter';
 export class DatabaseService {
   public databaseList: Database[];
 
-  public db = new PouchDB('alpha.oneinthinehand.org', { adapter: 'worker' });
+  public db = new PouchDB('alpha.oneinthinehand.org');
 
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
   constructor(private httpClient: HttpClient) {

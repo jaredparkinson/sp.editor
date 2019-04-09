@@ -5,7 +5,7 @@ import { NoteRef } from '../modelsJson/NoteRef';
 import { Paragraph } from '../modelsJson/Paragraph';
 import { SecondaryNote } from '../modelsJson/SecondaryNote';
 import { Verse } from '../modelsJson/Verse';
-import { aW } from '../modelsJson/W';
+import { aW, W } from '../modelsJson/W';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
 import { SaveStateService } from './save-state.service';
@@ -282,10 +282,7 @@ export class ChapterService {
     }
   }
 
-  private setWTagProperties(
-    wTag: import('c:/users/jared/source/repos/sp.editor/src/app/modelsJson/W').W,
-    verse: Verse,
-  ) {
+  private setWTagProperties(wTag: W, verse: Verse) {
     wTag.text = '';
     wTag.text = verse.text.substring(wTag.id[0], last(wTag.id) + 1);
     wTag.selected = false;

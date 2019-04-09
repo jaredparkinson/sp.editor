@@ -1,47 +1,55 @@
+import generate from 'nanoid/generate';
+
 // export class Verses {
 //   public verses: Verse[] = [];
 //   private count = 0;
-
+// import uuid = require('uuid-js')
+// import {  } from "nanoid";
 export interface IW {
-  id: number[];
   classList: string[] | undefined;
+  id: number[];
   refs: string[] | undefined;
-  visibleRefs: string[] | undefined;
   text: string | undefined;
+  visibleRefs: string[] | undefined;
 }
 
 export class rubyW implements IW {
-  public id: number[] = [];
   public classList: string[] | undefined = undefined;
-  public refs: string[] | undefined = undefined;
-  public visibleRefs: string[] | undefined = undefined;
+  public id: number[] = [];
   public isLink: boolean = true;
+  public refs: string[] | undefined = undefined;
   public text: string | undefined = undefined;
   public type: string;
+  public visibleRefs: string[] | undefined = undefined;
 }
 export class aW implements IW {
-  public id: number[] = [];
-  public classList: string[] | undefined = [];
-  public refs: string[] | undefined = undefined;
-  public visibleRefs: string[] | undefined = [];
-  public isLink: boolean = true;
-  public text: string | undefined = undefined;
-  public href: string | null;
   public childWTags: W[] = [];
+  public classList: string[] | undefined = [];
+  public href: string | null;
+  public id: number[] = [];
+  public isLink: boolean = true;
+  public refs: string[] | undefined = undefined;
+  public text: string | undefined = undefined;
   public type: string;
+  public visibleRefs: string[] | undefined = [];
 } // }
 export class W implements IW {
-  public id: number[] = [];
   public classList: string[] = [];
+  public clicked: boolean;
+  public highlightRefs: string[] = [];
+  public id: number[] = [];
   public refs: string[] = [];
-  public visibleRefs: string[] = [];
-  public text: string;
   public selected: boolean;
-  public wTag: boolean = true;
+  public text: string;
   public type: string;
-  clicked: boolean;
-  visibleRefCount = 0;
-  constructor(text: string) {
-    this.text = text;
+  public visibleRefCount = 0;
+  public visibleRefs: string[] = [];
+  public wTag: boolean = true;
+  constructor(ids: number[]) {
+    this.id = ids;
+    this.refs = [];
+    this.refs.push(generate('1234567890abcdef', 10));
+
+    console.log(this.refs);
   }
 }

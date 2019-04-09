@@ -22,6 +22,7 @@ import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
+import { WTagService } from '../services/wtag-builder.service';
 // import { VerseSelectService } from '../services/verse-select.service';
 
 @Component({
@@ -45,6 +46,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     // public verseSelectService: VerseSelectService,
     public dataService: DataService,
     public ngZone: NgZone,
+    public wTagService: WTagService,
   ) {}
 
   public filterClassList(classList: string[]): string {

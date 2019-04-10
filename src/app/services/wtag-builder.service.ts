@@ -3,6 +3,7 @@ import {
   clone,
   cloneDeep,
   debounce,
+  difference,
   filter,
   find,
   first,
@@ -10,6 +11,7 @@ import {
   last,
   merge,
   range,
+  uniq,
 } from 'lodash';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -86,7 +88,7 @@ export class WTagService {
             const end = last(wTag.id);
             for (start; start <= end; start++) {
               // const element = array[x];
-              const clonedWTag = clone(wTag);
+              const clonedWTag = cloneDeep(wTag);
               clonedWTag.id = [];
               clonedWTag.id.push(start);
               newWTags.forEach(newTag => {
@@ -122,7 +124,11 @@ export class WTagService {
         console.log(mergeWTag);
       }
       verse.wTags.forEach(m => {
-        m.text = verse.text.substring(first(m.id), last(m.id) + 1);
+        const f = first(m.id);
+        const l = last(m.id);
+
+        m.text = verse.text.substring(f, l + 1);
+        m.id = [f, l];
       });
     });
 
@@ -194,6 +200,14 @@ export class WTagService {
     if (refs1 === refs2) {
       return true;
     }
+    if (!refs1 || !refs2) {
+      return false;
+    }
+    return isEqual(uniq(refs1).sort(), uniq(refs2).sort());
+
+    const diff = difference(refs1, refs2);
+
+    return diff.length === 0;
     let equals = false;
     if (refs1 && refs2) {
       refs1.forEach(f => {
@@ -228,6 +242,9 @@ export class WTagService {
         this.cloneRange.endContainer,
         this.cloneRange.endOffset,
       );
+      console.log(startContainer);
+      console.log(endContainer);
+
       this.wTags.push({
         id: vereParent.id,
         w: new W(

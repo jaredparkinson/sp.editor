@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   clone,
   cloneDeep,
+  concat,
   debounce,
   difference,
   filter,
@@ -79,30 +80,14 @@ export class WTagService {
         }),
       ) as Array<{ id: string; w: IW }>;
       if (newWTags.length > 0) {
-        const newVerse = [];
+        let newVerse = [];
         verse.wTags.forEach(wTag => {
           if ((wTag as any).childWTags) {
-            const a = new aW();
+            // const a = cloneDeep();
+            const clonedWTag = cloneDeep(wTag);
+            newVerse.push(clonedWTag);
           } else {
-            let start = first(wTag.id);
-            const end = last(wTag.id);
-            for (start; start <= end; start++) {
-              // const element = array[x];
-              const clonedWTag = cloneDeep(wTag);
-              clonedWTag.id = [];
-              clonedWTag.id.push(start);
-              newWTags.forEach(newTag => {
-                if (newTag.w.id.includes(start)) {
-                  clonedWTag.refs
-                    ? clonedWTag.refs.push(newTag.w.refs[0])
-                    : ((clonedWTag.refs = []),
-                      clonedWTag.refs.push(newTag.w.refs[0]));
-
-                  // console.log(eff.w.refs);
-                }
-              });
-              newVerse.push(clonedWTag);
-            }
+            newVerse = concat(newVerse, this.expandWtags(wTag, newWTags));
           }
         });
         const mergeWTag = [];
@@ -195,6 +180,7 @@ export class WTagService {
     //   console.log(mergeWTag);
     // });
   }
+
   public isEqual(refs1: [], refs2: []): boolean {
     // throw new Error("Method not implemented.");
     if (refs1 === refs2) {
@@ -285,5 +271,26 @@ export class WTagService {
     // }
     // this.popupTimeout = setTimeout(() => {
     // }, 2000);
+  }
+  private expandWtags(wTag: W, newWTags: Array<{ id: string; w: IW }>) {
+    const newVerse = [];
+    let start = first(wTag.id);
+    const end = last(wTag.id);
+    for (start; start <= end; start++) {
+      // const element = array[x];
+      const clonedWTag = cloneDeep(wTag);
+      clonedWTag.id = [];
+      clonedWTag.id.push(start);
+      newWTags.forEach(newTag => {
+        if (newTag.w.id.includes(start)) {
+          clonedWTag.refs
+            ? clonedWTag.refs.push(newTag.w.refs[0])
+            : ((clonedWTag.refs = []), clonedWTag.refs.push(newTag.w.refs[0]));
+          // console.log(eff.w.refs);
+        }
+      });
+      newVerse.push(clonedWTag);
+    }
+    return newVerse;
   }
 }

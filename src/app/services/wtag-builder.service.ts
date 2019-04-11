@@ -223,6 +223,9 @@ export class WTagService {
       clonedWTag.id.push(start);
       newWTags.forEach(newTag => {
         if (newTag.w.id.includes(start)) {
+          clonedWTag.classList
+            ? clonedWTag.classList.push('red')
+            : ((clonedWTag.classList = []), clonedWTag.classList.push('red'));
           clonedWTag.refs
             ? clonedWTag.refs.push(newTag.w.refs[0])
             : ((clonedWTag.refs = []), clonedWTag.refs.push(newTag.w.refs[0]));

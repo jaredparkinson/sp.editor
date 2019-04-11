@@ -58,6 +58,7 @@ export class VerseComponent implements OnInit {
     if (!classList) {
       return '';
     }
+    // if()
 
     return classList.toString().replace(',', ' ');
   }

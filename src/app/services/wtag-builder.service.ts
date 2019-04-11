@@ -212,6 +212,10 @@ export class WTagService {
     // this.popupTimeout = setTimeout(() => {
     // }, 2000);
   }
+
+  private arrayIsEqual(arg1: any[], arg2: any[]) {
+    return isEqual(uniq(arg1).sort(), uniq(arg2).sort());
+  }
   private expandWtags(wTag: W, newWTags: Array<{ id: string; w: IW }>) {
     const newVerse = [];
     let start = first(wTag.id);
@@ -223,9 +227,10 @@ export class WTagService {
       clonedWTag.id.push(start);
       newWTags.forEach(newTag => {
         if (newTag.w.id.includes(start)) {
-          clonedWTag.classList
-            ? clonedWTag.classList.push('red')
-            : ((clonedWTag.classList = []), clonedWTag.classList.push('red'));
+          clonedWTag.highlightRefs
+            ? clonedWTag.highlightRefs.push('red')
+            : ((clonedWTag.highlightRefs = []),
+              clonedWTag.highlightRefs.push('red'));
           clonedWTag.refs
             ? clonedWTag.refs.push(newTag.w.refs[0])
             : ((clonedWTag.refs = []), clonedWTag.refs.push(newTag.w.refs[0]));
@@ -254,13 +259,7 @@ export class WTagService {
   private mergeWTags(newVerse: any[], mergeWTag: any[]) {
     newVerse.forEach(hh => {
       const l = last(mergeWTag);
-      if (
-        l &&
-        !(hh as any).childWTags &&
-        !(l as any).childWTags &&
-        this.isEqual(l.refs, hh.refs) &&
-        this.isEqual(hh.classList, l.classList)
-      ) {
+      if (l && this.wTagIsEqual(l, hh)) {
         l.id.push(last(hh.id));
       } else if ((hh as any).childWTags) {
         const m = [];
@@ -274,5 +273,24 @@ export class WTagService {
         mergeWTag.push(cloneDeep(hh));
       }
     });
+  }
+
+  private wTagIsEqual(w1: IW, w2: IW): boolean {
+    if ((w1 as any).childWTags || (w2 as any).childWTags) {
+      return false;
+    }
+    if (
+      w1.classList == w2.classList &&
+      w1.highlighting == w2.highlighting &&
+      w1.refs === w2.refs
+    ) {
+      return true;
+    }
+
+    return (
+      this.arrayIsEqual(w1.classList, w2.classList) &&
+      this.arrayIsEqual(w1.refs, w2.refs) &&
+      this.arrayIsEqual(w1.highlighting, w2.highlighting)
+    );
   }
 }

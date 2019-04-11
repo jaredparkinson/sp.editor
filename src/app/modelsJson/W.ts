@@ -7,6 +7,7 @@ import generate from 'nanoid/generate';
 // import {  } from "nanoid";
 export interface IW {
   classList: string[] | undefined;
+  highlighting: string[] | undefined;
   id: number[];
   refs: string[] | undefined;
   text: string | undefined;
@@ -15,6 +16,7 @@ export interface IW {
 
 export class rubyW implements IW {
   public classList: string[] | undefined = undefined;
+  public highlighting: string[];
   public id: number[] = [];
   public isLink: boolean = true;
   public refs: string[] | undefined = undefined;
@@ -25,6 +27,7 @@ export class rubyW implements IW {
 export class aW implements IW {
   public childWTags: W[] = [];
   public classList: string[] | undefined = [];
+  public highlighting: string[];
   public href: string | null;
   public id: number[] = [];
   public isLink: boolean = true;
@@ -36,6 +39,7 @@ export class aW implements IW {
 export class W implements IW {
   public classList: string[] = [];
   public clicked: boolean;
+  public highlighting: string[];
   public highlightRefs: string[] = [];
   public id: number[] = [];
   public refs: string[] = [];

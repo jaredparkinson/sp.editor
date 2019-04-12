@@ -206,10 +206,18 @@ body {
 
 .w-tag-popup {
   display: grid;
+  z-index: 77777;
   position: absolute;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 60px 60px 60px 60px 60px 60px 60px 60px;
   grid-column-gap: 5px;
+  justify-items: center;
+  align-items: center;
   grid-template-rows: 48px;
   background-color: white;
+  left: 50vw;
+  margin-left: -240px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  > * {
+    grid-template-rows: 40px 1fr;
+  }
 }

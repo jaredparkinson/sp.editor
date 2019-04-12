@@ -26,6 +26,7 @@ import { DataService } from './data.service';
 })
 export class WTagService {
   public cloneRange: Range;
+  public marked: boolean = false;
   public popupTimeout: NodeJS.Timer;
   public rangeInterval: any;
   public showPopup: boolean = false;
@@ -48,16 +49,16 @@ export class WTagService {
     };
   }
 
+  public highlightClick() {
+    this.markText();
+    this.marked = true;
+  }
+
   public init() {
     clearInterval(this.rangeInterval);
     this.rangeInterval = setInterval(() => {
-      if (
-        window.getSelection().rangeCount > 0 &&
-        window
-          .getSelection()
-          .toString()
-          .trim() !== ''
-      ) {
+      const r = window.getSelection();
+      if (this.checkTextSelection(r)) {
         this.cloneRange = window
           .getSelection()
           .getRangeAt(0)
@@ -66,9 +67,13 @@ export class WTagService {
         this.wTagPopupTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
           .top - 90}px`;
         this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
+        this.showPopup = true;
+      } else {
+        this.showPopup = false;
       }
     }, 100);
   }
+
   public async insertNewWTags(
     verses: Verse[],
     wTags: Array<{ id: string; w: IW }>,
@@ -204,8 +209,8 @@ export class WTagService {
   }
 
   public showWTagPopup() {
-    this.markText();
-    this.showPopup = true;
+    // this.markText();
+    // this.showPopup = true;
     // if (this.popupTimeout) {
     //   clearTimeout(this.popupTimeout);
     // }
@@ -215,6 +220,23 @@ export class WTagService {
 
   private arrayIsEqual(arg1: any[], arg2: any[]) {
     return isEqual(uniq(arg1).sort(), uniq(arg2).sort());
+  }
+  private checkTextSelection(r: Selection) {
+    let sameVerse = false;
+    if (r.rangeCount > 0 && r.toString().trim() !== '') {
+      const range = r.getRangeAt(0);
+      const commonAncestorContainer = range.commonAncestorContainer;
+      if (
+        range.startContainer.parentElement.nodeName === 'W' &&
+        range.endContainer.parentElement.nodeName === 'W' &&
+        range.commonAncestorContainer.nodeName !== 'DIV' &&
+        range.commonAncestorContainer.nodeName !== 'P'
+      ) {
+        sameVerse = true;
+      }
+    }
+
+    return sameVerse;
   }
   private expandWtags(wTag: W, newWTags: Array<{ id: string; w: IW }>) {
     const newVerse = [];

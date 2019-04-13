@@ -60,7 +60,7 @@ export class VerseComponent implements OnInit {
     }
     // if()
 
-    return classList.toString().replace(',', ' ');
+    return classList.toString().replace(/\,/g, ' ');
   }
 
   public ngOnInit() {}

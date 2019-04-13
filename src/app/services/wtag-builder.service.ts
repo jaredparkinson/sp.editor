@@ -50,8 +50,10 @@ export class WTagService {
   }
 
   public highlightClick() {
-    this.markText();
+    console.log('aoisdfjoaisdfjoiasjdfasdf');
+
     this.marked = true;
+    this.markText();
   }
 
   public init() {
@@ -69,7 +71,7 @@ export class WTagService {
         this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
         this.showPopup = true;
       } else {
-        this.showPopup = false;
+        // this.showPopup = false;
       }
     }, 100);
   }

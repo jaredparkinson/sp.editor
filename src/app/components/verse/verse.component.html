@@ -1,6 +1,8 @@
 <!-- (touchend)="this.selectText()" -->
 <!-- (press)="selectText()" -->
 <!-- (touchmove)="this.wTagService.showWTagPopup()" -->
+<!-- (pressup)="this.wTagService.showWTagPopup()"
+(mouseup)="this.wTagService.showWTagPopup()" -->
 <span
   class="verse"
   id="{{ verse.id }}"
@@ -9,8 +11,6 @@
     'highlight-context': verse.context,
     'verse-verse': !verse.header
   }"
-  (pressup)="this.wTagService.showWTagPopup()"
-  (mouseup)="this.wTagService.showWTagPopup()"
 >
   <ng-container *ngFor="let w of verse.wTags">
     <w

@@ -33,11 +33,14 @@ export class WTagService {
   public wTagPopupleft: string = '0px';
 
   public wTagPopupTop: string = '0px';
+  private bodyBlockElement: Element;
   private wTags: Array<{ id: string; w: IW }> = [];
   constructor(
     private dataService: DataService,
     private chapterService: ChapterService,
-  ) {}
+  ) {
+    // this.bodyBlockElement = document.getElementById('bodyBlock');
+  }
   public convertRange(
     node: Node,
     offSet: number,
@@ -228,6 +231,8 @@ export class WTagService {
     if (r.rangeCount > 0 && r.toString().trim() !== '') {
       const range = r.getRangeAt(0);
       const commonAncestorContainer = range.commonAncestorContainer;
+      this.bodyBlockElement = document.getElementById('bodyBlock');
+      return this.bodyBlockElement.contains(commonAncestorContainer);
 
       // range.startContainer.parentElement.nodeName === 'W' &&
       // range.endContainer.parentElement.nodeName === 'W' &&
@@ -278,6 +283,13 @@ export class WTagService {
       newVerse.push(clonedWTag);
     }
     return newVerse;
+  }
+
+  public copyText() {
+    document.execCommand('copy');
+    window.getSelection().empty();
+    this.showPopup = false;
+    this.marked = false;
   }
 
   private insertNewAWTags(

@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  clone,
   cloneDeep,
   concat,
-  debounce,
   difference,
   filter,
-  find,
   first,
   isEqual,
   last,
@@ -14,8 +11,6 @@ import {
   range,
   uniq,
 } from 'lodash';
-import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { Verse } from '../modelsJson/Verse';
 import { aW, IW, W } from '../modelsJson/W';
 import { ChapterService } from './chapter.service';
@@ -79,10 +74,7 @@ export class WTagService {
     }, 100);
   }
 
-  public async insertNewWTags(
-    verses: Verse[],
-    wTags: Array<{ id: string; w: IW }>,
-  ) {
+  public async insertNewWTags(verses: Verse[]) {
     verses.forEach(verse => {
       const newWTags = merge(
         filter(this.wTags, w => {
@@ -165,7 +157,7 @@ export class WTagService {
       while (
         !vereParent.classList ||
         (vereParent.classList &&
-          !(vereParent as Element).classList.contains('verse') &&
+          !vereParent.classList.contains('verse') &&
           !(vereParent.nodeName === 'span'))
       ) {
         vereParent = vereParent.parentNode as Element;
@@ -199,10 +191,7 @@ export class WTagService {
       // );
       // console.log(this.wTags);
 
-      this.insertNewWTags(
-        cloneDeep(this.dataService.chapter2.verses),
-        this.wTags,
-      );
+      this.insertNewWTags(cloneDeep(this.dataService.chapter2.verses));
 
       this.reset();
     }

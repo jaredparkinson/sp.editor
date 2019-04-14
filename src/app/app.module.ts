@@ -63,6 +63,7 @@ import { SaveStateService } from './services/save-state.service';
 import { SyncScrollingService } from './services/sync-scrolling.service';
 // // import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
+import { WTagPopupComponent } from './components/wtag-popup/wtag-popup.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -97,6 +98,7 @@ export function load(saveState: SaveStateService) {
     NavigationComponent,
     AWComponent,
     NoteComponent,
+    WTagPopupComponent,
   ],
   imports: [
     BrowserModule,

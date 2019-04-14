@@ -71,7 +71,7 @@ export class WTagService {
         this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
         this.showPopup = true;
       } else {
-        // this.showPopup = false;
+        this.showPopup = false;
       }
     }, 100);
   }
@@ -228,17 +228,27 @@ export class WTagService {
     if (r.rangeCount > 0 && r.toString().trim() !== '') {
       const range = r.getRangeAt(0);
       const commonAncestorContainer = range.commonAncestorContainer;
-      if (
-        range.startContainer.parentElement.nodeName === 'W' &&
-        range.endContainer.parentElement.nodeName === 'W' &&
-        range.commonAncestorContainer.nodeName !== 'DIV' &&
-        range.commonAncestorContainer.nodeName !== 'P'
-      ) {
+
+      // range.startContainer.parentElement.nodeName === 'W' &&
+      // range.endContainer.parentElement.nodeName === 'W' &&
+      // range.commonAncestorContainer.nodeName !== 'DIV' &&
+      // range.commonAncestorContainer.nodeName !== 'P'
+      if (this.hasNodeName(range)) {
         sameVerse = true;
       }
     }
 
     return sameVerse;
+  }
+  hasNodeName(range: Range) {
+    const validNodeNames = ['W'];
+    const invalidNodeNames = ['DIV', 'P'];
+
+    return (
+      validNodeNames.includes(range.startContainer.parentElement.nodeName) &&
+      validNodeNames.includes(range.endContainer.parentElement.nodeName) &&
+      !invalidNodeNames.includes(range.commonAncestorContainer.nodeName)
+    );
   }
   private expandWtags(wTag: W, newWTags: Array<{ id: string; w: IW }>) {
     const newVerse = [];

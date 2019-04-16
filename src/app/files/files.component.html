@@ -56,11 +56,11 @@
       </div> -->
     </div>
     <ul class="nav-list">
-      <ng-container *ngFor="let i of this.navService.navigation">
+      <ng-container *ngFor="let i of this.saveState.navigation">
         <app-navigation
           [ngClass]="{ none: i.hide }"
           [navigation]="i"
-          [navigations]="this.navService.navigation"
+          [navigations]="this.saveState.navigation"
         ></app-navigation>
       </ng-container>
     </ul>

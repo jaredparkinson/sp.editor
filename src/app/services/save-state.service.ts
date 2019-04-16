@@ -4,8 +4,11 @@ import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
+import { Navigation } from '../modelsJson/Navigation';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { DatabaseService } from './database.service';
+import { NavigationLoaderService } from './navigation-loader.service';
+import { NavigationService } from './navigation.service';
 import { SaveStateModel } from './SaveStateModel';
 import { SearchService } from './search.service';
 
@@ -14,14 +17,29 @@ import { SearchService } from './search.service';
 })
 export class SaveStateService {
   public data: SaveStateModel;
+  public flatNavigation: Navigation[] = [];
   public id: string;
 
+  public navigation: Navigation[] = [];
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService,
     private searchService: SearchService,
   ) {
     this.id = 'spEditorSaveState';
+  }
+
+  public flattenNavigation(
+    navigation: Navigation[],
+    parentNavigation: Navigation,
+  ) {
+    if (parentNavigation.navigation) {
+      parentNavigation.navigation.forEach(nav => {
+        this.flattenNavigation(navigation, nav);
+      });
+    } else {
+      navigation.push(parentNavigation);
+    }
   }
   public initISaveStateItems(): void {
     if (!this.data.navigationPaneToggle) {
@@ -38,8 +56,8 @@ export class SaveStateService {
       console.log('settings load');
       await this.loadVerseData();
       await this.loadSearch();
-
-      const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
+      await this.loadNavigation();
+      const temp = this.getSaveState();
       this.data = temp !== null ? temp : new SaveStateModel();
       this.data.leftPaneToggle = false;
       this.data.rightPaneToggle = false;
@@ -60,6 +78,32 @@ export class SaveStateService {
       resolve();
     });
   }
+  public loadNavigation() {
+    return new Promise(resolve => {
+      try {
+        this.navigation = JSON.parse(localStorage.get('navData'));
+        this.navigation.forEach(nav => {
+          this.flattenNavigation(this.flatNavigation, nav);
+        });
+        resolve();
+      } catch (error) {
+        this.httpClient
+          .get('assets/nav/nav_rev.json', {
+            responseType: 'text',
+          })
+          .subscribe(data => {
+            this.navigation = JSON.parse(data) as Navigation[];
+
+            localStorage.setItem('navData', data);
+            this.navigation.forEach(nav => {
+              this.flattenNavigation(this.flatNavigation, nav);
+            });
+            resolve();
+          });
+      }
+    });
+  }
+
   public loadVerseData() {
     return new Promise(async resolve => {
       const promises = [];
@@ -93,7 +137,6 @@ export class SaveStateService {
       });
     });
   }
-
   public resetSettings(): void {
     if (
       window.matchMedia(
@@ -142,6 +185,14 @@ export class SaveStateService {
     sortBy(this.data.noteCategories, f => {
       return f.refLabelName;
     });
+  }
+  private getSaveState() {
+    try {
+      const data = localStorage.getItem(this.id);
+      return JSON.parse(data) as SaveStateModel;
+    } catch (error) {
+      return null;
+    }
   }
   private loadSearch() {
     return new Promise(async resolve => {

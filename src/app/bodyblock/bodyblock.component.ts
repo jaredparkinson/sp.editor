@@ -78,20 +78,20 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   public getNavigationUrl(direction: number) {
     let url = '';
 
-    for (let x = 0; x < this.navService.flatNavigation.length; x++) {
-      const element = this.navService.flatNavigation[x];
+    for (let x = 0; x < this.saveState.flatNavigation.length; x++) {
+      const element = this.saveState.flatNavigation[x];
 
       if (element.url === this.pageUrl) {
         if (x + direction === -1) {
-          x = this.navService.flatNavigation.length;
-        } else if (x + direction === this.navService.flatNavigation.length) {
+          x = this.saveState.flatNavigation.length;
+        } else if (x + direction === this.saveState.flatNavigation.length) {
           x = -1;
         }
         console.log(x);
 
-        url = this.navService.flatNavigation[x + direction].url;
+        url = this.saveState.flatNavigation[x + direction].url;
 
-        x = this.navService.flatNavigation.length;
+        x = this.saveState.flatNavigation.length;
       }
     }
     return url;
@@ -125,7 +125,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
           this.chapterService.chapterFadeOut = false;
           this.scrollToVerse(v);
           // await this.resetNavigationFocus(this.navService.navigation);
-          this.setNavigation(this.navService.navigation);
+          this.setNavigation(this.saveState.navigation);
           this.chapterService.chapterFadeOut = false;
 
           this.wTagService.init();

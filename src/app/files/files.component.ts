@@ -64,32 +64,8 @@ export class FilesComponent implements OnInit {
 
     return nav ? (nav as HTMLElement).offsetWidth > 200 : false;
   }
-  public flattenNavigation(
-    navigation: Navigation[],
-    parentNavigation: Navigation,
-  ) {
-    if (parentNavigation.navigation) {
-      parentNavigation.navigation.forEach(nav => {
-        this.flattenNavigation(navigation, nav);
-      });
-    } else {
-      navigation.push(parentNavigation);
-    }
-  }
 
-  public ngOnInit() {
-    this.httpClient
-      .get('assets/nav/nav_rev.json', {
-        responseType: 'text',
-      })
-      .subscribe(data => {
-        this.navService.navigation = JSON.parse(data) as Navigation[];
-
-        this.navService.navigation.forEach(nav => {
-          this.flattenNavigation(this.navService.flatNavigation, nav);
-        });
-      });
-  }
+  public ngOnInit() {}
 
   public onChapterClick() {}
   @HostListener('window:resize')
@@ -109,7 +85,7 @@ export class FilesComponent implements OnInit {
     }, 50);
   }
   public resetNavigation() {
-    this.navService.navigation.forEach(nav => {
+    this.saveState.navigation.forEach(nav => {
       nav.subNavigationVisible = false;
       nav.hide = false;
     });

@@ -9,22 +9,110 @@ import { SaveStateService } from './save-state.service';
 
 @Injectable()
 export class NavigationService {
-  public leftPaneToggle = false;
-  public rightPaneToggle = false;
   public bodyBlock: string;
-  public showBooks = false;
+  public leftPaneToggle = false;
   public notesSettings = false;
   public pageTitle: string;
-  public navigation: Navigation[] = [];
-  public flatNavigation: Navigation[] = [];
+  public rightPaneToggle = false;
+  public showBooks = false;
 
   constructor(
     private httpClient: HttpClient,
     private saveState: SaveStateService,
   ) {}
+  public btnEnglishNotesPress(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.saveState.data.englishNotesVisible = !this.saveState.data
+        .englishNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
+  }
 
-  toggleNotes() {}
-  navigationClick(navigation: Navigation, navigations: Navigation[]) {
+  public btnHeaderButtonPress(
+    saveStateItem: ISaveStateItem<boolean>,
+    value: boolean = false,
+  ) {
+    saveStateItem.value = value;
+    saveStateItem.animated = true;
+
+    setTimeout(() => {
+      saveStateItem.animated = false;
+      this.saveState.save();
+    }, 500);
+  }
+  public btnLeftPanePress() {
+    this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
+
+    this.saveState.save();
+  }
+  public async btnNewNotesPress(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.saveState.data.newNotesVisible = !this.saveState.data
+        .newNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
+  }
+  public btnNotesSettingsPress() {
+    this.notesSettings = !this.notesSettings;
+  }
+  public btnOriginalNotesPress(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.saveState.data.originalNotesVisible = !this.saveState.data
+        .originalNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
+  }
+  public btnParagraphPress() {
+    this.saveState.data.paragraphsVisible = !this.saveState.data
+      .paragraphsVisible;
+    this.saveState.save();
+  }
+  public btnPoetryPress(): Promise<boolean> {
+    return new Promise<boolean>(() => {
+      this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
+      this.saveState.save();
+    });
+  }
+  public btnRightPanePress() {
+    this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
+    this.saveState.save();
+  }
+  public btnSecondaryNotesPress(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.saveState.data.secondaryNotesVisible = !this.saveState.data
+        .secondaryNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
+  }
+  public btnTranslatorNotesPress(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.saveState.data.translatorNotesVisible = !this.saveState.data
+        .translatorNotesVisible;
+      this.saveState.save();
+      resolve(true);
+    });
+  }
+
+  public documentBodyClick(e: Event) {
+    if ((e.target as HTMLElement).closest('.notes-settings') === null) {
+      this.notesSettings = false;
+      document
+        .querySelector('div.main.grid')
+        .removeEventListener('click', this.documentBodyClick);
+    }
+  }
+
+  public getChapter(book: string, chapter: string): Observable<string> {
+    const url = 'assets/' + this.urlBuilder(book, chapter);
+
+    return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
+  }
+  public getTestament(): void {}
+  public navigationClick(navigation: Navigation, navigations: Navigation[]) {
     navigation.subNavigationVisible = navigation.subNavigationVisible
       ? !navigation.subNavigationVisible
       : true;
@@ -53,102 +141,12 @@ export class NavigationService {
       }
     }
   }
-  btnPoetryPress(): Promise<boolean> {
-    return new Promise<boolean>(() => {
-      this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
-      this.saveState.save();
-    });
-  }
-  btnSecondaryNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.secondaryNotesVisible = !this.saveState.data
-        .secondaryNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
-  }
-  btnOriginalNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.originalNotesVisible = !this.saveState.data
-        .originalNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
-  }
-  btnTranslatorNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.translatorNotesVisible = !this.saveState.data
-        .translatorNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
-  }
-  btnEnglishNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.englishNotesVisible = !this.saveState.data
-        .englishNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
-  }
-  async btnNewNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.newNotesVisible = !this.saveState.data
-        .newNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
-  }
-  toggleNavButton() {
+  public toggleNavButton() {
     this.saveState.data.paragraphsVisible = !this.saveState.data
       .paragraphsVisible;
   }
 
-  documentBodyClick(e: Event) {
-    if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-      this.notesSettings = false;
-      document
-        .querySelector('div.main.grid')
-        .removeEventListener('click', this.documentBodyClick);
-    }
-  }
-  btnNotesSettingsPress() {
-    this.notesSettings = !this.notesSettings;
-  }
-  btnRightPanePress() {
-    this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
-    this.saveState.save();
-  }
-  btnLeftPanePress() {
-    this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
-
-    this.saveState.save();
-  }
-  btnParagraphPress() {
-    this.saveState.data.paragraphsVisible = !this.saveState.data
-      .paragraphsVisible;
-    this.saveState.save();
-  }
-
-  public getChapter(book: string, chapter: string): Observable<string> {
-    const url = 'assets/' + this.urlBuilder(book, chapter);
-
-    return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
-  }
-
-  btnHeaderButtonPress(
-    saveStateItem: ISaveStateItem<boolean>,
-    value: boolean = false,
-  ) {
-    saveStateItem.value = value;
-    saveStateItem.animated = true;
-
-    setTimeout(() => {
-      saveStateItem.animated = false;
-      this.saveState.save();
-    }, 500);
-  }
-  public getTestament(): void {}
+  public toggleNotes() {}
 
   public urlBuilder(book: string, chapter: string): string {
     const url = 'scriptures/';

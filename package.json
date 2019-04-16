@@ -59,6 +59,7 @@
     "@types/nanoid": "^1.2.1",
     "animate.css": "^3.7.0",
     "bourbon": "^5.1.0",
+    "elasticlunr": "^0.9.5",
     "graceful-fs": "^4.1.11",
     "hammerjs": "^2.0.8",
     "localforage": "^1.7.2",

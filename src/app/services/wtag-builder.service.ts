@@ -198,6 +198,8 @@ export class WTagService {
   }
 
   public reset() {
+    console.log(window.getSelection());
+
     this.cloneRange = undefined;
     this.showPopup = false;
   }
@@ -275,6 +277,16 @@ export class WTagService {
   }
 
   public copyText() {
+    this.marked = true;
+    const selection = this.cloneRange.cloneContents();
+    const textCopyArea = document.querySelector('#textCopyArea');
+
+    textCopyArea.appendChild(selection);
+    const range = document.createRange();
+    range.selectNodeContents(textCopyArea);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
     document.execCommand('copy');
     window.getSelection().empty();
     this.showPopup = false;

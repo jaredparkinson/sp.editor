@@ -70,9 +70,7 @@
       </button>
     </div> -->
       <div id="body-block-whitespace" class="body-block-whitespace"></div>
-      <app-wtag-popup
-        *ngIf="this.wTagService.showPopup || this.wTagService.marked"
-      ></app-wtag-popup>
+      <app-wtag-popup *ngIf="this.wTagService.showPopup"></app-wtag-popup>
     </div>
 
     <div class="right-content-pane">

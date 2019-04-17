@@ -30,6 +30,7 @@ export class WTagService {
   public wTagPopupTop: string = '0px';
   private bodyBlockElement: Element;
   private wTags: Array<{ id: string; w: IW }> = [];
+  public wTagColorPaletteTop: string='0px';
   constructor(
     private dataService: DataService,
     private chapterService: ChapterService,
@@ -66,6 +67,8 @@ export class WTagService {
 
         this.wTagPopupTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
           .top - 90}px`;
+        this.wTagColorPaletteTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
+          .top - 120}px`;
         this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
         this.showPopup = true;
       } else {

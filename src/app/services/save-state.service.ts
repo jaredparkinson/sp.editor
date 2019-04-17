@@ -54,8 +54,8 @@ export class SaveStateService {
   public load(): Promise<any> {
     return new Promise(async resolve => {
       console.log('settings load');
-      await this.loadVerseData();
-      await this.loadSearch();
+      // await this.loadVerseData();
+      // await this.loadSearch();
       await this.loadNavigation();
       const temp = this.getSaveState();
       this.data = temp !== null ? temp : new SaveStateModel();
@@ -80,13 +80,6 @@ export class SaveStateService {
   }
   public loadNavigation() {
     return new Promise(resolve => {
-      try {
-        this.navigation = JSON.parse(localStorage.get('navData'));
-        this.navigation.forEach(nav => {
-          this.flattenNavigation(this.flatNavigation, nav);
-        });
-        resolve();
-      } catch (error) {
         this.httpClient
           .get('assets/nav/nav_rev.json', {
             responseType: 'text',
@@ -94,13 +87,12 @@ export class SaveStateService {
           .subscribe(data => {
             this.navigation = JSON.parse(data) as Navigation[];
 
-            localStorage.setItem('navData', data);
+            // localStorage.setItem('navData', data);
             this.navigation.forEach(nav => {
               this.flattenNavigation(this.flatNavigation, nav);
             });
             resolve();
           });
-      }
     });
   }
 

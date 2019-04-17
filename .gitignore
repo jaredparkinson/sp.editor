@@ -54,3 +54,4 @@ scriptures.tar.gz
 src/assets/nav/nav_rev.json
 src/assets/data/search_index.json
 src/assets/data/verses.json
+*.sqlite

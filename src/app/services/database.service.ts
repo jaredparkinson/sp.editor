@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep, filter, find, merge, uniq } from 'lodash';
-
+import * as debug from 'pouchdb-debug';
 import * as PouchDBFind from 'pouchdb-find';
 
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,8 @@ export class DatabaseService {
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
   constructor(private httpClient: HttpClient) {
     PouchDB.plugin(PouchDBFind);
+    PouchDB.plugin(debug);
+    // PouchDB.debug.enable('pouchdb:find');
   }
 
   public allDocs() {

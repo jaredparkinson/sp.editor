@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
       } else {
         this.currentSearch = search;
         this.searchService
-          .search(search)
+          .search(search.toLowerCase())
           .then(searchResults => {
             // this.lunrResults = searchResults;
             searchResults.forEach(r => {

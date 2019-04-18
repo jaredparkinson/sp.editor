@@ -11,7 +11,7 @@ import { NavigationLoaderService } from './navigation-loader.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateModel } from './SaveStateModel';
 import { SearchService } from './search.service';
-
+import * as sqlJS from 'sql.js';
 @Injectable({
   providedIn: 'root',
 })
@@ -55,7 +55,7 @@ export class SaveStateService {
     return new Promise(async resolve => {
       console.log('settings load');
       // await this.loadVerseData();
-      // await this.loadSearch();
+      await this.loadSearch();
       await this.loadNavigation();
       const temp = this.getSaveState();
       this.data = temp !== null ? temp : new SaveStateModel();
@@ -80,19 +80,19 @@ export class SaveStateService {
   }
   public loadNavigation() {
     return new Promise(resolve => {
-        this.httpClient
-          .get('assets/nav/nav_rev.json', {
-            responseType: 'text',
-          })
-          .subscribe(data => {
-            this.navigation = JSON.parse(data) as Navigation[];
+      this.httpClient
+        .get('assets/nav/nav_rev.json', {
+          responseType: 'text',
+        })
+        .subscribe(data => {
+          this.navigation = JSON.parse(data) as Navigation[];
 
-            // localStorage.setItem('navData', data);
-            this.navigation.forEach(nav => {
-              this.flattenNavigation(this.flatNavigation, nav);
-            });
-            resolve();
+          // localStorage.setItem('navData', data);
+          this.navigation.forEach(nav => {
+            this.flattenNavigation(this.flatNavigation, nav);
           });
+          resolve();
+        });
     });
   }
 
@@ -188,32 +188,46 @@ export class SaveStateService {
   }
   private loadSearch() {
     return new Promise(async resolve => {
-      const promises = [];
+      this.httpClient
+        .get('assets/data/ggg.sqlite', { responseType: 'arraybuffer' })
+        .subscribe(data => {
+          this.searchService.db = new sqlJS.Database(new Uint8Array(data));
+          // console.log();
+          // const results = this.searchService.db.exec(
+          //   `select * from verse where text like '%david'`,
+          // );
+          // results.forEach(r => {
+          //   console.log(r.values);
+          // });
+          resolve();
+        });
 
-      const allDocs = await this.databaseService.db.allDocs();
-      const filteredDocs = allDocs.rows.filter(doc => {
-        return doc.id.includes('index');
-      });
+      // const promises = [];
 
-      filteredDocs.forEach(async doc => {
-        promises.push(
-          new Promise(async resolve2 => {
-            const value = await this.databaseService.db.get(doc.id);
-            if ((value as any).data) {
-              this.searchService.indexes.push(
-                lunr.Index.load((value as any).data),
-              );
-            }
-            resolve2();
-          }),
-        );
-      });
+      // const allDocs = await this.databaseService.db.allDocs();
+      // const filteredDocs = allDocs.rows.filter(doc => {
+      //   return doc.id.includes('index');
+      // });
 
-      Promise.all(promises).then(() => {
-        console.log(this.searchService.indexes.length);
+      // filteredDocs.forEach(async doc => {
+      //   promises.push(
+      //     new Promise(async resolve2 => {
+      //       const value = await this.databaseService.db.get(doc.id);
+      //       if ((value as any).data) {
+      //         this.searchService.indexes.push(
+      //           lunr.Index.load((value as any).data),
+      //         );
+      //       }
+      //       resolve2();
+      //     }),
+      //   );
+      // });
 
-        resolve();
-      });
+      // Promise.all(promises).then(() => {
+      //   console.log(this.searchService.indexes.length);
+
+      //   resolve();
+      // });
     });
   }
   private setSaveStateItemDefaults<T>(

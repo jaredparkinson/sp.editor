@@ -1,9 +1,9 @@
 <div id="searchGrid">
   <span>Search Results</span>
-  <ng-container *ngIf="this.searchResults.length > 0">
-    <div *ngFor="let searchResult of this.searchResults">
-      <a href="#/{{ searchResult.id }}">
-        {{ searchResult.text }}
+  <ng-container *ngIf="this.newResults.length > 0">
+    <div *ngFor="let searchResult of this.newResults">
+      <a href="#/{{ searchResult[0] }}">
+        {{ searchResult[1] }}
       </a>
     </div>
   </ng-container>

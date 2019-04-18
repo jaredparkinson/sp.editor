@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   private currentSearch: string = '';
   // public verses: Array<{ id: string; text: string }>;
   private lunrResults: lunr.Index.Result[];
+  newResults: (string | number | Uint8Array)[][];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,8 +41,11 @@ export class SearchComponent implements OnInit {
         this.searchService
           .search(search)
           .then(searchResults => {
-            this.lunrResults = searchResults;
-            console.log(searchResults);
+            // this.lunrResults = searchResults;
+            searchResults.forEach(r => {
+              console.log(r.values);
+              this.newResults = r.values.slice(0, 100);
+            });
 
             // this.searchPagination(pageNumber /? pageNumber : 0);
           })

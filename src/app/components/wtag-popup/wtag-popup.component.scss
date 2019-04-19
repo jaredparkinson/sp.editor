@@ -1,9 +1,9 @@
-@mixin popup($button_size) {
+@mixin popup($button_size, $grid) {
   display: grid;
   z-index: 77777;
   position: absolute;
   // $button_size: 60px;
-  grid-template-columns: repeat(5, $button_size);
+  grid-template-columns: $grid;
 
   grid-column-gap: 5px;
   justify-items: center;
@@ -16,7 +16,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .w-tag-popup {
-  @include popup(60px);
+  @include popup(60px, repeat(5, 60px));
   > * {
     grid-template-rows: 1fr 0.5fr;
     display: grid;
@@ -28,9 +28,11 @@
   }
 }
 .w-tag-color-palette {
-  @include popup(30px);
+  @include popup(32px, repeat(10, 32px));
+  grid-column-gap: 0px;
+  margin-left: (-150px);
   > * {
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
   }
 }

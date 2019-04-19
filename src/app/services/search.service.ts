@@ -22,21 +22,21 @@ export class SearchService {
       //     index: { fields: ['text'] },
       //   }),
       // );
-      console.log(PouchDB.debug);
+      // console.log(PouchDB.debug);
 
-      this.dataBaseService.db
-        .find({
-          selector: { text: { $gt: 'david' } },
-          limit: 100,
-        })
-        .then(v => {
-          console.log(v);
-        })
-        .catch(reason => {
-          console.log('olijasDFOIJASDFOIJASDFJOI');
+      // this.dataBaseService.sdb
+      //   .find({
+      //     selector: { text: { $gt: searchTerm } },
+      //     // limit: 100,
+      //   })
+      //   .then(v => {
+      //     console.log(v);
+      //   })
+      //   .catch(reason => {
+      //     console.log('olijasDFOIJASDFOIJASDFJOI');
 
-          console.log(reason);
-        });
+      //     console.log(reason);
+      //   });
 
       // this.dataBaseService.db
       //   .createIndex({ index: { fields: ['text'] } })
@@ -46,13 +46,13 @@ export class SearchService {
       //   .catch(reason => {
       //     console.log(reason);
       //   });
-      // this.db
-      //   ? resolve(
-      //       this.db.exec(
-      //         `select * from verse where text like '%${searchTerm}%' and not id like '%intro%'`,
-      //       ),
-      //     )
-      //   : reject();
+      this.db
+        ? resolve(
+            this.db.exec(
+              `select * from verse where text like '%${searchTerm}%' and not id like '%intro%'`,
+            ),
+          )
+        : reject();
     });
     // let searchResults: lunr.Index.Result[] = []; // this.index.search(searchTerm);
     // return new Promise<lunr.Index.Result[] | undefined>((resolve, reject) => {

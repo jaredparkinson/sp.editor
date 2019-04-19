@@ -54,14 +54,6 @@ export class SearchService {
           )
         : reject();
     });
-    // let searchResults: lunr.Index.Result[] = []; // this.index.search(searchTerm);
-    // return new Promise<lunr.Index.Result[] | undefined>((resolve, reject) => {
-    //   this.indexes.forEach(i => {
-    //     searchResults = searchResults.concat(i.search(searchTerm));
-    //   });
-
-    //   searchResults.length > 0 ? resolve(searchResults) : reject();
-    // });
   }
   public searchCouchDB(searchTerm: string) {
     return new Promise((resolve, reject) => {
@@ -71,6 +63,15 @@ export class SearchService {
         });
         r && r.length > 0 ? resolve(r) : reject();
       });
+    });
+  }
+
+  public searchLunr(searchTerm: string) {
+    let searchResults: lunr.Index.Result[] = []; // this.index.search(searchTerm);
+    return new Promise<lunr.Index.Result[] | undefined>((resolve, reject) => {
+      searchResults = this.index.search(searchTerm);
+
+      searchResults.length > 0 ? resolve(searchResults) : reject();
     });
   }
 }

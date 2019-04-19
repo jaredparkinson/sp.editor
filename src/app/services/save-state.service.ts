@@ -188,10 +188,25 @@ export class SaveStateService {
   }
   private loadSearch() {
     return new Promise(async resolve => {
+      // this.httpClient
+      //   .get('assets/data/ggg.sqlite', { responseType: 'arraybuffer' })
+      //   .subscribe(data => {
+      //     this.searchService.db = new sqlJS.Database(new Uint8Array(data));
+      //     // console.log();
+      //     // const results = this.searchService.db.exec(
+      //     //   `select * from verse where text like '%david'`,
+      //     // );
+      //     // results.forEach(r => {
+      //     //   console.log(r.values);
+      //     // });
+
+      //     resolve();
+      //   });
       this.httpClient
-        .get('assets/data/ggg.sqlite', { responseType: 'arraybuffer' })
+        .get('assets/data/chapters.json', { responseType: 'json' })
         .subscribe(data => {
-          this.searchService.db = new sqlJS.Database(new Uint8Array(data));
+          // this.searchService.db = new sqlJS.Database(new Uint8Array(data));
+          this.searchService.index = lunr.Index.load(data);
           // console.log();
           // const results = this.searchService.db.exec(
           //   `select * from verse where text like '%david'`,
@@ -199,6 +214,7 @@ export class SaveStateService {
           // results.forEach(r => {
           //   console.log(r.values);
           // });
+
           resolve();
         });
 

@@ -39,13 +39,15 @@ export class SearchComponent implements OnInit {
       } else {
         this.currentSearch = search;
         this.searchService
-          .search(search.toLowerCase())
+          .searchLunr(search.toLowerCase())
           .then(searchResults => {
             // this.lunrResults = searchResults;
-            searchResults.forEach(r => {
-              console.log(r.values);
-              this.newResults = r.values.slice(0, 100);
-            });
+            // searchResults.forEach(r => {
+            //   console.log(r.values);
+            //   this.newResults = r.values.slice(0, 100);
+            // });
+
+            console.log(searchResults);
 
             // this.searchPagination(pageNumber /? pageNumber : 0);
           })

@@ -8,16 +8,16 @@ import { WTagService } from '../../services/wtag-builder.service';
 })
 export class WTagPopupComponent implements OnInit {
   public colors: string[] = [
-    '#fff8aa',
-    '#aaf6ff',
-    '#d6ffaa',
-    '#FF9B9F',
-    '#D7D5FC',
-    '#FFBF98',
-    '#ffc2e9',
-    '#DDDDDD',
-    '#DFCDBA',
-    '#A8C7E6',
+    'highlight-yellow',
+    'highlight-lightblue',
+    'highlight-green',
+    'highlight-red',
+    'highlight-purple',
+    'highlight-orange',
+    'highlight-pink',
+    'highlight-lightgrey',
+    'highlight-brown',
+    'highlight-bluegrey',
   ];
   public showColorPalette = false;
   constructor(public wTagService: WTagService) {}

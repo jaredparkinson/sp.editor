@@ -29,6 +29,7 @@ import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { WTagService } from '../services/wtag-builder.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -59,6 +60,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public dataService: DataService,
     public router: Router,
     public wTagService: WTagService,
+    public databaseService: DatabaseService,
   ) {}
 
   public btnNavigationButtons(direction: number) {
@@ -257,7 +259,15 @@ export class BodyblockComponent implements OnInit, OnDestroy {
               return verse.header;
             },
           );
+          // const nums: { id }[] = [];
+          // this.dataService.verses.forEach(v => {
+          //   nums.push({ id: `${this.pageId.replace('-eng', '')}.${v.id}` });
+          // });
+          // console.log(nums);
 
+          // console.log(
+          //   await this.databaseService.db.bulkGet({ docs: nums as any }),
+          // );
           resolve(v);
         })
         .catch(() => {

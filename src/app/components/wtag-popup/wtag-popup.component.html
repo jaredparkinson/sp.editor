@@ -10,6 +10,7 @@
       *ngFor="let color of this.colors"
       [ngStyle]="{ 'background-color': color }"
       (click)="this.highlightClick(color)"
+      class="{{ color }}"
     ></li>
   </ul>
   <ul

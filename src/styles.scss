@@ -294,3 +294,15 @@ header > * {
 //     text-align: center;
 //   }
 // }
+
+$highlightColors: '#fff8aa', '#aaf6ff', '#d6ffaa', '#FF9B9F', '#D7D5FC',
+  '#FFBF98', '#ffc2e9', '#DDDDDD', '#DFCDBA', '#A8C7E6';
+$colors: 'yellow', 'lightblue', 'green', 'red', 'purple', 'orange', 'pink',
+  'lightgrey', 'brown', 'bluegrey';
+@for $i from 1 through 4 {
+  .highlight-#{$colors[$i]} {
+    background-color: $highlightColors[$i];
+  }
+}
+@mixin highlighColors {
+}

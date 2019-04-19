@@ -23,9 +23,11 @@ export class WTagPopupComponent implements OnInit {
   constructor(public wTagService: WTagService) {}
   public highlightClick() {
     this.wTagService.marked = true;
-    this.showColorPalette = true;
+    this.showColorPalette = !this.showColorPalette;
     // this.wTagService.markText();
   }
+
+  public addHighlight(color: string) {}
 
   public ngOnInit() {}
   public setColor() {}

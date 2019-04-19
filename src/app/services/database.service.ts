@@ -27,10 +27,10 @@ export class DatabaseService {
 
   public bulkDocs(databaseName: string) {
     return new Promise<void>(async resolve => {
-      await (PouchDB as any).replicate(
-        `https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand_all_eng`,
-        this.sdb,
-      );
+      // await (PouchDB as any).replicate(
+      //   `https://sp_users:test@couch.parkinson.im/alpha_oneinthinehand_all_eng`,
+      //   this.sdb,
+      // );
       await (PouchDB as any).replicate(
         `https://sp_users:test@couch.parkinson.im/${databaseName}`,
         this.db,

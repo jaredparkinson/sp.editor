@@ -3,6 +3,7 @@ import * as lunr from 'lunr';
 import { Database, QueryResults } from 'sql.js';
 import { DatabaseService } from './database.service';
 import { filter } from 'lodash';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,40 +13,15 @@ export class SearchService {
   public verses: Array<{ id: string; text: string }>;
   public db: Database;
 
-  constructor(private dataBaseService: DatabaseService) {}
+  constructor(
+    private dataBaseService: DatabaseService,
+    private httpClient: HttpClient,
+  ) {}
 
   public search(searchTerm: string): Promise<QueryResults[] | undefined> {
     return new Promise<QueryResults[]>(async (resolve, reject) => {
       console.log(await this.dataBaseService.db.getIndexes());
-      // console.log(
-      //   await this.dataBaseService.db.createIndex({
-      //     index: { fields: ['text'] },
-      //   }),
-      // );
-      // console.log(PouchDB.debug);
 
-      // this.dataBaseService.sdb
-      //   .find({
-      //     selector: { text: { $gt: searchTerm } },
-      //     // limit: 100,
-      //   })
-      //   .then(v => {
-      //     console.log(v);
-      //   })
-      //   .catch(reason => {
-      //     console.log('olijasDFOIJASDFOIJASDFJOI');
-
-      //     console.log(reason);
-      //   });
-
-      // this.dataBaseService.db
-      //   .createIndex({ index: { fields: ['text'] } })
-      //   .then(v => {
-      //     console.log(v);
-      //   })
-      //   .catch(reason => {
-      //     console.log(reason);
-      //   });
       this.db
         ? resolve(
             this.db.exec(
@@ -67,11 +43,33 @@ export class SearchService {
   }
 
   public searchLunr(searchTerm: string) {
-    let searchResults: lunr.Index.Result[] = []; // this.index.search(searchTerm);
-    return new Promise<lunr.Index.Result[] | undefined>((resolve, reject) => {
-      searchResults = this.index.search(searchTerm);
+    let searchResults: lunr.Index.Result[] = [];
+    return new Promise<lunr.Index.Result[] | undefined>(
+      async (resolve, reject) => {
+        if (!this.index) {
+          await this.loadSearch();
+        }
+        searchResults = this.index.search(searchTerm);
 
-      searchResults.length > 0 ? resolve(searchResults) : reject();
+        searchResults.length > 0 ? resolve(searchResults) : reject();
+      },
+    );
+  }
+
+  private loadSearch() {
+    return new Promise((resolve, reject) => {
+      this.httpClient
+        .get('assets/data/chapters.json', { responseType: 'json' })
+        .subscribe(
+          data => {
+            this.index = lunr.Index.load(data);
+
+            resolve();
+          },
+          error => {
+            reject();
+          },
+        );
     });
   }
 }

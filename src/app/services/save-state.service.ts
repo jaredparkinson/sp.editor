@@ -55,7 +55,7 @@ export class SaveStateService {
     return new Promise(async resolve => {
       console.log('settings load');
       // await this.loadVerseData();
-      await this.loadSearch();
+      // await this.loadSearch();
       await this.loadNavigation();
       const temp = this.getSaveState();
       this.data = temp !== null ? temp : new SaveStateModel();

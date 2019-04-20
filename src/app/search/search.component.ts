@@ -41,11 +41,11 @@ export class SearchComponent implements OnInit {
         this.searchService
           .searchLunr(search.toLowerCase())
           .then(searchResults => {
-            // this.lunrResults = searchResults;
-            // searchResults.forEach(r => {
-            //   console.log(r.values);
-            //   this.newResults = r.values.slice(0, 100);
-            // });
+            this.lunrResults = searchResults;
+            searchResults.forEach(r => {
+              console.log(r.ref);
+              // this.newResults = r.values.slice(0, 100);
+            });
 
             console.log(searchResults);
 

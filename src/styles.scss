@@ -295,14 +295,16 @@ header > * {
 //   }
 // }
 
-$highlightColors: '#fff8aa', '#aaf6ff', '#d6ffaa', '#FF9B9F', '#D7D5FC',
-  '#FFBF98', '#ffc2e9', '#DDDDDD', '#DFCDBA', '#A8C7E6';
-$colors: 'yellow', 'lightblue', 'green', 'red', 'purple', 'orange', 'pink',
-  'lightgrey', 'brown', 'bluegrey';
-@for $i from 1 through 4 {
-  .highlight-#{$colors[$i]} {
-    background-color: $highlightColors[$i];
+$highlightColors: #fff8aa, #aaf6ff, #d6ffaa, #ff9b9f, #d7d5fc, #ffbf98, #ffc2e9,
+  #dddddd, #dfcdba, #a8c7e6;
+$colors: yellow, lightblue, green, red, purple, orange, pink, lightgrey, brown,
+  bluegrey;
+
+@for $x from 1 through length($highlightColors) {
+  .highlight-#{nth( $colors,$x)} {
+    background-color: nth($highlightColors, $x);
   }
 }
+
 @mixin highlighColors {
 }

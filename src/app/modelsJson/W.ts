@@ -12,9 +12,19 @@ export interface IW {
   refs: string[] | undefined;
   text: string | undefined;
   visibleRefs: string[] | undefined;
+  highlightRefs: HighlightRef[];
+}
+export class HighlightRef {
+  public id: string;
+  public color: string;
+  constructor(id: string, color: string) {
+    this.id = id;
+    this.color = color;
+  }
 }
 
 export class rubyW implements IW {
+  public highlightRefs: HighlightRef[] | undefined = undefined;
   public classList: string[] | undefined = undefined;
   public highlighting: string[];
   public id: number[] = [];
@@ -25,6 +35,7 @@ export class rubyW implements IW {
   public visibleRefs: string[] | undefined = undefined;
 }
 export class aW implements IW {
+  public highlightRefs: HighlightRef[] | undefined = undefined;
   public childWTags: W[] = [];
   public classList: string[] | undefined = [];
   public highlighting: string[];
@@ -40,7 +51,7 @@ export class W implements IW {
   public classList: string[] = [];
   public clicked: boolean;
   public highlighting: string[];
-  public highlightRefs: string[] = [];
+  public highlightRefs: HighlightRef[] | undefined = undefined;
   public id: number[] = [];
   public refs: string[] = [];
   public selected: boolean;

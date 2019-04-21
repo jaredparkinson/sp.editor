@@ -12,7 +12,7 @@ import {
   uniq,
 } from 'lodash';
 import { Verse } from '../modelsJson/Verse';
-import { aW, IW, W } from '../modelsJson/W';
+import { aW, IW, W, HighlightRef } from '../modelsJson/W';
 import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 
@@ -30,7 +30,7 @@ export class WTagService {
   public wTagPopupTop: string = '0px';
   private bodyBlockElement: Element;
   private wTags: Array<{ id: string; w: IW }> = [];
-  public wTagColorPaletteTop: string='0px';
+  public wTagColorPaletteTop: string = '0px';
   constructor(
     private dataService: DataService,
     private chapterService: ChapterService,
@@ -265,9 +265,9 @@ export class WTagService {
             : ((clonedWTag.classList = []),
               clonedWTag.classList.push('mark-text'));
           clonedWTag.highlightRefs
-            ? clonedWTag.highlightRefs.push('mark-text')
+            ? clonedWTag.highlightRefs.push(new HighlightRef('', ''))
             : ((clonedWTag.highlightRefs = []),
-              clonedWTag.highlightRefs.push('mark-text'));
+              clonedWTag.highlightRefs.push(new HighlightRef('', '')));
           clonedWTag.refs
             ? clonedWTag.refs.push(newTag.w.refs[0])
             : ((clonedWTag.refs = []), clonedWTag.refs.push(newTag.w.refs[0]));

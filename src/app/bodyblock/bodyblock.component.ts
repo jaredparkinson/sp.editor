@@ -126,7 +126,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         const v = await this.buildPage(id, highlighting);
         this.chapterService.chapterFadeOut = false;
         this.scrollToVerse(v);
-        // await this.resetNavigationFocus(this.navService.navigation);
+        await this.setNavigation(this.saveState.navigation);
         // this.setNavigation(this.saveState.navigation);
         this.chapterService.chapterFadeOut = false;
 

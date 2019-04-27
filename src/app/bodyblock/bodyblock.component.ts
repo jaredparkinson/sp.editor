@@ -28,8 +28,8 @@ import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Chapter2 } from '../modelsJson/Chapter';
-import { WTagService } from '../services/wtag-builder.service';
 import { DatabaseService } from '../services/database.service';
+import { WTagService } from '../services/wtag-builder.service';
 
 @Component({
   selector: 'app-bodyblock',
@@ -122,23 +122,22 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       this.url = `${book}/${last(highlighting)}`;
       const id = `${book}-${highlighting.pop()}-${language}`;
       this.chapterService.chapterFadeOut = true;
-      this.buildPage(id, highlighting)
-        .then(async v => {
-          this.chapterService.chapterFadeOut = false;
-          this.scrollToVerse(v);
-          // await this.resetNavigationFocus(this.navService.navigation);
-          // this.setNavigation(this.saveState.navigation);
-          this.chapterService.chapterFadeOut = false;
+      try {
+        const v = await this.buildPage(id, highlighting);
+        this.chapterService.chapterFadeOut = false;
+        this.scrollToVerse(v);
+        // await this.resetNavigationFocus(this.navService.navigation);
+        // this.setNavigation(this.saveState.navigation);
+        this.chapterService.chapterFadeOut = false;
 
-          this.wTagService.init();
-        })
-        .catch(r => {
-          console.log(r);
+        this.wTagService.init();
+      } catch (error) {
+        console.log(error);
 
-          console.log('failed');
+        console.log('failed');
 
-          this.router.navigateByUrl('/');
-        });
+        this.router.navigateByUrl('/');
+      }
     });
   }
 
@@ -149,16 +148,13 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   public onScroll() {
     this.syncScrollingService.onScroll();
   }
-  public resetNavigationFocus(navigation: Navigation[]): Promise<void> {
-    return new Promise<void>(resolve => {
-      navigation.forEach(async nav => {
-        if (nav.url) {
-          nav.focus = false;
-        } else {
-          await this.resetNavigationFocus(nav.navigation);
-        }
-      });
-      resolve();
+  public async resetNavigationFocus(navigation: Navigation[]): Promise<void> {
+    navigation.forEach(async nav => {
+      if (nav.url) {
+        nav.focus = false;
+      } else {
+        await this.resetNavigationFocus(nav.navigation);
+      }
     });
   }
   public setNavigation(navigation: Navigation[]) {
@@ -219,88 +215,49 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return paragraph.id;
   }
 
-  private buildPage(id: string, highlighting: string[] = []) {
-    return new Promise<number>(async (resolve, reject) => {
-      // let chapter = this.dataService.chapter2;
-      // if (this.pageId !== id) {
-      //   chapter = await this.chapterService.getChapter(id);
-      //   this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
-      //   this.dataService.verses = cloneDeep(chapter.verses);
-      // }
+  private async buildPage(id: string, highlighting: string[] = []) {
+    const chapter = await this.getChapter(id);
 
-      this.getChapter(id)
-        .then(async chapter => {
-          this.pageId = id;
+    this.pageId = id;
 
-          const v = await this.chapterService.setHighlightging(
-            this.dataService.verses,
-            [highlighting.pop(), highlighting.pop()],
-          );
+    const v = await this.chapterService.setHighlightging(
+      this.dataService.verses,
+      [highlighting.pop(), highlighting.pop()],
+    );
 
-          await this.chapterService.resetNoteVisibility(
-            chapter,
-            this.dataService.noteVisibility,
-          );
+    await this.chapterService.resetNoteVisibility(
+      chapter,
+      this.dataService.noteVisibility,
+    );
 
-          await this.chapterService.buildWTags(
-            this.dataService.verses,
-            this.dataService.noteVisibility,
-          );
+    await this.chapterService.buildWTags(
+      this.dataService.verses,
+      this.dataService.noteVisibility,
+    );
 
-          await this.chapterService.buildParagraphs(
-            this.dataService.paragraphs,
-            this.dataService.verses,
-          );
+    await this.chapterService.buildParagraphs(
+      this.dataService.paragraphs,
+      this.dataService.verses,
+    );
 
-          this.dataService.chapter2 = chapter;
-          this.dataService.header = filter(
-            this.dataService.verses,
-            (verse: Verse) => {
-              return verse.header;
-            },
-          );
-          // const nums: { id }[] = [];
-          // this.dataService.verses.forEach(v => {
-          //   nums.push({ id: `${this.pageId.replace('-eng', '')}.${v.id}` });
-          // });
-          // console.log(nums);
-
-          // console.log(
-          //   await this.databaseService.db.bulkGet({ docs: nums as any }),
-          // );
-          resolve(v);
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  }
-  private getChapter(id: string) {
-    return new Promise<Chapter2 | undefined>(
-      (
-        resolve: (resolveValue: Chapter2 | undefined) => void,
-        reject: (rejectValue: Chapter2 | undefined) => void,
-      ) => {
-        let chapter = this.dataService.chapter2;
-        if (this.pageId !== id) {
-          this.chapterService
-            .getChapter(id)
-            .then(c => {
-              chapter = c;
-              this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
-              this.dataService.verses = cloneDeep(chapter.verses);
-              resolve(chapter);
-            })
-            .catch(() => {
-              console.log(id);
-
-              reject(undefined);
-            });
-        } else {
-          resolve(chapter);
-        }
+    this.dataService.chapter2 = chapter;
+    this.dataService.header = filter(
+      this.dataService.verses,
+      (verse: Verse) => {
+        return verse.header;
       },
     );
+    return v;
+  }
+  private async getChapter(id: string) {
+    let chapter = this.dataService.chapter2;
+    if (this.pageId !== id) {
+      chapter = await this.chapterService.getChapter(id);
+
+      this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
+      this.dataService.verses = cloneDeep(chapter.verses);
+    }
+    return chapter;
   }
 
   private scrollToVerse(v: number) {

@@ -20,13 +20,11 @@ export class NavigationService {
     private httpClient: HttpClient,
     private saveState: SaveStateService,
   ) {}
-  public btnEnglishNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.englishNotesVisible = !this.saveState.data
-        .englishNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
+  public async btnEnglishNotesPress(): Promise<boolean> {
+    this.saveState.data.englishNotesVisible = !this.saveState.data
+      .englishNotesVisible;
+    this.saveState.save();
+    return (true);
   }
 
   public btnHeaderButtonPress(

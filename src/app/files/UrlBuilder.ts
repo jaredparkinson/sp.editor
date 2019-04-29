@@ -7,14 +7,7 @@ import { BookConvert } from './BookCovert';
 
 @Injectable()
 export class UrlBuilder {
-  constructor(
-    private dataBaseService: DatabaseService,
-    private saveState: SaveStateService,
-  ) {
-    each(this.bookNames, book => {
-      this.bookConvert.push(new BookConvert(book));
-    });
-  }
+  public bookConvert: BookConvert[] = [];
   private bookNames = [
     ['Joseph Smith—History', 'js-h/1'],
     ['Genesis', 'Gen.', 'Gen', 'Gen', 'gen'],
@@ -164,78 +157,75 @@ export class UrlBuilder {
       'a-of-f',
     ],
   ];
-  public bookConvert: BookConvert[] = [];
 
   private cRegex = new RegExp('\\(.+\\)');
+  constructor(
+    private dataBaseService: DatabaseService,
+    private saveState: SaveStateService,
+  ) {
+    each(this.bookNames, book => {
+      this.bookConvert.push(new BookConvert(book));
+    });
+  }
 
-  public urlParser(url: string) {
-    return new Promise<string>(
-      (
-        resolve: (resolveValue: string) => void,
-        reject: (rejectValue: string) => void,
-      ) => {
-        let outUrl = url
-          .toLowerCase()
-          .replace(/\s/g, ' ')
-          .replace('&amp;', '&');
-        // .toLowerCase();
-        // .replace(/00A0/s, '\u0020');
-        // console.log(outUrl);
+  public async urlParser(url: string) {
+    let outUrl = url
+      .toLowerCase()
+      .replace(/\s/g, ' ')
+      .replace('&amp;', '&');
+    // .toLowerCase();
+    // .replace(/00A0/s, '\u0020');
+    // console.log(outUrl);
 
-        let bookName = '';
-        let context = '';
+    let bookName = '';
+    let context = '';
 
-        ({ outUrl, bookName } = this.getBookName(outUrl));
+    ({ outUrl, bookName } = this.getBookName(outUrl));
 
-        try {
-          context = this.cRegex.exec(outUrl).toString();
-        } catch {
-          context = '';
-        }
+    try {
+      context = this.cRegex.exec(outUrl).toString();
+    } catch {
+      context = '';
+    }
 
-        outUrl = outUrl.replace(context, '').trim();
+    outUrl = outUrl.replace(context, '').trim();
 
-        // console.log('bookName ' + bookName);
-        // console.log('outUrl ' + outUrl);
-        // console.log('context ' + context);
+    // console.log('bookName ' + bookName);
+    // console.log('outUrl ' + outUrl);
+    // console.log('context ' + context);
+    try {
+      await this.dataBaseService.db.get(
+        `${bookName}-${outUrl}-${this.saveState.data.language}`,
+      );
+      const fullUrl = (
+        bookName +
+        '/' +
+        outUrl
 
-        this.dataBaseService.db
-          .get(`${bookName}-${outUrl}-${this.saveState.data.language}`)
-          .then(() => {
-            const fullUrl = (
-              bookName +
-              '/' +
-              outUrl
+          //
+          .replace(':', '.')
 
-                //
-                .replace(':', '.')
+          .trim() +
+        '.' +
+        context
+          .replace('(', '')
+          .replace(')', '')
+          .trim()
+      )
+        .replace(/\s/g, '')
+        .replace(/\u2013/g, '-')
+        .replace(/\uFEFF/g, '');
 
-                .trim() +
-              '.' +
-              context
-                .replace('(', '')
-                .replace(')', '')
-                .trim()
-            )
-              .replace(/\s/g, '')
-              .replace(/\u2013/g, '-')
-              .replace(/\uFEFF/g, '');
+      if (bookName.startsWith('bofm/')) {
+        return bookName;
+      }
 
-            if (bookName.startsWith('bofm/')) {
-              return bookName;
-            }
-
-            resolve(
-              last(fullUrl) === '.'
-                ? fullUrl.substring(0, fullUrl.length - 1)
-                : fullUrl,
-            );
-          })
-          .catch(() => {
-            reject('');
-          });
-      },
-    );
+      return last(fullUrl) === '.'
+        ? fullUrl.substring(0, fullUrl.length - 1)
+        : fullUrl;
+    } catch (error) {
+      throw new Error();
+    }
   }
 
   private getBookName(outUrl: string) {

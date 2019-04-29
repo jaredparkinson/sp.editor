@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
+import * as sqlJS from 'sql.js';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
 import { Navigation } from '../modelsJson/Navigation';
@@ -11,7 +12,6 @@ import { NavigationLoaderService } from './navigation-loader.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateModel } from './SaveStateModel';
 import { SearchService } from './search.service';
-import * as sqlJS from 'sql.js';
 @Injectable({
   providedIn: 'root',
 })
@@ -78,22 +78,19 @@ export class SaveStateService {
       resolve();
     });
   }
-  public loadNavigation() {
-    return new Promise(resolve => {
-      this.httpClient
-        .get('assets/nav/nav_rev.json', {
-          responseType: 'text',
-        })
-        .subscribe(data => {
-          this.navigation = JSON.parse(data) as Navigation[];
+  public async loadNavigation() {
+    this.httpClient
+      .get('assets/nav/nav_rev.json', {
+        responseType: 'text',
+      })
+      .subscribe(data => {
+        this.navigation = JSON.parse(data) as Navigation[];
 
-          // localStorage.setItem('navData', data);
-          this.navigation.forEach(nav => {
-            this.flattenNavigation(this.flatNavigation, nav);
-          });
-          resolve();
+        // localStorage.setItem('navData', data);
+        this.navigation.forEach(nav => {
+          this.flattenNavigation(this.flatNavigation, nav);
         });
-    });
+      });
   }
 
   public loadVerseData() {

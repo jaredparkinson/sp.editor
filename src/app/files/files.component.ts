@@ -104,19 +104,16 @@ export class FilesComponent implements OnInit {
     this.navService.btnLeftPanePress();
   }
 
-  private buildUrl() {
+  private async buildUrl() {
     const addressBarValue = (document.getElementById(
       'addressBar',
     ) as HTMLInputElement).value;
 
-    this.urlBuilder
-      .urlParser(addressBarValue)
-      .then(urlAsdf => {
-        this.router.navigateByUrl(urlAsdf);
-      })
-      .catch(() => {
-        this.router.navigate(['/search', addressBarValue]);
-        // this.searchService.index.search(addressBarValue);
-      });
+    try {
+      const url = await this.urlBuilder.urlParser(addressBarValue);
+      this.router.navigateByUrl(url);
+    } catch (error) {
+      this.router.navigate(['/search', addressBarValue]);
+    }
   }
 }

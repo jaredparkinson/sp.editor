@@ -183,7 +183,7 @@ export class UrlBuilder {
     ({ outUrl, bookName } = this.getBookName(outUrl));
 
     try {
-      context = this.cRegex.exec(outUrl).toString();
+      context = new RegExp(/\..+/).exec(outUrl).toString();
     } catch {
       context = '';
     }
@@ -212,6 +212,7 @@ export class UrlBuilder {
           .replace(')', '')
           .trim()
       )
+        .replace('..', '.')
         .replace(/\s/g, '')
         .replace(/\u2013/g, '-')
         .replace(/\uFEFF/g, '');

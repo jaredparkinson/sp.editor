@@ -172,7 +172,8 @@ export class UrlBuilder {
     let outUrl = url
       .toLowerCase()
       .replace(/\s/g, ' ')
-      .replace('&amp;', '&');
+      .replace('&amp;', '&')
+      .replace(':', '.');
     // .toLowerCase();
     // .replace(/00A0/s, '\u0020');
     // console.log(outUrl);

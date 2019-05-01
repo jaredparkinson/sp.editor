@@ -31,20 +31,15 @@ export class SyncScrollingService {
     }, 50);
   }
 
-  public scrollNoteIntoView(belowTop: Element[]): Promise<void> {
-    return new Promise<void>(resolve => {
-      const note = document.querySelector(
-        `#${belowTop[0].id.replace('p', 'note')}`,
-      );
-      if (note) {
-        setTimeout(() => {
-          note.scrollIntoView();
-          resolve();
-        }, 300);
-      } else {
-        resolve();
-      }
-    });
+  public async scrollNoteIntoView(belowTop: Element[]): Promise<void> {
+    const note = document.querySelector(
+      `#${belowTop[0].id.replace('p', 'note')}`,
+    );
+    if (note) {
+      setTimeout(() => {
+        note.scrollIntoView();
+      }, 300);
+    }
   }
 
   public synchronizedScrolling(): void {

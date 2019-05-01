@@ -19,82 +19,67 @@ export class ChapterService {
     private dataService: DataService,
   ) {}
 
-  public buildParagraphs(
+  public async buildParagraphs(
     paragraphs: Paragraph[],
     verses: Verse[],
   ): Promise<void> {
-    return new Promise<void>(resolve => {
-      paragraphs.forEach(paragraph => {
-        paragraph.verses = [];
-        paragraph.verseIds.forEach(verseId => {
-          const verse = verses.find(v => {
-            return v.id === verseId;
-          });
-          if (verse) {
-            paragraph.verses.push(verse);
-          }
+    paragraphs.forEach(paragraph => {
+      paragraph.verses = [];
+      paragraph.verseIds.forEach(verseId => {
+        const verse = verses.find(v => {
+          return v.id === verseId;
         });
-        // paragraph.verses = verses.slice(
-        //   parseInt(paragraph.verseIds[0], 10) - 1,
-        //   parseInt(paragraph.verseIds[1], 10),
-        // );
+        if (verse) {
+          paragraph.verses.push(verse);
+        }
       });
-
-      if (paragraphs.length === 0) {
-        const ara = new Paragraph();
-        ara.verses = verses;
-        paragraphs.push(ara);
-      }
-
-      resolve();
+      // paragraph.verses = verses.slice(
+      //   parseInt(paragraph.verseIds[0], 10) - 1,
+      //   parseInt(paragraph.verseIds[1], 10),
+      // );
     });
+
+    if (paragraphs.length === 0) {
+      const ara = new Paragraph();
+      ara.verses = verses;
+      paragraphs.push(ara);
+    }
   }
 
-  public buildWTags(verses: Verse[], noteVisibility: Map<string, boolean>) {
-    return new Promise<void>(resolve => {
-      verses.forEach(verse => {
-        verse.wTags.forEach(wTag => {
-          switch (wTag.type) {
-            case 'aW': {
-              ((wTag as unknown) as aW).childWTags.forEach(w => {
-                this.setWTagProperties(w, verse);
-              });
-              break;
-            }
-            case 'rW': {
-              break;
-            }
-            case 'W': {
-              this.setWTagProperties(wTag, verse);
-              break;
-            }
+  public async buildWTags(
+    verses: Verse[],
+    noteVisibility: Map<string, boolean>,
+  ) {
+    verses.forEach(verse => {
+      verse.wTags.forEach(wTag => {
+        switch (wTag.type) {
+          case 'aW': {
+            ((wTag as unknown) as aW).childWTags.forEach(w => {
+              this.setWTagProperties(w, verse);
+            });
+            break;
           }
-          if (wTag.type === 'W') {
+          case 'rW': {
+            break;
           }
-        });
+          case 'W': {
+            this.setWTagProperties(wTag, verse);
+            break;
+          }
+        }
+        if (wTag.type === 'W') {
+        }
       });
-      this.resetRefVisible(verses, noteVisibility);
-
-      resolve(undefined);
     });
+    this.resetRefVisible(verses, noteVisibility);
   }
 
-  public getChapter(id: string) {
-    return new Promise<Chapter2>(
-      (
-        resolve: (resolveValue: Chapter2) => void,
-        reject: (rejectValue: Chapter2) => void,
-      ) => {
-        this.dataBaseService
-          .get(id)
-          .then(chapter => {
-            resolve(chapter as Chapter2);
-          })
-          .catch(r => {
-            reject(undefined);
-          });
-      },
-    );
+  public async getChapter(id: string) {
+    try {
+      return await this.dataBaseService.get(id);
+    } catch (error) {
+      return undefined;
+    }
   }
 
   public getNoteRefVisibility(noteRef: NoteRef): boolean {
@@ -191,41 +176,34 @@ export class ChapterService {
     return verseNums;
   }
 
-  public resetNotes(): Promise<void> {
-    return new Promise<void>(async resolve => {
-      await this.resetNoteVisibility(
-        this.dataService.chapter2,
-        this.dataService.noteVisibility,
-      );
-      await this.buildWTags(
-        this.dataService.verses,
-        this.dataService.noteVisibility,
-      );
-      resolve();
-    });
+  public async resetNotes(): Promise<void> {
+    await this.resetNoteVisibility(
+      this.dataService.chapter2,
+      this.dataService.noteVisibility,
+    );
+    await this.buildWTags(
+      this.dataService.verses,
+      this.dataService.noteVisibility,
+    );
   }
-  public resetNoteVisibility(
+  public async resetNoteVisibility(
     chapter: Chapter2,
     noteVisibility: Map<string, boolean>,
   ): Promise<void> {
-    return new Promise<void>(resolve => {
-      map(chapter.notes, note => {
-        return note.secondary;
-      }).forEach(s => {
-        s.forEach(secondaryNote => {
-          noteVisibility.set(secondaryNote.id, false);
-          if (this.getSecondaryNoteVisibility(secondaryNote)) {
-            secondaryNote.clicked = false;
-            secondaryNote.noteRefs.forEach(noteRef => {
-              if (this.getNoteRefVisibility(noteRef)) {
-                noteVisibility.set(secondaryNote.id, true);
-              }
-            });
-          }
-        });
+    map(chapter.notes, note => {
+      return note.secondary;
+    }).forEach(s => {
+      s.forEach(secondaryNote => {
+        noteVisibility.set(secondaryNote.id, false);
+        if (this.getSecondaryNoteVisibility(secondaryNote)) {
+          secondaryNote.clicked = false;
+          secondaryNote.noteRefs.forEach(noteRef => {
+            if (this.getNoteRefVisibility(noteRef)) {
+              noteVisibility.set(secondaryNote.id, true);
+            }
+          });
+        }
       });
-
-      resolve();
     });
   }
 
@@ -238,18 +216,19 @@ export class ChapterService {
     });
   }
 
-  public setHighlightging(verses: Verse[], highlightNumbers: [string, string]) {
-    return new Promise<number>(resolve => {
-      const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
-      const context = this.parseHighlightedVerses(highlightNumbers[1]);
-      verses.forEach(verse => {
-        const verseNumber = parseInt(verse.id.replace('p', ''), 10);
-        verse.highlight = includes(highlight, verseNumber) ? true : false;
-        verse.context = includes(context, verseNumber) ? true : false;
-      });
-
-      resolve(sortBy(highlight)[0]);
+  public async setHighlightging(
+    verses: Verse[],
+    highlightNumbers: [string, string],
+  ) {
+    const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
+    const context = this.parseHighlightedVerses(highlightNumbers[1]);
+    verses.forEach(verse => {
+      const verseNumber = parseInt(verse.id.replace('p', ''), 10);
+      verse.highlight = includes(highlight, verseNumber) ? true : false;
+      verse.context = includes(context, verseNumber) ? true : false;
     });
+
+    return sortBy(highlight)[0];
   }
   private noteTypeVisible(
     secondaryNote: SecondaryNote,

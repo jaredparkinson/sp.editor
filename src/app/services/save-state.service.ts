@@ -86,37 +86,31 @@ export class SaveStateService {
   }
 
   public loadVerseData() {
-    return new Promise(async resolve => {
-      const promises = [];
-
-      const allDocs = await this.databaseService.db.allDocs();
-      const filteredDocs = allDocs.rows.filter(doc => {
-        return doc.id.includes('verses');
-      });
-
-      this.searchService.verses = [];
-
-      filteredDocs.forEach(async doc => {
-        promises.push(() => {
-          new Promise(async resolve2 => {
-            const value = await this.databaseService.db.get(doc.id);
-
-            console.log(value);
-
-            this.searchService.verses = this.searchService.verses.concat(
-              (value as any).data,
-            );
-            console.log(this.searchService.verses.length);
-            resolve2();
-          });
-        });
-      });
-
-      Promise.all(promises).then(() => {
-        console.log(this.searchService.verses.length);
-        resolve();
-      });
-    });
+    // return new Promise(async resolve => {
+    //   const promises = [];
+    //   const allDocs = await this.databaseService.db.allDocs();
+    //   const filteredDocs = allDocs.rows.filter(doc => {
+    //     return doc.id.includes('verses');
+    //   });
+    //   this.searchService.verses = [];
+    //   filteredDocs.forEach(async doc => {
+    //     promises.push(() => {
+    //       new Promise(async resolve2 => {
+    //         const value = await this.databaseService.db.get(doc.id);
+    //         console.log(value);
+    //         this.searchService.verses = this.searchService.verses.concat(
+    //           (value as any).data,
+    //         );
+    //         console.log(this.searchService.verses.length);
+    //         resolve2();
+    //       });
+    //     });
+    //   });
+    //   Promise.all(promises).then(() => {
+    //     console.log(this.searchService.verses.length);
+    //     resolve();
+    //   });
+    // });
   }
   public resetSettings(): void {
     if (

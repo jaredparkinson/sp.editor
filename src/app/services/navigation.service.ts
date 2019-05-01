@@ -42,12 +42,9 @@ export class NavigationService {
     this.saveState.save();
   }
   public async btnNewNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.newNotesVisible = !this.saveState.data
-        .newNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
+    this.saveState.data.newNotesVisible = !this.saveState.data.newNotesVisible;
+    this.saveState.save();
+    return true;
   }
   public btnNotesSettingsPress() {
     this.notesSettings = !this.notesSettings;

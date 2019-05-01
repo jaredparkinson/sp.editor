@@ -12,7 +12,7 @@ import {
   uniq,
 } from 'lodash';
 import { Verse } from '../modelsJson/Verse';
-import { aW, IW, W, HighlightRef } from '../modelsJson/W';
+import { aW, HighlightRef, IW, W } from '../modelsJson/W';
 import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 
@@ -25,12 +25,12 @@ export class WTagService {
   public popupTimeout: NodeJS.Timer;
   public rangeInterval: any;
   public showPopup: boolean = false;
+  public wTagColorPaletteTop: string = '0px';
   public wTagPopupleft: string = '0px';
 
   public wTagPopupTop: string = '0px';
   private bodyBlockElement: Element;
   private wTags: Array<{ id: string; w: IW }> = [];
-  public wTagColorPaletteTop: string = '0px';
   constructor(
     private dataService: DataService,
     private chapterService: ChapterService,
@@ -46,6 +46,33 @@ export class WTagService {
       lastID: last(node.parentElement.getAttribute('w-ids').split(',')),
       offSet,
     };
+  }
+
+  public copyText() {
+    this.marked = true;
+    const selection = this.cloneRange.cloneContents();
+    const textCopyArea = document.querySelector('#textCopyArea');
+
+    textCopyArea.appendChild(selection);
+    const range = document.createRange();
+    range.selectNodeContents(textCopyArea);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    document.execCommand('copy');
+    window.getSelection().empty();
+    this.showPopup = false;
+    this.marked = false;
+  }
+  public hasNodeName(range: Range) {
+    const validNodeNames = ['W'];
+    const invalidNodeNames = ['DIV', 'P'];
+
+    return (
+      validNodeNames.includes(range.startContainer.parentElement.nodeName) &&
+      validNodeNames.includes(range.endContainer.parentElement.nodeName) &&
+      !invalidNodeNames.includes(range.commonAncestorContainer.nodeName)
+    );
   }
 
   public highlightClick() {
@@ -120,10 +147,10 @@ export class WTagService {
       this.dataService.verses,
       this.dataService.noteVisibility,
     );
-    await this.chapterService.buildParagraphs(
-      this.dataService.paragraphs,
-      this.dataService.verses,
-    );
+    await this.chapterService.buildParagraphs({
+      paragraphs: this.dataService.paragraphs,
+      verses: this.dataService.verses,
+    });
   }
 
   public isEqual(refs1: [], refs2: []): boolean {
@@ -239,16 +266,6 @@ export class WTagService {
 
     return sameVerse;
   }
-  hasNodeName(range: Range) {
-    const validNodeNames = ['W'];
-    const invalidNodeNames = ['DIV', 'P'];
-
-    return (
-      validNodeNames.includes(range.startContainer.parentElement.nodeName) &&
-      validNodeNames.includes(range.endContainer.parentElement.nodeName) &&
-      !invalidNodeNames.includes(range.commonAncestorContainer.nodeName)
-    );
-  }
   private expandWtags(wTag: W, newWTags: Array<{ id: string; w: IW }>) {
     const newVerse = [];
     let start = first(wTag.id);
@@ -277,23 +294,6 @@ export class WTagService {
       newVerse.push(clonedWTag);
     }
     return newVerse;
-  }
-
-  public copyText() {
-    this.marked = true;
-    const selection = this.cloneRange.cloneContents();
-    const textCopyArea = document.querySelector('#textCopyArea');
-
-    textCopyArea.appendChild(selection);
-    const range = document.createRange();
-    range.selectNodeContents(textCopyArea);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-
-    document.execCommand('copy');
-    window.getSelection().empty();
-    this.showPopup = false;
-    this.marked = false;
   }
 
   private insertNewAWTags(

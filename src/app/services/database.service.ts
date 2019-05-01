@@ -4,6 +4,7 @@ import * as debug from 'pouchdb-debug';
 import * as PouchDBFind from 'pouchdb-find';
 
 import { HttpClient } from '@angular/common/http';
+import axios from 'axios';
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
   providedIn: 'root',
@@ -92,49 +93,55 @@ export class DatabaseService {
     this.tempAllDocs = await this.db.allDocs();
   }
 
-  public setDatabases() {
-    return new Promise<void>((resolve: (resolveValue: void) => void) => {
-      const tempDatabases = localStorage.getItem('database-list');
+  public async setDatabases() {
+    const tempDatabases = localStorage.getItem('database-list');
 
-      if (tempDatabases) {
-        this.databaseList = JSON.parse(tempDatabases);
-      } else {
-        this.databaseList = [];
-      }
+    if (tempDatabases) {
+      this.databaseList = JSON.parse(tempDatabases);
+    } else {
+      this.databaseList = [];
+    }
 
-      this.httpClient
-        .get('assets/data/database-list.json', {
-          responseType: 'text',
-        })
-        .subscribe(data => {
-          const dataDatabase = JSON.parse(data) as Database[];
+    const a = await axios.get('assets/data/database-list.json');
+    console.log(a.data);
+    const dataDatabase = a.data as Database[];
 
-          dataDatabase.forEach(item => {
-            const existingItem = find(this.databaseList, (d: Database) => {
-              return d.name === item.name;
-            });
+    dataDatabase.forEach(item => {
+      const existingItem = find(this.databaseList, (d: Database) => {
+        return d.name === item.name;
+      });
 
-            if (existingItem) {
-              merge(existingItem.databaseItems, item.databaseItems);
-              existingItem.databaseItems = uniq(existingItem.databaseItems);
-              filter(existingItem.databaseItems, (i: DatabaseItem) => {
-                return !i.downloaded && i.downloading;
-              }).forEach(i => {
-                i.downloading = false;
-              });
-            } else {
-              this.databaseList.push(item);
-            }
-          });
-
-          localStorage.setItem(
-            'database-list',
-            JSON.stringify(this.databaseList),
-          );
-
-          resolve(undefined);
+      if (existingItem) {
+        merge(existingItem.databaseItems, item.databaseItems);
+        existingItem.databaseItems = uniq(existingItem.databaseItems);
+        filter(existingItem.databaseItems, (i: DatabaseItem) => {
+          return !i.downloaded && i.downloading;
+        }).forEach(i => {
+          i.downloading = false;
         });
+      } else {
+        this.databaseList.push(item);
+      }
     });
+
+    localStorage.setItem('database-list', JSON.stringify(this.databaseList));
+
+    // Axios('assets/data/database-list.json').
+    // const f = this.httpClient.get('assets/data/database-list.json', {
+    //   responseType: 'json',
+    // });
+    // f.subscribe(data => {
+
+    //   // resolve(undefined);
+    // });
+
+    // await this.httpClient
+    //   .get('assets/data/database-list.json', {
+    //     responseType: 'text',
+    //   });
+    // return new Promise<void>((resolve: (resolveValue: void) => void) => {
+
+    // });
   }
   private addFiles(dataFile: string) {
     return new Promise(async resolve => {

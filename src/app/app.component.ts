@@ -23,7 +23,7 @@ import { SaveStateService } from './services/save-state.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterContentInit {
-  ipcRenderer: any;
+  public ipcRenderer: any;
 
   public testStyle = '#gridBody {background-color: black;}';
   constructor(
@@ -60,7 +60,17 @@ export class AppComponent implements OnInit, AfterContentInit {
     //   console.log('Mode web');
     // }import searchInPage from 'electron-in-page-search';
   }
-  ngAfterContentInit(): void {}
+  public gridBodyClick() {
+    // console.log('body clicked');
+    // this.navService.notesSettings = false;
+    // if (
+    //   (e.target as HTMLElement).closest('.notes-settings') === null &&
+    //   this.navService.notesSettings
+    // ) {
+    //   console.log(e);
+    //   this.navService.notesSettings = false;
+    // }
+  }
   @HostListener('document:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent): void {
     if (this.electronService.isElectron()) {
@@ -79,22 +89,10 @@ export class AppComponent implements OnInit, AfterContentInit {
       }
     }
   }
+  public ngAfterContentInit(): void {}
 
-  ngOnInit(): void {
-    this.initNoteSettingsToggle();
-
-    this.databaseService.setDatabases();
-  }
-  gridBodyClick() {
-    // console.log('body clicked');
-    // this.navService.notesSettings = false;
-    // if (
-    //   (e.target as HTMLElement).closest('.notes-settings') === null &&
-    //   this.navService.notesSettings
-    // ) {
-    //   console.log(e);
-    //   this.navService.notesSettings = false;
-    // }
+  public async ngOnInit(): Promise<void> {
+    // this.initNoteSettingsToggle();
   }
   private initNoteSettingsToggle() {
     // document.body

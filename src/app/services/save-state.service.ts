@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as axios from 'axios';
 import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
 import * as sqlJS from 'sql.js';
@@ -51,12 +52,13 @@ export class SaveStateService {
       this.setSaveStateItemDefaults(this.data.notesPanePin, true);
     }
   }
-  public load(): Promise<any> {
-    return new Promise(async resolve => {
-      console.log('settings load');
-      // await this.loadVerseData();
-      // await this.loadSearch();
-      await this.loadNavigation();
+  public async load(): Promise<any> {
+    console.log('settings load');
+    await this.databaseService.setDatabases();
+
+    // await this.loadVerseData();
+    // await this.loadSearch();
+    this.loadNavigation().then(async () => {
       const temp = this.getSaveState();
       this.data = temp !== null ? temp : new SaveStateModel();
       this.data.leftPaneToggle = false;
@@ -74,12 +76,10 @@ export class SaveStateService {
       this.resetSettings();
 
       this.setCategories();
-
-      resolve();
     });
   }
   public async loadNavigation() {
-    this.httpClient
+    await this.httpClient
       .get('assets/nav/nav_rev.json', {
         responseType: 'text',
       })

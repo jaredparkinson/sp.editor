@@ -60,6 +60,9 @@ export class SettingsComponent implements OnInit {
     this.currentDatabaseList = find(this.databaseService.databaseList, d => {
       return d.name === location.host.split('.')[0];
     });
+    // this.databaseService.setDatabases().then(() => {
+
+    // });
   }
   public reset() {
     // localForage.clear();

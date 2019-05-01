@@ -4,11 +4,13 @@ import axios from 'axios';
 import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
 import * as sqlJS from 'sql.js';
+import cg from '../../assets/categories.json';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
 import { Navigation } from '../modelsJson/Navigation';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 import { DatabaseService } from './database.service';
+import nav from './nav_rev.json';
 import { NavigationLoaderService } from './navigation-loader.service';
 import { NavigationService } from './navigation.service';
 import { SaveStateModel } from './SaveStateModel';
@@ -21,12 +23,13 @@ export class SaveStateService {
   public flatNavigation: Navigation[] = [];
   public id: string;
 
-  public navigation: Navigation[] = [];
+  public navigation: Navigation[] = nav as Navigation[];
   constructor(
     private databaseService: DatabaseService,
     private searchService: SearchService,
   ) {
     this.id = 'spEditorSaveState';
+    // console.log(nav);
   }
 
   public flattenNavigation(
@@ -78,11 +81,11 @@ export class SaveStateService {
     await this.loadNavigation();
   }
   public async loadNavigation() {
-    const data = await axios.get('assets/nav/nav_rev.json');
-    this.navigation = data.data as Navigation[];
-    this.navigation.forEach(nav => {
-      this.flattenNavigation(this.flatNavigation, nav);
-    });
+    // const data = await axios.get('assets/nav/nav_rev.json');
+    // this.navigation = data.data as Navigation[];
+    // this.navigation.forEach(nav => {
+    //   this.flattenNavigation(this.flatNavigation, nav);
+    // });
   }
 
   public loadVerseData() {
@@ -128,12 +131,12 @@ export class SaveStateService {
   }
 
   public async setCategories() {
-    const data = await axios.get('assets/categories.json');
+    // const data = await axios.get('assets/categories.json');
 
     if (!this.data.noteCategories) {
       this.data.noteCategories = [];
     }
-    const categories = data.data as ReferenceLabel[];
+    const categories = cg as ReferenceLabel[];
     categories.forEach(category => {
       const filteredCategories = filter(this.data.noteCategories, c => {
         return c.refLabelName === category.refLabelName;

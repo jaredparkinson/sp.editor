@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import axios from 'axios';
 import { filter } from 'lodash';
 import * as lunr from 'lunr';
 import { Database, QueryResults } from 'sql.js';
@@ -53,14 +52,13 @@ export class SearchService {
     // }
   }
 
-  private async loadSearch() {
-    try {
-      const data = axios.get('assets/data/chapters.json');
+  // private async loadSearch() {
+  //   try {
 
-      this.index = lunr.Index.load(data);
-    } catch (error) {
-      console.log(error);
-      throw new Error('File not found');
-    }
-  }
+  //     this.index = lunr.Index.load(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw new Error('File not found');
+  //   }
+  // }
 }

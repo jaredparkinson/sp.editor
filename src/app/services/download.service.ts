@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import axios from 'axios';
 import { Download } from '../models/download';
 import { DatabaseItem, DatabaseService } from './database.service';
 
@@ -12,7 +11,7 @@ export class DownloadService {
     new Download('beta_oneinthinehand', 'scriptures', false),
   ];
   constructor(
-    // ,
+    private httpClient: HttpClient,
     private dataBaseService: DatabaseService,
   ) {
     const tempDownloads = localStorage.getItem('downloads');
@@ -33,7 +32,7 @@ export class DownloadService {
   }
 
   public async download(file: Download) {
-    return axios.get(file.fileName);
+    return this.httpClient.get(file.fileName);
   }
   public async downloadScriptures(file: Download) {
     file.downloaded = false;

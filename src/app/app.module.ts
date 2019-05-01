@@ -26,7 +26,6 @@ import { WebviewDirective } from './directives/webview.directive';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import * as Hammer from 'hammerjs';
 import { AppConfig } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { BodyBlockHolderComponent } from './body-block-holder/body-block-holder.component';
@@ -41,6 +40,7 @@ import { EditorComponent } from './editor/editor.component';
 
 import { AWComponent } from './components/aw/aw.component';
 import { NoteComponent } from './components/note/note.component';
+import { WTagPopupComponent } from './components/wtag-popup/wtag-popup.component';
 import { FilesComponent } from './files/files.component';
 import { UrlBuilder } from './files/UrlBuilder';
 import { HammerConfig } from './HammerConfig';
@@ -63,7 +63,6 @@ import { SaveStateService } from './services/save-state.service';
 import { SyncScrollingService } from './services/sync-scrolling.service';
 // // import { VerseSelectService } from './services/verse-select.service';
 import { SettingsComponent } from './settings/settings.component';
-import { WTagPopupComponent } from './components/wtag-popup/wtag-popup.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

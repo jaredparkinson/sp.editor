@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import axios from 'axios';
 import { filter, find, isEmpty, sortBy } from 'lodash';
 import * as lunr from 'lunr';
 import * as sqlJS from 'sql.js';
@@ -76,17 +75,11 @@ export class SaveStateService {
     this.initISaveStateItems();
     this.resetSettings();
 
-    await this.setCategories();
+    this.setCategories();
 
-    await this.loadNavigation();
+    this.loadNavigation();
   }
-  public async loadNavigation() {
-    // const data = await axios.get('assets/nav/nav_rev.json');
-    // this.navigation = data.data as Navigation[];
-    // this.navigation.forEach(nav => {
-    //   this.flattenNavigation(this.flatNavigation, nav);
-    // });
-  }
+  public loadNavigation() {}
 
   public loadVerseData() {
     // return new Promise(async resolve => {
@@ -130,7 +123,7 @@ export class SaveStateService {
     }, 100);
   }
 
-  public async setCategories() {
+  public setCategories() {
     // const data = await axios.get('assets/categories.json');
 
     if (!this.data.noteCategories) {

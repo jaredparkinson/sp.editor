@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { cloneDeep, filter, find, merge, uniq } from 'lodash';
-import * as debug from 'pouchdb-debug';
-import * as PouchDBFind from 'pouchdb-find';
+// import * as debug from 'pouchdb-debug';
+import PouchDB from 'pouchdb';
+import databaselist from '../../assets/data/database-list.json';
 
 import { HttpClient } from '@angular/common/http';
-import axios from 'axios';
 import { Chapter2 } from '../modelsJson/Chapter';
 @Injectable({
   providedIn: 'root',
@@ -17,8 +17,8 @@ export class DatabaseService {
 
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
   constructor() {
-    PouchDB.plugin(PouchDBFind);
-    PouchDB.plugin(debug);
+    // PouchDB.plugin(PouchDBFind);
+    // PouchDB.plugin(debug);
     // PouchDB.debug.enable('pouchdb:find');
   }
 
@@ -95,9 +95,9 @@ export class DatabaseService {
       this.databaseList = [];
     }
 
-    const a = await axios.get('assets/data/database-list.json');
-    console.log(a.data);
-    const dataDatabase = a.data as Database[];
+    // const a = await axios.get('assets/data/database-list.json');
+    // console.log(a.data);
+    const dataDatabase = databaselist as Database[];
 
     dataDatabase.forEach(item => {
       const existingItem = find(this.databaseList, (d: Database) => {

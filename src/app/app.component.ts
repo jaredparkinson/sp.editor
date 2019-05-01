@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
-// // import { VerseSelectService } from './services/verse-select.service';
-// import axios from 'axios';
 import * as matCSS from 'materialize-css';
 import { Navigation } from './modelsJson/Navigation';
 import { ElectronService } from './providers/electron.service';

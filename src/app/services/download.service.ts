@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import axios from 'axios';
 import { Download } from '../models/download';
-import { DatabaseService, DatabaseItem } from './database.service';
+import { DatabaseItem, DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class DownloadService {
     new Download('beta_oneinthinehand', 'scriptures', false),
   ];
   constructor(
-    private httpClient: HttpClient,
+    // private httpClient: HttpClient,
     private dataBaseService: DatabaseService,
   ) {
     const tempDownloads = localStorage.getItem('downloads');
@@ -19,6 +20,24 @@ export class DownloadService {
       this.downloads = JSON.parse(tempDownloads) as [];
     } else {
     }
+  }
+
+  public delete(file: Download) {
+    this.dataBaseService.db.allDocs().then(docs => {
+      docs.rows.map(row => {
+        this.dataBaseService.db.remove(row.id, row.value.rev);
+      });
+      file.downloading = false;
+      file.downloaded = false;
+    });
+  }
+
+  public async download(file: Download) {
+    return axios.get(file.fileName);
+    // return this.httpClient.get(file.fileName, {
+    //   observe: 'body',
+    //   responseType: 'arraybuffer',
+    // });
   }
   public async downloadScriptures(file: Download) {
     file.downloaded = false;
@@ -66,22 +85,5 @@ export class DownloadService {
         file.downloading = false;
       });
     return;
-  }
-
-  delete(file: Download) {
-    this.dataBaseService.db.allDocs().then(docs => {
-      docs.rows.map(row => {
-        this.dataBaseService.db.remove(row.id, row.value.rev);
-      });
-      file.downloading = false;
-      file.downloaded = false;
-    });
-  }
-
-  download(file: Download) {
-    return this.httpClient.get(file.fileName, {
-      observe: 'body',
-      responseType: 'arraybuffer',
-    });
   }
 }

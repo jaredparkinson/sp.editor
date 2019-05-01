@@ -24,7 +24,7 @@ export class NavigationService {
     this.saveState.data.englishNotesVisible = !this.saveState.data
       .englishNotesVisible;
     this.saveState.save();
-    return (true);
+    return true;
   }
 
   public btnHeaderButtonPress(
@@ -104,11 +104,6 @@ export class NavigationService {
     }
   }
 
-  public getChapter(book: string, chapter: string): Observable<string> {
-    const url = 'assets/' + this.urlBuilder(book, chapter);
-
-    return this.httpClient.get(url, { observe: 'body', responseType: 'text' });
-  }
   public getTestament(): void {}
   public navigationClick(navigation: Navigation, navigations: Navigation[]) {
     navigation.subNavigationVisible = navigation.subNavigationVisible

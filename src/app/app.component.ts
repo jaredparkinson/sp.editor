@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import {
   AfterContentInit,
   Component,
@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+// // import { VerseSelectService } from './services/verse-select.service';
+// import axios from 'axios';
 import * as matCSS from 'materialize-css';
 import { Navigation } from './modelsJson/Navigation';
 import { ElectronService } from './providers/electron.service';
@@ -15,7 +17,6 @@ import { DatabaseService } from './services/database.service';
 import { MediaQueryService } from './services/media-query.service';
 import { NavigationService } from './services/navigation.service';
 import { SaveStateService } from './services/save-state.service';
-// // import { VerseSelectService } from './services/verse-select.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     public navService: NavigationService,
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
-    public httpClient: HttpClient,
+    // public httpClient: HttpClient,
     public mediaQueryService: MediaQueryService,
     public databaseService: DatabaseService,
     private swUpdate: SwUpdate,

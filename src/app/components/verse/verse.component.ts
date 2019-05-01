@@ -39,20 +39,16 @@ export class VerseComponent implements OnInit {
     public chapterService: ChapterService,
     public dataService: DataService,
   ) {}
-  public animateNotesPane(): Promise<void> {
-    return new Promise<void>(resolve => {
-      if (!this.saveState.data.notesPanePin.value) {
-        this.saveState.data.notesPanePin.value = true;
+  public async animateNotesPane(): Promise<void> {
+    if (!this.saveState.data.notesPanePin.value) {
+      this.saveState.data.notesPanePin.value = true;
 
-        this.saveState.data.notesPanePin.animated = true;
-        setTimeout(() => {
-          this.saveState.data.notesPanePin.animated = false;
-          resolve();
-        }, 400);
-      } else {
-        resolve();
-      }
-    });
+      this.saveState.data.notesPanePin.animated = true;
+      setTimeout(() => {
+        this.saveState.data.notesPanePin.animated = false;
+        // resolve();
+      }, 400);
+    }
   }
   public filterClassList(classList: string[]) {
     if (!classList) {

@@ -2,29 +2,22 @@ import { ISaveStateItem } from '../models/ISaveStateItem';
 import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 
 export class SaveStateModel implements ISaveModel {
-  id = '';
-  public foldersVisible = true;
-  public leftPanePin = true;
-  public paragraphsVisible = false;
-  public poetryVisible = false;
-  public newNotesVisible = false;
-  public rightPaneToggle = false;
-  public rightPanePin = true;
-  public leftPaneToggle = false;
-  public secondaryNotesVisible = false;
-  public engNotesVisible = false;
-  public translatorNotesVisible = true;
-  public originalNotesVisible = false;
-  public englishNotesVisible = false;
   public backtrack: string[] = [];
-  public forward: string[] = [];
   public currentPage = '';
-  public verseSelect = true;
-  public verseSuperScripts = false;
+  public englishNotesVisible = false;
+  public engNotesVisible = false;
+  public foldersVisible = true;
   public fontSize = '16';
+  public forward: string[] = [];
+  public id = '';
+  public language: string;
+  public leftPanePin = true;
+  public leftPaneToggle = false;
   public lineHeight = '20';
 
   public navigationPaneToggle: ISaveStateItem<boolean>;
+  public newNotesVisible = false;
+  public noteCategories: ReferenceLabel[] = [];
   public notesPanePin: ISaveStateItem<boolean>;
   // public refQUO = true;
   // public refPHR = true;
@@ -40,8 +33,15 @@ export class SaveStateModel implements ISaveModel {
   // public refTG = true;
   // public refGS = true;
   public notesPopover = false;
-  public noteCategories: ReferenceLabel[] = [];
-  public language: string;
+  public originalNotesVisible = false;
+  public paragraphsVisible = false;
+  public poetryVisible = false;
+  public rightPanePin = true;
+  public rightPaneToggle = false;
+  public secondaryNotesVisible = false;
+  public translatorNotesVisible = true;
+  public verseSelect = true;
+  public verseSuperScripts = false;
 
   constructor() {}
 }

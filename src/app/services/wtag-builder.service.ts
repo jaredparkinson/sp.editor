@@ -147,10 +147,10 @@ export class WTagService {
       this.dataService.verses,
       this.dataService.noteVisibility,
     );
-    await this.chapterService.buildParagraphs({
-      paragraphs: this.dataService.paragraphs,
-      verses: this.dataService.verses,
-    });
+    await this.chapterService.buildParagraphs(
+      this.dataService.paragraphs,
+      this.dataService.verses,
+    );
   }
 
   public isEqual(refs1: [], refs2: []): boolean {
@@ -207,8 +207,8 @@ export class WTagService {
         id: vereParent.id,
         w: new W(
           range(
-            parseInt(startContainer.startID) + startContainer.offSet,
-            parseInt(endContainer.startID) + endContainer.offSet,
+            parseInt(startContainer.startID, 10) + startContainer.offSet,
+            parseInt(endContainer.startID, 10) + endContainer.offSet,
           ),
         ),
       });
@@ -334,8 +334,8 @@ export class WTagService {
       return false;
     }
     if (
-      w1.classList == w2.classList &&
-      w1.highlighting == w2.highlighting &&
+      w1.classList === w2.classList &&
+      w1.highlighting === w2.highlighting &&
       w1.refs === w2.refs
     ) {
       return true;

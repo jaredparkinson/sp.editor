@@ -76,7 +76,7 @@ export class ChapterService {
 
   public async getChapter(id: string) {
     try {
-      return await this.dataBaseService.get(id);
+      return (await this.dataBaseService.get(id)) as Chapter2;
     } catch (error) {
       return undefined;
     }

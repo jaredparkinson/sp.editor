@@ -235,10 +235,10 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       this.dataService.noteVisibility,
     );
 
-    await this.chapterService.buildParagraphs({
-      paragraphs: this.dataService.paragraphs,
-      verses: this.dataService.verses,
-    });
+    await this.chapterService.buildParagraphs(
+      this.dataService.paragraphs,
+      this.dataService.verses,
+    );
 
     this.dataService.chapter2 = chapter;
     this.dataService.header = filter(

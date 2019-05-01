@@ -23,7 +23,6 @@ export class SaveStateService {
 
   public navigation: Navigation[] = [];
   constructor(
-    private httpClient: HttpClient,
     private databaseService: DatabaseService,
     private searchService: SearchService,
   ) {
@@ -74,7 +73,7 @@ export class SaveStateService {
     this.initISaveStateItems();
     this.resetSettings();
 
-    this.setCategories();
+    await this.setCategories();
 
     await this.loadNavigation();
   }
@@ -174,66 +173,7 @@ export class SaveStateService {
       return null;
     }
   }
-  private loadSearch() {
-    return new Promise(async resolve => {
-      // this.httpClient
-      //   .get('assets/data/ggg.sqlite', { responseType: 'arraybuffer' })
-      //   .subscribe(data => {
-      //     this.searchService.db = new sqlJS.Database(new Uint8Array(data));
-      //     // console.log();
-      //     // const results = this.searchService.db.exec(
-      //     //   `select * from verse where text like '%david'`,
-      //     // );
-      //     // results.forEach(r => {
-      //     //   console.log(r.values);
-      //     // });
-
-      //     resolve();
-      //   });
-      this.httpClient
-        .get('assets/data/chapters.json', { responseType: 'json' })
-        .subscribe(data => {
-          // this.searchService.db = new sqlJS.Database(new Uint8Array(data));
-          this.searchService.index = lunr.Index.load(data);
-          // console.log();
-          // const results = this.searchService.db.exec(
-          //   `select * from verse where text like '%david'`,
-          // );
-          // results.forEach(r => {
-          //   console.log(r.values);
-          // });
-
-          resolve();
-        });
-
-      // const promises = [];
-
-      // const allDocs = await this.databaseService.db.allDocs();
-      // const filteredDocs = allDocs.rows.filter(doc => {
-      //   return doc.id.includes('index');
-      // });
-
-      // filteredDocs.forEach(async doc => {
-      //   promises.push(
-      //     new Promise(async resolve2 => {
-      //       const value = await this.databaseService.db.get(doc.id);
-      //       if ((value as any).data) {
-      //         this.searchService.indexes.push(
-      //           lunr.Index.load((value as any).data),
-      //         );
-      //       }
-      //       resolve2();
-      //     }),
-      //   );
-      // });
-
-      // Promise.all(promises).then(() => {
-      //   console.log(this.searchService.indexes.length);
-
-      //   resolve();
-      // });
-    });
-  }
+  private loadSearch() {}
   private setSaveStateItemDefaults<T>(
     saveSateItem: ISaveStateItem<T>,
     value: T,

@@ -7,8 +7,5 @@ import { NavigationService } from './navigation.service';
   providedIn: 'root',
 })
 export class NavigationLoaderService {
-  constructor(
-    private httpClient: HttpClient,
-    private navService: NavigationService,
-  ) {}
+  constructor(private navService: NavigationService) {}
 }

@@ -30,7 +30,6 @@ export class SettingsComponent implements OnInit {
     public swUpdate: SwUpdate,
     public editService: EditService,
     private dataService: DataService,
-    private httpClient: HttpClient,
     private databaseService: DatabaseService,
   ) {}
 

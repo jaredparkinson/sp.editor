@@ -63,11 +63,6 @@ export class NoteSettingsComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url.includes('edit')) {
-      // const saveData = JSON.stringify(this.dataService.chapter2);
-
-      // // this.httpClient.put()
-      // this.httpClient.post(this.chapterService.url, saveData);
-
       this.router.navigateByUrl(this.router.url.replace('/edit', ''));
     } else {
       this.router.navigateByUrl(`${this.router.url}/edit`);
@@ -76,13 +71,6 @@ export class NoteSettingsComponent implements OnInit {
 
   public ngOnInit() {
     this.setLeft();
-    // this.httpClient
-    //   .get('assets/version.txt', { observe: 'body', responseType: 'text' })
-    //   .subscribe(data => {
-    //     const regex = new RegExp(/\d(\.\d{1,3}){1,2}/);
-    //     this.versionNumber = regex.exec(data)[0];
-    //     console.log('data ' + this.versionNumber);
-    //   });
   }
 
   @HostListener('window:resize')

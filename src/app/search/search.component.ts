@@ -10,17 +10,16 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  public newResults: Array<Array<string | number | Uint8Array>>;
   public pageNumber: number;
   public searchResults: Array<{ id: string; text: string }> = [];
   private currentSearch: string = '';
   // public verses: Array<{ id: string; text: string }>;
   private lunrResults: lunr.Index.Result[];
-  newResults: (string | number | Uint8Array)[][];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private searchService: SearchService,
-    private httpClient: HttpClient,
   ) {}
   public getSearchText(id: string) {
     return find(this.searchService.verses, v => {
@@ -29,34 +28,31 @@ export class SearchComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      const search: string = params['search'];
-      const pageNumber: number = params['pageNumber'];
-      console.log(pageNumber);
-
-      if (search === this.currentSearch) {
-        this.searchPagination(pageNumber ? pageNumber : 0);
-      } else {
-        this.currentSearch = search;
-        this.searchService
-          .searchLunr(search.toLowerCase())
-          .then(searchResults => {
-            this.lunrResults = searchResults;
-            searchResults.forEach(r => {
-              console.log(r.ref);
-              // this.newResults = r.values.slice(0, 100);
-            });
-
-            console.log(searchResults);
-
-            // this.searchPagination(pageNumber /? pageNumber : 0);
-          })
-          .catch(() => {
-            this.lunrResults = [];
-            this.searchResults = [];
-          });
-      }
-    });
+    // this.activatedRoute.params.subscribe(params => {
+    //   const search: string = params['search'];
+    //   const pageNumber: number = params['pageNumber'];
+    //   console.log(pageNumber);
+    //   if (search === this.currentSearch) {
+    //     this.searchPagination(pageNumber ? pageNumber : 0);
+    //   } else {
+    //     this.currentSearch = search;
+    //     this.searchService
+    //       .searchLunr(search.toLowerCase())
+    //       .then(searchResults => {
+    //         this.lunrResults = searchResults;
+    //         searchResults.forEach(r => {
+    //           console.log(r.ref);
+    //           // this.newResults = r.values.slice(0, 100);
+    //         });
+    //         console.log(searchResults);
+    //         // this.searchPagination(pageNumber /? pageNumber : 0);
+    //       })
+    //       .catch(() => {
+    //         this.lunrResults = [];
+    //         this.searchResults = [];
+    //       });
+    //   }
+    // });
   }
   public searchPagination(pageNumber: number = 0) {
     this.searchResults = [];

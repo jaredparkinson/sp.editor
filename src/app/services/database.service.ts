@@ -16,7 +16,7 @@ export class DatabaseService {
   public sdb = new PouchDB('alpha_oneinthinehand_all_eng');
 
   private tempAllDocs: PouchDB.Core.AllDocsResponse<{}>;
-  constructor(private httpClient: HttpClient) {
+  constructor() {
     PouchDB.plugin(PouchDBFind);
     PouchDB.plugin(debug);
     // PouchDB.debug.enable('pouchdb:find');
@@ -125,23 +125,6 @@ export class DatabaseService {
     });
 
     localStorage.setItem('database-list', JSON.stringify(this.databaseList));
-
-    // Axios('assets/data/database-list.json').
-    // const f = this.httpClient.get('assets/data/database-list.json', {
-    //   responseType: 'json',
-    // });
-    // f.subscribe(data => {
-
-    //   // resolve(undefined);
-    // });
-
-    // await this.httpClient
-    //   .get('assets/data/database-list.json', {
-    //     responseType: 'text',
-    //   });
-    // return new Promise<void>((resolve: (resolveValue: void) => void) => {
-
-    // });
   }
   private addFiles(dataFile: string) {
     return new Promise(async resolve => {

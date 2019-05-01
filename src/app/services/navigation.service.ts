@@ -16,10 +16,7 @@ export class NavigationService {
   public rightPaneToggle = false;
   public showBooks = false;
 
-  constructor(
-    private httpClient: HttpClient,
-    private saveState: SaveStateService,
-  ) {}
+  constructor(private saveState: SaveStateService) {}
   public async btnEnglishNotesPress(): Promise<boolean> {
     this.saveState.data.englishNotesVisible = !this.saveState.data
       .englishNotesVisible;

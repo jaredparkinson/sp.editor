@@ -1,22 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import axios from 'axios';
+import { filter } from 'lodash';
 import * as lunr from 'lunr';
 import { Database, QueryResults } from 'sql.js';
 import { DatabaseService } from './database.service';
-import { filter } from 'lodash';
-import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
+  public db: Database;
   public index: lunr.Index;
   public indexes: lunr.Index[] = [];
   public verses: Array<{ id: string; text: string }>;
-  public db: Database;
 
-  constructor(
-    private dataBaseService: DatabaseService,
-    private httpClient: HttpClient,
-  ) {}
+  constructor(private dataBaseService: DatabaseService) {}
 
   public search(searchTerm: string): Promise<QueryResults[] | undefined> {
     return new Promise<QueryResults[]>(async (resolve, reject) => {
@@ -42,34 +40,27 @@ export class SearchService {
     });
   }
 
-  public searchLunr(searchTerm: string) {
-    let searchResults: lunr.Index.Result[] = [];
-    return new Promise<lunr.Index.Result[] | undefined>(
-      async (resolve, reject) => {
-        if (!this.index) {
-          await this.loadSearch();
-        }
-        searchResults = this.index.search(searchTerm);
-
-        searchResults.length > 0 ? resolve(searchResults) : reject();
-      },
-    );
+  public async searchLunr(searchTerm: string) {
+    // let searchResults: lunr.Index.Result[] = [];
+    // // await this.loadSearch();
+    // try {
+    //   if (!this.index) {
+    //     await this.loadSearch();
+    //   }
+    //   searchResults = this.index.search(searchTerm);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
-  private loadSearch() {
-    return new Promise((resolve, reject) => {
-      this.httpClient
-        .get('assets/data/chapters.json', { responseType: 'json' })
-        .subscribe(
-          data => {
-            this.index = lunr.Index.load(data);
+  private async loadSearch() {
+    try {
+      const data = axios.get('assets/data/chapters.json');
 
-            resolve();
-          },
-          error => {
-            reject();
-          },
-        );
-    });
+      this.index = lunr.Index.load(data);
+    } catch (error) {
+      console.log(error);
+      throw new Error('File not found');
+    }
   }
 }

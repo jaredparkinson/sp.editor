@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ISaveStateItem } from '../models/ISaveStateItem';
-import { Navigation } from '../modelsJson/Navigation';
+
 import { SaveStateService } from './save-state.service';
 
 @Injectable()

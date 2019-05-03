@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Chapter2 } from '../modelsJson/Chapter';
+
 import { ChapterService } from '../services/chapter.service';
-import { EditService } from '../services/EditService';
 import { DataService } from '../services/data.service';
+import { EditService } from '../services/EditService';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,7 +16,7 @@ export class LandingPageComponent implements OnInit {
     private dataService: DataService,
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.dataService.chapter2 = new Chapter2();
   }
 }

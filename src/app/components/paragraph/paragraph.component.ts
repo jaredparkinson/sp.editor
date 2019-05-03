@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Paragraph } from '../../modelsJson/Paragraph';
 
 @Component({
   selector: 'app-paragraph',
@@ -11,5 +10,5 @@ export class ParagraphComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 }

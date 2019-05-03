@@ -11,8 +11,7 @@ import {
   range,
   uniq,
 } from 'lodash';
-import { Verse } from '../modelsJson/Verse';
-import { aW, HighlightRef, IW, W } from '../modelsJson/W';
+
 import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 

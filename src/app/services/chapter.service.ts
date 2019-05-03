@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { find, includes, last, map, reverse, sortBy } from 'lodash';
-import { Chapter2 } from '../modelsJson/Chapter';
-import { NoteRef } from '../modelsJson/NoteRef';
-import { Paragraph } from '../modelsJson/Paragraph';
-import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { Verse } from '../modelsJson/Verse';
-import { aW, W } from '../modelsJson/W';
+import { Paragraph, Verse } from 'oith.models';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
 import { SaveStateService } from './save-state.service';

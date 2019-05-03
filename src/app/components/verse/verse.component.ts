@@ -11,13 +11,11 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { first, isEmpty, last } from 'lodash';
 import { scrollIntoView } from '../../../HtmlFunc';
-import { TemplateGroup } from '../../modelsJson/TemplateGroup';
-import { Verse } from '../../modelsJson/Verse';
-import { W } from '../../modelsJson/W';
+
 import { ChapterService } from '../../services/chapter.service';
 import { DataService } from '../../services/data.service';
 import { EditService } from '../../services/EditService';
-// import { Verse } from '../../modelsJson/Verse';
+//
 import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
 // import { VerseSelectService } from '../../services/verse-select.service';

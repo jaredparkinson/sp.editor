@@ -6,8 +6,7 @@ import * as sqlJS from 'sql.js';
 import cg from '../../assets/categories.json';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
-import { Navigation } from '../modelsJson/Navigation';
-import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
+
 import { DatabaseService } from './database.service';
 import nav from './nav_rev.json';
 import { NavigationLoaderService } from './navigation-loader.service';

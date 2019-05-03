@@ -8,7 +8,7 @@ import {
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import * as matCSS from 'materialize-css';
-import { Navigation } from './modelsJson/Navigation';
+
 import { ElectronService } from './providers/electron.service';
 import { ChapterService } from './services/chapter.service';
 import { DatabaseService } from './services/database.service';

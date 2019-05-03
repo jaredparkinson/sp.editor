@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Sanitizer } from '@angular/core';
-import { aW } from '../../modelsJson/W';
+
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -8,8 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./aw.component.scss'],
 })
 export class AWComponent implements OnInit {
-  @Input() w: aW;
+  @Input() public w: aW;
   constructor(public sanitizer: DomSanitizer) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 }

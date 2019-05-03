@@ -5,7 +5,7 @@ import PouchDB from 'pouchdb';
 import databaselist from '../../assets/data/database-list.json';
 
 import { HttpClient } from '@angular/common/http';
-import { Chapter2 } from '../modelsJson/Chapter';
+
 @Injectable({
   providedIn: 'root',
 })

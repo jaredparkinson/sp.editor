@@ -1,5 +1,4 @@
 import { ISaveStateItem } from '../models/ISaveStateItem';
-import { ReferenceLabel } from '../modelsJson/ReferenceLabel';
 
 export class SaveStateModel implements ISaveModel {
   public backtrack: string[] = [];

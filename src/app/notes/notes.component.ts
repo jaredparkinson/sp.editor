@@ -11,9 +11,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import {} from 'lodash';
 import { FloatingActionButton } from 'materialize-css';
-import { Note } from '../modelsJson/Note';
-import { SecondaryNote } from '../modelsJson/SecondaryNote';
-import { W } from '../modelsJson/WTag';
+
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';

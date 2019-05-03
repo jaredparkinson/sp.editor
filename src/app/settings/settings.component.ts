@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 // import * as localForage from 'localforage';
 import { find, first } from 'lodash';
-import { Chapter2 } from '../modelsJson/Chapter';
+
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { Database, DatabaseService } from '../services/database.service';

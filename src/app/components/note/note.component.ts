@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Note } from '../../modelsJson/Note';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { ChapterService } from '../../services/chapter.service';
-import { SyncScrollingService } from '../../services/sync-scrolling.service';
 import { DataService } from '../../services/data.service';
-import { SecondaryNote } from '../../modelsJson/SecondaryNote';
+import { SyncScrollingService } from '../../services/sync-scrolling.service';
 
 @Component({
   selector: 'app-note',
@@ -17,16 +16,16 @@ export class NoteComponent implements OnInit {
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
   ) {}
-
-  ngOnInit() {}
-  filterClassList(classList: string[]): string {
+  public filterClassList(classList: string[]): string {
     if (!classList) {
       return '';
     }
 
     return classList.toString();
   }
-  notePhraseClick(secondaryNote: SecondaryNote) {
+
+  public ngOnInit() {}
+  public notePhraseClick(secondaryNote: SecondaryNote) {
     console.log(secondaryNote.id);
     const clicked = secondaryNote.clicked;
     console.log(clicked);

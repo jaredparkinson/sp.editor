@@ -11,8 +11,8 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { each } from 'lodash';
-// import { Verse } from '../modelsJson/Verse';
-import { W } from '../modelsJson/WTag';
+//
+
 import { ChapterService } from '../services/chapter.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';

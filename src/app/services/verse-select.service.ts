@@ -1,9 +1,9 @@
 // import { ElementRef, Injectable } from '@angular/core';
 // import * as lodash from 'lodash';
-// import { Note } from '../modelsJson/Note';
-// import { SecondaryNote } from '../modelsJson/SecondaryNote';
-// // import { Verse } from '../modelsJson/Verse';
-// import { W } from '../modelsJson/WTag';
+//
+//
+// //
+//
 // import { EditService } from './EditService';
 // import { HelperService } from './helper.service';
 // import { NavigationService } from './navigation.service';

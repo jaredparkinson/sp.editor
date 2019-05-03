@@ -7,16 +7,14 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
-
+import { Chapter } from 'oith.models';
 import { VerseComponent } from '../components/verse/verse.component';
 
 import { cloneDeep, filter, last } from 'lodash';
-import { Navigation } from '../modelsJson/Navigation';
-import { Verse } from '../modelsJson/Verse';
+
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
@@ -29,7 +27,7 @@ import { SyncScrollingService } from '../services/sync-scrolling.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { scrollIntoView } from '../../HtmlFunc';
-import { Chapter2 } from '../modelsJson/Chapter';
+
 import { DatabaseService } from '../services/database.service';
 import { WTagService } from '../services/wtag-builder.service';
 
@@ -253,7 +251,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return v;
   }
   private async getChapter(id: string) {
-    let chapter: Chapter2 | undefined = this.dataService.chapter2;
+    let chapter: Chapter | undefined = this.dataService.chapter2;
     if (this.pageId !== id) {
       chapter = await this.chapterService.getChapter(id);
 

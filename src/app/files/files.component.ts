@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import {} from 'lodash';
-import { Navigation } from '../modelsJson/Navigation';
+
 import { SearchComponent } from '../search/search.component';
 import { ChapterService } from '../services/chapter.service';
 import { NavigationService } from '../services/navigation.service';

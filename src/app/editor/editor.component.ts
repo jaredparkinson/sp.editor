@@ -218,7 +218,7 @@ export class EditorComponent
 
     console.log('sync scrolling ' + this.verses.length);
 
-    let scrollIntoView: Element;
+    let scrollIntoView: Element | undefined;
 
     this.verses.toArray().forEach(verse => {
       const top = (verse.nativeElement as HTMLElement).getBoundingClientRect()
@@ -234,14 +234,17 @@ export class EditorComponent
 
         console.log('nojgtgcd' + noteID);
 
-        document.getElementById(noteID).scrollIntoView();
+        const e = document.getElementById(noteID);
+        if (e) {
+          e.scrollIntoView();
+        }
 
         return true;
       }
     });
 
     // this.chapterService.scrollIntoView = scrollIntoView;
-    if (scrollIntoView === undefined) {
+    if (scrollIntoView) {
       console.log(scrollIntoView);
 
       const element = verses[0];

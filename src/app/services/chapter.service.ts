@@ -85,25 +85,13 @@ export class ChapterService {
   public getNoteRefVisibility(noteRef: NoteRef): boolean {
     noteRef.visible = false;
 
-    if (
-      !noteRef.referenceLabel ||
-      (noteRef.referenceLabel &&
-        find(this.saveState.data.noteCategories, c => {
-          if (!noteRef.referenceLabel.refLabelName) {
-            return true;
-          }
-
-          return (
-            c.refLabelName.toLowerCase() ===
-            noteRef.referenceLabel.refLabelName.toLowerCase()
-          );
-        }).visible)
-    ) {
+    if (!noteRef.referenceLabel || this.refIsVis(noteRef)) {
       noteRef.visible = true;
     }
 
     return noteRef.visible;
   }
+
   public getSecondaryNoteVisibility(secondaryNote: SecondaryNote): boolean {
     let visible = false;
 
@@ -218,14 +206,19 @@ export class ChapterService {
 
   public async setHighlightging(
     verses: Verse[],
-    highlightNumbers: [string, string],
+    highlightNumbers: [string | undefined, string | undefined],
   ) {
-    const highlight = this.parseHighlightedVerses(highlightNumbers[0]);
-    const context = this.parseHighlightedVerses(highlightNumbers[1]);
+    const highlight = highlightNumbers[0]
+      ? this.parseHighlightedVerses(highlightNumbers[0])
+      : undefined;
+    const context = highlightNumbers[1]
+      ? this.parseHighlightedVerses(highlightNumbers[1])
+      : undefined;
     verses.forEach(verse => {
       const verseNumber = parseInt(verse.id.replace('p', ''), 10);
-      verse.highlight = includes(highlight, verseNumber) ? true : false;
-      verse.context = includes(context, verseNumber) ? true : false;
+      verse.highlight =
+        highlight && includes(highlight, verseNumber) ? true : false;
+      verse.context = context && includes(context, verseNumber) ? true : false;
     });
 
     return sortBy(highlight)[0];
@@ -238,6 +231,22 @@ export class ChapterService {
     return (
       noteVisible && includes(secondaryNote.notePhrase.classList, className)
     );
+  }
+  private refIsVis(noteRef: NoteRef): boolean {
+    if (!noteRef.referenceLabel) {
+      return false;
+    }
+    const category = find(this.saveState.data.noteCategories, c => {
+      if (!noteRef.referenceLabel.refLabelName) {
+        return true;
+      }
+
+      return (
+        c.refLabelName.toLowerCase() ===
+        noteRef.referenceLabel.refLabelName.toLowerCase()
+      );
+    });
+    return category !== undefined && category.visible;
   }
 
   private setRefVisibility(verse: Verse, noteVisibility: Map<string, boolean>) {

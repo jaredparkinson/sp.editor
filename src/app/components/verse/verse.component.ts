@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { first, isEmpty, last } from 'lodash';
+import { scrollIntoView } from '../../../HtmlFunc';
 import { TemplateGroup } from '../../modelsJson/TemplateGroup';
 import { Verse } from '../../modelsJson/Verse';
 import { W } from '../../modelsJson/W';
@@ -105,31 +106,24 @@ export class VerseComponent implements OnInit {
     });
   }
 
-  private wTagSelect(w: W) {
-    return new Promise<void>(async resolve => {
-      const ref = w.visibleRefs.pop();
-      w.selected = true;
-      this.dataService.verses.forEach(verse => {
-        verse.wTags.forEach(wTag => {
-          if (ref && wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
-            wTag.selected = true;
-          }
-        });
+  private async wTagSelect(w: W) {
+    const ref = w.visibleRefs.pop();
+    w.selected = true;
+    this.dataService.verses.forEach(verse => {
+      verse.wTags.forEach(wTag => {
+        if (ref && wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
+          wTag.selected = true;
+        }
       });
-
-      this.dataService.chapter2.notes.forEach(note => {
-        note.secondary.forEach(secondaryNote => {
-          secondaryNote.clicked = secondaryNote.id === ref;
-        });
-      });
-
-      await this.animateNotesPane();
-
-      const elem = ref ? document.getElementById(ref) : undefined;
-      if (elem) {
-        elem.scrollIntoView();
-      }
-      resolve();
     });
+
+    this.dataService.chapter2.notes.forEach(note => {
+      note.secondary.forEach(secondaryNote => {
+        secondaryNote.clicked = secondaryNote.id === ref;
+      });
+    });
+
+    await this.animateNotesPane();
+    scrollIntoView(`#${ref}`);
   }
 }

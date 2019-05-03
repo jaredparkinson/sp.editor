@@ -170,8 +170,10 @@ export class NoteSettingsComponent implements OnInit {
   private setLeft() {
     const notesSettings = document.getElementById('notesSettings');
     const elem = document.getElementById('btnNotesFlyout');
-    this.notesFlyout.left = `${elem.getBoundingClientRect().left -
-      notesSettings.getBoundingClientRect().width / 2}px`;
+    if (notesSettings && elem) {
+      this.notesFlyout.left = `${elem.getBoundingClientRect().left -
+        notesSettings.getBoundingClientRect().width / 2}px`;
+    }
   }
   // private resetNotes() {
   //   this.chapterService

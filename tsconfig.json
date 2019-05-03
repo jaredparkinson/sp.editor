@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": false,
+    "strictNullChecks": true,
     "experimentalDecorators": true,
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],

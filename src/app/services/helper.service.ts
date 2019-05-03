@@ -8,25 +8,29 @@ export class HelperService {
   public getWidth(): number {
     return Math.max(
       document.documentElement.clientWidth,
-      window.innerWidth || 0
+      window.innerWidth || 0,
     );
   }
 
-  public togglePane2(id: string, pinWidth: number): void {
-    console.log('called');
+  public toggleNavButton(
+    id: string,
+    targetId: string,
+    on: string,
+    off: string,
+  ): void {
+    console.log('called3');
     const element = document.getElementById(id);
-
-    const viewWidth = Math.max(
-      document.documentElement.clientWidth,
-      window.innerWidth || 0
-    );
-    const gridOn = this.getToggleStrings('grid', viewWidth, pinWidth);
-    const none = this.getToggleStrings('none', viewWidth, pinWidth);
-
-    if (this.contains(element, gridOn)) {
-      this.switchClasses(element, none, gridOn);
-    } else {
-      this.switchClasses(element, gridOn, none);
+    const target = document.getElementById(targetId);
+    if (element && target) {
+      if (target.classList.contains(off)) {
+        target.classList.add(on);
+        element.classList.add('nav-btn-on');
+        target.classList.remove(off);
+      } else {
+        target.classList.add(off);
+        element.classList.remove('nav-btn-on');
+        target.classList.remove(on);
+      }
     }
   }
 
@@ -37,77 +41,71 @@ export class HelperService {
 
     const viewWidth = Math.max(
       document.documentElement.clientWidth,
-      window.innerWidth || 0
+      window.innerWidth || 0,
     );
+    if (element) {
+      if (viewWidth < minViewWidth) {
+        let gridOn = true;
+        const gridClasses = ['grid-s'];
+        const noneClasses = ['none-s'];
+        if (minViewWidth === 1280) {
+          gridOn =
+            element.classList.contains('grid-s') ||
+            element.classList.contains('grid-m');
+          gridClasses.push('grid-m');
+          noneClasses.push('none-m');
+        } else {
+          gridOn = element.classList.contains('grid-s');
+        }
 
-    if (viewWidth < minViewWidth) {
-      let gridOn = true;
-      const gridClasses = ['grid-s'];
-      const noneClasses = ['none-s'];
-      if (minViewWidth === 1280) {
-        gridOn =
-          element.classList.contains('grid-s') ||
-          element.classList.contains('grid-m');
-        gridClasses.push('grid-m');
-        noneClasses.push('none-m');
+        if (gridOn) {
+          this.switchClasses(element, noneClasses, gridClasses);
+        } else {
+          this.switchClasses(element, gridClasses, noneClasses);
+        }
       } else {
-        gridOn = element.classList.contains('grid-s');
-      }
-
-      if (gridOn) {
-        this.switchClasses(element, noneClasses, gridClasses);
-      } else {
-        this.switchClasses(element, gridClasses, noneClasses);
-      }
-    } else {
-      const gridOn = element.classList.contains('grid-l');
-      if (gridOn) {
-        this.switchClasses(element, ['none-l'], ['grid-l']);
-      } else {
-        this.switchClasses(element, ['grid-l'], ['none-l']);
+        const gridOn = element.classList.contains('grid-l');
+        if (gridOn) {
+          this.switchClasses(element, ['none-l'], ['grid-l']);
+        } else {
+          this.switchClasses(element, ['grid-l'], ['none-l']);
+        }
       }
     }
   }
 
-  public toggleNavButton(
-    id: string,
-    targetId: string,
-    on: string,
-    off: string
-  ): void {
-    console.log('called3');
+  public togglePane2(id: string, pinWidth: number): void {
+    console.log('called');
     const element = document.getElementById(id);
-    const target = document.getElementById(targetId);
 
-    if (target.classList.contains(off)) {
-      target.classList.add(on);
-      element.classList.add('nav-btn-on');
-      target.classList.remove(off);
-    } else {
-      target.classList.add(off);
-      element.classList.remove('nav-btn-on');
-      target.classList.remove(on);
+    const viewWidth = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0,
+    );
+    const gridOn = this.getToggleStrings('grid', viewWidth, pinWidth);
+    const none = this.getToggleStrings('none', viewWidth, pinWidth);
+    if (element) {
+      if (this.contains(element, gridOn)) {
+        this.switchClasses(element, none, gridOn);
+      } else {
+        this.switchClasses(element, gridOn, none);
+      }
     }
   }
 
-  private switchClasses(
-    element: HTMLElement,
-    addClasses: string[],
-    removeClasses: string[]
-  ): void {
-    console.log('called4');
-    for (const addClass of addClasses) {
-      element.classList.add(addClass);
+  private contains(element: HTMLElement, classList: string[]): boolean {
+    for (const cls of classList) {
+      if (element.classList.contains(cls)) {
+        return true;
+      }
     }
-    for (const removeClass of removeClasses) {
-      element.classList.remove(removeClass);
-    }
+    return false;
   }
 
   private getToggleStrings(
     text: string,
     viewWidth: number,
-    pinWidth: number
+    pinWidth: number,
   ): string[] {
     console.log('called5');
     const classes: string[] = [];
@@ -125,13 +123,18 @@ export class HelperService {
     return classes;
   }
 
-  private contains(element: HTMLElement, classList: string[]): boolean {
-    for (const cls of classList) {
-      if (element.classList.contains(cls)) {
-        return true;
-      }
+  private switchClasses(
+    element: HTMLElement,
+    addClasses: string[],
+    removeClasses: string[],
+  ): void {
+    console.log('called4');
+    for (const addClass of addClasses) {
+      element.classList.add(addClass);
     }
-    return false;
+    for (const removeClass of removeClasses) {
+      element.classList.remove(removeClass);
+    }
   }
 }
 

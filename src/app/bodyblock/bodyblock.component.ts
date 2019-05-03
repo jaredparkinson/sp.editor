@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import axios from 'axios';
 
 import { VerseComponent } from '../components/verse/verse.component';
 
@@ -27,6 +28,7 @@ import { SyncScrollingService } from '../services/sync-scrolling.service';
 
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { scrollIntoView } from '../../HtmlFunc';
 import { Chapter2 } from '../modelsJson/Chapter';
 import { DatabaseService } from '../services/database.service';
 import { WTagService } from '../services/wtag-builder.service';
@@ -103,7 +105,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.route.params.subscribe(async params => {
       this.closeNavigation();
-      document.querySelector('.body-block').scrollIntoView();
+      scrollIntoView('.body-block'); // document.querySelector('.body-block'));
+      // .scrollIntoView();
       this.navService.rightPaneToggle = false;
       this.navService.leftPaneToggle = false;
 
@@ -250,12 +253,14 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return v;
   }
   private async getChapter(id: string) {
-    let chapter = this.dataService.chapter2;
+    let chapter: Chapter2 | undefined = this.dataService.chapter2;
     if (this.pageId !== id) {
       chapter = await this.chapterService.getChapter(id);
 
-      this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
-      this.dataService.verses = cloneDeep(chapter.verses);
+      if (chapter) {
+        this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
+        this.dataService.verses = cloneDeep(chapter.verses);
+      }
     }
     return chapter;
   }
@@ -266,7 +271,8 @@ export class BodyblockComponent implements OnInit, OnDestroy {
       if (selectedVerse) {
         selectedVerse.scrollIntoView();
       } else {
-        document.querySelector('header').scrollIntoView();
+        scrollIntoView('header');
+        // document.querySelector('header').scrollIntoView();
       }
     });
   }

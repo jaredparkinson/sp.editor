@@ -10,3 +10,17 @@ export function scrollIntoView(
     }
   }
 }
+
+export async function getBoundingClientRect(cloneRange: Range | undefined) {
+  if (cloneRange && cloneRange.startContainer.parentElement) {
+    return cloneRange.startContainer.parentElement.getBoundingClientRect();
+  }
+}
+
+export async function cloneRange() {
+  const selection = window.getSelection();
+
+  if (selection) {
+    return selection.getRangeAt(0).cloneRange();
+  }
+}

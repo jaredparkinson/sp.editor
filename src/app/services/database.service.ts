@@ -5,6 +5,7 @@ import PouchDB from 'pouchdb';
 import databaselist from '../../assets/data/database-list.json';
 
 import { HttpClient } from '@angular/common/http';
+import { Chapter } from 'oith.models/dist';
 
 @Injectable({
   providedIn: 'root',
@@ -57,25 +58,17 @@ export class DatabaseService {
     console.log(allDocs.rows.length);
   }
 
-  public getRevision(id: string): Promise<string> {
-    return new Promise<string>(
-      (
-        resolve: (resolveValue: string) => void,
-        reject: (rejectValue: string) => void,
-      ) => {
-        this.db
-          .get(id)
-          .then(value => {
-            resolve(value._rev);
-          })
-          .catch(() => {
-            resolve(undefined);
-          });
-      },
-    );
+  public async getRevision(id: string): Promise<string> {
+    try {
+      const rev = await this.db.get(id);
+
+      return rev._rev as string;
+    } catch {
+      throw new Error('Item is not in the databawse');
+    }
   }
   public async put(value: string) {
-    const chaper = JSON.parse(value) as Chapter2;
+    const chaper = JSON.parse(value) as Chapter;
 
     chaper._rev = await this.getRevision(chaper._id);
 
@@ -120,35 +113,35 @@ export class DatabaseService {
     localStorage.setItem('database-list', JSON.stringify(this.databaseList));
   }
   private addFiles(dataFile: string) {
-    return new Promise(async resolve => {
-      console.log(this.tempAllDocs);
-      const scriptureFiles = JSON.parse(dataFile) as Chapter2[];
-      const verses = [];
-      scriptureFiles.forEach(c => {
-        c.verses.forEach(verse => {
-          const v = cloneDeep(verse);
-          v._id = c._id + v._id;
-          v.wTags = undefined;
-          verses.push(v);
-        });
-      });
+  //   return new Promise(async resolve => {
+  //     console.log(this.tempAllDocs);
+  //     const scriptureFiles = JSON.parse(dataFile) as Chapter[];
+  //     const verses = [];
+  //     scriptureFiles.forEach(c => {
+  //       c.verses.forEach(verse => {
+  //         const v = cloneDeep(verse);
+  //         v._id = c._id + v._id;
+  //         v.wTags = undefined;
+  //         verses.push(v);
+  //       });
+  //     });
 
-      console.log(verses);
-      if (scriptureFiles) {
-        scriptureFiles.forEach((scriptureFile: any) => {
-          const savedDoc = this.tempAllDocs.rows.filter(doc => {
-            return doc.id === scriptureFile._id;
-          });
-          if (savedDoc && savedDoc.length > 0) {
-            scriptureFile._rev = savedDoc[0].value.rev;
-          }
-        });
-        this.db.bulkDocs(scriptureFiles).then(() => {
-          resolve();
-        });
-      }
-    });
-  }
+  //     console.log(verses);
+  //     if (scriptureFiles) {
+  //       scriptureFiles.forEach((scriptureFile: any) => {
+  //         const savedDoc = this.tempAllDocs.rows.filter(doc => {
+  //           return doc.id === scriptureFile._id;
+  //         });
+  //         if (savedDoc && savedDoc.length > 0) {
+  //           scriptureFile._rev = savedDoc[0].value.rev;
+  //         }
+  //       });
+  //       this.db.bulkDocs(scriptureFiles).then(() => {
+  //         resolve();
+  //       });
+  //     }
+  //   });
+  // }
 }
 
 export class DatabaseItem {

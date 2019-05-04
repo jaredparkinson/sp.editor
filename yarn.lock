@@ -574,6 +574,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.45.tgz#4c49ba34106bc7dced77ff6bae8eb6543cde8351"
   integrity sha512-tGVTbA+i3qfXsLbq9rEq/hezaHY55QxQLeXQL2ejNgFAxxrgu8eMmYIOsRcl7hN1uTLVsKOOYacV/rcJM3sfgQ==
 
+"@types/pouchdb-adapter-fruitdown@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-fruitdown/-/pouchdb-adapter-fruitdown-6.1.3.tgz#9b140ad9645cc56068728acf08ec19ac0046658e"
+  integrity sha512-Wz1Z1JLOW1hgmFQjqnSkmyyfH7by/iWb4abKn684WMvQfmxx6BxKJpJ4+eulkVPQzzgMMSgU1MpnQOm9FgRkbw==
+  dependencies:
+    "@types/pouchdb-core" "*"
+
 "@types/pouchdb-adapter-http@*":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-http/-/pouchdb-adapter-http-6.1.3.tgz#6e592d5f48deb6274a21ddac1498dd308096bcf3"
@@ -588,6 +595,35 @@
   dependencies:
     "@types/pouchdb-core" "*"
 
+"@types/pouchdb-adapter-leveldb@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-leveldb/-/pouchdb-adapter-leveldb-6.1.3.tgz#17c7e75d75b992050bca15991e97fba575c61bb3"
+  integrity sha512-ex8NFqQGFwEpFi7AaZ5YofmuemfZNsL3nTFZBUCAKYMBkazQij1pe2ILLStSvJr0XS0qxgXjCEW19T5Wqiiskg==
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-localstorage@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-localstorage/-/pouchdb-adapter-localstorage-6.1.3.tgz#0dde02ba6b9d6073a295a20196563942ba9a54bd"
+  integrity sha512-oor040tye1KKiGLWYtIy7rRT7C2yoyX3Tf6elEJRpjOA7Ja/H8lKc4LaSh9ATbptIcES6MRqZDxtp7ly9hsW3Q==
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-memory@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-memory/-/pouchdb-adapter-memory-6.1.3.tgz#9eabdbc890fcf58960ee8b68b8685f837e75c844"
+  integrity sha512-gVbsIMzDzgZYThFVT4eVNsmuZwVm/4jDxP1sjlgc3qtDIxbtBhGgyNfcskwwz9Zu5Lv1avkDsIWvcxQhnvRlHg==
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-node-websql@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-node-websql/-/pouchdb-adapter-node-websql-6.1.3.tgz#aa18bc68af8cf509acd12c400010dcd5fab2243d"
+  integrity sha512-F/P+os6Jsa7CgHtH64+Z0HfwIcj0hIRB5z8gNhF7L7dxPWoAfkopK5H2gydrP3sQrlGyN4WInF+UJW/Zu1+FKg==
+  dependencies:
+    "@types/pouchdb-adapter-websql" "*"
+    "@types/pouchdb-core" "*"
+
 "@types/pouchdb-adapter-websql@*":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-websql/-/pouchdb-adapter-websql-6.1.3.tgz#9e59884c2ded956f05e80ee06dc776735979322e"
@@ -595,7 +631,7 @@
   dependencies:
     "@types/pouchdb-core" "*"
 
-"@types/pouchdb-browser@^6.1.3":
+"@types/pouchdb-browser@*", "@types/pouchdb-browser@^6.1.3":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@types/pouchdb-browser/-/pouchdb-browser-6.1.3.tgz#8f33d6ef58d6817d1f6d36979148a1c7f63244d8"
   integrity sha512-EdYowrWxW9SWBMX/rux2eq7dbHi5Zeyzz+FF/IAsgQKnUxgeCO5VO2j4zTzos0SDyJvAQU+EYRc11r7xGn5tvA==
@@ -623,12 +659,31 @@
   dependencies:
     "@types/pouchdb-core" "*"
 
+"@types/pouchdb-http@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-http/-/pouchdb-http-6.1.3.tgz#09576c0d409da1f8dee34ec5b768415e2472ea52"
+  integrity sha512-0e9E5SqNOyPl/3FnEIbENssB4FlJsNYuOy131nxrZk36S+y1R/6qO7ZVRypWpGTqBWSuVd7gCsq2UDwO/285+w==
+  dependencies:
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-core" "*"
+
 "@types/pouchdb-mapreduce@*":
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@types/pouchdb-mapreduce/-/pouchdb-mapreduce-6.1.4.tgz#bc747eacd4e734a7486e9f4ef895fad7c45485e9"
   integrity sha512-c8cZ8E9zEl7ZMcrE5jaF2qOm+cxQ01+B0NG9oGHVX3Mj5G8m4oIBAUELJmJw9LvEq3r9nXXn6g9TvvN8NiRalg==
   dependencies:
     "@types/pouchdb-core" "*"
+
+"@types/pouchdb-node@*":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-node/-/pouchdb-node-6.1.3.tgz#ad998eccd683091af18e0fae1c01f09589bebfd6"
+  integrity sha512-rZb3eWGLKJo4LBhUIJLofyoric/5wKYI6HVUld8CfDWeVZgYVUJ/GEw/vXuqXsbgbsaNyk6XeU9461ULBt+0qg==
+  dependencies:
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-adapter-leveldb" "*"
+    "@types/pouchdb-core" "*"
+    "@types/pouchdb-mapreduce" "*"
+    "@types/pouchdb-replication" "*"
 
 "@types/pouchdb-replication@*":
   version "6.4.2"
@@ -637,6 +692,26 @@
   dependencies:
     "@types/pouchdb-core" "*"
     "@types/pouchdb-find" "*"
+
+"@types/pouchdb@^6.3.3":
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb/-/pouchdb-6.3.3.tgz#bb83f6d31f401f7a16b4bbc863e1d9e6ae5b988f"
+  integrity sha512-SL6TR37gf2nNhzWEtPW4esuQgiD9oimXFAXKZddviig6KUfDcbwQF3TB3A1fhALN6YxYpblGvPX+a88E8clkZg==
+  dependencies:
+    "@types/pouchdb-adapter-fruitdown" "*"
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-adapter-idb" "*"
+    "@types/pouchdb-adapter-leveldb" "*"
+    "@types/pouchdb-adapter-localstorage" "*"
+    "@types/pouchdb-adapter-memory" "*"
+    "@types/pouchdb-adapter-node-websql" "*"
+    "@types/pouchdb-adapter-websql" "*"
+    "@types/pouchdb-browser" "*"
+    "@types/pouchdb-core" "*"
+    "@types/pouchdb-http" "*"
+    "@types/pouchdb-mapreduce" "*"
+    "@types/pouchdb-node" "*"
+    "@types/pouchdb-replication" "*"
 
 "@types/q@^0.0.32":
   version "0.0.32"
@@ -706,19 +781,31 @@
   resolved "https://registry.yarnpkg.com/@types/yallist/-/yallist-3.0.1.tgz#3f43dac55d779e3058ba10334659d9fbb373807c"
   integrity sha512-nky1uSaFye8rZctRgEd+hC0rNZuDDH49DwOHdSIvgiRZPERVvcEFfV3kUReE60GMFNjG1z8x9ncSb+WKj3cMcA==
 
-"@typescript-eslint/parser@^1.3.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-1.6.0.tgz#f01189c8b90848e3b8e45a6cdad27870529d1804"
-  integrity sha512-VB9xmSbfafI+/kI4gUK3PfrkGmrJQfh0N4EScT1gZXSZyUxpsBirPL99EWZg9MmPG0pzq/gMtgkk7/rAHj4aQw==
+"@typescript-eslint/eslint-plugin@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-1.7.0.tgz#570e45dc84fb97852e363f1e00f47e604a0b8bcc"
+  integrity sha512-NUSz1aTlIzzTjFFVFyzrbo8oFjHg3K/M9MzYByqbMCxeFdErhLAcGITVfXzSz+Yvp5OOpMu3HkIttB0NyKl54Q==
   dependencies:
-    "@typescript-eslint/typescript-estree" "1.6.0"
+    "@typescript-eslint/parser" "1.7.0"
+    "@typescript-eslint/typescript-estree" "1.7.0"
+    eslint-utils "^1.3.1"
+    regexpp "^2.0.1"
+    requireindex "^1.2.0"
+    tsutils "^3.7.0"
+
+"@typescript-eslint/parser@1.7.0", "@typescript-eslint/parser@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-1.7.0.tgz#c3ea0d158349ceefbb6da95b5b09924b75357851"
+  integrity sha512-1QFKxs2V940372srm12ovSE683afqc1jB6zF/f8iKhgLz1yoSjYeGHipasao33VXKI+0a/ob9okeogGdKGvvlg==
+  dependencies:
+    "@typescript-eslint/typescript-estree" "1.7.0"
     eslint-scope "^4.0.0"
     eslint-visitor-keys "^1.0.0"
 
-"@typescript-eslint/typescript-estree@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-1.6.0.tgz#6cf43a07fee08b8eb52e4513b428c8cdc9751ef0"
-  integrity sha512-A4CanUwfaG4oXobD5y7EXbsOHjCwn8tj1RDd820etpPAjH+Icjc2K9e/DQM1Hac5zH2BSy+u6bjvvF2wwREvYA==
+"@typescript-eslint/typescript-estree@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-1.7.0.tgz#59ec02f5371964da1cc679dba7b878a417bc8c60"
+  integrity sha512-K5uedUxVmlYrVkFbyV3htDipvLqTE3QMOUQEHYJaKtgzxj6r7c5Ca/DG1tGgFxX+fsbi9nDIrf4arq7Ib7H/Yw==
   dependencies:
     lodash.unescape "4.0.1"
     semver "5.5.0"
@@ -3791,6 +3878,20 @@ escodegen@1.x.x:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-prettier@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.2.0.tgz#70b946b629cd0e3e98233fd9ecde4cb9778de96c"
+  integrity sha512-y0uWc/FRfrHhpPZCYflWC8aE0KRJRY04rdZVfl8cL3sEZmOYyaBdhdlQPjKZBnuRMyLVK+JUZr7HaZFClQiH4w==
+  dependencies:
+    get-stdin "^6.0.0"
+
+eslint-plugin-prettier@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.0.1.tgz#19d521e3981f69dd6d14f64aec8c6a6ac6eb0b0d"
+  integrity sha512-/PMttrarPAY78PLvV3xfWibMOdMDl57hmlQ2XqFeA37wd+CJ7WSxV7txqjVPHi/AAFKd2lX0ZqfsOc/i5yFCSQ==
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
+
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-4.0.3.tgz#ca03833310f6889a3264781aa82e63eb9cfe7848"
@@ -3809,7 +3910,7 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
 
-eslint@^5.14.0:
+eslint@^5.16.0:
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.16.0.tgz#a1e3ac1aae4a3fbd8296fcf8f7ab7314cbb6abea"
   integrity sha512-S3Rz11i7c8AA5JPv7xAH+dOyq/Cu/VXHiHXBPOU1k/JAM5dXqQPt3qcrhpHSorXmrpu2g0gkIBVXAqCpzfoZIg==
@@ -4131,6 +4232,11 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+
+fast-diff@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+  integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
 fast-future@~1.0.2:
   version "1.0.2"
@@ -8135,6 +8241,13 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
+"oith.models@github:jaredparkinson/oith.models":
+  version "0.35.0"
+  resolved "git+ssh://git@github.com/jaredparkinson/oith.models.git#e65c3d93994b22150b18d07b8231ebbd4f74d203"
+  dependencies:
+    lodash "^4.17.11"
+    tslib "~1.9.3"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -9275,6 +9388,13 @@ prepend-http@^1.0.1:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
+prettier-linter-helpers@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
+  dependencies:
+    fast-diff "^1.1.2"
+
 prettier-tslint@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/prettier-tslint/-/prettier-tslint-0.4.2.tgz#37dd009ad6a482ea8101f40cf70b777bc86f3438"
@@ -10177,6 +10297,11 @@ require-relative@^0.8.7:
   version "0.8.7"
   resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
   integrity sha1-eZlTn8ngR6N5KPoZb44VY9q9Nt4=
+
+requireindex@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.2.0.tgz#3463cdb22ee151902635aa6c9535d4de9c2ef1ef"
+  integrity sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==
 
 requires-port@^1.0.0:
   version "1.0.0"
@@ -11952,7 +12077,7 @@ ts-node@6.0.3:
     source-map-support "^0.5.3"
     yn "^2.0.0"
 
-tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@~1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
@@ -12004,6 +12129,13 @@ tsutils@^2.29.0:
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
   integrity sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==
+  dependencies:
+    tslib "^1.8.1"
+
+tsutils@^3.7.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.10.0.tgz#6f1c95c94606e098592b0dff06590cf9659227d6"
+  integrity sha512-q20XSMq7jutbGB8luhKKsQldRKWvyBO2BGqni3p4yq8Ys9bEP/xQw3KepKmMRt9gJ4lvQSScrihJrcKdKoSU7Q==
   dependencies:
     tslib "^1.8.1"
 

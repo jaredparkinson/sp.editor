@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { scrollIntoView } from '../../HtmlFunc';
 // import { setTimeout } from 'core-js';
 
 @Injectable()
@@ -90,7 +91,8 @@ export class SyncScrollingService {
   private scrollNotesTop() {
     const note = document.querySelector('note');
     if (note) {
-      document.querySelector('note').scrollIntoView();
+      scrollIntoView('.note');
+      // document.querySelector('note').scrollIntoView();
     }
   }
 }

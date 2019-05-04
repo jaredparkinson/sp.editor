@@ -12,6 +12,8 @@ import {
   uniq,
 } from 'lodash';
 
+import { Verse, W } from 'oith.models/dist';
+import { cloneRange, getBoundingClientRect } from '../../HtmlFunc';
 import { ChapterService } from './chapter.service';
 import { DataService } from './data.service';
 
@@ -19,7 +21,7 @@ import { DataService } from './data.service';
   providedIn: 'root',
 })
 export class WTagService {
-  public cloneRange: Range;
+  public cloneRange: Range | undefined;
   public marked: boolean = false;
   public popupTimeout: NodeJS.Timer;
   public rangeInterval: any;
@@ -29,7 +31,7 @@ export class WTagService {
 
   public wTagPopupTop: string = '0px';
   private bodyBlockElement: Element;
-  private wTags: Array<{ id: string; w: IW }> = [];
+  private wTags: Array<{ id: string; w: W }> = [];
   constructor(
     private dataService: DataService,
     private chapterService: ChapterService,
@@ -40,26 +42,40 @@ export class WTagService {
     node: Node,
     offSet: number,
   ): { lastID: string; offSet: number; startID: string } {
-    return {
-      startID: first(node.parentElement.getAttribute('w-ids').split(',')),
-      lastID: last(node.parentElement.getAttribute('w-ids').split(',')),
-      offSet,
-    };
+    const wIDS = node.parentElement
+      ? node.parentElement.getAttribute('w-ids')
+      : undefined;
+    if (wIDS) {
+      const lastID = last(wIDS.split(','));
+      const startID = first(wIDS.split(','));
+      if (lastID && startID) {
+        return {
+          lastID,
+          offSet,
+          startID,
+        };
+      }
+    }
+    throw new Error('No Range avaliable');
   }
 
   public copyText() {
     this.marked = true;
-    const selection = this.cloneRange.cloneContents();
-    const textCopyArea = document.querySelector('#textCopyArea');
+    if (this.cloneRange) {
+      const selection = this.cloneRange.cloneContents();
+      const textCopyArea = document.querySelector('#textCopyArea');
+      const windowSelection = window.getSelection();
+      if (textCopyArea && windowSelection) {
+        textCopyArea.appendChild(selection);
+        const range = document.createRange();
+        range.selectNodeContents(textCopyArea);
+        windowSelection.removeAllRanges();
+        windowSelection.addRange(range);
 
-    textCopyArea.appendChild(selection);
-    const range = document.createRange();
-    range.selectNodeContents(textCopyArea);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-
-    document.execCommand('copy');
-    window.getSelection().empty();
+        document.execCommand('copy');
+        windowSelection.empty();
+      }
+    }
     this.showPopup = false;
     this.marked = false;
   }
@@ -80,76 +96,68 @@ export class WTagService {
     this.marked = true;
     this.markText();
   }
-
   public init() {
     clearInterval(this.rangeInterval);
-    this.rangeInterval = setInterval(() => {
+    this.rangeInterval = setInterval(async () => {
       const r = window.getSelection();
-      if (this.checkTextSelection(r)) {
-        this.cloneRange = window
-          .getSelection()
-          .getRangeAt(0)
-          .cloneRange();
+      if (r && this.checkTextSelection(r)) {
+        this.cloneRange = await cloneRange();
+        const rect = await getBoundingClientRect(this.cloneRange);
 
-        this.wTagPopupTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
-          .top - 90}px`;
-        this.wTagColorPaletteTop = `${this.cloneRange.startContainer.parentElement.getBoundingClientRect()
-          .top - 120}px`;
-        this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
-        this.showPopup = true;
+        if (this.cloneRange && rect) {
+          this.wTagPopupTop = `${rect.top - 90}px`;
+          this.wTagColorPaletteTop = `${rect.top - 120}px`;
+          this.wTagPopupleft = `${this.cloneRange.getClientRects()[0].left}px`;
+          this.showPopup = true;
+        }
       } else {
         this.showPopup = false;
       }
     }, 100);
   }
 
-  public async insertNewWTags(verses: Verse[]) {
-    verses.forEach(verse => {
-      const newWTags = merge(
-        filter(this.wTags, w => {
-          return w.id === verse.id;
-        }),
-      ) as Array<{ id: string; w: IW }>;
-      if (newWTags.length > 0) {
-        let newVerse = [];
-        verse.wTags.forEach(wTag => {
-          if ((wTag as any).childWTags) {
-            // const a = cloneDeep();
-            this.insertNewAWTags(wTag, newWTags, newVerse);
-          } else {
-            newVerse = concat(newVerse, this.expandWtags(wTag, newWTags));
-          }
-        });
-        const mergeWTag = [];
-        this.mergeWTags(newVerse, mergeWTag);
-
-        verse.wTags = mergeWTag;
-        // console.log(mergeWTag);
-      }
-      verse.wTags.forEach(m => {
-        const f = first(m.id);
-        const l = last(m.id);
-
-        m.text = verse.text.substring(f, l + 1);
-        m.id = [f, l];
-      });
-    });
-
-    this.dataService.verses = verses;
-
-    await this.chapterService.resetNoteVisibility(
-      this.dataService.chapter2,
-      this.dataService.noteVisibility,
-    );
-
-    await this.chapterService.buildWTags(
-      this.dataService.verses,
-      this.dataService.noteVisibility,
-    );
-    await this.chapterService.buildParagraphs(
-      this.dataService.paragraphs,
-      this.dataService.verses,
-    );
+  public async insertNewWTags(verses: W[]) {
+    // verses.forEach(verse => {
+    //   const newWTags = merge(
+    //     filter(this.wTags, w => {
+    //       return w.id === verse._id;
+    //     }),
+    //   ) as Array<{ id: string; w: W }>;
+    //   if (newWTags.length > 0) {
+    //     let newVerse = [];
+    //     verse.wTags.forEach(wTag => {
+    //       if ((wTag as any).childWTags) {
+    //         // const a = cloneDeep();
+    //         this.insertNewAWTags(wTag, newWTags, newVerse);
+    //       } else {
+    //         newVerse = concat(newVerse, this.expandWtags(wTag, newWTags));
+    //       }
+    //     });
+    //     const mergeWTag = [];
+    //     this.mergeWTags(newVerse, mergeWTag);
+    //     verse.wTags = mergeWTag;
+    //     // console.log(mergeWTag);
+    //   }
+    //   verse.wTags.forEach(m => {
+    //     const f = first(m.id);
+    //     const l = last(m.id);
+    //     m.text = verse.text.substring(f, l + 1);
+    //     m.id = [f, l];
+    //   });
+    // });
+    // this.dataService.verses = verses;
+    // await this.chapterService.resetNoteVisibility(
+    //   this.dataService.chapter2,
+    //   this.dataService.noteVisibility,
+    // );
+    // await this.chapterService.buildWTags(
+    //   this.dataService.verses,
+    //   this.dataService.noteVisibility,
+    // );
+    // await this.chapterService.buildParagraphs(
+    //   this.dataService.paragraphs,
+    //   this.dataService.verses,
+    // );
   }
 
   public isEqual(refs1: [], refs2: []): boolean {

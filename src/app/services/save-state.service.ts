@@ -7,6 +7,7 @@ import cg from '../../assets/categories.json';
 import { ISaveStateItem } from '../models/ISaveStateItem';
 import { SaveStateItem } from '../models/SaveStateItem';
 
+import { Navigation } from 'oith.models';
 import { DatabaseService } from './database.service';
 import nav from './nav_rev.json';
 import { NavigationLoaderService } from './navigation-loader.service';
@@ -21,8 +22,8 @@ export class SaveStateService {
   public flatNavigation: Navigation[] = [];
   public id: string;
 
-  public navigation: Navigation[] = nav as Navigation[];
-  constructor(
+  public navigation: Navigation[] = (nav as any) as Navigation[];
+  public constructor(
     private databaseService: DatabaseService,
     private searchService: SearchService,
   ) {

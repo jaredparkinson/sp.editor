@@ -97,7 +97,7 @@
       </li>
     </ul>
 
-    <ul class="collection download">
+    <ul class="collection download" *ngIf="currentDatabaseList">
       <li
         class="collection-item"
         *ngFor="let download of currentDatabaseList.databaseItems"

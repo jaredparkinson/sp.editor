@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Download } from '../models/download';
-import { DatabaseItem, DatabaseService } from './database.service';
+import { DatabaseService } from './database.service';
+import { DatabaseItem } from './DatabaseItem';
 
 @Injectable({
   providedIn: 'root',
@@ -31,29 +33,33 @@ export class DownloadService {
     });
   }
 
-  public async download(file: Download) {
+  public async download(file: Download): Promise<Observable<object>> {
     return this.httpClient.get(file.fileName);
   }
-  public async downloadScriptures(file: Download) {
+  public async downloadScriptures(file: Download): Promise<void> {
     file.downloaded = false;
     file.downloading = true;
 
     this.dataBaseService
       .bulkDocs(file.fileName)
-      .then(() => {
-        console.log('Finished');
-        file.downloading = false;
-        file.downloaded = true;
-        file.deleting = false;
-        localStorage.setItem('downloads', JSON.stringify(this.downloads));
-      })
-      .catch(() => {
-        console.log('Failed, try again');
-        file.downloading = false;
-      });
+      .then(
+        (): void => {
+          console.log('Finished');
+          file.downloading = false;
+          file.downloaded = true;
+          file.deleting = false;
+          localStorage.setItem('downloads', JSON.stringify(this.downloads));
+        },
+      )
+      .catch(
+        (): void => {
+          console.log('Failed, try again');
+          file.downloading = false;
+        },
+      );
     return;
   }
-  public async downloadScriptures2(file: DatabaseItem) {
+  public async downloadScriptures2(file: DatabaseItem): Promise<void> {
     file.downloaded = false;
     file.downloading = true;
     const fileName = `${file.channel}_oneinthinehand_${file.databaseName}_${
@@ -63,22 +69,26 @@ export class DownloadService {
     console.log(fileName);
     // return;
     this.dataBaseService
-      .bulkDocs(fileName)
-      .then(() => {
-        console.log('Finished');
-        file.downloading = false;
-        file.downloaded = true;
-        file.deleting = false;
+      .bulkDocs(file.databaseName)
+      .then(
+        (): void => {
+          console.log('Finished');
+          file.downloading = false;
+          file.downloaded = true;
+          file.deleting = false;
 
-        localStorage.setItem(
-          'database-list',
-          JSON.stringify(this.dataBaseService.databaseList),
-        );
-      })
-      .catch(() => {
-        console.log('Failed, try again');
-        file.downloading = false;
-      });
+          localStorage.setItem(
+            'database-list',
+            JSON.stringify(this.dataBaseService.databaseList),
+          );
+        },
+      )
+      .catch(
+        (): void => {
+          console.log('Failed, try again');
+          file.downloading = false;
+        },
+      );
     return;
   }
 }

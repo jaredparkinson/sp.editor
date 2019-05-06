@@ -1,20 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { first, isEmpty, last } from 'lodash';
+import { isEmpty } from 'lodash';
 import { scrollIntoView } from '../../../HtmlFunc';
 
+import { Verse, W } from 'oith.models/dist';
 import { ChapterService } from '../../services/chapter.service';
 import { DataService } from '../../services/data.service';
-import { EditService } from '../../services/EditService';
 //
 import { SaveStateService } from '../../services/save-state.service';
 import { StringService } from '../../services/string.service';
@@ -29,7 +20,7 @@ import { WTagService } from '../../services/wtag-builder.service';
 export class VerseComponent implements OnInit {
   @ViewChild('span') public span!: ElementRef;
   @Input() public verse: Verse;
-  constructor(
+  public constructor(
     public wTagService: WTagService,
     public saveState: SaveStateService,
     // public verseSelectService: VerseSelectService,
@@ -43,13 +34,13 @@ export class VerseComponent implements OnInit {
       this.saveState.data.notesPanePin.value = true;
 
       this.saveState.data.notesPanePin.animated = true;
-      setTimeout(() => {
+      setTimeout((): void => {
         this.saveState.data.notesPanePin.animated = false;
         // resolve();
       }, 400);
     }
   }
-  public filterClassList(classList: string[]) {
+  public filterClassList(classList: string[]): string {
     if (!classList) {
       return '';
     }
@@ -58,12 +49,12 @@ export class VerseComponent implements OnInit {
     return classList.toString().replace(/\,/g, ' ');
   }
 
-  public ngOnInit() {}
-  public resetCloneRange() {
+  public ngOnInit(): void {}
+  public resetCloneRange(): void {
     this.wTagService.reset();
   }
 
-  public wTagClick(w: W) {
+  public wTagClick(w: W): void {
     if (!w.visibleRefs) {
       return;
     }
@@ -74,52 +65,38 @@ export class VerseComponent implements OnInit {
       if (w.clicked) {
         this.wTagSelect(w);
       } else {
-        this.chapterService.resetNotes().then(() => {
-          w.clicked = true;
+        this.chapterService.resetNotes().then(
+          (): void => {
+            w.clicked = true;
 
-          this.wTagSelect(w);
-        });
+            this.wTagSelect(w);
+          },
+        );
       }
     }
     // console.log(w.visibleRefs);
   }
 
-  private resetNotes(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.chapterService
-        .resetNoteVisibility(
-          this.dataService.chapter2,
-          this.dataService.noteVisibility,
-        )
-        .then(() => {
-          this.chapterService
-            .buildWTags(
-              this.dataService.verses,
-              this.dataService.noteVisibility,
-            )
-            .then(() => {
-              resolve();
-            });
-        });
-    });
-  }
-
-  private async wTagSelect(w: W) {
+  private async wTagSelect(w: W): Promise<void> {
     const ref = w.visibleRefs.pop();
     w.selected = true;
-    this.dataService.verses.forEach(verse => {
-      verse.wTags.forEach(wTag => {
-        if (ref && wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
-          wTag.selected = true;
-        }
-      });
-    });
+    this.dataService.verses.forEach(
+      (verse): void => {
+        verse.wTags.forEach(wTag => {
+          if (ref && wTag.visibleRefs && wTag.visibleRefs.includes(ref)) {
+            wTag.selected = true;
+          }
+        });
+      },
+    );
 
-    this.dataService.chapter2.notes.forEach(note => {
-      note.secondary.forEach(secondaryNote => {
-        secondaryNote.clicked = secondaryNote.id === ref;
-      });
-    });
+    this.dataService.chapter2.notes.forEach(
+      (note): void => {
+        note.secondary.forEach(secondaryNote => {
+          secondaryNote.clicked = secondaryNote.id === ref;
+        });
+      },
+    );
 
     await this.animateNotesPane();
     scrollIntoView(`#${ref}`);

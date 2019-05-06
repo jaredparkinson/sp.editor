@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
-  HostListener,
   OnDestroy,
   OnInit,
   QueryList,
@@ -9,8 +8,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import axios from 'axios';
-import { Chapter } from 'oith.models';
+import { Chapter, Navigation, Paragraph, Verse } from 'oith.models';
 import { VerseComponent } from '../components/verse/verse.component';
 
 import { cloneDeep, filter, last } from 'lodash';
@@ -24,8 +22,6 @@ import { SaveStateService } from '../services/save-state.service';
 import { StringService } from '../services/string.service';
 import { SyncScrollingService } from '../services/sync-scrolling.service';
 
-import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { scrollIntoView } from '../../HtmlFunc';
 
 import { DatabaseService } from '../services/database.service';
@@ -36,7 +32,7 @@ import { WTagService } from '../services/wtag-builder.service';
   templateUrl: './bodyblock.component.html',
   styleUrls: ['./bodyblock.component.scss'],
 })
-export class BodyblockComponent implements OnInit, OnDestroy {
+export class BodyblockComponent implements OnInit {
   public chapterFadeOut = false;
   public swipeRight = false;
   public url: string;
@@ -45,7 +41,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
   public verses!: QueryList<VerseComponent>;
   private pageId = '';
   private pageUrl = '';
-  constructor(
+  public constructor(
     public fileManager: NavigationService,
     public httpClient: HttpClient,
     public sanitizer: DomSanitizer,
@@ -63,7 +59,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     public databaseService: DatabaseService,
   ) {}
 
-  public btnNavigationButtons(direction: number) {
+  public btnNavigationButtons(direction: number): void {
     this.router.navigateByUrl(this.getNavigationUrl(direction));
   }
   public closeNavigation(): void {
@@ -77,7 +73,7 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getNavigationUrl(direction: number) {
+  public getNavigationUrl(direction: number): string {
     let url = '';
 
     for (let x = 0; x < this.saveState.flatNavigation.length; x++) {
@@ -99,96 +95,105 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return url;
   }
 
-  public ngOnDestroy() {}
-  public ngOnInit() {
-    this.route.params.subscribe(async params => {
-      this.closeNavigation();
-      scrollIntoView('.body-block'); // document.querySelector('.body-block'));
-      // .scrollIntoView();
-      this.navService.rightPaneToggle = false;
-      this.navService.leftPaneToggle = false;
+  public ngOnInit(): void {
+    this.route.params.subscribe(
+      async (params): Promise<void> => {
+        this.closeNavigation();
+        scrollIntoView('.body-block'); // document.querySelector('.body-block'));
+        // .scrollIntoView();
+        this.navService.rightPaneToggle = false;
+        this.navService.leftPaneToggle = false;
 
-      console.log(params);
+        console.log(params);
 
-      const book = params['book'];
-      const chapter = params['chapter'].toString();
-      const highlighting: string[] = chapter.split('.').reverse();
-      const language = params['language']
-        ? params['language']
-        : this.saveState.data.language;
+        const book = params['book'];
+        const chapter = params['chapter'].toString();
+        const highlighting: string[] = chapter.split('.').reverse();
+        const language = params['language']
+          ? params['language']
+          : this.saveState.data.language;
 
-      console.log(language);
+        console.log(language);
 
-      this.pageUrl = `${book}/${chapter.split('.')[0]}`;
-      this.url = `${book}/${last(highlighting)}`;
-      const id = `${book}-${highlighting.pop()}-${language}`;
-      this.chapterService.chapterFadeOut = true;
-      try {
-        const v = await this.buildPage(id, highlighting);
-        this.chapterService.chapterFadeOut = false;
-        this.scrollToVerse(v);
-        await this.setNavigation(this.saveState.navigation);
-        // this.setNavigation(this.saveState.navigation);
-        this.chapterService.chapterFadeOut = false;
+        this.pageUrl = `${book}/${chapter.split('.')[0]}`;
+        this.url = `${book}/${last(highlighting)}`;
+        const id = `${book}-${highlighting.pop()}-${language}`;
+        this.chapterService.chapterFadeOut = true;
+        try {
+          const v = await this.buildPage(id, highlighting);
+          this.chapterService.chapterFadeOut = false;
+          this.scrollToVerse(v);
+          await this.setNavigation(this.saveState.navigation);
+          // this.setNavigation(this.saveState.navigation);
+          this.chapterService.chapterFadeOut = false;
 
-        this.wTagService.init();
-      } catch (error) {
-        console.log(error);
+          this.wTagService.init();
+        } catch (error) {
+          console.log(error);
 
-        console.log('failed');
+          console.log('failed');
 
-        this.router.navigateByUrl('/');
-      }
-    });
+          this.router.navigateByUrl('/');
+        }
+      },
+    );
   }
 
-  public onPan(event: Event) {
+  public onPan(event: Event): void {
     console.log(event);
   }
 
-  public onScroll() {
+  public onScroll(): void {
     this.syncScrollingService.onScroll();
   }
   public async resetNavigationFocus(navigation: Navigation[]): Promise<void> {
-    navigation.forEach(async nav => {
-      if (nav.url) {
-        nav.focus = false;
-      } else {
-        await this.resetNavigationFocus(nav.navigation);
-      }
-    });
+    navigation.forEach(
+      async (nav): Promise<void> => {
+        if (nav.url) {
+          nav.focus = false;
+        } else {
+          await this.resetNavigationFocus(nav.navigation);
+        }
+      },
+    );
   }
-  public setNavigation(navigation: Navigation[]) {
+  public setNavigation(navigation: Navigation[]): boolean {
     let isNav = false;
 
-    const navLink = navigation.filter(n => {
-      return n.url && n.url === this.url;
-    });
+    const navLink = navigation.filter(
+      (n): boolean => {
+        return n.url && n.url === this.url;
+      },
+    );
     if (navLink.length > 0) {
       navLink[0].focus = true;
-      navigation.forEach(n => {
-        n.hide = false;
-        if (n !== navLink[0]) {
-          n.focus = false;
-        }
-      });
+      navigation.forEach(
+        (n): void => {
+          n.hide = false;
+          if (n !== navLink[0]) {
+            n.focus = false;
+          }
+        },
+      );
       isNav = true;
     } else {
-      navigation.forEach(n => {
-        n.focus = false;
-        if (!n.url) {
-          if (this.setNavigation(n.navigation)) {
-            n.hide = false;
-            n.subNavigationVisible = true;
-            isNav = true;
+      navigation.forEach(
+        (n): void => {
+          n.focus = false;
+          if (!n.url) {
+            if (this.setNavigation(n.navigation)) {
+              n.hide = false;
+              n.subNavigationVisible = true;
+              isNav = true;
+            } else {
+              n.hide = true;
+              n.subNavigationVisible = false;
+            }
           } else {
             n.hide = true;
-            n.subNavigationVisible = false;
           }
-        } else {
-          n.hide = true;
-        }
-      });
+        },
+      );
     }
 
     return isNav;
@@ -198,13 +203,13 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return Array.from(text);
   }
 
-  public swipeChapter(event: Event, direction: number) {
+  public swipeChapter(event: Event, direction: number): void {
     const url = this.getNavigationUrl(direction);
 
     if ((event as PointerEvent).pointerType === 'touch') {
       this.chapterService.chapterFadeOut = true;
 
-      setTimeout(() => {
+      setTimeout((): void => {
         this.router.navigateByUrl(url);
       }, 150);
     }
@@ -212,11 +217,15 @@ export class BodyblockComponent implements OnInit, OnDestroy {
 
   public synchronizedScrolling(): void {}
 
-  public trackById(paragraph: any) {
-    return paragraph.id;
+  public trackById(paragraph: Paragraph): string {
+    // return paragraph.;
+    return '';
   }
 
-  private async buildPage(id: string, highlighting: string[] = []) {
+  private async buildPage(
+    id: string,
+    highlighting: string[] = [],
+  ): Promise<void> {
     const chapter = await this.getChapter(id);
 
     this.pageId = id;
@@ -244,13 +253,13 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     this.dataService.chapter2 = chapter;
     this.dataService.header = filter(
       this.dataService.verses,
-      (verse: Verse) => {
+      (verse: Verse): boolean => {
         return verse.header;
       },
     );
     return v;
   }
-  private async getChapter(id: string) {
+  private async getChapter(id: string): Promise<Chapter> {
     let chapter: Chapter | undefined = this.dataService.chapter2;
     if (this.pageId !== id) {
       chapter = await this.chapterService.getChapter(id);
@@ -263,15 +272,17 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return chapter;
   }
 
-  private scrollToVerse(v: number) {
-    setTimeout(() => {
-      const selectedVerse = document.querySelector(`#p${v}`);
-      if (selectedVerse) {
-        selectedVerse.scrollIntoView();
-      } else {
-        scrollIntoView('header');
-        // document.querySelector('header').scrollIntoView();
-      }
-    });
+  private scrollToVerse(v: number): void {
+    setTimeout(
+      (): void => {
+        const selectedVerse = document.querySelector(`#p${v}`);
+        if (selectedVerse) {
+          selectedVerse.scrollIntoView();
+        } else {
+          scrollIntoView('header');
+          // document.querySelector('header').scrollIntoView();
+        }
+      },
+    );
   }
 }

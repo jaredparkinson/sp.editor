@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 // import * as localForage from 'localforage';
-import { find, first } from 'lodash';
+import { find } from 'lodash';
 
+import { Chapter } from 'oith.models/dist';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
-import { Database, DatabaseService } from '../services/database.service';
+import { Database } from '../services/Database';
+import { DatabaseService } from '../services/database.service';
 import { DownloadService } from '../services/download.service';
 import { EditService } from '../services/EditService';
 import { NavigationService } from '../services/navigation.service';
@@ -17,12 +18,11 @@ import { SaveStateService } from '../services/save-state.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  public currentDatabaseList: Database = new Database();
+  public currentDatabaseList: Database | undefined = new Database();
 
   public updating = false;
-  private temp = undefined;
 
-  constructor(
+  public constructor(
     public downloadService: DownloadService,
     public saveState: SaveStateService,
     public navServices: NavigationService,
@@ -33,40 +33,48 @@ export class SettingsComponent implements OnInit {
     private databaseService: DatabaseService,
   ) {}
 
-  public checkForUpdates() {
+  public async checkForUpdates(): Promise<void> {
     this.updating = true;
-    this.swUpdate
-      .checkForUpdate()
-      .then(value => {
-        console.log(value);
-        this.updating = false;
-      })
-      .catch(reason => {
-        console.log(reason);
 
-        this.updating = false;
-      });
+    try {
+      await this.swUpdate.checkForUpdate();
+    } catch (error) {
+      console.log(error);
+    }
+    this.updating = false;
+
+    // this.swUpdate
+    //   .checkForUpdate()
+    //   .then(value => {
+    //     console.log(value);
+    //     this.updating = false;
+    //   })
+    //   .catch(reason => {
+    //     console.log(reason);
+
+    //     this.updating = false;
+    //   });
   }
 
-  public download() {
-    // this.downloadService.download(file);
-  }
-  public async ngOnInit() {
-    this.dataService.chapter2 = new Chapter2();
+  public async ngOnInit(): Promise<void> {
+    this.dataService.chapter2 = new Chapter();
     this.navServices.notesSettings = false;
     this.dataService.chapter2.title = 'Settings';
 
-    this.currentDatabaseList = find(this.databaseService.databaseList, d => {
-      return d.name === location.host.split('.')[0];
-    });
+    this.currentDatabaseList = find(
+      this.databaseService.databaseList,
+      (d): boolean => {
+        return d.name === location.host.split('.')[0];
+      },
+    );
     // this.databaseService.setDatabases().then(() => {
 
     // });
   }
-  public reset() {
+  public reset(): void {
     // localForage.clear();
   }
-  public saveSettings() {
+  public saveSettings(): void {
     this.saveState.save();
   }
 }

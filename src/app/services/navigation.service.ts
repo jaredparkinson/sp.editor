@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
 
 import { ISaveStateItem } from '../models/ISaveStateItem';
 
+import { Navigation } from 'oith.models/dist';
 import { SaveStateService } from './save-state.service';
 
 @Injectable()
@@ -16,7 +14,7 @@ export class NavigationService {
   public rightPaneToggle = false;
   public showBooks = false;
 
-  constructor(private saveState: SaveStateService) {}
+  public constructor(private saveState: SaveStateService) {}
   public async btnEnglishNotesPress(): Promise<boolean> {
     this.saveState.data.englishNotesVisible = !this.saveState.data
       .englishNotesVisible;
@@ -27,16 +25,16 @@ export class NavigationService {
   public btnHeaderButtonPress(
     saveStateItem: ISaveStateItem<boolean>,
     value: boolean = false,
-  ) {
+  ): void {
     saveStateItem.value = value;
     saveStateItem.animated = true;
 
-    setTimeout(() => {
+    setTimeout((): void => {
       saveStateItem.animated = false;
       this.saveState.save();
     }, 500);
   }
-  public btnLeftPanePress() {
+  public btnLeftPanePress(): void {
     this.saveState.data.leftPanePin = !this.saveState.data.leftPanePin;
 
     this.saveState.save();
@@ -46,94 +44,113 @@ export class NavigationService {
     this.saveState.save();
     return true;
   }
-  public btnNotesSettingsPress() {
+  public btnNotesSettingsPress(): void {
     this.notesSettings = !this.notesSettings;
   }
   public btnOriginalNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.originalNotesVisible = !this.saveState.data
-        .originalNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
+    return new Promise<boolean>(
+      (resolve): void => {
+        this.saveState.data.originalNotesVisible = !this.saveState.data
+          .originalNotesVisible;
+        this.saveState.save();
+        resolve(true);
+      },
+    );
   }
-  public btnParagraphPress() {
+  public btnParagraphPress(): void {
     this.saveState.data.paragraphsVisible = !this.saveState.data
       .paragraphsVisible;
     this.saveState.save();
   }
   public btnPoetryPress(): Promise<boolean> {
-    return new Promise<boolean>(() => {
-      this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
-      this.saveState.save();
-    });
+    return new Promise<boolean>(
+      (): void => {
+        this.saveState.data.poetryVisible = !this.saveState.data.poetryVisible;
+        this.saveState.save();
+      },
+    );
   }
-  public btnRightPanePress() {
+  public btnRightPanePress(): void {
     this.saveState.data.rightPanePin = !this.saveState.data.rightPanePin;
     this.saveState.save();
   }
   public btnSecondaryNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.secondaryNotesVisible = !this.saveState.data
-        .secondaryNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
+    return new Promise<boolean>(
+      (resolve): void => {
+        this.saveState.data.secondaryNotesVisible = !this.saveState.data
+          .secondaryNotesVisible;
+        this.saveState.save();
+        resolve(true);
+      },
+    );
   }
   public btnTranslatorNotesPress(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.saveState.data.translatorNotesVisible = !this.saveState.data
-        .translatorNotesVisible;
-      this.saveState.save();
-      resolve(true);
-    });
+    return new Promise<boolean>(
+      (resolve): void => {
+        this.saveState.data.translatorNotesVisible = !this.saveState.data
+          .translatorNotesVisible;
+        this.saveState.save();
+        resolve(true);
+      },
+    );
   }
 
-  public documentBodyClick(e: Event) {
-    if ((e.target as HTMLElement).closest('.notes-settings') === null) {
-      this.notesSettings = false;
-      document
-        .querySelector('div.main.grid')
-        .removeEventListener('click', this.documentBodyClick);
-    }
-  }
+  // public documentBodyClick(e: Event): void {
+  //   if ((e.target as HTMLElement).closest('.notes-settings') === null) {
+  //     this.notesSettings = false;
+  //     document
+  //       .querySelector('div.main.grid')
+  //       .removeEventListener('click', this.documentBodyClick);
+  //   }
+  // }
 
   public getTestament(): void {}
-  public navigationClick(navigation: Navigation, navigations: Navigation[]) {
+  public navigationClick(
+    navigation: Navigation,
+    navigations: Navigation[],
+  ): void {
     navigation.subNavigationVisible = navigation.subNavigationVisible
       ? !navigation.subNavigationVisible
       : true;
 
     if (navigation.subNavigationVisible) {
-      navigations.forEach(nav => {
-        if (nav !== navigation) {
-          nav.hide = true;
+      navigations.forEach(
+        (nav): void => {
+          if (nav !== navigation) {
+            nav.hide = true;
+            nav.subNavigationVisible = false;
+          }
+        },
+      );
+      navigation.navigation.forEach(
+        (nav): void => {
+          nav.hide = false;
           nav.subNavigationVisible = false;
-        }
-      });
-      navigation.navigation.forEach(nav => {
-        nav.hide = false;
-        nav.subNavigationVisible = false;
-      });
+        },
+      );
     } else {
-      navigations.forEach(nav => {
-        nav.subNavigationVisible = false;
-        nav.hide = false;
-      });
-      if (navigation.navigation) {
-        navigation.navigation.forEach(nav => {
+      navigations.forEach(
+        (nav): void => {
           nav.subNavigationVisible = false;
           nav.hide = false;
-        });
+        },
+      );
+      if (navigation.navigation) {
+        navigation.navigation.forEach(
+          (nav): void => {
+            nav.subNavigationVisible = false;
+            nav.hide = false;
+          },
+        );
       }
     }
   }
-  public toggleNavButton() {
+  public toggleNavButton(): void {
     this.saveState.data.paragraphsVisible = !this.saveState.data
       .paragraphsVisible;
   }
 
-  public toggleNotes() {}
+  public toggleNotes(): void {}
 
   public urlBuilder(book: string, chapter: string): string {
     const url = 'scriptures/';

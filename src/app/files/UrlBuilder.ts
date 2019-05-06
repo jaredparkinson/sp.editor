@@ -4,6 +4,7 @@ import { DatabaseService } from '../services/database.service';
 import { SaveStateService } from '../services/save-state.service';
 // import * as _ from 'underscore';
 import { BookConvert } from './BookCovert';
+import englishChapters from './english_chapters.json';
 
 @Injectable()
 export class UrlBuilder {
@@ -159,16 +160,19 @@ export class UrlBuilder {
   ];
 
   private cRegex = new RegExp('\\(.+\\)');
-  constructor(
+  public constructor(
     private dataBaseService: DatabaseService,
     private saveState: SaveStateService,
   ) {
-    each(this.bookNames, book => {
-      this.bookConvert.push(new BookConvert(book));
-    });
+    each(
+      this.bookNames,
+      (book: string[]): void => {
+        this.bookConvert.push(new BookConvert(book));
+      },
+    );
   }
 
-  public async urlParser(url: string) {
+  public async urlParser(url: string): Promise<string> {
     let outUrl = url
       .toLowerCase()
       .replace(/\s/g, ' ')
@@ -184,20 +188,24 @@ export class UrlBuilder {
     ({ outUrl, bookName } = this.getBookName(outUrl));
 
     try {
-      context = new RegExp(/\..+/).exec(outUrl).toString();
+      const contextRegex = new RegExp(/\..+/).exec(outUrl);
+      if (contextRegex) {
+        context = contextRegex.toString();
+      }
     } catch {
       context = '';
     }
 
     outUrl = outUrl.replace(context, '').trim();
 
-    // console.log('bookName ' + bookName);
-    // console.log('outUrl ' + outUrl);
-    // console.log('context ' + context);
-    try {
-      await this.dataBaseService.db.get(
-        `${bookName}-${outUrl}-${this.saveState.data.language}`,
-      );
+    const chapterExists =
+      englishChapters.find(
+        (englishChapter: string): boolean => {
+          return englishChapter === `${bookName}-${outUrl}`;
+        },
+      ) !== undefined;
+
+    if (chapterExists) {
       const fullUrl = (
         bookName +
         '/' +
@@ -225,27 +233,32 @@ export class UrlBuilder {
       return last(fullUrl) === '.'
         ? fullUrl.substring(0, fullUrl.length - 1)
         : fullUrl;
-    } catch (error) {
-      throw new Error();
     }
+    throw new Error();
   }
 
-  private getBookName(outUrl: string) {
+  private getBookName(outUrl: string): { bookName: string; outUrl: string } {
     let bookName = '';
 
-    each(this.bookConvert, book => {
-      each(book.names, b => {
-        // console.log(outUrl.includes(b));
-        if (
-          outUrl.includes(b.toLowerCase()) &&
-          outUrl.startsWith(b.toLowerCase())
-        ) {
-          outUrl = outUrl.replace(b.toLowerCase(), '');
-          bookName = book.convertTo;
-          //   console.log('bookname ' + bookName);
-        }
-      });
-    });
+    each(
+      this.bookConvert,
+      (book: BookConvert): void => {
+        each(
+          book.names,
+          (b: string): void => {
+            // console.log(outUrl.includes(b));
+            if (
+              outUrl.includes(b.toLowerCase()) &&
+              outUrl.startsWith(b.toLowerCase())
+            ) {
+              outUrl = outUrl.replace(b.toLowerCase(), '');
+              bookName = book.convertTo;
+              //   console.log('bookname ' + bookName);
+            }
+          },
+        );
+      },
+    );
     // console.log(outUrl);
 
     return { outUrl, bookName };

@@ -68,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export function load(saveState: SaveStateService) {
+export function load(saveState: SaveStateService): () => Promise<any> {
   return () => saveState.load();
 }
 @NgModule({
@@ -142,5 +142,5 @@ export function load(saveState: SaveStateService) {
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {
-  constructor() {}
+  public constructor() {}
 }

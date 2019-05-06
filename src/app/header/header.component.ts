@@ -15,6 +15,7 @@ import { ISaveStateItem } from '../models/ISaveStateItem';
 import { ChapterService } from '../services/chapter.service';
 import { DataService } from '../services/data.service';
 import { EditService } from '../services/EditService';
+import { HeaderService } from '../services/header.service';
 import { HelperService } from '../services/helper.service';
 import { NavigationService } from '../services/navigation.service';
 import { SaveStateService } from '../services/save-state.service';
@@ -41,7 +42,8 @@ export class HeaderComponent implements OnInit {
   @ViewChildren('wtag')
   public wTags2: QueryList<any>;
   // leftPaneNav: HTMLElement;
-  constructor(
+  public constructor(
+    public headerService: HeaderService,
     public helperService: HelperService,
     public chapterService: ChapterService,
     public editService: EditService,

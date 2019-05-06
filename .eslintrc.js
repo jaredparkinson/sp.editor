@@ -6,31 +6,32 @@ module.exports = {
     'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
   ],
   rules: {
-    "@typescript-eslint/no-parameter-properties": false
-    "member-ordering": [
+    '@typescript-eslint/no-parameter-properties': false,
+    accessibility: 'explicit',
+    'member-ordering': [
       true,
       {
-        "order": [
-          "public-static-field",
-          "public-static-method",
-          "protected-static-field",
-          "protected-static-method",
-          "private-static-field",
-          "private-static-method",
-          "public-instance-field",
-          "protected-instance-field",
-          "private-instance-field",
-          "public-constructor",
-          "protected-constructor",
-          "private-constructor",
-          "public-instance-method",
-          "protected-instance-method",
-          "private-instance-method"
+        order: [
+          'public-static-field',
+          'public-static-method',
+          'protected-static-field',
+          'protected-static-method',
+          'private-static-field',
+          'private-static-method',
+          'public-instance-field',
+          'protected-instance-field',
+          'private-instance-field',
+          'public-constructor',
+          'protected-constructor',
+          'private-constructor',
+          'public-instance-method',
+          'protected-instance-method',
+          'private-instance-method',
         ],
-        "alphabetize": true
-      }
+        alphabetize: true,
+      },
     ],
-  }
+  },
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports

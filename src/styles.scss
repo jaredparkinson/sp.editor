@@ -308,3 +308,7 @@ $colors: yellow, lightblue, green, red, purple, orange, pink, lightgrey, brown,
 
 @mixin highlighColors {
 }
+
+.note-ref p {
+  display: inline;
+}

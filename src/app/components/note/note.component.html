@@ -30,6 +30,11 @@
           class="note-ref"
           [class]="filterClassList(noteRef.classList)"
           *ngIf="noteRef.visible"
+          [ngClass]="{
+            'note-reference-eng': noteRef.type === 2,
+            'note-reference-new': noteRef.type === 1,
+            'note-reference-tc': noteRef.type === 3
+          }"
         >
           <span [innerHTML]="md.render(noteRef.text)"></span>
         </div>

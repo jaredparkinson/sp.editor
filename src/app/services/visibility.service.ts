@@ -33,18 +33,15 @@ export class VisibilityService {
   }
 
   private convertNoteTypeToSaveState(type: NoteType | undefined): boolean {
-    if (type) {
-      switch (type) {
-        case 2:
-          return this.saveStateService.data.engNotesVisible;
-        case 1:
-          return this.saveStateService.data.newNotesVisible;
-        case 3:
-          return this.saveStateService.data.translatorNotesVisible;
-        default:
-          return true;
-      }
+    switch (type) {
+      case 2:
+        return this.saveStateService.data.engNotesVisible;
+      case 1:
+        return this.saveStateService.data.newNotesVisible;
+      case 3:
+        return this.saveStateService.data.translatorNotesVisible;
+      default:
+        return true;
     }
-    return true;
   }
 }

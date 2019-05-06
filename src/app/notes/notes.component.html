@@ -29,9 +29,10 @@
         saveState.data.notesPanePin.animated &&
         mediaQueryService.isSmallScreen()
     }"
+    *ngIf="dataService.displayChapter && dataService.displayChapter.notes"
   >
     <app-note
-      *ngFor="let note of dataService.chapter2.notes"
+      *ngFor="let note of dataService.displayChapter.notes"
       [note]="note"
     ></app-note>
 

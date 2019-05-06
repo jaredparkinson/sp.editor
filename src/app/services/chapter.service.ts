@@ -1,38 +1,73 @@
 import { Injectable } from '@angular/core';
-import { find, includes, last, map, reverse, sortBy } from 'lodash';
-import { Paragraph, Verse } from 'oith.models';
+import { Params } from '@angular/router';
+import { cloneDeep, find, includes, last, map, reverse, sortBy } from 'lodash';
+import {
+  Chapter,
+  NoteRef,
+  Paragraph,
+  SecondaryNote,
+  Verse,
+  W,
+} from 'oith.models';
+import { ChapterParams } from '../bodyblock/ChapterParams';
 import { DataService } from './data.service';
 import { DatabaseService } from './database.service';
+import { HeaderService } from './header.service';
 import { SaveStateService } from './save-state.service';
+import { VisibilityService } from './visibility.service';
 
 @Injectable()
 export class ChapterService {
   public chapterFadeOut = false;
-  constructor(
+  public constructor(
     private saveState: SaveStateService,
-    private dataBaseService: DatabaseService,
+    private headerService: HeaderService,
+    private databaseService: DatabaseService,
     private dataService: DataService,
+    private visibilityService: VisibilityService,
   ) {}
+  public async buildChapter(params: Params): Promise<void> {
+    const chapterParams = new ChapterParams(
+      params,
+      this.saveState.data.language,
+    );
+    await this.loadChapter(chapterParams);
+    await this.buildNotes(this.dataService.displayChapter);
+    console.log('asdf');
+
+    await this.buildParagraphs2(this.dataService.displayChapter);
+    console.log(this.dataService.displayChapter.notes);
+
+    console.log('asdf3');
+    // console.log(chapter);
+
+    this.setHeaderName(this.dataService.displayChapter);
+    console.log(chapterParams);
+  }
 
   public async buildParagraphs(
     paragraphs: Paragraph[],
     verses: Verse[],
   ): Promise<void> {
-    paragraphs.forEach(paragraph => {
-      paragraph.verses = [];
-      paragraph.verseIds.forEach(verseId => {
-        const verse = verses.find(v => {
-          return v.id === verseId;
-        });
-        if (verse) {
-          paragraph.verses.push(verse);
-        }
-      });
-      // paragraph.verses = verses.slice(
-      //   parseInt(paragraph.verseIds[0], 10) - 1,
-      //   parseInt(paragraph.verseIds[1], 10),
-      // );
-    });
+    paragraphs.forEach(
+      (paragraph): void => {
+        paragraph.verses = [];
+        paragraph.verseIds.forEach(
+          (verseId): void => {
+            const verse = verses.find(v => {
+              return v.id === verseId;
+            });
+            if (verse) {
+              paragraph.verses.push(verse);
+            }
+          },
+        );
+        // paragraph.verses = verses.slice(
+        //   parseInt(paragraph.verseIds[0], 10) - 1,
+        //   parseInt(paragraph.verseIds[1], 10),
+        // );
+      },
+    );
 
     if (paragraphs.length === 0) {
       const ara = new Paragraph();
@@ -44,36 +79,43 @@ export class ChapterService {
   public async buildWTags(
     verses: Verse[],
     noteVisibility: Map<string, boolean>,
-  ) {
-    verses.forEach(verse => {
-      verse.wTags.forEach(wTag => {
-        switch (wTag.type) {
-          case 'aW': {
-            ((wTag as unknown) as aW).childWTags.forEach(w => {
-              this.setWTagProperties(w, verse);
-            });
-            break;
-          }
-          case 'rW': {
-            break;
-          }
-          case 'W': {
-            this.setWTagProperties(wTag, verse);
-            break;
-          }
-        }
-        if (wTag.type === 'W') {
-        }
-      });
-    });
+  ): Promise<void> {
+    verses.forEach(
+      (verse): void => {
+        verse.wTags.forEach(
+          (wTag): void => {
+            switch (wTag.type) {
+              case 'aW': {
+                ((wTag as unknown) as aW).childWTags.forEach(
+                  (w): void => {
+                    this.setWTagProperties(w, verse);
+                  },
+                );
+                break;
+              }
+              case 'rW': {
+                break;
+              }
+              case 'W': {
+                this.setWTagProperties(wTag, verse);
+                break;
+              }
+            }
+            if (wTag.type === 'W') {
+            }
+          },
+        );
+      },
+    );
     this.resetRefVisible(verses, noteVisibility);
   }
 
-  public async getChapter(id: string) {
+  public async getChapter(id: string): Promise<Chapter> {
     try {
-      return (await this.dataBaseService.get(id)) as Chapter2;
+      // const asdf = await this.dataBaseService.get(id);
+      return (await this.databaseService.get(id)) as Chapter;
     } catch (error) {
-      return undefined;
+      throw new Error(`Can't find Chapter`);
     }
   }
 
@@ -138,6 +180,11 @@ export class ChapterService {
     }
     return 4;
   }
+  public nstructor(
+    private saveState: SaveStateService,
+    private dataBaseService: DatabaseService,
+    private dataService: DataService,
+  ) {}
 
   public parseHighlightedVerses(v: string): number[] {
     if (v === null || v === undefined) {
@@ -161,7 +208,7 @@ export class ChapterService {
 
   public async resetNotes(): Promise<void> {
     await this.resetNoteVisibility(
-      this.dataService.chapter2,
+      this.dataService.baseChapter,
       this.dataService.noteVisibility,
     );
     await this.buildWTags(
@@ -200,23 +247,51 @@ export class ChapterService {
   }
 
   public async setHighlightging(
-    verses: Verse[],
+    wTags: W[],
     highlightNumbers: [string | undefined, string | undefined],
-  ) {
+  ): Promise<number> {
     const highlight = highlightNumbers[0]
       ? this.parseHighlightedVerses(highlightNumbers[0])
       : undefined;
     const context = highlightNumbers[1]
       ? this.parseHighlightedVerses(highlightNumbers[1])
       : undefined;
-    verses.forEach(verse => {
-      const verseNumber = parseInt(verse.id.replace('p', ''), 10);
-      verse.highlight =
-        highlight && includes(highlight, verseNumber) ? true : false;
-      verse.context = context && includes(context, verseNumber) ? true : false;
-    });
+    wTags.forEach(
+      (verse): void => {
+        if (verse.verseId) {
+          const verseNumber = parseInt(verse.verseId.replace('p', ''), 10);
+          verse.highlight =
+            highlight && includes(highlight, verseNumber) ? true : false;
+          verse.context =
+            context && includes(context, verseNumber) ? true : false;
+        }
+      },
+    );
 
     return sortBy(highlight)[0];
+  }
+  private async buildNotes(displayChapter: Chapter): Promise<void> {
+    if (displayChapter.notes) {
+      displayChapter.notes.forEach(
+        async (note): Promise<void> => {
+          if (note.secondaryNotes) {
+            await this.visibilityService.secondaryNotesVisibility(
+              note.secondaryNotes,
+            );
+          }
+        },
+      );
+    }
+  }
+  private async buildParagraphs2(displayChapter: Chapter): Promise<void> {
+    console.log(displayChapter);
+  }
+
+  private async loadChapter(chapterParams: ChapterParams): Promise<void> {
+    const chapter = await this.getChapter(chapterParams.id);
+    this.dataService.baseChapter = cloneDeep(chapter);
+    this.dataService.displayChapter = cloneDeep(chapter);
+    // return chapter;
   }
   private noteTypeVisible(
     secondaryNote: SecondaryNote,
@@ -242,6 +317,10 @@ export class ChapterService {
       );
     });
     return category !== undefined && category.visible;
+  }
+  private setHeaderName(chapter: Chapter) {
+    this.headerService.pageName = chapter.title;
+    this.headerService.pageShortName = chapter.shortTitle;
   }
 
   private setRefVisibility(verse: Verse, noteVisibility: Map<string, boolean>) {

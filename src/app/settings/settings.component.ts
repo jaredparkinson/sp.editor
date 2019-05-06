@@ -57,9 +57,9 @@ export class SettingsComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
-    this.dataService.chapter2 = new Chapter();
+    this.dataService.baseChapter = new Chapter();
     this.navServices.notesSettings = false;
-    this.dataService.chapter2.title = 'Settings';
+    this.dataService.baseChapter.title = 'Settings';
 
     this.currentDatabaseList = find(
       this.databaseService.databaseList,

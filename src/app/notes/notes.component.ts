@@ -32,7 +32,7 @@ import { WTagService } from '../services/wtag-builder.service';
 export class NotesComponent implements OnInit, AfterViewInit {
   @ViewChildren('notes')
   public notes!: QueryList<ElementRef>;
-  constructor(
+  public constructor(
     public chapterService: ChapterService,
     public navServices: NavigationService,
     public saveState: SaveStateService,

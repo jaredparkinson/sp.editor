@@ -228,7 +228,7 @@ export class WTagService {
       // );
       // console.log(this.wTags);
 
-      this.insertNewWTags(cloneDeep(this.dataService.chapter2.verses));
+      this.insertNewWTags(cloneDeep(this.dataService.baseChapter.verses));
 
       this.reset();
     }

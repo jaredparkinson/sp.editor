@@ -90,7 +90,7 @@ export class VerseComponent implements OnInit {
       },
     );
 
-    this.dataService.chapter2.notes.forEach(
+    this.dataService.baseChapter.notes.forEach(
       (note): void => {
         note.secondary.forEach(secondaryNote => {
           secondaryNote.clicked = secondaryNote.id === ref;

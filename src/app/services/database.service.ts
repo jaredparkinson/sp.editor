@@ -21,10 +21,6 @@ export class DatabaseService {
   );
   public sdb = new PouchDB('alpha_oneinthinehand_all_eng');
 
-  public allDocs(): Promise<PouchDB.Core.AllDocsResponse<{}>> {
-    return this.db.allDocs();
-  }
-
   public async bulkDocs(databaseName: string): Promise<void> {
     console.log(databaseName);
     console.log(this.remoteDB.name);
@@ -33,7 +29,7 @@ export class DatabaseService {
 
     const docs = await this.remoteDB.allDocs();
 
-    const filteredDocsIDs = filter(
+    const filteredDocs = filter(
       docs.rows,
       (doc): boolean => {
         return doc.id.endsWith(`-${databaseName.replace(/\_/g, '-')}`);
@@ -44,20 +40,17 @@ export class DatabaseService {
       },
     );
 
-    if (filteredDocsIDs.length > 0) {
-      const filterDocs = await this.db.bulkGet({ docs: filteredDocsIDs });
+    if (filteredDocs.length > 0) {
+      // const filterDocs = await this.db.bulkGet({ docs: filteredDocsIDs });
 
       await PouchDB.replicate(this.remoteDB, this.db, {
-        doc_ids: filteredDocsIDs.map(
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        doc_ids: filteredDocs.map(
           (f): string => {
             return f.id;
           },
         ),
       });
-
-      // await this.db.bulkDocs(filterDocs.results);
-
-      console.log(filterDocs.results.length);
     }
 
     return;
@@ -87,8 +80,31 @@ export class DatabaseService {
     //     console.log(reason);
     //   });
   }
-  public async get(id: string): Promise<{}> {
-    return this.db.get(id);
+  public async get(
+    id: string,
+  ): Promise<(PouchDB.Core.IdMeta & PouchDB.Core.GetMeta) | undefined> {
+    try {
+      const allDocs = await this.db.allDocs();
+
+      const chapter = allDocs.rows.find(
+        (doc): boolean => {
+          return doc.id.startsWith(id);
+        },
+      );
+
+      console.log(chapter);
+
+      if (chapter) {
+        // return chapter.doc;
+        return this.db.get(chapter.id);
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+      console.log(error);
+
+      return undefined;
+    }
   }
 
   public async getRevision(id: string): Promise<string> {

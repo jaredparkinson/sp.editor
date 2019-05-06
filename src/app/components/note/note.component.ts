@@ -1,20 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import MarkdownIt from 'markdown-it';
+import { Note, SecondaryNote } from 'oith.models/dist';
 import { ChapterService } from '../../services/chapter.service';
 import { DataService } from '../../services/data.service';
 import { SyncScrollingService } from '../../services/sync-scrolling.service';
-
+import { VisibilityService } from '../../services/visibility.service';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent implements OnInit {
+  public md = new MarkdownIt({ html: true });
   @Input() public note: Note;
-  constructor(
+  public constructor(
     public chapterService: ChapterService,
     public syncScrollingService: SyncScrollingService,
     public dataService: DataService,
+    public visibilityService: VisibilityService,
   ) {}
   public filterClassList(classList: string[]): string {
     if (!classList) {
@@ -24,8 +28,8 @@ export class NoteComponent implements OnInit {
     return classList.toString();
   }
 
-  public ngOnInit() {}
-  public notePhraseClick(secondaryNote: SecondaryNote) {
+  public ngOnInit(): void {}
+  public notePhraseClick(secondaryNote: SecondaryNote): void {
     console.log(secondaryNote.id);
     const clicked = secondaryNote.clicked;
     console.log(clicked);

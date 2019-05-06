@@ -1,8 +1,8 @@
 <div
   class="scroll-container"
   (scroll)="this.onScroll()"
-  [attr.data-aid]="this.dataService.chapter2.dataAid"
-  [attr.page-name]="this.dataService.chapter2.title.toLowerCase()"
+  [attr.data-aid]="this.dataService.displayChapter.dataAid"
+  [attr.page-name]="this.dataService.displayChapter.title.toLowerCase()"
 >
   <div class="content-pane grid " id="appBodyBlock">
     <!-- <div> -->
@@ -35,7 +35,7 @@
       (swiperight)="swipeChapter($event, -1)"
       (swipeleft)="swipeChapter($event, 1)"
     >
-      <!-- <div id="bodyBlockTop">{{ this.dataService.chapter2.dataAid }}</div> -->
+      <!-- <div id="bodyBlockTop">{{ this.dataService.displayChapter.dataAid }}</div> -->
       <header class="body-block-header">
         <app-verse
           class="app-verse"

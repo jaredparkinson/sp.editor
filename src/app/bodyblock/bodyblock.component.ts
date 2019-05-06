@@ -26,6 +26,7 @@ import { scrollIntoView } from '../../HtmlFunc';
 
 import { DatabaseService } from '../services/database.service';
 import { WTagService } from '../services/wtag-builder.service';
+import { ChapterParams } from './ChapterParams';
 
 @Component({
   selector: 'app-bodyblock',
@@ -104,23 +105,36 @@ export class BodyblockComponent implements OnInit {
         this.navService.rightPaneToggle = false;
         this.navService.leftPaneToggle = false;
 
+        this.chapterService.buildChapter(params);
+        return;
         console.log(params);
 
-        const book = params['book'];
-        const chapter = params['chapter'].toString();
-        const highlighting: string[] = chapter.split('.').reverse();
-        const language = params['language']
-          ? params['language']
-          : this.saveState.data.language;
+        const chapterParams = new ChapterParams(
+          params,
+          this.saveState.data.language,
+        );
+        // const book = params['book'];
+        // const chapter = params['chapter'].toString();
+        // const highlighting: string[] = chapter.split('.').reverse();
+        // const language = params['language']
+        //   ? params['language']
+        //   : this.saveState.data.language;
 
-        console.log(language);
+        console.log(chapterParams.language);
 
-        this.pageUrl = `${book}/${chapter.split('.')[0]}`;
-        this.url = `${book}/${last(highlighting)}`;
-        const id = `${book}-${highlighting.pop()}-${language}`;
+        this.pageUrl = `${chapterParams.book}/${
+          chapterParams.chapter.split('.')[0]
+        }`;
+        this.url = `${chapterParams.book}/${last(chapterParams.highlighting)}`;
+        // const id = `${chapterParams.book}-${chapterParams.highlighting.pop()}-${
+        //   chapterParams.language
+        // }`;
         this.chapterService.chapterFadeOut = true;
         try {
-          const v = await this.buildPage(id, highlighting);
+          const v = await this.buildPage(
+            chapterParams.id,
+            chapterParams.highlighting,
+          );
           this.chapterService.chapterFadeOut = false;
           this.scrollToVerse(v);
           await this.setNavigation(this.saveState.navigation);
@@ -225,51 +239,63 @@ export class BodyblockComponent implements OnInit {
   private async buildPage(
     id: string,
     highlighting: string[] = [],
-  ): Promise<void> {
-    const chapter = await this.getChapter(id);
+  ): Promise<number> {
+    try {
+      const chapter = await this.getChapter(id);
 
-    this.pageId = id;
+      this.dataService.baseChapter = chapter;
+      this.dataService.displayChapter = cloneDeep(chapter);
 
-    const v = await this.chapterService.setHighlightging(
-      this.dataService.verses,
-      [highlighting.pop(), highlighting.pop()],
-    );
+      this.pageId = id;
 
-    await this.chapterService.resetNoteVisibility(
-      chapter,
-      this.dataService.noteVisibility,
-    );
+      const v = await this.chapterService.setHighlightging(
+        this.dataService.wTags,
+        [highlighting.pop(), highlighting.pop()],
+      );
 
-    await this.chapterService.buildWTags(
-      this.dataService.verses,
-      this.dataService.noteVisibility,
-    );
+      await this.chapterService.resetNoteVisibility(
+        chapter,
+        this.dataService.noteVisibility,
+      );
 
-    await this.chapterService.buildParagraphs(
-      this.dataService.paragraphs,
-      this.dataService.verses,
-    );
+      await this.chapterService.buildWTags(
+        this.dataService.verses,
+        this.dataService.noteVisibility,
+      );
 
-    this.dataService.chapter2 = chapter;
-    this.dataService.header = filter(
-      this.dataService.verses,
-      (verse: Verse): boolean => {
-        return verse.header;
-      },
-    );
-    return v;
+      await this.chapterService.buildParagraphs(
+        this.dataService.paragraphs,
+        this.dataService.verses,
+      );
+
+      this.dataService.baseChapter = chapter;
+      this.dataService.header = filter(
+        this.dataService.verses,
+        (verse: Verse): boolean => {
+          return verse.header;
+        },
+      );
+      return v;
+    } catch (error) {
+      throw error;
+    }
   }
   private async getChapter(id: string): Promise<Chapter> {
-    let chapter: Chapter | undefined = this.dataService.chapter2;
+    let chapter: Chapter | undefined = this.dataService.baseChapter;
     if (this.pageId !== id) {
       chapter = await this.chapterService.getChapter(id);
 
-      if (chapter) {
-        this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
-        this.dataService.verses = cloneDeep(chapter.verses);
-      }
+      // if (chapter && chapter.paragraphs && chapter.verses && chapter.wTags) {
+      //   this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
+      //   this.dataService.verses = cloneDeep(chapter.verses);
+      //   this.dataService.wTags = cloneDeep(chapter.wTags);
+      // }
     }
-    return chapter;
+    if (chapter) {
+      return chapter;
+    }
+
+    throw new Error(`Couldn't find chapter`);
   }
 
   private scrollToVerse(v: number): void {

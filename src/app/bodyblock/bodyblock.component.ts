@@ -7,8 +7,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as bowser from 'bowser';
 
+import axios from 'axios';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { VerseComponent } from '../components/verse/verse.component';
@@ -210,14 +210,18 @@ export class BodyblockComponent implements OnInit, OnDestroy {
     return paragraph.id;
   }
 
-  private buildPage(id: string, highlighting: string[] = []) {
-    return new Promise<number>(async (resolve ,reject)=> {
+  private async buildPage(
+    id: string,
+    highlighting: string[] = [],
+  ): Promise<number> {
+    return new Promise<number>(async (resolve, reject) => {
       // let chapter = this.dataService.chapter2;
       // if (this.pageId !== id) {
       //   chapter = await this.chapterService.getChapter(id);
       //   this.dataService.paragraphs = cloneDeep(chapter.paragraphs);
       //   this.dataService.verses = cloneDeep(chapter.verses);
       // }
+      console.log(id);
 
       this.getChapter(id)
         .then(async chapter => {
@@ -258,7 +262,18 @@ export class BodyblockComponent implements OnInit, OnDestroy {
         });
     });
   }
-  private getChapter(id: string) {
+  private async getChapter(id: string) {
+    try {
+      const chapter = await axios.get(`assets/scriptures/${id}.json`);
+      this.dataService.paragraphs = cloneDeep(
+        (chapter.data as Chapter2).paragraphs,
+      );
+      this.dataService.verses = cloneDeep((chapter.data as Chapter2).verses);
+      return chapter.data;
+    } catch (error) {
+      throw error;
+    }
+
     return new Promise<Chapter2 | undefined>(
       (
         resolve: (resolveValue: Chapter2 | undefined) => void,

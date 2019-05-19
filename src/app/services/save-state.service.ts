@@ -33,32 +33,26 @@ export class SaveStateService {
       this.setSaveStateItemDefaults(this.data.notesPanePin, true);
     }
   }
-  public load(): Promise<any> {
-    return new Promise(async resolve => {
-      // await this.loadSearch();
-      // await this.loadVerseData();
-      console.log('settings load');
+  public async load(): Promise<any> {
+    console.log('settings load');
 
-      const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
-      this.data = temp !== null ? temp : new SaveStateModel();
-      this.data.leftPaneToggle = false;
-      this.data.rightPaneToggle = false;
-      this.data.language = 'eng';
+    const temp = JSON.parse(localStorage.getItem(this.id)) as SaveStateModel;
+    this.data = temp !== null ? temp : new SaveStateModel();
+    this.data.leftPaneToggle = false;
+    this.data.rightPaneToggle = false;
+    this.data.language = 'eng';
 
-      if (!this.data.fontSize) {
-        this.data.fontSize = '16';
-      }
-      if (!this.data.lineHeight) {
-        this.data.lineHeight = '20';
-      }
+    if (!this.data.fontSize) {
+      this.data.fontSize = '16';
+    }
+    if (!this.data.lineHeight) {
+      this.data.lineHeight = '20';
+    }
 
-      this.initISaveStateItems();
-      this.resetSettings();
+    this.initISaveStateItems();
+    this.resetSettings();
 
-      this.setCategories();
-
-      resolve();
-    });
+    this.setCategories();
   }
   public loadVerseData() {
     return new Promise(async resolve => {

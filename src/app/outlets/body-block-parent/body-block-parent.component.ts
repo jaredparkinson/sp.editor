@@ -9,5 +9,7 @@ import { SaveStateService } from '../../services/save-state.service';
 export class BodyBlockParentComponent implements OnInit {
   constructor(public saveState: SaveStateService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('asdfoijasdofij');
+  }
 }

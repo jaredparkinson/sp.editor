@@ -57,6 +57,7 @@
     "@angular/service-worker": "latest",
     "@types/graceful-fs": "^4.1.2",
     "animate.css": "^3.7.0",
+    "axios": "^0.18.0",
     "benchmark": "^2.1.4",
     "bowser": "^2.1.2",
     "graceful-fs": "^4.1.11",

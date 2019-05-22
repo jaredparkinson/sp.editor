@@ -47,6 +47,7 @@ $font-stack: PalatinoldsLat-Roman, serif;
   @include span-reference('hebrew', 'HEB');
   @include span-reference('greek', 'GR');
   @include span-reference('archaic', 'KJV');
+  @include span-reference('translation', 'KJV');
   @include span-reference('historical', 'HST');
   @include span-reference('cr', 'CR');
   @include span-reference('alt', 'ALT');

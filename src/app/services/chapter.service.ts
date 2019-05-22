@@ -99,6 +99,9 @@ export class ChapterService {
 
   public getNoteRefVisibility(noteRef: NoteRef): boolean {
     noteRef.visible = false;
+    if (noteRef.referenceLabel.refLabelShortName === 'GEO') {
+      console.log('adsf');
+    }
 
     if (
       !noteRef.referenceLabel ||

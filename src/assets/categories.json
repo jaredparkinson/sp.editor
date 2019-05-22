@@ -5,7 +5,12 @@
   { "visible": true, "refLabelName": "IE", "refLabelShortName": "IE" },
   { "visible": true, "refLabelName": "Hebrew", "refLabelShortName": "HEB" },
   { "visible": true, "refLabelName": "Greek", "refLabelShortName": "GR" },
-  { "visible": true, "refLabelName": "Archaic", "refLabelShortName": "KJV" },
+  {
+    "visible": true,
+    "refLabelName": "Translation",
+    "refLabelShortName": "TRN"
+  },
+  { "visible": true, "refLabelName": "Geography", "refLabelShortName": "GEO" },
   { "visible": true, "refLabelName": "Historical", "refLabelShortName": "HST" },
   { "visible": true, "refLabelName": "CR", "refLabelShortName": "CR" },
   { "visible": true, "refLabelName": "Alt", "refLabelShortName": "ALT" },

@@ -120,6 +120,15 @@ export class SaveStateService {
       .subscribe(json => {
         if (!this.data.noteCategories) {
           this.data.noteCategories = [];
+        } else {
+          this.data.noteCategories = this.data.noteCategories.filter(
+            (noteCategory): boolean => {
+              return (
+                noteCategory.refLabelName !== 'Archaic' ||
+                noteCategory.refLabelShortName !== 'KJV'
+              );
+            },
+          );
         }
         const categories = json as ReferenceLabel[];
         categories.forEach(category => {

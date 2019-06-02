@@ -107,7 +107,7 @@ export class FilesComponent implements OnInit {
   private buildUrl() {
     const addressBarValue = (document.getElementById(
       'addressBar',
-    ) as HTMLInputElement).value;
+    ) as HTMLInputElement).value.trim();
 
     this.urlBuilder
       .urlParser(addressBarValue)

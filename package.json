@@ -62,7 +62,7 @@
     "localforage": "^1.7.2",
     "lodash": "^4.17.11",
     "mark.js": "^8.11.1",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "nodejs": "0.0.0",
     "pako": "^1.0.6",
     "path": "^0.12.7",
